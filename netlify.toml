@@ -60,7 +60,3 @@
 # Optional: Branch deploys
 [context.branch-deploy]
   command = "npm run build"
-
-# Optional: Production context
-[context.production]
-  command = "npm run build -- --configuration production"
