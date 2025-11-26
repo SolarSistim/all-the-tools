@@ -1,0 +1,66 @@
+# Netlify Configuration for Angular Project
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Directory with the built static files
+  publish = "dist/all-the-tools/browser"
+  
+  # Base directory (optional, defaults to root)
+  base = ""
+
+# Build environment variables
+[build.environment]
+  # Use Node.js 20 (or your preferred version)
+  NODE_VERSION = "20"
+  
+  # Set production environment
+  NODE_ENV = "production"
+
+# Headers for security and performance
+[[headers]]
+  # Apply these headers to all routes
+  for = "/*"
+  
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Cache control for static assets
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache control for HTML files (no cache)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Cache control for service worker (no cache)
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Redirects for SPA (Single Page Application)
+# This ensures all routes go to index.html for Angular routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Optional: Deploy previews settings
+[context.deploy-preview]
+  command = "npm run build"
+
+# Optional: Branch deploys
+[context.branch-deploy]
+  command = "npm run build"
+
+# Optional: Production context
+[context.production]
+  command = "npm run build -- --configuration production"
