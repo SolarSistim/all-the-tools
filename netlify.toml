@@ -2,8 +2,8 @@
 # https://docs.netlify.com/configure-builds/file-based-configuration/
 
 [build]
-  # Build command
-  command = "npm run build"
+  # Build command - using npx to ensure Angular CLI is found
+  command = "npx ng build"
   
   # Directory with the built static files
   publish = "dist/all-the-tools/browser"
@@ -55,8 +55,8 @@
 
 # Optional: Deploy previews settings
 [context.deploy-preview]
-  command = "npm run build"
+  command = "npx ng build"
 
 # Optional: Branch deploys
 [context.branch-deploy]
-  command = "npm run build"
+  command = "npx ng build"
