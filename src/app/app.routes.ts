@@ -33,6 +33,11 @@ export const routes: Routes = [
     title: 'Accessibility Statement - All The Tools'
   },
   {
+    path: 'tools/percentage-calculator',
+    loadComponent: () => import('./features/tools/math-and-calculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
+    title: 'Percentage Calculator - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
