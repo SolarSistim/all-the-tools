@@ -430,3 +430,79 @@ body.light-theme {
     text-decoration: underline;
   }
 }
+
+// ============================================
+// INPUT STYLES
+// ============================================
+
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  // border-color: var(--border-color) !important;
+  border: none !important;
+}
+
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  // border-color: var(--neon-cyan) !important;
+  // box-shadow: 0 0 8px var(--neon-cyan-glow);
+  border: none !important;
+}
+
+// .mat-mdc-form-field-flex, .mat-mdc-text-field-wrapper {
+//   background-color: rgb(241, 241, 241) !important;
+//   color: black;
+// }
+
+// Material form field background
+.mat-mdc-form-field-flex, .mat-mdc-text-field-wrapper {
+  background-color: rgb(241, 241, 241) !important;
+  color: black !important;
+}
+
+// Input text color (dark)
+.mat-mdc-form-field .mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+// Placeholder text color (dark gray)
+.mat-mdc-form-field .mat-mdc-input-element::placeholder {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+// Label color (dark gray)
+.mat-mdc-form-field .mat-mdc-floating-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+// Focused label color (darker)
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+// Icon color inside form fields (dark)
+.mat-mdc-form-field .mat-icon {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+// Prefix/Suffix text color (dark)
+.mat-mdc-form-field .mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field .mat-mdc-form-field-icon-suffix {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+// Hint text color (dark gray)
+.mat-mdc-form-field .mat-mdc-form-field-hint {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+// Bottom line color (dark)
+.mat-mdc-form-field .mat-mdc-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+// Focused bottom line color (darker)
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.87) !important;
+}

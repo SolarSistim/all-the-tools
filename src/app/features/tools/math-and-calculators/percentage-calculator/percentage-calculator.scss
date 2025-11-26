@@ -1,4 +1,4 @@
-@import '../../../../../../styles/utilities';
+@import '../../../../../styles/utilities';
 
 .percentage-calculator-page {
   min-height: 100vh;
@@ -46,7 +46,6 @@
   }
 
   &:hover {
-    transform: translateY(-4px);
     border-color: var(--neon-cyan) !important;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 20px var(--neon-cyan-glow) !important;
   }
@@ -110,26 +109,13 @@
       background: var(--bg-secondary);
     }
 
-    .mdc-notched-outline__leading,
-    .mdc-notched-outline__notch,
-    .mdc-notched-outline__trailing {
-      border-color: var(--border-color) !important;
-    }
-
-    .mdc-text-field--focused .mdc-notched-outline__leading,
-    .mdc-text-field--focused .mdc-notched-outline__notch,
-    .mdc-text-field--focused .mdc-notched-outline__trailing {
-      border-color: var(--neon-cyan) !important;
-      box-shadow: 0 0 8px var(--neon-cyan-glow);
-    }
-
-    .mat-mdc-form-field-label,
-    .mat-mdc-floating-label {
-      color: var(--text-secondary) !important;
-    }
+    // .mat-mdc-form-field-label,
+    // .mat-mdc-floating-label {
+    //   color: var(--text-secondary) !important;
+    // }
 
     .mat-mdc-input-element {
-      color: var(--text-primary) !important;
+      // color: var(--text-primary) !important;
       font-family: 'Space Grotesk', sans-serif;
     }
 

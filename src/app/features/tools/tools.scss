@@ -141,20 +141,20 @@
 
 // Theme-aware form field styling scoped to tools component
 :host {
-  ::ng-deep mat-label {
-    color: var(--text-secondary) !important;
-  }
+  // ::ng-deep mat-label {
+  //   color: var(--text-secondary) !important;
+  // }
 
   ::ng-deep mat-icon {
     color: var(--text-secondary) !important;
   }
 
   ::ng-deep .mat-mdc-form-field-input-control {
-    color: var(--text-primary) !important;
+    // color: var(--text-primary) !important;
 
     // Hide placeholder by default (shows label instead)
     &::placeholder {
-      color: var(--text-tertiary) !important;
+      // color: var(--text-tertiary) !important;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
@@ -173,4 +173,10 @@
     display: none !important;
   }
 
+}
+
+:host .ng-star-inserted {
+  border: none !important;
+  padding-right: 12px;
+  cursor: pointer;
 }

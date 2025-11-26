@@ -105,7 +105,8 @@
   .sidenav-content {
     padding: 0.5rem;
     overflow-y: auto;
-    max-height: calc(100vh - 80px);
+    // max-height: calc(100vh - 80px);
+    height: auto;
   }
 
   // Category Expansion Panels
