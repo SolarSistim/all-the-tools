@@ -45,6 +45,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@netlify/angular-runtime": "^3.0.1",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",

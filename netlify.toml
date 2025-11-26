@@ -2,14 +2,10 @@
 [build]
   command = "npm run prerender"
   publish = "dist/all-the-tools/browser"
-  # Tell Netlify this is a static build, not SSR
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [build.environment]
   NODE_VERSION = "20"
   NODE_ENV = "production"
-  # Disable Netlify's Angular auto-detection
-  NETLIFY_USE_ANGULAR_RUNTIME = "false"
 
 [[headers]]
   for = "/*"
