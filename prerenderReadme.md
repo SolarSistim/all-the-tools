@@ -69,7 +69,7 @@ export class YourComponent implements OnInit {
       title: 'Page Title | All The Tools',
       description: 'Page description for SEO',
       keywords: ['keyword1', 'keyword2'],
-      image: 'https://all-the-tools.netlify.app/assets/og-image.png',
+      image: 'https://all-the-tools.netlify.app/assets/meta-images/og-image.png',
       url: 'https://all-the-tools.netlify.app/your-route'
     });
   }
@@ -78,8 +78,8 @@ export class YourComponent implements OnInit {
 ### Add Social Media Images
 
 1. Create image: **1200x630 pixels** (PNG or JPG)
-2. Save to: `public/assets/og-[page-name].png`
-3. Update component meta tags with image URL
+2. Save to: `public/assets/meta-images/og-[page-name].png`
+3. Update component meta tags with image URL: `https://all-the-tools.netlify.app/assets/meta-images/og-[page-name].png`
 4. Rebuild: `npm run prerender`
 
 ### Add New Routes to Prerender
