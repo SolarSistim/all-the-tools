@@ -20,12 +20,32 @@ npm run prerender
 
 ## Deploy to Netlify
 
+```bash
 # Commit and push
 git add .
 git commit -m "Your message"
 git push origin main
+```
 
 Netlify automatically runs `npm run prerender` and deploys from `dist/all-the-tools/browser`.
+
+### Netlify Configuration
+
+**Important:** The following packages MUST be in regular `dependencies` (not `devDependencies`) for Netlify builds to work:
+
+- `@netlify/angular-runtime` - Required by Netlify's Angular framework detection
+- `@types/express` - Required for TypeScript compilation of server files
+
+Netlify's build process:
+1. Auto-detects Angular framework (Runtime: Angular in dashboard)
+2. Loads `@netlify/angular-runtime` plugin during onPreBuild
+3. Runs `npm ci && npm run prerender`
+4. Deploys static files from `dist/all-the-tools/browser`
+
+**Build Settings in Netlify Dashboard:**
+- Runtime: `Angular`
+- Build command: `npm run prerender`
+- Publish directory: `dist/all-the-tools/browser`
 
 ## Verify
 
@@ -72,3 +92,31 @@ Edit `routes.txt` in project root:
 /your-new-route
 
 Then rebuild and deploy.
+
+## Troubleshooting
+
+### Netlify Build Error: "Angular@19 SSR requires '@netlify/angular-runtime'"
+
+**Cause:** Package is in `devDependencies` instead of `dependencies`
+
+**Solution:** Move to regular dependencies:
+```bash
+npm uninstall @netlify/angular-runtime
+npm install --save @netlify/angular-runtime
+```
+
+### Netlify Build Error: "Could not find declaration file for module 'express'"
+
+**Cause:** `@types/express` is in `devDependencies`
+
+**Solution:** Move to regular dependencies:
+```bash
+npm uninstall @types/express
+npm install --save @types/express
+```
+
+### Testing Social Media Previews
+
+- **Facebook:** [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+- **Twitter:** [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+- **LinkedIn:** Share a link and check the preview
