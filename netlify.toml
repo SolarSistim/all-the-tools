@@ -6,14 +6,9 @@
 [build.environment]
   NODE_VERSION = "20"
   NODE_ENV = "production"
-  # Disable Angular detection
+  # Disable Angular detection and framework plugins
   NG_BUILD_CACHE = "false"
-
-# Explicitly disable Angular runtime plugin (we use static prerendering)
-[[plugins]]
-  package = "@netlify/angular-runtime"
-  [plugins.inputs]
-    enabled = false
+  NETLIFY_USE_FRAMEWORK = "false"
 
 [[headers]]
   for = "/*"
