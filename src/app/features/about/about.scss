@@ -7,6 +7,54 @@
   transition: background-color 0.3s ease;
 }
 
+.policy-links {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin: $spacing-2xl 0;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.policy-button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-md $spacing-lg;
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: none !important;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: var(--neon-cyan);
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: var(--bg-secondary) !important;
+    border-color: var(--neon-cyan) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+
+    mat-icon {
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+  }
+}
+
 .about-content {
   max-width: 800px;
   margin: 0 auto;
