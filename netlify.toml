@@ -9,6 +9,12 @@
   # Disable Angular detection
   NG_BUILD_CACHE = "false"
 
+# Explicitly disable Angular runtime plugin (we use static prerendering)
+[[plugins]]
+  package = "@netlify/angular-runtime"
+  [plugins.inputs]
+    enabled = false
+
 [[headers]]
   for = "/*"
   [headers.values]
