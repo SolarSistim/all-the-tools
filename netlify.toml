@@ -1,11 +1,19 @@
 # Netlify Configuration for Angular Project with Static Prerendering
 [build]
-  command = "npm run prerender"
+  command = "npm install && npm run prerender"
   publish = "dist/all-the-tools/browser"
 
 [build.environment]
   NODE_VERSION = "20"
   NODE_ENV = "production"
+
+# Explicitly disable the Angular runtime plugin
+[build.processing]
+  skip_processing = false
+
+[functions]
+  # No functions needed for static prerendering
+  directory = "netlify/functions"
 
 [[headers]]
   for = "/*"
