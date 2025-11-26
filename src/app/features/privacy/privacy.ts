@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
+import { MetaService } from '../../core/services/meta.service';
 
 @Component({
   selector: 'app-privacy',
@@ -8,10 +9,21 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
   templateUrl: './privacy.html',
   styleUrl: './privacy.scss',
 })
-export class PrivacyComponent {
+export class PrivacyComponent implements OnInit {
+  private metaService = inject(MetaService);
+
   currentDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
+
+  ngOnInit(): void {
+    this.metaService.updateTags({
+      title: 'Privacy Policy - All The Tools',
+      description: 'Our commitment to your privacy and how we handle your data.',
+      keywords: ['privacy policy', 'data privacy', 'all the tools'],
+      url: 'https://all-the-tools.netlify.app/privacy'
+    });
+  }
 }

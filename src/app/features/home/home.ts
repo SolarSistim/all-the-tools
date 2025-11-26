@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ToolsService } from '../../core/services/tools.service';
+import { MetaService } from '../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 
@@ -24,6 +25,7 @@ import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 })
 export class HomeComponent implements OnInit {
   toolsService = inject(ToolsService); // Made public for template access
+  private metaService = inject(MetaService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -60,6 +62,14 @@ export class HomeComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.metaService.updateTags({
+      title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
+      description: 'Free online tools for text, images, developers, and more. Word counter, case converter, JSON formatter, and 20+ other utilities.',
+      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
+      image: 'https://all-the-tools.netlify.app/assets/og-home.png',
+      url: 'https://all-the-tools.netlify.app/'
+    });
+
     this.featuredTools = this.toolsService.getFeaturedTools();
     this.categories = this.toolsService.getAllCategories();
   }

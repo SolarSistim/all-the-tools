@@ -1,0 +1,6 @@
+/
+/tools
+/about
+/privacy
+/terms
+/accessibility

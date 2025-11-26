@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { ToolsService } from '../../core/services/tools.service';
+import { MetaService } from '../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
@@ -29,6 +30,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
 })
 export class ToolsComponent implements OnInit {
   private toolsService = inject(ToolsService);
+  private metaService = inject(MetaService);
   private route = inject(ActivatedRoute);
 
   allTools: Tool[] = [];
@@ -38,6 +40,14 @@ export class ToolsComponent implements OnInit {
   selectedCategory = signal<string | null>(null);
 
   ngOnInit(): void {
+    this.metaService.updateTags({
+      title: 'Browse All Tools - 20+ Free Online Utilities | All The Tools',
+      description: 'Explore our complete collection of free online tools. Text tools, image tools, developer tools, and more. No sign-up required.',
+      keywords: ['online tools', 'web tools', 'free utilities', 'text tools', 'calculators', 'converters', 'generators'],
+      image: 'https://all-the-tools.netlify.app/assets/og-tools.png',
+      url: 'https://all-the-tools.netlify.app/tools'
+    });
+
     this.allTools = this.toolsService.getAvailableTools();
     this.filteredTools = this.allTools;
     this.categories = this.toolsService.getAllCategories();

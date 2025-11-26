@@ -1,5 +1,5 @@
-import { Component, signal, inject, OnInit, OnDestroy, HostBinding } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal, inject, OnInit, OnDestroy, HostBinding, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -47,6 +47,8 @@ import { ToolCategoryMeta, Tool } from '../../core/models/tool.interface';
 export class HeaderComponent implements OnInit, OnDestroy {
   private toolsService = inject(ToolsService);
   private sidenavService = inject(SidenavService);
+  private platformId = inject(PLATFORM_ID);
+  private document = inject(DOCUMENT);
 
   // Mobile menu state
   mobileMenuOpen = signal(false);
@@ -73,22 +75,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Listen to scroll events
-    window.addEventListener('scroll', this.onScroll.bind(this));
+    // Listen to scroll events (only in browser)
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('scroll', this.onScroll.bind(this));
+    }
   }
 
   ngOnDestroy(): void {
-    // Clean up scroll listener
-    window.removeEventListener('scroll', this.onScroll.bind(this));
+    // Clean up scroll listener (only in browser)
+    if (isPlatformBrowser(this.platformId)) {
+      window.removeEventListener('scroll', this.onScroll.bind(this));
+    }
   }
 
   /**
    * Handle scroll event - update header state
    */
   private onScroll(): void {
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-    // Consider scrolled if user has scrolled more than 50px
-    this.isScrolled.set(scrollPosition > 50);
+    if (isPlatformBrowser(this.platformId)) {
+      const scrollPosition = window.scrollY || this.document.documentElement.scrollTop;
+      // Consider scrolled if user has scrolled more than 50px
+      this.isScrolled.set(scrollPosition > 50);
+    }
   }
 
   /**
@@ -132,11 +140,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toggleTheme(): void {
     this.isDarkTheme.set(!this.isDarkTheme());
 
-    // Toggle the theme class on the body element
-    if (this.isDarkTheme()) {
-      document.body.classList.remove('light-theme');
-    } else {
-      document.body.classList.add('light-theme');
+    // Toggle the theme class on the body element (only in browser)
+    if (isPlatformBrowser(this.platformId)) {
+      if (this.isDarkTheme()) {
+        this.document.body.classList.remove('light-theme');
+      } else {
+        this.document.body.classList.add('light-theme');
+      }
     }
   }
 
