@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { ToolsService } from '../../../../core/services/tools.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
+import { MetaService } from '../../../../core/services/meta.service';
+import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
+import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 
 @Component({
   selector: 'app-percentage-calculator',
@@ -19,12 +24,35 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
     MatInputModule,
     MatIconModule,
     MatDividerModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    ToolCardComponent
   ],
   templateUrl: './percentage-calculator.html',
   styleUrl: './percentage-calculator.scss'
 })
-export class PercentageCalculatorComponent {
+export class PercentageCalculatorComponent implements OnInit {
+
+  toolsService = inject(ToolsService); // Made public for template access
+  private metaService = inject(MetaService);
+
+  featuredTools: Tool[] = [];
+  categories: ToolCategoryMeta[] = [];
+
+    ngOnInit(): void {
+    this.metaService.updateTags({
+      title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
+      description: 'Free online tools for text, images, developers, and more. Word counter, case converter, JSON formatter, and 20+ other utilities.',
+      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
+      image: 'https://all-the-tools.netlify.app/meta-images/og-home.png',
+      url: 'https://all-the-tools.netlify.app/'
+    });
+
+    this.featuredTools = this.toolsService.getFeaturedTools();
+    this.categories = this.toolsService.getAllCategories();
+  }
+
+
+
   // Calculate X% of Y
   percentage1 = signal<number | null>(null);
   number1 = signal<number | null>(null);

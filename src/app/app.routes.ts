@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home';
+import { Presskit } from './features/presskit/presskit';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,11 @@ export const routes: Routes = [
     path: 'tools/percentage-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
     title: 'Percentage Calculator - All The Tools'
+  },
+  {
+    path: 'presskit',
+    loadComponent: () => import('./features/presskit/presskit').then(m => m.Presskit),
+    title: 'All The Tools - Presskit'
   },
   {
     path: '**',

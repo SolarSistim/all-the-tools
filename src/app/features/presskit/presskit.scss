@@ -1,0 +1,246 @@
+@import '../../../styles/utilities';
+
+// ============================================
+// HERO SECTION
+// ============================================
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: $spacing-4xl 0 $spacing-3xl;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  transition: background-color 0.3s ease;
+
+  // Radial gradient overlay for depth with animation
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(109, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 140, 176, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    animation: gradient-shift 15s ease-in-out infinite;
+  }
+
+  // Add a second layer for more depth and movement
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(109, 212, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 30% 70%, rgba(255, 140, 176, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+    animation: gradient-shift-reverse 20s ease-in-out infinite;
+  }
+
+  @media (max-width: 768px) {
+    min-height: auto;
+    padding: $spacing-3xl 0 $spacing-2xl;
+  }
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-4xl;
+  align-items: center;
+  z-index: 2;
+
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+  }
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  @media (max-width: 968px) {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+
+  @media (max-width: 968px) {
+    font-size: 2.75rem;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 2rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 540px;
+
+  @media (max-width: 640px) {
+    font-size: 1.1rem;
+  }
+}
+
+// Hero Visual - Percentage Theme
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.percentage-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.percentage-circle {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  padding: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+
+  .percentage-symbol {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+
+    .percent-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 6rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px var(--neon-cyan-glow));
+    }
+
+    .percent-sign {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--neon-pink);
+      filter: drop-shadow(0 0 15px var(--neon-pink-glow));
+    }
+  }
+
+  .percent-icon {
+    position: absolute;
+    bottom: 50px;
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: var(--neon-cyan);
+    opacity: 0.7;
+    filter: drop-shadow(0 0 10px var(--neon-cyan-glow));
+    animation: float 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+                inset 0 0 30px rgba(109, 212, 255, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 60px var(--neon-cyan-glow),
+                inset 0 0 40px rgba(109, 212, 255, 0.2);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+// Gradient animation - very pronounced movement
+@keyframes gradient-shift {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    opacity: 0.6;
+    transform: translate(8%, -5%) scale(1.15);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-6%, 8%) scale(1.25);
+  }
+  75% {
+    opacity: 0.65;
+    transform: translate(6%, 6%) scale(1.15);
+  }
+}
+
+// Reverse gradient animation for second layer - very pronounced
+@keyframes gradient-shift-reverse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    opacity: 0.75;
+    transform: translate(-6%, 8%) scale(1.2);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(8%, -8%) scale(1.3);
+  }
+  75% {
+    opacity: 0.85;
+    transform: translate(-8%, 4%) scale(1.18);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Your existing presskit styles go below here
