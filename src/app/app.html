@@ -1,0 +1,97 @@
+<!-- Main App Layout -->
+<mat-sidenav-container class="sidenav-container">
+  <!-- Tools Browser Sidenav -->
+  <mat-sidenav
+    #toolsSidenav
+    (closed)="closeToolsSidenav()"
+    mode="over"
+    position="start"
+    class="tools-sidenav"
+  >
+    <div class="sidenav-header">
+      <h2>Browse Tools</h2>
+      <button
+        mat-icon-button
+        (click)="closeToolsSidenav()"
+        aria-label="Close tools menu"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="sidenav-nav">
+      <a
+        routerLink="/"
+        (click)="closeToolsSidenav()"
+        class="sidenav-nav-link"
+      >
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+
+      <a
+        routerLink="/tools"
+        (click)="closeToolsSidenav()"
+        class="sidenav-nav-link"
+      >
+        <mat-icon>apps</mat-icon>
+        <span>All Tools</span>
+      </a>
+
+      <a
+        routerLink="/about"
+        (click)="closeToolsSidenav()"
+        class="sidenav-nav-link"
+      >
+        <mat-icon>info</mat-icon>
+        <span>About</span>
+      </a>
+    </div>
+
+    <div class="sidenav-content">
+      <!-- Category Expansion Panels -->
+      @for (category of categories; track category.id) {
+        @if (getToolCount(category.id) > 0) {
+          <mat-expansion-panel class="category-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon class="category-icon">{{ category.icon }}</mat-icon>
+                <span class="category-name">{{ category.name }}</span>
+                <span class="category-badge">{{ getToolCount(category.id) }}</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Tools List -->
+            <div class="tools-list">
+              @for (tool of getToolsByCategory(category.id); track tool.id) {
+                <a
+                  [routerLink]="['/tools', tool.route]"
+                  (click)="closeToolsSidenav()"
+                  class="tool-item"
+                >
+                  <mat-icon class="tool-icon">{{ tool.icon }}</mat-icon>
+                  <div class="tool-info">
+                    <span class="tool-name">{{ tool.name }}</span>
+                    <span class="tool-desc">{{ tool.description }}</span>
+                  </div>
+                </a>
+              }
+            </div>
+          </mat-expansion-panel>
+        }
+      }
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <app-header></app-header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

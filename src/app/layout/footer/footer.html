@@ -1,0 +1,99 @@
+<footer class="footer">
+  <div class="footer-content container">
+    <!-- Main Footer Content -->
+    <div class="footer-main">
+      <!-- Brand Section -->
+      <div class="footer-section brand-section">
+        <div class="footer-brand">
+          <mat-icon class="brand-icon">construction</mat-icon>
+          <h3 class="brand-name">ALL THE TOOLS</h3>
+        </div>
+        <p class="brand-description">
+          Your Swiss Army knife of web utilities. Fast, private, and always free.
+        </p>
+        <!-- Social Links -->
+        <div class="social-links">
+          @for (social of socialLinks; track social.name) {
+            <a
+              [href]="social.url"
+              [matTooltip]="social.tooltip"
+              class="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <mat-icon>{{ social.icon }}</mat-icon>
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-links">
+          @for (link of quickLinks; track link.route) {
+            <li>
+              <a [routerLink]="link.route" class="footer-link">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Tool Categories -->
+      <div class="footer-section">
+        <h4 class="footer-title">Categories</h4>
+        <ul class="footer-links">
+          @for (category of toolCategories; track category.label) {
+            <li>
+              <a
+                [routerLink]="category.route"
+                [queryParams]="category.params"
+                class="footer-link"
+              >
+                {{ category.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Info Section -->
+      <div class="footer-section">
+        <h4 class="footer-title">About</h4>
+        <p class="footer-info">
+          All tools run entirely in your browser. No data is sent to any server.
+          Your privacy is guaranteed.
+        </p>
+        <div class="footer-badges">
+          <span class="badge">
+            <mat-icon>lock</mat-icon>
+            100% Private
+          </span>
+          <span class="badge">
+            <mat-icon>flash_on</mat-icon>
+            Fast
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-divider"></div>
+      <div class="footer-bottom-content">
+        <p class="copyright">
+          © {{ currentYear }} All The Tools. Built with Angular & passion.
+        </p>
+        <div class="footer-bottom-links">
+          <a routerLink="/privacy" class="footer-bottom-link">Privacy</a>
+          <span class="separator">•</span>
+          <a routerLink="/terms" class="footer-bottom-link">Terms</a>
+          <span class="separator">•</span>
+          <a routerLink="/accessibility" class="footer-bottom-link">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

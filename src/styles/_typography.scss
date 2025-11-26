@@ -1,0 +1,185 @@
+// ============================================
+// TYPOGRAPHY - RETRO-FUTURISTIC
+// ============================================
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+// Font families
+$font-display: 'Orbitron', sans-serif; // Futuristic, geometric - for headings
+$font-body: 'Space Grotesk', sans-serif; // Modern, readable - for body text
+$font-mono: 'Courier New', monospace; // For code/numeric displays
+
+// Font sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+$font-size-6xl: 3.75rem;   // 60px
+$font-size-7xl: 4.5rem;    // 72px
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// Line heights
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Letter spacing
+$letter-spacing-tight: -0.02em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.05em;
+$letter-spacing-wider: 0.1em;
+
+// ============================================
+// TYPOGRAPHY CLASSES
+// ============================================
+
+// Display headings (Orbitron)
+h1, .h1 {
+  font-family: $font-display;
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+  margin: 0 0 1rem;
+
+  @media (max-width: 640px) {
+    font-size: $font-size-4xl;
+  }
+}
+
+h2, .h2 {
+  font-family: $font-display;
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+  margin: 0 0 0.875rem;
+
+  @media (max-width: 640px) {
+    font-size: $font-size-3xl;
+  }
+}
+
+h3, .h3 {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-normal;
+  margin: 0 0 0.75rem;
+
+  @media (max-width: 640px) {
+    font-size: $font-size-2xl;
+  }
+}
+
+h4, .h4 {
+  font-family: $font-display;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-normal;
+  margin: 0 0 0.625rem;
+
+  @media (max-width: 640px) {
+    font-size: $font-size-xl;
+  }
+}
+
+h5, .h5 {
+  font-family: $font-body;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-normal;
+  margin: 0 0 0.5rem;
+}
+
+h6, .h6 {
+  font-family: $font-body;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-normal;
+  margin: 0 0 0.5rem;
+}
+
+// Body text
+body, p, .body {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+  letter-spacing: $letter-spacing-normal;
+}
+
+// Utility classes
+.text-display {
+  font-family: $font-display;
+}
+
+.text-body {
+  font-family: $font-body;
+}
+
+.text-mono {
+  font-family: $font-mono;
+}
+
+.text-xs { font-size: $font-size-xs; }
+.text-sm { font-size: $font-size-sm; }
+.text-base { font-size: $font-size-base; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }
+.text-2xl { font-size: $font-size-2xl; }
+.text-3xl { font-size: $font-size-3xl; }
+.text-4xl { font-size: $font-size-4xl; }
+.text-5xl { font-size: $font-size-5xl; }
+
+.font-light { font-weight: $font-weight-light; }
+.font-normal { font-weight: $font-weight-normal; }
+.font-medium { font-weight: $font-weight-medium; }
+.font-semibold { font-weight: $font-weight-semibold; }
+.font-bold { font-weight: $font-weight-bold; }
+.font-black { font-weight: $font-weight-black; }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+
+// Neon glow text effect (for special emphasis)
+.text-neon-cyan {
+  color: var(--neon-cyan-bright);
+  text-shadow:
+    0 0 10px var(--neon-cyan-glow),
+    0 0 20px var(--neon-cyan-glow),
+    0 0 30px var(--neon-cyan-glow);
+}
+
+.text-neon-pink {
+  color: var(--neon-pink-bright);
+  text-shadow:
+    0 0 10px var(--neon-pink-glow),
+    0 0 20px var(--neon-pink-glow),
+    0 0 30px var(--neon-pink-glow);
+}
+
+.text-gradient-cyber {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

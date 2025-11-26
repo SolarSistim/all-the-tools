@@ -1,0 +1,176 @@
+@import '../../../styles/utilities';
+
+.tools-page {
+  padding: $spacing-2xl 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.filters-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+}
+
+.search-container {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: $spacing-lg;
+  transition: all 0.3s ease;
+}
+
+.search-field {
+  width: 100%;
+}
+
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.category-btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  &:hover:not(.selected) {
+    background: var(--bg-secondary);
+    border-color: var(--neon-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+    mat-icon {
+      color: var(--neon-cyan);
+    }
+  }
+
+  &.selected {
+    background: var(--neon-cyan);
+    color: #000000;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 12px var(--neon-cyan-glow);
+    font-weight: 600;
+
+    mat-icon {
+      color: #000000 !important;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Light mode overrides for selected buttons
+:host-context(body.light-theme) {
+  .category-btn.selected {
+    color: #ffffff;
+
+    mat-icon {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.results-info {
+  margin-bottom: $spacing-lg;
+  color: var(--text-secondary);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $spacing-xl;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-md;
+  padding: $spacing-4xl;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--text-tertiary);
+  }
+
+  h3 {
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
+
+// ============================================
+// MAT FORM FIELD SEARCH INPUT - RETRO-FUTURISTIC
+// ============================================
+
+// Theme-aware form field styling scoped to tools component
+:host {
+  ::ng-deep mat-label {
+    color: var(--text-secondary) !important;
+  }
+
+  ::ng-deep mat-icon {
+    color: var(--text-secondary) !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-input-control {
+    color: var(--text-primary) !important;
+
+    // Hide placeholder by default (shows label instead)
+    &::placeholder {
+      color: var(--text-tertiary) !important;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    // Show placeholder only when input is focused
+    &:focus::placeholder {
+      opacity: 0.7;
+    }
+  }
+
+  ::ng-deep .mdc-line-ripple {
+    background-color: var(--neon-cyan) !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+
+}

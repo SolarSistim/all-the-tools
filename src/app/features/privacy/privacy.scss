@@ -1,0 +1,57 @@
+@import '../../../styles/utilities';
+
+.legal-page {
+  padding: $spacing-2xl 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.legal-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.legal-section {
+  margin-bottom: $spacing-2xl;
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: $spacing-md 0;
+
+    &.last-updated {
+      font-size: 0.9rem;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    strong {
+      color: var(--neon-cyan);
+      font-weight: 600;
+    }
+  }
+
+  ul {
+    margin: $spacing-md 0;
+    padding-left: $spacing-xl;
+
+    li {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin: $spacing-sm 0;
+    }
+  }
+}

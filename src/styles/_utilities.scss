@@ -1,0 +1,352 @@
+// ============================================
+// UTILITIES & MIXINS - RETRO-FUTURISTIC
+// ============================================
+
+// ============================================
+// FONT SIZES (for buttons and utilities)
+// ============================================
+$font-size-base: 1rem;  // 16px
+
+// ============================================
+// SPACING SYSTEM
+// ============================================
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ============================================
+// NEON GLOW EFFECTS
+// ============================================
+@mixin neon-glow($color, $intensity: 1) {
+  box-shadow:
+    0 0 calc(5px * #{$intensity}) rgba($color, 0.5),
+    0 0 calc(10px * #{$intensity}) rgba($color, 0.4),
+    0 0 calc(15px * #{$intensity}) rgba($color, 0.3),
+    0 0 calc(20px * #{$intensity}) rgba($color, 0.2);
+}
+
+.neon-glow-cyan {
+  @include neon-glow(#6dd4ff, 1);
+}
+
+.neon-glow-pink {
+  @include neon-glow(#ff8cb0, 1);
+}
+
+.neon-glow-amber {
+  @include neon-glow(#ffb945, 1);
+}
+
+// ============================================
+// GLASSMORPHISM
+// ============================================
+@mixin glass-effect($opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass {
+  @include glass-effect(0.1);
+}
+
+.glass-dark {
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(109, 212, 255, 0.2);
+}
+
+// ============================================
+// CARD STYLES
+// ============================================
+@mixin card-elevated {
+  background: var(--bg-elevated);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow:
+    0 4px 6px -1px var(--shadow-color),
+    0 2px 4px -2px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 10px 15px -3px var(--shadow-color),
+      0 4px 6px -4px var(--shadow-color);
+  }
+}
+
+.card {
+  @include card-elevated;
+  padding: $spacing-lg;
+}
+
+.card-compact {
+  @include card-elevated;
+  padding: $spacing-md;
+}
+
+.card-neon {
+  @include card-elevated;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  }
+
+  &:hover {
+    border-color: var(--neon-cyan);
+    @include neon-glow(#6dd4ff, 0.3);
+  }
+}
+
+// ============================================
+// BUTTON STYLES
+// ============================================
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: $font-size-base;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  min-height: 44px; // Touch target
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn {
+  @include button-base;
+  background: var(--neon-cyan);
+  color: #000000;
+
+  &:hover:not(:disabled) {
+    background: var(--neon-cyan-bright);
+    @include neon-glow(#6dd4ff, 0.5);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.btn-outline {
+  @include button-base;
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+
+  &:hover:not(:disabled) {
+    background: var(--neon-cyan);
+    color: #000000;
+    @include neon-glow(#6dd4ff, 0.5);
+  }
+}
+
+.btn-ghost {
+  @include button-base;
+  background: transparent;
+  color: var(--text-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--bg-elevated);
+  }
+}
+
+// ============================================
+// GRADIENT BACKGROUNDS
+// ============================================
+.bg-gradient-cyber {
+  background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #0a0e1a 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(109, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 140, 176, 0.1) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.bg-gradient-neon {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.8; }
+  43% { opacity: 1; }
+  45% { opacity: 0.9; }
+  46% { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-neon {
+  animation: neon-flicker 5s infinite;
+}
+
+// ============================================
+// LAYOUT UTILITIES
+// ============================================
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  @media (min-width: $breakpoint-sm) {
+    padding: 0 $spacing-lg;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 $spacing-md;
+
+  @media (min-width: $breakpoint-sm) {
+    padding: 0 $spacing-lg;
+  }
+}
+
+// Flexbox utilities
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.gap-xs { gap: $spacing-xs; }
+.gap-sm { gap: $spacing-sm; }
+.gap-md { gap: $spacing-md; }
+.gap-lg { gap: $spacing-lg; }
+.gap-xl { gap: $spacing-xl; }
+
+// Grid utilities
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (min-width: $breakpoint-md) {
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: $breakpoint-lg) {
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+// ============================================
+// BORDERS & DIVIDERS
+// ============================================
+.border-neon {
+  border: 1px solid var(--neon-cyan);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}

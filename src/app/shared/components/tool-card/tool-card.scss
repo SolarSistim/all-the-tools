@@ -1,0 +1,266 @@
+// ============================================
+// TOOL CARD COMPONENT - RETRO-FUTURISTIC
+// ============================================
+
+@import '../../../../styles/utilities';
+
+.tool-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: $spacing-lg;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  height: 340px;
+
+  // Neon glow effect on hover
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-cyan);
+    box-shadow:
+      0 8px 16px rgba(0, 0, 0, 0.2),
+      0 0 20px var(--neon-cyan-glow);
+
+    .card-glow {
+      opacity: 1;
+    }
+
+    .tool-icon {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px var(--neon-cyan-glow));
+    }
+
+    .arrow-icon {
+      transform: translateX(4px);
+      color: var(--neon-cyan);
+    }
+
+    .tool-name {
+      color: var(--neon-cyan);
+    }
+  }
+
+  &.featured {
+    border-color: var(--neon-pink);
+
+    .icon-container {
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    }
+
+    &:hover {
+      border-color: var(--neon-pink);
+      box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 0 20px var(--neon-pink-glow);
+    }
+  }
+
+  &.unavailable {
+    opacity: 0.7;
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      border-color: var(--border-color);
+      box-shadow: none;
+    }
+  }
+}
+
+// ============================================
+// CARD HEADER
+// ============================================
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-md;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+
+  .tool-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--neon-cyan);
+    transition: all 0.3s ease;
+  }
+}
+
+.featured-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--neon-pink);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--neon-pink-glow);
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #000000;
+  }
+}
+
+.coming-soon-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--amber);
+  color: #000000;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--amber-glow);
+}
+
+// ============================================
+// CARD CONTENT
+// ============================================
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  overflow: hidden;
+}
+
+.tool-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.tool-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tool-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  margin-top: $spacing-sm;
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+// ============================================
+// CARD FOOTER
+// ============================================
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1px solid var(--border-color);
+}
+
+.category-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--text-tertiary);
+  }
+}
+
+.arrow-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+  transition: all 0.3s ease;
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: 640px) {
+  .tool-card {
+    height: 320px;
+    padding: $spacing-md;
+  }
+
+  .icon-container {
+    width: 48px;
+    height: 48px;
+
+    .tool-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .tool-name {
+    font-size: 1.1rem;
+  }
+
+  .tool-description {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,153 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content container">
+      <div class="hero-text">
+        <h1 class="hero-title animate-fade-in">
+          Your Swiss Army Knife of
+          <span class="text-gradient-cyber">Web Tools</span>
+        </h1>
+        <p class="hero-subtitle animate-fade-in">
+          A powerful collection of front-end utilities that run entirely in your browser.
+          Fast, private, and always free.
+        </p>
+        <div class="hero-actions animate-fade-in">
+          <a routerLink="/tools" class="btn">
+            <mat-icon>apps</mat-icon>
+            Browse All Tools
+          </a>
+          <a routerLink="/about" class="btn-outline">
+            <mat-icon>info</mat-icon>
+            Learn More
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual Element -->
+      <div class="hero-visual">
+        <div class="visual-grid">
+          <div class="grid-item" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+            <mat-icon>{{ getRandomIcon(i) }}</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <mat-icon>expand_more</mat-icon>
+    </div>
+  </section>
+
+  <!-- Featured Tools Section -->
+  <section class="featured-tools">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Featured Tools</h2>
+          <div class="title-underline"></div>
+        </div>
+        <p class="section-subtitle">
+          Our most popular and useful utilities, handpicked for you
+        </p>
+      </div>
+
+      <div class="tools-grid">
+        @for (tool of featuredTools; track tool.id) {
+          <app-tool-card [tool]="tool" [featured]="true"></app-tool-card>
+        }
+      </div>
+
+      <div class="section-footer">
+        <a routerLink="/tools" class="btn-outline">
+          <mat-icon>apps</mat-icon>
+          View All {{ featuredTools.length > 0 ? toolsService.getAllTools().length : '' }} Tools
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Browse by Category</h2>
+          <div class="title-underline"></div>
+        </div>
+        <p class="section-subtitle">
+          Find exactly what you need, organized by tool type
+        </p>
+      </div>
+
+      <div class="categories-grid">
+        @for (category of categories; track category.id) {
+          @if (getToolCountForCategory(category.id) > 0) {
+            <a
+              [routerLink]="['/tools']"
+              [queryParams]="{category: category.id}"
+              class="category-card"
+            >
+              <div class="category-icon-wrapper">
+                <mat-icon class="category-icon">{{ category.icon }}</mat-icon>
+              </div>
+              <h3 class="category-name">{{ category.name }}</h3>
+              <p class="category-description">{{ category.description }}</p>
+              <div class="category-footer">
+                <span class="category-count">
+                  {{ getToolCountForCategory(category.id) }} tools
+                </span>
+                <mat-icon class="arrow">arrow_forward</mat-icon>
+              </div>
+            </a>
+          }
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Why Choose Us</h2>
+          <div class="title-underline"></div>
+        </div>
+        <p class="section-subtitle">
+          Built with your privacy, performance, and convenience in mind
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        @for (benefit of benefits; track benefit.title) {
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <mat-icon class="benefit-icon">{{ benefit.icon }}</mat-icon>
+            </div>
+            <h3 class="benefit-title">{{ benefit.title }}</h3>
+            <p class="benefit-description">{{ benefit.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <mat-icon class="cta-icon">construction</mat-icon>
+        <h2 class="cta-title">Ready to get started?</h2>
+        <p class="cta-subtitle">
+          Explore our complete collection of powerful web utilities
+        </p>
+        <a routerLink="/tools" class="btn">
+          <mat-icon>apps</mat-icon>
+          Browse All Tools
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,46 @@
+<a
+  [routerLink]="['/tools', tool.route]"
+  class="tool-card"
+  [class.featured]="featured"
+  [class.unavailable]="tool.available === false"
+  (click)="onCardClick()"
+>
+  <div class="card-glow"></div>
+
+  <div class="card-header">
+    <div class="icon-container">
+      <mat-icon class="tool-icon">{{ tool.icon }}</mat-icon>
+    </div>
+
+    @if (featured) {
+      <span class="featured-badge">
+        <mat-icon>star</mat-icon>
+      </span>
+    }
+
+    @if (tool.available === false) {
+      <span class="coming-soon-badge">Coming Soon</span>
+    }
+  </div>
+
+  <div class="card-content">
+    <h3 class="tool-name">{{ tool.name }}</h3>
+    <p class="tool-description">{{ tool.description }}</p>
+
+    @if (tool.tags && tool.tags.length > 0) {
+      <div class="tool-tags">
+        @for (tag of tool.tags.slice(0, 3); track tag) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="card-footer">
+    <span class="category-badge">
+      <mat-icon>{{ getCategoryIcon(tool.category) }}</mat-icon>
+      {{ getCategoryName(tool.category) }}
+    </span>
+    <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+  </div>
+</a>

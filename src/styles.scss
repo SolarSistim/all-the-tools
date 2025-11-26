@@ -1,0 +1,432 @@
+// ============================================
+// ALL THE TOOLS - GLOBAL STYLES
+// Retro-Futuristic Calculator Aesthetic
+// ============================================
+
+// Import custom theme files
+@use './styles/theme' as theme;
+@import './styles/typography';
+@import './styles/utilities';
+
+// ============================================
+// BASE THEME APPLICATION
+// ============================================
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+
+  // Apply dark theme by default (retro-futuristic aesthetic)
+  @include theme.apply-dark-theme;
+
+  // Smooth transitions when switching themes
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  // Default font family (will be overridden by typography)
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Light theme class (can be toggled)
+body.light-theme {
+  @include theme.apply-light-theme;
+
+  // Remove grid pattern for light theme
+  background-image: none;
+
+  // Fix button text color in light mode
+  .btn {
+    color: #ffffff !important;
+
+    &:hover:not(:disabled) {
+      color: #ffffff !important;
+    }
+  }
+
+  // Material button overrides for light mode
+  .mat-mdc-button,
+  .mat-mdc-raised-button,
+  .mat-mdc-flat-button {
+    &.mat-primary {
+      color: #ffffff !important;
+
+      mat-icon {
+        color: #ffffff !important;
+      }
+
+      &:hover:not(:disabled) {
+        color: #ffffff !important;
+
+        mat-icon {
+          color: #ffffff !important;
+        }
+      }
+    }
+  }
+
+  .mat-mdc-raised-button.mat-primary {
+    color: #ffffff !important;
+
+    mat-icon {
+      color: #ffffff !important;
+    }
+
+    &:hover:not(:disabled) {
+      color: #ffffff !important;
+
+      mat-icon {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+// ============================================
+// SELECTION STYLES
+// ============================================
+::selection {
+  background: var(--neon-cyan);
+  color: #000000;
+}
+
+::-moz-selection {
+  background: var(--neon-cyan);
+  color: #000000;
+}
+
+// ============================================
+// SCROLLBAR STYLES
+// ============================================
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 6px;
+  border: 2px solid var(--bg-secondary);
+
+  &:hover {
+    background: var(--neon-cyan-bright);
+  }
+}
+
+// Firefox scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neon-cyan) var(--bg-secondary);
+}
+
+// ============================================
+// FOCUS STYLES (ACCESSIBILITY)
+// ============================================
+:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
+// ============================================
+// LINK STYLES
+// ============================================
+a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--neon-cyan-bright);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: var(--neon-pink);
+  }
+}
+
+// ============================================
+// APP ROOT STYLES
+// ============================================
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// ============================================
+// MATERIAL OVERRIDES
+// ============================================
+
+// Override Material button styles for retro-futuristic look
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-flat-button {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  border-radius: 8px !important;
+  text-transform: uppercase;
+  font-size: 0.875rem !important;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  background: var(--neon-cyan) !important;
+  color: #000000 !important;
+
+  &:hover {
+    box-shadow:
+      0 0 10px var(--neon-cyan-glow),
+      0 0 20px var(--neon-cyan-glow) !important;
+  }
+}
+
+// Material card overrides
+.mat-mdc-card {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-radius: 16px !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+// Material form field overrides
+.mat-mdc-form-field {
+  font-family: 'Space Grotesk', sans-serif !important;
+
+  .mat-mdc-text-field-wrapper {
+    background: var(--bg-elevated);
+    border-radius: 8px;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: var(--neon-cyan-glow);
+  }
+}
+
+// Force all form fields to use fill appearance
+.mat-mdc-form-field-appearance-outline {
+  .mat-mdc-text-field-wrapper {
+    background: var(--bg-elevated) !important;
+  }
+}
+
+// Enhanced fill style for better visibility
+// Use ::ng-deep to penetrate Angular view encapsulation
+::ng-deep .mat-mdc-form-field-fill {
+  .mat-mdc-text-field-wrapper {
+    background: var(--bg-elevated) !important;
+    border-radius: 8px 8px 0 0 !important;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: var(--neon-cyan-glow) !important;
+  }
+
+  .mdc-line-ripple {
+    background-color: var(--neon-cyan) !important;
+  }
+
+  // Fix icon color in dark mode
+  .mat-mdc-form-field-icon-prefix,
+  .mat-mdc-form-field-icon-suffix {
+    mat-icon {
+      color: var(--text-secondary) !important;
+    }
+  }
+
+  // Fix label color
+  .mdc-floating-label,
+  .mat-mdc-floating-label {
+    color: var(--text-secondary) !important;
+
+    &.mdc-floating-label--float-above {
+      color: var(--text-secondary) !important;
+    }
+  }
+
+  // Fix input text color
+  .mat-mdc-input-element {
+    color: var(--text-primary) !important;
+    caret-color: var(--neon-cyan) !important;
+
+    // Fix placeholder color
+    &::placeholder {
+      color: var(--text-tertiary) !important;
+      opacity: 0.7;
+    }
+  }
+}
+
+// Material toolbar
+.mat-toolbar {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Orbitron', sans-serif !important;
+}
+
+// Material menu
+.mat-mdc-menu-panel {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+}
+
+.mat-mdc-menu-item {
+  font-family: 'Space Grotesk', sans-serif !important;
+  color: var(--text-primary) !important;
+
+  &:hover {
+    background: var(--bg-secondary) !important;
+  }
+}
+
+// Material dialog
+.mat-mdc-dialog-container {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-radius: 16px !important;
+  border: 1px solid var(--neon-cyan) !important;
+  box-shadow: 0 0 30px var(--neon-cyan-glow) !important;
+}
+
+// Material tabs
+.mat-mdc-tab-group {
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+
+.mat-mdc-tab {
+  font-family: 'Orbitron', sans-serif !important;
+  text-transform: uppercase;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.05em;
+}
+
+.mat-mdc-tab-label-active {
+  color: var(--neon-cyan) !important;
+}
+
+// Material tooltip overrides
+.mat-mdc-tooltip {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.75rem !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+}
+
+// Dark mode tooltips (default)
+body:not(.light-theme) {
+  .mat-mdc-tooltip {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #000000 !important;
+  }
+}
+
+// Light mode tooltips
+body.light-theme {
+  .mat-mdc-tooltip {
+    background: rgba(26, 30, 46, 0.95) !important;
+    color: #ffffff !important;
+  }
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+// Visibility
+.hidden { display: none !important; }
+.invisible { visibility: hidden; }
+
+// Responsive utilities
+@media (max-width: 640px) {
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 641px) {
+  .hide-desktop { display: none !important; }
+}
+
+// Text alignment
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+// Spacing utilities
+.m-0 { margin: 0; }
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+.p-0 { padding: 0; }
+
+// ============================================
+// LOADING & TRANSITIONS
+// ============================================
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// Loading spinner (custom)
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--neon-cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ============================================
+// PRINT STYLES
+// ============================================
+@media print {
+  body {
+    background: white;
+    color: black;
+    background-image: none;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+}

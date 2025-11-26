@@ -1,0 +1,606 @@
+// ============================================
+// HEADER COMPONENT - RETRO-FUTURISTIC
+// ============================================
+
+@import '../../../styles/utilities';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  // Subtle neon glow at the bottom
+  box-shadow: 0 2px 10px rgba(109, 212, 255, 0.1);
+
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ============================================
+// TOOLBAR
+// ============================================
+.toolbar {
+  background: transparent !important;
+  padding: 0 !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+  height: 64px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .toolbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 64px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+// ============================================
+// HAMBURGER MENU BUTTON
+// ============================================
+.hamburger-btn {
+  color: var(--text-primary) !important;
+  margin-right: $spacing-sm;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--bg-elevated) !important;
+
+    mat-icon {
+      color: var(--neon-cyan);
+    }
+  }
+}
+
+// ============================================
+// LOGO / BRAND
+// ============================================
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: $spacing-sm;
+  border-radius: 8px;
+  height: 100%;
+  align-self: center;
+
+  .logo-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    color: var(--neon-cyan);
+    transform: rotate(-15deg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .logo-text {
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    background: var(--bg-elevated);
+    color: var(--neon-cyan);
+    text-decoration: none;
+
+    .logo-icon {
+      transform: rotate(0deg);
+      filter: drop-shadow(0 0 10px var(--neon-cyan-glow));
+    }
+  }
+}
+
+// ============================================
+// DESKTOP NAVIGATION
+// ============================================
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex: 1;
+  justify-content: center;
+  height: 100%;
+
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      color: var(--neon-cyan);
+      background: var(--bg-elevated);
+      text-decoration: none;
+    }
+
+    &.active {
+      color: var(--neon-cyan);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 24px;
+        height: 2px;
+        background: var(--neon-cyan);
+        border-radius: 2px;
+        box-shadow: 0 0 8px var(--neon-cyan-glow);
+      }
+    }
+  }
+
+  .tools-btn,
+  .about-btn {
+    // Material button overrides
+    min-width: auto;
+    line-height: 1.5;
+
+    ::ng-deep .mdc-button__label {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      width: 100%;
+
+      mat-icon {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+// ============================================
+// ACTIONS (THEME TOGGLE, ETC.)
+// ============================================
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 100%;
+}
+
+.theme-toggle {
+  color: var(--text-secondary) !important;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: var(--bg-elevated) !important;
+
+    mat-icon {
+      color: var(--neon-cyan);
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+  }
+}
+
+// ============================================
+// TOOLS DROPDOWN MENU (DESKTOP)
+// ============================================
+
+::ng-deep .tools-menu {
+  .tools-menu-content {
+    padding: $spacing-md;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .menu-section {
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.menu-footer {
+      padding-top: $spacing-md;
+      border-top: 1px solid var(--border-color);
+    }
+  }
+
+  .menu-section-title,
+  h4.menu-section-title {
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: var(--text-primary) !important;
+    margin: 0 0 $spacing-sm !important;
+    padding: 0 $spacing-md !important;
+  }
+
+  .tool-menu-item,
+  .category-menu-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    min-height: 44px;
+    padding: $spacing-sm $spacing-md;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    mat-icon {
+      color: var(--neon-cyan);
+    }
+
+    &:hover {
+      background: var(--bg-secondary) !important;
+      color: var(--neon-cyan) !important;
+
+      mat-icon {
+        filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
+      }
+    }
+  }
+
+  .category-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .category-name {
+      font-weight: 500;
+    }
+
+    .category-count {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+  }
+
+  .view-all-link {
+    font-weight: 600;
+    color: var(--neon-cyan);
+
+    mat-icon {
+      color: var(--neon-cyan);
+    }
+  }
+}
+
+// ============================================
+// ABOUT DROPDOWN MENU (DESKTOP)
+// ============================================
+::ng-deep .about-menu {
+  .about-menu-content {
+    min-width: 260px;
+    max-width: 320px;
+    padding: $spacing-md;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .menu-section {
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .about-menu-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    min-height: 44px;
+    padding: $spacing-sm $spacing-md;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    mat-icon {
+      color: var(--neon-cyan);
+    }
+
+    &:hover {
+      background: var(--bg-secondary) !important;
+      color: var(--neon-cyan) !important;
+
+      mat-icon {
+        filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
+      }
+    }
+  }
+}
+
+// ============================================
+// MOBILE ACTIONS
+// ============================================
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  .mobile-menu-btn {
+    color: var(--text-primary) !important;
+
+    mat-icon {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+// ============================================
+// MOBILE MENU OVERLAY & SIDEBAR
+// ============================================
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  animation: fade-in 0.3s ease;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  width: 85%;
+  max-width: 320px;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-color);
+  z-index: 1000;
+  overflow-y: auto;
+  animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+
+  // Add backdrop blur if supported
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+// ============================================
+// MOBILE NAVIGATION LINKS
+// ============================================
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg $spacing-md;
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    mat-icon {
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    &:hover {
+      background: var(--bg-elevated);
+      color: var(--neon-cyan);
+
+      mat-icon {
+        color: var(--neon-cyan);
+      }
+    }
+
+    &.active {
+      background: var(--bg-elevated);
+      color: var(--neon-cyan);
+      border-left: 3px solid var(--neon-cyan);
+
+      mat-icon {
+        color: var(--neon-cyan);
+        filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+      }
+    }
+  }
+}
+
+// ============================================
+// MOBILE CATEGORIES SECTION
+// ============================================
+.mobile-categories {
+  margin: $spacing-lg 0;
+  padding: $spacing-md 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+
+  .mobile-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-primary) !important;
+    margin: 0 0 $spacing-sm;
+    padding: 0 $spacing-md;
+  }
+
+  .mobile-category-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--text-tertiary);
+    }
+
+    .count {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      background: var(--bg-elevated);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    &:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+
+      mat-icon {
+        color: var(--neon-cyan);
+      }
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE UTILITIES
+// ============================================
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+// ============================================
+// SCROLLED STATE - DYNAMIC HEADER
+// ============================================
+:host.scrolled {
+  .header {
+    // Enhanced shadow when scrolled
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(109, 212, 255, 0.15);
+    border-bottom-color: rgba(109, 212, 255, 0.3);
+    // Use theme-aware background instead of hardcoded dark
+    background: var(--bg-secondary);
+    opacity: 0.98;
+  }
+
+  // Shrink toolbar height dramatically
+  .toolbar {
+    min-height: 48px !important;
+    max-height: 48px !important;
+    height: 48px !important;
+
+    .toolbar-content {
+      height: 48px;
+      // Ensure elements stay vertically centered
+      align-items: center;
+    }
+  }
+
+  // Shrink logo more dramatically
+  .logo {
+    font-size: 1rem;
+    padding: $spacing-xs $spacing-sm;
+
+    .logo-icon {
+      font-size: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  // Shrink nav links more
+  .desktop-nav {
+    .nav-link {
+      padding: $spacing-xs $spacing-sm;
+      font-size: 0.85rem;
+
+      mat-icon {
+        font-size: 15px;
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  // Shrink action buttons more
+  .theme-toggle {
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .mobile-menu-btn {
+    mat-icon {
+      font-size: 22px !important;
+      width: 22px !important;
+      height: 22px !important;
+    }
+  }
+}

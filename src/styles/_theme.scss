@@ -1,0 +1,214 @@
+// ============================================
+// RETRO-FUTURISTIC THEME
+// Inspired by 80s/90s calculators + neon aesthetics
+// ============================================
+
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+// ============================================
+// CUSTOM COLOR PALETTES
+// ============================================
+
+// Neon Cyan (Primary) - Electric blue/cyan
+$neon-cyan-palette: (
+  0: #000000,
+  10: #001e2f,
+  20: #003348,
+  25: #003f56,
+  30: #004c65,
+  35: #005974,
+  40: #006684,
+  50: #0080a5,
+  60: #009cc7,
+  70: #3fb8e3,
+  80: #6dd4ff,
+  90: #c0e8ff,
+  95: #e0f4ff,
+  98: #f1faff,
+  99: #f9fcff,
+  100: #ffffff,
+  // Additional keys for contrast
+  secondary: #6dd4ff,
+  neutral: #c0e8ff,
+  neutral-variant: #003f56,
+  error: #ff4646,
+);
+
+// Neon Pink/Magenta (Accent)
+$neon-pink-palette: (
+  0: #000000,
+  10: #3d001d,
+  20: #5e1133,
+  25: #6e1d3e,
+  30: #7f284a,
+  35: #903456,
+  40: #a14062,
+  50: #c4597b,
+  60: #e77295,
+  70: #ff8cb0,
+  80: #ffb0ca,
+  90: #ffd8e5,
+  95: #ffecf1,
+  98: #fff8f9,
+  99: #fffbff,
+  100: #ffffff,
+  secondary: #ff8cb0,
+  neutral: #ffb0ca,
+  neutral-variant: #7f284a,
+  error: #ff4646,
+);
+
+// Deep Navy/Space (Neutral)
+$deep-navy-palette: (
+  0: #000000,
+  10: #0a0e1a,
+  20: #1a1e2e,
+  25: #212537,
+  30: #282d41,
+  35: #2f344b,
+  40: #363c56,
+  50: #4e546d,
+  60: #676d87,
+  70: #8187a1,
+  80: #9ca2bc,
+  90: #b8bed8,
+  95: #d6dcf6,
+  98: #f1f0ff,
+  99: #fdfbff,
+  100: #ffffff,
+  secondary: #9ca2bc,
+  neutral: #282d41,
+  neutral-variant: #2f344b,
+  error: #ff4646,
+);
+
+// Amber/Orange (Warning/Energy)
+$amber-palette: (
+  0: #000000,
+  10: #2d1500,
+  20: #4a2800,
+  25: #583100,
+  30: #673b00,
+  35: #764600,
+  40: #865100,
+  50: #a76800,
+  60: #c98000,
+  70: #ec9a00,
+  80: #ffb945,
+  90: #ffddb3,
+  95: #ffeed8,
+  98: #fff8f4,
+  99: #fffbff,
+  100: #ffffff,
+  secondary: #ffb945,
+  neutral: #ffddb3,
+  neutral-variant: #673b00,
+  error: #ff4646,
+);
+
+// ============================================
+// THEME CONFIGURATION
+// ============================================
+
+// Light theme configuration
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$rose-palette,
+    use-system-variables: true,
+  ),
+  typography: (
+    use-system-variables: true,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Dark theme configuration (default for retro-futuristic look)
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$rose-palette,
+    use-system-variables: true,
+  ),
+  typography: (
+    use-system-variables: true,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// ============================================
+// THEME MIXINS
+// ============================================
+
+// Apply light theme
+@mixin apply-light-theme {
+  @include mat.theme($light-theme);
+
+  // Custom CSS variables for light theme
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.95);
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  --neon-cyan: #0080a5;
+  --neon-cyan-bright: #00b8e6;
+  --neon-cyan-glow: rgba(0, 184, 230, 0.3);
+
+  --neon-pink: #ff8cb0;
+  --neon-pink-bright: #ff6b99;
+  --neon-pink-glow: rgba(255, 107, 153, 0.3);
+
+  --amber: #ffb945;
+  --amber-bright: #ffa500;
+  --amber-glow: rgba(255, 185, 69, 0.3);
+}
+
+// Apply dark theme
+@mixin apply-dark-theme {
+  @include mat.theme($dark-theme);
+
+  // Custom CSS variables for dark theme (retro-futuristic default)
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #1a1e2e;
+  --bg-elevated: #212537;
+  --bg-overlay: rgba(26, 30, 46, 0.95);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b8bed8;
+  --text-tertiary: #8187a1;
+
+  --border-color: #2f344b;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+
+  --neon-cyan: #6dd4ff;
+  --neon-cyan-bright: #9ee5ff;
+  --neon-cyan-glow: rgba(109, 212, 255, 0.5);
+
+  --neon-pink: #ff8cb0;
+  --neon-pink-bright: #ffb0ca;
+  --neon-pink-glow: rgba(255, 140, 176, 0.5);
+
+  --amber: #ffb945;
+  --amber-bright: #ffddb3;
+  --amber-glow: rgba(255, 185, 69, 0.5);
+
+  // Grid pattern background (retro tech aesthetic)
+  background-image:
+    linear-gradient(rgba(109, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(109, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}

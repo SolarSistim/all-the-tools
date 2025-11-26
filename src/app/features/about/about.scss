@@ -1,0 +1,73 @@
+@import '../../../styles/utilities';
+
+.about-page {
+  padding: $spacing-2xl 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-section {
+  margin-bottom: $spacing-3xl;
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-primary);
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+  max-width: none;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: var(--neon-cyan);
+    margin-bottom: $spacing-sm;
+  }
+
+  h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}

@@ -1,0 +1,83 @@
+<div class="tools-page">
+  <div class="container">
+    <!-- Page Header -->
+    <app-page-header
+      title="All Tools"
+      subtitle="Browse our complete collection of powerful web utilities"
+      icon="apps"
+    ></app-page-header>
+
+    <!-- Search and Filters -->
+    <div class="filters-section">
+      <!-- Search Bar Container -->
+      <div class="search-container">
+        <mat-form-field class="search-field" appearance="fill">
+          <mat-label>Search tools...</mat-label>
+          <input
+            matInput
+            type="text"
+            [value]="searchQuery()"
+            (input)="onSearchChange($any($event.target).value)"
+            placeholder="Try 'calculator', 'color', 'text'..."
+          />
+          <mat-icon matPrefix>search</mat-icon>
+          @if (searchQuery()) {
+            <button mat-icon-button matSuffix (click)="clearFilters()" aria-label="Clear search">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="category-chips">
+        <button
+          class="category-btn"
+          [class.selected]="!selectedCategory()"
+          (click)="filterByCategory(null)"
+        >
+          All
+        </button>
+        @for (category of categories; track category.id) {
+          <button
+            class="category-btn"
+            [class.selected]="selectedCategory() === category.id"
+            (click)="filterByCategory(category.id)"
+          >
+            <mat-icon>{{ category.icon }}</mat-icon>
+            {{ category.name }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Results Info -->
+    <div class="results-info">
+      <p>
+        Showing <strong>{{ filteredTools.length }}</strong> of <strong>{{ allTools.length }}</strong> tools
+        @if (selectedCategory()) {
+          in <strong>{{ getCategoryName(selectedCategory()!) }}</strong>
+        }
+      </p>
+    </div>
+
+    <!-- Tools Grid -->
+    @if (filteredTools.length > 0) {
+      <div class="tools-grid">
+        @for (tool of filteredTools; track tool.id) {
+          <app-tool-card [tool]="tool"></app-tool-card>
+        }
+      </div>
+    } @else {
+      <div class="no-results">
+        <mat-icon>search_off</mat-icon>
+        <h3>No tools found</h3>
+        <p>Try adjusting your search or filters</p>
+        <button class="btn-outline" (click)="clearFilters()">
+          <mat-icon>refresh</mat-icon>
+          Clear Filters
+        </button>
+      </div>
+    }
+  </div>
+</div>

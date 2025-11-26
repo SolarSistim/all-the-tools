@@ -1,0 +1,33 @@
+<div class="page-header">
+  <!-- Breadcrumbs (if provided) -->
+  @if (breadcrumbs && breadcrumbs.length > 0) {
+    <nav class="breadcrumbs">
+      @for (crumb of breadcrumbs; track crumb.label; let last = $last) {
+        @if (crumb.route && !last) {
+          <a [routerLink]="crumb.route" class="breadcrumb-link">
+            {{ crumb.label }}
+          </a>
+        } @else {
+          <span class="breadcrumb-current">{{ crumb.label }}</span>
+        }
+        @if (!last) {
+          <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>
+        }
+      }
+    </nav>
+  }
+
+  <!-- Main Header Content -->
+  <div class="header-content">
+    @if (icon) {
+      <mat-icon class="header-icon">{{ icon }}</mat-icon>
+    }
+
+    <div class="header-text">
+      <h1 class="header-title">{{ title }}</h1>
+      @if (subtitle) {
+        <p class="header-subtitle">{{ subtitle }}</p>
+      }
+    </div>
+  </div>
+</div>

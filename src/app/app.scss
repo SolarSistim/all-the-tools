@@ -1,0 +1,282 @@
+// Main App Component Styles
+
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+
+::ng-deep .mat-drawer-backdrop {
+  position: fixed !important;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 64px); // Account for header height
+  flex: 1;
+  padding-top: 64px; // Add padding for fixed header
+}
+
+// ============================================
+// TOOLS BROWSER SIDENAV
+// ============================================
+::ng-deep .tools-sidenav {
+  width: 320px;
+  background: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-color);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+
+  .sidenav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-elevated);
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    button {
+      color: var(--text-secondary) !important;
+
+      &:hover {
+        background: var(--bg-secondary) !important;
+
+        mat-icon {
+          color: var(--neon-cyan);
+        }
+      }
+    }
+  }
+
+  // Navigation Buttons
+  .sidenav-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    gap: 4px;
+
+    .sidenav-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+      }
+
+      &:hover {
+        background: var(--bg-elevated);
+        border-left-color: var(--neon-cyan);
+        color: var(--neon-cyan);
+
+        mat-icon {
+          color: var(--neon-cyan);
+          filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
+        }
+      }
+    }
+  }
+
+  .sidenav-content {
+    padding: 0.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
+  }
+
+  // Category Expansion Panels
+  .category-panel {
+    background: var(--bg-elevated) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px !important;
+    margin-bottom: 0.5rem;
+    box-shadow: none !important;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .mat-expansion-panel-header {
+      background: transparent !important;
+      padding: 0.5rem 0.75rem 0.5rem 0.5rem !important;
+      min-height: 44px !important;
+
+      &:hover {
+        background: var(--bg-secondary) !important;
+      }
+
+      .mat-expansion-indicator {
+        color: var(--text-secondary) !important;
+        margin-right: 0.5rem;
+
+        // Target the SVG chevron icon
+        svg {
+          fill: var(--text-secondary) !important;
+
+          path {
+            fill: var(--text-secondary) !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Category panel title elements - common styles
+  .mat-expansion-panel-header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .category-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: var(--neon-cyan);
+  }
+
+  .category-name {
+    flex: 1;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+
+  .category-badge {
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 !important;
+    background: var(--bg-secondary);
+  }
+
+  // Dark mode specific color overrides
+  :host-context(body:not(.light-theme)) {
+    .category-panel .mat-expansion-indicator {
+      color: #ffffff !important;
+
+      svg {
+        fill: #ffffff !important;
+
+        path {
+          fill: #ffffff !important;
+        }
+      }
+    }
+
+    .category-name {
+      color: #ffffff !important;
+    }
+  }
+
+  // Light mode specific color overrides
+  :host-context(body.light-theme) {
+    .category-panel .mat-expansion-indicator {
+      color: #000000 !important;
+
+      svg {
+        fill: #000000 !important;
+
+        path {
+          fill: #000000 !important;
+        }
+      }
+    }
+  }
+
+  // Tools List
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tool-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+
+    &:hover {
+      background: var(--bg-elevated);
+      border-left-color: var(--neon-cyan);
+
+      .tool-icon {
+        color: var(--neon-cyan);
+        filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
+      }
+
+      .tool-name {
+        color: var(--neon-cyan);
+      }
+    }
+
+    .tool-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .tool-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .tool-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: color 0.2s ease;
+    }
+
+    .tool-desc {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
