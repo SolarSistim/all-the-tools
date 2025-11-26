@@ -1,0 +1,150 @@
+<div class="percentage-calculator-page">
+  <div class="container">
+    <app-page-header
+      title="Percentage Calculator"
+      subtitle="Calculate percentages and find what percent one number is of another"
+      icon="percent"
+    ></app-page-header>
+
+    <div class="calculator-grid">
+      <!-- Calculator 1: X% of Y -->
+      <mat-card class="calculator-card">
+        <div class="card-header">
+          <mat-icon class="card-icon">calculate</mat-icon>
+          <h2>What is X% of Y?</h2>
+        </div>
+
+        <div class="calculator-content">
+          <div class="input-row">
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Percentage (%)</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="percentage1"
+                (ngModelChange)="calculatePercentageOf()"
+                placeholder="e.g., 20"
+              />
+              <mat-icon matSuffix>percent</mat-icon>
+            </mat-form-field>
+
+            <span class="operator">of</span>
+
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Number</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="number1"
+                (ngModelChange)="calculatePercentageOf()"
+                placeholder="e.g., 100"
+              />
+            </mat-form-field>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="result-section">
+            <div class="result-label">Result</div>
+            <div class="result-value">
+              @if (result1() !== null) {
+                <span class="value">{{ result1() | number:'1.0-2' }}</span>
+              } @else {
+                <span class="placeholder">Enter values above</span>
+              }
+            </div>
+            @if (result1() !== null && percentage1() !== null && number1() !== null) {
+              <div class="result-explanation">
+                {{ percentage1() }}% of {{ number1() }} = {{ result1() | number:'1.0-2' }}
+              </div>
+            }
+          </div>
+        </div>
+      </mat-card>
+
+      <!-- Calculator 2: What percent is Y of X -->
+      <mat-card class="calculator-card">
+        <div class="card-header">
+          <mat-icon class="card-icon">functions</mat-icon>
+          <h2>What percent is Y of X?</h2>
+        </div>
+
+        <div class="calculator-content">
+          <div class="input-row">
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Part (Y)</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="part"
+                (ngModelChange)="calculateWhatPercent()"
+                placeholder="e.g., 25"
+              />
+            </mat-form-field>
+
+            <span class="operator">of</span>
+
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Whole (X)</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="whole"
+                (ngModelChange)="calculateWhatPercent()"
+                placeholder="e.g., 100"
+              />
+            </mat-form-field>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="result-section">
+            <div class="result-label">Result</div>
+            <div class="result-value">
+              @if (result2() !== null) {
+                <span class="value">{{ result2() | number:'1.0-2' }}%</span>
+              } @else {
+                <span class="placeholder">Enter values above</span>
+              }
+            </div>
+            @if (result2() !== null && part() !== null && whole() !== null) {
+              <div class="result-explanation">
+                {{ part() }} is {{ result2() | number:'1.0-2' }}% of {{ whole() }}
+              </div>
+            }
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Usage Examples -->
+    <div class="examples-section">
+      <h3>
+        <mat-icon>lightbulb</mat-icon>
+        Common Uses
+      </h3>
+      <div class="examples-grid">
+        <div class="example-card">
+          <mat-icon>shopping_cart</mat-icon>
+          <h4>Discounts</h4>
+          <p>Calculate sale prices and savings on purchases</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>trending_up</mat-icon>
+          <h4>Growth Rates</h4>
+          <p>Measure percentage increase or decrease</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>restaurant</mat-icon>
+          <h4>Tips & Taxes</h4>
+          <p>Calculate tips and sales tax amounts</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>school</mat-icon>
+          <h4>Grades</h4>
+          <p>Convert test scores to percentages</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

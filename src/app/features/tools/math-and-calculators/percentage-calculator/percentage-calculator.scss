@@ -1,0 +1,301 @@
+@import '../../../../../../styles/utilities';
+
+.percentage-calculator-page {
+  min-height: 100vh;
+  padding: $spacing-2xl 0;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+// ============================================
+// CALCULATOR GRID
+// ============================================
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: $spacing-xl;
+  margin-bottom: $spacing-3xl;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================
+// CALCULATOR CARDS
+// ============================================
+.calculator-card {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  padding: $spacing-xl !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    opacity: 0.7;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 20px var(--neon-cyan-glow) !important;
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  .card-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+  }
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+}
+
+.calculator-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// ============================================
+// INPUT ROW
+// ============================================
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.input-field {
+  flex: 1;
+  min-width: 150px;
+
+  ::ng-deep {
+    .mat-mdc-form-field-flex {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      background: var(--bg-secondary);
+    }
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: var(--border-color) !important;
+    }
+
+    .mdc-text-field--focused .mdc-notched-outline__leading,
+    .mdc-text-field--focused .mdc-notched-outline__notch,
+    .mdc-text-field--focused .mdc-notched-outline__trailing {
+      border-color: var(--neon-cyan) !important;
+      box-shadow: 0 0 8px var(--neon-cyan-glow);
+    }
+
+    .mat-mdc-form-field-label,
+    .mat-mdc-floating-label {
+      color: var(--text-secondary) !important;
+    }
+
+    .mat-mdc-input-element {
+      color: var(--text-primary) !important;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .mat-icon {
+      color: var(--text-tertiary);
+    }
+  }
+}
+
+.operator {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--neon-pink);
+  text-transform: lowercase;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+}
+
+// ============================================
+// RESULT SECTION
+// ============================================
+.result-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: $spacing-lg;
+  text-align: center;
+}
+
+.result-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: $spacing-sm;
+}
+
+.result-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: $spacing-sm;
+
+  .value {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 12px var(--neon-cyan-glow);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .placeholder {
+    color: var(--text-tertiary);
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
+.result-explanation {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+// ============================================
+// EXAMPLES SECTION
+// ============================================
+.examples-section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: $spacing-xl;
+
+  h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-lg 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    mat-icon {
+      color: var(--neon-cyan);
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-md;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.example-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--neon-pink);
+    margin-bottom: $spacing-xs;
+  }
+
+  h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--neon-pink);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    mat-icon {
+      filter: drop-shadow(0 0 8px var(--neon-pink-glow));
+    }
+  }
+}
+
+// ============================================
+// DIVIDER
+// ============================================
+::ng-deep {
+  .mat-divider {
+    border-top-color: var(--border-color) !important;
+  }
+}
