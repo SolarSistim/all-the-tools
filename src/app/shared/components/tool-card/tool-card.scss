@@ -109,7 +109,7 @@
     font-size: 32px;
     width: 32px;
     height: 32px;
-    color: var(--neon-cyan);
+    color: #ffffff;
     transition: all 0.3s ease;
   }
 }
@@ -234,15 +234,6 @@
   height: 20px;
   color: var(--text-tertiary);
   transition: all 0.3s ease;
-}
-
-// ============================================
-// LIGHT MODE OVERRIDES
-// ============================================
-:host-context(body.light-theme) {
-  .icon-container .tool-icon {
-    color: #ffffff;
-  }
 }
 
 // ============================================
