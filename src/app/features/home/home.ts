@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
       title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
       description: 'Free online tools for text, images, developers, and more. Word counter, case converter, JSON formatter, and 20+ other utilities.',
       keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
-      image: 'https://all-the-tools.netlify.app/assets/meta-images/og-home.png',
+      image: 'https://all-the-tools.netlify.app/meta-images/og-home.png',
       url: 'https://all-the-tools.netlify.app/'
     });
 
