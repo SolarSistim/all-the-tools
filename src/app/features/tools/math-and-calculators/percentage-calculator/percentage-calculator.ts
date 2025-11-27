@@ -40,7 +40,7 @@ export class PercentageCalculatorComponent implements OnInit {
 
     ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'All The Tools - Percentage Calculator',
+      title: 'Percentage Calculator',
       description: 'Calculate percentages and find what percent one number is of another',
       keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
       image: 'https://all-the-tools.netlify.app/meta-images/og-percentage-calculator.png',
