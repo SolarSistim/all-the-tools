@@ -12,6 +12,7 @@
   overflow: hidden;
   background: var(--bg-secondary);
   transition: background-color 0.3s ease;
+  height: 100vh;
 
   // Radial gradient overlay for depth with animation
   &::before {
