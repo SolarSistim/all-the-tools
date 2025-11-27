@@ -1,0 +1,205 @@
+<div class="tip-calculator-page">
+  <div class="container">
+    <app-page-header
+      title="Tip Calculator"
+      subtitle="Calculate tips and split bills with ease"
+      icon="payments"
+    ></app-page-header>
+
+    <div class="calculator-grid">
+      <!-- Calculator 1: Basic Tip Calculator -->
+      <mat-card class="calculator-card">
+        <div class="card-header">
+          <mat-icon class="card-icon">restaurant</mat-icon>
+          <h2>Calculate Tip</h2>
+        </div>
+
+        <div class="calculator-content">
+          <div class="input-section">
+            <mat-form-field appearance="fill" class="input-field full-width">
+              <mat-label>Bill Amount</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="billAmount"
+                (ngModelChange)="calculateTip()"
+                placeholder="e.g., 50.00"
+                step="0.01"
+              />
+              <span matPrefix class="dollar-symbol">$&nbsp;</span>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="input-field full-width">
+              <mat-label>Tip Percentage</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="tipPercentage"
+                (ngModelChange)="calculateTip()"
+                placeholder="e.g., 15"
+                step="1"
+              />
+              <mat-icon matSuffix>percent</mat-icon>
+            </mat-form-field>
+
+            <!-- Quick Tip Buttons -->
+            <div class="quick-tip-buttons">
+              <button mat-stroked-button (click)="setTipPercentage(10)" class="tip-btn">10%</button>
+              <button mat-stroked-button (click)="setTipPercentage(15)" class="tip-btn">15%</button>
+              <button mat-stroked-button (click)="setTipPercentage(18)" class="tip-btn">18%</button>
+              <button mat-stroked-button (click)="setTipPercentage(20)" class="tip-btn">20%</button>
+              <button mat-stroked-button (click)="setTipPercentage(25)" class="tip-btn">25%</button>
+              <button mat-stroked-button (click)="setTipPercentage(30)" class="tip-btn">30%</button>
+              <button mat-stroked-button (click)="setTipPercentage(35)" class="tip-btn">35%</button>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="result-section">
+            <div class="result-row">
+              <span class="result-label">Tip Amount</span>
+              @if (tipAmount() !== null) {
+                <span class="result-value">${{ tipAmount() | number:'1.2-2' }}</span>
+              } @else {
+                <span class="result-placeholder">-</span>
+              }
+            </div>
+            <div class="result-row highlight">
+              <span class="result-label">Total Amount</span>
+              @if (totalAmount() !== null) {
+                <span class="result-value-large">${{ totalAmount() | number:'1.2-2' }}</span>
+              } @else {
+                <span class="result-placeholder">-</span>
+              }
+            </div>
+            @if (billAmount() !== null && tipPercentage() !== null && totalAmount() !== null) {
+              <div class="result-explanation">
+                Bill: ${{ billAmount() | number:'1.2-2' }} + {{ tipPercentage() }}% tip = ${{ totalAmount() | number:'1.2-2' }}
+              </div>
+            }
+          </div>
+        </div>
+      </mat-card>
+
+      <!-- Calculator 2: Split Bill Calculator -->
+      <mat-card class="calculator-card">
+        <div class="card-header">
+          <mat-icon class="card-icon">groups</mat-icon>
+          <h2>Split Bill</h2>
+        </div>
+
+        <div class="calculator-content">
+          <div class="input-section">
+            <mat-form-field appearance="fill" class="input-field full-width">
+              <mat-label>Bill Amount</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="billAmount2"
+                (ngModelChange)="calculateSplitBill()"
+                placeholder="e.g., 120.00"
+                step="0.01"
+              />
+              <span matPrefix class="dollar-symbol">$&nbsp;</span>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="input-field full-width">
+              <mat-label>Tip Percentage</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="tipPercentage2"
+                (ngModelChange)="calculateSplitBill()"
+                placeholder="e.g., 20"
+                step="1"
+              />
+              <mat-icon matSuffix>percent</mat-icon>
+            </mat-form-field>
+
+            <!-- Quick Tip Buttons -->
+            <div class="quick-tip-buttons">
+              <button mat-stroked-button (click)="setTipPercentage2(10)" class="tip-btn">10%</button>
+              <button mat-stroked-button (click)="setTipPercentage2(15)" class="tip-btn">15%</button>
+              <button mat-stroked-button (click)="setTipPercentage2(18)" class="tip-btn">18%</button>
+              <button mat-stroked-button (click)="setTipPercentage2(20)" class="tip-btn">20%</button>
+              <button mat-stroked-button (click)="setTipPercentage2(25)" class="tip-btn">25%</button>
+              <button mat-stroked-button (click)="setTipPercentage2(30)" class="tip-btn">30%</button>
+              <button mat-stroked-button (click)="setTipPercentage2(35)" class="tip-btn">35%</button>
+            </div>
+
+            <mat-form-field appearance="fill" class="input-field full-width">
+              <mat-label>Number of People</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="numberOfPeople"
+                (ngModelChange)="calculateSplitBill()"
+                placeholder="e.g., 4"
+                step="1"
+                min="1"
+              />
+              <mat-icon matSuffix>people</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="result-section">
+            <div class="result-row">
+              <span class="result-label">Tip per Person</span>
+              @if (tipPerPerson() !== null) {
+                <span class="result-value">${{ tipPerPerson() | number:'1.2-2' }}</span>
+              } @else {
+                <span class="result-placeholder">-</span>
+              }
+            </div>
+            <div class="result-row highlight">
+              <span class="result-label">Total per Person</span>
+              @if (totalPerPerson() !== null) {
+                <span class="result-value-large">${{ totalPerPerson() | number:'1.2-2' }}</span>
+              } @else {
+                <span class="result-placeholder">-</span>
+              }
+            </div>
+            @if (grandTotal() !== null && numberOfPeople() !== null) {
+              <div class="result-explanation">
+                Grand Total: ${{ grandTotal() | number:'1.2-2' }} ÷ {{ numberOfPeople() }} people
+              </div>
+            }
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Usage Examples -->
+    <div class="examples-section">
+      <h3>
+        <mat-icon>lightbulb</mat-icon>
+        Common Uses
+      </h3>
+      <div class="examples-grid">
+        <div class="example-card">
+          <mat-icon>restaurant_menu</mat-icon>
+          <h4>Dining Out</h4>
+          <p>Calculate tips for restaurants and cafes</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>delivery_dining</mat-icon>
+          <h4>Delivery</h4>
+          <p>Tip delivery drivers and couriers</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>local_taxi</mat-icon>
+          <h4>Transportation</h4>
+          <p>Calculate tips for taxis and rideshares</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>content_cut</mat-icon>
+          <h4>Services</h4>
+          <p>Tip hairdressers and service providers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

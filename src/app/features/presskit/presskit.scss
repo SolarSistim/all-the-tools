@@ -93,6 +93,13 @@
   // Inherits base .hero styles
 }
 
+// ============================================
+// HERO SECTION - TIP CALCULATOR
+// ============================================
+.hero-tip-calculator {
+  // Inherits base .hero styles
+}
+
 .hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -683,6 +690,84 @@
   }
   50% {
     transform: translateY(-15px) scale(1.05);
+  }
+}
+
+// ============================================
+// HERO VISUAL - TIP CALCULATOR THEME
+// ============================================
+.hero-tip-calculator .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.tip-calculator-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.tip-circle {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-pink);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--neon-pink-glow),
+              inset 0 0 30px rgba(255, 140, 176, 0.1);
+  animation: pulse-glow-pink 3s ease-in-out infinite;
+
+  .tip-symbol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+
+    .dollar-sign {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 8rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px var(--neon-pink-glow));
+    }
+
+    .tip-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: var(--neon-cyan);
+      opacity: 0.9;
+      filter: drop-shadow(0 0 15px var(--neon-cyan-glow));
+      animation: float 2s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes pulse-glow-pink {
+  0%, 100% {
+    box-shadow: 0 0 40px var(--neon-pink-glow),
+                inset 0 0 30px rgba(255, 140, 176, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 60px var(--neon-pink-glow),
+                inset 0 0 40px rgba(255, 140, 176, 0.2);
+    transform: scale(1.05);
   }
 }
 

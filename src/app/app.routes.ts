@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home';
-import { Presskit } from './features/presskit/presskit';
 
 export const routes: Routes = [
   {
@@ -42,6 +41,11 @@ export const routes: Routes = [
     path: 'presskit',
     loadComponent: () => import('./features/presskit/presskit').then(m => m.Presskit),
     title: 'All The Tools - Presskit'
+  },
+  {
+    path: 'tools/tip-calculator',
+    loadComponent: () => import('./features/tools/math-and-calculators/tip-calculator/tip-calculator').then(m => m.TipCalculator),
+    title: 'Tip Calculator - All The Tools'
   },
   {
     path: '**',
