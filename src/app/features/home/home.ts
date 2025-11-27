@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
+      title: 'Your Swiss Army Knife of Web Utilities',
       description: 'Free online tools for text, images, developers, and more. Word counter, case converter, JSON formatter, and 20+ other utilities.',
       keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
       image: 'https://all-the-tools.netlify.app/meta-images/og-home.png',

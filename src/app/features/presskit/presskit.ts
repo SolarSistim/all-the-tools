@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-presskit',
-  imports: [CommonModule,MatIconModule],
+  imports: [CommonModule, RouterLink, MatIconModule, MatButtonModule],
   templateUrl: './presskit.html',
   styleUrl: './presskit.scss',
 })

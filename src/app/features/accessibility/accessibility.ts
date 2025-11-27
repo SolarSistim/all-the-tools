@@ -20,9 +20,10 @@ export class AccessibilityComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Accessibility Statement - All The Tools',
+      title: 'Accessibility Statement',
       description: 'Our commitment to making All The Tools accessible to everyone.',
       keywords: ['accessibility', 'wcag', 'all the tools'],
+      image: 'https://all-the-tools.netlify.app/meta-images/og-accessibility-statement.png',
       url: 'https://all-the-tools.netlify.app/accessibility'
     });
   }

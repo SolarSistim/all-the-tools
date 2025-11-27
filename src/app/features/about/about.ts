@@ -17,9 +17,10 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'About - All The Tools',
+      title: 'About All The Tools',
       description: 'Learn about All The Tools - your comprehensive collection of free online utilities for everyday tasks.',
       keywords: ['about', 'all the tools', 'free online tools'],
+      image: 'https://all-the-tools.netlify.app/meta-images/og-about.png',
       url: 'https://all-the-tools.netlify.app/about'
     });
   }

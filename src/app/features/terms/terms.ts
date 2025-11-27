@@ -20,9 +20,10 @@ export class TermsComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Terms of Service - All The Tools',
+      title: 'Terms of Service',
       description: 'Terms and conditions for using All The Tools.',
       keywords: ['terms of service', 'terms and conditions', 'all the tools'],
+      image: 'https://all-the-tools.netlify.app/meta-images/og-terms-of-service.png',
       url: 'https://all-the-tools.netlify.app/terms'
     });
   }

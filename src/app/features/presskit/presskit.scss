@@ -1,18 +1,17 @@
 @import '../../../styles/utilities';
 
 // ============================================
-// HERO SECTION
+// HERO SECTION - SHARED STYLES
 // ============================================
 .hero {
   position: relative;
-  min-height: 90vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   padding: $spacing-4xl 0 $spacing-3xl;
   overflow: hidden;
   background: var(--bg-secondary);
   transition: background-color 0.3s ease;
-  height: 100vh;
 
   // Radial gradient overlay for depth with animation
   &::before {
@@ -39,9 +38,59 @@
   }
 
   @media (max-width: 768px) {
-    min-height: auto;
+    height: auto;
     padding: $spacing-3xl 0 $spacing-2xl;
   }
+}
+
+// ============================================
+// HERO SECTION - PERCENTAGE CALCULATOR
+// ============================================
+.hero-percentage {
+  // Specific styles for percentage calculator hero
+  // (Currently commented out in HTML)
+}
+
+// ============================================
+// HERO SECTION - HOME
+// ============================================
+.hero-home {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO SECTION - ABOUT
+// ============================================
+.hero-about {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO SECTION - PRIVACY POLICY
+// ============================================
+.hero-privacy {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO SECTION - TERMS OF SERVICE
+// ============================================
+.hero-terms {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO SECTION - ACCESSIBILITY
+// ============================================
+.hero-accessibility {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO SECTION - TOOLS
+// ============================================
+.hero-tools {
+  // Inherits base .hero styles
 }
 
 .hero-content {
@@ -98,8 +147,10 @@
   }
 }
 
-// Hero Visual - Percentage Theme
-.hero-visual {
+// ============================================
+// HERO VISUAL - PERCENTAGE THEME
+// ============================================
+.hero-percentage .hero-visual {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,6 +292,397 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// ============================================
+// HERO VISUAL - HOME THEME
+// ============================================
+.hero-home .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.visual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+  perspective: 1000px;
+
+  .grid-item {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: var(--neon-cyan);
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-8px) rotateY(10deg);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px var(--neon-cyan-glow);
+
+      mat-icon {
+        opacity: 1;
+        filter: drop-shadow(0 0 10px var(--neon-cyan-glow));
+      }
+    }
+
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+    &:nth-child(4) { animation-delay: 0.6s; }
+    &:nth-child(5) { animation-delay: 0.8s; }
+    &:nth-child(6) { animation-delay: 1s; }
+    &:nth-child(7) { animation-delay: 1.2s; }
+    &:nth-child(8) { animation-delay: 1.4s; }
+    &:nth-child(9) { animation-delay: 1.6s; }
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: $spacing-2xl;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.hero-actions {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  @media (max-width: 968px) {
+    justify-content: center;
+  }
+}
+
+// ============================================
+// HERO VISUAL - ABOUT THEME
+// ============================================
+.hero-about .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.question-mark-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .question-mark-icon {
+    font-size: 400px;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow))
+            drop-shadow(0 0 60px var(--neon-pink-glow));
+    animation: pulse-question 3s ease-in-out infinite;
+
+    @media (max-width: 1200px) {
+      font-size: 300px;
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+
+@keyframes pulse-question {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow))
+            drop-shadow(0 0 60px var(--neon-pink-glow));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 60px var(--neon-cyan-glow))
+            drop-shadow(0 0 80px var(--neon-pink-glow));
+  }
+}
+
+// ============================================
+// HERO VISUAL - POLICY PAGES THEME
+// ============================================
+.hero-privacy .hero-visual,
+.hero-terms .hero-visual,
+.hero-accessibility .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.policy-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .policy-icon {
+    font-size: 400px;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow))
+            drop-shadow(0 0 60px var(--neon-pink-glow));
+    animation: pulse-policy 3s ease-in-out infinite;
+
+    @media (max-width: 1200px) {
+      font-size: 300px;
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+
+@keyframes pulse-policy {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow))
+            drop-shadow(0 0 60px var(--neon-pink-glow));
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+    filter: drop-shadow(0 0 60px var(--neon-cyan-glow))
+            drop-shadow(0 0 80px var(--neon-pink-glow));
+  }
+}
+
+// ============================================
+// HERO VISUAL - TOOLS PAGE THEME
+// ============================================
+.hero-tools .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.tools-visual {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1200px) {
+    width: 400px;
+    height: 400px;
+  }
+
+  // Central Icon
+  .central-icon {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 3px solid var(--neon-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+                inset 0 0 20px rgba(109, 212, 255, 0.1);
+    animation: pulse-central 3s ease-in-out infinite;
+    z-index: 2;
+
+    mat-icon {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px var(--neon-cyan-glow));
+    }
+
+    @media (max-width: 1200px) {
+      width: 110px;
+      height: 110px;
+
+      mat-icon {
+        font-size: 60px;
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+
+  // Orbiting Icons
+  .orbit-icon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    animation: orbit-float 4s ease-in-out infinite;
+
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      color: var(--neon-cyan);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px var(--neon-cyan-glow);
+
+      mat-icon {
+        opacity: 1;
+        filter: drop-shadow(0 0 10px var(--neon-cyan-glow));
+      }
+    }
+
+    @media (max-width: 1200px) {
+      width: 60px;
+      height: 60px;
+
+      mat-icon {
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+
+  // Position each orbiting icon in a circle
+  .orbit-1 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+  }
+
+  .orbit-2 {
+    top: 10%;
+    right: 10%;
+    animation-delay: 0.5s;
+  }
+
+  .orbit-3 {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    animation-delay: 1s;
+  }
+
+  .orbit-4 {
+    bottom: 10%;
+    right: 10%;
+    animation-delay: 1.5s;
+  }
+
+  .orbit-5 {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 2s;
+  }
+
+  .orbit-6 {
+    bottom: 10%;
+    left: 10%;
+    animation-delay: 2.5s;
+  }
+
+  .orbit-7 {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    animation-delay: 3s;
+  }
+
+  .orbit-8 {
+    top: 10%;
+    left: 10%;
+    animation-delay: 3.5s;
+  }
+}
+
+@keyframes pulse-central {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+                inset 0 0 20px rgba(109, 212, 255, 0.1);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 0 60px var(--neon-cyan-glow),
+                inset 0 0 30px rgba(109, 212, 255, 0.2);
+  }
+}
+
+@keyframes orbit-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
   }
 }
 

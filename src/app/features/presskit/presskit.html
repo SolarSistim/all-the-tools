@@ -1,5 +1,4 @@
-<!-- Hero Section -->
-<section class="hero">
+<!-- <section class="hero hero-percentage">
   <div class="hero-content container">
     <div class="hero-text">
       <h1 class="hero-title animate-fade-in">
@@ -12,10 +11,8 @@
       </p>
     </div>
 
-    <!-- Hero Visual Element -->
     <div class="hero-visual">
       <div class="percentage-visual">
-        <!-- Main Percentage Circle -->
         <div class="percentage-circle">
           <div class="percentage-symbol">
             <span class="percent-num">100</span>
@@ -26,6 +23,166 @@
       </div>
     </div>
   </div>
+</section> -->
+
+<section class="hero hero-home">
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1 class="hero-title animate-fade-in">
+        Your Swiss Army Knife of
+        <span class="text-gradient-cyber">Web Tools</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-in">
+        A powerful collection of front-end utilities that run entirely in your browser.
+        Fast, private, and always free.
+      </p>
+    </div>
+    <div class="hero-visual">
+      <div class="visual-grid">
+        <div class="grid-item" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+          <mat-icon>{{ getRandomIcon(i) }}</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- Your existing presskit content goes here -->
+<!-- Hero Section - About -->
+<section class="hero hero-about">
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1 class="hero-title animate-fade-in">
+        About
+        <span class="text-gradient-cyber">All The Tools</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-in">
+        Your privacy-first collection of web utilities
+      </p>
+    </div>
+
+    <!-- Hero Visual Element - Question Mark -->
+    <div class="hero-visual">
+      <div class="question-mark-visual">
+        <mat-icon class="question-mark-icon">help_outline</mat-icon>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hero Section - Privacy Policy -->
+<section class="hero hero-privacy">
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1 class="hero-title animate-fade-in">
+        Privacy
+        <span class="text-gradient-cyber">Policy</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-in">
+        Your privacy is our top priority
+      </p>
+    </div>
+
+    <!-- Hero Visual Element - Shield Icon -->
+    <div class="hero-visual">
+      <div class="policy-visual">
+        <mat-icon class="policy-icon">shield</mat-icon>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hero Section - Terms of Service -->
+<section class="hero hero-terms">
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1 class="hero-title animate-fade-in">
+        Terms of
+        <span class="text-gradient-cyber">Service</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-in">
+        Please read these terms carefully
+      </p>
+    </div>
+
+    <!-- Hero Visual Element - Document Icon -->
+    <div class="hero-visual">
+      <div class="policy-visual">
+        <mat-icon class="policy-icon">gavel</mat-icon>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hero Section - Accessibility Statement -->
+<section class="hero hero-accessibility">
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1 class="hero-title animate-fade-in">
+        Accessibility
+        <span class="text-gradient-cyber">Statement</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-in">
+        Committed to digital accessibility for all users
+      </p>
+    </div>
+
+    <!-- Hero Visual Element - Accessibility Icon -->
+    <div class="hero-visual">
+      <div class="policy-visual">
+        <mat-icon class="policy-icon">accessibility</mat-icon>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hero Section - Tools -->
+<section class="hero hero-tools">
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1 class="hero-title animate-fade-in">
+        All
+        <span class="text-gradient-cyber">Tools</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-in">
+        Browse our complete collection of powerful web utilities
+      </p>
+    </div>
+
+    <!-- Hero Visual Element - Multiple Tool Icons -->
+    <div class="hero-visual">
+      <div class="tools-visual">
+        <!-- Central Icon -->
+        <div class="central-icon">
+          <mat-icon>apps</mat-icon>
+        </div>
+
+        <!-- Orbiting Icons -->
+        <div class="orbit-icon orbit-1">
+          <mat-icon>calculate</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-2">
+          <mat-icon>text_fields</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-3">
+          <mat-icon>palette</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-4">
+          <mat-icon>code</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-5">
+          <mat-icon>image</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-6">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-7">
+          <mat-icon>percent</mat-icon>
+        </div>
+        <div class="orbit-icon orbit-8">
+          <mat-icon>swap_horiz</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
