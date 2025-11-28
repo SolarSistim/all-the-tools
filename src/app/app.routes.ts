@@ -63,6 +63,11 @@ export const routes: Routes = [
     title: 'Unit Converter - All The Tools'
   },
   {
+    path: 'tools/word-counter',
+    loadComponent: () => import('./features/tools/text-tools/word-counter/word-counter').then(m => m.WordCounter),
+    title: 'Word Counter - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
