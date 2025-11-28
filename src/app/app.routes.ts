@@ -33,6 +33,11 @@ export const routes: Routes = [
     title: 'Accessibility Statement - All The Tools'
   },
   {
+    path: 'changelog',
+    loadComponent: () => import('./features/changelog/changelog').then(m => m.Changelog),
+    title: 'Changelog - All The Tools'
+  },
+  {
     path: 'tools/percentage-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
     title: 'Percentage Calculator - All The Tools'
@@ -46,6 +51,16 @@ export const routes: Routes = [
     path: 'tools/tip-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/tip-calculator/tip-calculator').then(m => m.TipCalculator),
     title: 'Tip Calculator - All The Tools'
+  },
+  {
+    path: 'tools/bmi-calculator',
+    loadComponent: () => import('./features/tools/math-and-calculators/body-mass-index-calculator/body-mass-index-calculator').then(m => m.BodyMassIndexCalculator),
+    title: 'BMI Calculator - All The Tools'
+  },
+  {
+    path: 'tools/unit-converter',
+    loadComponent: () => import('./features/tools/converters/unit-converter/unit-converter').then(m => m.UnitConverter),
+    title: 'Unit Converter - All The Tools'
   },
   {
     path: '**',

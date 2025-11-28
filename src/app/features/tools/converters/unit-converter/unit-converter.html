@@ -1,0 +1,165 @@
+<div class="unit-converter-page">
+  <div class="container">
+    <app-page-header
+      title="Unit Converter"
+      subtitle="Convert between different units of measurement"
+      icon="swap_horiz"
+    ></app-page-header>
+
+    <!-- Category Selection -->
+    <div class="category-section">
+      <div class="category-grid">
+        @for (category of getCategoryList(); track category.id) {
+          <button
+            class="category-btn"
+            [class.active]="selectedCategory() === category.id"
+            (click)="selectedCategory.set(category.id); onCategoryChange()"
+          >
+            <mat-icon>{{ category.icon }}</mat-icon>
+            <span>{{ category.name }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Converter Card -->
+    <mat-card class="converter-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">{{ getCurrentCategory().icon }}</mat-icon>
+        <h2>{{ getCurrentCategory().name }} Converter</h2>
+      </div>
+
+      <div class="converter-content">
+        <!-- From Section -->
+        <div class="conversion-section">
+          <div class="section-label">From</div>
+          <div class="conversion-row">
+            <mat-form-field appearance="fill" class="input-field">
+              <mat-label>Value</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="inputValue"
+                (ngModelChange)="convert()"
+                placeholder="Enter value"
+                step="any"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="unit-select">
+              <mat-label>Unit</mat-label>
+              <mat-select [(ngModel)]="fromUnit" (ngModelChange)="convert()">
+                @for (unit of getUnitList(); track unit) {
+                  <mat-option [value]="unit">{{ getUnitName(unit) }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Swap Button -->
+        <div class="swap-section">
+          <button mat-icon-button class="swap-btn" (click)="swapUnits()">
+            <mat-icon>swap_vert</mat-icon>
+          </button>
+        </div>
+
+        <!-- To Section -->
+        <div class="conversion-section">
+          <div class="section-label">To</div>
+          <div class="conversion-row">
+            <div class="result-display">
+              <div class="result-label">Result</div>
+              <div class="result-value">
+                @if (resultValue() !== null) {
+                  <span class="value">{{ resultValue() | number:'1.0-6' }}</span>
+                } @else {
+                  <span class="placeholder">—</span>
+                }
+              </div>
+            </div>
+
+            <mat-form-field appearance="fill" class="unit-select">
+              <mat-label>Unit</mat-label>
+              <mat-select [(ngModel)]="toUnit" (ngModelChange)="convert()">
+                @for (unit of getUnitList(); track unit) {
+                  <mat-option [value]="unit">{{ getUnitName(unit) }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Quick Reference -->
+    <div class="reference-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        How to Use
+      </h3>
+      <div class="reference-grid">
+        <div class="reference-card">
+          <mat-icon>category</mat-icon>
+          <h4>Select Category</h4>
+          <p>Choose the type of unit you want to convert (length, weight, etc.)</p>
+        </div>
+        <div class="reference-card">
+          <mat-icon>edit</mat-icon>
+          <h4>Enter Value</h4>
+          <p>Type the value you want to convert in the input field</p>
+        </div>
+        <div class="reference-card">
+          <mat-icon>tune</mat-icon>
+          <h4>Choose Units</h4>
+          <p>Select the units you're converting from and to</p>
+        </div>
+        <div class="reference-card">
+          <mat-icon>swap_vert</mat-icon>
+          <h4>Swap Direction</h4>
+          <p>Click the swap button to reverse the conversion direction</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supported Conversions -->
+    <div class="supported-section">
+      <h3>
+        <mat-icon>check_circle</mat-icon>
+        Supported Conversions
+      </h3>
+      <div class="supported-grid">
+        <div class="supported-card">
+          <mat-icon>straighten</mat-icon>
+          <h4>Length</h4>
+          <p>Meter, Kilometer, Mile, Yard, Foot, Inch, and more</p>
+        </div>
+        <div class="supported-card">
+          <mat-icon>fitness_center</mat-icon>
+          <h4>Weight</h4>
+          <p>Kilogram, Gram, Pound, Ounce, Ton, and more</p>
+        </div>
+        <div class="supported-card">
+          <mat-icon>thermostat</mat-icon>
+          <h4>Temperature</h4>
+          <p>Celsius, Fahrenheit, Kelvin</p>
+        </div>
+        <div class="supported-card">
+          <mat-icon>water_drop</mat-icon>
+          <h4>Volume</h4>
+          <p>Liter, Gallon, Quart, Cup, Fluid Ounce, and more</p>
+        </div>
+        <div class="supported-card">
+          <mat-icon>crop_square</mat-icon>
+          <h4>Area</h4>
+          <p>Square Meter, Acre, Hectare, Square Mile, and more</p>
+        </div>
+        <div class="supported-card">
+          <mat-icon>speed</mat-icon>
+          <h4>Speed</h4>
+          <p>Meter/Second, Kilometer/Hour, Mile/Hour, Knot</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

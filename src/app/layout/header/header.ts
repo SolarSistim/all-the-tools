@@ -75,8 +75,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Listen to scroll events (only in browser)
+    // Load saved theme from localStorage (only in browser)
     if (isPlatformBrowser(this.platformId)) {
+      this.loadThemeFromStorage();
       window.addEventListener('scroll', this.onScroll.bind(this));
     }
   }
@@ -135,6 +136,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Load theme preference from localStorage
+   */
+  private loadThemeFromStorage(): void {
+    try {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        const isDark = savedTheme === 'dark';
+        this.isDarkTheme.set(isDark);
+
+        // Apply the saved theme to the body
+        if (isDark) {
+          this.document.body.classList.remove('light-theme');
+        } else {
+          this.document.body.classList.add('light-theme');
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load theme from localStorage:', error);
+    }
+  }
+
+  /**
    * Toggle between light and dark themes
    */
   toggleTheme(): void {
@@ -142,6 +165,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // Toggle the theme class on the body element (only in browser)
     if (isPlatformBrowser(this.platformId)) {
+      const theme = this.isDarkTheme() ? 'dark' : 'light';
+
+      // Save theme preference to localStorage
+      try {
+        localStorage.setItem('theme', theme);
+      } catch (error) {
+        console.error('Failed to save theme to localStorage:', error);
+      }
+
+      // Apply theme to body
       if (this.isDarkTheme()) {
         this.document.body.classList.remove('light-theme');
       } else {

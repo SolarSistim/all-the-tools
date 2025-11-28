@@ -105,17 +105,6 @@ export class ToolsService {
       available: true
     },
     {
-      id: 'temperature-converter',
-      name: 'Temperature Converter',
-      description: 'Convert between Celsius, Fahrenheit, and Kelvin',
-      category: 'converter',
-      icon: 'thermostat',
-      route: 'temperature-converter',
-      featured: false,
-      tags: ['converter', 'temperature'],
-      available: true
-    },
-    {
       id: 'currency-converter',
       name: 'Currency Converter',
       description: 'Convert between world currencies with live rates',
@@ -231,7 +220,7 @@ export class ToolsService {
     {
       id: 'converter',
       name: 'Converters',
-      description: 'Convert between different units and formats',
+      description: 'Convert length, weight, temperature, volume, area and speed.',
       icon: 'swap_horiz',
       color: 'var(--neon-pink)'
     },

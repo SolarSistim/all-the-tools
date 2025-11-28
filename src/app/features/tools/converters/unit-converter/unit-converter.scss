@@ -1,0 +1,491 @@
+@import '../../../../../styles/utilities';
+
+.unit-converter-page {
+  min-height: 100vh;
+  padding: $spacing-2xl 0;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+// ============================================
+// CATEGORY SECTION
+// ============================================
+.category-section {
+  margin-bottom: $spacing-2xl;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: $spacing-md;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-md $spacing-lg;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    color: var(--text-tertiary);
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    border-color: var(--neon-cyan);
+    background: var(--bg-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    mat-icon {
+      color: var(--neon-cyan);
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+  }
+
+  &.active {
+    background: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    color: var(--bg-primary);
+
+    mat-icon {
+      color: var(--bg-primary);
+    }
+
+    &:hover {
+      background: var(--neon-cyan-bright);
+      border-color: var(--neon-cyan-bright);
+    }
+  }
+}
+
+// ============================================
+// CONVERTER CARD
+// ============================================
+.converter-card {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  padding: $spacing-xl !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: $spacing-3xl;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    opacity: 0.7;
+  }
+
+  &:hover {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 20px var(--neon-cyan-glow) !important;
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  .card-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+  }
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+}
+
+.converter-content {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// ============================================
+// CONVERSION SECTIONS
+// ============================================
+.conversion-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.section-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-left: $spacing-xs;
+}
+
+.conversion-row {
+  display: flex;
+  gap: $spacing-md;
+  align-items: stretch;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.input-field {
+  flex: 1;
+
+  ::ng-deep {
+    .mat-mdc-form-field-flex {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      background: var(--bg-secondary);
+    }
+
+    .mat-mdc-input-element {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.unit-select {
+  flex: 1;
+
+  ::ng-deep {
+    .mat-mdc-form-field-flex {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      background: var(--bg-secondary);
+    }
+
+    .mat-mdc-select-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+    }
+  }
+}
+
+// ============================================
+// SWAP SECTION
+// ============================================
+.swap-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-sm 0;
+}
+
+.swap-btn {
+  background: var(--bg-secondary) !important;
+  border: 2px solid var(--border-color);
+  width: 48px;
+  height: 48px;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    color: var(--neon-cyan);
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  &:hover {
+    border-color: var(--neon-cyan);
+    background: var(--neon-cyan) !important;
+    transform: rotate(180deg);
+    box-shadow: 0 0 16px var(--neon-cyan-glow);
+
+    mat-icon {
+      color: var(--bg-primary);
+    }
+  }
+}
+
+// ============================================
+// RESULT DISPLAY
+// ============================================
+.result-display {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: $spacing-xs;
+}
+
+.result-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  .value {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 12px var(--neon-cyan-glow);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .placeholder {
+    color: var(--text-tertiary);
+    font-weight: 400;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+// ============================================
+// REFERENCE SECTION
+// ============================================
+.reference-section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: $spacing-xl;
+  margin-bottom: $spacing-2xl;
+
+  h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-lg 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    mat-icon {
+      color: var(--neon-cyan);
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.reference-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-md;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reference-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--neon-pink);
+    margin-bottom: $spacing-xs;
+  }
+
+  h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--neon-pink);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    mat-icon {
+      filter: drop-shadow(0 0 8px var(--neon-pink-glow));
+    }
+  }
+}
+
+// ============================================
+// SUPPORTED SECTION
+// ============================================
+.supported-section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: $spacing-xl;
+
+  h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-lg 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    mat-icon {
+      color: var(--neon-cyan);
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.supported-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-md;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.supported-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--neon-cyan);
+    margin-bottom: $spacing-xs;
+  }
+
+  h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    mat-icon {
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+  }
+}
+
+// ============================================
+// MATERIAL SELECT PANEL
+// ============================================
+::ng-deep {
+  .mat-mdc-select-panel {
+    background: #ECF1F2 !important;
+    border: 1px solid var(--border-color);
+  }
+
+  .mat-mdc-option {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #ECF1F2;
+    color: #000 !important;
+
+    &:hover {
+      background: #d4dde0;
+      color: #000 !important;
+    }
+
+    &.mat-mdc-option-active {
+      background: var(--neon-cyan);
+      color: var(--bg-primary) !important;
+    }
+  }
+}

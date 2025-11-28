@@ -1,0 +1,45 @@
+<div class="changelog-page">
+  <div class="container">
+    <app-page-header
+      title="Changelog"
+      subtitle="Track the latest updates, features, and improvements"
+      icon="update"
+    ></app-page-header>
+
+    <div class="changelog-content">
+      @for (entry of changelog; track entry.version) {
+        <mat-card class="changelog-card">
+          <div class="card-header">
+            <div class="version-info">
+              <h2 class="version">Changes</h2>
+              <span class="date">{{ entry.date }}</span>
+            </div>
+          </div>
+
+          <div class="changes-list">
+            @for (change of entry.changes; track $index) {
+              <div class="change-item" [ngClass]="getChangeClass(change.type)">
+                <mat-icon class="change-icon">{{ getChangeIcon(change.type) }}</mat-icon>
+                <div class="change-content">
+                  <span class="change-type">{{ change.type }}</span>
+                  <p class="change-description">{{ change.description }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </mat-card>
+      }
+    </div>
+
+    <!-- Subscribe Section -->
+    <div class="subscribe-section">
+      <mat-icon class="subscribe-icon">notifications</mat-icon>
+      <h3>Stay Updated</h3>
+      <p>Follow our development to get notified of new features and improvements.</p>
+      <a mat-raised-button href="mailto:subscribe@all-the-tools.app?subject=Subscribe%20to%20Updates" class="subscribe-btn">
+        <mat-icon>email</mat-icon>
+        Subscribe to Email Notifications
+      </a>
+    </div>
+  </div>
+</div>

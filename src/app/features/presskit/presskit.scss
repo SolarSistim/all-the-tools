@@ -771,4 +771,208 @@
   }
 }
 
+// ============================================
+// HERO VISUAL - BMI CALCULATOR THEME
+// ============================================
+.hero-bmi-calculator .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.bmi-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.bmi-circle {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+
+  .bmi-icon {
+    font-size: 120px;
+    width: 120px;
+    height: 120px;
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 20px var(--neon-cyan-glow));
+    animation: float 2s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .bmi-rings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid;
+      animation: ring-pulse 3s ease-in-out infinite;
+
+      &.ring-1 {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: rgba(16, 185, 129, 0.4);
+        animation-delay: 0s;
+      }
+
+      &.ring-2 {
+        width: 260px;
+        height: 260px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: rgba(245, 158, 11, 0.4);
+        animation-delay: 1s;
+      }
+
+      &.ring-3 {
+        width: 320px;
+        height: 320px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: rgba(239, 68, 68, 0.4);
+        animation-delay: 2s;
+      }
+    }
+  }
+}
+
+@keyframes ring-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+// ============================================
+// HERO VISUAL - UNIT CONVERTER THEME
+// ============================================
+.hero-unit-converter .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.converter-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.converter-container {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3xl;
+  position: relative;
+
+  .converter-unit {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 3px solid var(--neon-cyan);
+    border-radius: 24px;
+    box-shadow: 0 0 30px var(--neon-cyan-glow),
+                inset 0 0 20px rgba(109, 212, 255, 0.1);
+    animation: converter-float 3s ease-in-out infinite;
+
+    mat-icon {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      color: var(--neon-cyan);
+      filter: drop-shadow(0 0 15px var(--neon-cyan-glow));
+    }
+
+    &.unit-from {
+      animation-delay: 0s;
+    }
+
+    &.unit-to {
+      animation-delay: 1.5s;
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 30px var(--neon-pink-glow),
+                  inset 0 0 20px rgba(255, 140, 176, 0.1);
+
+      mat-icon {
+        color: var(--neon-pink);
+        filter: drop-shadow(0 0 15px var(--neon-pink-glow));
+      }
+    }
+  }
+
+  .converter-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: arrow-pulse 2s ease-in-out infinite;
+
+    mat-icon {
+      font-size: 72px;
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px var(--neon-cyan-glow));
+    }
+  }
+}
+
+@keyframes converter-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
+  }
+}
+
+@keyframes arrow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
 // Your existing presskit styles go below here

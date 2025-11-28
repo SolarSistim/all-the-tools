@@ -1,0 +1,267 @@
+<div class="bmi-calculator-page">
+  <div class="container">
+    <app-page-header
+      title="BMI Calculator"
+      subtitle="Calculate your Body Mass Index and get health insights"
+      icon="monitor_weight"
+    ></app-page-header>
+
+    <!-- Health Disclaimer -->
+    <div class="health-disclaimer">
+      <mat-icon>warning</mat-icon>
+      <div class="disclaimer-content">
+        <h3>Important Notice</h3>
+        <p>
+          Do not use this tool as a definitive health indicator. Always consult your doctor before making health related decisions.
+          All The Tools is not a healthcare provider and is not qualified to give health advice.
+        </p>
+      </div>
+    </div>
+
+    <!-- Unit System Toggle -->
+    <div class="unit-toggle-section">
+      <mat-button-toggle-group
+        [value]="unitSystem()"
+        (change)="setUnitSystem($event.value)"
+        class="unit-toggle-group"
+      >
+        <mat-button-toggle value="imperial">
+          <mat-icon>straighten</mat-icon>
+          Imperial (lbs, inches)
+        </mat-button-toggle>
+        <mat-button-toggle value="metric">
+          <mat-icon>straighten</mat-icon>
+          Metric (kg, cm)
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div class="calculator-grid">
+      <!-- Metric Calculator -->
+      @if (unitSystem() === 'metric') {
+        <mat-card class="calculator-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">calculate</mat-icon>
+            <h2>Calculate BMI (Metric)</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-section">
+              <mat-form-field appearance="fill" class="input-field full-width">
+                <mat-label>Weight (kg)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="weightKg"
+                  (ngModelChange)="calculateBMI()"
+                  placeholder="e.g., 70"
+                  step="0.1"
+                />
+                <span matSuffix class="weight-symbol">kg</span>
+              </mat-form-field>
+
+              <div class="input-group">
+                <div class="input-group-label">Height</div>
+                <mat-form-field appearance="fill" class="input-field full-width">
+                  <mat-label>Height (cm)</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="heightCm"
+                    (ngModelChange)="calculateBMI()"
+                    placeholder="e.g., 175"
+                    step="0.1"
+                  />
+                  <span matSuffix class="weight-symbol">cm</span>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-label">Your BMI</div>
+              <div class="result-value">
+                @if (bmi() !== null) {
+                  <span class="value" [ngClass]="categoryColor()">{{ bmi() | number:'1.1-1' }}</span>
+                } @else {
+                  <span class="placeholder">Enter values above</span>
+                }
+              </div>
+              @if (category() !== null) {
+                <div class="result-category" [ngClass]="categoryColor()">
+                  <mat-icon>{{ getCategoryIcon() }}</mat-icon>
+                  {{ category() }}
+                </div>
+                <div class="result-explanation">
+                  {{ getCategoryExplanation() }}
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
+
+      <!-- Imperial Calculator -->
+      @if (unitSystem() === 'imperial') {
+        <mat-card class="calculator-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">calculate</mat-icon>
+            <h2>Calculate BMI (Imperial)</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-section">
+              <mat-form-field appearance="fill" class="input-field full-width">
+                <mat-label>Weight (lbs)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="weightLbs"
+                  (ngModelChange)="calculateBMI()"
+                  placeholder="e.g., 154"
+                  step="0.1"
+                />
+                <span matSuffix class="weight-symbol">lbs</span>
+              </mat-form-field>
+
+              <div class="input-group">
+                <div class="input-group-label">Height</div>
+                <div class="height-row">
+                  <mat-form-field appearance="fill" class="input-field">
+                    <mat-label>Feet</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      [(ngModel)]="heightFeet"
+                      (ngModelChange)="calculateBMI()"
+                      placeholder="e.g., 5"
+                      step="1"
+                      min="0"
+                    />
+                    <span matSuffix class="weight-symbol">ft</span>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" class="input-field">
+                    <mat-label>Inches</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      [(ngModel)]="heightInches"
+                      (ngModelChange)="calculateBMI()"
+                      placeholder="e.g., 9"
+                      step="0.1"
+                      min="0"
+                    />
+                    <span matSuffix class="weight-symbol">in</span>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-label">Your BMI</div>
+              <div class="result-value">
+                @if (bmi() !== null) {
+                  <span class="value" [ngClass]="categoryColor()">{{ bmi() | number:'1.1-1' }}</span>
+                } @else {
+                  <span class="placeholder">Enter values above</span>
+                }
+              </div>
+              @if (category() !== null) {
+                <div class="result-category" [ngClass]="categoryColor()">
+                  <mat-icon>{{ getCategoryIcon() }}</mat-icon>
+                  {{ category() }}
+                </div>
+                <div class="result-explanation">
+                  {{ getCategoryExplanation() }}
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
+
+      <!-- BMI Reference Chart -->
+      <mat-card class="calculator-card reference-card">
+        <div class="card-header">
+          <mat-icon class="card-icon">analytics</mat-icon>
+          <h2>BMI Categories</h2>
+        </div>
+
+        <div class="calculator-content">
+          <div class="bmi-ranges">
+            <div class="bmi-range underweight">
+              <div class="range-header">
+                <mat-icon>trending_down</mat-icon>
+                <span class="range-title">Underweight</span>
+              </div>
+              <div class="range-value">BMI &lt; 18.5</div>
+            </div>
+
+            <div class="bmi-range normal">
+              <div class="range-header">
+                <mat-icon>favorite</mat-icon>
+                <span class="range-title">Normal weight</span>
+              </div>
+              <div class="range-value">BMI 18.5 - 24.9</div>
+            </div>
+
+            <div class="bmi-range overweight">
+              <div class="range-header">
+                <mat-icon>trending_up</mat-icon>
+                <span class="range-title">Overweight</span>
+              </div>
+              <div class="range-value">BMI 25 - 29.9</div>
+            </div>
+
+            <div class="bmi-range obese">
+              <div class="range-header">
+                <mat-icon>warning</mat-icon>
+                <span class="range-title">Obese</span>
+              </div>
+              <div class="range-value">BMI ≥ 30</div>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            <mat-icon>info</mat-icon>
+            <p>BMI is a screening tool. Consult a healthcare professional for personalized health advice.</p>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Usage Examples -->
+    <div class="examples-section">
+      <h3>
+        <mat-icon>lightbulb</mat-icon>
+        Understanding BMI
+      </h3>
+      <div class="examples-grid">
+        <div class="example-card">
+          <mat-icon>calculate</mat-icon>
+          <h4>Quick Calculation</h4>
+          <p>Instantly calculate BMI from height and weight</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>swap_horiz</mat-icon>
+          <h4>Dual Units</h4>
+          <p>Switch between metric and imperial measurements</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>bar_chart</mat-icon>
+          <h4>Category Reference</h4>
+          <p>View standard BMI ranges and categories</p>
+        </div>
+        <div class="example-card">
+          <mat-icon>insights</mat-icon>
+          <h4>Easy Tracking</h4>
+          <p>Simple tool for personal record keeping</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
