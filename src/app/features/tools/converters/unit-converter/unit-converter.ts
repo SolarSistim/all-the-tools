@@ -57,7 +57,7 @@ export class UnitConverter implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Unit Converter - Convert Between Multiple Units',
+      title: 'Unit Converter - Length, Weight, Temp, Volume, Area & Speed.',
       description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
       keywords: ['unit converter', 'measurement converter', 'metric converter', 'imperial converter'],
       image: 'https://all-the-tools.netlify.app/meta-images/og-unit-converter.png',
