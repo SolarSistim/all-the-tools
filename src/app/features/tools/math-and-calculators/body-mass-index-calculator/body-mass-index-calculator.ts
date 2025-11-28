@@ -44,7 +44,7 @@ export class BodyMassIndexCalculator implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'BMI Calculator - Body Mass Index Calculator',
+      title: 'Body Mass Index Calculator',
       description: 'Calculate your Body Mass Index (BMI) with support for both metric and imperial units. Get instant health insights.',
       keywords: ['bmi calculator', 'body mass index', 'health calculator', 'weight calculator', 'fitness'],
       image: 'https://all-the-tools.netlify.app/meta-images/og-bmi-calculator.png',
