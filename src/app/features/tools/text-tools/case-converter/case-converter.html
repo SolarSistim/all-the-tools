@@ -1,0 +1,117 @@
+<div class="case-converter-page">
+  <div class="container">
+    <app-page-header
+      title="Case Converter"
+      subtitle="Transform text between different cases instantly"
+      icon="format_size"
+    ></app-page-header>
+
+    <!-- Quick Conversion Buttons -->
+    <div class="quick-conversions">
+      @for (conversion of conversions; track conversion.id) {
+        <button
+          mat-button
+          class="quick-convert-btn"
+          (click)="applyConversion(conversion)"
+          [disabled]="!getInputText()"
+        >
+          <mat-icon>{{ conversion.icon }}</mat-icon>
+          <span>{{ conversion.name }}</span>
+        </button>
+      }
+    </div>
+
+    <!-- Text Input Card -->
+    <mat-card class="input-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">edit_note</mat-icon>
+        <h2>Enter Your Text</h2>
+        <div class="header-actions">
+          <button
+            mat-raised-button
+            (click)="copyToClipboard()"
+            class="action-btn copy-btn"
+            [disabled]="!getInputText()"
+          >
+            <mat-icon>content_copy</mat-icon>
+            Copy
+          </button>
+          <button
+            mat-raised-button
+            (click)="clearText()"
+            class="action-btn clear-btn"
+            [disabled]="!getInputText()"
+          >
+            <mat-icon>clear</mat-icon>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <div class="input-content">
+        <mat-form-field appearance="fill" class="text-area-field">
+          <mat-label>Type or paste your text here</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="inputText"
+            placeholder="Start typing or paste your text..."
+            rows="8"
+            class="text-area"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <!-- Conversion Options -->
+    <div class="conversions-section">
+      <h3>
+        <mat-icon>transform</mat-icon>
+        Choose a Conversion
+      </h3>
+      <div class="conversions-grid">
+        @for (conversion of conversions; track conversion.id) {
+          <mat-card class="conversion-card" (click)="applyConversion(conversion)">
+            <div class="conversion-header">
+              <mat-icon>{{ conversion.icon }}</mat-icon>
+              <h4>{{ conversion.name }}</h4>
+            </div>
+            <p class="conversion-description">{{ conversion.description }}</p>
+            <div class="conversion-preview">
+              {{ conversion.convert(getPreviewText()) }}
+            </div>
+          </mat-card>
+        }
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+      <h3>
+        <mat-icon>lightbulb</mat-icon>
+        Use Cases
+      </h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <mat-icon>code</mat-icon>
+          <h4>Programming</h4>
+          <p>Convert variable names to camelCase, snake_case, or PascalCase</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>article</mat-icon>
+          <h4>Writing</h4>
+          <p>Fix capitalization in titles and sentences</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>link</mat-icon>
+          <h4>URLs</h4>
+          <p>Create kebab-case URLs from titles</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>settings</mat-icon>
+          <h4>Constants</h4>
+          <p>Convert configuration names to CONSTANT_CASE</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

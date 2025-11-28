@@ -44,6 +44,24 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.0.0',
+      date: 'November 28, 2025',
+      changes: [
+        {
+          type: 'added',
+          description: 'Unit Converter'
+        },
+        {
+          type: 'added',
+          description: 'Word Counter'
+        },
+        {
+          type: 'added',
+          description: 'Case Converter'
+        }
+      ]
+    },
+    {
+      version: '1.0.0',
       date: 'November 26, 2025',
       changes: [
         {
@@ -53,6 +71,10 @@ export class Changelog implements OnInit {
         {
           type: 'added',
           description: 'Tip Calculator'
+        },
+        {
+          type: 'added',
+          description: 'BMI Calculator'
         }
       ]
     }

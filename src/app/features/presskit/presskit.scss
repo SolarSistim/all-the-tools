@@ -1089,4 +1089,106 @@
   }
 }
 
+// ============================================
+// HERO VISUAL - CASE CONVERTER THEME
+// ============================================
+.hero-case-converter {
+  // Inherits base .hero styles
+}
+
+.hero-case-converter .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.case-converter-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.case-display {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  padding: $spacing-2xl;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 24px;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.case-example {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-md $spacing-xl;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border-left: 3px solid;
+  transition: all 0.3s ease;
+  animation: case-slide-in 0.6s ease-out;
+  min-width: 280px;
+
+  &.example-1 {
+    border-left-color: var(--neon-cyan);
+    animation-delay: 0.1s;
+  }
+
+  &.example-2 {
+    border-left-color: var(--neon-pink);
+    animation-delay: 0.2s;
+  }
+
+  &.example-3 {
+    border-left-color: var(--neon-purple, #a855f7);
+    animation-delay: 0.3s;
+  }
+
+  &.example-4 {
+    border-left-color: var(--neon-cyan);
+    animation-delay: 0.4s;
+  }
+
+  &.example-5 {
+    border-left-color: var(--neon-pink);
+    animation-delay: 0.5s;
+  }
+
+  &:hover {
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .example-text {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 1.25rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes case-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 // Your existing presskit styles go below here

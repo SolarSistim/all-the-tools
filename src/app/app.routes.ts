@@ -68,6 +68,11 @@ export const routes: Routes = [
     title: 'Word Counter - All The Tools'
   },
   {
+    path: 'tools/case-converter',
+    loadComponent: () => import('./features/tools/text-tools/case-converter/case-converter').then(m => m.CaseConverter),
+    title: 'Word Counter - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
