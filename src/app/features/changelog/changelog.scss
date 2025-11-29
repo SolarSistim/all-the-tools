@@ -123,6 +123,42 @@
     color: var(--text-secondary);
     margin: 0;
   }
+
+  .change-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: $spacing-sm;
+
+    .link-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      color: var(--neon-cyan-bright);
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+      transform: translateX(4px);
+
+      .link-icon {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &:active {
+      transform: translateX(2px);
+    }
+  }
 }
 
 // Change type styling

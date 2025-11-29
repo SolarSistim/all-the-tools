@@ -22,7 +22,14 @@
                 <mat-icon class="change-icon">{{ getChangeIcon(change.type) }}</mat-icon>
                 <div class="change-content">
                   <span class="change-type">{{ change.type }}</span>
-                  <p class="change-description">{{ change.description }}</p>
+                  @if (change.route) {
+                    <a [routerLink]="change.route" class="change-description change-link">
+                      {{ change.description }}
+                      <mat-icon class="link-icon">arrow_forward</mat-icon>
+                    </a>
+                  } @else {
+                    <p class="change-description">{{ change.description }}</p>
+                  }
                 </div>
               </div>
             }

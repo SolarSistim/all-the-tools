@@ -50,7 +50,7 @@ export class CaseConverter implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Case Converter & Text Transforms',
+      title: 'Case Conversion & Text Transforms',
       description: 'Convert text between different cases: lowercase, UPPERCASE, Title Case, camelCase, snake_case, kebab-case, and more.',
       keywords: ['case converter', 'text transform', 'uppercase', 'lowercase', 'camelCase', 'snake_case'],
       image: 'https://all-the-tools.netlify.app/meta-images/og-case-converter.png',

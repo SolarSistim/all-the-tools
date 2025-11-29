@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +13,7 @@ interface ChangelogEntry {
   changes: {
     type: 'added' | 'improved' | 'fixed' | 'removed';
     description: string;
+    route?: string; // Optional route to link to
   }[];
 }
 
@@ -20,6 +22,7 @@ interface ChangelogEntry {
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
@@ -44,19 +47,38 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.0.0',
+      date: 'November 29, 2025',
+      changes: [
+        {
+          type: 'added',
+          description: 'Password Generator',
+          route: '/tools/password-generator'
+        },
+        {
+          type: 'added',
+          description: 'Lorem Ipsum Generator',
+          route: '/tools/lorem-ipsum'
+        }
+      ]
+    },
+    {
+      version: '1.0.0',
       date: 'November 28, 2025',
       changes: [
         {
           type: 'added',
-          description: 'Unit Converter'
+          description: 'Unit Converter',
+          route: '/tools/unit-converter'
         },
         {
           type: 'added',
-          description: 'Word Counter'
+          description: 'Case Converter',
+          route: '/tools/case-converter'
         },
         {
           type: 'added',
-          description: 'Case Converter'
+          description: 'Word Counter',
+          route: '/tools/word-counter'
         }
       ]
     },
@@ -66,15 +88,18 @@ export class Changelog implements OnInit {
       changes: [
         {
           type: 'added',
-          description: 'Percentage Calculator'
+          description: 'Percentage Calculator',
+          route: '/tools/percentage-calculator'
         },
         {
           type: 'added',
-          description: 'Tip Calculator'
+          description: 'BMI Calculator',
+          route: '/tools/bmi-calculator'
         },
         {
           type: 'added',
-          description: 'BMI Calculator'
+          description: 'Tip Calculator',
+          route: '/tools/tip-calculator'
         }
       ]
     }

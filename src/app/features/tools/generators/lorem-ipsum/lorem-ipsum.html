@@ -1,0 +1,129 @@
+<div class="lorem-ipsum-page">
+  <div class="container">
+    <app-page-header
+      title="Lorem Ipsum Generator"
+      subtitle="Generate customizable placeholder text instantly"
+      icon="subject"
+    ></app-page-header>
+
+        <!-- Generated Text Card -->
+    <mat-card class="output-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">description</mat-icon>
+        <h2>Generated Text</h2>
+        <div class="header-actions">
+          <button
+            mat-raised-button
+            (click)="copyToClipboard()"
+            class="action-btn copy-btn"
+          >
+            <mat-icon>content_copy</mat-icon>
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div class="output-content">
+        <div class="generated-text">
+          {{ generatedText() }}
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Configuration Card -->
+    <mat-card class="config-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">settings</mat-icon>
+        <h2>Configuration</h2>
+      </div>
+
+      <div class="config-content">
+
+                <!-- Word Count Slider -->
+        <div class="slider-section">
+          <h3>
+            <mat-icon>tune</mat-icon>
+            Word Count: <span class="word-count-display">{{ wordCount() }}</span>
+          </h3>
+          <mat-slider
+            [min]="1"
+            [max]="1000"
+            [step]="1"
+            class="word-slider"
+            discrete
+            [displayWith]="formatLabel"
+          >
+            <input matSliderThumb [value]="wordCount()" (valueChange)="updateWordCount($event)">
+          </mat-slider>
+          <div class="slider-labels">
+            <span>1 word</span>
+            <span>1000 words</span>
+          </div>
+        </div>
+
+        <!-- Text Type Selection -->
+        <div class="text-type-section">
+          <h3>
+            <mat-icon>style</mat-icon>
+            Select Text Type
+          </h3>
+          <mat-radio-group
+            [value]="selectedType()"
+            (change)="updateType($any($event.value))"
+            class="radio-group"
+          >
+            <mat-radio-button value="nonsensical" class="radio-option">
+              <div class="radio-content">
+                <span class="radio-label">Non-sensical</span>
+                <span class="radio-description">Classic Lorem Ipsum placeholder text</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="cicero-latin" class="radio-option">
+              <div class="radio-content">
+                <span class="radio-label">Cicero - Latin</span>
+                <span class="radio-description">Original Latin passage from Cicero</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="cicero-english" class="radio-option">
+              <div class="radio-content">
+                <span class="radio-label">Cicero - English</span>
+                <span class="radio-description">English translation of Cicero's work</span>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+      </div>
+    </mat-card>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        About Lorem Ipsum
+      </h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <mat-icon>history_edu</mat-icon>
+          <h4>Origins</h4>
+          <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" by Cicero, written in 45 BC.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>design_services</mat-icon>
+          <h4>Design Use</h4>
+          <p>Used as placeholder text in graphic design, publishing, and web development since the 1500s.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>visibility</mat-icon>
+          <h4>Purpose</h4>
+          <p>Helps designers and developers visualize how text will look without the distraction of meaningful content.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>language</mat-icon>
+          <h4>Variations</h4>
+          <p>Choose between the classic non-sensical version or the original Latin and English passages from Cicero.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

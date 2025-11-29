@@ -1191,4 +1191,285 @@
   }
 }
 
+// ============================================
+// HERO VISUAL - PASSWORD GENERATOR THEME
+// ============================================
+.hero-password-generator .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.password-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.password-shield {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+
+  .shield-icon {
+    font-size: 180px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 30px var(--neon-cyan-glow));
+    animation: float 2.5s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .password-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    .dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--neon-pink);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--neon-pink-glow);
+      animation: dot-orbit 8s linear infinite;
+
+      &.dot-1 {
+        top: 20%;
+        left: 50%;
+        animation-delay: 0s;
+      }
+
+      &.dot-2 {
+        top: 30%;
+        right: 15%;
+        animation-delay: 1s;
+      }
+
+      &.dot-3 {
+        top: 50%;
+        right: 10%;
+        animation-delay: 2s;
+      }
+
+      &.dot-4 {
+        bottom: 30%;
+        right: 15%;
+        animation-delay: 3s;
+      }
+
+      &.dot-5 {
+        bottom: 20%;
+        left: 50%;
+        animation-delay: 4s;
+      }
+
+      &.dot-6 {
+        bottom: 30%;
+        left: 15%;
+        animation-delay: 5s;
+      }
+
+      &.dot-7 {
+        top: 50%;
+        left: 10%;
+        animation-delay: 6s;
+      }
+
+      &.dot-8 {
+        top: 30%;
+        left: 15%;
+        animation-delay: 7s;
+      }
+    }
+  }
+
+  .lock-icon-wrapper {
+    position: absolute;
+    bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--bg-elevated);
+    border: 2px solid var(--neon-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--neon-pink-glow);
+    animation: lock-pulse 2s ease-in-out infinite;
+
+    .lock-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      color: var(--neon-pink);
+      filter: drop-shadow(0 0 10px var(--neon-pink-glow));
+    }
+  }
+}
+
+@keyframes dot-orbit {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes lock-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px var(--neon-pink-glow);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px var(--neon-pink-glow);
+  }
+}
+
+// ============================================
+// HERO VISUAL - LOREM IPSUM THEME
+// ============================================
+.hero-lorem-ipsum .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.lorem-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.text-container {
+  position: relative;
+  width: 400px;
+  padding: $spacing-2xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-lg;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 24px;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+
+  .text-line {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: text-fade-in 0.8s ease-out;
+
+    &.line-1 {
+      animation-delay: 0.1s;
+    }
+
+    &.line-2 {
+      animation-delay: 0.3s;
+    }
+
+    &.line-3 {
+      animation-delay: 0.5s;
+    }
+
+    &.line-4 {
+      animation-delay: 0.7s;
+    }
+
+    .text-word {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding: $spacing-xs $spacing-sm;
+      background-color: var(--bg-secondary);
+      border-radius: 8px;
+      animation: word-float 3s ease-in-out infinite;
+
+      &:nth-child(1) { animation-delay: 0s; }
+      &:nth-child(2) { animation-delay: 0.5s; }
+      &:nth-child(3) { animation-delay: 1s; }
+    }
+  }
+
+  .lorem-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    width: 200px;
+    height: 200px;
+    color: var(--neon-cyan);
+    opacity: 0.08;
+    z-index: 0;
+    animation: icon-rotate 20s linear infinite;
+  }
+}
+
+@keyframes text-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes word-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes icon-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 // Your existing presskit styles go below here

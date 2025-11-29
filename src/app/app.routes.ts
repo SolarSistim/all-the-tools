@@ -73,6 +73,16 @@ export const routes: Routes = [
     title: 'Word Counter - All The Tools'
   },
   {
+    path: 'tools/lorem-ipsum',
+    loadComponent: () => import('./features/tools/generators/lorem-ipsum/lorem-ipsum').then(m => m.LoremIpsum),
+    title: 'Lorem Ipsum Generator - All The Tools'
+  },
+  {
+    path: 'tools/password-generator',
+    loadComponent: () => import('./features/tools/generators/password-generator/password-generator').then(m => m.PasswordGenerator),
+    title: 'Password Generator - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

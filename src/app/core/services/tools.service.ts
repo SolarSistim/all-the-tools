@@ -44,7 +44,7 @@ export class ToolsService {
     {
       id: 'lorem-ipsum',
       name: 'Lorem Ipsum Generator',
-      description: 'Generate placeholder text for design mockups',
+      description: 'Generate customizable placeholder text with adjustable word count (1-1000 words)',
       category: 'generator',
       icon: 'notes',
       route: 'lorem-ipsum',
