@@ -83,6 +83,11 @@ export const routes: Routes = [
     title: 'Password Generator - All The Tools'
   },
   {
+    path: 'tools/qr-code-generator',
+    loadComponent: () => import('./features/tools/generators/qr-code-generator/qr-code-generator').then(m => m.QrCodeGenerator),
+    title: 'QR Code Generator - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

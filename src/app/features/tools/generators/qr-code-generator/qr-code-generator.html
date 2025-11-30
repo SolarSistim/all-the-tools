@@ -1,0 +1,346 @@
+<div class="qr-generator-page">
+  <div class="container">
+    <app-page-header
+      title="QR Code Generator"
+      subtitle="Create customizable QR codes for any purpose"
+      icon="qr_code_2"
+    ></app-page-header>
+
+    <div class="qr-generator-layout">
+      <!-- Left Side: Input Form -->
+      <div class="input-section">
+        <mat-card class="input-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">edit</mat-icon>
+            <h2>QR Code Content</h2>
+          </div>
+
+          <!-- Type Selector -->
+          <mat-form-field class="type-selector" appearance="fill">
+            <mat-label>QR Code Type</mat-label>
+            <mat-select [(ngModel)]="selectedType" aria-label="Select QR code type">
+              <mat-option value="text">
+                <mat-icon>text_fields</mat-icon>
+                Plain Text
+              </mat-option>
+              <mat-option value="url">
+                <mat-icon>link</mat-icon>
+                Website URL
+              </mat-option>
+              <mat-option value="email">
+                <mat-icon>email</mat-icon>
+                Email
+              </mat-option>
+              <mat-option value="phone">
+                <mat-icon>phone</mat-icon>
+                Phone Number
+              </mat-option>
+              <mat-option value="sms">
+                <mat-icon>sms</mat-icon>
+                SMS Message
+              </mat-option>
+              <mat-option value="wifi">
+                <mat-icon>wifi</mat-icon>
+                WiFi Network
+              </mat-option>
+              <mat-option value="vcard">
+                <mat-icon>contact_page</mat-icon>
+                Contact Card (vCard)
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Text Input -->
+          @if (selectedType() === 'text') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Enter your text</mat-label>
+              <textarea
+              class="text-area-style"
+                matInput
+                [(ngModel)]="textInput"
+                rows="4"
+                placeholder="Type any text here..."
+                aria-label="Text to encode in QR code"
+              ></textarea>
+              <mat-hint>Enter any text you want to encode</mat-hint>
+            </mat-form-field>
+          }
+
+          <!-- URL Input -->
+          @if (selectedType() === 'url') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Website URL</mat-label>
+              <input
+                matInput
+                type="url"
+                [(ngModel)]="urlInput"
+                placeholder="https://example.com"
+                aria-label="URL to encode in QR code"
+              />
+              <mat-hint>Must start with http:// or https://</mat-hint>
+            </mat-form-field>
+          }
+
+          <!-- Email Inputs -->
+          @if (selectedType() === 'email') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                type="email"
+                [(ngModel)]="emailAddress"
+                placeholder="name@example.com"
+                aria-label="Email address"
+              />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Subject (optional)</mat-label>
+              <input matInput [(ngModel)]="emailSubject" placeholder="Email subject" />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Message (optional)</mat-label>
+              <textarea matInput [(ngModel)]="emailBody" rows="3" placeholder="Email message"></textarea>
+            </mat-form-field>
+          }
+
+          <!-- Phone Input -->
+          @if (selectedType() === 'phone') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                type="tel"
+                [(ngModel)]="phoneNumber"
+                placeholder="+1234567890"
+                aria-label="Phone number"
+              />
+              <mat-hint>Include country code (e.g., +1)</mat-hint>
+            </mat-form-field>
+          }
+
+          <!-- SMS Inputs -->
+          @if (selectedType() === 'sms') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                type="tel"
+                [(ngModel)]="smsNumber"
+                placeholder="+1234567890"
+                aria-label="SMS recipient phone number"
+              />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Message (optional)</mat-label>
+              <textarea matInput [(ngModel)]="smsMessage" rows="3" placeholder="SMS message"></textarea>
+            </mat-form-field>
+          }
+
+          <!-- WiFi Inputs -->
+          @if (selectedType() === 'wifi') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Network Name (SSID)</mat-label>
+              <input
+                matInput
+                [(ngModel)]="wifiSSID"
+                placeholder="MyWiFiNetwork"
+                aria-label="WiFi network name"
+              />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                type="password"
+                [(ngModel)]="wifiPassword"
+                placeholder="WiFi password"
+                aria-label="WiFi password"
+              />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Security Type</mat-label>
+              <mat-select [(ngModel)]="wifiSecurity" aria-label="WiFi security type">
+                <mat-option value="WPA">WPA/WPA2</mat-option>
+                <mat-option value="WEP">WEP</mat-option>
+                <mat-option value="nopass">No Password</mat-option>
+              </mat-select>
+            </mat-form-field>
+          }
+
+          <!-- vCard Inputs -->
+          @if (selectedType() === 'vcard') {
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Full Name</mat-label>
+              <input matInput [(ngModel)]="vcardName" placeholder="John Doe" aria-label="Contact name" />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Organization (optional)</mat-label>
+              <input matInput [(ngModel)]="vcardOrganization" placeholder="Company Name" />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Phone (optional)</mat-label>
+              <input matInput type="tel" [(ngModel)]="vcardPhone" placeholder="+1234567890" />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Email (optional)</mat-label>
+              <input matInput type="email" [(ngModel)]="vcardEmail" placeholder="name@example.com" />
+            </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Website (optional)</mat-label>
+              <input matInput type="url" [(ngModel)]="vcardWebsite" placeholder="https://example.com" />
+            </mat-form-field>
+          }
+
+          <!-- Validation Error -->
+          @if (validationError()) {
+            <div class="validation-error">
+              <mat-icon>error</mat-icon>
+              <span>{{ validationError() }}</span>
+            </div>
+          }
+        </mat-card>
+
+        <!-- Customization -->
+        <mat-card class="options-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">tune</mat-icon>
+            <h2>Customization</h2>
+          </div>
+
+          <!-- Size Slider -->
+          <div class="option-section">
+            <h3>
+              <mat-icon>photo_size_select_large</mat-icon>
+              Size: <span class="option-value">{{ qrSize() }}px</span>
+            </h3>
+            <mat-slider [min]="128" [max]="1024" [step]="64" class="option-slider" discrete [displayWith]="formatLabel">
+              <input matSliderThumb [value]="qrSize()" (valueChange)="updateSize($event)" aria-label="QR code size">
+            </mat-slider>
+            <div class="slider-labels">
+              <span>128px</span>
+              <span>1024px</span>
+            </div>
+          </div>
+
+          <!-- Margin Slider -->
+          <div class="option-section">
+            <h3>
+              <mat-icon>border_outer</mat-icon>
+              Margin: <span class="option-value">{{ qrMargin() }}</span>
+            </h3>
+            <mat-slider [min]="0" [max]="10" [step]="1" class="option-slider" discrete [displayWith]="formatLabel">
+              <input matSliderThumb [value]="qrMargin()" (valueChange)="updateMargin($event)" aria-label="QR code margin">
+            </mat-slider>
+            <div class="slider-labels">
+              <span>0</span>
+              <span>10</span>
+            </div>
+          </div>
+
+          <!-- Color Pickers -->
+          <div class="color-pickers">
+            <mat-form-field class="color-picker" appearance="fill">
+              <mat-label>Foreground Color</mat-label>
+              <input matInput type="color" [(ngModel)]="qrForeground" aria-label="QR code foreground color" />
+            </mat-form-field>
+
+            <mat-form-field class="color-picker" appearance="fill">
+              <mat-label>Background Color</mat-label>
+              <input matInput type="color" [(ngModel)]="qrBackground" aria-label="QR code background color" />
+            </mat-form-field>
+          </div>
+
+          <!-- Error Correction -->
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Error Correction Level</mat-label>
+            <mat-select [(ngModel)]="qrErrorCorrection" aria-label="Error correction level">
+              <mat-option value="L">Low (7%)</mat-option>
+              <mat-option value="M">Medium (15%)</mat-option>
+              <mat-option value="Q">Quartile (25%)</mat-option>
+              <mat-option value="H">High (30%)</mat-option>
+            </mat-select>
+            <mat-hint>Higher levels allow more damage tolerance</mat-hint>
+          </mat-form-field>
+
+          <!-- Reset Button -->
+          <button mat-raised-button (click)="resetToDefaults()" class="reset-btn">
+            <mat-icon>restore</mat-icon>
+            Reset to Defaults
+          </button>
+        </mat-card>
+      </div>
+
+      <!-- Right Side: QR Preview -->
+      <div class="preview-section">
+        <!-- QR Preview -->
+        <mat-card class="preview-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">qr_code_2</mat-icon>
+            <h2>QR Code Preview</h2>
+          </div>
+
+          <div class="qr-preview-container">
+            @if (qrDataUrl()) {
+              <img
+                [src]="qrDataUrl()"
+                alt="Generated QR Code"
+                class="qr-image"
+                [style.backgroundColor]="qrBackground()"
+              />
+            } @else {
+              <div class="qr-placeholder">
+                <mat-icon>qr_code_2</mat-icon>
+                <p>Enter content to generate QR code</p>
+              </div>
+            }
+          </div>
+
+          <!-- Download Buttons -->
+          @if (qrDataUrl()) {
+            <div class="action-buttons">
+              <button mat-raised-button (click)="downloadPNG()" class="action-btn download-btn">
+                <mat-icon>download</mat-icon>
+                PNG
+              </button>
+              <button mat-raised-button (click)="downloadSVG()" class="action-btn download-btn">
+                <mat-icon>download</mat-icon>
+                SVG
+              </button>
+              <button mat-raised-button (click)="copyImage()" class="action-btn copy-btn">
+                <mat-icon>content_copy</mat-icon>
+                Copy Image
+              </button>
+            </div>
+          }
+        </mat-card>
+
+        <!-- Encoded Data Panel -->
+        @if (encodedData()) {
+          <mat-expansion-panel class="data-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>code</mat-icon>
+                Encoded Data
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="encoded-data-content">
+              <p class="encoded-data-text">{{ encodedData() }}</p>
+              <button mat-icon-button (click)="copyData()" matTooltip="Copy data" aria-label="Copy encoded data">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+          </mat-expansion-panel>
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -1472,4 +1472,167 @@
   }
 }
 
+// ============================================
+// HERO VISUAL - QR CODE GENERATOR THEME
+// ============================================
+.hero-qr-code-generator .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.qr-code-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-code-container {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border-radius: 24px;
+  padding: $spacing-2xl;
+  border: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: qr-pulse 3s ease-in-out infinite;
+}
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.qr-module {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+  border-radius: 8px;
+  animation: module-blink 2s ease-in-out infinite;
+  box-shadow: 0 0 20px var(--neon-cyan-glow);
+
+  &.qr-1 { animation-delay: 0s; }
+  &.qr-2 { animation-delay: 0.2s; }
+  &.qr-3 { animation-delay: 0.4s; }
+  &.qr-4 { animation-delay: 0.6s; }
+  &.qr-5 {
+    animation-delay: 0.8s;
+    background: var(--neon-pink);
+    box-shadow: 0 0 20px var(--neon-pink-glow);
+  }
+  &.qr-6 { animation-delay: 1s; }
+  &.qr-7 { animation-delay: 1.2s; }
+  &.qr-8 { animation-delay: 1.4s; }
+  &.qr-9 { animation-delay: 1.6s; }
+}
+
+.qr-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 280px;
+  width: 280px;
+  height: 280px;
+  color: var(--neon-cyan);
+  opacity: 0.05;
+  z-index: 0;
+  animation: qr-icon-rotate 15s linear infinite;
+}
+
+.qr-corners {
+  position: absolute;
+  inset: 30px;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--neon-pink);
+  border-radius: 8px;
+  animation: corner-glow 2s ease-in-out infinite alternate;
+
+  &.corner-tl {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+    animation-delay: 0s;
+  }
+
+  &.corner-tr {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+    animation-delay: 0.5s;
+  }
+
+  &.corner-bl {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes qr-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+                inset 0 0 30px rgba(109, 212, 255, 0.1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 60px var(--neon-cyan-glow),
+                inset 0 0 40px rgba(109, 212, 255, 0.2);
+  }
+}
+
+@keyframes module-blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes qr-icon-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes corner-glow {
+  from {
+    box-shadow: 0 0 10px var(--neon-pink-glow);
+    border-color: var(--neon-pink);
+  }
+  to {
+    box-shadow: 0 0 25px var(--neon-pink-glow);
+    border-color: var(--neon-cyan);
+  }
+}
+
 // Your existing presskit styles go below here
