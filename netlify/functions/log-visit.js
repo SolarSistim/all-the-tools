@@ -33,6 +33,11 @@ exports.handler = async (event, context) => {
     // Parse the request body
     const data = JSON.parse(event.body);
 
+    // Debug: Log available headers and context (remove this after debugging)
+    console.log('Geo-related headers:', Object.keys(event.headers).filter(h => h.toLowerCase().includes('geo') || h.toLowerCase().includes('country') || h.toLowerCase().includes('city') || h.toLowerCase().includes('nf')));
+    console.log('Context geo:', context.geo);
+    console.log('All headers:', JSON.stringify(event.headers, null, 2));
+
     // Extract visitor information
     const visitorInfo = {
       timestamp: new Date().toISOString(),
