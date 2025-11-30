@@ -1,10 +1,49 @@
 <div class="lorem-ipsum-page">
   <div class="container">
-    <app-page-header
-      title="Lorem Ipsum Generator"
-      subtitle="Generate customizable placeholder text instantly"
-      icon="subject"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">subject</mat-icon>
+        </div>
+        <h1 class="hero-title">Lorem Ipsum Generator</h1>
+        <p class="hero-subtitle">
+          Generate customizable placeholder text instantly with classic Lorem Ipsum or authentic Cicero passages.
+          Perfect for designers, developers, and content creators who need realistic text samples for mockups
+          and prototypes with adjustable word count.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>description</mat-icon>
+            <span>Document Generation</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>history_edu</mat-icon>
+            <span>Classic Text</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>language</mat-icon>
+            <span>Multiple Versions</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">Classic</span>
+            <code>Lorem ipsum dolor <span class="highlight">sit amet...</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">Cicero Latin</span>
+            <code>Sed ut perspiciatis <span class="highlight">unde omnis...</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">Cicero English</span>
+            <code>But I must explain <span class="highlight">to you...</span></code>
+          </div>
+        </div>
+      </div>
+    </section>
 
         <!-- Generated Text Card -->
     <mat-card class="output-card">
