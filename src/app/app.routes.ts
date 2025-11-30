@@ -88,6 +88,31 @@ export const routes: Routes = [
     title: 'QR Code Generator - All The Tools'
   },
   {
+    path: 'tools/uuid-generator',
+    loadComponent: () => import('./features/tools/generators/uuid-generator/uuid-generator').then(m => m.UuidGenerator),
+    title: 'UUID Generator'
+  },
+  {
+    path: 'tools/color-picker',
+    loadComponent: () => import('./features/tools/color-tools/color-picker/color-picker').then(m => m.ColorPicker),
+    title: 'Color Picker - All The Tools'
+  },
+  {
+    path: 'tools/gradient-generator',
+    loadComponent: () => import('./features/tools/color-tools/gradient-generator/gradient-generator').then(m => m.GradientGenerator),
+    title: 'Gradient Generator - All The Tools'
+  },
+  {
+    path: 'tools/timestamp-converter',
+    loadComponent: () => import('./features/tools/time-and-date/timestamp-converter/timestamp-converter').then(m => m.TimestampConverter),
+    title: 'Timestamp Converter - All The Tools'
+  },
+  {
+    path: 'tools/time-zone-converter',
+    loadComponent: () => import('./features/tools/time-and-date/timezone-converter/timezone-converter').then(m => m.TimezoneConverter),
+    title: 'TImezone Converter - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
