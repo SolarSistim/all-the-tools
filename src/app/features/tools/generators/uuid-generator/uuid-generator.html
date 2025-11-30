@@ -1,15 +1,249 @@
-<div class="coming-soon-page">
+<div class="uuid-generator-page">
   <div class="container">
-    <mat-card class="coming-soon-card">
-      <div class="coming-soon-content">
-        <mat-icon class="coming-soon-icon">construction</mat-icon>
-        <h1 class="coming-soon-title">Coming Soon</h1>
-        <p class="coming-soon-subtitle">This tool is currently under development</p>
-        <div class="coming-soon-progress">
-          <mat-icon>code</mat-icon>
-          <span>We're working hard to bring you this feature</span>
+    <app-page-header
+      title="UUID Generator"
+      subtitle="Generate universally unique identifiers (UUIDs) instantly"
+      icon="fingerprint"
+    ></app-page-header>
+
+    <!-- Generated UUID Card -->
+    <mat-card class="uuid-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">fingerprint</mat-icon>
+        <h2>Generated UUID</h2>
+        <div class="header-actions">
+          <button
+            mat-raised-button
+            (click)="generateSingleUUID()"
+            class="action-btn generate-btn"
+          >
+            <mat-icon>refresh</mat-icon>
+            Generate New
+          </button>
+          <button
+            mat-raised-button
+            (click)="copyToClipboard(generatedUUID())"
+            class="action-btn copy-btn"
+            [disabled]="!generatedUUID()"
+          >
+            <mat-icon>content_copy</mat-icon>
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div class="uuid-display">
+        <div class="uuid-text">{{ generatedUUID() || 'Click Generate to create a UUID' }}</div>
+      </div>
+
+      <!-- UUID Info -->
+      @if (generatedUUID()) {
+        <div class="uuid-info">
+          <div class="info-item">
+            <span class="info-label">Version:</span>
+            <span class="info-value">{{ selectedVersion() }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Format:</span>
+            <span class="info-value">{{ selectedFormat() }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Length:</span>
+            <span class="info-value">{{ generatedUUID().length }} characters</span>
+          </div>
+        </div>
+      }
+    </mat-card>
+
+    <!-- Configuration Card -->
+    <mat-card class="config-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">settings</mat-icon>
+        <h2>UUID Options</h2>
+      </div>
+
+      <div class="config-content">
+        <!-- Version Selection -->
+        <div class="version-section">
+          <h3>
+            <mat-icon>select_all</mat-icon>
+            UUID Version
+          </h3>
+          <mat-radio-group [(ngModel)]="selectedVersion" class="version-group">
+            <mat-radio-button value="v4" class="version-option">
+              <div class="version-content">
+                <span class="version-name">Version 4 (Random)</span>
+                <span class="version-desc">Randomly generated UUID using cryptographic randomness</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="v1" class="version-option">
+              <div class="version-content">
+                <span class="version-name">Version 1 (Timestamp)</span>
+                <span class="version-desc">Time-based UUID with MAC address (simulated)</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="nil" class="version-option">
+              <div class="version-content">
+                <span class="version-name">Nil UUID</span>
+                <span class="version-desc">All zeros: 00000000-0000-0000-0000-000000000000</span>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Format Options -->
+        <div class="format-section">
+          <h3>
+            <mat-icon>format_paint</mat-icon>
+            Output Format
+          </h3>
+          <mat-radio-group [(ngModel)]="selectedFormat" class="format-group">
+            <mat-radio-button value="standard" class="format-option">
+              <div class="format-content">
+                <span class="format-name">Standard (Hyphenated)</span>
+                <span class="format-example">550e8400-e29b-41d4-a716-446655440000</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="no-hyphens" class="format-option">
+              <div class="format-content">
+                <span class="format-name">No Hyphens</span>
+                <span class="format-example">550e8400e29b41d4a716446655440000</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="uppercase" class="format-option">
+              <div class="format-content">
+                <span class="format-name">Uppercase</span>
+                <span class="format-example">550E8400-E29B-41D4-A716-446655440000</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="braces" class="format-option">
+              <div class="format-content">
+                <span class="format-name">With Braces</span>
+                <span class="format-example">{{ '{' }}550e8400-e29b-41d4-a716-446655440000{{ '}' }}</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="urn" class="format-option">
+              <div class="format-content">
+                <span class="format-name">URN Format</span>
+                <span class="format-example">urn:uuid:550e8400-e29b-41d4-a716-446655440000</span>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Bulk Generation -->
+        <div class="bulk-section">
+          <h3>
+            <mat-icon>content_copy</mat-icon>
+            Generate Multiple UUIDs
+          </h3>
+          <div class="bulk-controls">
+            <mat-slider
+              [min]="1"
+              [max]="100"
+              [step]="1"
+              class="count-slider"
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb [value]="uuidCount()" (valueChange)="updateUUIDCount($event)">
+            </mat-slider>
+            <span class="count-display">{{ uuidCount() }} UUID{{ uuidCount() > 1 ? 's' : '' }}</span>
+            <button
+              mat-raised-button
+              (click)="generateMultiple()"
+              class="generate-multiple-btn"
+            >
+              <mat-icon>add</mat-icon>
+              Generate {{ uuidCount() }}
+            </button>
+          </div>
         </div>
       </div>
     </mat-card>
+
+    <!-- UUID History -->
+    @if (uuidHistory().length > 0) {
+      <mat-card class="history-card">
+        <div class="card-header">
+          <mat-icon class="card-icon">history</mat-icon>
+          <h2>Recently Generated ({{ uuidHistory().length }})</h2>
+          <div class="header-actions">
+            <button
+              mat-raised-button
+              (click)="copyAllToClipboard()"
+              class="action-btn copy-all-btn"
+            >
+              <mat-icon>content_copy</mat-icon>
+              Copy All
+            </button>
+            <button
+              mat-raised-button
+              (click)="clearHistory()"
+              class="action-btn clear-btn"
+            >
+              <mat-icon>clear_all</mat-icon>
+              Clear History
+            </button>
+          </div>
+        </div>
+
+        <div class="history-content">
+          @for (uuid of uuidHistory(); track $index) {
+            <div class="history-item">
+              <span class="history-uuid">{{ uuid }}</span>
+              <button
+                mat-icon-button
+                (click)="copyToClipboard(uuid)"
+                class="copy-icon-btn"
+                matTooltip="Copy to clipboard"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      </mat-card>
+    }
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        About UUIDs
+      </h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <mat-icon>lock</mat-icon>
+          <h4>Universally Unique</h4>
+          <p>UUIDs are 128-bit identifiers designed to be unique across all space and time without coordination.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>schedule</mat-icon>
+          <h4>Version 1 (Time-based)</h4>
+          <p>Generated using timestamp and MAC address. Useful when you need sortable identifiers.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>casino</mat-icon>
+          <h4>Version 4 (Random)</h4>
+          <p>Most commonly used. Generated using cryptographically secure random numbers.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>code</mat-icon>
+          <h4>Standard Format</h4>
+          <p>8-4-4-4-12 hexadecimal digits separated by hyphens (e.g., 550e8400-e29b-41d4-a716-446655440000).</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>storage</mat-icon>
+          <h4>Database Keys</h4>
+          <p>Commonly used as primary keys in distributed databases to avoid collisions.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>offline_bolt</mat-icon>
+          <h4>Generated Locally</h4>
+          <p>All UUIDs are generated in your browser using cryptographically secure random values.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
