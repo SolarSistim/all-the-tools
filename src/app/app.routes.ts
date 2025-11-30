@@ -5,7 +5,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'All The Tools - Your Swiss Army Knife of Web Utilities'
+    title: 'All The Things - Your Swiss Army Knife of Web Utilities'
   },
   {
     path: 'tools',
@@ -15,32 +15,32 @@ export const routes: Routes = [
   {
     path: 'about',
     loadComponent: () => import('./features/about/about').then(m => m.AboutComponent),
-    title: 'About - All The Tools'
+    title: 'About - All The Things'
   },
   {
     path: 'privacy',
     loadComponent: () => import('./features/privacy/privacy').then(m => m.PrivacyComponent),
-    title: 'Privacy Policy - All The Tools'
+    title: 'Privacy Policy - All The Things'
   },
   {
     path: 'terms',
     loadComponent: () => import('./features/terms/terms').then(m => m.TermsComponent),
-    title: 'Terms of Service - All The Tools'
+    title: 'Terms of Service - All The Things'
   },
   {
     path: 'accessibility',
     loadComponent: () => import('./features/accessibility/accessibility').then(m => m.AccessibilityComponent),
-    title: 'Accessibility Statement - All The Tools'
+    title: 'Accessibility Statement - All The Things'
   },
   {
     path: 'changelog',
     loadComponent: () => import('./features/changelog/changelog').then(m => m.Changelog),
-    title: 'Changelog - All The Tools'
+    title: 'Changelog - All The Things'
   },
   {
     path: 'tools/percentage-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
-    title: 'Percentage Calculator - All The Tools'
+    title: 'Percentage Calculator - All The Things'
   },
   {
     path: 'presskit',
@@ -50,42 +50,42 @@ export const routes: Routes = [
   {
     path: 'tools/tip-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/tip-calculator/tip-calculator').then(m => m.TipCalculator),
-    title: 'Tip Calculator - All The Tools'
+    title: 'Tip Calculator - All The Things'
   },
   {
     path: 'tools/bmi-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/body-mass-index-calculator/body-mass-index-calculator').then(m => m.BodyMassIndexCalculator),
-    title: 'BMI Calculator - All The Tools'
+    title: 'BMI Calculator - All The Things'
   },
   {
     path: 'tools/unit-converter',
     loadComponent: () => import('./features/tools/converters/unit-converter/unit-converter').then(m => m.UnitConverter),
-    title: 'Unit Converter - All The Tools'
+    title: 'Unit Converter - All The Things'
   },
   {
     path: 'tools/word-counter',
     loadComponent: () => import('./features/tools/text-tools/word-counter/word-counter').then(m => m.WordCounter),
-    title: 'Word Counter - All The Tools'
+    title: 'Word Counter - All The Things'
   },
   {
     path: 'tools/case-converter',
     loadComponent: () => import('./features/tools/text-tools/case-converter/case-converter').then(m => m.CaseConverter),
-    title: 'Case Converter - All The Tools'
+    title: 'Case Converter - All The Things'
   },
   {
     path: 'tools/lorem-ipsum',
     loadComponent: () => import('./features/tools/generators/lorem-ipsum/lorem-ipsum').then(m => m.LoremIpsum),
-    title: 'Lorem Ipsum Generator - All The Tools'
+    title: 'Lorem Ipsum Generator - All The Things'
   },
   {
     path: 'tools/password-generator',
     loadComponent: () => import('./features/tools/generators/password-generator/password-generator').then(m => m.PasswordGenerator),
-    title: 'Password Generator - All The Tools'
+    title: 'Password Generator - All The Things'
   },
   {
     path: 'tools/qr-code-generator',
     loadComponent: () => import('./features/tools/generators/qr-code-generator/qr-code-generator').then(m => m.QrCodeGenerator),
-    title: 'QR Code Generator - All The Tools'
+    title: 'QR Code Generator - All The Things'
   },
   {
     path: 'tools/uuid-generator',
@@ -95,27 +95,27 @@ export const routes: Routes = [
   {
     path: 'tools/color-picker',
     loadComponent: () => import('./features/tools/color-tools/color-picker/color-picker').then(m => m.ColorPicker),
-    title: 'Color Picker - All The Tools'
+    title: 'Color Picker - All The Things'
   },
   {
     path: 'tools/gradient-generator',
     loadComponent: () => import('./features/tools/color-tools/gradient-generator/gradient-generator').then(m => m.GradientGenerator),
-    title: 'Gradient Generator - All The Tools'
+    title: 'Gradient Generator - All The Things'
   },
   {
     path: 'tools/timestamp-converter',
     loadComponent: () => import('./features/tools/time-and-date/timestamp-converter/timestamp-converter').then(m => m.TimestampConverter),
-    title: 'Timestamp Converter - All The Tools'
+    title: 'Timestamp Converter - All The Things'
   },
   {
     path: 'tools/time-zone-converter',
     loadComponent: () => import('./features/tools/time-and-date/timezone-converter/timezone-converter').then(m => m.TimezoneConverter),
-    title: 'Timezone Converter - All The Tools'
+    title: 'Timezone Converter - All The Things'
   },
   {
     path: 'tools/icon-generator',
     loadComponent: () => import('./features/tools/image-tools/icon-generator/icon-generator').then(m => m.IconGenerator),
-    title: 'Icon Generator - All The Tools'
+    title: 'Icon Generator - All The Things'
   },
   {
     path: '**',

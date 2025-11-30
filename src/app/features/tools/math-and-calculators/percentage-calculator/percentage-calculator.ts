@@ -40,7 +40,7 @@ export class PercentageCalculatorComponent implements OnInit {
 
     ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Percentage Calculator - Free Online Tool | All The Tools',
+      title: 'Percentage Calculator - Free Online Tool | All The Things',
       description: 'Calculate percentages, percentage increase/decrease, and find what percent one number is of another. Fast, accurate, and completely free.',
       keywords: ['percentage calculator', 'percent calculator', 'calculate percentage', 'percentage increase', 'percentage decrease', 'online calculator'],
       image: 'https://www.allthethings.dev/meta-images/og-percentage-calculator.png',

@@ -76,7 +76,7 @@ export class StructuredDataService {
       inLanguage: 'en-US',
       isPartOf: {
         '@type': 'WebSite',
-        name: 'All The Tools',
+        name: 'All The Things',
         url: 'https://www.allthethings.dev'
       }
     };
@@ -91,7 +91,7 @@ export class StructuredDataService {
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'All The Tools',
+      name: 'All The Things',
       url: 'https://www.allthethings.dev',
       logo: 'https://www.allthethings.dev/favicon.ico',
       description: 'Free online tools for text, images, developers, and more',

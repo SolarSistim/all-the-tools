@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
+      title: 'All The Things - Your Swiss Army Knife of Web Utilities',
       description: 'Free online tools for text, images, developers, and more. Word counter, case converter, percentage calculator, QR code generator, and 20+ other utilities. Fast, private, and always free.',
       keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters', 'generators', 'developer tools'],
       image: 'https://www.allthethings.dev/meta-images/og-home.png',

@@ -68,7 +68,7 @@ export class YourToolComponent implements OnInit {
   ngOnInit(): void {
     // Update meta tags
     this.metaService.updateTags({
-      title: 'Your Tool Name - Free Online Tool | All The Tools',
+      title: 'Your Tool Name - Free Online Tool | All The Things',
       description: 'Specific description of what this tool does. Include keywords naturally.',
       keywords: ['specific keyword 1', 'specific keyword 2', 'tool type', 'online tool'],
       image: 'https://www.allthethings.dev/meta-images/og-your-tool.png',
@@ -97,7 +97,7 @@ export class YourToolComponent implements OnInit {
 ```typescript
 ngOnInit(): void {
   this.metaService.updateTags({
-    title: 'Page Title | All The Tools',
+    title: 'Page Title | All The Things',
     description: 'Clear description of the page content',
     keywords: ['relevant', 'keywords'],
     image: 'https://www.allthethings.dev/meta-images/og-page.png',
@@ -130,7 +130,7 @@ ngOnInit(): void {
 ## 📊 SEO Best Practices
 
 ### Title Tags
-✅ **Good**: "Percentage Calculator - Free Online Tool | All The Tools"
+✅ **Good**: "Percentage Calculator - Free Online Tool | All The Things"
 - Descriptive
 - Includes keywords
 - Under 60 characters

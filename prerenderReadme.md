@@ -66,7 +66,7 @@ export class YourComponent implements OnInit {
 
   ngOnInit() {
     this.metaService.updateTags({
-      title: 'Page Title | All The Tools',
+      title: 'Page Title | All The Things',
       description: 'Page description for SEO',
       keywords: ['keyword1', 'keyword2'],
       image: 'https://all-the-tools.netlify.app/assets/meta-images/og-image.png',

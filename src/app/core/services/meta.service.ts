@@ -28,7 +28,7 @@ export class MetaService {
   private document = inject(DOCUMENT);
 
   private readonly defaultConfig: MetaConfig = {
-    title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
+    title: 'All The Things - Your Swiss Army Knife of Web Utilities',
     description: 'Free online tools for text, images, developers, and more. Word counter, case converter, JSON formatter, and 20+ other utilities.',
     keywords: ['online tools', 'web utilities', 'free tools'],
     image: 'https://www.allthethings.dev/meta-images/og-home.png',
