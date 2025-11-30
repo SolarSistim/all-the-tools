@@ -47,8 +47,8 @@ export class BodyMassIndexCalculator implements OnInit {
       title: 'Body Mass Index Calculator',
       description: 'Calculate your Body Mass Index (BMI) with support for both metric and imperial units. Get instant health insights.',
       keywords: ['bmi calculator', 'body mass index', 'health calculator', 'weight calculator', 'fitness'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-bmi-calculator.png',
-      url: 'https://all-the-tools.netlify.app/tools/bmi-calculator'
+      image: 'https://www.allthethings.dev/meta-images/og-bmi-calculator.png',
+      url: 'https://www.allthethings.dev/tools/bmi-calculator'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

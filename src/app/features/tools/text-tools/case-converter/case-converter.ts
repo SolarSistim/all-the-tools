@@ -53,8 +53,8 @@ export class CaseConverter implements OnInit {
       title: 'Case Conversion & Text Transforms',
       description: 'Convert text between different cases: lowercase, UPPERCASE, Title Case, camelCase, snake_case, kebab-case, and more.',
       keywords: ['case converter', 'text transform', 'uppercase', 'lowercase', 'camelCase', 'snake_case'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-case-converter.png',
-      url: 'https://all-the-tools.netlify.app/tools/case-converter'
+      image: 'https://www.allthethings.dev/meta-images/og-case-converter.png',
+      url: 'https://www.allthethings.dev/tools/case-converter'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

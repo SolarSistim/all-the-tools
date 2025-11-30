@@ -39,8 +39,8 @@ export class Changelog implements OnInit {
       title: 'Changelog - All The Tools',
       description: 'View the latest updates, new features, and improvements to All The Tools',
       keywords: ['changelog', 'updates', 'release notes', 'version history'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-home.png',
-      url: 'https://all-the-tools.netlify.app/changelog'
+      image: 'https://www.allthethings.dev/meta-images/og-home.png',
+      url: 'https://www.allthethings.dev/changelog'
     });
   }
 

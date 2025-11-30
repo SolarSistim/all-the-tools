@@ -59,8 +59,8 @@ export class UuidGenerator implements OnInit {
       title: 'UUID Generator',
       description: 'Generate universally unique identifiers (UUIDs) with different versions and formats. Support for UUID v1, v4, and various output formats.',
       keywords: ['uuid generator', 'guid generator', 'unique id', 'uuid v4', 'uuid v1', 'random uuid'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-uuid-generator.png',
-      url: 'https://all-the-tools.netlify.app/tools/uuid-generator'
+      image: 'https://www.allthethings.dev/meta-images/og-uuid-generator.png',
+      url: 'https://www.allthethings.dev/tools/uuid-generator'
     });
 
     // Generate initial UUID

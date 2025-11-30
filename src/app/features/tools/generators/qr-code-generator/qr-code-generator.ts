@@ -131,8 +131,8 @@ export class QrCodeGenerator implements OnInit {
       title: 'QR Code Generator',
       description: 'Create QR codes for URLs, text, emails, WiFi, vCards, and more. Customize colors, size, and download as PNG or SVG.',
       keywords: ['qr code generator', 'qr code', 'barcode', 'qr scanner', 'wifi qr code'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-qr-code-generator.png',
-      url: 'https://all-the-tools.netlify.app/tools/qr-code-generator'
+      image: 'https://www.allthethings.dev/meta-images/og-qr-code-generator.png',
+      url: 'https://www.allthethings.dev/tools/qr-code-generator'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

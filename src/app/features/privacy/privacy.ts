@@ -23,8 +23,8 @@ export class PrivacyComponent implements OnInit {
       title: 'Privacy Policy',
       description: 'Our commitment to your privacy and how we handle your data.',
       keywords: ['privacy policy', 'data privacy', 'all the tools'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-privacy-policy.png',
-      url: 'https://all-the-tools.netlify.app/privacy'
+      image: 'https://www.allthethings.dev/meta-images/og-privacy-policy.png',
+      url: 'https://www.allthethings.dev/privacy'
     });
   }
 }

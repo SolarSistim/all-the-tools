@@ -23,8 +23,8 @@ export class AccessibilityComponent implements OnInit {
       title: 'Accessibility Statement',
       description: 'Our commitment to making All The Tools accessible to everyone.',
       keywords: ['accessibility', 'wcag', 'all the tools'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-accessibility-statement.png',
-      url: 'https://all-the-tools.netlify.app/accessibility'
+      image: 'https://www.allthethings.dev/meta-images/og-accessibility-statement.png',
+      url: 'https://www.allthethings.dev/accessibility'
     });
   }
 }

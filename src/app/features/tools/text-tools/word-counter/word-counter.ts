@@ -57,8 +57,8 @@ export class WordCounter implements OnInit {
       title: 'Word & Character Counter',
       description: 'Count words, characters, sentences, paragraphs, and estimates reading time.',
       keywords: ['word counter', 'character counter', 'text analysis', 'word count', 'writing tool'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-word-counter.png',
-      url: 'https://all-the-tools.netlify.app/tools/word-counter'
+      image: 'https://www.allthethings.dev/meta-images/og-word-counter.png',
+      url: 'https://www.allthethings.dev/tools/word-counter'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

@@ -74,8 +74,8 @@ export class PasswordGenerator implements OnInit {
       title: 'Password Generator',
       description: 'Generate strong, secure, random passwords with customizable options. Uppercase, lowercase, numbers, symbols, and advanced security options.',
       keywords: ['password generator', 'secure password', 'random password', 'strong password', 'password creator'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-password-generator.png',
-      url: 'https://all-the-tools.netlify.app/tools/password-generator'
+      image: 'https://www.allthethings.dev/meta-images/og-password-generator.png',
+      url: 'https://www.allthethings.dev/tools/password-generator'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

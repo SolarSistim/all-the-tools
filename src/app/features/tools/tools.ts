@@ -44,8 +44,8 @@ export class ToolsComponent implements OnInit {
       title: 'All The Tools',
       description: 'Explore our complete collection of free online tools.',
       keywords: ['online tools', 'web tools', 'free utilities', 'text tools', 'calculators', 'converters', 'generators'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-tools.png',
-      url: 'https://all-the-tools.netlify.app/tools'
+      image: 'https://www.allthethings.dev/meta-images/og-tools.png',
+      url: 'https://www.allthethings.dev/tools'
     });
 
     this.allTools = this.toolsService.getAvailableTools();

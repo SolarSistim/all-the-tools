@@ -44,8 +44,8 @@ export class LoremIpsum implements OnInit {
       title: 'Lorem Ipsum Generator',
       description: 'Generate Lorem Ipsum placeholder text with customizable word count. Choose from non-sensical, Cicero Latin, or Cicero English variations.',
       keywords: ['lorem ipsum', 'placeholder text', 'text generator', 'cicero', 'dummy text'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-lorem-ipsum.png',
-      url: 'https://all-the-tools.netlify.app/tools/lorem-ipsum'
+      image: 'https://www.allthethings.dev/meta-images/og-lorem-ipsum.png',
+      url: 'https://www.allthethings.dev/tools/lorem-ipsum'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

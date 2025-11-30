@@ -20,8 +20,8 @@ export class AboutComponent implements OnInit {
       title: 'About All The Tools',
       description: 'Learn about All The Tools - your comprehensive collection of free online utilities for everyday tasks.',
       keywords: ['about', 'all the tools', 'free online tools'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-about.png',
-      url: 'https://all-the-tools.netlify.app/about'
+      image: 'https://www.allthethings.dev/meta-images/og-about.png',
+      url: 'https://www.allthethings.dev/about'
     });
   }
 }

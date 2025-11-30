@@ -23,8 +23,8 @@ export class TermsComponent implements OnInit {
       title: 'Terms of Service',
       description: 'Terms and conditions for using All The Tools.',
       keywords: ['terms of service', 'terms and conditions', 'all the tools'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-terms-of-service.png',
-      url: 'https://all-the-tools.netlify.app/terms'
+      image: 'https://www.allthethings.dev/meta-images/og-terms-of-service.png',
+      url: 'https://www.allthethings.dev/terms'
     });
   }
 }
