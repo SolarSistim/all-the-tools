@@ -3,7 +3,7 @@
  * Defines the structure for each utility tool in the application
  */
 
-export type ToolCategory = 'math' | 'converter' | 'text' | 'generator' | 'color' | 'time' | 'other';
+export type ToolCategory = 'math' | 'converter' | 'text' | 'generator' | 'color' | 'time' | 'image' | 'other';
 
 export interface Tool {
   /** Unique identifier for the tool */

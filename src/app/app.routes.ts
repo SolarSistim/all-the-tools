@@ -113,6 +113,11 @@ export const routes: Routes = [
     title: 'TImezone Converter - All The Tools'
   },
   {
+    path: 'tools/icon-generator',
+    loadComponent: () => import('./features/tools/image-tools/icon-generator/icon-generator').then(m => m.IconGenerator),
+    title: 'TImezone Converter - All The Tools'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

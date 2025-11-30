@@ -203,63 +203,85 @@ export class ToolsService {
       featured: false,
       tags: ['time', 'converter', 'timezone'],
       available: true
-    }
+    },
+
+    // ========================================
+  // IMAGE TOOLS
+  // ========================================
+  {
+    id: 'icon-generator',
+    name: 'Icon Generator',
+    description: 'Create custom icons and graphics',
+    category: 'image',
+    icon: 'add_photo_alternate',
+    route: 'icon-generator',
+    featured: false,
+    tags: ['image', 'icon', 'generator', 'graphics'],
+    available: true // Set to true when you complete the component
+  },
   ];
 
   /**
    * Category metadata for UI display
    */
   private categoryMeta: ToolCategoryMeta[] = [
-    {
-      id: 'math',
-      name: 'Math & Calculators',
-      description: 'Mathematical calculations and computing tools',
-      icon: 'calculate',
-      color: 'var(--neon-cyan)'
-    },
-    {
-      id: 'converter',
-      name: 'Converters',
-      description: 'Convert length, weight, temperature, volume, area and speed.',
-      icon: 'swap_horiz',
-      color: 'var(--neon-pink)'
-    },
-    {
-      id: 'text',
-      name: 'Text Tools',
-      description: 'Text manipulation and analysis utilities',
-      icon: 'text_fields',
-      color: 'var(--amber)'
-    },
-    {
-      id: 'generator',
-      name: 'Generators',
-      description: 'Generate various types of content and data',
-      icon: 'auto_awesome',
-      color: 'var(--neon-cyan-bright)'
-    },
-    {
-      id: 'color',
-      name: 'Color Tools',
-      description: 'Color picking, conversion, and generation',
-      icon: 'palette',
-      color: 'var(--neon-pink-bright)'
-    },
-    {
-      id: 'time',
-      name: 'Time & Date',
-      description: 'Time zone and timestamp utilities',
-      icon: 'access_time',
-      color: 'var(--amber-bright)'
-    },
-    {
-      id: 'other',
-      name: 'Other Tools',
-      description: 'Miscellaneous useful utilities',
-      icon: 'more_horiz',
-      color: 'var(--text-secondary)'
-    }
-  ];
+  {
+    id: 'math',
+    name: 'Math & Calculators',
+    description: 'Mathematical calculations and computing tools',
+    icon: 'calculate',
+    color: 'var(--neon-cyan)'
+  },
+  {
+    id: 'converter',
+    name: 'Converters',
+    description: 'Convert length, weight, temperature, volume, area and speed.',
+    icon: 'swap_horiz',
+    color: 'var(--neon-pink)'
+  },
+  {
+    id: 'text',
+    name: 'Text Tools',
+    description: 'Text manipulation and analysis utilities',
+    icon: 'text_fields',
+    color: 'var(--amber)'
+  },
+  {
+    id: 'generator',
+    name: 'Generators',
+    description: 'Generate various types of content and data',
+    icon: 'auto_awesome',
+    color: 'var(--neon-cyan-bright)'
+  },
+  {
+    id: 'color',
+    name: 'Color Tools',
+    description: 'Color picking, conversion, and generation',
+    icon: 'palette',
+    color: 'var(--neon-pink-bright)'
+  },
+  {
+    id: 'time',
+    name: 'Time & Date',
+    description: 'Time zone and timestamp utilities',
+    icon: 'access_time',
+    color: 'var(--amber-bright)'
+  },
+  {
+    id: 'image',
+    name: 'Image Tools',
+    description: 'Image manipulation and generation utilities',
+    icon: 'image',
+    color: 'var(--neon-cyan)'
+  },
+  {
+    id: 'other',
+    name: 'Other Tools',
+    description: 'Miscellaneous useful utilities',
+    icon: 'more_horiz',
+    color: 'var(--text-secondary)'
+  }
+];
 
   constructor() { }
 
