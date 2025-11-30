@@ -1,10 +1,49 @@
 <div class="word-counter-page">
   <div class="container">
-    <app-page-header
-      title="Word Counter"
-      subtitle="Count words, characters, sentences, and analyze your text"
-      icon="text_fields"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">text_fields</mat-icon>
+        </div>
+        <h1 class="hero-title">Word Counter</h1>
+        <p class="hero-subtitle">
+          Analyze your text in real-time with comprehensive metrics. Count words, characters, sentences,
+          and paragraphs instantly. Perfect for writers, students, and content creators who need to meet
+          word count requirements or optimize their content.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>speed</mat-icon>
+            <span>Real-time Analysis</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>timer</mat-icon>
+            <span>Time Estimates</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>analytics</mat-icon>
+            <span>Multiple Metrics</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">Word Count</span>
+            <code>"Hello World" = <span class="highlight">2 words</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">Reading Time</span>
+            <code>450 words ≈ <span class="highlight">2 min read</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">Speaking Time</span>
+            <code>280 words ≈ <span class="highlight">2 min talk</span></code>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Text Input Card -->
     <mat-card class="input-card">

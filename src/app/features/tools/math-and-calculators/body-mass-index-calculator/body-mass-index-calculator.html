@@ -1,10 +1,48 @@
 <div class="bmi-calculator-page">
   <div class="container">
-    <app-page-header
-      title="BMI Calculator"
-      subtitle="Calculate your Body Mass Index and get health insights"
-      icon="monitor_weight"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">monitor_weight</mat-icon>
+        </div>
+        <h1 class="hero-title">BMI Calculator</h1>
+        <p class="hero-subtitle">
+          Calculate your Body Mass Index instantly with metric or imperial units. Get insights into
+          your weight category and understand your health metrics. Fast, accurate, and private.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>straighten</mat-icon>
+            <span>Metric & Imperial</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>health_and_safety</mat-icon>
+            <span>Health Categories</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>lock</mat-icon>
+            <span>100% Private</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">Healthy Range</span>
+            <code>BMI 18.5 - 24.9 = <span class="highlight">Normal</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">Example</span>
+            <code>70kg / 1.75m² = <span class="highlight">BMI 22.9</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">Quick Check</span>
+            <code>Weight ÷ Height² = <span class="highlight">BMI</span></code>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Health Disclaimer -->
     <div class="health-disclaimer">

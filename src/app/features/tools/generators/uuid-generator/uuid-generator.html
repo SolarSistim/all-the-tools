@@ -1,10 +1,67 @@
 <div class="uuid-generator-page">
   <div class="container">
-    <app-page-header
-      title="UUID Generator"
-      subtitle="Generate universally unique identifiers (UUIDs) instantly"
-      icon="fingerprint"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">fingerprint</mat-icon>
+        </div>
+        <h1 class="hero-title">UUID Generator</h1>
+        <p class="hero-subtitle">
+          Generate cryptographically secure Universally Unique Identifiers instantly.
+          Perfect for databases, APIs, and distributed systems.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>security</mat-icon>
+            <span>Cryptographically Secure</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>speed</mat-icon>
+            <span>Instant Generation</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>browser_not_supported</mat-icon>
+            <span>100% Client-Side</span>
+          </div>
+        </div>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="generateSingleUUID()"
+            class="cta-button"
+          >
+            <mat-icon>refresh</mat-icon>
+            Generate UUID Now
+          </button>
+          <button
+            mat-stroked-button
+            (click)="scrollToOptions()"
+            class="cta-button-secondary"
+          >
+            <mat-icon>tune</mat-icon>
+            Customize Options
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="uuid-showcase">
+          <div class="uuid-example uuid-example-1">
+            <span class="uuid-label">Version 4</span>
+            <code>550e8400-e29b-41d4-a716-446655440000</code>
+          </div>
+          <div class="uuid-example uuid-example-2">
+            <span class="uuid-label">Version 1</span>
+            <code>6ba7b810-9dad-11d1-80b4-00c04fd430c8</code>
+          </div>
+          <div class="uuid-example uuid-example-3">
+            <span class="uuid-label">Uppercase</span>
+            <code>A987FBC9-4BED-3078-CF07-9141BA07C9F3</code>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Generated UUID Card -->
     <mat-card class="uuid-card">

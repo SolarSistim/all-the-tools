@@ -1,10 +1,49 @@
 <div class="case-converter-page">
   <div class="container">
-    <app-page-header
-      title="Case Converter"
-      subtitle="Transform text between different cases instantly"
-      icon="format_size"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">format_size</mat-icon>
+        </div>
+        <h1 class="hero-title">Case Converter</h1>
+        <p class="hero-subtitle">
+          Transform text between 10+ different case styles instantly. Convert to camelCase, snake_case,
+          PascalCase, kebab-case, and more with a single click. Essential for developers, writers, and anyone
+          working with text formatting across different conventions.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>architecture</mat-icon>
+            <span>10+ Conversions</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>bolt</mat-icon>
+            <span>Instant Transform</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>code</mat-icon>
+            <span>Developer Friendly</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">Camel Case</span>
+            <code>hello world → <span class="highlight">helloWorld</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">Screaming Snake</span>
+            <code>api key → <span class="highlight">API_KEY</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">Kebab Case</span>
+            <code>Blog Post → <span class="highlight">blog-post</span></code>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Quick Conversion Buttons -->
     <div class="quick-conversions">

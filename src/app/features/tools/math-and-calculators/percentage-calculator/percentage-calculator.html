@@ -1,10 +1,48 @@
 <div class="percentage-calculator-page">
   <div class="container">
-    <app-page-header
-      title="Percentage Calculator"
-      subtitle="Calculate percentages and find what percent one number is of another"
-      icon="percent"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">percent</mat-icon>
+        </div>
+        <h1 class="hero-title">Percentage Calculator</h1>
+        <p class="hero-subtitle">
+          Calculate percentages instantly with precision and ease. Perfect for discounts,
+          tips, taxes, grades, and financial calculations. Get accurate results in real-time.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>speed</mat-icon>
+            <span>Instant Results</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>functions</mat-icon>
+            <span>Multiple Calculators</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>trending_up</mat-icon>
+            <span>Increase/Decrease</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">Discount</span>
+            <code>20% off $100 = <span class="highlight">$80</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">Tip Amount</span>
+            <code>15% of $50 = <span class="highlight">$7.50</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">Growth</span>
+            <code>$100 → $125 = <span class="highlight">+25%</span></code>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="calculator-grid">
       <!-- Calculator 1: X% of Y -->

@@ -272,4 +272,14 @@ export class UuidGenerator implements OnInit {
   updateUUIDCount(value: number): void {
     this.uuidCount.set(value);
   }
+
+  /**
+   * Scroll to options section
+   */
+  scrollToOptions(): void {
+    const optionsCard = document.querySelector('.config-card');
+    if (optionsCard) {
+      optionsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

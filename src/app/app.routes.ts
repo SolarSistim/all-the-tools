@@ -90,7 +90,7 @@ export const routes: Routes = [
   {
     path: 'tools/uuid-generator',
     loadComponent: () => import('./features/tools/generators/uuid-generator/uuid-generator').then(m => m.UuidGenerator),
-    title: 'UUID Generator'
+    title: 'UUID Generator - All The Things'
   },
   {
     path: 'tools/color-picker',

@@ -1,10 +1,48 @@
 <div class="tip-calculator-page">
   <div class="container">
-    <app-page-header
-      title="Tip Calculator"
-      subtitle="Calculate tips and split bills with ease"
-      icon="payments"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">payments</mat-icon>
+        </div>
+        <h1 class="hero-title">Tip Calculator</h1>
+        <p class="hero-subtitle">
+          Calculate tips and split bills effortlessly for restaurants, delivery, and services.
+          Get instant calculations with customizable tip percentages and bill splitting options.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>restaurant</mat-icon>
+            <span>Dining & Delivery</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>group</mat-icon>
+            <span>Split Bills</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>calculate</mat-icon>
+            <span>Custom Tips</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">15% Tip</span>
+            <code>$50.00 bill → Tip: <span class="highlight">$7.50</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">20% Tip</span>
+            <code>$85.00 bill → Tip: <span class="highlight">$17.00</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">Split 4 Ways</span>
+            <code>$120 total ÷ 4 = <span class="highlight">$30.00</span></code>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="calculator-grid">
       <!-- Calculator 1: Basic Tip Calculator -->
