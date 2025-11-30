@@ -47,6 +47,17 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.0.0',
+      date: 'November 30, 2025',
+      changes: [
+        {
+          type: 'added',
+          description: 'QR Code Generator',
+          route: '/tools/qr-code-generator'
+        }
+      ]
+    },
+    {
+      version: '1.0.0',
       date: 'November 29, 2025',
       changes: [
         {

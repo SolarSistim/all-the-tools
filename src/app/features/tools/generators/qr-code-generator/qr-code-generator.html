@@ -325,20 +325,18 @@
 
         <!-- Encoded Data Panel -->
         @if (encodedData()) {
-          <mat-expansion-panel class="data-panel">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>code</mat-icon>
-                Encoded Data
-              </mat-panel-title>
-            </mat-expansion-panel-header>
+          <mat-card class="data-panel">
+            <div class="card-header">
+              <mat-icon class="card-icon">code</mat-icon>
+              <h2>Encoded Data</h2>
+            </div>
             <div class="encoded-data-content">
               <p class="encoded-data-text">{{ encodedData() }}</p>
               <button mat-icon-button (click)="copyData()" matTooltip="Copy data" aria-label="Copy encoded data">
                 <mat-icon>content_copy</mat-icon>
               </button>
             </div>
-          </mat-expansion-panel>
+          </mat-card>
         }
       </div>
     </div>
