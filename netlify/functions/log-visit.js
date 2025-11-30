@@ -33,10 +33,16 @@ exports.handler = async (event, context) => {
     // Parse the request body
     const data = JSON.parse(event.body);
 
-    // Debug: Log available headers and context (remove this after debugging)
-    console.log('Geo-related headers:', Object.keys(event.headers).filter(h => h.toLowerCase().includes('geo') || h.toLowerCase().includes('country') || h.toLowerCase().includes('city') || h.toLowerCase().includes('nf')));
-    console.log('Context geo:', context.geo);
-    console.log('All headers:', JSON.stringify(event.headers, null, 2));
+    // Decode Netlify geo data from x-nf-geo header (base64 encoded JSON)
+    let geoData = null;
+    if (event.headers['x-nf-geo']) {
+      try {
+        const decoded = Buffer.from(event.headers['x-nf-geo'], 'base64').toString('utf-8');
+        geoData = JSON.parse(decoded);
+      } catch (error) {
+        console.error('Error decoding geo data:', error);
+      }
+    }
 
     // Extract visitor information
     const visitorInfo = {
@@ -60,14 +66,15 @@ exports.handler = async (event, context) => {
       language: data.language || 'Unknown',
       timezone: data.timezone || 'Unknown',
       // Server-side data from Netlify
-      ip: event.headers['x-nf-client-connection-ip'] ||
+      ip: event.headers['cf-connecting-ip'] ||
+          event.headers['x-nf-client-connection-ip'] ||
           event.headers['client-ip'] ||
           'Unknown',
-      country: event.headers['x-nf-geo-country-code'] || 'Unknown',
-      city: event.headers['x-nf-geo-city'] || 'Unknown',
-      region: event.headers['x-nf-geo-subdivision-code'] || 'Unknown',
-      latitude: event.headers['x-nf-geo-latitude'] || 'Unknown',
-      longitude: event.headers['x-nf-geo-longitude'] || 'Unknown',
+      country: geoData?.country?.code || event.headers['x-country'] || 'Unknown',
+      city: geoData?.city || 'Unknown',
+      region: geoData?.subdivision?.code || 'Unknown',
+      latitude: geoData?.latitude || 'Unknown',
+      longitude: geoData?.longitude || 'Unknown',
     };
 
     // Initialize Google Sheets API
