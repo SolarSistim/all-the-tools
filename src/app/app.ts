@@ -38,10 +38,7 @@ export class App implements AfterViewInit, OnInit {
   private visitLogger = inject(VisitLoggerService);
 
   ngOnInit(): void {
-    // Log initial page visit
-    this.visitLogger.logVisit(this.router.url);
-
-    // Log subsequent navigation
+    // Log page visits (including initial load and subsequent navigation)
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {

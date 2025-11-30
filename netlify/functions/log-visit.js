@@ -55,14 +55,14 @@ exports.handler = async (event, context) => {
       language: data.language || 'Unknown',
       timezone: data.timezone || 'Unknown',
       // Server-side data from Netlify
-      ip: event.headers['x-nf-client-connection-ip'] || 
-          event.headers['client-ip'] || 
+      ip: event.headers['x-nf-client-connection-ip'] ||
+          event.headers['client-ip'] ||
           'Unknown',
-      country: event.headers['x-country'] || 'Unknown',
-      city: event.headers['x-city'] || 'Unknown',
-      region: event.headers['x-subdivision-code'] || 'Unknown',
-      latitude: event.headers['x-latitude'] || 'Unknown',
-      longitude: event.headers['x-longitude'] || 'Unknown',
+      country: event.headers['x-nf-geo-country-code'] || 'Unknown',
+      city: event.headers['x-nf-geo-city'] || 'Unknown',
+      region: event.headers['x-nf-geo-subdivision-code'] || 'Unknown',
+      latitude: event.headers['x-nf-geo-latitude'] || 'Unknown',
+      longitude: event.headers['x-nf-geo-longitude'] || 'Unknown',
     };
 
     // Initialize Google Sheets API
