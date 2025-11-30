@@ -21,27 +21,31 @@ export class VisitLoggerService {
    * This won't block the page load
    */
   logVisit(urlPath: string): void {
-    // Only run in browser and only log once per session
-    if (!isPlatformBrowser(this.platformId) || this.hasLogged) {
+    // Only run in browser
+    if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
-    // Mark as logged to prevent duplicate logs
-    this.hasLogged = true;
+    // Log initial visit to visitor_logs (once per session)
+    if (!this.hasLogged) {
+      this.hasLogged = true;
+      this.sendLog(urlPath, 'visitor_logs');
+    }
 
+    // Log page view to page_views (every navigation)
     // Use requestIdleCallback to ensure this doesn't impact performance
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => this.sendLog(urlPath), { timeout: 2000 });
+      requestIdleCallback(() => this.sendLog(urlPath, 'page_views'), { timeout: 2000 });
     } else {
       // Fallback for browsers that don't support requestIdleCallback
-      setTimeout(() => this.sendLog(urlPath), 100);
+      setTimeout(() => this.sendLog(urlPath, 'page_views'), 100);
     }
   }
 
   /**
    * Send the log data to the Netlify function
    */
-  private async sendLog(urlPath: string): Promise<void> {
+  private async sendLog(urlPath: string, sheetName: string): Promise<void> {
     try {
       const visitorData = {
         referrer: document.referrer,
@@ -52,6 +56,7 @@ export class VisitLoggerService {
         screenResolution: `${window.screen.width}x${window.screen.height}`,
         language: navigator.language,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        sheetName: sheetName, // Add sheet name to request
       };
 
       // Send to Netlify function (fire and forget)

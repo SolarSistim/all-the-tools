@@ -88,7 +88,10 @@ exports.handler = async (event, context) => {
 
     const sheets = google.sheets({ version: 'v4', auth });
     const spreadsheetId = '1NDJC3E6n9rGkILd0IKI58vksBSW9eAJQ9gDTzBzoWbs';
-    const range = 'visitor_logs!A:M'; // Adjust column range as needed
+
+    // Use the sheet name from request data, default to visitor_logs
+    const sheetName = data.sheetName || 'visitor_logs';
+    const range = `${sheetName}!A:M`; // Adjust column range as needed
 
     // Prepare the row data
     const values = [[
