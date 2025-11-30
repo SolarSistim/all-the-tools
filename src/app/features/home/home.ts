@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ToolsService } from '../../core/services/tools.service';
 import { MetaService } from '../../core/services/meta.service';
+import { StructuredDataService } from '../../core/services/structured-data.service';
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 
@@ -26,6 +27,7 @@ import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 export class HomeComponent implements OnInit {
   toolsService = inject(ToolsService); // Made public for template access
   private metaService = inject(MetaService);
+  private structuredData = inject(StructuredDataService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -63,12 +65,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Your Swiss Army Knife of Web Utilities',
-      description: 'Free online tools for text, images, developers, and more. Word counter, case converter, JSON formatter, and 20+ other utilities.',
-      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-home.png',
-      url: 'https://all-the-tools.netlify.app/'
+      title: 'All The Tools - Your Swiss Army Knife of Web Utilities',
+      description: 'Free online tools for text, images, developers, and more. Word counter, case converter, percentage calculator, QR code generator, and 20+ other utilities. Fast, private, and always free.',
+      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters', 'generators', 'developer tools'],
+      image: 'https://www.allthethings.dev/meta-images/og-home.png',
+      url: 'https://www.allthethings.dev/'
     });
+
+    // Add structured data for homepage
+    this.structuredData.addOrganization();
 
     this.featuredTools = this.toolsService.getFeaturedTools();
     this.categories = this.toolsService.getAllCategories();

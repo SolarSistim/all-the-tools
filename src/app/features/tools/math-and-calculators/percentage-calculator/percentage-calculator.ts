@@ -40,11 +40,11 @@ export class PercentageCalculatorComponent implements OnInit {
 
     ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Percentage Calculator',
-      description: 'Calculate percentages and find what percent one number is of another',
-      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters'],
-      image: 'https://all-the-tools.netlify.app/meta-images/og-percentage-calculator.png',
-      url: 'https://all-the-tools.netlify.app/tools/percentage-calculator'
+      title: 'Percentage Calculator - Free Online Tool | All The Tools',
+      description: 'Calculate percentages, percentage increase/decrease, and find what percent one number is of another. Fast, accurate, and completely free.',
+      keywords: ['percentage calculator', 'percent calculator', 'calculate percentage', 'percentage increase', 'percentage decrease', 'online calculator'],
+      image: 'https://www.allthethings.dev/meta-images/og-percentage-calculator.png',
+      url: 'https://www.allthethings.dev/tools/percentage-calculator'
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

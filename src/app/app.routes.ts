@@ -70,7 +70,7 @@ export const routes: Routes = [
   {
     path: 'tools/case-converter',
     loadComponent: () => import('./features/tools/text-tools/case-converter/case-converter').then(m => m.CaseConverter),
-    title: 'Word Counter - All The Tools'
+    title: 'Case Converter - All The Tools'
   },
   {
     path: 'tools/lorem-ipsum',
@@ -110,12 +110,12 @@ export const routes: Routes = [
   {
     path: 'tools/time-zone-converter',
     loadComponent: () => import('./features/tools/time-and-date/timezone-converter/timezone-converter').then(m => m.TimezoneConverter),
-    title: 'TImezone Converter - All The Tools'
+    title: 'Timezone Converter - All The Tools'
   },
   {
     path: 'tools/icon-generator',
     loadComponent: () => import('./features/tools/image-tools/icon-generator/icon-generator').then(m => m.IconGenerator),
-    title: 'TImezone Converter - All The Tools'
+    title: 'Icon Generator - All The Tools'
   },
   {
     path: '**',

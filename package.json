@@ -4,13 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run generate:seo && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng serve",
-    "build:ssr": "ng build",
-    "prerender": "ng build --configuration production",
-    "serve:ssr:all-the-tools": "node dist/all-the-tools/server/server.mjs"
+    "build:ssr": "npm run generate:seo && ng build",
+    "prerender": "npm run generate:seo && ng build --configuration production",
+    "serve:ssr:all-the-tools": "node dist/all-the-tools/server/server.mjs",
+    "generate:seo": "node scripts/generate-seo-files.js"
   },
   "prettier": {
     "overrides": [
