@@ -1,15 +1,366 @@
-<div class="coming-soon-page">
+<div class="timestamp-converter-page">
   <div class="container">
-    <mat-card class="coming-soon-card">
-      <div class="coming-soon-content">
-        <mat-icon class="coming-soon-icon">construction</mat-icon>
-        <h1 class="coming-soon-title">Coming Soon</h1>
-        <p class="coming-soon-subtitle">This tool is currently under development</p>
-        <div class="coming-soon-progress">
-          <mat-icon>code</mat-icon>
-          <span>We're working hard to bring you this feature</span>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">schedule</mat-icon>
+        </div>
+        <h1 class="hero-title">Timestamp Converter</h1>
+        <p class="hero-subtitle">
+          Convert timestamps between Unix epoch, ISO 8601, UTC, and human-readable formats.
+          Parse and convert timestamps instantly with timezone support.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>access_time</mat-icon>
+            <span>Unix Timestamps</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>date_range</mat-icon>
+            <span>ISO 8601 Format</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>language</mat-icon>
+            <span>Timezone Support</span>
+          </div>
+        </div>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToSection('.converter-card')"
+            class="cta-button"
+          >
+            <mat-icon>schedule</mat-icon>
+            Convert Timestamp
+          </button>
+          <button
+            mat-stroked-button
+            (click)="useCurrentTimestamp()"
+            class="cta-button-secondary"
+          >
+            <mat-icon>access_time</mat-icon>
+            Use Current Time
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="timestamp-showcase">
+          <div class="showcase-display">
+            <div class="display-label">Current Unix Timestamp</div>
+            <code class="display-value">{{ unixSeconds() }}</code>
+            <div class="display-time">{{ localString() }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Converter Card -->
+    <mat-card class="converter-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">schedule</mat-icon>
+        <h2>Timestamp Converter</h2>
+      </div>
+
+      <!-- Input Section -->
+      <div class="input-section">
+        <mat-form-field appearance="fill" class="timestamp-input-field">
+          <mat-label>Enter Timestamp</mat-label>
+          <input
+            matInput
+            [(ngModel)]="timestampInput"
+            placeholder="1638360000 or 2021-12-01T12:00:00Z"
+            class="timestamp-input"
+          >
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clearInput()"
+            matTooltip="Clear input"
+            *ngIf="timestampInput()"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div class="input-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="useCurrentTimestamp()"
+          >
+            <mat-icon>access_time</mat-icon>
+            Use Current Time
+          </button>
+          <button
+            mat-stroked-button
+            (click)="clearInput()"
+          >
+            <mat-icon>clear</mat-icon>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Time Display -->
+      <div class="current-time-section">
+        <div class="current-time-header">
+          <mat-icon>update</mat-icon>
+          <span>Current Time (Live)</span>
+        </div>
+        <div class="current-time-display">
+          <div class="time-item">
+            <span class="time-label">Unix (seconds)</span>
+            <code class="time-value">{{ currentTimestampSeconds() }}</code>
+          </div>
+          <div class="time-item">
+            <span class="time-label">Unix (milliseconds)</span>
+            <code class="time-value">{{ currentTimestampMilliseconds() }}</code>
+          </div>
+          <div class="time-item">
+            <span class="time-label">Local Time</span>
+            <code class="time-value">{{ currentTimestampLocalString() }}</code>
+          </div>
         </div>
       </div>
     </mat-card>
+
+    <!-- Output Formats Card -->
+    <mat-card class="output-card" *ngIf="parsedDate()">
+      <div class="card-header">
+        <mat-icon class="card-icon">transform</mat-icon>
+        <h2>Converted Formats</h2>
+      </div>
+
+      <div class="output-grid">
+        <!-- Unix Seconds -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>schedule</mat-icon>
+            <span class="output-label">Unix Timestamp (seconds)</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ unixSeconds() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyUnixSeconds()"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Unix Milliseconds -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>schedule</mat-icon>
+            <span class="output-label">Unix Timestamp (milliseconds)</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ unixMilliseconds() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyUnixMilliseconds()"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- ISO 8601 -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>label</mat-icon>
+            <span class="output-label">ISO 8601</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ isoString() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyISO()"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- UTC String -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>public</mat-icon>
+            <span class="output-label">UTC String</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ utcString() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyUTC()"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Local String -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>location_on</mat-icon>
+            <span class="output-label">Local Time</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ localString() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyLocal()"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Date Only -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>calendar_today</mat-icon>
+            <span class="output-label">Date Only</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ dateOnly() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyToClipboard(dateOnly(), 'Date')"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Time Only -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>access_time</mat-icon>
+            <span class="output-label">Time Only</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ timeOnly() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyToClipboard(timeOnly(), 'Time')"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Relative Time -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>update</mat-icon>
+            <span class="output-label">Relative Time</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ relativeTime() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyToClipboard(relativeTime(), 'Relative time')"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Custom Format -->
+        <div class="output-item">
+          <div class="output-header">
+            <mat-icon>edit</mat-icon>
+            <span class="output-label">Custom Format</span>
+          </div>
+          <div class="output-value-container">
+            <code class="output-value">{{ customFormat() }}</code>
+            <button
+              mat-icon-button
+              (click)="copyCustom()"
+              matTooltip="Copy"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Timezone Display Card -->
+    <mat-card class="timezone-card" *ngIf="parsedDate()">
+      <div class="card-header">
+        <mat-icon class="card-icon">language</mat-icon>
+        <h2>Timezone Display</h2>
+      </div>
+
+      <mat-form-field appearance="fill" class="timezone-select">
+        <mat-label>Select Timezone</mat-label>
+        <mat-select [(ngModel)]="selectedTimezone">
+          <mat-option *ngFor="let tz of timezones" [value]="tz.value">
+            {{ tz.label }} {{ tz.offset ? '(' + tz.offset + ')' : '' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="timezone-display">
+        <div class="timezone-info">
+          <mat-icon>location_on</mat-icon>
+          <span class="timezone-label">{{ selectedTimezoneLabel() }}</span>
+        </div>
+        <code class="timezone-time">{{ selectedTimezoneTime() }}</code>
+      </div>
+    </mat-card>
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        About Timestamp Formats
+      </h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <mat-icon>schedule</mat-icon>
+          <h4>Unix Timestamp</h4>
+          <p>Unix timestamp is the number of seconds (or milliseconds) since January 1, 1970 00:00:00 UTC. It's a standard way to represent time in programming.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>label</mat-icon>
+          <h4>ISO 8601</h4>
+          <p>ISO 8601 is an international standard for representing dates and times. Format: YYYY-MM-DDTHH:mm:ss.sssZ. The 'Z' indicates UTC timezone.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>public</mat-icon>
+          <h4>UTC Time</h4>
+          <p>Coordinated Universal Time (UTC) is the primary time standard. It's not affected by daylight saving time and is used as a reference for all timezones.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>language</mat-icon>
+          <h4>Timezones</h4>
+          <p>Timezones represent local time at different locations. They're offset from UTC by a specific number of hours and may adjust for daylight saving time.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>update</mat-icon>
+          <h4>Relative Time</h4>
+          <p>Relative time shows how long ago (or in the future) a timestamp is compared to now. Examples: "2 hours ago", "in 3 days".</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>offline_bolt</mat-icon>
+          <h4>Client-Side Only</h4>
+          <p>All timestamp conversions happen in your browser using JavaScript. No data is sent to any server.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
