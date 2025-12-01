@@ -2207,6 +2207,293 @@
 }
 
 // ============================================
+// HERO VISUAL - GRADIENT GENERATOR THEME
+// ============================================
+.hero-gradient-generator .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.gradient-generator-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.gradient-display-container {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: gradient-display-pulse 3s ease-in-out infinite;
+  overflow: hidden;
+
+  @media (max-width: 1200px) {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+.main-gradient-display {
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gradient-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transition: opacity 1s ease-in-out;
+  animation: gradient-fade 9s ease-in-out infinite;
+
+  &.layer-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation-delay: 0s;
+  }
+
+  &.layer-2 {
+    background: radial-gradient(circle, #f093fb 0%, #f5576c 100%);
+    animation-delay: 3s;
+  }
+
+  &.layer-3 {
+    background: conic-gradient(from 0deg, #667eea 0%, #764ba2 33%, #f093fb 66%, #667eea 100%);
+    animation-delay: 6s;
+  }
+}
+
+.gradient-type-badges {
+  position: absolute;
+  bottom: 25px;
+  display: flex;
+  gap: $spacing-xs;
+  z-index: 10;
+}
+
+.type-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: badge-float 3s ease-in-out infinite;
+
+  &.badge-linear {
+    animation-delay: 0s;
+  }
+
+  &.badge-radial {
+    animation-delay: 1s;
+  }
+
+  &.badge-conic {
+    animation-delay: 2s;
+  }
+}
+
+// Orbiting Gradient Samples
+.gradient-orbit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: orbit-rotation 15s linear infinite;
+
+  &.orbit-1 {
+    animation-delay: 0s;
+  }
+
+  &.orbit-2 {
+    animation-delay: -3.75s;
+  }
+
+  &.orbit-3 {
+    animation-delay: -7.5s;
+  }
+
+  &.orbit-4 {
+    animation-delay: -11.25s;
+  }
+}
+
+.gradient-sample {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid var(--bg-elevated);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(-190px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  animation: sample-pulse 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+
+  &.sample-1 {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 0 25px rgba(102, 126, 234, 0.7);
+    animation-delay: 0s;
+  }
+
+  &.sample-2 {
+    background: radial-gradient(circle, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 0 25px rgba(240, 147, 251, 0.7);
+    animation-delay: 0.5s;
+  }
+
+  &.sample-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 0 25px rgba(79, 172, 254, 0.7);
+    animation-delay: 1s;
+  }
+
+  &.sample-4 {
+    background: conic-gradient(from 45deg, #667eea, #764ba2, #f093fb, #667eea);
+    box-shadow: 0 0 25px rgba(118, 75, 162, 0.7);
+    animation-delay: 1.5s;
+  }
+}
+
+.gradient-swatches {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 380px;
+
+  @media (max-width: 1200px) {
+    max-width: 340px;
+  }
+}
+
+.swatch {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  animation: swatch-float 3s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    transform: translateY(-6px) scale(1.1);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  &.swatch-1 {
+    background: linear-gradient(90deg, #ff6b6b 0%, #feca57 50%, #ee5a6f 100%);
+    animation-delay: 0s;
+  }
+
+  &.swatch-2 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation-delay: 0.2s;
+  }
+
+  &.swatch-3 {
+    background: radial-gradient(circle, #a1c4fd 0%, #c2e9fb 100%);
+    animation-delay: 0.4s;
+  }
+
+  &.swatch-4 {
+    background: linear-gradient(45deg, #f12711 0%, #f5af19 100%);
+    animation-delay: 0.6s;
+  }
+
+  &.swatch-5 {
+    background: linear-gradient(90deg, #134e5e 0%, #71b280 100%);
+    animation-delay: 0.8s;
+  }
+
+  &.swatch-6 {
+    background: conic-gradient(from 0deg, #ff0000 0%, #ff7f00 25%, #ffff00 50%, #00ff00 75%, #ff0000 100%);
+    animation-delay: 1s;
+  }
+}
+
+// Animations
+@keyframes gradient-display-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+                inset 0 0 30px rgba(109, 212, 255, 0.1);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 60px var(--neon-cyan-glow),
+                inset 0 0 40px rgba(109, 212, 255, 0.2);
+  }
+}
+
+@keyframes gradient-fade {
+  0%, 30% {
+    opacity: 1;
+  }
+  33%, 63% {
+    opacity: 0;
+  }
+  66%, 96% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes badge-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes sample-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(-190px) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-190px) scale(1.1);
+  }
+}
+
+@keyframes swatch-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+// ============================================
 // HERO VISUAL - TIMESTAMP CONVERTER THEME
 // ============================================
 .hero-timestamp-converter .hero-visual {

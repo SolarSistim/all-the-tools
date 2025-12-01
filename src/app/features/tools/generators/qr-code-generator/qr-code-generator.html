@@ -1,10 +1,63 @@
 <div class="qr-generator-page">
   <div class="container">
-    <app-page-header
-      title="QR Code Generator"
-      subtitle="Create customizable QR codes for any purpose"
-      icon="qr_code_2"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">qr_code_2</mat-icon>
+        </div>
+        <h1 class="hero-title">QR Code Generator</h1>
+        <p class="hero-subtitle">
+          Create professional, customizable QR codes instantly. 
+          Support for URLs, text, contact info, WiFi credentials, and more with full styling control and high-resolution downloads.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>link</mat-icon>
+            <span>URLs & Links</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>wifi</mat-icon>
+            <span>WiFi Access</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>contacts</mat-icon>
+            <span>Contact Cards</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="qr-showcase">
+          <div class="qr-example qr-example-1">
+            <div class="qr-pattern">
+              <div class="qr-corner tl"></div>
+              <div class="qr-corner tr"></div>
+              <div class="qr-corner bl"></div>
+              <div class="qr-dots"></div>
+            </div>
+            <span class="qr-label">Website URL</span>
+          </div>
+          <div class="qr-example qr-example-2">
+            <div class="qr-pattern colored">
+              <div class="qr-corner tl"></div>
+              <div class="qr-corner tr"></div>
+              <div class="qr-corner bl"></div>
+              <div class="qr-dots"></div>
+            </div>
+            <span class="qr-label">Styled QR</span>
+          </div>
+          <div class="qr-example qr-example-3">
+            <div class="qr-pattern gradient">
+              <div class="qr-corner tl"></div>
+              <div class="qr-corner tr"></div>
+              <div class="qr-corner bl"></div>
+              <div class="qr-dots"></div>
+            </div>
+            <span class="qr-label">Custom Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="qr-generator-layout">
       <!-- Left Side: Input Form -->
