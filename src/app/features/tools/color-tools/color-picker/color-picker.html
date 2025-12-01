@@ -1,15 +1,436 @@
-<div class="coming-soon-page">
+<div class="color-picker-page">
   <div class="container">
-    <mat-card class="coming-soon-card">
-      <div class="coming-soon-content">
-        <mat-icon class="coming-soon-icon">construction</mat-icon>
-        <h1 class="coming-soon-title">Coming Soon</h1>
-        <p class="coming-soon-subtitle">This tool is currently under development</p>
-        <div class="coming-soon-progress">
-          <mat-icon>code</mat-icon>
-          <span>We're working hard to bring you this feature</span>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">palette</mat-icon>
+        </div>
+        <h1 class="hero-title">Color Picker & Contrast Checker</h1>
+        <p class="hero-subtitle">
+          Create perfect colors with an advanced visual picker, multiple format support,
+          and built-in WCAG contrast checker for accessible designs.
+        </p>
+        <div class="hero-features">
+          <div class="feature-badge">
+            <mat-icon>colorize</mat-icon>
+            <span>Visual Color Picker</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>palette</mat-icon>
+            <span>Multiple Formats</span>
+          </div>
+          <div class="feature-badge">
+            <mat-icon>accessibility</mat-icon>
+            <span>WCAG Contrast Checker</span>
+          </div>
+        </div>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToSection('.color-picker-card')"
+            class="cta-button"
+          >
+            <mat-icon>colorize</mat-icon>
+            Start Picking Colors
+          </button>
+          <button
+            mat-stroked-button
+            (click)="scrollToSection('.contrast-card')"
+            class="cta-button-secondary"
+          >
+            <mat-icon>accessibility</mat-icon>
+            Check Contrast
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="color-showcase">
+          <div class="showcase-swatch" [style.background]="currentHex()">
+            <div class="swatch-overlay">
+              <span class="swatch-label">Current Color</span>
+              <code class="swatch-code">{{ currentHex() }}</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Picker Card -->
+    <mat-card class="color-picker-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">colorize</mat-icon>
+        <h2>Color Picker</h2>
+      </div>
+
+      <!-- Large Color Preview -->
+      <div class="color-preview-section">
+        <div class="color-preview" [style.background]="currentHex()">
+          <div class="preview-info">
+            <span class="preview-hex">{{ currentHex() }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Sliders -->
+      <div class="sliders-section">
+        <div class="slider-group">
+          <div class="slider-header">
+            <mat-icon>wb_sunny</mat-icon>
+            <span class="slider-label">Hue</span>
+            <span class="slider-value">{{ hue() }}°</span>
+          </div>
+          <div class="slider-wrapper" [style.background]="getHueGradient()">
+            <mat-slider
+              [min]="0"
+              [max]="360"
+              [step]="1"
+              class="color-slider"
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb [(ngModel)]="hue" (ngModelChange)="updateFromHSL()">
+            </mat-slider>
+          </div>
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <mat-icon>water_drop</mat-icon>
+            <span class="slider-label">Saturation</span>
+            <span class="slider-value">{{ saturation() }}%</span>
+          </div>
+          <div class="slider-wrapper" [style.background]="getSaturationGradient()">
+            <mat-slider
+              [min]="0"
+              [max]="100"
+              [step]="1"
+              class="color-slider"
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb [(ngModel)]="saturation" (ngModelChange)="updateFromHSL()">
+            </mat-slider>
+          </div>
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <mat-icon>light_mode</mat-icon>
+            <span class="slider-label">Lightness</span>
+            <span class="slider-value">{{ lightness() }}%</span>
+          </div>
+          <div class="slider-wrapper" [style.background]="getLightnessGradient()">
+            <mat-slider
+              [min]="0"
+              [max]="100"
+              [step]="1"
+              class="color-slider"
+              discrete
+              [displayWith]="formatLabel"
+            >
+              <input matSliderThumb [(ngModel)]="lightness" (ngModelChange)="updateFromHSL()">
+            </mat-slider>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Input Formats -->
+      <div class="color-inputs-section">
+        <mat-tab-group class="color-tabs">
+          <!-- Hex Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>tag</mat-icon>
+              <span>Hex</span>
+            </ng-template>
+            <div class="tab-content">
+              <mat-form-field appearance="fill" class="color-input-field">
+                <mat-label>Hex Color</mat-label>
+                <div
+                  matPrefix
+                  class="hex-color-swatch"
+                  [style.background]="currentHex()"
+                  (click)="openHexColorPicker()"
+                  matTooltip="Click to pick color"
+                ></div>
+                <input
+                  type="color"
+                  [(ngModel)]="hexInput"
+                  (ngModelChange)="updateFromHex(hexInput())"
+                  class="hidden-hex-color-picker"
+                  #hexColorPicker
+                >
+                <input
+                  matInput
+                  [(ngModel)]="hexInput"
+                  (blur)="updateFromHex(hexInput())"
+                  placeholder="#3f51b5"
+                  maxlength="7"
+                >
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="copyHex()"
+                  matTooltip="Copy Hex"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </mat-tab>
+
+          <!-- RGB Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>gradient</mat-icon>
+              <span>RGB</span>
+            </ng-template>
+            <div class="tab-content">
+              <div class="rgb-inputs">
+                <mat-form-field appearance="fill" class="rgb-field">
+                  <mat-label>R</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="rgbRInput"
+                    (blur)="updateFromRGB()"
+                    min="0"
+                    max="255"
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="rgb-field">
+                  <mat-label>G</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="rgbGInput"
+                    (blur)="updateFromRGB()"
+                    min="0"
+                    max="255"
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="rgb-field">
+                  <mat-label>B</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="rgbBInput"
+                    (blur)="updateFromRGB()"
+                    min="0"
+                    max="255"
+                  >
+                </mat-form-field>
+                <button
+                  mat-icon-button
+                  (click)="copyRGB()"
+                  matTooltip="Copy RGB"
+                  class="rgb-copy-btn"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- HSL Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>tune</mat-icon>
+              <span>HSL</span>
+            </ng-template>
+            <div class="tab-content">
+              <div class="hsl-inputs">
+                <mat-form-field appearance="fill" class="hsl-field">
+                  <mat-label>H</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="hslHInput"
+                    (blur)="updateFromHSLInput()"
+                    min="0"
+                    max="360"
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="hsl-field">
+                  <mat-label>S</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="hslSInput"
+                    (blur)="updateFromHSLInput()"
+                    min="0"
+                    max="100"
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="hsl-field">
+                  <mat-label>L</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [(ngModel)]="hslLInput"
+                    (blur)="updateFromHSLInput()"
+                    min="0"
+                    max="100"
+                  >
+                </mat-form-field>
+                <button
+                  mat-icon-button
+                  (click)="copyHSL()"
+                  matTooltip="Copy HSL"
+                  class="hsl-copy-btn"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-card>
+
+    <!-- Contrast Checker Card -->
+    <mat-card class="contrast-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">accessibility</mat-icon>
+        <h2>Contrast Checker</h2>
+      </div>
+
+      <div class="contrast-content">
+        <div class="contrast-inputs">
+          <div class="contrast-input-group">
+            <label>Foreground Color</label>
+            <div class="contrast-input-wrapper">
+              <div
+                class="color-swatch clickable"
+                [style.background]="foregroundColor()"
+                (click)="openForegroundColorPicker()"
+                matTooltip="Click to pick color"
+              ></div>
+              <input
+                type="color"
+                [(ngModel)]="foregroundColor"
+                class="hidden-color-picker"
+                #foregroundPicker
+              >
+              <input
+                type="text"
+                [(ngModel)]="foregroundColor"
+                placeholder="#000000"
+                class="contrast-input"
+              >
+            </div>
+          </div>
+
+          <div class="contrast-input-group">
+            <label>Background Color</label>
+            <div class="contrast-input-wrapper">
+              <div
+                class="color-swatch clickable"
+                [style.background]="backgroundColor()"
+                (click)="openBackgroundColorPicker()"
+                matTooltip="Click to pick color"
+              ></div>
+              <input
+                type="color"
+                [(ngModel)]="backgroundColor"
+                class="hidden-color-picker"
+                #backgroundPicker
+              >
+              <input
+                type="text"
+                [(ngModel)]="backgroundColor"
+                placeholder="#FFFFFF"
+                class="contrast-input"
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="contrast-results">
+          <div class="contrast-preview" [style.background]="backgroundColor()">
+            <div class="preview-text" [style.color]="foregroundColor()">
+              <h3>Sample Text</h3>
+              <p>The quick brown fox jumps over the lazy dog</p>
+            </div>
+          </div>
+
+          <div class="contrast-metrics">
+            <div class="contrast-ratio-display">
+              <span class="ratio-label">Contrast Ratio</span>
+              <span class="ratio-value">{{ contrastRatio().toFixed(2) }}:1</span>
+            </div>
+
+            <div class="contrast-rating">
+              @if (contrastRatio(); as ratio) {
+                @if (getContrastRating(ratio); as rating) {
+                  <div class="rating-badge" [style.background]="rating.color">
+                    <span class="rating-level">{{ rating.level }}</span>
+                    <span class="rating-desc">{{ rating.description }}</span>
+                  </div>
+                }
+              }
+            </div>
+
+            <div class="wcag-guidelines">
+              <div class="guideline-item">
+                <mat-icon [class.pass]="contrastRatio() >= 4.5" [class.fail]="contrastRatio() < 4.5">
+                  {{ contrastRatio() >= 4.5 ? 'check_circle' : 'cancel' }}
+                </mat-icon>
+                <span>WCAG AA Normal Text (4.5:1)</span>
+              </div>
+              <div class="guideline-item">
+                <mat-icon [class.pass]="contrastRatio() >= 3" [class.fail]="contrastRatio() < 3">
+                  {{ contrastRatio() >= 3 ? 'check_circle' : 'cancel' }}
+                </mat-icon>
+                <span>WCAG AA Large Text (3:1)</span>
+              </div>
+              <div class="guideline-item">
+                <mat-icon [class.pass]="contrastRatio() >= 7" [class.fail]="contrastRatio() < 7">
+                  {{ contrastRatio() >= 7 ? 'check_circle' : 'cancel' }}
+                </mat-icon>
+                <span>WCAG AAA Normal Text (7:1)</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </mat-card>
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        About Color Formats
+      </h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <mat-icon>tag</mat-icon>
+          <h4>Hex Colors</h4>
+          <p>Hexadecimal format (#RRGGBB) is the most common way to represent colors on the web. Each pair represents Red, Green, and Blue values from 00 to FF.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>gradient</mat-icon>
+          <h4>RGB Colors</h4>
+          <p>RGB (Red, Green, Blue) format uses decimal values from 0-255 for each color channel. Widely supported and easy to understand.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>tune</mat-icon>
+          <h4>HSL Colors</h4>
+          <p>HSL (Hue, Saturation, Lightness) is more intuitive for color adjustments. Hue is 0-360°, while Saturation and Lightness are 0-100%.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>accessibility</mat-icon>
+          <h4>WCAG Guidelines</h4>
+          <p>Web Content Accessibility Guidelines ensure text is readable. AA requires 4.5:1 for normal text, AAA requires 7:1.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>offline_bolt</mat-icon>
+          <h4>Client-Side Only</h4>
+          <p>All color conversions and calculations happen in your browser. No data is sent to any server.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
