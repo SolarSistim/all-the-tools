@@ -1,15 +1,315 @@
-<div class="coming-soon-page">
+<div class="timezone-converter-page">
   <div class="container">
-    <mat-card class="coming-soon-card">
-      <div class="coming-soon-content">
-        <mat-icon class="coming-soon-icon">construction</mat-icon>
-        <h1 class="coming-soon-title">Coming Soon</h1>
-        <p class="coming-soon-subtitle">This tool is currently under development</p>
-        <div class="coming-soon-progress">
-          <mat-icon>code</mat-icon>
-          <span>We're working hard to bring you this feature</span>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">public</mat-icon>
+        </div>
+        <h1 class="hero-title">Timezone Converter</h1>
+        <p class="hero-subtitle">
+          Compare time zones across the world with live clocks. View time differences, schedule meetings,
+          and convert times between multiple time zones instantly. Perfect for international teams and travelers.
+        </p>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToClocks()"
+            class="cta-button"
+          >
+            <mat-icon>language</mat-icon>
+            View World Clocks
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="world-clock-showcase">
+          <div class="showcase-clock">
+            <mat-icon class="clock-icon">schedule</mat-icon>
+            <div class="clock-time">{{ userTimezoneDisplay()?.time }}</div>
+            <div class="clock-label">{{ userTimezoneDisplay()?.label }}</div>
+            <div class="clock-offset">{{ userTimezoneDisplay()?.offset }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User's Timezone Card -->
+    <mat-card class="user-timezone-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">my_location</mat-icon>
+        <h2>Your Current Time</h2>
+      </div>
+
+      <div class="user-timezone-display">
+        <div class="main-clock">
+          <div class="clock-time-large">{{ userTimezoneDisplay()?.timeWithSeconds }}</div>
+          <div class="clock-date">{{ userTimezoneDisplay()?.date }}</div>
+          <div class="clock-info">
+            <span class="clock-location">
+              <mat-icon>location_on</mat-icon>
+              {{ userTimezoneDisplay()?.label }}
+            </span>
+            <span class="clock-offset-badge">{{ userTimezoneDisplay()?.offset }}</span>
+          </div>
         </div>
       </div>
     </mat-card>
+
+    <!-- Add Timezone Card -->
+    <mat-card class="add-timezone-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">add_location</mat-icon>
+        <h2>Add Timezone</h2>
+        <div class="header-actions">
+          <button
+            mat-raised-button
+            (click)="copyAllTimes()"
+            class="action-btn"
+            *ngIf="otherTimezoneDisplays().length > 0"
+          >
+            <mat-icon>content_copy</mat-icon>
+            Copy All Times
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="clearAllTimezones()"
+            class="action-btn"
+            *ngIf="otherTimezoneDisplays().length > 0"
+          >
+            <mat-icon>clear_all</mat-icon>
+            Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="add-timezone-controls">
+        <mat-form-field appearance="fill" class="timezone-select">
+          <mat-label>Select Timezone</mat-label>
+          <mat-select [(ngModel)]="selectedTimezoneToAdd">
+            <mat-optgroup *ngFor="let region of getRegions()" [label]="region">
+              <mat-option 
+                *ngFor="let tz of getTimezonesForRegion(region)" 
+                [value]="tz.value"
+              >
+                {{ tz.label }} ({{ tz.offset }})
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addTimezone()"
+          class="add-btn"
+        >
+          <mat-icon>add</mat-icon>
+          Add Timezone
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- World Clocks Grid -->
+    <div class="timezone-clocks-card" *ngIf="otherTimezoneDisplays().length > 0">
+      <div class="clocks-header">
+        <h2>
+          <mat-icon>public</mat-icon>
+          World Clocks
+        </h2>
+      </div>
+
+      <div class="clocks-grid">
+        <mat-card 
+          *ngFor="let tz of otherTimezoneDisplays(); trackBy: trackByTimezoneId" 
+          class="clock-card"
+        >
+          <button
+            mat-icon-button
+            class="remove-btn"
+            (click)="removeTimezone(tz.id)"
+            matTooltip="Remove timezone"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <div class="clock-content">
+            <div class="clock-header-info">
+              <mat-icon class="region-icon">location_on</mat-icon>
+              <h3 class="clock-location-name">{{ tz.label }}</h3>
+            </div>
+
+            <div class="clock-display">
+              <div class="digital-clock">
+                <div class="time-display">{{ tz.time }}</div>
+                <div class="date-display">{{ tz.date }}</div>
+              </div>
+
+              <div class="clock-metadata">
+                <div class="metadata-item">
+                  <mat-icon>schedule</mat-icon>
+                  <span>{{ tz.offset }}</span>
+                </div>
+                <div class="metadata-item difference">
+                  <mat-icon>compare_arrows</mat-icon>
+                  <span>{{ getTimeDifference(userTimezoneDisplay()?.timezone || 'UTC', tz.timezone) }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="clock-actions">
+              <button
+                mat-stroked-button
+                (click)="copyTimezoneTime(tz.timezone, tz.label)"
+                class="copy-time-btn"
+              >
+                <mat-icon>content_copy</mat-icon>
+                Copy Time
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <mat-card class="empty-state-card" *ngIf="otherTimezoneDisplays().length === 0">
+      <div class="empty-state-content">
+        <mat-icon class="empty-icon">public_off</mat-icon>
+        <h3 class="empty-title">No Timezones Added Yet</h3>
+        <p class="empty-subtitle">
+          Add timezones from around the world to see live clocks and time differences.
+          Perfect for scheduling meetings across multiple time zones!
+        </p>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addPopularTimezones()"
+          class="cta-button"
+        >
+          <mat-icon>add</mat-icon>
+          Add Popular Timezones
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- Time Comparison Card -->
+    <mat-card class="comparison-card" *ngIf="otherTimezoneDisplays().length > 0">
+      <div class="card-header">
+        <mat-icon class="card-icon">compare_arrows</mat-icon>
+        <h2>Time Difference Comparison</h2>
+      </div>
+
+      <div class="comparison-table">
+        <div class="comparison-row header-row">
+          <div class="comparison-cell">Timezone</div>
+          <div class="comparison-cell">Current Time</div>
+          <div class="comparison-cell">UTC Offset</div>
+          <div class="comparison-cell">Difference from You</div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-cell timezone-name">
+            <mat-icon>my_location</mat-icon>
+            <strong>{{ userTimezoneDisplay()?.label }}</strong>
+          </div>
+          <div class="comparison-cell time-value">
+            {{ userTimezoneDisplay()?.time }}
+          </div>
+          <div class="comparison-cell offset-value">
+            {{ userTimezoneDisplay()?.offset }}
+          </div>
+          <div class="comparison-cell difference-value">
+            <span class="badge reference">Reference</span>
+          </div>
+        </div>
+
+        <div 
+          *ngFor="let tz of otherTimezoneDisplays(); trackBy: trackByTimezoneId" 
+          class="comparison-row"
+        >
+          <div class="comparison-cell timezone-name">
+            <mat-icon>location_on</mat-icon>
+            {{ tz.label }}
+          </div>
+          <div class="comparison-cell time-value">
+            {{ tz.time }}
+          </div>
+          <div class="comparison-cell offset-value">
+            {{ tz.offset }}
+          </div>
+          <div class="comparison-cell difference-value">
+            <span class="badge">
+              {{ getTimeDifference(userTimezoneDisplay()?.timezone || 'UTC', tz.timezone) }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        About Timezones
+      </h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <mat-icon>public</mat-icon>
+          <h4>What are Timezones?</h4>
+          <p>
+            Timezones are regions of the world that observe the same standard time. 
+            They're defined by their offset from UTC (Coordinated Universal Time).
+          </p>
+        </div>
+
+        <div class="info-card">
+          <mat-icon>schedule</mat-icon>
+          <h4>UTC Offset</h4>
+          <p>
+            UTC offset shows how many hours ahead or behind a timezone is from UTC. 
+            For example, UTC+5 is 5 hours ahead of UTC, while UTC-8 is 8 hours behind.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <mat-icon>wb_sunny</mat-icon>
+          <h4>Daylight Saving Time</h4>
+          <p>
+            Some timezones observe Daylight Saving Time (DST), shifting their clocks forward 
+            in spring and back in fall. Our converter automatically accounts for DST.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <mat-icon>event</mat-icon>
+          <h4>Meeting Scheduling</h4>
+          <p>
+            Use the time difference feature to find convenient meeting times across timezones. 
+            The comparison table shows how times align across different locations.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <mat-icon>flight_takeoff</mat-icon>
+          <h4>Travel Planning</h4>
+          <p>
+            Traveling? Add your destination timezone to see what time it will be when you arrive, 
+            helping you plan for jet lag and adjust your schedule.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <mat-icon>offline_bolt</mat-icon>
+          <h4>Live Updates</h4>
+          <p>
+            All clocks update in real-time every second, so you always see accurate current times. 
+            All calculations happen in your browser - no data is sent to any server.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

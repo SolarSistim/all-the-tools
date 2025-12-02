@@ -19,8 +19,25 @@
   gap: $spacing-2xl;
   margin-bottom: $spacing-2xl;
   padding: $spacing-2xl;
-  background: var(--bg-secondary) !important;
-  border-radius: 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--neon-cyan) 0%,
+      var(--neon-pink) 50%,
+      var(--neon-purple, #a855f7) 100%
+    );
+  }
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
