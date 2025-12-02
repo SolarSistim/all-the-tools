@@ -1,15 +1,461 @@
-<div class="coming-soon-page">
-  <div class="container">
-    <mat-card class="coming-soon-card">
-      <div class="coming-soon-content">
-        <mat-icon class="coming-soon-icon">construction</mat-icon>
-        <h1 class="coming-soon-title">Coming Soon</h1>
-        <p class="coming-soon-subtitle">This tool is currently under development</p>
-        <div class="coming-soon-progress">
-          <mat-icon>code</mat-icon>
-          <span>We're working hard to bring you this feature</span>
+<div class="icon-generator-container">
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">grid_view</mat-icon>
+        </div>
+        <h1 class="hero-title">Icon Generator</h1>
+        <p class="hero-subtitle">
+          Transform a single image into a complete icon set for websites, apps, and platforms.
+          Generate favicons, Apple touch icons, Android icons, and more with advanced cropping tools.
+        </p>
+        <div class="hero-cta" *ngIf="!uploadedImage">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="triggerFileInput()"
+            class="cta-button"
+          >
+            <mat-icon>cloud_upload</mat-icon>
+            Upload Your Image
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="icon-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-icon small">
+              <div class="icon-preview"></div>
+              <span>16x16</span>
+            </div>
+            <div class="showcase-icon medium">
+              <div class="icon-preview"></div>
+              <span>64x64</span>
+            </div>
+            <div class="showcase-icon large">
+              <div class="icon-preview"></div>
+              <span>192x192</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Generate multiple sizes instantly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Hidden file input (always in DOM) -->
+  <input
+    #fileInput
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    style="display: none;">
+
+  <!-- Upload Section -->
+  <mat-card class="upload-card" *ngIf="!uploadedImage">
+    <div
+      class="upload-area"
+      [class.dragging]="isDragging"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+      (click)="triggerFileInput()">
+      <mat-icon class="upload-icon">cloud_upload</mat-icon>
+      <h2>Drag & Drop Your Image</h2>
+      <p>or click to browse</p>
+      <p class="file-info">Supports PNG, JPG, SVG, and more</p>
+    </div>
+  </mat-card>
+
+  <!-- Main Content -->
+  <div class="content" *ngIf="uploadedImage">
+    <!-- Interactive Crop Preview Card -->
+    <mat-card class="preview-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>crop</mat-icon>
+          Interactive Crop Tool
+        </h2>
+        <button mat-icon-button (click)="clearImage()" matTooltip="Clear image">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="preview-image-container" #cropPreviewContainer>
+        <img [src]="uploadedImage" alt="Uploaded image" class="preview-image">
+        
+        <!-- Crop Overlay -->
+        <div class="crop-overlay" >
+          <!-- Crop Area (draggable) -->
+          <div class="crop-area" [ngStyle]="getCropOverlayStyle()" 
+               (mousedown)="onCropMouseDown($event)"
+               [class.dragging]="isDraggingCrop">
+            <div class="crop-border"></div>
+            
+            <!-- Corner Resize Handles -->
+            <div class="resize-handle nw" 
+                 (mousedown)="onResizeHandleMouseDown($event, 'nw')"
+                 matTooltip="Drag to resize"></div>
+            <div class="resize-handle ne" 
+                 (mousedown)="onResizeHandleMouseDown($event, 'ne')"
+                 matTooltip="Drag to resize"></div>
+            <div class="resize-handle sw" 
+                 (mousedown)="onResizeHandleMouseDown($event, 'sw')"
+                 matTooltip="Drag to resize"></div>
+            <div class="resize-handle se" 
+                 (mousedown)="onResizeHandleMouseDown($event, 'se')"
+                 matTooltip="Drag to resize"></div>
+          </div>
+        </div>
+      </div>
+      <div class="crop-instructions">
+        <mat-icon>info</mat-icon>
+        <span>Drag the crop area to reposition • Drag corners to resize (1:1 aspect ratio locked)</span>
+      </div>
+      <div style="display: flex; justify-content: flex-end; padding-bottom: 0px; padding-top: 16px;">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="clearImage()"
+          class="prominent-action-btn start-over-btn"
+          style="padding: 12px 24px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.3);">
+          <mat-icon style="margin-right: 8px;">restart_alt</mat-icon>
+          Start Over
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- Crop & Resize Controls Card -->
+    <mat-card class="controls-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>tune</mat-icon>
+          Fine-Tune Controls
+        </h2>
+      </div>
+
+      <!-- Live Preview (moved to top) -->
+      <div class="live-preview">
+        <h3 class="preview-title">
+          <mat-icon>visibility</mat-icon>
+          Live Preview
+        </h3>
+        <div class="preview-sizes">
+          <div class="live-preview-item">
+            <div class="live-preview-box" style="width: 64px; height: 64px;">
+              <img [src]="getPreviewUrl(64)" alt="64x64 preview">
+            </div>
+            <span>64x64</span>
+          </div>
+          <div class="live-preview-item">
+            <div class="live-preview-box" style="width: 128px; height: 128px;">
+              <img [src]="getPreviewUrl(128)" alt="128x128 preview">
+            </div>
+            <span>128x128</span>
+          </div>
+          <div class="live-preview-item">
+            <div class="live-preview-box" style="width: 192px; height: 192px;">
+              <img [src]="getPreviewUrl(192)" alt="192x192 preview">
+            </div>
+            <span>192x192</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-grid">
+        <!-- Crop Size Control -->
+        <div class="control-item">
+          <label class="control-label">
+            <mat-icon>zoom_in</mat-icon>
+            Crop Size: {{ cropSize | number:'1.0-2' }}%
+          </label>
+          <input
+            type="range"
+            min="10"
+            max="150"
+            step="1"
+            [(ngModel)]="cropSize"
+            class="slider">
+          <p class="control-hint">Adjust the size of the crop area (smaller = zoom in)</p>
+        </div>
+
+        <!-- Horizontal Position Control -->
+        <div class="control-item">
+          <label class="control-label">
+            <mat-icon>swap_horiz</mat-icon>
+            Horizontal Position: {{ cropX | number:'1.0-2' }}%
+          </label>
+          <input
+            type="range"
+            min="-50"
+            max="150"
+            step="0.5"
+            [(ngModel)]="cropX"
+            class="slider">
+          <p class="control-hint">Position the center of the crop area (0% = left edge, 50% = center, 100% = right edge)</p>
+        </div>
+
+        <!-- Vertical Position Control -->
+        <div class="control-item">
+          <label class="control-label">
+            <mat-icon>swap_vert</mat-icon>
+            Vertical Position: {{ cropY | number:'1.0-2' }}%
+          </label>
+          <input
+            type="range"
+            min="-50"
+            max="150"
+            step="0.5"
+            [(ngModel)]="cropY"
+            class="slider">
+          <p class="control-hint">Position the center of the crop area (0% = top edge, 50% = center, 100% = bottom edge)</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="control-item control-actions">
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="resetCrop()"
+            class="prominent-action-btn">
+            <mat-icon>refresh</mat-icon>
+            Reset to Default
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="centerCrop()"
+            class="prominent-action-btn">
+            <mat-icon>center_focus_strong</mat-icon>
+            Center Crop
+          </button>
         </div>
       </div>
     </mat-card>
+
+    <!-- Download Actions -->
+    <mat-card class="actions-card" *ngIf="selectedSizes.length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>download</mat-icon>
+          Download Icons
+        </h2>
+      </div>
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" (click)="downloadAllPNG()" class="primary-btn">
+          <mat-icon>file_download</mat-icon>
+          Download All as PNG ({{ selectedSizes.length }} files)
+        </button>
+        <button mat-raised-button (click)="downloadICO()" class="secondary-btn">
+          <mat-icon>language</mat-icon>
+          Download Favicon Set (3x icons, .ico format)
+        </button>
+      </div>
+      <p class="download-note">
+        <mat-icon>info</mat-icon>
+        <span *ngIf="selectedSizes.length === 1">Single icon will download directly as PNG. Favicon set includes 16x16, 32x32, and 48x48 sizes in .ico format.</span>
+        <span *ngIf="selectedSizes.length > 1">Multiple icons will download as a ZIP file. Favicon set includes 16x16, 32x32, and 48x48 sizes in .ico format.</span>
+      </p>
+    </mat-card>
+
+    <!-- Size Selection Card -->
+    <mat-card class="sizes-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>photo_size_select_large</mat-icon>
+          Select Sizes<span *ngIf="selectedSizes.length > 0"> ({{ selectedSizes.length }} selected)</span>
+        </h2>
+        <div class="header-actions">
+          <button mat-stroked-button (click)="selectAll()" class="action-btn">
+            <mat-icon>done_all</mat-icon>
+            Select All
+          </button>
+          <button mat-stroked-button (click)="deselectAll()" class="action-btn">
+            <mat-icon>clear</mat-icon>
+            Deselect All
+          </button>
+        </div>
+      </div>
+
+      <!-- Favicon Sizes -->
+      <div class="size-category">
+        <div class="category-header">
+          <h3>
+            <mat-icon>public</mat-icon>
+            Favicon Sizes
+          </h3>
+          <div class="category-actions">
+            <button mat-stroked-button (click)="selectAll('favicon')" class="action-btn">
+              <mat-icon>done_all</mat-icon>
+              Select All
+            </button>
+            <button mat-stroked-button (click)="deselectAll('favicon')" class="action-btn">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="size-grid">
+          <div *ngFor="let size of categorizedSizes.favicon" class="size-item">
+            <mat-checkbox [(ngModel)]="size.selected">
+              <span class="size-name">{{ size.name }}</span>
+              <span class="size-description">{{ size.description }}</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apple Touch Icons -->
+      <div class="size-category">
+        <div class="category-header">
+          <h3>
+            <mat-icon>apple</mat-icon>
+            Apple Touch Icons
+          </h3>
+          <div class="category-actions">
+            <button mat-stroked-button (click)="selectAll('apple')" class="action-btn">
+              <mat-icon>done_all</mat-icon>
+              Select All
+            </button>
+            <button mat-stroked-button (click)="deselectAll('apple')" class="action-btn">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="size-grid">
+          <div *ngFor="let size of categorizedSizes.apple" class="size-item">
+            <mat-checkbox [(ngModel)]="size.selected">
+              <span class="size-name">{{ size.name }}</span>
+              <span class="size-description">{{ size.description }}</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android Icons -->
+      <div class="size-category">
+        <div class="category-header">
+          <h3>
+            <mat-icon>android</mat-icon>
+            Android Icons
+          </h3>
+          <div class="category-actions">
+            <button mat-stroked-button (click)="selectAll('android')" class="action-btn">
+              <mat-icon>done_all</mat-icon>
+              Select All
+            </button>
+            <button mat-stroked-button (click)="deselectAll('android')" class="action-btn">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="size-grid">
+          <div *ngFor="let size of categorizedSizes.android" class="size-item">
+            <mat-checkbox [(ngModel)]="size.selected">
+              <span class="size-name">{{ size.name }}</span>
+              <span class="size-description">{{ size.description }}</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <!-- Windows Icons -->
+      <div class="size-category">
+        <div class="category-header">
+          <h3>
+            <mat-icon>window</mat-icon>
+            Windows Tiles
+          </h3>
+          <div class="category-actions">
+            <button mat-stroked-button (click)="selectAll('windows')" class="action-btn">
+              <mat-icon>done_all</mat-icon>
+              Select All
+            </button>
+            <button mat-stroked-button (click)="deselectAll('windows')" class="action-btn">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="size-grid">
+          <div *ngFor="let size of categorizedSizes.windows" class="size-item">
+            <mat-checkbox [(ngModel)]="size.selected">
+              <span class="size-name">{{ size.name }}</span>
+              <span class="size-description">{{ size.description }}</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Sizes -->
+      <div class="size-category">
+        <div class="category-header">
+          <h3>
+            <mat-icon>crop_square</mat-icon>
+            Common Sizes
+          </h3>
+          <div class="category-actions">
+            <button mat-stroked-button (click)="selectAll('custom')" class="action-btn">
+              <mat-icon>done_all</mat-icon>
+              Select All
+            </button>
+            <button mat-stroked-button (click)="deselectAll('custom')" class="action-btn">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="size-grid">
+          <div *ngFor="let size of categorizedSizes.custom" class="size-item">
+            <mat-checkbox [(ngModel)]="size.selected">
+              <span class="size-name">{{ size.name }}</span>
+              <span class="size-description">{{ size.description }}</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Preview Grid -->
+    <mat-card class="preview-grid-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>preview</mat-icon>
+          Preview<span *ngIf="selectedSizes.length > 0"> ({{ selectedSizes.length }} selected)</span>
+        </h2>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="selectedSizes.length === 0" class="empty-state">
+        <mat-icon class="empty-icon">image_search</mat-icon>
+        <p class="empty-message">Select an icon size from the Select Sizes panel to see previews</p>
+      </div>
+
+      <!-- Preview Grid -->
+      <div *ngIf="selectedSizes.length > 0" class="preview-grid">
+        <div *ngFor="let size of selectedSizes" class="preview-item">
+          <div class="preview-box" [style.width.px]="Math.min(size.size, 128)" [style.height.px]="Math.min(size.size, 128)">
+            <img [src]="getPreviewUrl(size.size)" [alt]="size.name">
+          </div>
+          <div class="preview-info">
+            <span class="preview-size">{{ size.size }}x{{ size.size }}</span>
+            <button
+              mat-icon-button
+              (click)="downloadPNG(size.size, size.name)"
+              matTooltip="Download PNG"
+              class="download-btn">
+              <mat-icon>download</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
   </div>
 </div>
