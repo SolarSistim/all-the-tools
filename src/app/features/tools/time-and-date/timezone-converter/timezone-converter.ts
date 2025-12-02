@@ -182,8 +182,10 @@ export class TimezoneConverter implements OnInit, OnDestroy {
       url: 'https://www.allthethings.dev/tools/timezone-converter'
     });
 
-    // Add some popular timezones by default
-    this.addPopularTimezones();
+    // Load saved timezones from local storage, or add popular ones if none saved
+    if (!this.loadSavedTimezones()) {
+      this.addPopularTimezones();
+    }
   }
 
   ngOnDestroy(): void {
@@ -285,8 +287,8 @@ export class TimezoneConverter implements OnInit, OnDestroy {
    */
   getOffsetInMinutes(date: Date, timezone: string): number {
     try {
-      // Create formatter for the timezone
-      const formatter = new Intl.DateTimeFormat('en-US', {
+      // Get the date string in the target timezone
+      const tzString = date.toLocaleString('en-US', {
         timeZone: timezone,
         year: 'numeric',
         month: '2-digit',
@@ -297,19 +299,24 @@ export class TimezoneConverter implements OnInit, OnDestroy {
         hour12: false
       });
 
-      // Get the date in the target timezone
-      const parts = formatter.formatToParts(date);
-      const tzDate = new Date(
-        parseInt(parts.find(p => p.type === 'year')?.value || '0'),
-        parseInt(parts.find(p => p.type === 'month')?.value || '1') - 1,
-        parseInt(parts.find(p => p.type === 'day')?.value || '1'),
-        parseInt(parts.find(p => p.type === 'hour')?.value || '0'),
-        parseInt(parts.find(p => p.type === 'minute')?.value || '0'),
-        parseInt(parts.find(p => p.type === 'second')?.value || '0')
-      );
+      // Get the date string in UTC
+      const utcString = date.toLocaleString('en-US', {
+        timeZone: 'UTC',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
 
-      // Calculate offset in minutes
-      const offset = (tzDate.getTime() - date.getTime()) / 1000 / 60;
+      // Parse both strings as dates
+      const tzDate = new Date(tzString);
+      const utcDate = new Date(utcString);
+
+      // Calculate offset: timezone time - UTC time
+      const offset = (tzDate.getTime() - utcDate.getTime()) / (1000 * 60);
       return Math.round(offset);
     } catch {
       return 0;
@@ -363,6 +370,60 @@ export class TimezoneConverter implements OnInit, OnDestroy {
         }
       }
     });
+
+    // Save the default timezones
+    this.saveTimezonesToStorage();
+  }
+
+  /**
+   * Save timezones to local storage
+   */
+  private saveTimezonesToStorage(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    try {
+      // Only save non-primary timezones
+      const timezonesToSave = this.activeTimezones()
+        .filter(tz => !tz.isPrimary)
+        .map(tz => ({
+          timezone: tz.timezone,
+          label: tz.label,
+          offset: tz.offset
+        }));
+
+      localStorage.setItem('savedTimezones', JSON.stringify(timezonesToSave));
+    } catch (error) {
+      console.error('Failed to save timezones to local storage', error);
+    }
+  }
+
+  /**
+   * Load timezones from local storage
+   * Returns true if timezones were loaded, false otherwise
+   */
+  private loadSavedTimezones(): boolean {
+    if (!isPlatformBrowser(this.platformId)) return false;
+
+    try {
+      const saved = localStorage.getItem('savedTimezones');
+      if (!saved) return false;
+
+      const savedTimezones = JSON.parse(saved);
+      if (!Array.isArray(savedTimezones) || savedTimezones.length === 0) return false;
+
+      // Add saved timezones
+      savedTimezones.forEach((tz: any) => {
+        const tzOption = this.allTimezones().find(t => t.value === tz.timezone);
+        if (tzOption) {
+          this.addTimezoneDisplay(tzOption);
+        }
+      });
+
+      return true;
+    } catch (error) {
+      console.error('Failed to load timezones from local storage', error);
+      return false;
+    }
   }
 
   /**
@@ -378,14 +439,15 @@ export class TimezoneConverter implements OnInit, OnDestroy {
     const tzOption = this.allTimezones().find(t => t.value === selected);
     if (!tzOption) return;
 
-    // Check if already added
-    if (this.activeTimezones().some(t => t.timezone === selected)) {
+    // Check if already added to World Clocks (exclude primary timezone)
+    if (this.activeTimezones().some(t => t.timezone === selected && !t.isPrimary)) {
       this.snackBar.open('This timezone is already added', 'Close', { duration: 2000 });
       return;
     }
 
     this.addTimezoneDisplay(tzOption);
     this.selectedTimezoneToAdd.set('');
+    this.saveTimezonesToStorage();
     this.snackBar.open('Timezone added!', 'Close', { duration: 2000 });
   }
 
@@ -415,6 +477,7 @@ export class TimezoneConverter implements OnInit, OnDestroy {
     }
 
     this.activeTimezones.update(zones => zones.filter(t => t.id !== id));
+    this.saveTimezonesToStorage();
     this.snackBar.open('Timezone removed', 'Close', { duration: 2000 });
   }
 
@@ -423,6 +486,7 @@ export class TimezoneConverter implements OnInit, OnDestroy {
    */
   clearAllTimezones(): void {
     this.activeTimezones.update(zones => zones.filter(t => t.isPrimary));
+    this.saveTimezonesToStorage();
     this.snackBar.open('All timezones cleared', 'Close', { duration: 2000 });
   }
 
