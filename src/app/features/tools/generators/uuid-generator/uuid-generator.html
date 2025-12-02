@@ -11,7 +11,7 @@
           Generate cryptographically secure Universally Unique Identifiers instantly.
           Perfect for databases, APIs, and distributed systems.
         </p>
-        <div class="hero-features">
+        <!-- <div class="hero-features">
           <div class="feature-badge">
             <mat-icon>security</mat-icon>
             <span>Cryptographically Secure</span>
@@ -24,24 +24,16 @@
             <mat-icon>browser_not_supported</mat-icon>
             <span>100% Client-Side</span>
           </div>
-        </div>
+        </div> -->
         <div class="hero-cta">
           <button
             mat-raised-button
             color="primary"
-            (click)="generateSingleUUID()"
+            (click)="scrollToGenerator()"
             class="cta-button"
           >
-            <mat-icon>refresh</mat-icon>
+            <mat-icon>qr_code</mat-icon>
             Generate UUID Now
-          </button>
-          <button
-            mat-stroked-button
-            (click)="scrollToOptions()"
-            class="cta-button-secondary"
-          >
-            <mat-icon>tune</mat-icon>
-            Customize Options
           </button>
         </div>
       </div>
@@ -71,7 +63,7 @@
         <div class="header-actions">
           <button
             mat-raised-button
-            (click)="generateSingleUUID()"
+            (click)="scrollToGenerator()"
             class="action-btn generate-btn"
           >
             <mat-icon>refresh</mat-icon>

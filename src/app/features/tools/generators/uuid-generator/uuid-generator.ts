@@ -282,4 +282,12 @@ export class UuidGenerator implements OnInit {
       optionsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+    scrollToGenerator(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
 }

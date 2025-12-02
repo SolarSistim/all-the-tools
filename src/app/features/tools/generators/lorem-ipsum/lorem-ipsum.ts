@@ -145,4 +145,11 @@ export class LoremIpsum implements OnInit {
   formatLabel(value: number): string {
     return `${value}`;
   }
+
+  scrollToGenerator(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

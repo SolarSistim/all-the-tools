@@ -332,10 +332,10 @@ export class TimestampConverter implements OnInit, OnDestroy {
   }
 
   /**
-   * Scroll to section
+   * Scroll to converter section
    */
-  scrollToSection(selector: string): void {
-    const element = document.querySelector(selector);
+  scrollToConverter(): void {
+    const element = document.querySelector('.cta-button');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

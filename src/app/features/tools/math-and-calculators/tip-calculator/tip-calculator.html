@@ -11,7 +11,7 @@
           Calculate tips and split bills effortlessly for restaurants, delivery, and services.
           Get instant calculations with customizable tip percentages and bill splitting options.
         </p>
-        <div class="hero-features">
+        <!-- <div class="hero-features">
           <div class="feature-badge">
             <mat-icon>restaurant</mat-icon>
             <span>Dining & Delivery</span>
@@ -24,6 +24,17 @@
             <mat-icon>calculate</mat-icon>
             <span>Custom Tips</span>
           </div>
+        </div> -->
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToTipCalculator()"
+            class="cta-button"
+            >
+            <mat-icon>calculate</mat-icon>
+            Calculate Tip Now
+            </button>
         </div>
       </div>
       <div class="hero-visual">

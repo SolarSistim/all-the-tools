@@ -139,6 +139,54 @@
   }
 }
 
+.hero-cta {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-md;
+
+  @media (max-width: 968px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.cta-button {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0 $spacing-xl !important;
+  height: 48px !important;
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 15px var(--neon-cyan-glow) !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--neon-cyan-glow), 0 0 30px var(--neon-pink-glow) !important;
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin: 0 !important;
+  }
+}
+
 .hero-visual {
   display: flex;
   align-items: center;

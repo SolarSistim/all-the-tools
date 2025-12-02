@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
@@ -24,6 +25,7 @@ import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-
     MatInputModule,
     MatIconModule,
     MatDividerModule,
+    MatButtonModule,
     PageHeaderComponent,
     ToolCardComponent
   ],
@@ -82,6 +84,13 @@ export class PercentageCalculatorComponent implements OnInit {
       this.result2.set((partVal / wholeVal) * 100);
     } else {
       this.result2.set(null);
+    }
+  }
+
+  scrollToCalculators(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 }

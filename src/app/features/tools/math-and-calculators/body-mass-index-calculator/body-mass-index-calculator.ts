@@ -162,4 +162,12 @@ export class BodyMassIndexCalculator implements OnInit {
         return '';
     }
   }
+
+    scrollToBmiCalculators(): void {
+    const element = document.querySelector('.unit-toggle-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
 }

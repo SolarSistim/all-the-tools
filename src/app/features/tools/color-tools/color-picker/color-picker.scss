@@ -7,6 +7,36 @@
   transition: background-color 0.3s ease;
 }
 
+.cta-button {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0 $spacing-xl !important;
+  height: 48px !important;
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 15px var(--neon-cyan-glow) !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px var(--neon-cyan-glow), 0 0 30px var(--neon-pink-glow) !important;
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin: 0 !important;
+  }
+}
+
 // ============================================
 // HERO SECTION
 // ============================================
@@ -148,55 +178,6 @@
     button {
       width: 100%;
     }
-  }
-}
-
-.cta-button {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0 $spacing-xl !important;
-  height: 48px !important;
-  background: linear-gradient(135deg, var(--neon-pink) 0%, var(--amber) 100%) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: 0 4px 15px var(--neon-pink-glow) !important;
-  transition: all 0.3s ease !important;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px var(--neon-pink-glow), 0 0 30px rgba(255, 193, 7, 0.6) !important;
-  }
-
-  mat-icon {
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
-  }
-}
-
-.cta-button-secondary {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0 $spacing-xl !important;
-  height: 48px !important;
-  background: var(--bg-secondary) !important;
-  color: var(--text-primary) !important;
-  border: 2px solid var(--border-color) !important;
-  transition: all 0.3s ease !important;
-
-  &:hover {
-    border-color: var(--neon-pink) !important;
-    color: var(--neon-pink) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  mat-icon {
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
   }
 }
 

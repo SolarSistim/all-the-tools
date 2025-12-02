@@ -455,4 +455,11 @@ export class QrCodeGenerator implements OnInit {
   updateMargin(value: number): void {
     this.qrMargin.set(value);
   }
+
+  scrollToGenerator(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

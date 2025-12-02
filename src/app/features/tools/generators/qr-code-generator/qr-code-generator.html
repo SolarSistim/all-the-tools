@@ -11,7 +11,7 @@
           Create professional, customizable QR codes instantly. 
           Support for URLs, text, contact info, WiFi credentials, and more with full styling control and high-resolution downloads.
         </p>
-        <div class="hero-features">
+        <!-- <div class="hero-features">
           <div class="feature-badge">
             <mat-icon>link</mat-icon>
             <span>URLs & Links</span>
@@ -24,6 +24,17 @@
             <mat-icon>contacts</mat-icon>
             <span>Contact Cards</span>
           </div>
+        </div> -->
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToGenerator()"
+            class="cta-button"
+          >
+            <mat-icon>qr_code</mat-icon>
+            Generate QR Code Now
+          </button>
         </div>
       </div>
       <div class="hero-visual">

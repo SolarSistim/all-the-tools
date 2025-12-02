@@ -381,4 +381,12 @@ export class UnitConverter implements OnInit {
 
     this.convert();
   }
+
+    scrollToUnitConverter(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
 }

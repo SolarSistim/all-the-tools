@@ -505,4 +505,14 @@ export class GradientGenerator implements OnInit {
   trackByStopId(index: number, stop: ColorStop): number {
     return stop.id;
   }
+
+  /**
+   * Scroll to gradient generator
+   */
+  scrollToGenerator(): void {
+    const element = document.querySelector('.preset-gradient');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

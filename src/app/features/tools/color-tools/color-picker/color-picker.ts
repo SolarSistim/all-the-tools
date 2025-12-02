@@ -408,11 +408,8 @@ export class ColorPicker implements OnInit {
     return `${value}`;
   }
 
-  /**
-   * Scroll to section
-   */
-  scrollToSection(selector: string): void {
-    const element = document.querySelector(selector);
+  scrollToColorPicker(): void {
+    const element = document.querySelector('.cta-button');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

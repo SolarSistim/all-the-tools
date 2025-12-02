@@ -264,4 +264,11 @@ export class CaseConverter implements OnInit {
     }
     return text.substring(0, maxLength) + '...';
   }
+
+  scrollToConverter(): void {
+    const element = document.querySelector('.quick-conversions');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

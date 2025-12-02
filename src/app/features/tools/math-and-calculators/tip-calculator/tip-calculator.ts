@@ -116,4 +116,13 @@ export class TipCalculator implements OnInit {
     this.tipPercentage2.set(percentage);
     this.calculateSplitBill();
   }
+
+  scrollToTipCalculator(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+
 }

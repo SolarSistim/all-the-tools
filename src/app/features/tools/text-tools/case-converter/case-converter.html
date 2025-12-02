@@ -12,7 +12,7 @@
           PascalCase, kebab-case, and more with a single click. Essential for developers, writers, and anyone
           working with text formatting across different conventions.
         </p>
-        <div class="hero-features">
+        <!-- <div class="hero-features">
           <div class="feature-badge">
             <mat-icon>architecture</mat-icon>
             <span>10+ Conversions</span>
@@ -25,6 +25,17 @@
             <mat-icon>code</mat-icon>
             <span>Developer Friendly</span>
           </div>
+        </div> -->
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToConverter()"
+            class="cta-button"
+          >
+            <mat-icon>text_format</mat-icon>
+            Convert Text Case Now
+          </button>
         </div>
       </div>
       <div class="hero-visual">

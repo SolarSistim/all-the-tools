@@ -175,4 +175,11 @@ export class WordCounter implements OnInit {
       return `${mins}m ${secs}s`;
     }
   }
+
+  scrollToTextArea(): void {
+    const element = document.querySelector('.hero-cta');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

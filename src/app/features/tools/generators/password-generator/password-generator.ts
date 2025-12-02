@@ -350,4 +350,11 @@ export class PasswordGenerator implements OnInit {
   updatePasswordCount(value: number): void {
     this.passwordCount.set(value);
   }
+
+  scrollToGenerator(): void {
+    const element = document.querySelector('.cta-button');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }
