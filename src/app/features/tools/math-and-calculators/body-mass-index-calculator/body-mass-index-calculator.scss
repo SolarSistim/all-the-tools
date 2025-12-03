@@ -285,11 +285,21 @@
   justify-content: center;
   margin-bottom: $spacing-xl;
 
+  // Add horizontal padding on mobile
+  @media (max-width: 640px) {
+    padding: 0 $spacing-lg;
+  }
+
   .unit-toggle-group {
     background: var(--bg-elevated);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     overflow: hidden;
+
+    // Full width on mobile
+    @media (max-width: 640px) {
+      width: 100%;
+    }
 
     ::ng-deep {
       .mat-button-toggle {
@@ -317,6 +327,21 @@
 
         &:hover:not(.mat-button-toggle-checked) {
           background: var(--bg-secondary) !important;
+        }
+      }
+
+      // Stack buttons vertically on mobile
+      @media (max-width: 640px) {
+        display: flex;
+        flex-direction: column;
+
+        .mat-button-toggle {
+          width: 100%;
+
+          .mat-button-toggle-label-content {
+            justify-content: center;
+            padding: $spacing-md $spacing-lg;
+          }
         }
       }
     }

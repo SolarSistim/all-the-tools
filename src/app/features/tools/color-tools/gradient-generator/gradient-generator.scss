@@ -180,6 +180,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  // Hide gradient showcase on mobile
+  @media (max-width: 968px) {
+    display: none;
+  }
 }
 
 .static-gradients-showcase {

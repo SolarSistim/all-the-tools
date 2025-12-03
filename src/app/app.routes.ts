@@ -118,6 +118,11 @@ export const routes: Routes = [
     title: 'Icon Generator - All The Things'
   },
   {
+    path: 'tools/currency-converter',
+    loadComponent: () => import('./features/tools/converters/currency-converter/currency-converter').then(m => m.CurrencyConverter),
+    title: 'Currency Converter - All The Things'
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

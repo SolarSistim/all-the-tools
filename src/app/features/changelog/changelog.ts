@@ -46,7 +46,49 @@ export class Changelog implements OnInit {
 
   changelog: ChangelogEntry[] = [
     {
-      version: '1.0.0',
+      version: '1.2.0',
+      date: 'December 1, 2025',
+      changes: [
+        {
+          type: 'added',
+          description: 'Currency Converter',
+          route: '/tools/currency-converter'
+        },
+        {
+          type: 'added',
+          description: 'Time Zone Converter',
+          route: '/tools/time-zone-converter'
+        },
+        {
+          type: 'added',
+          description: 'UUID Generator',
+          route: '/tools/uuid-generator'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
+      date: 'December 1, 2025',
+      changes: [
+        {
+          type: 'added',
+          description: 'Color Picker',
+          route: '/tools/color-picker'
+        },
+        {
+          type: 'added',
+          description: 'Gradient Generator',
+          route: '/tools/gradient-generator'
+        },
+        {
+          type: 'added',
+          description: 'Icon Generator',
+          route: '/tools/icon-generator'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'November 30, 2025',
       changes: [
         {
@@ -57,7 +99,7 @@ export class Changelog implements OnInit {
       ]
     },
     {
-      version: '1.0.0',
+      version: '1.2.0',
       date: 'November 29, 2025',
       changes: [
         {
@@ -73,7 +115,7 @@ export class Changelog implements OnInit {
       ]
     },
     {
-      version: '1.0.0',
+      version: '1.2.0',
       date: 'November 28, 2025',
       changes: [
         {
@@ -94,7 +136,7 @@ export class Changelog implements OnInit {
       ]
     },
     {
-      version: '1.0.0',
+      version: '1.2.0',
       date: 'November 26, 2025',
       changes: [
         {
@@ -115,105 +157,6 @@ export class Changelog implements OnInit {
       ]
     }
   ];
-
-  // changelog: ChangelogEntry[] = [
-  //   {
-  //     version: '1.3.0',
-  //     date: 'January 15, 2025',
-  //     changes: [
-  //       {
-  //         type: 'added',
-  //         description: 'Tip Calculator - Calculate tips and split bills easily'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Quick tip percentage buttons (10%, 15%, 18%, 20%, 25%, 30%, 35%)'
-  //       },
-  //       {
-  //         type: 'improved',
-  //         description: 'Enhanced mobile navigation with better category organization'
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     version: '1.2.0',
-  //     date: 'January 10, 2025',
-  //     changes: [
-  //       {
-  //         type: 'added',
-  //         description: 'Percentage Calculator with multiple calculation modes'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Real-time calculation as you type'
-  //       },
-  //       {
-  //         type: 'improved',
-  //         description: 'Enhanced dark mode with smoother transitions'
-  //       },
-  //       {
-  //         type: 'fixed',
-  //         description: 'Fixed color picker accuracy on mobile devices'
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     version: '1.1.0',
-  //     date: 'December 20, 2024',
-  //     changes: [
-  //       {
-  //         type: 'added',
-  //         description: 'Temperature Converter with Celsius, Fahrenheit, and Kelvin support'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Unit Converter for length, weight, and volume measurements'
-  //       },
-  //       {
-  //         type: 'improved',
-  //         description: 'Improved search functionality with better keyword matching'
-  //       },
-  //       {
-  //         type: 'fixed',
-  //         description: 'Fixed gradient generator color picker positioning'
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     version: '1.0.0',
-  //     date: 'December 1, 2024',
-  //     changes: [
-  //       {
-  //         type: 'added',
-  //         description: 'Initial release with 15+ tools'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Text tools: Word Counter, Case Converter, Lorem Ipsum Generator'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Color tools: Color Picker, Gradient Generator'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Generator tools: Password Generator, QR Code Generator, UUID Generator'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Time tools: Timestamp Converter, Time Zone Converter'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: 'Dark mode support with theme toggle'
-  //       },
-  //       {
-  //         type: 'added',
-  //         description: '100% client-side processing - no data leaves your browser'
-  //       }
-  //     ]
-  //   }
-  // ];
 
   getChangeIcon(type: string): string {
     switch (type) {

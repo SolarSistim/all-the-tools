@@ -52,28 +52,53 @@ export class CtaEmailList {
     return !this.isEmailValid() || this.isLoading();
   });
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (!this.isEmailValid()) {
       return; // Prevent submission if email is invalid
     }
-    
+
     if (this.email() && this.isValidEmail(this.email().trim())) {
       this.isLoading.set(true);
-      
-      // Simulate API call delay
-      setTimeout(() => {
+
+      try {
+        // Collect submission data
+        const submissionData = {
+          email: this.email().trim(),
+          referrer: document.referrer || 'Direct',
+          urlPath: window.location.pathname,
+        };
+
+        // Call Netlify function to submit email
+        const response = await fetch('/.netlify/functions/submit-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(submissionData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to submit email');
+        }
+
+        const result = await response.json();
+        console.log('Email submitted successfully:', result);
+
         this.isLoading.set(false);
         this.isSubmitted.set(true);
-        
-        // TODO: Implement actual API call here
-        console.log('Email submitted:', this.email());
-        
-        // Reset after 5 seconds (optional)
+
+        // Reset after 5 seconds
         setTimeout(() => {
           this.isSubmitted.set(false);
           this.email.set('');
         }, 5000);
-      }, 800);
+
+      } catch (error) {
+        console.error('Error submitting email:', error);
+        this.isLoading.set(false);
+        // Optionally show an error message to the user
+        alert('Sorry, there was an error submitting your email. Please try again later.');
+      }
     }
   }
 

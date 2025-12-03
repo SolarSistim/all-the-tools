@@ -113,7 +113,7 @@ export class ToolsService {
       route: 'currency-converter',
       featured: false,
       tags: ['converter', 'currency', 'money'],
-      available: false // Requires API
+      available: true
     },
 
     // ========================================

@@ -363,6 +363,11 @@
   gap: $spacing-md;
   margin-bottom: $spacing-lg;
 
+  // Stack header elements on mobile
+  @media (max-width: 640px) {
+    flex-wrap: wrap;
+  }
+
   .card-icon {
     font-size: 32px;
     width: 32px;
@@ -383,6 +388,16 @@
   .header-actions {
     display: flex;
     gap: $spacing-sm;
+
+    // Stack buttons vertically on mobile
+    @media (max-width: 640px) {
+      flex-direction: column;
+      width: 100%;
+
+      .action-btn {
+        width: 100%;
+      }
+    }
   }
 
   .action-btn {
