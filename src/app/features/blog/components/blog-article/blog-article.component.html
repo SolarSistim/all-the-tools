@@ -1,0 +1,124 @@
+<div class="blog-article-container" *ngIf="!loading && article">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a routerLink="/blog" class="breadcrumb-link">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Blog
+      </a>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <div class="article-meta-top">
+        <span class="article-category">{{ article.category }}</span>
+        <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
+        <span class="article-reading-time">{{ readingTime | readingTime }}</span>
+      </div>
+
+      <h1 class="article-title">{{ article.title }}</h1>
+
+      <p class="article-description">{{ article.description }}</p>
+
+      <div class="article-author-info">
+        <img
+          *ngIf="article.author.avatar"
+          [src]="article.author.avatar"
+          [alt]="article.author.name"
+          class="author-avatar-small"
+        />
+        <div class="author-details">
+          <span class="author-name">{{ article.author.name }}</span>
+          <span class="author-date">
+            Published {{ formatDate(article.publishedDate) }}
+            <span *ngIf="article.updatedDate"> • Updated {{ formatDate(article.updatedDate) }}</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="article-tags">
+        <mat-chip *ngFor="let tag of article.tags">{{ tag }}</mat-chip>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <app-hero-image [image]="article.heroImage"></app-hero-image>
+
+    <!-- Social Share (top) -->
+    <div class="social-share-top">
+      <app-social-share-buttons
+        [title]="article.title"
+        [url]="articleUrl"
+        [description]="article.description"
+      ></app-social-share-buttons>
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-body">
+      <app-article-content [blocks]="article.content"></app-article-content>
+    </article>
+
+    <!-- Social Share (bottom) -->
+    <div class="social-share-bottom">
+      <h3>Share this article</h3>
+      <app-social-share-buttons
+        [title]="article.title"
+        [url]="articleUrl"
+        [description]="article.description"
+      ></app-social-share-buttons>
+    </div>
+
+    <!-- Author Signature -->
+    <app-author-signature [author]="article.author"></app-author-signature>
+
+    <!-- Email CTA -->
+    <app-cta-email-list></app-cta-email-list>
+
+    <!-- Related Articles -->
+    <section class="related-articles" *ngIf="relatedArticles.length > 0">
+      <h2 class="related-title">Related Articles</h2>
+      <div class="related-grid">
+        <a
+          *ngFor="let related of relatedArticles"
+          [routerLink]="['/blog', related.slug]"
+          class="related-card"
+        >
+          <img
+            [src]="related.heroImage.src"
+            [alt]="related.heroImage.alt"
+            class="related-image"
+            loading="lazy"
+          />
+          <div class="related-content">
+            <span class="related-category">{{ related.category }}</span>
+            <h3 class="related-card-title">{{ related.title }}</h3>
+            <p class="related-description">{{ related.description }}</p>
+            <div class="related-meta">
+              <span>{{ formatDate(related.publishedDate) }}</span>
+              <span>{{ related.readingTime | readingTime }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button
+      mat-fab
+      class="back-to-top"
+      (click)="scrollToTop()"
+      aria-label="Back to top"
+    >
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div class="loading-container" *ngIf="loading">
+  <div class="loading-spinner">
+    <mat-icon>refresh</mat-icon>
+    <span>Loading article...</span>
+  </div>
+</div>

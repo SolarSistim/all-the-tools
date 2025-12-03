@@ -25,6 +25,23 @@ export interface WebPageSchema {
 }
 
 /**
+ * Configuration for Article schema
+ */
+export interface ArticleSchema {
+  headline: string;
+  description: string;
+  image: string;
+  url: string;
+  author: {
+    name: string;
+    url?: string;
+  };
+  datePublished: string;
+  dateModified?: string;
+  keywords?: string[];
+}
+
+/**
  * StructuredDataService
  * Service for managing JSON-LD structured data (schema.org)
  * Helps search engines understand your content better for rich snippets
@@ -119,6 +136,45 @@ export class StructuredDataService {
         name: crumb.name,
         item: crumb.url
       }))
+    };
+
+    this.insertStructuredData(schema);
+  }
+
+  /**
+   * Add Article schema (for blog posts)
+   * @param config Article configuration
+   */
+  addArticle(config: ArticleSchema): void {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: config.headline,
+      description: config.description,
+      image: config.image,
+      url: config.url,
+      author: {
+        '@type': 'Person',
+        name: config.author.name,
+        url: config.author.url
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'All The Things',
+        url: 'https://www.allthethings.dev',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.allthethings.dev/favicon.ico'
+        }
+      },
+      datePublished: config.datePublished,
+      dateModified: config.dateModified || config.datePublished,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': config.url
+      },
+      keywords: config.keywords?.join(', '),
+      inLanguage: 'en-US'
     };
 
     this.insertStructuredData(schema);

@@ -1,0 +1,70 @@
+.article-blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 1.5rem 1.5rem 2rem;
+  background: linear-gradient(
+    90deg,
+    var(--neon-cyan-glow) 0%,
+    transparent 2%
+  );
+  border-left: 4px solid var(--neon-cyan);
+  border-radius: 4px;
+  background-color: var(--bg-elevated);
+  position: relative;
+
+  &::before {
+    content: '"';
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    font-size: 4rem;
+    color: var(--neon-cyan);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+}
+
+.quote-text {
+  margin: 0;
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-footer {
+  margin-top: 1rem;
+  font-style: normal;
+  color: var(--text-secondary);
+
+  &::before {
+    content: '— ';
+  }
+
+  cite {
+    font-style: normal;
+
+    a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--neon-cyan-bright);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .article-blockquote {
+    padding: 1rem 1rem 1rem 1.5rem;
+  }
+
+  .quote-text {
+    font-size: 1rem;
+  }
+}

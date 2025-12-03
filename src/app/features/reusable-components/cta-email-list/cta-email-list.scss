@@ -1,9 +1,26 @@
 .email-cta {
   padding: 4rem 0;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   position: relative;
   transition: background-color 0.3s ease;
-  
+
+  // Dark theme background overrides (only apply when NOT in light theme)
+  body:not(.light-theme) &.dark-bg-primary {
+    background: var(--bg-primary);
+
+    .email-cta-card {
+      background: var(--bg-primary);
+    }
+  }
+
+  body:not(.light-theme) &.dark-bg-secondary {
+    background: var(--bg-secondary);
+
+    .email-cta-card {
+      background: var(--bg-secondary);
+    }
+  }
+
   .container {
     max-width: 1200px;
     margin: 0 auto;

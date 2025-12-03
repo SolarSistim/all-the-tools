@@ -1,0 +1,45 @@
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+.hero-image-credit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-overlay);
+  backdrop-filter: blur(10px);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border-top-left-radius: 8px;
+
+  a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--neon-cyan-bright);
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    max-height: 300px;
+  }
+}

@@ -1,0 +1,25 @@
+<figure class="article-image">
+  <img
+    [src]="data.src"
+    [alt]="data.alt"
+    [loading]="loading"
+    [width]="data.width"
+    [height]="data.height"
+    class="article-image-img"
+  />
+  <figcaption class="article-image-caption" *ngIf="data.caption || data.credit">
+    <span class="caption-text" *ngIf="data.caption">{{ data.caption }}</span>
+    <span class="caption-credit" *ngIf="data.credit">
+      Credit:
+      <a
+        *ngIf="data.creditUrl; else plainCredit"
+        [href]="data.creditUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ data.credit }}
+      </a>
+      <ng-template #plainCredit>{{ data.credit }}</ng-template>
+    </span>
+  </figcaption>
+</figure>

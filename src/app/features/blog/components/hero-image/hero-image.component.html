@@ -1,0 +1,22 @@
+<div class="hero-image-container">
+  <img
+    [src]="image.src"
+    [alt]="image.alt"
+    [loading]="loading"
+    class="hero-image"
+  />
+  <div class="hero-image-credit" *ngIf="image.credit">
+    <span>
+      Photo by
+      <a
+        *ngIf="image.creditUrl; else plainCredit"
+        [href]="image.creditUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ image.credit }}
+      </a>
+      <ng-template #plainCredit>{{ image.credit }}</ng-template>
+    </span>
+  </div>
+</div>

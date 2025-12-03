@@ -14,7 +14,7 @@
       <!-- Logo / Brand -->
       <a routerLink="/" class="logo">
         <mat-icon class="logo-icon">construction</mat-icon>
-        <span class="logo-text">ALL THE TOOLS</span>
+        <span class="logo-text">ALL THE THINGS</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -38,6 +38,15 @@
           Tools
           <mat-icon>expand_more</mat-icon>
         </button>
+
+        <!-- Blog Link -->
+        <a
+          routerLink="/blog"
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          Blog
+        </a>
 
         <!-- About Dropdown -->
         <button
@@ -312,6 +321,16 @@
         >
           <mat-icon>apps</mat-icon>
           <span>All Tools</span>
+        </a>
+
+        <a
+          routerLink="/blog"
+          routerLinkActive="active"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link"
+        >
+          <mat-icon>article</mat-icon>
+          <span>Blog</span>
         </a>
 
         <!-- Tool Categories -->

@@ -1,0 +1,107 @@
+<div class="article-content">
+  <ng-container *ngFor="let block of blocks">
+    <!-- Paragraph -->
+    <p
+      *ngIf="block.type === 'paragraph'"
+      class="content-paragraph"
+      [ngClass]="block.data.className"
+      [innerHTML]="block.data.text"
+    ></p>
+
+    <!-- Heading -->
+    <ng-container *ngIf="block.type === 'heading'">
+      <h2
+        *ngIf="block.data.level === 2"
+        class="content-heading"
+        [id]="block.data.id || generateId(block.data.text)"
+      >
+        {{ block.data.text }}
+      </h2>
+      <h3
+        *ngIf="block.data.level === 3"
+        class="content-heading"
+        [id]="block.data.id || generateId(block.data.text)"
+      >
+        {{ block.data.text }}
+      </h3>
+      <h4
+        *ngIf="block.data.level === 4"
+        class="content-heading"
+        [id]="block.data.id || generateId(block.data.text)"
+      >
+        {{ block.data.text }}
+      </h4>
+      <h5
+        *ngIf="block.data.level === 5"
+        class="content-heading"
+        [id]="block.data.id || generateId(block.data.text)"
+      >
+        {{ block.data.text }}
+      </h5>
+      <h6
+        *ngIf="block.data.level === 6"
+        class="content-heading"
+        [id]="block.data.id || generateId(block.data.text)"
+      >
+        {{ block.data.text }}
+      </h6>
+    </ng-container>
+
+    <!-- Image -->
+    <app-article-image
+      *ngIf="block.type === 'image'"
+      [data]="block.data"
+    ></app-article-image>
+
+    <!-- Gallery -->
+    <app-image-gallery
+      *ngIf="block.type === 'gallery'"
+      [data]="block.data"
+    ></app-image-gallery>
+
+    <!-- Blockquote -->
+    <app-blockquote
+      *ngIf="block.type === 'blockquote'"
+      [data]="block.data"
+    ></app-blockquote>
+
+    <!-- Code -->
+    <app-code-block
+      *ngIf="block.type === 'code'"
+      [data]="block.data"
+    ></app-code-block>
+
+    <!-- List -->
+    <ng-container *ngIf="block.type === 'list'">
+      <ul *ngIf="block.data.style === 'unordered'" class="content-list">
+        <li *ngFor="let item of block.data.items" [innerHTML]="item"></li>
+      </ul>
+      <ol *ngIf="block.data.style === 'ordered'" class="content-list">
+        <li *ngFor="let item of block.data.items" [innerHTML]="item"></li>
+      </ol>
+    </ng-container>
+
+    <!-- CTA -->
+    <div *ngIf="block.type === 'cta'" class="content-cta">
+      <h3 class="cta-title">{{ block.data.title }}</h3>
+      <p class="cta-description">{{ block.data.description }}</p>
+      <a
+        [href]="block.data.buttonUrl"
+        mat-raised-button
+        [color]="block.data.variant === 'secondary' ? 'accent' : 'primary'"
+        class="cta-button"
+      >
+        {{ block.data.buttonText }}
+      </a>
+    </div>
+
+    <!-- Affiliate -->
+    <app-affiliate-link
+      *ngIf="block.type === 'affiliate'"
+      [product]="block.data"
+    ></app-affiliate-link>
+
+    <!-- Divider -->
+    <hr *ngIf="block.type === 'divider'" class="content-divider" [ngClass]="'style-' + (block.data.style || 'line')" />
+  </ng-container>
+</div>

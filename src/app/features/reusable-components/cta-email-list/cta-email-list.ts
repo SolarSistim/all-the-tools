@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, Input, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +22,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './cta-email-list.scss',
 })
 export class CtaEmailList {
+  /**
+   * Background color for dark theme only
+   * Options: 'primary' or 'secondary'
+   * Default: 'secondary'
+   */
+  @Input() darkThemeBg: 'primary' | 'secondary' = 'secondary';
+
   email = signal('');
   isSubmitted = signal(false);
   isLoading = signal(false);

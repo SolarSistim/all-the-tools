@@ -1,0 +1,38 @@
+<div class="pagination" *ngIf="totalPages > 1">
+  <button
+    mat-button
+    class="pagination-button"
+    [disabled]="currentPage === 1"
+    (click)="goToPrevious()"
+    aria-label="Previous page"
+  >
+    <mat-icon>chevron_left</mat-icon>
+    Previous
+  </button>
+
+  <div class="pagination-numbers" *ngIf="showPageNumbers">
+    <button
+      *ngFor="let page of visiblePages"
+      mat-button
+      class="pagination-number"
+      [class.active]="page === currentPage"
+      [disabled]="!isNumber(page)"
+      (click)="onPageClick(page)"
+      [attr.aria-label]="isNumber(page) ? 'Go to page ' + page : 'More pages'"
+      [attr.aria-current]="page === currentPage ? 'page' : null"
+    >
+      {{ page }}
+    </button>
+  </div>
+
+  <button
+    mat-button
+    class="pagination-button"
+    [disabled]="currentPage === totalPages"
+    (click)="goToNext()"
+    aria-label="Next page"
+  >
+    Next
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

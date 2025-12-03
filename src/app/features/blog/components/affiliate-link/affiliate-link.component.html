@@ -1,0 +1,58 @@
+<div class="affiliate-product" [ngClass]="'variant-' + variant">
+  <div class="affiliate-badge">
+    <mat-icon>sell</mat-icon>
+    <span>Affiliate Link</span>
+  </div>
+
+  <div class="affiliate-image" *ngIf="product.image">
+    <img [src]="product.image" [alt]="product.imageAlt || product.name" loading="lazy" />
+  </div>
+
+  <div class="affiliate-content">
+    <h4 class="affiliate-name">{{ product.name }}</h4>
+
+    <div class="affiliate-rating" *ngIf="product.rating">
+      <div class="stars">
+        <mat-icon *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= product.rating!">
+          {{ star <= product.rating! ? 'star' : 'star_border' }}
+        </mat-icon>
+      </div>
+      <span class="review-count" *ngIf="product.reviewCount">
+        ({{ product.reviewCount }} reviews)
+      </span>
+    </div>
+
+    <p class="affiliate-description">{{ product.description }}</p>
+
+    <ul class="affiliate-features" *ngIf="product.features && product.features.length > 0">
+      <li *ngFor="let feature of product.features">
+        <mat-icon>check_circle</mat-icon>
+        {{ feature }}
+      </li>
+    </ul>
+
+    <div class="affiliate-footer">
+      <div class="affiliate-price" *ngIf="product.price">
+        <span class="price">{{ product.price }}</span>
+        <span class="price-note" *ngIf="product.priceNote">{{ product.priceNote }}</span>
+      </div>
+
+      <a
+        [href]="product.link"
+        target="_blank"
+        rel="nofollow sponsored noopener noreferrer"
+        mat-raised-button
+        color="primary"
+        class="affiliate-button"
+      >
+        {{ product.buttonText || 'Check Price on Amazon' }}
+        <mat-icon>open_in_new</mat-icon>
+      </a>
+    </div>
+
+    <p class="affiliate-disclosure">
+      <mat-icon>info</mat-icon>
+      {{ product.disclosure || defaultDisclosure }}
+    </p>
+  </div>
+</div>

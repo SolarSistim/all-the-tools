@@ -1,0 +1,75 @@
+<div class="image-gallery" [ngClass]="'layout-' + (data.layout || 'grid')">
+  <div
+    *ngFor="let image of data.images; let i = index"
+    class="gallery-item"
+    (click)="openLightbox(i)"
+    [attr.aria-label]="'View image: ' + image.alt"
+    role="button"
+    tabindex="0"
+    (keydown.enter)="openLightbox(i)"
+  >
+    <img
+      [src]="image.src"
+      [alt]="image.alt"
+      loading="lazy"
+      class="gallery-image"
+    />
+    <div class="gallery-overlay">
+      <mat-icon>zoom_in</mat-icon>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div
+  *ngIf="lightboxOpen"
+  class="lightbox"
+  (click)="onBackdropClick($event)"
+  (keydown)="onKeyDown($event)"
+  tabindex="0"
+  role="dialog"
+  aria-modal="true"
+>
+  <button
+    mat-icon-button
+    class="lightbox-close"
+    (click)="closeLightbox()"
+    aria-label="Close lightbox"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    class="lightbox-nav lightbox-prev"
+    (click)="previousImage()"
+    aria-label="Previous image"
+    *ngIf="data.images.length > 1"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <div class="lightbox-content">
+    <img
+      [src]="data.images[currentImageIndex].src"
+      [alt]="data.images[currentImageIndex].alt"
+      class="lightbox-image"
+    />
+    <div class="lightbox-caption" *ngIf="data.images[currentImageIndex].caption">
+      {{ data.images[currentImageIndex].caption }}
+    </div>
+    <div class="lightbox-counter" *ngIf="data.images.length > 1">
+      {{ currentImageIndex + 1 }} / {{ data.images.length }}
+    </div>
+  </div>
+
+  <button
+    mat-icon-button
+    class="lightbox-nav lightbox-next"
+    (click)="nextImage()"
+    aria-label="Next image"
+    *ngIf="data.images.length > 1"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

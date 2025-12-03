@@ -1,0 +1,110 @@
+<div class="blog-listing-container">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="blog-hero">
+      <h1 class="blog-title">The All The Things Blog</h1>
+      <p class="blog-subtitle">
+        Articles, tutorials, and guides to help you get the most out of your web tools and boost your productivity.
+      </p>
+    </section>
+
+    <!-- Filters -->
+    <div class="filters" *ngIf="selectedCategory || selectedTag">
+      <div class="active-filters">
+        <span class="filter-label">Filtered by:</span>
+        <mat-chip *ngIf="selectedCategory" class="filter-chip">
+          {{ selectedCategory }}
+          <button mat-icon-button (click)="clearFilters()" aria-label="Clear category filter">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-chip>
+        <mat-chip *ngIf="selectedTag" class="filter-chip">
+          #{{ selectedTag }}
+          <button mat-icon-button (click)="clearFilters()" aria-label="Clear tag filter">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-chip>
+      </div>
+      <button mat-button (click)="clearFilters()" class="clear-filters-btn">
+        Clear all filters
+      </button>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="articles-grid" *ngIf="!loading && articles.length > 0">
+      <article *ngFor="let article of articles" class="article-card">
+        <a [routerLink]="['/blog', article.slug]" class="article-link">
+          <div class="article-image-wrapper">
+            <img
+              [src]="article.heroImage.src"
+              [alt]="article.heroImage.alt"
+              class="article-image"
+              loading="lazy"
+            />
+            <span class="article-category">{{ article.category }}</span>
+          </div>
+
+          <div class="article-content">
+            <div class="article-meta">
+              <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
+              <span class="article-reading-time">{{ article.readingTime | readingTime }}</span>
+            </div>
+
+            <h2 class="article-title">{{ article.title }}</h2>
+
+            <p class="article-description">{{ article.description }}</p>
+
+            <div class="article-footer">
+              <div class="article-author">
+                <img
+                  *ngIf="article.author.avatar"
+                  [src]="article.author.avatar"
+                  [alt]="article.author.name"
+                  class="author-avatar"
+                />
+                <span class="author-name">{{ article.author.name }}</span>
+              </div>
+
+              <div class="article-tags">
+                <button
+                  mat-chip-button
+                  *ngFor="let tag of article.tags.slice(0, 2)"
+                  (click)="filterByTag(tag); $event.preventDefault()"
+                  class="tag-chip"
+                >
+                  #{{ tag }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && articles.length === 0">
+      <mat-icon>article</mat-icon>
+      <h2>No articles found</h2>
+      <p>Try adjusting your filters or check back later for new content.</p>
+      <button mat-raised-button color="primary" (click)="clearFilters()">
+        Clear Filters
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="loading-spinner">
+        <mat-icon>refresh</mat-icon>
+        <span>Loading articles...</span>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <app-pagination
+      *ngIf="!loading && articles.length > 0"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+</div>

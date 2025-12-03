@@ -1,0 +1,16 @@
+<blockquote class="article-blockquote">
+  <p class="quote-text">{{ data.text }}</p>
+  <footer class="quote-footer" *ngIf="data.citation">
+    <cite>
+      <a
+        *ngIf="data.citationUrl; else plainCitation"
+        [href]="data.citationUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ data.citation }}
+      </a>
+      <ng-template #plainCitation>{{ data.citation }}</ng-template>
+    </cite>
+  </footer>
+</blockquote>

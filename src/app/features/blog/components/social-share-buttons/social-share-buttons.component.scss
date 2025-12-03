@@ -1,0 +1,77 @@
+.social-share {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &.layout-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.share-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.share-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &.twitter {
+    color: #1da1f2;
+
+    &:hover {
+      background-color: rgba(29, 161, 242, 0.1);
+    }
+  }
+
+  &.facebook {
+    color: #1877f2;
+
+    &:hover {
+      background-color: rgba(24, 119, 242, 0.1);
+    }
+  }
+
+  &.linkedin {
+    color: #0a66c2;
+
+    &:hover {
+      background-color: rgba(10, 102, 194, 0.1);
+    }
+  }
+
+  &.copy {
+    color: var(--neon-cyan);
+
+    &:hover {
+      background-color: var(--neon-cyan-glow);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .social-share {
+    flex-wrap: wrap;
+  }
+
+  .share-label {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+}
