@@ -88,8 +88,6 @@
 
   .success-content {
     position: absolute;
-    margin-top: 36px;
-    margin-bottom: 36px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -326,8 +324,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     margin-bottom: 1rem;
     background: linear-gradient(135deg, #10b981, #059669);
     border-radius: 50%;
