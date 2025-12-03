@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
+import { MetaService } from '../../../../core/services/meta.service';
 
 interface Currency {
   code: string;
@@ -35,7 +36,7 @@ interface Currency {
   templateUrl: './currency-converter.html',
   styleUrl: './currency-converter.scss',
 })
-export class CurrencyConverter {
+export class CurrencyConverter implements OnInit {
   // Amount signals
   fromAmount = signal<number>(1);
   toAmount = signal<number>(0);
@@ -66,6 +67,7 @@ export class CurrencyConverter {
     { code: 'DKK', name: 'Danish Krone', symbol: 'kr', flag: '🇩🇰' },
     { code: 'PLN', name: 'Polish Zloty', symbol: 'zł', flag: '🇵🇱' },
     { code: 'THB', name: 'Thai Baht', symbol: '฿', flag: '🇹🇭' },
+    { code: 'RUB', name: 'Russian Ruble', symbol: '₽', flag: '🇷🇺' },
   ];
 
   // Static exchange rates (relative to 1 USD)
@@ -91,7 +93,20 @@ export class CurrencyConverter {
     DKK: 6.88,
     PLN: 3.98,
     THB: 35.42,
+    RUB: 92.50,
   };
+
+  private metaService = inject(MetaService);
+
+    ngOnInit(): void {
+    this.metaService.updateTags({
+      title: 'Currency Converter - Real-Time Exchange Rates for 20+ Currencies',
+      description: 'Convert between 20+ world currencies with real-time exchange rates. Fast, accurate currency conversion for USD, EUR, GBP, JPY, and more.',
+      keywords: ['currency converter', 'exchange rate', 'currency exchange', 'forex converter', 'money converter', 'currency calculator', 'foreign exchange', 'convert currency', 'USD to EUR', 'real-time exchange rates'],
+      image: 'https://www.allthethings.dev/meta-images/og-currency-converter.png',
+      url: 'https://www.allthethings.dev/tools/currency-converter'
+    });
+  }
 
   // Get current exchange rate
   currentRate = computed(() => {

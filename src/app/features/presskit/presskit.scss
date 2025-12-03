@@ -3700,3 +3700,585 @@
     }
   }
 }
+
+// ============================================
+// HERO SECTION - CURRENCY CONVERTER
+// ============================================
+.hero-currency-converter {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO VISUAL - CURRENCY CONVERTER THEME
+// ============================================
+.hero-currency-converter .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.currency-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+  width: 100%;
+  max-width: 550px;
+}
+
+.currency-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xl;
+
+  @media (max-width: 1200px) {
+    height: 450px;
+    gap: $spacing-lg;
+  }
+}
+
+// Currency Cards (From/To)
+.currency-card {
+  position: relative;
+  width: 280px;
+  padding: $spacing-xl $spacing-2xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3),
+              0 0 40px var(--neon-cyan-glow),
+              inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: currency-card-float 4s ease-in-out infinite;
+  z-index: 3;
+
+  @media (max-width: 1200px) {
+    width: 240px;
+    padding: $spacing-lg $spacing-xl;
+  }
+
+  &.card-from {
+    animation-delay: 0s;
+  }
+
+  &.card-to {
+    animation-delay: 2s;
+    border-color: var(--neon-pink);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3),
+                0 0 40px var(--neon-pink-glow),
+                inset 0 0 30px rgba(255, 140, 176, 0.1);
+  }
+
+  .currency-flag {
+    font-size: 4rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    animation: flag-pulse 3s ease-in-out infinite;
+  }
+
+  .currency-code {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.1em;
+  }
+
+  .currency-amount {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px var(--neon-cyan-glow));
+  }
+}
+
+// Exchange Icon Container
+.exchange-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  z-index: 4;
+
+  .swap-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    padding: $spacing-md;
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+    border: 3px solid transparent;
+    border-radius: 16px;
+    background-clip: padding-box;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4),
+                0 0 40px var(--neon-cyan-glow);
+    animation: swap-icon-pulse 2s ease-in-out infinite;
+    
+    // Gradient border effect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      border-radius: 16px;
+      z-index: -1;
+    }
+
+    @media (max-width: 1200px) {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .exchange-rate {
+    position: absolute;
+    top: 100%;
+    margin-top: $spacing-sm;
+    padding: $spacing-xs $spacing-md;
+    background: var(--bg-elevated);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--neon-cyan);
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+                0 0 25px var(--neon-cyan-glow);
+    animation: rate-fade 3s ease-in-out infinite;
+
+    @media (max-width: 1200px) {
+      font-size: 0.8rem;
+      padding: $spacing-xs $spacing-sm;
+    }
+  }
+}
+
+// Floating Currency Badges
+.floating-currency {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: badge-float 5s ease-in-out infinite;
+  z-index: 2;
+
+  @media (max-width: 1200px) {
+    width: 70px;
+    height: 70px;
+  }
+
+  .badge-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    @media (max-width: 1200px) {
+      padding: $spacing-xs $spacing-sm;
+    }
+
+    &:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3),
+                  0 0 30px var(--neon-pink-glow);
+      transform: scale(1.1);
+    }
+
+    .badge-flag {
+      font-size: 1.8rem;
+      line-height: 1;
+
+      @media (max-width: 1200px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .badge-code {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+
+      @media (max-width: 1200px) {
+        font-size: 0.65rem;
+      }
+    }
+  }
+
+  // Badge positioning
+  &.badge-1 {
+    top: 5%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  &.badge-2 {
+    top: 8%;
+    right: 8%;
+    animation-delay: 1s;
+  }
+
+  &.badge-3 {
+    top: 50%;
+    left: 0%;
+    animation-delay: 2s;
+  }
+
+  &.badge-4 {
+    top: 50%;
+    right: 0%;
+    animation-delay: 3s;
+  }
+
+  &.badge-5 {
+    bottom: 8%;
+    left: 12%;
+    animation-delay: 4s;
+  }
+
+  &.badge-6 {
+    bottom: 5%;
+    right: 10%;
+    animation-delay: 5s;
+  }
+}
+
+// Connection Lines (subtle)
+.connection-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+
+  .line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%,
+      var(--neon-cyan) 50%,
+      transparent 100%);
+    opacity: 0.3;
+    animation: line-pulse 4s ease-in-out infinite;
+
+    &.line-1 {
+      top: 20%;
+      left: 15%;
+      right: 15%;
+      animation-delay: 0s;
+    }
+
+    &.line-2 {
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        var(--neon-pink) 50%,
+        transparent 100%);
+      animation-delay: 1.3s;
+    }
+
+    &.line-3 {
+      bottom: 20%;
+      left: 15%;
+      right: 15%;
+      animation-delay: 2.6s;
+    }
+  }
+}
+
+// ============================================
+// HERO SECTION - CURRENCY CONVERTER
+// ============================================
+.hero-currency-converter {
+  // Inherits base .hero styles
+}
+
+// ============================================
+// HERO VISUAL - CURRENCY CONVERTER THEME
+// ============================================
+.hero-currency-converter .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.currency-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+  width: 100%;
+  max-width: 550px;
+}
+
+.currency-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xl;
+
+  @media (max-width: 1200px) {
+    height: 450px;
+    gap: $spacing-lg;
+  }
+}
+
+// Currency Cards (From/To)
+.currency-card {
+  position: relative;
+  width: 280px;
+  padding: $spacing-xl $spacing-2xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
+              0 0 30px var(--neon-cyan-glow);
+  animation: currency-card-float 4s ease-in-out infinite;
+  z-index: 3;
+
+  @media (max-width: 1200px) {
+    width: 240px;
+    padding: $spacing-lg $spacing-xl;
+  }
+
+  &.card-from {
+    animation-delay: 0s;
+  }
+
+  &.card-to {
+    animation-delay: 2s;
+    border-color: var(--neon-pink);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3),
+                0 0 30px var(--neon-pink-glow);
+  }
+
+  .currency-flag {
+    font-size: 4rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+  }
+
+  .currency-code {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.1em;
+  }
+
+  .currency-amount {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Exchange Icon Container
+.exchange-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  z-index: 4;
+
+  .swap-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    padding: $spacing-md;
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+    border: 3px solid transparent;
+    border-radius: 16px;
+    background-clip: padding-box;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    animation: swap-icon-pulse 2s ease-in-out infinite;
+    
+    // Gradient border effect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      border-radius: 16px;
+      z-index: -1;
+    }
+
+    @media (max-width: 1200px) {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .exchange-rate {
+    position: absolute;
+    top: 100%;
+    margin-top: $spacing-sm;
+    padding: $spacing-xs $spacing-md;
+    background: var(--bg-elevated);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--neon-cyan);
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 1200px) {
+      font-size: 0.8rem;
+      padding: $spacing-xs $spacing-sm;
+    }
+  }
+}
+
+// Floating Currency Badges
+.floating-currency {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: badge-float 5s ease-in-out infinite;
+  z-index: 2;
+  opacity: 0.7;
+
+  @media (max-width: 1200px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  .badge-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: var(--bg-elevated);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 1200px) {
+      padding: $spacing-xs $spacing-sm;
+    }
+
+    .badge-flag {
+      font-size: 1.5rem;
+      line-height: 1;
+
+      @media (max-width: 1200px) {
+        font-size: 1.3rem;
+      }
+    }
+
+    .badge-code {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+
+      @media (max-width: 1200px) {
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  // Badge positioning
+  &.badge-1 {
+    top: 15%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+
+  &.badge-2 {
+    top: 15%;
+    right: 5%;
+    animation-delay: 1.5s;
+  }
+
+  &.badge-3 {
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 3s;
+  }
+}
+
+// Currency Converter Animations
+@keyframes currency-card-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes swap-icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes badge-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
