@@ -13,6 +13,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { MetaService } from '../../../../core/services/meta.service';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface PasswordStrength {
   score: number;
@@ -35,7 +36,8 @@ interface PasswordStrength {
     MatSnackBarModule,
     MatTooltipModule,
     MatChipsModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CtaEmailList
   ],
   templateUrl: './password-generator.html',
   styleUrl: './password-generator.scss',

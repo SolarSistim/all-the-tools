@@ -14,6 +14,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { MetaService } from '../../../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
   selector: 'app-body-mass-index-calculator',
@@ -29,7 +30,8 @@ import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-
     MatButtonModule,
     MatButtonToggleModule,
     PageHeaderComponent,
-    ToolCardComponent
+    ToolCardComponent,
+    CtaEmailList
   ],
   templateUrl: './body-mass-index-calculator.html',
   styleUrl: './body-mass-index-calculator.scss'

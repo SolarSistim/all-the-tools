@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { MetaService } from '../../core/services/meta.service';
+import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
   selector: 'app-privacy',
   standalone: true,
-  imports: [PageHeaderComponent],
+  imports: [PageHeaderComponent,CtaEmailList],
   templateUrl: './privacy.html',
   styleUrl: './privacy.scss',
 })

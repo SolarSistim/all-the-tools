@@ -10,6 +10,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
   selector: 'app-uuid-generator',
@@ -24,7 +25,8 @@ import { MetaService } from '../../../../core/services/meta.service';
     MatButtonModule,
     MatSnackBarModule,
     MatTooltipModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CtaEmailList
   ],
   templateUrl: './uuid-generator.html',
   styleUrl: './uuid-generator.scss',

@@ -11,6 +11,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { MetaService } from '../../../../core/services/meta.service';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
 
@@ -26,7 +27,8 @@ type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
     MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CtaEmailList
   ],
   templateUrl: './lorem-ipsum.html',
   styleUrl: './lorem-ipsum.scss',

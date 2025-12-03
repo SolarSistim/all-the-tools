@@ -4,11 +4,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { MetaService } from '../../core/services/meta.service';
+import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [RouterLink, MatIconModule, MatButtonModule, PageHeaderComponent],
+  imports: [RouterLink, MatIconModule, MatButtonModule, PageHeaderComponent,CtaEmailList],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

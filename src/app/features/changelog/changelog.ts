@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { MetaService } from '../../core/services/meta.service';
+import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
 
 interface ChangelogEntry {
   version: string;
@@ -26,7 +27,8 @@ interface ChangelogEntry {
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CtaEmailList
   ],
   templateUrl: './changelog.html',
   styleUrl: './changelog.scss',

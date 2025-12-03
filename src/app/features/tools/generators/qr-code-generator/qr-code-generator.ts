@@ -15,6 +15,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import QRCode from 'qrcode';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 type QRCodeType = 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard';
 
@@ -41,7 +42,8 @@ interface QRCodeOptions {
     MatSnackBarModule,
     MatTooltipModule,
     MatExpansionModule,
-    PageHeaderComponent
+    PageHeaderComponent,
+    CtaEmailList
   ],
   templateUrl: './qr-code-generator.html',
   styleUrl: './qr-code-generator.scss',

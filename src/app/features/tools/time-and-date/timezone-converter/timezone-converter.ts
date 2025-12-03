@@ -10,6 +10,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface TimezoneDisplay {
   id: string;
@@ -39,7 +40,8 @@ interface TimezoneOption {
     MatFormFieldModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    CtaEmailList
   ],
   templateUrl: './timezone-converter.html',
   styleUrl: './timezone-converter.scss',

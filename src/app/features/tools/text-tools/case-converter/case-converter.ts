@@ -12,6 +12,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { MetaService } from '../../../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface CaseConversion {
   id: string;
@@ -34,7 +35,8 @@ interface CaseConversion {
     MatButtonModule,
     MatSnackBarModule,
     PageHeaderComponent,
-    ToolCardComponent
+    ToolCardComponent,
+    CtaEmailList
   ],
   templateUrl: './case-converter.html',
   styleUrl: './case-converter.scss'

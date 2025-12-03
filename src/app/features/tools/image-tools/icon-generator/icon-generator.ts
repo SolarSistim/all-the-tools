@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import JSZip from 'jszip';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface IconSize {
   name: string;
@@ -26,7 +27,8 @@ interface IconSize {
     MatButtonModule,
     MatCheckboxModule,
     MatTooltipModule,
-    FormsModule
+    FormsModule,
+    CtaEmailList
   ],
   templateUrl: './icon-generator.html',
   styleUrl: './icon-generator.scss',

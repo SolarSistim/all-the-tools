@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface ColorStop {
   id: number;
@@ -48,7 +49,8 @@ interface GradientPreset {
     MatSliderModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    CtaEmailList
   ],
   templateUrl: './gradient-generator.html',
   styleUrl: './gradient-generator.scss'
