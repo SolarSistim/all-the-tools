@@ -436,9 +436,10 @@
 // Hero Section Styles
 // Hero Section Styles
 .hero-section {
-  background-color: #212537;
-  padding: 4rem 0;
-  margin: 2rem -2rem 3rem -2rem;
+  background-color: var(--bg-secondary);
+  padding: 30px;
+  padding-top: 26px !important;
+  margin: 0rem -2rem 3rem -2rem;
   padding-left: 2rem;
   padding-right: 2rem;
   display: grid;
@@ -449,6 +450,7 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 24px;
+  transition: background-color 0.3s ease;
   
   // Add the top border style to match the converter cards
   border-top: 4px solid #667eea;
@@ -514,8 +516,9 @@
 .hero-subtitle {
   font-size: 1.125rem;
   line-height: 1.7;
-  color: #b8bcc8;
+  color: var(--text-secondary);
   margin: 0;
+  transition: color 0.3s ease;
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -561,14 +564,14 @@
 }
 
 .calc-example {
-  background: #2d3248;
+  background: var(--bg-elevated);
   border-radius: 16px;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   animation: slideIn 0.5s ease-out forwards;
   opacity: 0;
-  border: 1px solid rgba(102, 126, 234, 0.2);
+  border: 1px solid var(--border-color);
 
   &:hover {
     transform: translateX(10px);
@@ -614,9 +617,10 @@
   display: block;
   font-family: 'Courier New', monospace;
   font-size: 1.125rem;
-  color: #e8eaf0;
+  color: var(--text-primary);
   background: transparent;
   padding: 0;
+  transition: color 0.3s ease;
 
   .highlight {
     color: #667eea;
