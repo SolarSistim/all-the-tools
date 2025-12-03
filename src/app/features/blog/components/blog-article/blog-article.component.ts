@@ -54,10 +54,32 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   loading = true;
 
   ngOnInit(): void {
-    this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
-      const slug = params['slug'];
-      if (slug) {
-        this.loadArticle(slug);
+    // Get article from resolver data
+    const article = this.route.snapshot.data['article'] as Article | null;
+
+    if (article) {
+      this.article = article;
+      this.readingTime = this.blogService.calculateReadingTime(article);
+      this.articleUrl = this.blogService.getArticleUrl(article.slug);
+      this.updateMetaTags();
+      this.updateStructuredData();
+      this.loadRelatedArticles();
+      this.loading = false;
+    } else {
+      this.router.navigate(['/blog']);
+    }
+
+    // Watch for route changes (if navigating between articles)
+    this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
+      const newArticle = data['article'] as Article | null;
+      if (newArticle && newArticle.id !== this.article?.id) {
+        this.article = newArticle;
+        this.readingTime = this.blogService.calculateReadingTime(newArticle);
+        this.articleUrl = this.blogService.getArticleUrl(newArticle.slug);
+        this.updateMetaTags();
+        this.updateStructuredData();
+        this.loadRelatedArticles();
+        this.loading = false;
       }
     });
   }
@@ -66,29 +88,6 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
     this.structuredDataService.removeStructuredData();
   }
 
-  private loadArticle(slug: string): void {
-    this.loading = true;
-
-    this.blogService.getArticleBySlug(slug).subscribe({
-      next: (article) => {
-        if (article) {
-          this.article = article;
-          this.readingTime = this.blogService.calculateReadingTime(article);
-          this.articleUrl = this.blogService.getArticleUrl(article.slug);
-          this.updateMetaTags();
-          this.updateStructuredData();
-          this.loadRelatedArticles();
-        } else {
-          this.router.navigate(['/blog']);
-        }
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.router.navigate(['/blog']);
-      },
-    });
-  }
 
   private loadRelatedArticles(): void {
     if (!this.article) return;

@@ -1,6 +1,6 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
-import { map, delay, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {
   Article,
   ArticlePreview,
@@ -90,7 +90,7 @@ export class BlogService {
       pageSize,
       totalItems,
       totalPages,
-    }).pipe(delay(100)); // Simulate small network delay
+    });
   }
 
   /**
@@ -99,7 +99,7 @@ export class BlogService {
   getArticleBySlug(slug: string): Observable<Article | null> {
     // Check if article is already fully loaded in cache
     if (this.fullArticlesCache.has(slug)) {
-      return of(this.fullArticlesCache.get(slug)!).pipe(delay(50));
+      return of(this.fullArticlesCache.get(slug)!);
     }
 
     // Find metadata
@@ -123,8 +123,7 @@ export class BlogService {
         // Cache the full article
         this.fullArticlesCache.set(slug, article);
         return article;
-      }),
-      delay(50)
+      })
     );
   }
 
@@ -177,7 +176,7 @@ export class BlogService {
       related = [...related, ...byCategory];
     }
 
-    return of(related.slice(0, limit)).pipe(delay(50));
+    return of(related.slice(0, limit));
   }
 
   /**
@@ -208,7 +207,7 @@ export class BlogService {
     const featured = this.previewsCache()
       .filter((p) => p.featured)
       .slice(0, limit);
-    return of(featured).pipe(delay(50));
+    return of(featured);
   }
 
   /**
@@ -222,7 +221,7 @@ export class BlogService {
         return dateB - dateA;
       })
       .slice(0, limit);
-    return of(recent).pipe(delay(50));
+    return of(recent);
   }
 
   /**

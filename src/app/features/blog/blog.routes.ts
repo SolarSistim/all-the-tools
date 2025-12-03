@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { articleResolver } from './resolvers/article.resolver';
 
 /**
  * Blog Routes
@@ -15,6 +16,9 @@ export const BLOG_ROUTES: Routes = [
   },
   {
     path: ':slug',
+    resolve: {
+      article: articleResolver,
+    },
     loadComponent: () =>
       import('./components/blog-article/blog-article.component').then(
         (m) => m.BlogArticleComponent
