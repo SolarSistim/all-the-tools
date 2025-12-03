@@ -32,6 +32,7 @@
         <button
           mat-button
           [matMenuTriggerFor]="toolsMenu"
+          #toolsMenuTrigger="matMenuTrigger"
           class="nav-link tools-btn"
         >
           Tools
@@ -78,50 +79,144 @@
     </div>
   </mat-toolbar>
 
-  <!-- Tools Dropdown Menu (Desktop) -->
-  <mat-menu #toolsMenu="matMenu" class="tools-menu">
-    <div class="tools-menu-content">
-      <!-- Quick Links to Featured Tools -->
-      <div class="menu-section">
-        <h4 class="menu-section-title">Featured Tools</h4>
-        @for (tool of featuredTools; track tool.id) {
-          <a
-            mat-menu-item
-            [routerLink]="['/tools', tool.route]"
-            class="tool-menu-item"
-          >
-            <mat-icon>{{ tool.icon }}</mat-icon>
-            <span>{{ tool.name }}</span>
-          </a>
-        }
-      </div>
-
-      <!-- Categories -->
-      <div class="menu-section">
-        <h4 class="menu-section-title">Browse by Category</h4>
-        @for (category of categories; track category.id) {
-          @if (getToolCount(category.id) > 0) {
-            <a
-              mat-menu-item
-              [routerLink]="['/tools']"
-              [queryParams]="{category: category.id}"
-              class="category-menu-item"
-            >
-              <mat-icon>{{ category.icon }}</mat-icon>
-              <div class="category-info">
-                <span class="category-name">{{ category.name }}</span>
-                <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+  <!-- Tools Dropdown Menu (Desktop) - Mega Menu with Tabs -->
+  <mat-menu #toolsMenu="matMenu" class="tools-menu mega-menu" xPosition="after">
+    <div class="mega-menu-content">
+      <mat-tab-group class="mega-menu-tabs" (click)="$event.stopPropagation()">
+        <!-- Tab 1: All Tools -->
+        <mat-tab label="All Tools">
+          <div class="mega-menu-tab-content">
+            <div class="mega-menu-columns">
+              <!-- Column 1: First 5 tools -->
+              <div class="mega-menu-column">
+                @for (tool of sortedTools; track tool.id; let i = $index) {
+                  @if (i < 5) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools', tool.route]"
+                      (click)="closeMegaMenu()"
+                      class="tool-menu-item"
+                    >
+                      <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span>{{ tool.name }}</span>
+                    </a>
+                  }
+                }
               </div>
-            </a>
-          }
-        }
-      </div>
 
-      <!-- View All Link -->
-      <div class="menu-section menu-footer">
+              <!-- Column 2: Next 5 tools -->
+              <div class="mega-menu-column">
+                @for (tool of sortedTools; track tool.id; let i = $index) {
+                  @if (i >= 5 && i < 10) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools', tool.route]"
+                      (click)="closeMegaMenu()"
+                      class="tool-menu-item"
+                    >
+                      <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span>{{ tool.name }}</span>
+                    </a>
+                  }
+                }
+              </div>
+
+              <!-- Column 3: Last 5 tools -->
+              <div class="mega-menu-column">
+                @for (tool of sortedTools; track tool.id; let i = $index) {
+                  @if (i >= 10 && i < 15) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools', tool.route]"
+                      (click)="closeMegaMenu()"
+                      class="tool-menu-item"
+                    >
+                      <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span>{{ tool.name }}</span>
+                    </a>
+                  }
+                }
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+
+        <!-- Tab 2: Categories -->
+        <mat-tab label="Categories">
+          <div class="mega-menu-tab-content">
+            <div class="mega-menu-columns">
+              <!-- Column 1: First 3 categories -->
+              <div class="mega-menu-column">
+                @for (category of categoriesWithTools; track category.id; let i = $index) {
+                  @if (i < 3) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools']"
+                      [queryParams]="{category: category.id}"
+                      (click)="closeMegaMenu()"
+                      class="category-menu-item"
+                    >
+                      <mat-icon>{{ category.icon }}</mat-icon>
+                      <div class="category-info">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+                      </div>
+                    </a>
+                  }
+                }
+              </div>
+
+              <!-- Column 2: Next 3 categories -->
+              <div class="mega-menu-column">
+                @for (category of categoriesWithTools; track category.id; let i = $index) {
+                  @if (i >= 3 && i < 6) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools']"
+                      [queryParams]="{category: category.id}"
+                      (click)="closeMegaMenu()"
+                      class="category-menu-item"
+                    >
+                      <mat-icon>{{ category.icon }}</mat-icon>
+                      <div class="category-info">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+                      </div>
+                    </a>
+                  }
+                }
+              </div>
+
+              <!-- Column 3: Last 3 categories -->
+              <div class="mega-menu-column">
+                @for (category of categoriesWithTools; track category.id; let i = $index) {
+                  @if (i >= 6 && i < 9) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools']"
+                      [queryParams]="{category: category.id}"
+                      (click)="closeMegaMenu()"
+                      class="category-menu-item"
+                    >
+                      <mat-icon>{{ category.icon }}</mat-icon>
+                      <div class="category-info">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+                      </div>
+                    </a>
+                  }
+                }
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+      <!-- View All Link - Bottom Right -->
+      <div class="mega-menu-footer">
         <a
-          mat-menu-item
-          routerLink="/tools"
+          mat-raised-button
+          [routerLink]="['/tools']"
           class="view-all-link"
         >
           <mat-icon>apps</mat-icon>

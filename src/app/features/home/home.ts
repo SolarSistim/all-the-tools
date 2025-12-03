@@ -9,6 +9,7 @@ import { MetaService } from '../../core/services/meta.service';
 import { StructuredDataService } from '../../core/services/structured-data.service';
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
+import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +20,14 @@ import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    ToolCardComponent
-  ],
+    ToolCardComponent,
+    CtaEmailList
+],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class HomeComponent implements OnInit {
-  toolsService = inject(ToolsService); // Made public for template access
+  toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private structuredData = inject(StructuredDataService);
 

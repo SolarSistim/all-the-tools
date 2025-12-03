@@ -1,15 +1,16 @@
-import { Component, signal, inject, OnInit, OnDestroy, HostBinding, PLATFORM_ID } from '@angular/core';
+import { Component, signal, inject, OnInit, OnDestroy, HostBinding, PLATFORM_ID, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ToolsService } from '../../core/services/tools.service';
 import { SidenavService } from '../../core/services/sidenav.service';
 import { ToolCategoryMeta, Tool } from '../../core/models/tool.interface';
@@ -28,7 +29,8 @@ import { ToolCategoryMeta, Tool } from '../../core/models/tool.interface';
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
@@ -69,10 +71,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.toolsService.getAllCategories();
   }
 
+  // Get categories that have tools (for mega menu layout)
+  get categoriesWithTools(): ToolCategoryMeta[] {
+    return this.categories.filter(category => this.getToolCount(category.id) > 0);
+  }
+
   // Get featured tools for quick access
   get featuredTools() {
     return this.toolsService.getFeaturedTools();
   }
+
+  // Expose Math for template usage
+  Math = Math;
+
+  // ViewChild to access the tools menu trigger
+  @ViewChild('toolsMenuTrigger') toolsMenuTrigger!: MatMenuTrigger;
 
   ngOnInit(): void {
     // Load saved theme from localStorage (only in browser)
@@ -115,6 +128,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Close the tools mega menu
+   */
+  closeMegaMenu(): void {
+    if (this.toolsMenuTrigger) {
+      this.toolsMenuTrigger.closeMenu();
+    }
+  }
+
+  /**
    * Toggle tools sidenav
    */
   toggleToolsSidenav(): void {
@@ -133,6 +155,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
   get allTools(): Tool[] {
     return this.toolsService.getAllTools();
+  }
+
+  /**
+   * Get all tools sorted alphabetically by name
+   */
+  get sortedTools(): Tool[] {
+    return [...this.allTools].sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  /**
+   * Get non-featured tools for the mega menu
+   */
+  get nonFeaturedTools(): Tool[] {
+    const featured = this.featuredTools;
+    return this.allTools.filter(tool => !featured.some(ft => ft.id === tool.id));
+  }
+
+  /**
+   * Check if a tool is featured
+   */
+  isToolFeatured(toolId: string): boolean {
+    return this.featuredTools.some(ft => ft.id === toolId);
   }
 
   /**

@@ -1,0 +1,65 @@
+<section class="email-cta">
+  <div class="container">
+    <div class="email-cta-card">
+      <!-- Form State -->
+      <div class="cta-content" [class.fade-out]="isSubmitted()">
+        <div class="cta-left">
+          <div class="cta-icon-wrapper">
+            <mat-icon class="cta-icon">mail_outline</mat-icon>
+          </div>
+          <div class="cta-text">
+            <h3 class="cta-title">Stay in the Loop</h3>
+            <p class="cta-subtitle">
+              Get notified when we add new tools and features
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-right">
+          <form class="email-form" (ngSubmit)="onSubmit()">
+            <div class="input-wrapper">
+              <mat-icon class="input-icon">email</mat-icon>
+              <input
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="your@email.com"
+                class="email-input"
+                [disabled]="isLoading()"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn"
+              [disabled]="isButtonDisabled()"
+              [matTooltip]="tooltipMessage()"
+              [matTooltipDisabled]="isEmailValid() && !isLoading()"
+              matTooltipPosition="above"
+              matTooltipShowDelay="0"
+            >
+              <mat-icon *ngIf="!isLoading()">send</mat-icon>
+              <mat-icon *ngIf="isLoading()" class="loading-icon">hourglass_empty</mat-icon>
+              {{ isLoading() ? 'Subscribing...' : 'Subscribe' }}
+            </button>
+          </form>
+          
+          <!-- <p class="cta-disclaimer">
+            No spam, ever. Unsubscribe anytime.
+          </p> -->
+        </div>
+      </div>
+
+      <!-- Success State -->
+      <div class="success-content" [class.fade-in]="isSubmitted()">
+        <div class="success-icon-wrapper">
+          <mat-icon class="success-icon">check_circle</mat-icon>
+        </div>
+        <h3 class="success-title">Thank You!</h3>
+        <p class="success-subtitle">
+          You're all set. We'll keep you updated with the latest tools and features.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
