@@ -15,6 +15,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
 
 @Component({
   selector: 'app-body-mass-index-calculator',
@@ -31,7 +32,8 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     MatButtonToggleModule,
     PageHeaderComponent,
     ToolCardComponent,
-    CtaEmailList
+    CtaEmailList,
+    AlertDanger
   ],
   templateUrl: './body-mass-index-calculator.html',
   styleUrl: './body-mass-index-calculator.scss'

@@ -16,6 +16,7 @@ html {
   height: 100%;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  background-color: #0A0E1A;
 }
 
 *,
@@ -505,4 +506,107 @@ body.light-theme {
 // Focused bottom line color (darker)
 .mat-mdc-form-field.mat-focused .mat-mdc-form-field-underline {
   background-color: rgba(0, 0, 0, 0.87) !important;
+}
+
+// ============================================
+// MATERIAL SELECT DROPDOWN OVERRIDES
+// ============================================
+
+// Select trigger (the closed dropdown display)
+.mat-mdc-select {
+  // Selected value text
+  .mat-mdc-select-value {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  // Selected value text container - ensure proper spacing
+  .mat-mdc-select-value-text {
+    .currency-option {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+
+      // Add explicit margin to each child for better spacing
+      .currency-flag {
+        margin-right: 0.5rem !important;
+      }
+
+      .currency-code {
+        margin-right: 0.5rem !important;
+      }
+
+      .currency-name {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  // Select arrow
+  .mat-mdc-select-arrow {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  // Placeholder text
+  .mat-mdc-select-placeholder {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+}
+
+// Select panel (dropdown container)
+.mat-mdc-select-panel {
+  background: #F1F1F1 !important;
+  border-radius: 8px !important;
+}
+
+// Select options
+.mat-mdc-option {
+  background: #F1F1F1 !important;
+
+  // Primary text color (dark for visibility)
+  .mdc-list-item__primary-text {
+    color: #2c2c2c !important;
+  }
+
+  // Hover state
+  &:hover {
+    background: #e0e0e0 !important;
+  }
+
+  // Active state (keyboard navigation)
+  &.mat-mdc-option-active {
+    background: #e0e0e0 !important;
+  }
+
+  // Selected state
+  &.mdc-list-item--selected {
+    background: #d0d0d0 !important;
+
+    .mdc-list-item__primary-text {
+      color: #1a1a1a !important;
+      font-weight: 600;
+    }
+  }
+}
+
+// Currency option styling for select dropdowns
+.currency-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .currency-flag {
+    font-size: 1.25rem;
+    color: #2c2c2c !important;
+  }
+
+  .currency-code {
+    font-weight: 600;
+    min-width: 40px;
+    color: #2c2c2c !important;
+  }
+
+  .currency-name {
+    font-size: 0.875rem;
+    color: #5c5c5c !important;
+  }
 }

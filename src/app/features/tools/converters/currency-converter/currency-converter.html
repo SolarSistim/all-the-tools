@@ -1,25 +1,200 @@
-<div class="coming-soon-container">
-  <div class="coming-soon-content">
-    <div class="icon-wrapper">
-      <mat-icon class="coming-soon-icon">attach_money</mat-icon>
-    </div>
-    <h1 class="coming-soon-title">Currency Converter</h1>
-    <p class="coming-soon-subtitle">Coming Soon</p>
-    <p class="coming-soon-description">
-      This tool is currently under development. Check back soon for real-time currency conversion capabilities!
-    </p>
-    <div class="features-preview">
-      <div class="feature-item">
-        <mat-icon>swap_horiz</mat-icon>
-        <span>Real-time exchange rates</span>
+<div class="currency-converter-container">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">currency_exchange</mat-icon>
+        </div>
+        <h1 class="hero-title">Currency Converter</h1>
+        <p class="hero-subtitle">
+          Convert between 20 major world currencies using available exchange rate data. Check exchange rates quickly for reference purposes.
+        </p>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToConverter()"
+            class="cta-button"
+          >
+            <mat-icon>currency_exchange</mat-icon>
+            Convert Currency Now
+          </button>
+        </div>
       </div>
-      <div class="feature-item">
-        <mat-icon>language</mat-icon>
-        <span>Multiple currencies</span>
+      <div class="hero-visual">
+        <div class="calculation-showcase">
+          <div class="calc-example calc-example-1">
+            <span class="calc-label">USD to EUR</span>
+            <code>$100.00 → <span class="highlight">€92.00</span></code>
+          </div>
+          <div class="calc-example calc-example-2">
+            <span class="calc-label">GBP to JPY</span>
+            <code>£50.00 → <span class="highlight">¥9,462</span></code>
+          </div>
+          <div class="calc-example calc-example-3">
+            <span class="calc-label">EUR to USD</span>
+            <code>€200.00 → <span class="highlight">$217.39</span></code>
+          </div>
+        </div>
       </div>
-      <div class="feature-item">
-        <mat-icon>trending_up</mat-icon>
-        <span>Historical data</span>
+    </section>
+
+        <app-alert-danger 
+      title="Important Notice" 
+      content="This tool provides approximate exchange rates for general information only. Always verify rates with your financial institution before making any transactions. All The Tools is not a financial services provider.">
+    </app-alert-danger>
+
+    <div class="converter-wrapper">
+      <!-- Converter Card -->
+      <div class="converter-card">
+        <!-- From Currency Section -->
+        <div class="currency-section">
+          <label class="section-label">From</label>
+
+          <div class="currency-input-row">
+            <mat-form-field appearance="fill" class="amount-field">
+              <mat-label>Amount</mat-label>
+              <input
+                matInput
+                type="number"
+                [value]="fromAmount()"
+                (input)="onFromAmountChange($any($event.target).value)"
+                min="0"
+                step="0.01"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="currency-field">
+              <mat-label>Currency</mat-label>
+              <mat-select
+                [(ngModel)]="fromCurrency"
+                (ngModelChange)="onCurrencyChange()"
+              >
+                <mat-select-trigger>
+                  <span class="currency-option">
+                    <span class="currency-flag">{{ getCurrencyFlag(fromCurrency()) }}</span>
+                    <span class="currency-code">{{ fromCurrency() }}</span>
+                    <span class="currency-name">{{ getCurrencyName(fromCurrency()) }}</span>
+                  </span>
+                </mat-select-trigger>
+                @for (currency of currencies; track currency.code) {
+                  <mat-option [value]="currency.code">
+                    <span class="currency-option">
+                      <span class="currency-flag">{{ currency.flag }}</span>
+                      <span class="currency-code">{{ currency.code }}</span>
+                      <span class="currency-name">{{ currency.name }}</span>
+                    </span>
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="currency-display">
+            <span class="currency-symbol">{{ getCurrencySymbol(fromCurrency()) }}</span>
+            <span class="currency-amount">{{ formatAmount(fromAmount()) }}</span>
+            <span class="currency-code-display">{{ fromCurrency() }}</span>
+          </div>
+        </div>
+
+        <!-- Swap Button -->
+        <div class="swap-section">
+          <button
+            mat-fab
+            class="swap-button"
+            (click)="swapCurrencies()"
+            matTooltip="Swap currencies"
+            aria-label="Swap currencies"
+          >
+            <mat-icon>swap_vert</mat-icon>
+          </button>
+        </div>
+
+        <!-- To Currency Section -->
+        <div class="currency-section">
+          <label class="section-label">To</label>
+
+          <div class="currency-input-row">
+            <mat-form-field appearance="fill" class="amount-field">
+              <mat-label>Amount</mat-label>
+              <input
+                matInput
+                type="number"
+                [value]="toAmount()"
+                (input)="onToAmountChange($any($event.target).value)"
+                min="0"
+                step="0.01"
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="currency-field">
+              <mat-label>Currency</mat-label>
+              <mat-select
+                [(ngModel)]="toCurrency"
+                (ngModelChange)="onCurrencyChange()"
+              >
+                <mat-select-trigger>
+                  <span class="currency-option">
+                    <span class="currency-flag">{{ getCurrencyFlag(toCurrency()) }}</span>
+                    <span class="currency-code">{{ toCurrency() }}</span>
+                    <span class="currency-name">{{ getCurrencyName(toCurrency()) }}</span>
+                  </span>
+                </mat-select-trigger>
+                @for (currency of currencies; track currency.code) {
+                  <mat-option [value]="currency.code">
+                    <span class="currency-option">
+                      <span class="currency-flag">{{ currency.flag }}</span>
+                      <span class="currency-code">{{ currency.code }}</span>
+                      <span class="currency-name">{{ currency.name }}</span>
+                    </span>
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="currency-display">
+            <span class="currency-symbol">{{ getCurrencySymbol(toCurrency()) }}</span>
+            <span class="currency-amount">{{ formatAmount(toAmount()) }}</span>
+            <span class="currency-code-display">{{ toCurrency() }}</span>
+          </div>
+        </div>
+
+        <!-- Exchange Rate Display -->
+        <div class="rate-display">
+          <mat-icon>info</mat-icon>
+          <span>{{ rateDisplay() }}</span>
+        </div>
+
+        <app-alert-danger 
+        style="position: relative; top: 32px;"
+          title="Warning" 
+          content="Exchange rates are approximate and for informational purposes only. These are static rates and may not reflect current market conditions. For actual transactions, please verify rates with your financial institution.">
+        </app-alert-danger>
+      </div>
+
+      <!-- Popular Conversions -->
+      <div class="popular-conversions">
+        <h3 class="popular-title">Popular Conversions</h3>
+        <div class="popular-grid">
+          <div class="popular-item">
+            <span class="popular-pair">🇺🇸 USD → 🇪🇺 EUR</span>
+            <span class="popular-rate">{{ getCurrencySymbol('USD') }}1 = {{ getCurrencySymbol('EUR') }}0.92</span>
+          </div>
+          <div class="popular-item">
+            <span class="popular-pair">🇺🇸 USD → 🇬🇧 GBP</span>
+            <span class="popular-rate">{{ getCurrencySymbol('USD') }}1 = {{ getCurrencySymbol('GBP') }}0.79</span>
+          </div>
+          <div class="popular-item">
+            <span class="popular-pair">🇺🇸 USD → 🇯🇵 JPY</span>
+            <span class="popular-rate">{{ getCurrencySymbol('USD') }}1 = {{ getCurrencySymbol('JPY') }}149.50</span>
+          </div>
+          <div class="popular-item">
+            <span class="popular-pair">🇪🇺 EUR → 🇬🇧 GBP</span>
+            <span class="popular-rate">{{ getCurrencySymbol('EUR') }}1 = {{ getCurrencySymbol('GBP') }}0.86</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

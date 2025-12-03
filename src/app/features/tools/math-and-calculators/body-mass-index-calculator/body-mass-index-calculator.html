@@ -55,17 +55,11 @@
       </div>
     </section>
 
-    <!-- Health Disclaimer -->
-    <div class="health-disclaimer">
-      <mat-icon>warning</mat-icon>
-      <div class="disclaimer-content">
-        <h3>Important Notice</h3>
-        <p>
-          Do not use this tool as a definitive health indicator. Always consult your doctor before making health related decisions.
-          All The Tools is not a healthcare provider and is not qualified to give health advice.
-        </p>
-      </div>
-    </div>
+    <app-alert-danger 
+      title="Important Notice" 
+      content="Do not use this tool as a definitive health indicator. Always consult your doctor before making health related decisions.
+          All The Tools is not a healthcare provider and is not qualified to give health advice.">
+    </app-alert-danger>
 
     <!-- Unit System Toggle -->
     <div class="unit-toggle-section">
