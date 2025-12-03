@@ -275,6 +275,15 @@
           <mat-icon>accessibility</mat-icon>
           <span>Accessibility</span>
         </a>
+
+        <a
+          mat-menu-item
+          routerLink="/contact"
+          class="about-menu-item"
+        >
+          <mat-icon>contact_mail</mat-icon>
+          <span>Contact Us</span>
+        </a>
       </div>
     </div>
   </mat-menu>
@@ -376,6 +385,16 @@
           >
             <mat-icon>accessibility</mat-icon>
             <span>Accessibility</span>
+          </a>
+
+          <a
+            routerLink="/contact"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-category-link"
+          >
+            <mat-icon>contact_mail</mat-icon>
+            <span>Contact Us</span>
           </a>
         </div>
       </nav>

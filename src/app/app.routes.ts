@@ -38,6 +38,11 @@ export const routes: Routes = [
     title: 'Changelog - All The Things'
   },
   {
+    path: 'contact',
+    loadComponent: () => import('./features/contact-form/contact-form').then(m => m.ContactForm),
+    title: 'Contact Us - All The Things'
+  },
+  {
     path: 'tools/percentage-calculator',
     loadComponent: () => import('./features/tools/math-and-calculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
     title: 'Percentage Calculator - All The Things'
