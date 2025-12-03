@@ -1,7 +1,9 @@
 /
 /about
 /accessibility
+/blog
 /changelog
+/contact
 /presskit
 /privacy
 /terms
@@ -9,6 +11,7 @@
 /tools/bmi-calculator
 /tools/case-converter
 /tools/color-picker
+/tools/currency-converter
 /tools/gradient-generator
 /tools/icon-generator
 /tools/lorem-ipsum
