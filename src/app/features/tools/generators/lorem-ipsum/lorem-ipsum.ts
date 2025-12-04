@@ -6,9 +6,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
@@ -26,7 +26,6 @@ type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
     MatSliderModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
     PageHeaderComponent,
     CtaEmailList
   ],
@@ -36,7 +35,7 @@ type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
 export class LoremIpsum implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -123,21 +122,15 @@ export class LoremIpsum implements OnInit {
   async copyToClipboard(): Promise<void> {
     const text = this.generatedText();
     if (!text) {
-      this.snackBar.open('No text to copy', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.warning('No text to copy', 2000);
       return;
     }
 
     try {
       await navigator.clipboard.writeText(text);
-      this.snackBar.open('Copied to clipboard!', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.success('Copied to clipboard!', 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 

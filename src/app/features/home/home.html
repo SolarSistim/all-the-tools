@@ -68,7 +68,7 @@
     </div>
   </section>
 
-  <app-cta-email-list></app-cta-email-list>
+  <app-cta-email-list [darkThemeBg]="'secondary'"></app-cta-email-list>
 
   <!-- Categories Section -->
   <section class="categories">
@@ -108,6 +108,72 @@
       </div>
     </div>
   </section>
+
+  <!-- Recent Blog Articles Section -->
+  @if (recentArticles.length > 0) {
+    <section class="recent-articles">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-wrapper">
+            <h2 class="section-title">Latest from the Blog</h2>
+            <div class="title-underline"></div>
+          </div>
+          <p class="section-subtitle">
+            Stay up-to-date with our latest articles, tutorials, and guides
+          </p>
+        </div>
+
+        <div class="articles-grid">
+          @for (article of recentArticles; track article.id) {
+            <article class="article-card">
+              <a [routerLink]="['/blog', article.slug]" class="article-link">
+                <div class="article-image-wrapper">
+                  <img
+                    [src]="article.heroImage.src"
+                    [alt]="article.heroImage.alt"
+                    class="article-image"
+                    loading="lazy"
+                  />
+                  <span class="article-category">{{ article.category }}</span>
+                </div>
+
+                <div class="article-content">
+                  <div class="article-meta">
+                    <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
+                  </div>
+
+                  <h3 class="article-title">{{ article.title }}</h3>
+
+                  <p class="article-description">{{ article.description }}</p>
+
+                  <div class="article-footer">
+                    <div class="article-author">
+                      @if (article.author.avatar) {
+                        <img
+                          [src]="article.author.avatar"
+                          [alt]="article.author.name"
+                          class="author-avatar"
+                        />
+                      }
+                      <span class="author-name">{{ article.author.name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </article>
+          }
+        </div>
+
+        <div class="section-footer">
+          <a routerLink="/blog" class="btn-outline">
+            <mat-icon>article</mat-icon>
+            View All Articles
+            <mat-icon>arrow_forward</mat-icon>
+          </a>
+        </div>
+      </div>
+    </section>
+  }
 
   <!-- Benefits Section -->
   <section class="benefits">

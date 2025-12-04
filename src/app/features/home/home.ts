@@ -10,6 +10,8 @@ import { StructuredDataService } from '../../core/services/structured-data.servi
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
+import { BlogService } from '../blog/services/blog.service';
+import { ArticlePreview } from '../blog/models/blog.models';
 
 @Component({
   selector: 'app-home',
@@ -30,9 +32,11 @@ export class HomeComponent implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private structuredData = inject(StructuredDataService);
+  private blogService = inject(BlogService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
+  recentArticles: ArticlePreview[] = [];
 
   // Icon pool for hero visual grid
   private iconPool = [
@@ -79,6 +83,13 @@ export class HomeComponent implements OnInit {
 
     this.featuredTools = this.toolsService.getFeaturedTools();
     this.categories = this.toolsService.getAllCategories();
+
+    // Load recent blog articles
+    this.blogService.getRecentArticles(3).subscribe({
+      next: (articles) => {
+        this.recentArticles = articles;
+      }
+    });
   }
 
   getToolCountForCategory(categoryId: string): number {
@@ -87,5 +98,14 @@ export class HomeComponent implements OnInit {
 
   getRandomIcon(index: number): string {
     return this.iconPool[index % this.iconPool.length];
+  }
+
+  formatDate(date: Date | string): string {
+    const d = new Date(date);
+    return d.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   }
 }

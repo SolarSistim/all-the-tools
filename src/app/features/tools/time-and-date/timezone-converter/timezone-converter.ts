@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface TimezoneDisplay {
@@ -38,7 +38,6 @@ interface TimezoneOption {
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule,
     MatTooltipModule,
     MatSelectModule,
     CtaEmailList
@@ -48,7 +47,7 @@ interface TimezoneOption {
 })
 export class TimezoneConverter implements OnInit, OnDestroy {
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
   private platformId = inject(PLATFORM_ID);
   private intervalId?: number;
 
@@ -434,7 +433,7 @@ export class TimezoneConverter implements OnInit, OnDestroy {
   addTimezone(): void {
     const selected = this.selectedTimezoneToAdd();
     if (!selected) {
-      this.snackBar.open('Please select a timezone', 'Close', { duration: 2000 });
+      this.snackbar.warning('Please select a timezone', 2000);
       return;
     }
 
@@ -443,14 +442,14 @@ export class TimezoneConverter implements OnInit, OnDestroy {
 
     // Check if already added to World Clocks (exclude primary timezone)
     if (this.activeTimezones().some(t => t.timezone === selected && !t.isPrimary)) {
-      this.snackBar.open('This timezone is already added', 'Close', { duration: 2000 });
+      this.snackbar.warning('This timezone is already added', 2000);
       return;
     }
 
     this.addTimezoneDisplay(tzOption);
     this.selectedTimezoneToAdd.set('');
     this.saveTimezonesToStorage();
-    this.snackBar.open('Timezone added!', 'Close', { duration: 2000 });
+    this.snackbar.success('Timezone added!', 2000);
   }
 
   /**
@@ -474,13 +473,13 @@ export class TimezoneConverter implements OnInit, OnDestroy {
   removeTimezone(id: string): void {
     const timezone = this.activeTimezones().find(t => t.id === id);
     if (timezone?.isPrimary) {
-      this.snackBar.open('Cannot remove your primary timezone', 'Close', { duration: 2000 });
+      this.snackbar.warning('Cannot remove your primary timezone', 2000);
       return;
     }
 
     this.activeTimezones.update(zones => zones.filter(t => t.id !== id));
     this.saveTimezonesToStorage();
-    this.snackBar.open('Timezone removed', 'Close', { duration: 2000 });
+    this.snackbar.success('Timezone removed', 2000);
   }
 
   /**
@@ -489,7 +488,7 @@ export class TimezoneConverter implements OnInit, OnDestroy {
   clearAllTimezones(): void {
     this.activeTimezones.update(zones => zones.filter(t => t.isPrimary));
     this.saveTimezonesToStorage();
-    this.snackBar.open('All timezones cleared', 'Close', { duration: 2000 });
+    this.snackbar.success('All timezones cleared', 2000);
   }
 
   // ============================================
@@ -503,12 +502,12 @@ export class TimezoneConverter implements OnInit, OnDestroy {
     const time = this.formatTimeForTimezone(this.currentTime(), timezone);
     const date = this.formatDateForTimezone(this.currentTime(), timezone);
     const text = `${label}: ${time} - ${date}`;
-    
+
     try {
       await navigator.clipboard.writeText(text);
-      this.snackBar.open('Time copied to clipboard!', 'Close', { duration: 2000 });
+      this.snackbar.success('Time copied to clipboard!', 2000);
     } catch {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 2000 });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 
@@ -520,12 +519,12 @@ export class TimezoneConverter implements OnInit, OnDestroy {
     const text = displays.map(d => {
       return `${d.label}: ${d.time} (${d.offset}) - ${d.date}`;
     }).join('\n');
-    
+
     try {
       await navigator.clipboard.writeText(text);
-      this.snackBar.open('All times copied to clipboard!', 'Close', { duration: 2000 });
+      this.snackbar.success('All times copied to clipboard!', 2000);
     } catch {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 2000 });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 

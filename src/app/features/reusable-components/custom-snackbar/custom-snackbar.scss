@@ -1,0 +1,106 @@
+// Override Angular Material's default snackbar padding
+::ng-deep .custom-snackbar-container {
+  .mat-mdc-snack-bar-label {
+    padding: 0 !important;
+  }
+}
+
+.custom-snackbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 500px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+
+  &:hover {
+  }
+}
+
+.snackbar-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.snackbar-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.snackbar-message {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.snackbar-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: var(--text-secondary);
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: -3px;
+    left: -3px;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Type-specific styles
+.snackbar-success {
+  border-left: 4px solid #4caf50;
+
+  .snackbar-icon {
+    color: #4caf50;
+  }
+}
+
+.snackbar-error {
+  border-left: 4px solid #f44336;
+
+  .snackbar-icon {
+    color: #f44336;
+  }
+}
+
+.snackbar-warning {
+  border-left: 4px solid #ff9800;
+
+  .snackbar-icon {
+    color: #ff9800;
+  }
+}
+
+.snackbar-info {
+  border-left: 4px solid var(--neon-cyan);
+
+  .snackbar-icon {
+    color: var(--neon-cyan);
+  }
+}
+
+// Responsive
+@media (max-width: 640px) {
+  .custom-snackbar {
+    min-width: 280px;
+    max-width: calc(100vw - 2rem);
+  }
+}

@@ -4,20 +4,20 @@
   position: relative;
   transition: background-color 0.3s ease;
 
-  // Dark theme background overrides (only apply when NOT in light theme)
-  body:not(.light-theme) &.dark-bg-primary {
-    background: var(--bg-primary);
+  // Dark theme background overrides
+  &.dark-bg-primary {
+    background: #0A0E1A !important;
 
     .email-cta-card {
-      background: var(--bg-primary);
+      background: #1A1E2E !important;
     }
   }
 
-  body:not(.light-theme) &.dark-bg-secondary {
-    background: var(--bg-secondary);
+  &.dark-bg-secondary {
+    background: #1A1E2E !important;
 
     .email-cta-card {
-      background: var(--bg-secondary);
+      background: #0A0E1A !important;
     }
   }
 

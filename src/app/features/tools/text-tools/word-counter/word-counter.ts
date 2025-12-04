@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
@@ -50,6 +51,7 @@ export class WordCounter implements OnInit {
 
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
+  private snackbar = inject(CustomSnackbarService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -158,6 +160,7 @@ export class WordCounter implements OnInit {
   clearText(): void {
     this.inputText.set('');
     this.analyzeText();
+    this.snackbar.success('Text cleared', 2000);
   }
 
   /**

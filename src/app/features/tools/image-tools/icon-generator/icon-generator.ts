@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import JSZip from 'jszip';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface IconSize {
@@ -36,6 +37,7 @@ interface IconSize {
 export class IconGenerator implements AfterViewInit {
 
   private metaService = inject(MetaService);
+  private snackbar = inject(CustomSnackbarService);
   @ViewChild('cropPreviewContainer') cropPreviewContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
 
@@ -518,10 +520,12 @@ export class IconGenerator implements AfterViewInit {
     // If only one icon, download directly without ZIP
     if (selectedIcons.length === 1) {
       this.downloadPNG(selectedIcons[0].size, selectedIcons[0].name);
+      this.snackbar.success('Icon downloaded!', 2000);
       return;
     }
 
     // Multiple icons: create ZIP
+    this.snackbar.info('Generating icons...', 2000);
     const zip = new JSZip();
 
     // Generate all icons and add to ZIP
@@ -545,6 +549,8 @@ export class IconGenerator implements AfterViewInit {
     a.download = 'icons.zip';
     a.click();
     URL.revokeObjectURL(url);
+
+    this.snackbar.success(`${selectedIcons.length} icons downloaded!`, 2000);
   }
 
   async downloadICO(): Promise<void> {
@@ -553,6 +559,7 @@ export class IconGenerator implements AfterViewInit {
     // ICO files can contain multiple sizes
     // We'll include the most common favicon sizes: 16, 32, 48
     const icoSizes = [16, 32, 48];
+    this.snackbar.info('Generating favicon set...', 2000);
     const zip = new JSZip();
 
     // Generate all favicon sizes and add to ZIP
@@ -575,6 +582,8 @@ export class IconGenerator implements AfterViewInit {
     a.download = 'favicons.zip';
     a.click();
     URL.revokeObjectURL(url);
+
+    this.snackbar.success('Favicon set downloaded!', 2000);
   }
 
   getPreviewUrl(size: number): string {
@@ -587,6 +596,7 @@ export class IconGenerator implements AfterViewInit {
     this.uploadedImage = null;
     this.originalImage = null;
     this.resetCrop();
+    this.snackbar.success('Image cleared, ready to start over!', 2000);
   }
 
   triggerFileInput(): void {

@@ -6,13 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 
 interface CaseConversion {
   id: string;
@@ -33,7 +33,6 @@ interface CaseConversion {
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList
@@ -45,7 +44,7 @@ export class CaseConverter implements OnInit {
 
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -209,9 +208,7 @@ export class CaseConverter implements OnInit {
   applyConversion(conversion: CaseConversion): void {
     const text = this._inputText();
     if (!text) {
-      this.snackBar.open('Please enter some text first', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.warning('Please enter some text first', 2000);
       return;
     }
     this._inputText.set(conversion.convert(text));
@@ -223,21 +220,15 @@ export class CaseConverter implements OnInit {
   async copyToClipboard(): Promise<void> {
     const text = this._inputText();
     if (!text) {
-      this.snackBar.open('No text to copy', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.warning('No text to copy', 2000);
       return;
     }
 
     try {
       await navigator.clipboard.writeText(text);
-      this.snackBar.open('Copied to clipboard!', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.success('Copied to clipboard!', 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 

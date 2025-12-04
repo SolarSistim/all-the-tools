@@ -1,3 +1,5 @@
+<div id="top"></div>
+
 <div class="blog-article-container" *ngIf="!loading && article">
   <div class="container">
     <!-- Breadcrumbs -->
@@ -42,10 +44,7 @@
       </div>
     </header>
 
-    <!-- Hero Image -->
-    <app-hero-image [image]="article.heroImage"></app-hero-image>
-
-    <!-- Social Share (top) -->
+        <!-- Social Share (top) -->
     <div class="social-share-top">
       <app-social-share-buttons
         [title]="article.title"
@@ -54,8 +53,42 @@
       ></app-social-share-buttons>
     </div>
 
+    <!-- Hero Image -->
+    <app-hero-image [image]="article.heroImage"></app-hero-image>
+
+
+
+    <!-- Font Size Controls -->
+    <div class="font-size-control">
+      <span class="font-size-label">Text Size:</span>
+      <button
+        (click)="setFontSize('small')"
+        [class.active]="fontSize === 'small'"
+        class="font-size-btn font-size-small"
+        aria-label="Small font size"
+      >
+        A
+      </button>
+      <button
+        (click)="setFontSize('medium')"
+        [class.active]="fontSize === 'medium'"
+        class="font-size-btn font-size-medium"
+        aria-label="Medium font size"
+      >
+        A
+      </button>
+      <button
+        (click)="setFontSize('large')"
+        [class.active]="fontSize === 'large'"
+        class="font-size-btn font-size-large"
+        aria-label="Large font size"
+      >
+        A
+      </button>
+    </div>
+
     <!-- Article Content -->
-    <article class="article-body">
+    <article class="article-body" [ngClass]="'font-size-' + fontSize">
       <app-article-content [blocks]="article.content"></app-article-content>
     </article>
 
@@ -73,7 +106,7 @@
     <app-author-signature [author]="article.author"></app-author-signature>
 
     <!-- Email CTA -->
-    <app-cta-email-list></app-cta-email-list>
+    <app-cta-email-list [darkThemeBg]="'primary'"></app-cta-email-list>
 
     <!-- Related Articles -->
     <section class="related-articles" *ngIf="relatedArticles.length > 0">
@@ -104,14 +137,14 @@
     </section>
 
     <!-- Back to Top Button -->
-    <button
+    <a
+      [href]="'/blog/' + article.slug + '#top'"
       mat-fab
       class="back-to-top"
-      (click)="scrollToTop()"
       aria-label="Back to top"
     >
       <mat-icon>arrow_upward</mat-icon>
-    </button>
+    </a>
   </div>
 </div>
 

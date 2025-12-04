@@ -6,11 +6,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
@@ -33,7 +33,6 @@ interface PasswordStrength {
     MatSliderModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
     MatTooltipModule,
     MatChipsModule,
     PageHeaderComponent,
@@ -45,7 +44,7 @@ interface PasswordStrength {
 export class PasswordGenerator implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -155,6 +154,7 @@ export class PasswordGenerator implements OnInit {
       // Add to history (keep last 10)
       const history = [password, ...this.passwordHistory()].slice(0, 10);
       this.passwordHistory.set(history);
+      this.snackbar.success('New password generated!', 2000);
     }
   }
 
@@ -184,9 +184,7 @@ export class PasswordGenerator implements OnInit {
     const history = [...passwords, ...this.passwordHistory()].slice(0, 10);
     this.passwordHistory.set(history);
 
-    this.snackBar.open(`Generated ${count} password${count > 1 ? 's' : ''}`, 'Close', {
-      duration: 2000
-    });
+    this.snackbar.success(`Generated ${count} password${count > 1 ? 's' : ''}`, 2000);
   }
 
   /**
@@ -312,13 +310,9 @@ export class PasswordGenerator implements OnInit {
   async copyToClipboard(password: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(password);
-      this.snackBar.open('Password copied to clipboard!', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.success('Password copied to clipboard!', 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 
@@ -327,9 +321,7 @@ export class PasswordGenerator implements OnInit {
    */
   clearHistory(): void {
     this.passwordHistory.set([]);
-    this.snackBar.open('History cleared', 'Close', {
-      duration: 2000
-    });
+    this.snackbar.success('History cleared', 2000);
   }
 
   /**

@@ -21,7 +21,7 @@ import { loadArticleContent } from '../data/content/article-content-loader';
 })
 export class BlogService {
   private readonly config: BlogConfig = {
-    pageSize: 10,
+    pageSize: 9,
     baseUrl: 'https://www.allthethings.dev/blog',
     defaultOgImage: 'https://www.allthethings.dev/meta-images/og-blog.png',
   };

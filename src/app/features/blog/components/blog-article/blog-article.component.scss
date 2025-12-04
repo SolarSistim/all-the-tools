@@ -128,8 +128,181 @@
   border: 1px solid var(--border-color);
 }
 
+.font-size-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-elevated);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.font-size-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 0.5rem;
+}
+
+.font-size-btn {
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0.5rem;
+  min-width: 40px;
+  transition: all 0.2s ease;
+  font-weight: 700;
+
+  &:hover {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+  }
+
+  &.active {
+    background-color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    color: var(--bg-primary);
+  }
+}
+
+.font-size-small {
+  font-size: 0.875rem;
+}
+
+.font-size-medium {
+  font-size: 1.125rem;
+}
+
+.font-size-large {
+  font-size: 1.5rem;
+}
+
 .article-body {
   margin: 3rem 0;
+
+  // Small font size (default - left button)
+  &.font-size-small {
+    ::ng-deep .article-content {
+      font-size: 1.125rem;
+    }
+
+    ::ng-deep .content-paragraph {
+      font-size: 1.125rem;
+
+      &.lead {
+        font-size: 1.25rem;
+      }
+    }
+
+    ::ng-deep h2.content-heading {
+      font-size: 2rem;
+    }
+
+    ::ng-deep h3.content-heading {
+      font-size: 1.5rem;
+    }
+
+    ::ng-deep h4.content-heading {
+      font-size: 1.25rem;
+    }
+
+    ::ng-deep h5.content-heading,
+    ::ng-deep h6.content-heading {
+      font-size: 1.125rem;
+    }
+
+    ::ng-deep .cta-title {
+      font-size: 1.75rem;
+    }
+
+    ::ng-deep .cta-description {
+      font-size: 1.125rem;
+    }
+  }
+
+  // Medium font size (larger - middle button)
+  &.font-size-medium {
+    ::ng-deep .article-content {
+      font-size: 1.3rem;
+    }
+
+    ::ng-deep .content-paragraph {
+      font-size: 1.3rem;
+
+      &.lead {
+        font-size: 1.45rem;
+      }
+    }
+
+    ::ng-deep h2.content-heading {
+      font-size: 2.25rem;
+    }
+
+    ::ng-deep h3.content-heading {
+      font-size: 1.75rem;
+    }
+
+    ::ng-deep h4.content-heading {
+      font-size: 1.5rem;
+    }
+
+    ::ng-deep h5.content-heading,
+    ::ng-deep h6.content-heading {
+      font-size: 1.3rem;
+    }
+
+    ::ng-deep .cta-title {
+      font-size: 2rem;
+    }
+
+    ::ng-deep .cta-description {
+      font-size: 1.3rem;
+    }
+  }
+
+  // Large font size (even larger - right button)
+  &.font-size-large {
+    ::ng-deep .article-content {
+      font-size: 1.5rem;
+    }
+
+    ::ng-deep .content-paragraph {
+      font-size: 1.5rem;
+
+      &.lead {
+        font-size: 1.65rem;
+      }
+    }
+
+    ::ng-deep h2.content-heading {
+      font-size: 2.5rem;
+    }
+
+    ::ng-deep h3.content-heading {
+      font-size: 2rem;
+    }
+
+    ::ng-deep h4.content-heading {
+      font-size: 1.75rem;
+    }
+
+    ::ng-deep h5.content-heading,
+    ::ng-deep h6.content-heading {
+      font-size: 1.5rem;
+    }
+
+    ::ng-deep .cta-title {
+      font-size: 2.25rem;
+    }
+
+    ::ng-deep .cta-description {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .social-share-bottom {

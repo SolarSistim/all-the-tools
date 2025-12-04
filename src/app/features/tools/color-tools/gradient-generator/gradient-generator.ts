@@ -9,9 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface ColorStop {
@@ -48,7 +48,6 @@ interface GradientPreset {
     MatSelectModule,
     MatSliderModule,
     MatTooltipModule,
-    MatSnackBarModule,
     MatChipsModule,
     CtaEmailList
   ],
@@ -56,7 +55,7 @@ interface GradientPreset {
   styleUrl: './gradient-generator.scss'
 })
 export class GradientGenerator implements OnInit {
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
   private metaService = inject(MetaService);
   private nextColorStopId = 3;
 
@@ -351,7 +350,7 @@ export class GradientGenerator implements OnInit {
   removeColorStop(id: number): void {
     const config = this.gradientConfig();
     if (config.colorStops.length <= 2) {
-      this.snackBar.open('Must have at least 2 color stops', 'Close', { duration: 2000 });
+      this.snackbar.warning('Must have at least 2 color stops', 2000);
       return;
     }
 
@@ -418,7 +417,7 @@ export class GradientGenerator implements OnInit {
   applyPreset(preset: GradientPreset): void {
     this.nextColorStopId = Math.max(...preset.config.colorStops.map(s => s.id)) + 1;
     this.gradientConfig.set({ ...preset.config });
-    this.snackBar.open(`Applied "${preset.name}" preset`, 'Close', { duration: 2000 });
+    this.snackbar.success(`Applied "${preset.name}" preset`, 2000);
   }
 
   /**
@@ -428,9 +427,9 @@ export class GradientGenerator implements OnInit {
     const css = this.cssGradient();
     try {
       await navigator.clipboard.writeText(css);
-      this.snackBar.open('CSS copied to clipboard!', 'Close', { duration: 2000 });
+      this.snackbar.success('CSS copied to clipboard!', 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy CSS', 'Close', { duration: 2000 });
+      this.snackbar.error('Failed to copy CSS', 2000);
     }
   }
 
@@ -441,9 +440,9 @@ export class GradientGenerator implements OnInit {
     const css = `background: ${this.cssGradient()};`;
     try {
       await navigator.clipboard.writeText(css);
-      this.snackBar.open('Full CSS property copied!', 'Close', { duration: 2000 });
+      this.snackbar.success('Full CSS property copied!', 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy CSS', 'Close', { duration: 2000 });
+      this.snackbar.error('Failed to copy CSS', 2000);
     }
   }
 
@@ -476,7 +475,7 @@ export class GradientGenerator implements OnInit {
       colorStops
     });
 
-    this.snackBar.open('Random gradient generated!', 'Close', { duration: 2000 });
+    this.snackbar.success('Random gradient generated!', 2000);
   }
 
   /**

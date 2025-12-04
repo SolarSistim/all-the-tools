@@ -52,8 +52,14 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   readingTime: number = 0;
   articleUrl: string = '';
   loading = true;
+  fontSize: 'small' | 'medium' | 'large' = 'small';
+
+  private readonly FONT_SIZE_STORAGE_KEY = 'blog-article-font-size';
 
   ngOnInit(): void {
+    // Load saved font size preference from localStorage
+    this.loadFontSizePreference();
+
     // Get article from resolver data
     const article = this.route.snapshot.data['article'] as Article | null;
 
@@ -156,7 +162,29 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
     });
   }
 
-  scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  setFontSize(size: 'small' | 'medium' | 'large'): void {
+    this.fontSize = size;
+    this.saveFontSizePreference(size);
+  }
+
+  private loadFontSizePreference(): void {
+    try {
+      const savedSize = localStorage.getItem(this.FONT_SIZE_STORAGE_KEY);
+      if (savedSize && (savedSize === 'small' || savedSize === 'medium' || savedSize === 'large')) {
+        this.fontSize = savedSize;
+      }
+    } catch (error) {
+      // LocalStorage might not be available (e.g., in SSR or private browsing mode)
+      console.warn('Unable to load font size preference from localStorage:', error);
+    }
+  }
+
+  private saveFontSizePreference(size: 'small' | 'medium' | 'large'): void {
+    try {
+      localStorage.setItem(this.FONT_SIZE_STORAGE_KEY, size);
+    } catch (error) {
+      // LocalStorage might not be available (e.g., in SSR or private browsing mode)
+      console.warn('Unable to save font size preference to localStorage:', error);
+    }
   }
 }

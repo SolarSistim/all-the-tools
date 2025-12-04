@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 interface TimezoneOption {
@@ -29,7 +29,6 @@ interface TimezoneOption {
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule,
     MatTooltipModule,
     MatSelectModule,
     CtaEmailList
@@ -39,7 +38,7 @@ interface TimezoneOption {
 })
 export class TimestampConverter implements OnInit, OnDestroy {
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
   private platformId = inject(PLATFORM_ID);
   private intervalId?: number;
 
@@ -296,13 +295,9 @@ export class TimestampConverter implements OnInit, OnDestroy {
   async copyToClipboard(text: string, label: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(text);
-      this.snackBar.open(`${label} copied to clipboard!`, 'Close', {
-        duration: 2000
-      });
+      this.snackbar.success(`${label} copied to clipboard!`, 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 

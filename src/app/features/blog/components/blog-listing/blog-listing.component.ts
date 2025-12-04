@@ -1,9 +1,13 @@
-import { Component, OnInit, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ArticlePreview, PaginatedResponse } from '../../models/blog.models';
 import { BlogService } from '../../services/blog.service';
@@ -25,6 +29,10 @@ import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
     MatIconModule,
     MatChipsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    FormsModule,
     PaginationComponent,
     ReadingTimePipe,
   ],
@@ -43,12 +51,22 @@ export class BlogListingComponent implements OnInit {
   currentPage = 1;
   totalPages = 1;
   totalItems = 0;
-  pageSize = 10;
+  pageSize = 9;
   loading = true;
   selectedCategory: string | null = null;
   selectedTag: string | null = null;
+  searchQuery = signal('');
+  allArticles: ArticlePreview[] = [];
+  filteredArticles = signal<ArticlePreview[]>([]);
 
   ngOnInit(): void {
+    // Load all articles for search autocomplete
+    this.blogService.getArticlePreviews(1, 1000).subscribe({
+      next: (response) => {
+        this.allArticles = response.items;
+      },
+    });
+
     // Watch for query param changes
     this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       this.currentPage = Number(params['page']) || 1;
@@ -155,5 +173,33 @@ export class BlogListingComponent implements OnInit {
 
   private scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  onSearchInput(value: string): void {
+    this.searchQuery.set(value);
+
+    if (value.trim() === '') {
+      this.filteredArticles.set([]);
+      return;
+    }
+
+    const query = value.toLowerCase();
+    const filtered = this.allArticles.filter(article =>
+      article.title.toLowerCase().includes(query) ||
+      article.description.toLowerCase().includes(query) ||
+      article.tags.some(tag => tag.toLowerCase().includes(query))
+    ).slice(0, 10); // Limit to 10 results
+
+    this.filteredArticles.set(filtered);
+  }
+
+  onArticleSelected(article: ArticlePreview): void {
+    this.searchQuery.set('');
+    this.filteredArticles.set([]);
+    this.router.navigate(['/blog', article.slug]);
+  }
+
+  displayArticle(article: ArticlePreview | null): string {
+    return article ? article.title : '';
   }
 }

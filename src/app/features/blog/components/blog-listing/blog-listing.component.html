@@ -8,6 +8,61 @@
       </p>
     </section>
 
+    <!-- Search Bar -->
+    <div class="search-section">
+      <div class="search-container">
+        <mat-form-field class="search-field" appearance="fill">
+          <mat-label>Search articles...</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput($any($event.target).value)"
+            [matAutocomplete]="auto"
+            placeholder="Try 'web development', 'productivity', 'tutorial'..."
+          />
+          <mat-icon matPrefix>search</mat-icon>
+          @if (searchQuery()) {
+            <button mat-icon-button matSuffix (click)="searchQuery.set(''); filteredArticles.set([])" aria-label="Clear search">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onArticleSelected($event.option.value)"
+          [displayWith]="displayArticle"
+          class="blog-autocomplete"
+        >
+          @for (article of filteredArticles(); track article.id) {
+            <mat-option [value]="article" class="blog-option">
+              <div class="autocomplete-item">
+                <div class="autocomplete-image">
+                  <img [src]="article.heroImage.src" [alt]="article.title" />
+                </div>
+                <div class="autocomplete-content">
+                  <div class="autocomplete-title">{{ article.title }}</div>
+                  <div class="autocomplete-meta">
+                    <span class="autocomplete-category">{{ article.category }}</span>
+                    <span class="autocomplete-date">{{ formatDate(article.publishedDate) }}</span>
+                  </div>
+                </div>
+              </div>
+            </mat-option>
+          }
+          @if (searchQuery() && filteredArticles().length === 0) {
+            <mat-option disabled>
+              <div class="no-results-option">
+                <mat-icon>search_off</mat-icon>
+                <span>No articles found</span>
+              </div>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </div>
+    </div>
+
     <!-- Filters -->
     <div class="filters" *ngIf="selectedCategory || selectedTag">
       <div class="active-filters">
@@ -94,8 +149,6 @@
     <!-- Loading State -->
     <div class="loading-container" *ngIf="loading">
       <div class="loading-spinner">
-        <mat-icon>refresh</mat-icon>
-        <span>Loading articles...</span>
       </div>
     </div>
 

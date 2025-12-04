@@ -6,10 +6,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
@@ -23,7 +23,6 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     MatSliderModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
     MatTooltipModule,
     PageHeaderComponent,
     CtaEmailList
@@ -33,7 +32,7 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
 })
 export class UuidGenerator implements OnInit {
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
 
   // Signals for UUID options
   selectedVersion = signal<'v4' | 'v1' | 'nil'>('v4');
@@ -108,7 +107,7 @@ export class UuidGenerator implements OnInit {
 
     for (let i = 0; i < count; i++) {
       let uuid = '';
-      
+
       switch (this.selectedVersion()) {
         case 'v4':
           uuid = this.generateV4();
@@ -129,9 +128,7 @@ export class UuidGenerator implements OnInit {
     const history = [...uuids, ...this.uuidHistory()].slice(0, 50);
     this.uuidHistory.set(history);
 
-    this.snackBar.open(`Generated ${count} UUID${count > 1 ? 's' : ''}`, 'Close', {
-      duration: 2000
-    });
+    this.snackbar.success(`Generated ${count} UUID${count > 1 ? 's' : ''}`, 2000);
   }
 
   /**
@@ -224,13 +221,9 @@ export class UuidGenerator implements OnInit {
   async copyToClipboard(uuid: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(uuid);
-      this.snackBar.open('UUID copied to clipboard!', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.success('UUID copied to clipboard!', 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 
@@ -241,13 +234,9 @@ export class UuidGenerator implements OnInit {
     try {
       const allUUIDs = this.uuidHistory().join('\n');
       await navigator.clipboard.writeText(allUUIDs);
-      this.snackBar.open(`Copied ${this.uuidHistory().length} UUIDs to clipboard!`, 'Close', {
-        duration: 2000
-      });
+      this.snackbar.success(`Copied ${this.uuidHistory().length} UUIDs to clipboard!`, 2000);
     } catch (err) {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', {
-        duration: 2000
-      });
+      this.snackbar.error('Failed to copy to clipboard', 2000);
     }
   }
 
@@ -256,9 +245,7 @@ export class UuidGenerator implements OnInit {
    */
   clearHistory(): void {
     this.uuidHistory.set([]);
-    this.snackBar.open('History cleared', 'Close', {
-      duration: 2000
-    });
+    this.snackbar.success('History cleared', 2000);
   }
 
   /**

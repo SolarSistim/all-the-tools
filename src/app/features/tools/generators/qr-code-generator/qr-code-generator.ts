@@ -7,11 +7,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
+import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import QRCode from 'qrcode';
@@ -39,7 +39,6 @@ interface QRCodeOptions {
     MatSliderModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
     MatTooltipModule,
     MatExpansionModule,
     PageHeaderComponent,
@@ -53,7 +52,7 @@ export class QrCodeGenerator implements OnInit {
 
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
-  private snackBar = inject(MatSnackBar);
+  private snackbar = inject(CustomSnackbarService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
@@ -298,9 +297,7 @@ export class QrCodeGenerator implements OnInit {
       this.qrDataUrl.set(dataUrl);
     } catch (error) {
       console.error('QR Code generation error:', error);
-      this.snackBar.open('Failed to generate QR code', 'Close', {
-        duration: 3000
-      });
+      this.snackbar.error('Failed to generate QR code', 3000);
     } finally {
       this.isGenerating.set(false);
     }
@@ -312,7 +309,7 @@ export class QrCodeGenerator implements OnInit {
   async downloadPNG(): Promise<void> {
     const dataUrl = this.qrDataUrl();
     if (!dataUrl) {
-      this.snackBar.open('No QR code to download', 'Close', { duration: 2000 });
+      this.snackbar.warning('No QR code to download', 2000);
       return;
     }
 
@@ -321,7 +318,7 @@ export class QrCodeGenerator implements OnInit {
     link.href = dataUrl;
     link.click();
 
-    this.snackBar.open('QR code downloaded!', 'Close', { duration: 2000 });
+    this.snackbar.success('QR code downloaded!', 2000);
   }
 
   /**
@@ -330,7 +327,7 @@ export class QrCodeGenerator implements OnInit {
   async downloadSVG(): Promise<void> {
     const data = this.encodedData();
     if (!data) {
-      this.snackBar.open('No QR code to download', 'Close', { duration: 2000 });
+      this.snackbar.warning('No QR code to download', 2000);
       return;
     }
 
@@ -357,10 +354,10 @@ export class QrCodeGenerator implements OnInit {
 
       URL.revokeObjectURL(url);
 
-      this.snackBar.open('QR code downloaded!', 'Close', { duration: 2000 });
+      this.snackbar.success('QR code downloaded!', 2000);
     } catch (error) {
       console.error('SVG generation error:', error);
-      this.snackBar.open('Failed to generate SVG', 'Close', { duration: 3000 });
+      this.snackbar.error('Failed to generate SVG', 3000);
     }
   }
 
@@ -370,7 +367,7 @@ export class QrCodeGenerator implements OnInit {
   async copyImage(): Promise<void> {
     const dataUrl = this.qrDataUrl();
     if (!dataUrl) {
-      this.snackBar.open('No QR code to copy', 'Close', { duration: 2000 });
+      this.snackbar.warning('No QR code to copy', 2000);
       return;
     }
 
@@ -380,10 +377,10 @@ export class QrCodeGenerator implements OnInit {
         new ClipboardItem({ [blob.type]: blob })
       ]);
 
-      this.snackBar.open('QR code copied to clipboard!', 'Close', { duration: 2000 });
+      this.snackbar.success('QR code copied to clipboard!', 2000);
     } catch (error) {
       console.error('Clipboard error:', error);
-      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
+      this.snackbar.error('Failed to copy to clipboard', 3000);
     }
   }
 
@@ -393,16 +390,16 @@ export class QrCodeGenerator implements OnInit {
   async copyData(): Promise<void> {
     const data = this.encodedData();
     if (!data) {
-      this.snackBar.open('No data to copy', 'Close', { duration: 2000 });
+      this.snackbar.warning('No data to copy', 2000);
       return;
     }
 
     try {
       await navigator.clipboard.writeText(data);
-      this.snackBar.open('Data copied to clipboard!', 'Close', { duration: 2000 });
+      this.snackbar.success('Data copied to clipboard!', 2000);
     } catch (error) {
       console.error('Clipboard error:', error);
-      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
+      this.snackbar.error('Failed to copy to clipboard', 3000);
     }
   }
 
@@ -434,7 +431,7 @@ export class QrCodeGenerator implements OnInit {
     this.qrBackground.set('#FFFFFF');
     this.qrErrorCorrection.set('M');
 
-    this.snackBar.open('Reset to defaults', 'Close', { duration: 2000 });
+    this.snackbar.success('Reset to defaults', 2000);
   }
 
   /**
