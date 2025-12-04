@@ -14,7 +14,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     title: 'Getting Started with Web Development Tools: A Complete Guide',
     description:
       'Learn about essential web development tools that will boost your productivity and help you build better websites faster.',
-    author: AUTHORS.john_doe,
+    author: AUTHORS.joel_hansen,
     publishedDate: '2025-01-15',
     heroImage: {
       src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=630&fit=crop',
