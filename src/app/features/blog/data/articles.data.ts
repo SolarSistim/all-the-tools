@@ -33,7 +33,7 @@ export const BLOG_ARTICLES: Article[] = [
     tags: ['web development', 'tools', 'productivity', 'beginner'],
     category: 'Web Development',
     metaDescription:
-      'Discover essential web development tools that will boost your productivity. Learn about code editors, version control, debugging tools, and more.',
+      'Discover essential  web development tools that will boost your productivity. Learn about code editors, version control, debugging tools, and more.',
     metaKeywords: [
       'web development tools',
       'developer productivity',
