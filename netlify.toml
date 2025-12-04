@@ -39,3 +39,4 @@
   from = "/*"
   to = "/index.html"
   status = 200
+  conditions = {Not = "*.{js,css,svg,jpg,jpeg,png,gif,webp,ico,woff,woff2,ttf,eot,json,xml,txt}"}
