@@ -36,6 +36,16 @@
     Cache-Control = "public, max-age=0, must-revalidate"
 
 [[redirects]]
+  from = "/author-images/*"
+  to = "/author-images/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/meta-images/*"
+  to = "/meta-images/:splat"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
