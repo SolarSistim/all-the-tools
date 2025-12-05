@@ -91,20 +91,8 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Exclude static asset directories from SPA redirect
-[[redirects]]
-  from = "/meta-images/*"
-  to = "/meta-images/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/author-images/*"
-  to = "/author-images/:splat"
-  status = 200
-  force = true
-
-# SPA fallback - redirect all other routes to index.html
+# SPA fallback - redirect all routes to index.html
+# force = false means it won't redirect if a static file exists
 [[redirects]]
   from = "/*"
   to = "/index.html"
