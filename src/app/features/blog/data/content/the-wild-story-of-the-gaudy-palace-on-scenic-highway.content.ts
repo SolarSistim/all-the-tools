@@ -141,7 +141,7 @@ export const content: ContentBlock[] = [
         {
           src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-now.png',
           alt: 'The palace today',
-          caption: 'The golden palace as it appears today'
+          caption: 'The golden palace as it appeared a few years ago'
         },
         {
           src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-christmas.png',
