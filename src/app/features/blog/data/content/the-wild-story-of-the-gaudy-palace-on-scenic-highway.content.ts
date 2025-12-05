@@ -32,7 +32,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&h=600&fit=crop',
+      src: '/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpeg',
       alt: 'The Golden Palace on Scenic Highway',
       caption: 'The golden palace sits prominently on Escambia Bay - impossible to miss',
     },
@@ -130,19 +130,19 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop',
-          alt: 'Storm damage on coastal property',
-          caption: 'The property after Hurricane Sally'
+          src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-doctor-mikhchi.png',
+          alt: 'Dr. Mohammad Mikhchi',
+          caption: 'Dr. Mohammad Mikhchi'
         },
         {
-          src: 'https://images.unsplash.com/photo-1601581987809-a874a81309c9?w=800&h=600&fit=crop',
-          alt: 'Waterfront mansion view',
-          caption: 'View from Escambia Bay'
+          src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-now.png',
+          alt: 'The palace today',
+          caption: 'The golden palace as it appears today'
         },
         {
-          src: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
-          alt: 'Scenic bay view',
-          caption: 'The golden palace from the road'
+          src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-christmas.png',
+          alt: 'The palace decorated for Christmas',
+          caption: 'The palace during the holidays with its famous Christmas light display'
         }
       ],
       layout: 'grid'
