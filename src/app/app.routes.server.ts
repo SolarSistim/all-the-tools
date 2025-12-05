@@ -12,6 +12,18 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: '**',
-    renderMode: RenderMode.Prerender
+    renderMode: RenderMode.Prerender,
+    // Exclude static asset directories from prerendering
+    exclude: [
+      '/author-images/**',
+      '/meta-images/**',
+      '**/*.png',
+      '**/*.jpg',
+      '**/*.jpeg',
+      '**/*.gif',
+      '**/*.svg',
+      '**/*.ico',
+      '**/*.webp'
+    ]
   }
 ];
