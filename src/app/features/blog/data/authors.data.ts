@@ -9,12 +9,8 @@ export const AUTHORS = {
     id: 'joel_hansen',
     name: 'Joel Hansen',
     bio: 'Joel Hansen is a full-stack problem-solver, spends days crafting Angular front ends, taming complex Node backends, and bending C# to his will. By night, Joel moonlights as an amateur sleuth — known for unraveling mysteries from puzzling codebases to actual real-world oddities.',
-    avatar: '/meta-images/joel_hansen.png',
+    avatar: '/author-images/joel_hansen.png',
     socialLinks: {
-      twitter: 'https://twitter.com/johndoe',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      github: 'https://github.com/johndoe',
-      website: 'https://johndoe.dev',
     },
   }
 } as const;

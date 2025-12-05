@@ -4282,3 +4282,17 @@
     transform: translateY(-8px);
   }
 }
+
+// Gaudy Palace Blog Post Hero Section
+.hero-gaudy-palace {
+  .gaudy-palace-visual {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    // Empty placeholder for Photoshop image
+  }
+}

@@ -10,8 +10,8 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
-      case 'getting-started-with-web-development-tools':
-        const module = await import('./getting-started-with-web-development-tools.content');
+      case 'the-wild-story-of-the-gaudy-palace-on-scenic-highway':
+        const module = await import('./the-wild-story-of-the-gaudy-palace-on-scenic-highway.content');
         return module.content;
 
       default:
