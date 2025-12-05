@@ -7,6 +7,7 @@ import { ImageGalleryComponent } from '../image-gallery/image-gallery.component'
 import { BlockquoteComponent } from '../blockquote/blockquote.component';
 import { CodeBlockComponent } from '../code-block/code-block.component';
 import { AffiliateLinkComponent } from '../affiliate-link/affiliate-link.component';
+import { AdsenseComponent } from '../adsense/adsense.component';
 
 /**
  * Article Content Component
@@ -23,6 +24,7 @@ import { AffiliateLinkComponent } from '../affiliate-link/affiliate-link.compone
     BlockquoteComponent,
     CodeBlockComponent,
     AffiliateLinkComponent,
+    AdsenseComponent,
   ],
   templateUrl: './article-content.component.html',
   styleUrls: ['./article-content.component.scss'],

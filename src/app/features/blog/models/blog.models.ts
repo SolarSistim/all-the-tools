@@ -81,7 +81,8 @@ export type ContentBlockType =
   | 'list'
   | 'cta'
   | 'affiliate'
-  | 'divider';
+  | 'divider'
+  | 'adsense';
 
 /**
  * Base content block
@@ -210,6 +211,19 @@ export interface DividerBlock extends ContentBlock {
   type: 'divider';
   data: {
     style?: 'line' | 'dots' | 'stars';
+  };
+}
+
+/**
+ * AdSense block
+ */
+export interface AdsenseBlock extends ContentBlock {
+  type: 'adsense';
+  data: {
+    adClient?: string;
+    adSlot?: string;
+    width?: string;
+    height?: string;
   };
 }
 

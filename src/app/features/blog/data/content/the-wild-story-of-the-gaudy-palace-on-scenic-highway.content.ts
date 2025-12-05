@@ -63,6 +63,10 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'heading',
     data: {
       level: 3,
@@ -184,6 +188,10 @@ export const content: ContentBlock[] = [
     data: {
       text: '<strong>Northpointe Retirement Community</strong> is worse - mostly one-star reviews.',
     },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'paragraph',
