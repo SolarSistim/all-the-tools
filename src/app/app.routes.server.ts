@@ -9,5 +9,9 @@ export const serverRoutes: ServerRoute[] = [
       // Return all article slugs for prerendering
       return BLOG_ARTICLES_METADATA.map(article => ({ slug: article.slug }));
     }
+  },
+  {
+    path: '**',
+    renderMode: RenderMode.Prerender
   }
 ];
