@@ -9,6 +9,31 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '2',
+    slug: 'i-switched-from-facebook-to-reddit-for-doomscrolling',
+    title: 'I Switched from Facebook to Reddit for Doomscrolling. Here\'s What Happened.',
+    description:
+      'How I broke my Facebook addiction by redirecting my doomscrolling habit to something that actually gives back.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-06-2025',
+    heroImage: {
+      src: '/meta-images/og-i-switched-from-facebook-to-reddit-for-doomscrolling.png',
+      alt: 'I Switched from Facebook to Reddit for Doomscrolling',
+    },
+    tags: ['Social Media', 'Reddit', 'Facebook', 'Productivity'],
+    category: 'Technology',
+    metaDescription:
+      'How I broke my Facebook addiction by redirecting my doomscrolling habit to something that actually gives back.',
+    metaKeywords: [
+      'Facebook',
+      'Reddit',
+      'Doomscrolling',
+      'Social Media',
+      'Productivity',
+    ],
+    featured: true,
+  },
+  {
     id: '1',
     slug: 'the-wild-story-of-the-gaudy-palace-on-scenic-highway',
     title: 'The WILD Story of the Gaudy Palace on Scenic Highway',

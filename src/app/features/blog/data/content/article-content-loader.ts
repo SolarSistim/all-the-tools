@@ -10,9 +10,13 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'i-switched-from-facebook-to-reddit-for-doomscrolling':
+        const redditModule = await import('./i-switched-from-facebook-to-reddit-for-doomscrolling.content');
+        return redditModule.content;
+
       case 'the-wild-story-of-the-gaudy-palace-on-scenic-highway':
-        const module = await import('./the-wild-story-of-the-gaudy-palace-on-scenic-highway.content');
-        return module.content;
+        const palaceModule = await import('./the-wild-story-of-the-gaudy-palace-on-scenic-highway.content');
+        return palaceModule.content;
 
       default:
         console.warn(`No content file found for article: ${slug}`);
