@@ -109,7 +109,7 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
     if (!this.article) return;
 
     const config = {
-      title: `${this.article.title} | All The Things Blog`,
+      title: this.article.title,
       description: this.article.metaDescription || this.article.description,
       keywords: this.article.metaKeywords || this.article.tags,
       image:
