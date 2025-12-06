@@ -553,37 +553,122 @@ export class IconGenerator implements AfterViewInit {
     this.snackbar.success(`${selectedIcons.length} icons downloaded!`, 2000);
   }
 
+  /**
+   * Convert PNG data to ICO format (browser-compatible implementation)
+   */
+  private async createICO(pngDataArray: Uint8Array[]): Promise<Uint8Array> {
+    const numImages = pngDataArray.length;
+
+    // Calculate total size
+    let totalSize = 6 + (numImages * 16); // Header + Directory entries
+    for (const pngData of pngDataArray) {
+      totalSize += pngData.length;
+    }
+
+    const icoData = new Uint8Array(totalSize);
+    let offset = 0;
+
+    // Write ICO header
+    icoData[offset++] = 0; // Reserved
+    icoData[offset++] = 0;
+    icoData[offset++] = 1; // Type: 1 = ICO
+    icoData[offset++] = 0;
+    icoData[offset++] = numImages; // Number of images
+    icoData[offset++] = 0;
+
+    // Calculate image data offset
+    let imageDataOffset = 6 + (numImages * 16);
+
+    // Write directory entries
+    for (let i = 0; i < numImages; i++) {
+      const pngData = pngDataArray[i];
+      const size = this.getPNGSize(pngData);
+
+      icoData[offset++] = size === 256 ? 0 : size; // Width (0 = 256)
+      icoData[offset++] = size === 256 ? 0 : size; // Height (0 = 256)
+      icoData[offset++] = 0; // Color palette
+      icoData[offset++] = 0; // Reserved
+      icoData[offset++] = 1; // Color planes
+      icoData[offset++] = 0;
+      icoData[offset++] = 32; // Bits per pixel
+      icoData[offset++] = 0;
+
+      // Image data size (4 bytes, little-endian)
+      const dataSize = pngData.length;
+      icoData[offset++] = dataSize & 0xFF;
+      icoData[offset++] = (dataSize >> 8) & 0xFF;
+      icoData[offset++] = (dataSize >> 16) & 0xFF;
+      icoData[offset++] = (dataSize >> 24) & 0xFF;
+
+      // Image data offset (4 bytes, little-endian)
+      icoData[offset++] = imageDataOffset & 0xFF;
+      icoData[offset++] = (imageDataOffset >> 8) & 0xFF;
+      icoData[offset++] = (imageDataOffset >> 16) & 0xFF;
+      icoData[offset++] = (imageDataOffset >> 24) & 0xFF;
+
+      imageDataOffset += pngData.length;
+    }
+
+    // Write image data
+    for (const pngData of pngDataArray) {
+      icoData.set(pngData, offset);
+      offset += pngData.length;
+    }
+
+    return icoData;
+  }
+
+  /**
+   * Extract PNG image size from PNG data
+   */
+  private getPNGSize(pngData: Uint8Array): number {
+    // PNG width is at bytes 16-19 (big-endian)
+    return (pngData[16] << 24) | (pngData[17] << 16) | (pngData[18] << 8) | pngData[19];
+  }
+
   async downloadICO(): Promise<void> {
     if (!this.originalImage) return;
 
-    // ICO files can contain multiple sizes
-    // We'll include the most common favicon sizes: 16, 32, 48
-    const icoSizes = [16, 32, 48];
+    // Create separate ICO files for each size
+    const icoSizes = [16, 32, 48, 64];
     this.snackbar.info('Generating favicon set...', 2000);
-    const zip = new JSZip();
 
-    // Generate all favicon sizes and add to ZIP
-    for (const size of icoSizes) {
-      const canvas = this.resizeImage(size);
-      const blob = await new Promise<Blob | null>((resolve) => {
-        canvas.toBlob((b) => resolve(b), 'image/png');
-      });
+    try {
+      const zip = new JSZip();
 
-      if (blob) {
-        zip.file(`favicon-${size}x${size}.png`, blob);
+      // Generate a separate ICO file for each size
+      for (const size of icoSizes) {
+        const canvas = this.resizeImage(size);
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob((b) => resolve(b), 'image/png');
+        });
+
+        if (blob) {
+          const arrayBuffer = await blob.arrayBuffer();
+          const pngData = new Uint8Array(arrayBuffer);
+
+          // Create ICO file with single size
+          const icoData = await this.createICO([pngData]);
+
+          // Add to ZIP with descriptive filename
+          zip.file(`favicon-${size}x${size}.ico`, icoData);
+        }
       }
+
+      // Generate and download ZIP
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(zipBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'favicons.zip';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      this.snackbar.success('Favicon set downloaded!', 2000);
+    } catch (error) {
+      console.error('Error generating ICO:', error);
+      this.snackbar.error('Failed to generate ICO files', 3000);
     }
-
-    // Generate and download ZIP
-    const zipBlob = await zip.generateAsync({ type: 'blob' });
-    const url = URL.createObjectURL(zipBlob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'favicons.zip';
-    a.click();
-    URL.revokeObjectURL(url);
-
-    this.snackbar.success('Favicon set downloaded!', 2000);
   }
 
   getPreviewUrl(size: number): string {
