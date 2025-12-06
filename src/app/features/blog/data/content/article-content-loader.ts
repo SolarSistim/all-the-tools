@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'wordpress-vs-angular-why-i-built-my-site-with-zero-backend':
+        const wpModule = await import('./wordpress-vs-angular-why-i-built-my-site-with-zero-backend.content');
+        return wpModule.content;
+
       case 'i-switched-from-facebook-to-reddit-for-doomscrolling':
         const redditModule = await import('./i-switched-from-facebook-to-reddit-for-doomscrolling.content');
         return redditModule.content;

@@ -9,13 +9,39 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '3',
+    slug: 'wordpress-vs-angular-why-i-built-my-site-with-zero-backend',
+    title: 'WordPress vs. Angular: Why I Built My Site With Zero Backend',
+    description:
+      'Why I chose Angular over WordPress to build AllTheTools.dev - complete control, zero technical debt, and no database required.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-06-2025',
+    heroImage: {
+      src: '/meta-images/og-why-i-build-my-site-with-zero-backend.png',
+      alt: 'WordPress vs. Angular: Why I Built My Site With Zero Backend',
+    },
+    tags: ['Angular', 'WordPress', 'Web Development', 'Static Sites'],
+    category: 'Technology',
+    metaDescription:
+      'Why I chose Angular over WordPress to build AllTheTools.dev - complete control, zero technical debt, and no database required.',
+    metaKeywords: [
+      'Angular',
+      'WordPress',
+      'Web Development',
+      'Static Sites',
+      'Front-End',
+      'CMS',
+    ],
+    featured: true,
+  },
+  {
     id: '2',
     slug: 'i-switched-from-facebook-to-reddit-for-doomscrolling',
     title: 'I Switched from Facebook to Reddit for Doomscrolling. Here\'s What Happened.',
     description:
       'How I broke my Facebook addiction by redirecting my doomscrolling habit to something that actually gives back.',
     author: AUTHORS.joel_hansen,
-    publishedDate: '12-06-2025',
+    publishedDate: '12-04-2025',
     heroImage: {
       src: '/meta-images/og-i-switched-from-facebook-to-reddit-for-doomscrolling.png',
       alt: 'I Switched from Facebook to Reddit for Doomscrolling',
@@ -40,7 +66,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     description:
       "How a golden-roofed mansion became Pensacola's most controversial landmark.",
     author: AUTHORS.joel_hansen,
-    publishedDate: '12-04-2025',
+    publishedDate: '12-02-2025',
     heroImage: {
       src: '/meta-images/og-the-wild-story-of-the-gaudy-palace.png',
       alt: 'The WILD Story of the Gaudy Palace on Scenic Highway',
