@@ -222,6 +222,10 @@
     ::ng-deep .cta-description {
       font-size: 1.125rem;
     }
+
+    ::ng-deep .code-content {
+      font-size: 0.875rem;
+    }
   }
 
   // Medium font size (larger - middle button)
@@ -262,6 +266,10 @@
     ::ng-deep .cta-description {
       font-size: 1.3rem;
     }
+
+    ::ng-deep .code-content {
+      font-size: 1rem;
+    }
   }
 
   // Large font size (even larger - right button)
@@ -301,6 +309,10 @@
 
     ::ng-deep .cta-description {
       font-size: 1.5rem;
+    }
+
+    ::ng-deep .code-content {
+      font-size: 1.125rem;
     }
   }
 }

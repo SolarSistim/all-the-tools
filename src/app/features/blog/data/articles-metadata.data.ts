@@ -9,6 +9,59 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '6',
+    slug: 'the-deneb-paradox-when-first-contact-means-last-contact',
+    title: 'The Deneb Paradox: When First Contact Means Last Contact',
+    description:
+      'A deep dive into Pluribus episode 8\'s terrifying revelation about the Deneb aliens and their galaxy-spanning plan to absorb all conscious life.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-21-2025',
+    heroImage: {
+      src: '/meta-images/og-pluribus-the-deneb-paradox-when-first-contact-means-last-contact.png',
+      alt: 'The Deneb Paradox: When First Contact Means Last Contact',
+    },
+    tags: ['Pluribus', 'TV Analysis', 'Science Fiction', 'Vince Gilligan'],
+    category: 'TV & Film',
+    metaDescription:
+      'A deep dive into Pluribus episode 8\'s terrifying revelation about the Deneb aliens and their galaxy-spanning plan to absorb all conscious life.',
+    metaKeywords: [
+      'Pluribus',
+      'Deneb aliens',
+      'TV analysis',
+      'Science fiction',
+      'Vince Gilligan',
+      'Hive mind',
+      'First contact',
+    ],
+    featured: true,
+  },
+  {
+    id: '5',
+    slug: 'how-to-calculate-percentages-in-your-head',
+    title: 'How to Calculate Percentages in Your Head (Without Looking Like a Dunce)',
+    description:
+      'Master mental math with simple tricks to calculate percentages instantly. No more fumbling with your phone calculator.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-21-2025',
+    heroImage: {
+      src: '/meta-images/og-how-to-calculate-percentages-in-your-head.png',
+      alt: 'How to Calculate Percentages in Your Head',
+    },
+    tags: ['Math', 'Mental Math', 'Tips', 'Life Skills'],
+    category: 'Education',
+    metaDescription:
+      'Master mental math with simple tricks to calculate percentages instantly. No more fumbling with your phone calculator.',
+    metaKeywords: [
+      'Mental Math',
+      'Calculate Percentages',
+      'Math Tricks',
+      'Quick Math',
+      'Percentage Calculation',
+      'Math Tips',
+    ],
+    featured: true,
+  },
+  {
     id: '4',
     slug: 'why-truckers-drift-to-the-right-on-the-highway',
     title: 'Why Truckers Drift to the Right on the Highway',

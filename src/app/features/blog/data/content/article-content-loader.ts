@@ -10,6 +10,14 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'the-deneb-paradox-when-first-contact-means-last-contact':
+        const denebModule = await import('./the-deneb-paradox-when-first-contact-means-last-contact.content');
+        return denebModule.content;
+
+      case 'how-to-calculate-percentages-in-your-head':
+        const percentagesModule = await import('./how-to-calculate-percentages-in-your-head.content');
+        return percentagesModule.content;
+
       case 'why-truckers-drift-to-the-right-on-the-highway':
         const truckersModule = await import('./why-truckers-drift-to-the-right-on-the-highway.content');
         return truckersModule.content;
