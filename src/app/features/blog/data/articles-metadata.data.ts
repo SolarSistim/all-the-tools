@@ -9,6 +9,32 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '4',
+    slug: 'why-truckers-drift-to-the-right-on-the-highway',
+    title: 'Why Truckers Drift to the Right on the Highway',
+    description:
+      'Ever wonder why semi-trucks veer toward the shoulder? The reasons are more intentional - and darker - than you think.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-21-2025',
+    heroImage: {
+      src: '/meta-images/og-why-do-semi-truckers-veer-to-the-right-on-the-highway.png',
+      alt: 'Why Truckers Drift to the Right on the Highway',
+    },
+    tags: ['Trucking', 'Highway Safety', 'Transportation', 'Road Safety'],
+    category: 'Amateur Sleuthing',
+    metaDescription:
+      'Ever wonder why semi-trucks veer toward the shoulder? The reasons are more intentional—and darker—than you think.',
+    metaKeywords: [
+      'Trucking',
+      'Highway Safety',
+      'Semi-Trucks',
+      'Road Safety',
+      'Transportation',
+      'Driver Fatigue',
+    ],
+    featured: true,
+  },
+  {
     id: '3',
     slug: 'wordpress-vs-angular-why-i-built-my-site-with-zero-backend',
     title: 'WordPress vs. Angular: Why I Built My Site With Zero Backend',
