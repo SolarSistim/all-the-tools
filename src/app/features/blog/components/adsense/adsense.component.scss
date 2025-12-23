@@ -1,10 +1,11 @@
 .adsense-container {
   margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  width: 100%;
+  min-height: 250px;
 
-  amp-ad {
+  .adsbygoogle {
     display: block;
+    width: 100%;
   }
 }

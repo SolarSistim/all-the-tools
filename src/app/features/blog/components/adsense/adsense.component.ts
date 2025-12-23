@@ -19,10 +19,13 @@ export class AdsenseComponent implements AfterViewInit {
   @Input() fullWidthResponsive: string = 'true';
 
   ngAfterViewInit(): void {
-    try {
-      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-    } catch (e) {
-      console.error('AdSense error:', e);
-    }
+    // Delay ad initialization to ensure container is fully rendered
+    setTimeout(() => {
+      try {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('AdSense error:', e);
+      }
+    }, 100);
   }
 }
