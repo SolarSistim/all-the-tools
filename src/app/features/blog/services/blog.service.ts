@@ -37,10 +37,20 @@ export class BlogService {
 
   /**
    * Initialize article preview cache
+   * Loads all article content to calculate accurate reading times
    */
-  private initializePreviewCache(): void {
-    const previews = this.metadataCache().map((metadata) =>
-      this.convertMetadataToPreview(metadata)
+  private async initializePreviewCache(): Promise<void> {
+    const previews = await Promise.all(
+      this.metadataCache().map(async (metadata) => {
+        // Load content to calculate accurate reading time
+        const content = await loadArticleContent(metadata.slug);
+        const article: Article = {
+          ...metadata,
+          content: content || [],
+        };
+
+        return this.convertMetadataToPreview(metadata, article);
+      })
     );
     this.previewsCache.set(previews);
   }
@@ -265,7 +275,7 @@ export class BlogService {
   /**
    * Convert ArticleMetadata to ArticlePreview
    */
-  private convertMetadataToPreview(metadata: ArticleMetadata): ArticlePreview {
+  private convertMetadataToPreview(metadata: ArticleMetadata, article: Article): ArticlePreview {
     return {
       id: metadata.id,
       slug: metadata.slug,
@@ -276,7 +286,7 @@ export class BlogService {
       heroImage: metadata.heroImage,
       tags: metadata.tags,
       category: metadata.category,
-      readingTime: this.estimateReadingTime(metadata),
+      readingTime: this.calculateReadingTime(article),
       featured: metadata.featured,
     };
   }

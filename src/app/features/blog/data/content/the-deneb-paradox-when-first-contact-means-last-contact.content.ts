@@ -285,7 +285,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Remember the problem with intergalactic transmission? Signal attenuation. The signal spreads out and weakens over distance until it\'s just noise.',
+      text: 'Do you know the problem with intergalactic transmission? Signal attenuation. The signal spreads out and weakens over distance until it\'s just noise.',
     },
   },
   {
