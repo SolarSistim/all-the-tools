@@ -32,7 +32,19 @@ export class FooterComponent {
   quickLinks = [
     { label: 'Home', route: '/' },
     { label: 'All Tools', route: '/tools' },
+    { label: 'Blog', route: '/blog' },
     { label: 'About', route: '/about' }
+  ];
+
+  // About & Legal links
+  aboutLinks = [
+    { label: 'About All The Tools', route: '/about' },
+    { label: 'Changelog', route: '/changelog' },
+    { label: 'Privacy Policy', route: '/privacy' },
+    { label: 'Terms of Service', route: '/terms' },
+    { label: 'Accessibility', route: '/accessibility' },
+    { label: 'Disclaimer', route: '/disclaimer' },
+    { label: 'Contact Us', route: '/contact' }
   ];
 
   // Tool categories
@@ -40,6 +52,9 @@ export class FooterComponent {
     { label: 'Math & Calculators', route: '/tools', params: { category: 'math' } },
     { label: 'Converters', route: '/tools', params: { category: 'converter' } },
     { label: 'Text Tools', route: '/tools', params: { category: 'text' } },
-    { label: 'Generators', route: '/tools', params: { category: 'generator' } }
+    { label: 'Generators', route: '/tools', params: { category: 'generator' } },
+    { label: 'Color Tools', route: '/tools', params: { category: 'color' } },
+    { label: 'Time & Date', route: '/tools', params: { category: 'time' } },
+    { label: 'Image Tools', route: '/tools', params: { category: 'image' } }
   ];
 }

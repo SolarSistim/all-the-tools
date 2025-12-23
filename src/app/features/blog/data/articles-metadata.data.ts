@@ -34,6 +34,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'First contact',
     ],
     featured: true,
+    relatedArticles: ['4', '1', '2'],
   },
   {
     id: '5',
@@ -60,6 +61,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Math Tips',
     ],
     featured: true,
+    relatedArticles: ['3', '2', '4'],
   },
   {
     id: '4',
@@ -86,6 +88,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Driver Fatigue',
     ],
     featured: true,
+    relatedArticles: ['1', '6', '2'],
   },
   {
     id: '3',
@@ -112,6 +115,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'CMS',
     ],
     featured: true,
+    relatedArticles: ['2', '5', '1'],
   },
   {
     id: '2',
@@ -137,6 +141,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Productivity',
     ],
     featured: true,
+    relatedArticles: ['3', '5', '6'],
   },
   {
     id: '1',
@@ -160,5 +165,6 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Palace',
     ],
     featured: true,
+    relatedArticles: ['4', '2', '3'],
   },
 ];

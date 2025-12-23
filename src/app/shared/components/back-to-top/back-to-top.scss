@@ -1,0 +1,25 @@
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  background-color: var(--neon-cyan) !important;
+  color: var(--bg-primary) !important;
+
+  &:hover {
+    background-color: var(--neon-cyan-bright) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+@media print {
+  .back-to-top {
+    display: none;
+  }
+}

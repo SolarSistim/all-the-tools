@@ -11,20 +11,6 @@
         <p class="brand-description">
           Your Swiss Army knife of web utilities. Fast, private, and always free.
         </p>
-        <!-- Social Links -->
-        <div class="social-links">
-          @for (social of socialLinks; track social.name) {
-            <a
-              [href]="social.url"
-              [matTooltip]="social.tooltip"
-              class="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <mat-icon>{{ social.icon }}</mat-icon>
-            </a>
-          }
-        </div>
       </div>
 
       <!-- Quick Links -->
@@ -32,6 +18,20 @@
         <h4 class="footer-title">Quick Links</h4>
         <ul class="footer-links">
           @for (link of quickLinks; track link.route) {
+            <li>
+              <a [routerLink]="link.route" class="footer-link">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- About & Legal -->
+      <div class="footer-section">
+        <h4 class="footer-title">About & Legal</h4>
+        <ul class="footer-links">
+          @for (link of aboutLinks; track link.route) {
             <li>
               <a [routerLink]="link.route" class="footer-link">
                 {{ link.label }}
@@ -57,25 +57,6 @@
             </li>
           }
         </ul>
-      </div>
-
-      <!-- Info Section -->
-      <div class="footer-section">
-        <h4 class="footer-title">About</h4>
-        <p class="footer-info">
-          All tools run entirely in your browser. No data is sent to any server.
-          Your privacy is guaranteed.
-        </p>
-        <div class="footer-badges">
-          <span class="badge">
-            <mat-icon>lock</mat-icon>
-            100% Private
-          </span>
-          <span class="badge">
-            <mat-icon>flash_on</mat-icon>
-            Fast
-          </span>
-        </div>
       </div>
     </div>
 

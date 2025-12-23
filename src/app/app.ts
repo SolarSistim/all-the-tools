@@ -7,6 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './layout/header/header';
 import { FooterComponent } from './layout/footer/footer';
+import { BackToTopComponent } from './shared/components/back-to-top/back-to-top';
 import { SidenavService } from './core/services/sidenav.service';
 import { ToolsService } from './core/services/tools.service';
 import { VisitLoggerService } from './core/services/visit-logger.service';
@@ -22,7 +23,8 @@ import { ToolCategoryMeta, Tool } from './core/models/tool.interface';
     MatButtonModule,
     MatExpansionModule,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BackToTopComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
