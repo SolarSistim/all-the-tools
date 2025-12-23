@@ -1,14 +1,13 @@
 <div class="adsense-container">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7077792325295668"
-        crossorigin="anonymous"></script>
-    <!-- All The Things Article Ad -->
-    <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-7077792325295668"
-        data-ad-slot="3887470191"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+  <amp-ad
+    [attr.width]="width || '100vw'"
+    [attr.height]="height || '320'"
+    type="adsense"
+    [attr.data-ad-client]="adClient || 'ca-pub-7077792325295668'"
+    [attr.data-ad-slot]="adSlot || '3887470191'"
+    [attr.data-auto-format]="autoFormat || 'rspv'"
+    data-full-width=""
+  >
+    <div overflow=""></div>
+  </amp-ad>
 </div>
