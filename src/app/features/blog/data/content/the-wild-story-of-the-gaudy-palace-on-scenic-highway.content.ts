@@ -111,6 +111,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {
+      adClient: 'ca-pub-7077792325295668',
+      adSlot: '3887470191'
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 3,
@@ -419,6 +426,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Whether the tradition returns now that repairs are underway remains to be seen.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {
+      adClient: 'ca-pub-7077792325295668',
+      adSlot: '3887470191'
     },
   },
   {

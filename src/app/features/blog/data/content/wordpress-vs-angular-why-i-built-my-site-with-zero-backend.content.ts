@@ -244,7 +244,10 @@ export const content: ContentBlock[] = [
   },
   {
     type: 'adsense',
-    data: {},
+    data: {
+      adClient: 'ca-pub-7077792325295668',
+      adSlot: '3887470191'
+    },
   },
   {
     type: 'heading',
