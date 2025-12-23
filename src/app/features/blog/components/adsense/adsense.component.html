@@ -1,9 +1,21 @@
 <div class="adsense-container">
-  <ins class="adsbygoogle"
-    style="display:block"
-    [attr.data-ad-client]="adClient"
-    [attr.data-ad-slot]="adSlot"
-    [attr.data-ad-format]="adFormat"
-    [attr.data-full-width-responsive]="fullWidthResponsive">
-  </ins>
+  @if (isDevelopment) {
+    <!-- Development mode placeholder -->
+    <div class="ad-placeholder">
+      <div class="placeholder-content">
+        <div class="placeholder-icon">📢</div>
+        <div class="placeholder-text">AdSense Ad Placeholder</div>
+        <div class="placeholder-details">{{ adFormat }} format • {{ fullWidthResponsive === 'true' ? 'Responsive' : 'Fixed' }}</div>
+      </div>
+    </div>
+  } @else {
+    <!-- Production AdSense ad -->
+    <ins class="adsbygoogle"
+      style="display:block"
+      [attr.data-ad-client]="adClient"
+      [attr.data-ad-slot]="adSlot"
+      [attr.data-ad-format]="adFormat"
+      [attr.data-full-width-responsive]="fullWidthResponsive">
+    </ins>
+  }
 </div>
