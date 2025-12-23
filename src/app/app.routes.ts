@@ -28,6 +28,11 @@ export const routes: Routes = [
     title: 'Terms of Service - All The Things'
   },
   {
+    path: 'disclaimer',
+    loadComponent: () => import('./features/disclaimer/disclaimer').then(m => m.Disclaimer),
+    title: 'Disclaimer - All The Things'
+  },
+  {
     path: 'accessibility',
     loadComponent: () => import('./features/accessibility/accessibility').then(m => m.AccessibilityComponent),
     title: 'Accessibility Statement - All The Things'
