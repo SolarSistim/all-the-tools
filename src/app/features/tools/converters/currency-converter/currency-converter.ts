@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
 import { MetaService } from '../../../../core/services/meta.service';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 interface Currency {
   code: string;
@@ -31,7 +32,8 @@ interface Currency {
     MatInputModule,
     MatTooltipModule,
     CtaEmailList,
-    AlertDanger
+    AlertDanger,
+    AdsenseComponent
   ],
   templateUrl: './currency-converter.html',
   styleUrl: './currency-converter.scss',

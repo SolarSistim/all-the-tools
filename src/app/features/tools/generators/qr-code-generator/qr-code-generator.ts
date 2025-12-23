@@ -16,6 +16,7 @@ import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import QRCode from 'qrcode';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 type QRCodeType = 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard';
 
@@ -42,7 +43,8 @@ interface QRCodeOptions {
     MatTooltipModule,
     MatExpansionModule,
     PageHeaderComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './qr-code-generator.html',
   styleUrl: './qr-code-generator.scss',

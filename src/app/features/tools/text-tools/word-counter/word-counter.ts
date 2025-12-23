@@ -14,6 +14,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 interface TextMetrics {
   words: number;
@@ -42,7 +43,8 @@ interface TextMetrics {
     MatButtonModule,
     PageHeaderComponent,
     ToolCardComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './word-counter.html',
   styleUrl: './word-counter.scss'

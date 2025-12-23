@@ -12,6 +12,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
 
@@ -27,7 +28,8 @@ type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
     MatIconModule,
     MatButtonModule,
     PageHeaderComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './lorem-ipsum.html',
   styleUrl: './lorem-ipsum.scss',

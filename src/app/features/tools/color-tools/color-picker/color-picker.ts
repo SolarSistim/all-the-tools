@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 // Color interface
 interface RGB {
@@ -41,7 +42,8 @@ interface HSL {
     MatSnackBarModule,
     MatTooltipModule,
     MatTabsModule,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
 ],
   templateUrl: './color-picker.html',
   styleUrl: './color-picker.scss',

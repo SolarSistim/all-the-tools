@@ -11,6 +11,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 @Component({
   selector: 'app-uuid-generator',
@@ -25,7 +26,8 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     MatButtonModule,
     MatTooltipModule,
     PageHeaderComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './uuid-generator.html',
   styleUrl: './uuid-generator.scss',

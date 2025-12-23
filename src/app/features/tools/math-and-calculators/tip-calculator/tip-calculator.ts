@@ -14,6 +14,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 @Component({
   selector: 'app-tip-calculator',
@@ -29,7 +30,8 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     MatButtonModule,
     PageHeaderComponent,
     ToolCardComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './tip-calculator.html',
   styleUrl: './tip-calculator.scss'

@@ -15,7 +15,7 @@
   grid-template-columns: 1fr 1fr;
   gap: $spacing-2xl;
   align-items: center;
-  margin-bottom: $spacing-3xl;
+  margin-bottom: 32px;
   padding: $spacing-2xl;
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);
@@ -793,7 +793,10 @@
 // INFO SECTION
 // ============================================
 .info-section {
-  margin-top: $spacing-2xl;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: $spacing-xl;
 
   h3 {
     font-family: 'Orbitron', sans-serif;
@@ -821,7 +824,7 @@
 }
 
 .info-card {
-  background: var(--bg-elevated);
+  background: #1A1E2E;
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: $spacing-lg;

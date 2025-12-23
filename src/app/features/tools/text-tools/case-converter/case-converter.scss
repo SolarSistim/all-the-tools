@@ -15,7 +15,7 @@
   grid-template-columns: 1fr 1fr;
   gap: $spacing-2xl;
   align-items: center;
-  margin-bottom: $spacing-3xl;
+  margin-bottom: 32px;
   padding: $spacing-2xl;
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);
@@ -478,7 +478,7 @@
 // CONVERSIONS SECTION
 // ============================================
 .conversions-section {
-  margin-bottom: $spacing-2xl;
+  margin-bottom: 32px;
 
   h3 {
     font-family: 'Orbitron', sans-serif;

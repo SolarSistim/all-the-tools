@@ -13,6 +13,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 interface CaseConversion {
   id: string;
@@ -35,7 +36,8 @@ interface CaseConversion {
     MatButtonModule,
     PageHeaderComponent,
     ToolCardComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './case-converter.html',
   styleUrl: './case-converter.scss'

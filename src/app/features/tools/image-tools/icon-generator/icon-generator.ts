@@ -10,6 +10,7 @@ import JSZip from 'jszip';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 interface IconSize {
   name: string;
@@ -29,7 +30,8 @@ interface IconSize {
     MatCheckboxModule,
     MatTooltipModule,
     FormsModule,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './icon-generator.html',
   styleUrl: './icon-generator.scss',

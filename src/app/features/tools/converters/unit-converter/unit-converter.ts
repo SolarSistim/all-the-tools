@@ -14,6 +14,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 interface Unit {
   name: string;
@@ -44,7 +45,8 @@ interface UnitCategory {
     MatButtonToggleModule,
     PageHeaderComponent,
     ToolCardComponent,
-    CtaEmailList
+    CtaEmailList,
+    AdsenseComponent
   ],
   templateUrl: './unit-converter.html',
   styleUrl: './unit-converter.scss'
