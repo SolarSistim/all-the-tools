@@ -1,4 +1,4 @@
-import { Component, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -9,15 +9,20 @@ import { CommonModule } from '@angular/common';
   selector: 'app-adsense',
   standalone: true,
   imports: [CommonModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './adsense.component.html',
   styleUrls: ['./adsense.component.scss'],
 })
-export class AdsenseComponent {
+export class AdsenseComponent implements AfterViewInit {
   @Input() adClient: string = 'ca-pub-7077792325295668';
   @Input() adSlot: string = '3887470191';
-  @Input() width: string = '100vw';
-  @Input() height: string = '320';
-  @Input() autoFormat: string = 'rspv';
-  @Input() fullWidth: boolean = true;
+  @Input() adFormat: string = 'auto';
+  @Input() fullWidthResponsive: string = 'true';
+
+  ngAfterViewInit(): void {
+    try {
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    } catch (e) {
+      console.error('AdSense error:', e);
+    }
+  }
 }

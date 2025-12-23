@@ -1,13 +1,9 @@
 <div class="adsense-container">
-  <amp-ad
-    [attr.width]="width || '100vw'"
-    [attr.height]="height || '320'"
-    type="adsense"
-    [attr.data-ad-client]="adClient || 'ca-pub-7077792325295668'"
-    [attr.data-ad-slot]="adSlot || '3887470191'"
-    [attr.data-auto-format]="autoFormat || 'rspv'"
-    data-full-width=""
-  >
-    <div overflow=""></div>
-  </amp-ad>
+  <ins class="adsbygoogle"
+    style="display:block"
+    [attr.data-ad-client]="adClient"
+    [attr.data-ad-slot]="adSlot"
+    [attr.data-ad-format]="adFormat"
+    [attr.data-full-width-responsive]="fullWidthResponsive">
+  </ins>
 </div>
