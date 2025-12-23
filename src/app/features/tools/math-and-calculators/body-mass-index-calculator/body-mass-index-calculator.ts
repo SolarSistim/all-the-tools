@@ -16,6 +16,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 @Component({
   selector: 'app-body-mass-index-calculator',
@@ -33,7 +34,8 @@ import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/al
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AlertDanger
+    AlertDanger,
+    AdsenseComponent
   ],
   templateUrl: './body-mass-index-calculator.html',
   styleUrl: './body-mass-index-calculator.scss'
