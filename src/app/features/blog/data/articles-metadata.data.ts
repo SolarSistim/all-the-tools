@@ -9,6 +9,34 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '7',
+    slug: 'these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him',
+    title: 'These Song Lyrics Do Not Tease the Grinch. They Unload on Him.',
+    description:
+      'A psychological breakdown of how "You\'re A Mean One, Mr. Grinch" isn\'t playful teasing - it\'s a brutal character assassination with surprising depth.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-24-2025',
+    heroImage: {
+      src: '/meta-images/og-these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.png',
+      alt: 'These Song Lyrics Do Not Tease the Grinch. They Unload on Him.',
+    },
+    tags: ['The Grinch', 'Psychology', 'Christmas', 'Pop Culture Analysis'],
+    category: 'TV & Film',
+    metaDescription:
+      'A psychological breakdown of how "You\'re A Mean One, Mr. Grinch" isn\'t playful teasing - it\'s a brutal character assassination.',
+    metaKeywords: [
+      'Grinch',
+      'Mr. Grinch',
+      'Psychology',
+      'Christmas',
+      'Pop Culture',
+      'Character Analysis',
+      'Song Analysis',
+    ],
+    featured: true,
+    relatedArticles: ['6', '1', '2'],
+  },
+  {
     id: '6',
     slug: 'the-deneb-paradox-when-first-contact-means-last-contact',
     title: 'The Deneb Paradox: When First Contact Means Last Contact',

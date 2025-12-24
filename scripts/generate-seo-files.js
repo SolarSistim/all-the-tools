@@ -10,8 +10,32 @@ const path = require('path');
 // Configuration
 const DOMAIN = 'https://www.allthethings.dev';
 const ROUTES_FILE = path.join(__dirname, '../src/app/app.routes.ts');
+const BLOG_METADATA_FILE = path.join(__dirname, '../src/app/features/blog/data/articles-metadata.data.ts');
 const SITEMAP_OUTPUT = path.join(__dirname, '../public/sitemap.xml');
 const ROUTES_OUTPUT = path.join(__dirname, '../routes.txt');
+
+/**
+ * Extract blog article slugs from metadata file
+ */
+function extractBlogArticles() {
+  try {
+    const content = fs.readFileSync(BLOG_METADATA_FILE, 'utf-8');
+    const articles = [];
+
+    // Match slug definitions in the metadata
+    const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
+
+    let match;
+    while ((match = slugRegex.exec(content)) !== null) {
+      articles.push(`/blog/${match[1]}`);
+    }
+
+    return articles;
+  } catch (error) {
+    console.warn('⚠️  Could not extract blog articles:', error.message);
+    return [];
+  }
+}
 
 /**
  * Extract routes from app.routes.ts
@@ -39,6 +63,10 @@ function extractRoutes() {
     }
   }
 
+  // Add blog article routes
+  const blogArticles = extractBlogArticles();
+  routes.push(...blogArticles);
+
   // Remove duplicates and sort
   return [...new Set(routes)].sort();
 }
@@ -60,12 +88,15 @@ function generateSitemap(routes) {
     if (route === '/') {
       priority = '1.0';
       changefreq = 'weekly';
-    } else if (route === '/tools') {
+    } else if (route === '/tools' || route === '/blog') {
       priority = '0.9';
       changefreq = 'weekly';
     } else if (route.startsWith('/tools/')) {
       priority = '0.8';
       changefreq = 'monthly';
+    } else if (route.startsWith('/blog/')) {
+      priority = '0.7';
+      changefreq = 'weekly';
     } else if (['/about', '/privacy', '/terms'].includes(route)) {
       priority = '0.6';
       changefreq = 'yearly';
