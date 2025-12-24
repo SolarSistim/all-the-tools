@@ -9,9 +9,10 @@
     "test": "ng test",
     "dev:ssr": "ng serve",
     "build:ssr": "npm run generate:seo && ng build",
-    "prerender": "npm run generate:seo && ng build --configuration production",
+    "prerender": "npm run generate:seo && ng build --configuration production && npm run generate:sitemap",
     "serve:ssr:all-the-tools": "node dist/all-the-tools/server/server.mjs",
-    "generate:seo": "node scripts/generate-seo-files.js"
+    "generate:seo": "node scripts/generate-seo-files.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js"
   },
   "prettier": {
     "overrides": [

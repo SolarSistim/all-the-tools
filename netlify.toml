@@ -31,6 +31,19 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Sitemap and robots.txt - cache for 1 hour (allows frequent updates)
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "application/xml"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "text/plain"
+
 # Service worker - never cache
 [[headers]]
   for = "/sw.js"
