@@ -82,7 +82,8 @@ export type ContentBlockType =
   | 'cta'
   | 'affiliate'
   | 'divider'
-  | 'adsense';
+  | 'adsense'
+  | 'component';
 
 /**
  * Base content block
@@ -224,6 +225,16 @@ export interface AdsenseBlock extends ContentBlock {
     adSlot?: string;
     width?: string;
     height?: string;
+  };
+}
+
+/**
+ * Component block
+ */
+export interface ComponentBlock extends ContentBlock {
+  type: 'component';
+  data: {
+    componentName: string;
   };
 }
 

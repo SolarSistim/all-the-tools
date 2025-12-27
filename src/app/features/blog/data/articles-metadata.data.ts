@@ -9,6 +9,35 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '8',
+    slug: 'i-built-a-roku-compatibility-checker',
+    title: 'I Built a Roku Compatibility Checker (And This Is Why You Might Need It)',
+    description:
+      'After a decade of buying Rokus and struggling to find compatibility info, I spent a week compiling specs for every Roku product and built a simple web tool to solve this problem once and for all.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-27-2025',
+    heroImage: {
+      src: '/meta-images/og-roku-compatibility-checker.png',
+      alt: 'I Built a Roku Compatibility Checker',
+    },
+    tags: ['Roku', 'Tools', 'Hardware', 'Compatibility', 'Product Review'],
+    category: 'Technology',
+    metaDescription:
+      'After struggling to find Roku compatibility info, I built a web tool that shows you exactly what features and accessories work with your Roku model.',
+    metaKeywords: [
+      'Roku compatibility',
+      'Roku checker',
+      'Roku features',
+      'Roku accessories',
+      'Roku wireless speakers',
+      'Roku soundbar',
+      'Roku 4K',
+      'Roku HDR',
+    ],
+    featured: true,
+    relatedArticles: ['3', '5', '1'],
+  },
+  {
     id: '7',
     slug: 'these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him',
     title: 'These Song Lyrics Do Not Tease the Grinch. They Unload on Him.',

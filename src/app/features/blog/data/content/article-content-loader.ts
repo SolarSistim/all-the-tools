@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'i-built-a-roku-compatibility-checker':
+        const rokuModule = await import('./i-built-a-roku-compatibility-checker.content');
+        return rokuModule.content;
+
       case 'these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him':
         const grinchModule = await import('./these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.content');
         return grinchModule.content;

@@ -8,6 +8,7 @@ import { BlockquoteComponent } from '../blockquote/blockquote.component';
 import { CodeBlockComponent } from '../code-block/code-block.component';
 import { AffiliateLinkComponent } from '../affiliate-link/affiliate-link.component';
 import { AdsenseComponent } from '../adsense/adsense.component';
+import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/roku-compatibility-checker/roku-programmatic-compatibility-checker/roku-programmatic-compatibility-checker';
 
 /**
  * Article Content Component
@@ -25,6 +26,7 @@ import { AdsenseComponent } from '../adsense/adsense.component';
     CodeBlockComponent,
     AffiliateLinkComponent,
     AdsenseComponent,
+    RokuProgrammaticCompatibilityChecker,
   ],
   templateUrl: './article-content.component.html',
   styleUrls: ['./article-content.component.scss'],

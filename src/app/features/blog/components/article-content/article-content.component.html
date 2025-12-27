@@ -110,5 +110,10 @@
       [adClient]="block.data.adClient"
       [adSlot]="block.data.adSlot"
     ></app-adsense>
+
+    <!-- Custom Component -->
+    <app-roku-programmatic-compatibility-checker
+      *ngIf="block.type === 'component' && block.data.componentName === 'roku-checker'"
+    ></app-roku-programmatic-compatibility-checker>
   </ng-container>
 </div>
