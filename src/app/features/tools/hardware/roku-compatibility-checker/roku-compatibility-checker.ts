@@ -30,10 +30,10 @@ export class RokuCompatibilityChecker implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'Roku Compatibility Checker - Check Device Features & Compatibility',
+      title: 'Roku Compatibility Checker',
       description: 'Check compatibility for Roku devices including 4K, HDR, Dolby Vision, voice remotes, smart home integration, and more.',
       keywords: ['roku compatibility', 'roku checker', 'roku features', 'roku 4k', 'roku voice remote', 'roku airplay'],
-      image: 'https://www.allthethings.dev/meta-images/og-roku-compatibility.png',
+      image: 'https://www.allthethings.dev/meta-images/og-roku-compatibility-checker.png',
       url: 'https://www.allthethings.dev/tools/roku-compatibility-checker'
     });
   }
