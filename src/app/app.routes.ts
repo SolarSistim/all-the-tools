@@ -133,6 +133,11 @@ export const routes: Routes = [
     title: 'Currency Converter - All The Things'
   },
   {
+    path: 'tools/roku-compatibility',
+    loadComponent: () => import('./features/tools/hardware/roku-compatibility-checker/roku-compatibility-checker').then(m => m.RokuCompatibilityChecker),
+    title: 'Roku Compatibility - All The Things'
+  },
+  {
     path: 'blog',
     loadChildren: () => import('./features/blog/blog.routes').then(m => m.BLOG_ROUTES),
   }

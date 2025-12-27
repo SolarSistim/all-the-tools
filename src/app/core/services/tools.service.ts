@@ -217,7 +217,23 @@ export class ToolsService {
     route: 'icon-generator',
     featured: false,
     tags: ['image', 'icon', 'generator', 'graphics'],
-    available: true // Set to true when you complete the component
+    available: true
+  },
+
+  // ========================================
+  // HARDWARE TOOLS
+  // ========================================
+  {
+    id: 'roku-compatibility',
+    name: 'Roku Compatibility',
+    description: 'Check compatibility and features for Roku devices',
+    longDescription: 'Comprehensive compatibility checker for Roku devices. View 4K support, HDR capabilities, voice remote features, smart home integration, and more for any Roku model.',
+    category: 'hardware',
+    icon: 'devices',
+    route: 'roku-compatibility',
+    featured: false,
+    tags: ['hardware', 'roku', 'streaming', 'compatibility'],
+    available: true
   },
   ];
 
@@ -273,6 +289,13 @@ export class ToolsService {
     description: 'Image manipulation and generation utilities',
     icon: 'image',
     color: 'var(--neon-cyan)'
+  },
+  {
+    id: 'hardware',
+    name: 'Hardware Tools',
+    description: 'Hardware compatibility and device utilities',
+    icon: 'devices',
+    color: 'var(--neon-pink)'
   },
   {
     id: 'other',

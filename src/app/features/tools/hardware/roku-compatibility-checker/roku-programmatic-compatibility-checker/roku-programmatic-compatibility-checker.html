@@ -1,0 +1,118 @@
+<!-- Model Selector Card -->
+<mat-card class="selector-card">
+  <div class="card-header">
+    <mat-icon class="card-icon">search</mat-icon>
+    <h2>Select Your Roku Model</h2>
+  </div>
+
+  <div class="selector-content">
+    <mat-form-field appearance="fill" class="model-select">
+      <mat-label>Choose a Roku Model</mat-label>
+      <mat-select [(ngModel)]="selectedModel">
+        <mat-option class="search-option">
+          <div class="search-input-wrapper">
+            <mat-icon class="search-icon">search</mat-icon>
+            <input
+              matInput
+              type="text"
+              placeholder="Type to filter models..."
+              [(ngModel)]="searchTerm"
+              (click)="$event.stopPropagation()"
+              class="search-input"
+            />
+            @if (searchTerm()) {
+              <button
+                mat-icon-button
+                class="clear-button"
+                (click)="clearSearch($event)"
+                type="button"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </div>
+        </mat-option>
+        @for (model of filteredModels(); track model.model) {
+          <mat-option [value]="model.model">
+            {{ model.model }} - {{ model.productType }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Category Filters -->
+    <div class="category-filters">
+      <div class="category-filter-header">
+        <mat-icon>filter_list</mat-icon>
+        <span>Filter by Category</span>
+      </div>
+      <div class="category-filter-grid">
+        @for (category of categories(); track category.id) {
+          <mat-checkbox
+            [checked]="category.selected"
+            (change)="toggleCategory(category.id)"
+            class="category-checkbox"
+          >
+            {{ category.label }}
+          </mat-checkbox>
+        }
+      </div>
+    </div>
+
+    @if (selectedModelData()) {
+      <div class="model-info">
+        <div class="model-header">
+          <h3>{{ selectedModelData()?.model }}</h3>
+          <mat-chip class="product-type-chip">{{ selectedModelData()?.productType }}</mat-chip>
+        </div>
+        @if (selectedModelData()?.minRokuOSAirPlayHomeKit !== 'N/A') {
+          <p class="os-version">
+            <mat-icon>info</mat-icon>
+            Minimum Roku OS: {{ selectedModelData()?.minRokuOSAirPlayHomeKit }}
+          </p>
+        }
+      </div>
+    }
+  </div>
+</mat-card>
+
+<!-- Compatibility Results -->
+@if (selectedModelData()) {
+  <div class="compatibility-results">
+    @for (category of compatibilityCategories(); track category.name) {
+      <mat-card class="category-card">
+        <div class="category-header">
+          <mat-icon class="category-icon">{{ category.icon }}</mat-icon>
+          <h3>{{ category.name }}</h3>
+        </div>
+
+        <div class="compatibility-grid">
+          @for (item of category.items; track item.label) {
+            <div class="compatibility-item" [class.compatible]="item.isCompatible" [class.not-compatible]="!item.isCompatible">
+              <div class="item-icon-wrapper">
+                <mat-icon class="item-icon">{{ item.icon }}</mat-icon>
+              </div>
+              <div class="item-content">
+                <div class="item-label">{{ item.label }}</div>
+                <div class="item-value">
+                  @if (item.isCompatible) {
+                    <mat-icon class="status-icon compatible">check_circle</mat-icon>
+                    <span class="status-text">{{ item.value }}</span>
+                  } @else {
+                    <mat-icon class="status-icon not-compatible">cancel</mat-icon>
+                    <span class="status-text">{{ item.value }}</span>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </mat-card>
+    }
+  </div>
+} @else {
+  <div class="no-selection">
+    <mat-icon>info</mat-icon>
+    <p>Select a Roku model above to view its compatibility information</p>
+  </div>
+}

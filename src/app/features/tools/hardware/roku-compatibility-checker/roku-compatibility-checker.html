@@ -1,0 +1,98 @@
+<div class="roku-compatibility-page">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">devices</mat-icon>
+        </div>
+        <h1 class="hero-title">Roku Compatibility Checker</h1>
+        <p class="hero-subtitle">
+          Check the complete feature set and compatibility information for any Roku device.
+        </p>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToChecker()"
+            class="cta-button"
+          >
+            <mat-icon>auto_awesome</mat-icon>
+            Check Roku Compatibility
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="device-showcase">
+          <div class="device-example device-example-1">
+            <mat-icon>4k</mat-icon>
+            <span class="device-label">4K Ultra HD</span>
+          </div>
+          <div class="device-example device-example-2">
+            <mat-icon>mic</mat-icon>
+            <span class="device-label">Voice Remote</span>
+          </div>
+          <div class="device-example device-example-3">
+            <mat-icon>cast</mat-icon>
+            <span class="device-label">AirPlay & HomeKit</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+<app-alert-warning title="important" content = "The compatibility information shown here is for reference purposes only and may not reflect the most current specifications. Device features and compatibility can change over time due to firmware updates, regional variations, or hardware revisions. Always verify compatibility details directly with Roku or your device manufacturer before making purchase decisions.">
+
+</app-alert-warning>
+
+    <!-- Roku Programmatic Compatibility Checker -->
+    <app-roku-programmatic-compatibility-checker></app-roku-programmatic-compatibility-checker>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Information Section -->
+    <div class="info-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        About Roku Compatibility
+      </h3>
+      <div class="info-grid">
+        <div class="info-card">
+          <mat-icon>4k</mat-icon>
+          <h4>4K & HDR Support</h4>
+          <p>Check if your Roku supports 4K Ultra HD, HDR10, and Dolby Vision for the best picture quality.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>mic</mat-icon>
+          <h4>Voice Remote Features</h4>
+          <p>Discover voice remote compatibility, hands-free voice control, and remote finder capabilities.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>cast</mat-icon>
+          <h4>Smart Home Integration</h4>
+          <p>Find out about Apple AirPlay, HomeKit, Google Assistant, and Alexa compatibility.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>bluetooth</mat-icon>
+          <h4>Audio Features</h4>
+          <p>Check Bluetooth audio streaming, headphone mode, and wireless speaker support.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>settings_ethernet</mat-icon>
+          <h4>Connectivity</h4>
+          <p>View built-in Ethernet, adapter support, and compatible network accessories.</p>
+        </div>
+        <div class="info-card">
+          <mat-icon>sports_esports</mat-icon>
+          <h4>Gaming & Apps</h4>
+          <p>Discover gaming console compatibility and access to streaming channels like Netflix Games.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>

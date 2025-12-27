@@ -49,6 +49,17 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'December 26, 2025',
+      changes: [
+        {
+          type: 'added',
+          description: 'Roku Compatibility Checker',
+          route: '/tools/roku-compatibility'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'December 1, 2025',
       changes: [
         {

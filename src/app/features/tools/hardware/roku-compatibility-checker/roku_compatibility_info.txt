@@ -1,0 +1,1591 @@
+Which gaming consoles are compatible with my Roku TV™?
+Your Roku TV™ doesn’t need any special set up to work with most modern gaming consoles as long as they have an HDMI output. Roku TVs support many different HDMI inputs, allowing you to use a variety of HDMI-compatible devices, including game consoles and even PCs. When you connect a game console to an HDMI input, your TV will automatically detect the input. After you have connected a console, learn more about the best settings for your gaming setup.
+
+Supported game consoles
+Generation	Console
+ Current Generation Console	
+ Playstation 5 (PS5)
+
+ Xbox Series X
+ Xbox Series S
+ Nintendo Switch (via dock)
+ Previous Generation Consoles	 PlayStation 4 (PS4)
+ Xbox One
+ Xbox One S
+ Xbox One X
+ Consoles with HDMI in Later Models	 PlayStation 3 (PS3) — Some models (slim &   superslim)
+ Xbox 360 — Later models (Elite and newer)
+ Retro Consoles (with HDMI Built-in)	 NES / SNES Classic Edition
+ Genesis Mini / Mega Drive Mini
+ PlayStation Classic
+Last updated on 1/22/2025, 6:10:23 AM
+
+Do I need a special TV?
+Roku® streaming players (including the one built into the Roku Streambar® SE, Roku Streambar, Roku Streambar Pro, and Roku Smart Soundbar) can be connected to any TV with an HDMI® connection. If you have a pair of Roku wireless speakers, they must be connected to a Roku host device such as a Roku TV™, Roku Streambar, Roku Streambar Pro, or Roku Smart Soundbar; and will not work with other TVs or Roku streaming players.
+
+You can find more details in this article about connecting a Roku player and the type of HDMI cable to use, and how a Roku audio device can enhance your listening experience.
+
+Roku players
+All Roku streaming players, including a Roku Streaming Stick®, Roku Streambar SE, Roku Streambar, Roku Streambar Pro, and Roku Smart Soundbar, will work with any television with an HDMI connection. However, certain features such as 4K Ultra HD or HDR require that you connect your Roku player to a compatible television that can support these features (see section below).
+
+Aside from a Streaming Stick, when connecting a Roku streaming player to your TV using an HDMI connection, we recommend you use a High Speed HDMI Cable if your TV only supports 720p and 1080p, or a Premium High Speed HDMI Cable if your TV also supports 4K and/or HDR.
+
+end of HDMI cable and HDMI connection or port
+
+A Roku Streaming Stick connects directly to the HDMI port on your TV, and does not need an HDMI cable.
+
+close up of Roku streaming stick plus whoing HDMI port and power connection
+
+Questions about 4K Ultra HD and HDR
+Do I need a 4K or HDR-compatible TV if I buy a Roku player that supports 4K or HDR?
+No. All 4K Roku streaming players will work with any television with an HDMI connection. However, you will not be able to take advantage of 4K resolution without a compatible 4K TV, or HDR without a compatible HDR TV. You will also need a Premium High Speed HDMI Cable unless you are connecting a compatible Roku Streaming Stick.
+
+Do I need a 4K or HDR-compatible Roku player if I have a 4K or HDR-compatible television?
+No. All Roku streaming players will work for any television with an HDMI connection, so any Roku player can be connected to a 4K or HDR-compatible television. However, to stream movies and TV shows in 4K or HDR you will need a compatible Roku streaming player and television that supports 4K or HDR. You will also need a Premium High Speed HDMI Cable unless you are connecting a compatible Roku Streaming Stick.
+
+Do I need to do anything special to configure a HDR compatible television for HDR?
+You may need to update the software on your TV. You can typically find instructions how to do this along with the latest software on the TV manufacturer’s website. Once you confirm that your TV is running the latest software, check that it is properly configured to enable HDR on the specific input to which your Roku player gets connected. Some TVs that support HDR do not enable this feature by default.
+
+Compare Roku streaming players to determine which 4K or HDR-compatible player is right for you.
+
+Learn more about setting up your Roku streaming player for 4K or setting up your Roku player for HDR.
+
+How to add premium sound with a Roku audio system
+You can drastically improve your listening experience with a Roku audio system. Add a Roku Streambar SE, Roku Streambar, or Roku Streambar Pro to your TV for exceptional, full, rich sound from your favorite streaming content, your TV's built-in tuner, and any device connected to your TV, such as a Blu-ray™ player, game console, or cable set-top box. For richer, deeper bass, you can add a Roku Wireless Bass or Roku Wireless Bass Pro.
+
+If you are looking for more and want a complete cinema-like surround sound experience with easy setup, add Roku wireless speakers for immersive surround sound. Learn how easy it is to build a Roku surround sound system.
+
+For further instructions on sound options, check out the detailed articles below to browse more information about each Roku audio device and find answers to common questions.
+
+What is a Roku Streambar SE?
+What is a Roku Streambar?
+What is a Roku Streambar Pro?
+What are Roku Wireless Speakers?
+What is a Roku Wireless Bass?
+What is a Roku Wireless Bass Pro?
+How do I build a Roku surround sound system?
+Last updated on 7/25/2025, 1:04:13 PM
+
+What to do if you cannot stream Netflix 4K Ultra HD content
+Different content providers have different requirements for streaming movies and TV shows in 4K. Check with Netflix for the latest information regarding requirements for streaming Netflix shows in 4K Ultra HD.
+
+What you need to stream Netflix shows in 4K on your Roku® streaming device
+To play movies and TV shows from Netflix in 4K, you will need:
+
+A Netflix plan that supports 4K Ultra HD
+A Roku streaming device that supports 4K Ultra HD
+A 4K Ultra HD compatible television that supports more than 30fps
+A Premium High Speed HDMI® Cable (*not needed when connecting a 4K-compatible Roku Streaming Stick® directly to a compatible TV)
+Why do I need a 4K compatible television that supports more than 30fps?
+When playing video, “fps” refers to frames per second, also known as frame rate. Each frame is a still image; displaying frames in quick succession creates the illusion of motion or animation. The more frames per second, the smoother the motion appears.
+
+The optimal frame rate for 4K is more than 30fps; however, some 4K Ultra HD TVs only support 4K at 30fps. This is important because Netflix will only play 4K content if the HDMI connection with the TV supports 4K at more than 30fps.
+
+Note that a 4K Ultra HD compatible television that supports more than 30fps is not the only requirement for playing 4K content, go here to get more information on setting up your Roku streaming player for 4K.
+
+Why don’t I see the “4K row” in the Netflix channel?
+You may find that the “4K row” in the Netflix channel is not displayed if an HDMI connection capable of playing 4K content at more than 30fps is not detected.
+
+Last updated on 8/25/2025, 1:23:05 AM
+
+How to use USB to connect your Roku streaming device to a wired network
+Your Roku® streaming device must have a good internet connection to stream your favorite movies and TV shows. To accomplish this, you can connect it to your wireless network, or if your Roku device and third-party Ethernet adapter, you can connect it to your wired network.
+
+This article provides information about compatible Roku devices and Ethernet adapters and explains how you can connect your devices to your wired network.
+
+Is my Roku device compatible?
+Not all Roku devices support using an Ethernet adapter to connect to your wired network. Refer to the chart below for a list of Roku streaming devices that support an external third-party Ethernet adapter.
+
+Tip: Learn how to locate the model number on your Roku streaming device.
+Device	Model
+ Roku Streaming Stick, Streaming Stick Plus
+
+ 3840X, 3830X
+ Roku Express
+
+ 3960, 3960RS
+ Roku Express 4K
+
+ 3940 
+ Roku Express 4K+
+
+ 3941 
+ Roku Streambar® SE	 9104R
+ Roku Streambar	 9102 
+ Roku Streambar Pro 	 9101R2 
+ Roku Smart Soundbar 	 9101 
+ onn.™ • Roku Smart Soundbar 	 9100 
+What Ethernet adapters are supported?
+When you are looking for an Ethernet adapter that is compatible with your Roku streaming device, use the following guidelines to narrow your search.
+
+Speed: Streaming high-resolution content (like 4K HDR movies with Dolby Atmos) typically requires no more than 25 Mbps. Look for an adapter that only supports 10/100 Mbps speeds. Adapters that also support 1000 Mbps will not work.
+Chipset: Find an adapter that has an AX8877X or SMSC95XX chipset. This information is typically available with the manufacturer specifications.
+Interface: An adapter with a standard USB Type A connector is needed for your Roku Streambar or soundbar. An adapter with a micro USB (or USB-C for Roku Streaming Stick and Streaming Stick Plus) connector is needed for your streaming player.
+The third-party adapters below have been tested and verified with your compatible Roku device.
+
+Compatible streaming device	Tested adapters
+ Roku Express 
+ Roku Express 4K 
+ Roku Express 4K+ 	
+UGREEN micro USB to RJ45 Ethernet network adapter
+Cable Matters micro USB to Ethernet adapter
+Weixinke micro USB to RJ45 Ethernet 100Mbps network adapter
+TV xStream USB to RJ45 Ethernet adapter
+Belker micro USB to RJ45 Ethernet adapter
+ Roku Streambar SE
+
+ Roku Streambar
+
+ Roku Streambar Pro
+
+ Roku Smart Soundbar
+
+ onn. • Roku Smart   Soundbar 
+
+Plugable USB 2.0 to Ethernet fast 10/100 LAN wired network adapter
+TRENDnet USB 2.0 to 10/100 fast Ethernet LAN wired network adapter
+How to make the wired connection
+Connect an Ethernet adapter to your streaming player
+Use the following steps to connect a compatible Ethernet adapter to your Roku Express 4K, or Express 4K+.
+
+Disconnect the USB power cable from the USB port on your streaming player
+Plug your Ethernet adapter into the USB port on the back of your device
+Insert one end of a network cable into the Ethernet port on your adapter
+Connect the other end of the network cable into your router
+Connect your Ethernet adapter to a power adapter
+Plug the power adapter into a wall outlet
+Tip: Learn what to do if your Roku streaming player will not power on.
+You are now ready to configure your streaming player for a wired internet connection.
+
+micro USB and USB port locations on compatible Roku devices
+
+Connect an Ethernet adapter to your Streambar
+Use the following steps to connect a compatible Ethernet adapter to your Streambar.
+
+Plug your Ethernet adapter into the USB port on the back of your Streambar
+Insert one end of a network cable into the Ethernet port on your adapter
+Connect the other end of the network cable into your router*
+You are now ready to configure your Streambar for a wired internet connection.
+
+Roku streambar USB ports
+
+How to configure your Roku device
+After the physical connection is made, you can configure the network connection during the initial setup of your Roku streaming device or you can do it at any time from the Settings menu.
+
+Initial setup
+If you are setting up your Roku device for the first time, you need to follow the on-screen setup process described in the setup articles below.
+
+Set up your Roku Express
+Set up your Roku Express 4K
+Set up your Roku Express 4K+
+Set up your Roku Streambar SE
+Set up your Roku Streambar
+Set up your Roku Streambar Pro or Smart Soundbar
+ 
+Settings menu
+If your Roku device is already set up with a wireless network connection, use the steps below to configure your device from the Settings menu.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Network
+Select Set up connection
+Select Wired
+Why is the Wired option not available?
+When a compatible Ethernet adapter is detected, your Roku streaming device will automatically show the Wired option on the Network Connection Type screen. If you do not see the Wired option, refer to the previous sections in this article to check the following:
+
+Make sure you are using a supported adapter based on the guidelines provided earlier in this article.
+Make sure you are using a compatible Ethernet adapter
+If your adapter and device are compatible, try the following troubleshooting steps.
+
+Unplug your Roku device from the power outlet
+Remove and reattach the Ethernet adapter
+When the adapter is firmly connected, power on your Roku device and try again
+*A note on terminology:
+To access your network and ultimately the internet, you will typically connect to a device called a router but it may also be referred to as a wireless router, wireless access point, home gateway or cable modem. In some cases, your internet service provider (ISP) may have provided you with a single integrated device that includes a cable modem and a router, or you may have purchased a stand-alone router from a company such as Linksys, NETGEAR, ASUS, Belkin or D-Link. In this article, the term router is used as a generic term to refer to the network device that your Roku device must connect to access the internet. For more information refer to the documentation provided by your ISP or router manufacturer.
+
+Last updated on 6/2/2025, 12:18:47 PM
+
+How to use the Apple TV channel on your Roku® streaming device
+The Apple TV channel is now available on select Roku streaming players and Roku TV™ models. You can access your library of shows and movies, and find new programs to stream, buy, or rent. This article will help you determine if your Roku device is compatible, help you sign into the channel and stream content, and learn about Apple TV+.
+
+Is my Roku device compatible?
+Not all Roku streaming devices support the Apple TV channel. To help determine if your device in your country is compatible, you need to know the device model. To find this information, go to the home screen on your Roku device and select Settings > System > About. The models below support the Apple TV channel.
+
+Device	Model
+ Roku TV	 7000x, C000x, 8000x, A000x, 6000x 
+ Roku Streambar®	 9102
+ Roku Streambar Pro	 9101R2
+ Roku Smart Soundbar	 9101
+ onn.™ • Roku Smart Soundbar 	 9100
+ Roku Express	 3900, 3930, 3960
+ Roku Express+	 3910, 3931
+ Roku Express 4K	 3900, 3940
+ Roku Express 4K+	 3910, 3941
+ Roku HD	 3932
+ Roku Streaming Stick®	 3600, 3800
+ Roku Streaming Stick+	 3810, 3811
+ Roku Streaming Stick 4K 	 3820 
+ Roku Streaming Stick 4K+ 	 3821 
+ Roku Premiere	 3920, 4620
+ Roku Premiere+	 3921, 4630
+ Roku Ultra	 4640, 4660, 4661, 4670, 4800, 4802
+ Roku Ultra LT	 4662, 4801
+ Roku 2	 4205, 4210
+ Roku 3	 4200, 4230
+How to add the Apple TV channel
+You can add the Apple TV channel to your compatible Roku streaming player or Roku TV using the steps below.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Streaming Channels to open the Channel Store
+Select Search Channels
+Begin entering Apple TV. Search results will narrow as you type.
+Note: If Apple TV does not appear, it may not be supported on your Roku device.
+When you see the channel, use the directional pad on your Roku remote to highlight Apple TV
+Press OK OK button on Roku remote to view details
+Select Add Channel
+Once installed, the Apple TV channel will appear in the list of channels under Home on the main screen of your Roku device. If you prefer, the channel can be moved elsewhere in the list.
+
+You can also add the channel from your Roku account on a web browser, or from the Roku mobile app. For more help, read the detailed article about adding channels to your Roku device.
+
+How to sign into the Apple TV channel
+Before you can sign into the Apple TV channel, you must have an Apple ID. Use the instructions below to sign in with your existing Apple ID, or learn how to create a new Apple ID.
+
+Launch the Apple TV channel
+Select Settings
+Select Accounts
+Select Sign In
+Two sign-in options appear on your TV
+
+Choose Sign In On Mobile Device to sign in using your smartphone. You can either navigate to activate.apple.com and enter the code displayed on your TV, or scan the QR code that appears. Follow the on-screen instructions to complete the sign in process.
+Or, you can choose Sign In On This TV and enter your Apple ID directly on your TV screen using your Roku remote.
+
+If you do not have an Apple ID, select Create an Apple ID. You can either navigate to activate.apple.com and enter the code displayed on your TV, or scan the QR code that appears. Follow the on-screen instructions to complete the sign up process. You will be signed in automatically once you are finished.
+For more information or help signing in, visit Apple Support.
+
+How to stream movies and TV from Apple TV
+In the Apple TV channel, you can:
+
+Select a category to browse available content.
+Select Library to view content you already own.
+Select Search if you know what you are looking for.
+
+Scroll through the available titles and select one you like
+Select Buy or Rent
+If prompted, enter your Apple ID password to complete your purchase
+Select Play to begin playing the content
+What is Apple TV +?
+Apple TV + is a new streaming service by Apple offering original TV shows and movies. It is available on the Apple TV channel. For more details, check out apple.com.
+
+
+Last updated on 3/1/2023, 8:59:48 AM
+
+How to use Bluetooth headphones for Headphone Mode on your Roku streaming device
+Some Roku® streaming devices allow you to pair and then connect Bluetooth™ earbuds or headphones directly to your device for Headphone Mode. But through mobile app listening, Bluetooth directly to host, or a wired connection to the remote, you can also listen to any content streaming on your Roku device. If you have a Roku Streambar® SE, Roku Streambar or Roku Streambar Pro you can also listen to audio from your TV, if connected via an HDMI ARC or optical connection. If your streaming device does not support Bluetooth Headphone Mode, you may be able to use wired headphones with a Roku voice remote for Headphone Mode instead.
+
+This article provides instructions for pairing and connecting your Bluetooth earbuds or headphones to your compatible Roku streaming device. You can also learn how to connect your phone to your Roku device over Bluetooth.
+
+Which devices are compatible with Bluetooth Headphone Mode?
+Bluetooth Headphone Mode is only available on Roku streaming devices with Bluetooth capability. Any Bluetooth headphones that support Bluetooth version 4.2 or greater can connect to a compatible Roku streaming device.
+
+Compatible Roku streaming devices
+The following Roku streaming devices have Bluetooth capability:
+
+Roku Streambar SE
+Roku Streaming Stick (3840)
+Roku Streaming Stick Plus (3830)
+Roku Streambar
+Roku Streambar Pro
+Roku Smart Soundbar
+Roku Ultra (models 4800, 4802, and 4850)
+Roku Ultra LT (model 4801)
+Roku Select Series HD TV (2025)
+Roku Select Series 4k TV (2025)
+Roku Plus Series TV
+Roku Pro Series TV
+The following streaming devices do not support Headphone mode:
+
+Roku Express
+Roku Premiere
+Roku Streaming Stick 4K
+Roku Streaming Stick 4K+
+To find the model of your Roku streaming device, you can go to the Home screen and select Settings > System > About.
+
+Note: The only TVs that Bluetooth headphones can pair with for Headphone Mode are Roku Select Series 4k (2025), Roku Plus Series or Roku Pro Series TV. If a Roku Streambar SE, Roku Streambar, Roku Streambar Pro, or Roku Smart Soundbar is connected to your TV, you can still pair your headphones with the streambar or soundbar directly.
+How to pair Bluetooth headphones
+Before you can begin streaming Bluetooth audio, you need to pair your headphones to your compatible Roku streaming device. This is done through a discovery process which allows Bluetooth devices to register information about each other and then make a secure wireless connection. Because this pairing information is retained even when Bluetooth devices are powered off, it is typically only necessary to pair your Bluetooth device one time. After you complete the pairing process, your headphones will appear in the list of paired devices and a headphone icon headphones icon will appear on the television screen when adjusting volume.
+
+Use the steps below to pair your headphones:
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Wireless headphones
+Select Add new wireless headphones
+Turn on your Bluetooth headphones and put them in pairing mode
+Wait while your Roku device scans for Bluetooth headphones. This can take up to 30 seconds.
+Select your Bluetooth headphones from the list of available devices
+ 
+Note: The Wireless headphones menu option will only appear on a compatible Roku device.
+If you need help pairing your Bluetooth headphones, refer to the manufacturer's support site for instructions.
+
+How to connect Bluetooth headphones
+Once your Bluetooth headphones are paired, you can easily connect them in the Settings menu or while playing content without having to re-pair them. You can also choose to have your headphones connect automatically when they are powered on and within range of your Roku device.
+
+Tip: To reduce battery consumption on your headphones, your Roku device will disconnect from your headphones if the screensaver starts or no audio has been streaming for several minutes.
+Connect headphones
+Use the following steps to connect your headphones in the Settings menu:
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Wireless headphones
+Select your headphones
+Select Connect
+If you are already playing content and need to connect headphones, use these instructions instead:
+
+Press Star star button on Roku remote on the Roku remote
+Scroll and select Wireless headphones
+Select your headphones
+Select Connect
+Change auto-detect settings
+In most situations, when your Bluetooth headphones are powered on they will automatically try to connect to the most recent device. If auto-detect is turned off or your headphones do not automatically connect, you will need to use the previous instructions to manually connect your headphones when you want to use Headphone Mode. You can change auto-detect in the Settings menu on your Roku streaming device.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Wireless headphones
+Select your headphones
+Toggle Auto-detect
+How to disconnect Bluetooth headphones
+You can disconnect your Bluetooth headphones in the Settings menu, while playing content, or you can simply power them off.
+
+Use the following steps to disconnect your headphones in the Settings menu:
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Wireless headphones
+Select your headphones
+Select Disconnect
+If you are already playing content on your streaming device, use these instructions instead:
+
+Press Star star button on Roku remote on the Roku remote
+Scroll and select Wireless headphones
+Select your headphones
+Select Disconnect
+How to change volume and use media controls
+You can adjust the loudness of your headphones by either using the volume up and down controls on your headphones or the Volume up volume down button on Roku remote and Volume down volume down button on Roku remote buttons on your Roku remote. Compatible Roku devices will also support play/pause, next track, and previous track controls from your headphones.
+
+Note: Not all Bluetooth headphones support volume and media controls. Refer to the manufacturer or the user manual for your Bluetooth headphones for more information.
+Last updated on 11/19/2025, 4:17:41 PM
+
+Do Roku Smart Home devices work with products from Wyze Labs?
+Roku® Smart Home cameras, video doorbells, smart plugs, bulbs, light strips, and home monitoring devices were developed in partnership with Wyze Labs but are designed to work exclusively with other Roku products and not with products sold by any other company including Wyze Labs.
+
+Most Roku Smart Home devices can be controlled by voice assistant devices powered by Google Assistant and Alexa.
+
+You can learn more about the various models of Roku Smart Home devices on the Roku website.
+
+Is the Wyze app compatible with my Roku smart devices?
+You must use the Roku Smart Home mobile app to set up, configure, and control all your Roku Smart Home devices.
+
+Does the Roku smart home app work with products from other companies?
+The Roku Smart Home app was designed to work exclusively with Roku Smart Home devices. It can be used to set up, configure, and control all your Roku smart devices, but is not compatible with any smart devices purchased from another company including Wyze Labs.
+
+Do my Wyze products work with the Roku Cameras channel?
+The Roku Cameras app available on your Roku streaming player or Roku TV™ only allows you to view the video feed from a Roku Smart Home camera or video doorbell.
+
+Can I use an accessory from another company with my Roku smart device?
+With no plan to officially test third-party accessories, we cannot recommend their use with Roku Smart Home devices.
+
+Last updated on 1/29/2024, 6:53:44 PM
+
+How to get The Roku Channel
+What is the Roku Channel?
+Discover The Roku Channel to access 500+ live channels, Roku® Originals, free TV shows, and movies. Learn how to stream on mobile, online, or on any Roku device. To learn more about what's on The Roku Channel, go to TheRokuChannel.com. Add The Roku Channel to any Roku streaming device, compatible Samsung Smart TV, or compatible Amazon Fire TV device or watch on TheRokuChannel.com or on the Roku mobile app.
+
+Note: The Roku Channel is currently available in the United States, Canada, and the United Kingdom on Roku streaming devices, web, and mobile, and in Mexico on Roku streaming devices only. Premium Subscriptions on The Roku Channel are available in the United States, except on Samsung TVs and Amazon Fire TV devices.
+Add The Roku Channel to your Roku device
+Add The Roku Channel when activating your Roku device or install it later from the Roku Store:
+
+Press Home home button on Roku remote on your Roku remote select Streaming Store
+Select Apps and find The Roku Channel under recommended apps
+Highlight The Roku Channel and press OK OK button on Roku remote > select Add app
+Once installed, The Roku Channel will appear on your Home Screen along with your other streaming apps.
+
+Watch The Roku Channel on the website or mobile app
+Stream hit movies, TV shows, and more, on TheRokuChannel.com or on the Roku mobile app.
+
+Get The Roku Channel on your Samsung TV
+When you add The Roku Channel on your Samsung TV, you can begin watching free movies and TV shows immediately. Sign in or create a free Roku account so that you can resume watching programs that you started on your Samsung TV, on other devices that are signed in to the same Roku account. To install the The Roku Channel on your Samsung TV:
+
+Press the Smart Hub button or Home button on your Samsung remote > navigate down the page to Apps
+Search 'Roku' and wait for The Roku Channel to appear
+Select the app and choose Download
+Note: These steps may vary for some Samsung models. For more help, refer to the Samsung support website.
+Get The Roku Channel on your Amazon Fire TV device
+The Roku Channel can be installed on Amazon Fire TV streaming devices, Fire TV Edition smart TVs, and Fire TV Edition soundbars in the United States. To add the app to your compatible Fire TV device:
+
+Open the top menu using your Fire TV remote > scroll right and select Apps
+Select Categories, followed by Movies & TV
+Scroll down and select The Roku Channel
+You can also add The Roku Channel by searching for it from the top menu (just select the magnifying glass), or by using a voice command such as, "Alexa, open The Roku Channel." Once The Roku Channel is installed, it will appear on the home screen on your Fire TV device.
+
+Last updated on 4/14/2025, 3:53:07 PM
+
+Why is 4K Dolby Vision not working on my Roku streaming player?
+With some Roku® streaming players, you can stream 4K Dolby Vision™ with a compatible TV and apps. However, you may not be able to view Dolby Vision content at 4K resolution if your Dolby Vision-capable TV was manufactured prior to 2018. These models, and a few manufactured in later years, only support 4K Dolby Vision at lower frame rates like 30 frames per second (fps). Unfortunately, some apps such as Netflix, will not play 4K Dolby Vision when the TV does not support higher frame rates like 60fps.
+
+This article helps you determine why 4K Dolby Vision may not play on your TV and offers options to resolve the issue or choose an alternate configuration. Visit the Roku product comparison chart to determine if your player supports Dolby Vision.
+
+How to know if your TV supports Dolby Vision
+Dolby Vision is an advanced form of HDR (High Dynamic Range) available on high-end TV models that improves image quality with more accurate color and contrast details on a scene-by-scene basis.
+
+To determine if your TV supports Dolby Vision, your Roku streaming player automatically checks the capabilities of the HDMI connection whenever connected. To see the automatic settings, go to Settings > Display type > Automatic.
+
+Display settings with Automatic (4K Dolby vision HDR) selected
+
+What to do if the HDMI connection does not support 4K Dolby Vision
+If your TV supports Dolby Vision and you see the message below, you may need to adjust a setting on your TV called FreeSync.
+
+Display settings with Automatic (4K HDR) selected
+
+FreeSync is designed to enhance your experience with a connected game console (e.g., Xbox, PlayStation), but with some TV models, FreeSync may disable Dolby Vision. To correct this behavior, you need to adjust the settings on your TV to disable FreeSync on the HDMI port where your Roku player is connected.
+
+You can refer to the sample instructions below if you have an LG TV, but the steps may vary from model to model, and may change when TV software is updated. When in doubt, refer to the user manual or online documentation for your specific make and model.
+
+LG: Go to Home > HDMI > Settings > Advanced > Picture > Additional Settings > FreeSync > Off > Restart
+
+A note on HDMI cables
+Roku players that support HDR ship with an HDMI 2.0 compatible cable. If you cannot use the included cable, be sure to purchase a Premium High Speed HDMI Cable or Ultra High Speed HDMI Cable. The typically more expensive Ultra High Speed HDMI Cable is a good choice for reducing potential Wi-Fi® and Bluetooth® interference, or for future-proofing an installation where the cable location is in an otherwise inaccessible area. Cables that are not labeled or may be labeled "high speed" or "standard speed" may not be adequate for 4K HDR10, HDR10+, or Dolby Vision content at 60fps.
+
+If your Roku player is connected to an AVR or soundbar, make sure all cables are HDMI 2.0 compatible. If you see a black screen or poor performance and video degradation with a 4K HDR signal, replace any older cables with a Premium High Speed HDMI Cable or Ultra High Speed HDMI Cable.
+
+Last updated on 5/7/2025, 10:41:00 AM
+
+How to set up your Roku Premiere
+Roku Premiere with black housing and Roku Premiere with white housing
+
+Roku® Premiere (model 3920R) supports 720p HD, 1080p Full HD, 4K Ultra HD (4K UHD), High Dynamic Range (HDR), and ships with a Roku simple (IR) remote. This article describes the product in more detail and outlines the setup steps.
+
+Note: Roku Premiere model 3920 replaces Roku Premiere model 4620. If you need help setting up model 4620, refer to the general setup instructions for any model player.
+Will Roku Premiere work with my TV?
+Roku Premiere will work with any television with an HDMI® connection. However, you will not be able to take advantage of 4K UHD resolution without a 4K UHD-compatible TV, or HDR without an HDR-compatible TV. A compatible television is not the only requirement to stream movies and TV shows in 4K UHD or HDR; learn more about setting up your Roku player for 4K or setting up your Roku player for HDR.
+
+We recommend using a High Speed HDMI Cable if your TV only supports 720p and 1080p, or a Premium High Speed HDMI Cable if your TV also supports 4K UHD or HDR.
+
+audio and video connectors on Roku Premiere
+
+Setting up your Roku Premiere
+Review the Roku Premiere Quick Start Guide
+If desired, attach your your Roku Premiere using the adhesive strip.
+Use your TV remote to power on your television and select the input where you connected your Roku Premiere. You should see the Roku logo on the TV screen as your player powers on. Help is available if you do not see any picture on your TV.
+Slide open the battery cover on the back side of your remote and insert batteries. Help is available if you have problems with your simple remote.
+On-screen setup and activation
+A welcome screen will appear after you switch your TV input to where your streaming device is connected. During setup, you will choose a language, connect to the internet, download the latest updates, configure display settings, and finally activate your Roku streaming device. You must create or use an existing Roku account and then activate and link your device using an activation link sent to your email or accessed with a QR code. Learn how to enable the text-to-speech screen reader, if you need audial assistance navigating through setup.
+
+Choose a language
+The first screen you see will allow you to choose a language. Scroll through the list and press OK OK button on Roku remote on your Roku remote to choose a language. All text and dialog within the Roku interface will be displayed in the selected language.
+
+Note: It is the responsibility of the app publisher to translate their app and some apps may not support your chosen language.
+Connect to the internet
+Choose your wireless network from the list of available networks and enter your password. This is often the same network you use to connect your computer or smartphone to the internet. If you do not see your network, select Scan again to see all networks. For more assistance, see help finding your wireless network and password.
+
+If you want to see your password as you type, choose Show password. This can help prevent entering the wrong password. Remember, passwords are case-sensitive. Use the shift button shift key on Roku on-screen keyboard on the on-screen keyboard to enter a capital letter.
+
+Once you enter your password and select Connect, your device will automatically connect to the internet. Alternatively, you can get more help if you are unable to connect to your wireless network.
+
+Download the latest updates
+Once connected to the internet, your streaming device will check to see if there is a software update available, download the latest version if necessary, and automatically reboot after updating.
+
+Configure display settings
+Select Set display type and let your streaming device auto detect the best display resolution so you do not have to manually configure the settings. To change the display type at a later time, go to Settings > Display type.
+
+If support for 4K or HDR is not detected on your compatible Roku device, and you are using a compatible TV, make sure all HDMI cables are firmly attached and all connections support HDCP 2.2. For more help, review the steps for 4K setup or HDR setup.
+
+Note: This step may be done automatically by your device. If this step is not shown during setup, your device was able to do this step automatically for you.
+Create a Roku account and activate your device
+When prompted on screen, you will need to perform the following steps to create your Roku account and complete device activation. It may take a few moments to receive the activation email from Roku. If you do not see it in your email inbox, be sure to check your spam (or junk) folder.
+
+Press OK OK button on Roku remote on your remote to reveal the on-screen keyboard.
+
+Using your remote, type a valid email address. If you have a voice remote, you can press and hold the voice microphone icon button and say your email address instead.
+
+Important: This email will also be used as your Roku login, which is important for managing your Roku account and device services.
+If you have trouble receiving the activation link in your email, press Star star button on Roku remote on your remote and try again or select Activate with a QR Code option. Use your mobile phone's camera to scan the QR code and get the device activation link.
+Once you open the link, either from the email or QR code, follow the instructions for creating a Roku account and setting up your Roku device with apps to watch.
+If you cannot get your Roku device activated, learn how to resolve linking issues. Roku does not require an activation fee, or charge for support of any kind. Learn how to avoid fraudulent websites.
+
+Enjoy your Roku device!
+With all steps complete, your Roku streaming device is ready to use. You can personalize your device by changing your theme pack or screensaver and you can use the Streaming Store to add new streaming apps.
+
+Why is the image not in HDR or the picture quality poor when watching HDR content?
+When you specifically watch an HDR movie or TV show on your HDR-capable Roku device, you may notice the image is not displayed in HDR, or the picture quality is poor. If you encounter this behavior, you may need to update the software on your HDR-capable TV. You can typically find instructions how to do this along with the latest software on the TV manufacturer’s website. Once you confirm that your TV is running the latest software, check that it is properly configured to enable HDR on the specific input to which your Roku player is connected. Some TVs that support HDR do not enable this feature by default.
+
+Last updated on 7/25/2025, 12:51:58 PM
+
+How to fix errors in the Roku Smart Home mobile app
+If you see the error “The app isn’t compatible with your device,” in the Roku Smart Home app, your phone or tablet may be jailbroken, rooted, running uncertified software, or using an unsupported operating system.
+
+This article provides troubleshooting instructions for Roku Smart Home app compatibility issues on Google Android™ and Apple iOS® phones and tablets.
+
+How to fix Roku Smart Home app compatibility issues
+App compatibility issues on Android
+The Roku Smart Home App requires Android version 9.0 or newer. Update the app in the Google Play Store.
+If your Android phone or tablet is rooted, running uncertified software, or not Play Protect certified, then it may not work with the Roku Smart Home mobile app. Learn more about how to check your Play Protect certification status.
+If your device is not Play Protect certified or you are using an older device that does not have the option to check certification status, get further help from Android support or the Android Help Community.
+Note: Supported mobile OS versions are subject to change as required in the future.
+App compatibility issues on iOS
+Update the Roku Smart Home mobile app to iOS 16.0 or newer. Follow the prompts within the Roku Smart Home app and click Update app now, or update the Smart Home app directly in the App Store.
+If your phone or tablet is running an older version or is jailbroken, it may not be compatible with the mobile app. Contact Apple support for further support.
+Roku Camera issues
+For Roku cameras (like the Battery Camera), follow these steps or refer to the camera troubleshooting guide for connection-specific solutions.
+Restart from app Settings by scrolling down and tapping Restart, or unplug/re-plug your camera.
+The Outdoor SE camera has a power switch under the back cover—slide the switch OFF, wait 30 seconds, then switch it back ON.
+To restart the Roku Battery Camera, press the Setup button three times.
+Restart the Floodlight Camera by locating the breaker switch that controls power to your camera. Switch in OFF, wait for 30 seconds, then switch it back ON.
+ 
+
+ 
+
+Last updated on 8/22/2025, 1:37:32 PM
+
+How to resolve issues connecting a Bluetooth device to your Roku device
+With your compatible Roku® device, you can connect a smartphone, tablet, or computer via Bluetooth®, a wireless communication technology that allows devices to exchange data over short distances (typically less than 30 feet). When a Bluetooth device is connected and playing audio, the Bluetooth app launches automatically on your Roku device so you can listen to music, podcasts, or other audio streamed from apps installed on your smartphone, tablet, or computer.
+
+This article will help you resolve problems you may encounter when attempting to pair, connect, or use your Bluetooth device with your compatible Roku device.
+
+Which Roku devices are compatible?
+You can connect a Bluetooth-capable smartphone, tablet, or laptop to the following Roku devices.
+
+Roku Streambar SE®
+Roku Streambar®
+Roku Streambar Pro
+Roku Smart Soundbar or onn.™ Roku Smart Soundbar
+Roku Ultra models 4800, 4802, and 4850
+Roku Ultra LT model 4801
+Roku Select Series 4k (2025)
+Roku Plus Series TV
+Roku Pro Series TV
+Roku TV™ system with Roku wireless speakers, Roku TV Wireless Soundbar, or TCL Roku TV Wireless Soundbar
+Note:
+Roku Ultra models 4670, 4661, 4660, and 4640 and Roku Ultra LT model 4662 are not compatible.
+A Bluetooth device can be connected directly to a Roku Plus Series TV. If you have any other Roku TV system, you will need to pair Roku Wireless Speakers or a Roku TV Wireless Soundbar to add Bluetooth capability to your TV.
+Is your Roku device connected and set up?
+Before you can pair a Bluetooth device, your compatible Roku device must be connected and set up.
+
+Roku Streambar, Roku Streambar Pro or Roku Smart Soundbar, or compatible Roku player
+Use the instructions from the appropriate article below to connect and set up your Roku device.
+
+How do I set up my Roku Streambar SE?
+How do I set up my Roku Streambar?
+How do I set up my Roku Streambar Pro or Roku Smart Soundbar?
+How do I set up my Roku Ultra or Ultra LT?
+Roku wireless speakers or Roku TV Wireless Soundbar
+Roku wireless speakers or a Roku TV Wireless Soundbar connects wirelessly to your Roku TV system, initially through a discovery process called pairing. For more help, learn more about setting up your wireless speakers or setting up your wireless soundbar. After your wireless speakers or wireless soundbar is paired, it remains connected even when the screen on your TV is powered off. You can visit the Settings menu on your TV at any time to check that your speakers or soundbar is connected.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices to open the Remote & devices menu
+Select Audio devices
+On this screen, you will see Wireless speaker (Left) and Wireless speaker (Right) when your speakers are connected, or Wireless soundbar when your soundbar is connected.
+
+Are you Roku wireless speakers connected?
+
+If your speakers or soundbar is not listed, it has not been paired and you must first set up your wireless speakers or set up your wireless soundbar before you can pair a Bluetooth device.
+
+If you see your device listed but next to it you see (Disconnected), your speakers or soundbar has previously been paired, but is not connected. If this is the case, try the following:
+
+Disconnect the power cable from the speakers or soundbar
+Move your speakers or soundbar closer to your TV
+Power the speakers or soundbar back on and try again
+If the behavior continues, factory reset your wireless audio device and try again to set up your wireless speakers or to set up your wireless soundbar. If your speakers or soundbar fails to pair, read about what you can do to resolve pairing issues with your wireless speakers or resolve pairing issues with your wireless soundbar.
+
+Problems pairing your Bluetooth device
+Before you can begin streaming Bluetooth audio, you need to connect your smartphone, tablet, or computer to your compatible Roku device. This is also done through a pairing process which allows Bluetooth devices to register information about each other to make a secure wireless connection. Because this pairing information is retained even when Bluetooth devices are powered off, it is typically only necessary to pair your Bluetooth device one time.
+
+To check if your smartphone, tablet, or computer is paired, open the Remotes & devices menu as described above, and then select Bluetooth devices. Look for your Bluetooth device by name as seen below.
+
+my paired devices with my smartphone paired
+
+Note: The name that appears in the list is acquired from your Bluetooth device. You can typically change this by accessing the settings menu on your smartphone, tablet, or computer. Refer to the manufacturer's online documentation for help.
+If you do not see your Bluetooth device in the list, it is not paired. You must first pair your Bluetooth device to your Roku device before you can listen to audio from your smartphone, tablet, or computer.
+
+If your Bluetooth device fails to pair:
+
+Make sure Bluetooth is enabled: Bluetooth must be turned on, or enabled on your Bluetooth device, and your device must not be in 'airplane mode'. With some devices, you may need to turn Bluetooth off, and then back on to get it to pair. For help using Bluetooth on your Bluetooth device, refer to the manufacturer's online resources or contact their support center. You can find links to some common manufacturers in the detailed article about connecting a Bluetooth device to your Roku device.
+Check your wireless speakers or wireless soundbar: If you have Roku wireless speakers or a Roku TV Wireless Soundbar, make sure it is powered on and working. When paired and connected, you will see it listed on the Remotes & devices menu as described earlier in this article. If your wireless speakers or wireless soundbar is not connected, you will not be able to pair a Bluetooth device.
+Check that your Roku device is in pairing mode: Your Roku device must be in pairing mode to allow your smartphone, tablet, or computer to discover it. To enter pairing mode, go to Settings > Remotes & devices > Pair Bluetooth device.
+Move your device closer: Bluetooth allows devices to wirelessly exchange data over short distances (typically less than 30 feet). Try moving your Bluetooth device closer when attempting to pair.
+Wait longer: If you do not see your Roku device in the list of discovered devices on your Bluetooth device, check that your Roku device is still in the Bluetooth pairing screen, and restart the scan on your smartphone, tablet, or computer. Occasionally, Bluetooth devices take longer (30-60 seconds) to discover devices around them.
+Restart Bluetooth device: In some cases, restarting your Bluetooth device will get it to pair successfully.
+Eliminate interference: If you already have a Bluetooth device paired and it is nearby, try powering it off if you are attempting to pair a second Bluetooth device.
+Repeat the pairing process: In the event that a device lost pairing information, delete pairing information on both your Bluetooth device and Roku device, and repeat the pairing process. To delete pairing information on your Bluetooth device, open the list of paired Bluetooth devices and remove, or 'forget' your Roku device. On your Roku device, go to Settings > Remotes & devices > Bluetooth devices to select your Bluetooth device, and then select Forget this device.
+Problems connecting your Bluetooth device
+After your Bluetooth device is paired, it must also be connected before you can stream audio to your compatible Roku device.
+
+When you initially pair your smartphone, tablet, or computer, it may also connect automatically to your Roku device. To check if your Bluetooth device is connected, open the Remotes & devices menu as described above and then select Bluetooth devices. Look for (Connected) next to your Bluetooth device as seen below.
+
+my paired devices showing my smartphone conneected
+
+This indicator lets you know your Bluetooth device is not only paired, but also connected to your Roku device, and is ready to use.
+
+If your Bluetooth device is paired, but not connected:
+
+Make sure Bluetooth is enabled: Bluetooth must be turned on, or enabled on your Bluetooth device, and your device must not be in 'airplane mode'. With some devices, you may need to turn Bluetooth off and then back on to get it connected. For help using Bluetooth on your Bluetooth device, refer to the manufacturer's online resources or contact their support center. You can find links to some common manufacturers in the detailed article about connecting a Bluetooth device to your Roku audio device.
+Select your Roku device: You may need to open the Bluetooth settings on your smartphone, tablet, or computer and connect to your Roku device from the list of paired devices. Often times, this is done by simply selecting your Roku device from the list. For help, visit the manufacturer's website, or refer to their online documentation.
+Check your wireless speakers or wireless soundbar: If you have Roku wireless speakers or a Roku TV Wireless Soundbar, make sure it is powered on and working. When paired and connected, you will see it listed on the Remotes & devices menu as described earlier in this article. If your wireless speakers or wireless soundbar is not connected, you will not be able to pair a Bluetooth device.
+Move your device closer: Bluetooth allows devices to wirelessly exchange data over short distances (typically less than 30 feet). Try moving your Bluetooth device closer when attempting to connect.
+Restart Bluetooth device: In some cases, restarting your Bluetooth device will get it to connect successfully.
+Disconnect another Bluetooth device: You can have multiple Bluetooth devices paired to your Roku device, but only one device can be connected at any time. Check that you do not have another Bluetooth device connected by looking at the list of Bluetooth devices on your Roku device. If another Bluetooth device has the (Connected) indicator next to it, try disabling Bluetooth on that device, power it off, or disconnect it from Bluetooth.
+Repeat the pairing process: In the event that a device lost pairing information, delete pairing information on both your Bluetooth device and Roku device, and repeat the pairing process. To delete pairing information on your Bluetooth device, open the list of paired Bluetooth devices and remove, or 'forget' your Roku device. On your Roku device, go to Settings > Remotes & devices > Bluetooth devices to select your Bluetooth device, and then select Forget this device.
+Why do I not hear anything from my Bluetooth device?
+After your smartphone, tablet, or computer is paired and connected to your compatible Roku device, the Bluetooth app should launch automatically. If it does not, you can manually open the Bluetooth app by selecting the app icon from the grid, issuing a voice command, or pressing a personal shortcut button on a compatible Roku remote.
+
+Select the app icon
+To open the app from your Home screen, use your Roku remote and navigate the app grid with the directional pad. The directional pad is plus-shaped and is in the center of your remote. Once you find the Bluetooth app, highlight it and press OK OK button on Roku remote to open it.
+
+Bluetooth app in Roku app grid
+
+Issue a voice command
+You can open the Bluetooth app with a voice command using the free Roku mobile app or a Roku voice remote. Simply press and hold the Voice button voice button with microphone icon and with a conversational tone at a normal volume, say something like "launch the Bluetooth app" or "open Bluetooth". If you have a Roku Voice Remote Pro, you can also use hands-free voice to issue the same commands. Just remember to begin your request with "Hey Roku...". For help using voice commands, read more about using your voice to search and control your Roku device.
+
+Create a personal shortcut button
+If you plan to listen to Bluetooth audio frequently, you may want to program one of the personal shortcut buttons on select Roku voice remotes. To do this, issue a voice command as described above and wait a moment for the app to open. Next, press and hold the personal shortcut button until you hear the success tone. The button is now programmed to launch the Bluetooth app with a single touch. For help saving an often-used voice command, read more about creating a personal shortcut on your compatible voice remote.
+
+Note: A personal shortcut button can be re-assigned as many times as you like.
+After the Bluetooth app is open and an app is playing music, a podcast, or other audio content on your Bluetooth device, you should hear sound after a moment. You will also see details on the TV screen about the music or podcast that is playing. If you see this information, but still do not hear sound, adjust the volume level making sure it is not muted or inaudible. You can also adjust the volume from your smartphone, tablet, or computer, but you will not see volume feedback on the TV screen like when you adjust the volume with a Roku remote or voice command.
+
+Note: When you adjust the volume from your Bluetooth device, there may be a slight delay until you hear a change in audio volume.
+Other issues when using your Bluetooth device
+Below are some issues you may encounter when streaming Bluetooth audio:
+
+Missing song or podcast information: When audio begins streaming from your Bluetooth device, your TV screen may display the Bluetooth device name, track name, and artist name in that order. If this information is not appearing, it is possible that it is not being transmitted by your Bluetooth device. For example, this information is not sent when some Windows 10 laptops stream music, or when iOS® devices (e.g., iPhone) stream YouTube.
+Playing content from a web browser: When you play content from a web browser on your smartphone, tablet, or computer, information about the music, podcast, or other audio will not be displayed in the Bluetooth app. In addition, you cannot use a Roku remote to issue control commands such as pause or play, due to a lack of support for control information from a web browser over Bluetooth. In cases like this, you can view playback information and issue control commands from your smartphone, tablet, or computer, or download and use the standalone app.
+Skip back behavior: You may find that "skip back" or Rewind rewind button on Roku remote on your Roku remote does not behave as you expect. This is because different brands and models of Bluetooth devices interpret "skip back" commands differently. Some skip back to the previous track, while others only skip back to beginning of the current track. It may be necessary to quickly press Rewind rewind button on Roku remote two times to skip back to the previous track.
+Why is the Bluetooth app opening unexpectedly?
+In rare cases, you may find the Bluetooth app opens unexpectedly when your Bluetooth device connects and begins playing audio without you having initiated any action. To correct this behavior, you can manually disconnect your Bluetooth device each time this happens or turn off the Bluetooth auto-play feature altogether.
+
+Manually disconnect your Bluetooth device
+When you disconnect a smartphone, tablet, or computer from your compatible Roku device, it remains in the My paired devices list as it is merely disconnected from the current Bluetooth session. You can use the steps below to manually disconnect your Bluetooth device should the Bluetooth app open unexpectedly.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Bluetooth devices
+Select your Bluetooth device by name
+Note: The name that appears in the list is acquired from your Bluetooth device. You can typically change this name by accessing the settings menu on your smartphone, tablet, or computer. Refer to the manufacturer's online documentation for help.
+Select Disconnect
+
+Bluetooth device disconnected screen
+Once your Bluetooth device is disconnected, the Bluetooth app will not launch automatically, and you will not be able to stream Bluetooth audio to your Roku device. You must re-connect your smartphone, tablet, or computer when you want to stream Bluetooth audio again.
+
+Turn off Bluetooth auto-play
+You can turn the Bluetooth auto-play feature off (or on) only when the Bluetooth app is open.
+
+If it is not already open, launch the Bluetooth app on your Roku device.
+Press Star star button on Roku remote on your Roku remote to access playback options.
+Scroll to highlight Bluetooth auto-play.
+Switch the setting to Off (or On).
+Last updated on 7/16/2025, 3:43:10 PM
+
+How to use AirPlay and HomeKit with your Roku streaming device
+Apple AirPlay lets you stream, control, and share content from your iPhone, iPad, or Mac to your compatible Roku® streaming device. You can watch movies, TV shows, and family videos, listen to popular music, or browse vacation photos. You can even mirror exactly what you see on your Apple device – all while enjoying the big-screen experience from the comfort of your couch.
+
+Apple HomeKit provides an easy and secure way for you to use Siri and the Home app on your iPhone, iPad, or Mac to control your compatible Roku device. Or, you can use scenes to group your Roku device with other HomeKit-enabled devices to control an entire room at once.
+
+This article provides information about using AirPlay and HomeKit with your Roku device, and lists suggestions to help resolve common issues.
+
+Is my Roku device compatible?
+To determine if you can use AirPlay and HomeKit with your Roku device, you need to know the software version and device model. To find this information, go to the home screen and select Settings > System > About. If necessary, you can manually have your Roku device check for a software update.
+
+Roku Select and Plus Series TVs support Apple AirPlay and HomeKit regardless of Roku OS version. If you have any other Roku streaming device, refer to the charts below to determine if your streaming device supports Apple AirPlay and HomeKit.
+
+The Roku devices listed below must be running Roku OS 9.4 or higher to support Apple HomeKit and streaming with AirPlay 2.
+
+Device	Model
+ Roku TV™ 	 Axxxx, Cxxxx, CxxGB, 7xxxx 
+ Roku Streambar® 	 9102 
+ Roku Streambar Pro 	 9101R2 
+ Roku Smart Soundbar 	 9101 
+ onn.™ • Roku Smart Soundbar 	 9100 
+ Roku Streaming Stick®+ 	 3810, 3811 
+ Roku Streaming Stick 4K 	 3820 
+ Roku Streaming Stick 4K+ 	 3821 
+ Roku Express 4K 	 3940 
+ Roku Express 4K+ 	 3941 
+ Roku Premiere 	 3920, 4620 
+ Roku Premiere+ 	 3921, 4630 
+ Roku Ultra 	 4600, 4640, 4660, 4661, 4670, 4800, 4802, and 4850 
+ Roku Ultra LT 	 4662, 4801 
+The Roku devices listed below must be running Roku OS 10.0 or higher to support Apple HomeKit and streaming with AirPlay 2.
+
+Device	Model
+ Roku TV	 5xxx, 6xxx
+ Roku Express 	 3700 
+ Roku Express+ 	 3710 
+ Roku 4 	 440
+Is my Apple device compatible?
+The Apple devices below support streaming audio and video with AirPlay 2.
+
+iPhone, iPad, or iPod touch with iOS 12.3 or later
+Mac with macOS Mojave 10.14.5 or later
+If you need more information, visit the Apple support website.
+
+Are there any settings to check before using AirPlay and HomeKit with my Roku device?
+If you have a Roku TV system or Roku Streambar it may not stay connected to your wireless network when powered off. To maintain the network connection use the steps below to turn on a feature called "Fast TV start" (on your TV) or "Fast start" (on your Streambar).
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select System
+Select Power
+Select Fast TV start or Fast start
+Highlight Enable 'Fast TV Start' or Turn on 'Fast start' and check the box
+Note:
+Fast TV start and Fast start use significantly more power than normal standby and override default power settings.
+How do I use AirPlay to view videos, music, and photos on my TV?
+Before you can use AirPlay with your Roku device, check that your Apple device and Roku device are on the same wireless network. Once they are, you can use the steps below to view content on your TV using AirPlay.
+
+On your Apple device, find the video, song, photo, or podcast you wish to share.
+Tap or click the AirPlay video icon Apple AirPlay video icon in video apps, or the AirPlay audio icon Apple AirPlay audio icon in music and other audio apps.
+Note: With some apps, you may need to tap or click the Share icon Apple Share icon before you will see the AirPlay icon.
+Select your Roku device from the AirPlay menu.
+Once playback begins, you can pause, fast forward, and rewind from your iPhone, iPad, or Mac, or you can use your Roku remote. When you want to stop streaming with AirPlay, you can press Home home button on Roku remote on your Roku remote.
+
+What HomeKit controls are available with my Roku device?
+Your compatible Roku device supports the HomeKit controls listed in the table below.
+
+ 	 Power 	 Volume/mute 	 Input switching 2 	 Basic remote control commands 3 
+ Roku TV system 	supports the HomeKit control	supports the HomeKit control	supports the HomeKit control	supports the HomeKit control
+ Roku Streambar or soundbar 	supports the HomeKit control 1	supports the HomeKit control	does not support the HomeKit control	supports the HomeKit control
+ Roku players 	supports the HomeKit control 1	does not support the HomeKit control	does not support the HomeKit control	supports the HomeKit control
+1  Requires HDMI-CEC support on the TV.
+2  Input switching is supported via the Home app and can be included in HomeKit scenes, but is not supported directly by Siri.
+3  Remote control commands via Siri are only supported within an AirPlay session.
+How do I set up HomeKit?
+Use the steps below to set up HomeKit and add your Roku device to the Home app.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Apple AirPlay and HomeKit
+Select HomeKit
+Select Set up
+Use the camera on your iPhone or iPad to scan the eight-digit HomeKit code you see on your TV screen
+Follow the instructions on your Apple device to add your Roku device to the Home app and complete the setup process
+Why is my Roku device not appearing in the AirPlay menu?
+If you do not see your Roku device when trying to use AirPlay to view content on your TV, you should check the following:
+
+Do both your Roku device and Apple device support AirPlay 2?
+Review the requirements covered earlier in this article to determine if your devices are compatible.
+
+Are your Roku device and Apple device connected to the same wireless network?
+You can view the network configuration of your devices in the settings menu. On your Roku device, go to Settings > Network > About. If it is not connected to the same network as your Apple device, learn how you can resolve connectivity issues.
+
+Has AirPlay been turned off on your Roku device?
+Go to Settings > Apple AirPlay and HomeKit and make sure AirPlay is set to On.
+Why will my TV not power on or off using HomeKit?
+If you are using the Home app or a Siri voice command with your Roku player, Roku Streambar, Roku Streambar Pro, or Roku Smart Soundbar and your TV will not power on or off, you need to make sure your TV supports HDMI-CEC (or just CEC) and the feature is enabled. CEC helps simplify how you use your entertainment system allowing commands to be shared between devices over the same HDMI connection you use for audio and video. Visit the online documentation for your TV, or contact the manufacturer to determine if your TV supports the feature and how you can enable CEC.
+
+In addition to having CEC enabled on your TV, you also need "1-touch play" enabled on your Roku device using the steps below.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select System
+Select Control Other Devices
+Highlight 1-touch play and check the box
+ 
+
+
+Last updated on 9/25/2024, 1:20:11 PM
+
+How to change the display type on your Roku streaming player
+Television manufacturers offer a variety of displays with different resolutions and frame rates. Your Roku® streaming player can be configured to always detect the best resolution and frame rate of your TV, or you can choose to manually select the resolution and frame rate, known together as display type. Roku players that support High Dynamic Range (HDR) ship with an HDMI 2.0 compatible cable. If you cannot use the included cable, be sure to purchase a Premium High Speed HDMI Cable or Ultra High Speed HDMI Cable.
+
+What is resolution and frame rate?
+Resolution is the measure of how much detail you can see on the screen. Typical resolutions on TVs today are 720p, 1080p and 4K Ultra HD (4K), with some 4K TVs also supporting higher frame rates and more color information with High Dynamic Range (HDR). The higher the resolution, the sharper and more realistic the image appears.
+
+When playing video, what you see is a quick succession of still images, or frames, which creates the illusion of motion or animation. The number of frames displayed each second is known as the frame rate and is measured in frames per second (fps), or frequency (Hz). The higher the frame rate, the smoother the motion appears.
+
+How to configure your player to detect the best resolution and frame rate
+During setup, your Roku streaming player will analyze the HDMI® connection to determine the resolutions and frame rates supported by your TV. If your streaming player can determine the best configuration for your TV, the guided setup process will automatically select the best settings, so you do not have to manually configure the settings. The automatic setting is appropriate for most situations.
+
+How to change the display type
+If your Roku streaming player is unable to correctly detect the capabilities of your TV, you may wish to configure the display type on your own. Follow the steps below to manually change your display type setting.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Display type
+Select one of the available display types and press OK OK button on Roku remote on your remote
+Your screen may go black for a few seconds while the display setting is changed
+
+Your screen may go black for a few seconds
+
+When an image is shown, select Yes, I can see it and press OK on your remote
+
+On-screen message that says Do you see the picture above?
+
+Your screen will return to the Display type menu
+A check Purple check mark will appear next to the new display setting
+Note: If you receive a message indicating your TV does not support a display type, you can still select the display type and try it anyway.
+TV does not support 4K HDR at 60 frames per second
+
+What to do if there is no picture after changing the display type
+If you do not see a picture after choosing the new setting, your TV does not support the resolution or frame rate. Your streaming player will revert to the previous setting after 20 seconds. If you believe your TV supports the desired display type, but you continue to see no picture, review the setup requirements for 4K or the setup requirements for HDR..
+
+Setting didn't work
+
+A note on HDMI cables
+Roku players that support HDR ship with an HDMI 2.0 compatible cable. If you cannot use the included cable, be sure to purchase a Premium High Speed HDMI Cable or Ultra High Speed HDMI Cable. The typically more expensive Ultra High Speed HDMI Cable is a good choice for reducing potential Wi-Fi® and Bluetooth® interference, or for future-proofing an installation where the cable location is in an otherwise inaccessible area. Cables that are not labeled or may be labeled "high speed" or "standard speed" may not be adequate for 4K HDR10, HDR10+, or Dolby Vision content at 60fps.
+
+If your Roku player is connected to an AVR or soundbar, make sure all cables are HDMI 2.0 compatible. If you see a black screen or poor performance and video degradation with a 4K HDR signal, replace any older cables with a Premium High Speed HDMI Cable or Ultra High Speed HDMI Cable.
+
+ 
+
+Why is the image not in HDR or the picture quality poor when watching HDR content?
+When you specifically watch an HDR movie or TV show on your HDR-capable Roku device, you may notice the image is not displayed in HDR, or the picture quality is poor. If you encounter this behavior, you may need to update the software on your HDR-capable TV. You can typically find instructions how to do this along with the latest software on the TV manufacturer’s website. Once you confirm that your TV is running the latest software, check that it is properly configured to enable HDR on the specific input to which your Roku player is connected. Some TVs that support HDR do not enable this feature by default.
+
+Last updated on 7/25/2025, 11:46:46 AM
+
+Why is HDCP 2.2 important to playing 4K Ultra HD or HDR content?
+To successfully stream 4K Ultra HD (4K) or High Dynamic Range (HDR) content, all devices connected via HDMI® to your compatible Roku® streaming player must support HDCP 2.2. This includes your TV, an audio/video receiver (AVR), and any other devices connected in between. If even one device does not support HDCP 2.2, then the 4K or HDR movie or TV show can only be viewed in a lower resolution, such as 720p or 1080p.
+
+Note: Only select Roku players support 4K or HDR. Learn about the other requirements for streaming 4K or requirements for streaming HDR.
+What is HDCP 2.2?
+The latest copy protection technology is called HDCP (High-bandwidth Digital Content Protection) and is used on HDMI connections for digital devices like Blu-ray™ players, cable boxes and Roku streaming devices. HDCP is the copy and content protection standard used by the movie and TV industry. Copy protection/content protection has been around for a long time, and in its early stages was what prevented you from copying commercial VHS tapes. HDCP 2.2 is specifically designed for 4K Ultra HD content, as well as movies and TV shows available with High Dynamic Range.
+
+What happens if HDCP 2.2 support is not detected?
+If your Roku player does not detect support for HDCP 2.2, you may see the following message during setup:
+
+Your TV supports better picture quality
+
+…or you may see the message below when trying to change to one of the 4K or HDR selections in Settings > Display type:
+
+Display setting automatic (1080p)
+
+...or you may see the following "HDCP Error Detected" message when attempting to play 4K or HDR content.
+
+HDCP 2.2 Error Detected Message on HDMI on Roku device
+
+How do I avoid this?
+Review the following items to make sure your Roku streaming player is set up for HDCP 2.2.
+
+Use Premium High Speed HDMI Cables. Be sure to use Premium High Speed HDMI Cables for each link in the chain. Using a subpar cable for even one link may cause an HDCP 2.2 failure.
+Your TV must have an HDMI input that supports HDCP 2.2. Verify that your TV has at least one HDMI input that supports HDCP 2.2. Not all 4K TVs support HDCP 2.2, including early models and some lesser-known brands.
+Your AVR must have an HDMI input that supports HDCP 2.2. If you are connecting your Roku player through an AVR, the AVR must also support HDCP 2.2. In fact, every device in the chain between the Roku player and the TV must also support HDCP 2.2. Check the documentation for your AVR to make sure that HDCP 2.2 is supported on the HDMI input you are using.
+
+If you have a 4K-compatible TV or an HDR-compatible TV but your AVR does not support HDCP 2.2, you can still get 4K or HDR video and use your AVR. You just need two connections. Connect your Roku player directly to an HDCP 2.2 input on your TV, and use either ARC (Audio Return Channel) or S/PDIF (if available) to route the audio from the TV back to the AVR.
+
+Tip: If you are using an AVR and want to determine if it is the source of the issue, try removing it from the chain and connect your Roku player directly to an HDCP 2.2 input on your TV. If HDCP 2.2 support is detected in this configuration, there is an issue with the AVR connection. Try a different HDMI cable and input on the AVR if possible.
+How do I determine which HDMI inputs support HDCP 2.2?
+If your name-brand 4K TV, HDR TV, or AVR was purchased in the past couple of years, there is a good chance it has at least one HDMI input that supports HDCP 2.2. When determining which inputs support HDCP 2.2, start with the obvious – look for the inputs labeled with “HDCP 2.2”.
+
+Note: On some TVs, the HDMI inputs are part of an external box that is attached to the display via special cable. This external box may be behind your TV, or it may be inside a cabinet.
+
+Single input – When only a single input supports HDCP 2.2, you may see a label next to just that input as seen below:
+
+rear of AVR with single HDCP 2.2 port highlighted
+In these cases, assume the remaining inputs do not support HDCP 2.2. Connect your Roku player to the labeled input.
+
+Note: If you are connecting more than one device that requires HDCP 2.2 and you plan to use an HDMI splitter, be sure it also supports HDCP 2.2.
+Multiple inputs – When multiple inputs support HDCP 2.2, you may see a single label across several inputs as seen in the following example:
+
+rear of AVR with multiple HDCP 2.2 ports highlighted
+… or you may see an individual label on each input as pictured below.
+
+rear of AVR with two HDCP 2.2 ports highlighted
+Either way, assume any input that is not labeled as such does not support HDCP 2.2. Connect your Roku player to any of the labeled inputs.
+All inputs – Unfortunately, a device that supports HDCP 2.2 on all inputs may or may not include labeling to indicate this – each brand is different. If you do not see a label but suspect your device supports HDCP 2.2, refer to the owner’s manual or online user’s guide. If you cannot find the HDCP version documented anywhere, contact the manufacturer to inquire further.
+
+Once you determine all HDMI inputs support HDCP 2.2, connect your Roku player to any one of them.
+What if I my devices do not support HDCP 2.2?
+You can still enjoy HD content. During setup, your Roku player will automatically select 720p or 1080p instead of 4K or HDR. Or you can select 720p or 1080p from Settings > Display type. Detailed steps for changing your display type are available. 
+
+Last updated on 7/25/2025, 11:35:54 AM
+
+How to use headphones with the Roku mobile app for Headphone Mode
+Listen to streaming content using the Roku mobile app through headphones connected to a phone or tablet using Headphone Mode. Enjoy the sound from apps and live digital broadcast television without disturbing people nearby. Aside from mobile app listening, Headphone Mode is also accessible through Bluetooth directly to the host or through a wired connection in some Roku remotes.
+
+You can use the Roku device comparison chart to determine which current-generation products support Headphone Mode with the Roku mobile app.
+
+Note: Headphone Mode is only supported on a Roku Streambar® SE, Roku Streambar, Roku Streambar Pro, or Roku Smart Soundbar when using its built-in streaming player. Headphone Mode is not supported on these products when using an external device such as a game console, Blu-ray™ player, or cable/satellite set-top box; or when using a Bluetooth device such as a smartphone or computer.
+What to know before using Headphone Mode
+You must first install the latest version of the Roku mobile app and connect your mobile device to your Roku device. To establish this wireless connection, both your mobile device and your Roku device must be connected to the same wireless network.
+When Headphone Mode is active, you will not hear audio from your TV speakers.
+You must have an HDTV antenna connected to your Roku TV to use Headphone Mode with live digital broadcast television. Mobile Headphone Mode is not supported with analog over-the-air broadcast television.
+Headphone Mode is also available when using your headphones with a compatible Roku voice remote.
+How to activate Headphone Mode
+Before you begin, make sure your wired headphones are plugged into your mobile device or your Bluetooth headphones are paired and connected. For pairing help, visit the website for the manufacture of your headphones and/or mobile device, or contact them directly. When you are ready, use the steps below to activate Headphone Mode.
+
+Important: Do not put your headphones on until the volume is at a safe level.
+Open the Roku mobile app
+Tap Remote remote icon on Roku mobile app from the navigation bar
+Tap the Headphone icon to activate Headphone Mode
+Higlight on the headphones button on the Remote page on the Roku mobile app 
+
+Once Headphone Mode is activated, adjust the volume to a comfortable level and put on your headphones. When you want to deactivate Headphone Mode, simply tap the Headphone icon again. If you have wired headphones, you can also activate and deactivate Headphone Mode by plugging in and unplugging your headphones when the Roku mobile app is already open.
+
+Can more than one person use Headphone Mode at the same time?
+Yes. Up to four mobile devices can be connected at the same time for Headphone Mode.
+
+Note: Headphone Mode by multiple users is only supported on mobile devices running the Roku mobile app. If you connect headphones to a compatible Roku voice remote, Headphone Mode on all connected mobile devices will be deactivated.
+Troubleshooting Headphone Mode
+If you are experiencing intermittent connectivity or hear audio issues (such as lip sync), learn how to solve problems with Headphone Mode.
+
+Last updated on 4/30/2025, 8:00:59 PM
+
+Fix issues with the Roku mobile app
+This article explains what to do if you encounter an "Unmet security requirements" or "Required version update" error using the Roku mobile app. It also explains what to do when you can't connect the mobile app with your Roku device.
+
+
+What to do if Roku app won't connect to Roku TV or player
+Enable mobile app control on Roku
+Go to Settings > System > Advanced system settings > Control by mobile apps
+Make sure both are on the same network
+Your phone and Roku TV must be connected to the same Wi-Fi network.
+Troubleshoot Internet connectivity
+Your Wi-Fi signal may be weak or disconnected. Learn how to troubleshoot your connection.
+App compatibility issues on iOS
+The Roku mobile app requires iOS 14.0 or newer. If your iOS phone or tablet is running an older version or is jailbroken, it may not be compatible with the Roku mobile app. Contact Apple support for further support.
+
+App compatibility issues on Android
+Update the Google Play Store™
+Make sure the Play Store app is up to date:
+Open the Google Play Store app
+Tap on your profile icon in the top right
+Go to Settings > About
+If there’s an update available tap "Update Play Store"
+Restart Your Device
+Restarting the device can help refresh your device and downloads from the Google Play Store.
+
+Clear Google Play Store cache
+Go to Settings > Apps > Google Play Store
+Select Storage & Cache and tap on Clear Cache
+Ensure Google Play services are updated
+Open the Play Store and search for "Google Play services"
+Click the Update button if present to install the latest version
+Verify the app is installed from the Google Play Store
+
+What you see on screen may differ from the steps below based on your device.
+
+Tap and hold the Roku app
+Tap App Info in the pop-up
+Scroll down to the bottom of the screen to the Store section. In the app details, verify it says “App installed from Google Play Store”
+Check for Roku mobile app updates in the App Store® or Google Play Store
+If your Android phone or tablet is rooted, running uncertified software, or not Play Protect certified, it may not be compatible with the Roku mobile app. Refer to the Google Play Help article for instructions on how to check your Play Protect certification status.
+
+If your device is not Play Protect certified, or you are using an older device without the option to check certification status, get further help from Google Android support or the Android Help Community.
+
+ 
+
+ 
+
+Last updated on 12/19/2025, 4:26:37 PM
+
+
+How to cast apps like YouTube or Netflix from your phone to a TV
+You can of course launch apps directly from your Roku streaming player or Roku TV™, but on some occasions, you may want to direct, or cast, to your TV what you are already watching on your mobile device. You can do this wirelessly with supported apps like YouTube and Netflix by opening the casting icon casting icon on mobile device on your phone or tablet and selecting your Roku device. The app will launch automatically on your Roku device and playback will begin.
+
+example of casting YouTube to your Roku device
+
+To use casting, the supported app must be installed on both your mobile device and your Roku streaming device. You must also make sure to connect your phone or tablet to the same wireless network as your Roku device.
+
+Are casting and screen mirroring the same?
+Even though the terms “casting” and “screen mirroring” are commonly interchanged in the industry, there are differences when using them with your Roku device.
+
+What content you can send. When casting, you can only watch content available from a mobile app that specifically supports casting. Screen mirroring allows you to view content from any app installed on your mobile device.
+What you see on your TV. With casting you only see playback of the selected piece of content, whereas with screen mirroring, you see the entire screen of your mobile device including buttons and menus – every action is mirrored on your TV.
+How you control playback. Casting gives you the option to use your mobile device for control or you can choose to use your Roku remote. During a screen mirroring session, all actions are controlled on your mobile device.
+Power state of your phone or tablet. Once playback begins, casting lets you use your mobile device to do something else or you can power it off entirely. Screen mirroring requires that your mobile device remain powered on for the duration of playback.
+Supported mobile devices. Casting is supported on most mobile devices – if you see a casting icon casting icon in an app, you may be able to send content to your TV (but not in all cases). Screen mirroring is limited to compatible Android™ and Windows® devices.
+To learn more about replicating the screen from your compatible mobile device on your TV, review the detailed article about screen mirroring.
+
+How to cast from a supported app
+To begin casting, you need to install the app and matching mobile app and start playback. Refer to the instructions below for help.
+
+If not already installed, add the app to your Roku device.
+Install the matching mobile app on your phone or tablet.
+Launch the app on your mobile device.
+Note: You do not need to open the matching app on your Roku device to begin casting.
+Select the casting icon casting icon on mobile device from inside the mobile app.
+Note: With some apps, the casting icon may not appear until you begin playback on your mobile device.
+From the list of available devices on your phone or tablet, select your Roku device.
+The app will launch automatically on your Roku device and playback of the content will begin.
+Note: When casting to apps that support profiles (e.g., Netflix) you may need to select your profile with your Roku remote before playback will begin.
+During playback, you can use your mobile device to find and begin casting another program, do something entirely different, or turn it off completely – all without affecting playback on your Roku device.
+
+Last updated on 7/16/2025, 3:46:20 PM
+
+Ways to display media from your phone on your TV using a Roku® streaming device
+When gathering with friends and family, you can use your Roku streaming device to wirelessly share content on a nearby TV screen rather than asking everyone to huddle around your phone. Use Play on Roku to display personal photos and videos, Photo Streams to share special moments with loved ones at home and in different locations, Apple AirPlay to stream movies and videos that you are watching on your Apple device, screen mirroring to project the entire screen of your phone, or casting to view movies and shows you may have already started watching on your phone.
+
+What is Apple AirPlay?
+Apple AirPlay allows you to stream, control, and share content from your iPhone, iPad, or Mac to your compatible 4K Roku streaming device.
+
+What can I share? Movies, TV shows, music, personal photos and videos, and more. You can even mirror exactly what you see on your Apple device.
+What devices are supported? iPhones, iPads, and Macs that support AirPlay 2.
+To successfully share content using AirPlay, you must connect your iOS device to the same wireless network as your Roku device. Learn more about sharing content from your iOS devices by reading the detailed article about AirPlay.
+
+What is screen mirroring?
+Screen mirroring allows you to replicate (or “mirror”) everything you see on your compatible mobile device on to your TV screen. Whatever you see on your mobile device is what appears on your TV – only larger.
+
+What can I share? Most anything you can view on your phone or tablet including web pages, videos, photos, music, and more.
+What devices are supported? Windows devices running Windows 8.1 or Windows 10, and most Android devices running version 4.2 or later (with the notable exception of Google branded devices running OS 6.0 or later like the Google Nexus or Pixel).
+To learn more about getting your mobile device screen to show on your TV, review the detailed article about screen mirroring.
+
+What is casting
+Casting lets you direct, or cast, a video, movie or TV show you are watching on your mobile device to your TV using a Roku device. After the content starts playing on your Roku device, you can use your mobile device for something else, or switch it off and control playback with your Roku remote.
+
+What can I share? Videos, movies, and TV shows from a mobile app that supports casting like YouTube or Netflix.
+What devices are supported? Most phones and tablets. If you see a casting icon casting icon on mobile apps in an app, you may be able to direct that content to your TV screen using a Roku device (but not in all cases).
+To successfully share content using casting, you must connect your mobile device to the same wireless network as the Roku device. Learn more about directing the content from apps you watch on your mobile device to your TV by reading the detailed article about casting.
+
+Last updated on 1/16/2025, 3:29:08 PM
+
+How to mount your Roku® Streambar® Pro or Roku Smart Soundbar
+You can mount your Roku Streambar Pro or Roku Smart Soundbar to a wall or your TV as it is compatible with most universal soundbar mounting solutions (sold separately). This article provides guidelines and outlines some options for mounting your Streambar or soundbar.
+
+Mounting guidelines
+When choosing a location where to mount your Roku Streambar Pro or Roku Smart Soundbar, take the following guidelines into consideration:
+
+Do not block the IR receiver on your TV: Your TV remote uses invisible infrared (IR) light to send a signal a short distance to an IR receiver on the front of your TV, typically located along the bottom edge of the screen. Do not mount your Streambar or soundbar in a location that blocks the IR signal from getting to the IR receiver on your TV when seated in your normal viewing position.
+Center your Streambar or soundbar: To best anchor the sound with the picture, center your Streambar or soundbar with your TV. Mounting it to the left or right of the screen will create a disconnected listening experience.
+Install at ear level: To best focus the sound at your listening position, your Streambar or soundbar should be mounted at ear level (when you are seated).
+Leave access space: Some TV's have buttons and/or connectors along the bottom or top edge of the screen. When choosing a mounting location, leave enough space between your Streambar or soundbar and TV to allow for access to any control buttons or audio/video connections.
+How to choose compatible mounting hardware for your Streambar or soundbar
+Your Roku Streambar Pro or Roku Smart Soundbar features ¼” (6.35 mm) 20-threaded mounting sockets for compatibility with a wide range of mounting solutions. These sockets fit standard ¼” (6.35 mm) 20-threaded screws, 0.39” (10 mm) in length. These are commonly included with universal mounting kits, or they can typically be purchased from most hardware stores. Any solution you choose must safely support the weight of your Streambar or soundbar. Confirm that your chosen hardware is designed to support a minimum of 5.5 lbs. (2.49 kg).
+
+The mounting sockets are located on the rear of your Streambar or soundbar, 12.6" apart as seen below.
+
+Back panel of Roku Smart Soundbar with mounting sockets
+
+Which soundbar mount is right for me?
+Manufacturers offer soundbar mounts that let you attach your Streambar or soundbar to the wall, or to your TV. There are a variety of models on the market with a few examples listed below.
+
+Mounting to a wall
+If you plan to mount your Streambar or soundbar to a wall, you can purchase an adjustable design such as those listed below. Follow the instructions from the manufacturer to ensure your Streambar or soundbar is mounted securely to the wall.
+
+Echogear Universal Soundbar Wall Mount
+Excel Life Universal Soundbar Mount
+Mounting to your TV
+If you want to mount your Streambar or soundbar directly to your TV, or to the bracket holding your TV on the wall, a few ideas are listed below. Use the manufacturer's instructions to make sure your Streambar or soundbar is attached securely to your TV, or the TV bracket.
+
+Echogear Adjustable TV Soundbar Mount
+Sanus VMA201
+Sanus VMA202
+Sanus SA405 - Note: ¼” 20-threaded screws not included with this model
+Last updated on 7/5/2023, 11:44:38 AM
+
+How to turn on Bluetooth pairing and connect your phone to your Roku device
+Getting started streaming Bluetooth® audio to your Roku® streaming device is just two simple steps – pairing your smartphone, tablet, or computer the first time and then connecting your device whenever you want to use it. The Bluetooth app on your Roku device will automatically launch once you start playing music, podcasts, or other audio.
+
+This article outlines the steps for pairing, connecting, and streaming Bluetooth audio to your Roku device. You can also learn how to use Bluetooth headphones for Headphone Mode.
+
+Which Roku devices are compatible?
+You can connect a Bluetooth-capable smartphone, tablet, or laptop to the following Roku devices.
+
+Roku Streambar SE®
+Roku Streambar®
+Roku Streambar Pro
+Roku Smart Soundbar or onn.™ Roku Smart Soundbar
+Roku Ultra models 4800, 4802, and 4850
+Roku Ultra LT model 4801
+Roku Select Series 4k (2025)
+Roku Plus Series TV
+Roku Pro Series TV
+Roku TV™ system with Roku wireless speakers, Roku TV Wireless Soundbar, or TCL Roku TV Wireless Soundbar
+Note:
+Roku Ultra models 4670, 4661, 4660, and 4640 and Roku Ultra LT model 4662 are not compatible.
+A Bluetooth device can be connected directly to a Roku Plus Series TV. If you have any other Roku TV system, you will need to pair Roku Wireless Speakers or a Roku TV Wireless Soundbar to add Bluetooth capability to your TV.
+You must set up your Roku device before you can use it for Bluetooth streaming. Refer to the articles below for set up instructions
+
+How to set up a Roku Streambar SE
+How to set up a Roku Streambar
+How to set up a Roku Streambar Pro or Roku Smart Soundbar
+How to set up a Roku Ultra or Ultra LT
+How to set up a Roku wireless speakers
+How to set up a Roku TV Wireless Soundbar
+How to set up a Roku TV system
+How to pair your Bluetooth device
+Before you can begin streaming Bluetooth audio, you need to pair your smartphone, tablet, or computer to your compatible Roku streaming device. Pairing information is retained even when your devices are powered off, so usually you only need to pair your Bluetooth device one time.
+
+Use the following instructions to start the pairing process on your Roku device.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Smartphones & tablets
+Select Add a new smartphone or tablet
+To complete the pairing process, follow the steps below when you see the pairing screen on your smartphone, tablet, or computer
+
+Open Bluetooth settings on your smartphone, tablet, or computer
+Make sure Bluetooth is turned on
+Wait a moment for your Bluetooth device to scan for devices and discover your Roku device
+Select your Roku device from the list of available devices
+After you complete the pairing process, your Roku device will appear in the list of paired devices on your smartphone, tablet, or computer. In addition, your Bluetooth device will appear under Smartphones & tablets on your Roku device.
+
+Bluetooth device paired on my Roku device
+
+How to connect your Bluetooth device and stream audio
+When you initially pair your Bluetooth device, it may also connect automatically to your Roku device. When it is connected, you will see a check mark next to your Bluetooth device. A similar indicator should also appear on your smartphone, tablet, or computer in the list of paired devices near the name of your Roku device. Once you see that your smartphone, tablet, or computer is connected, you are ready to begin streaming Bluetooth audio.
+
+Stream audio over Bluetooth
+Once your Bluetooth device is connected, begin playing audio on your smartphone, tablet, or computer.
+The Bluetooth app on your Roku device will automatically launch.
+As you listen to audio streaming from your Bluetooth device, the Bluetooth app will display information about the content streaming.
+To stop streaming Bluetooth audio, just exit the Bluetooth app on your Roku device or disconnect your Roku device from the Bluetooth settings menu on your smartphone, tablet, or computer.
+Manually connect your Bluetooth device
+Use the following steps to connect your Bluetooth device if it isn't automatically connected
+
+Open the Bluetooth settings on your smartphone, tablet, or computer.
+Select your Roku device from the list of paired devices.
+How to fix Bluetooth audio issues
+Refer to the articles below for help with any Bluetooth streaming issues.
+
+If you encounter any issues during setup, learn more about what to do to resolve problems when connecting a Bluetooth device.
+If you do not hear sound from your Roku device, adjust the volume with your Roku remote, or press and hold the Voice button microphone icon on a voice remote and say something like "volume 20" or "turn up the volume".
+If you continue to have problems, learn what to do if your Bluetooth device is connected but no sound is heard.
+How to turn off the TV screen while using Bluetooth
+To stream audio to your Roku wireless speakers, Roku TV Wireless Soundbar, or Roku Plus Series TV when the screen on your TV is off, you must enable a feature called Fast TV Start. Learn about Fast TV Start to understand other ways you can use your TV when the screen is off.
+
+Note: Fast TV Start uses significantly more power than normal standby and overrides default power settings.
+When using any other Roku streaming device you can simply power off your television using your TV remote and Bluetooth audio will continue playing. You can also begin playing Bluetooth audio on your smartphone, tablet, or computer when the TV screen is already off. Just make sure to connect your Bluetooth device to your Streambar or soundbar before you begin.
+
+How to disconnect a Bluetooth device
+Use the steps below when you want to disconnect your smartphone, tablet, or computer. When you disconnect a Bluetooth device, it remains in the list of Bluetooth devices on your Roku device and is simply disconnected from the current Bluetooth session.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Smartphones & tablets
+Select your Bluetooth device
+Select Disconnect
+Note: If your device is not currently connected, you will not have the disconnect option.
+Once your Bluetooth device is disconnected, you will not be able to stream Bluetooth audio to your Roku device until you re-connect it as described in this article.
+
+How to remove or forget a Bluetooth device
+When you forget a Bluetooth device, it is removed from the list of Bluetooth devices on your Roku device. You typically will not forget a Bluetooth device unless it was replaced or connected temporarily.
+
+Use the following steps to forget a Bluetooth device:
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Smartphones & tablets
+Select your Bluetooth device
+Select Forget this device
+If you want to stream Bluetooth audio from the forgotten device again, you will need to pair it again using the instructions provided earlier in this article.
+
+Which Bluetooth devices can I connect?
+You can connect a Bluetooth-capable smartphone, tablet, or computer to a compatible Roku streaming. You can also connect Bluetooth headphones for Headphone Mode or use the Roku mobile app for Headphone Mode.
+
+Before you can pair or connect your Bluetooth-capable device, you must first turn on, or enable Bluetooth on that device. Depending on the brand and model of your device, this may be done in the settings menu or a shortcut area from a 'Bluetooth' submenu. Typically you can click the icon with the following symbol: Bluetooth icon Roku
+
+If you need help, refer to the online documents or help articles available on the manufacturer's support site. Links for some common brands are listed below:
+
+Apple: support.apple.com
+Google: support.google.com
+HUAWEI: consumer.huawei.com/en/support/
+Lenovo: support.lenovo.com
+LG: lg.com/us/support
+Microsoft: support.microsoft.com
+Motorola: support.motorola.com
+Samsung: samsung.com/us/support/mobile/phones
+Help setting up a Roku device
+You must set up your Roku device before you can use it for Bluetooth streaming. Refer to the articles below for set up instructions.
+
+Set up your Roku Streambar SE
+Set up your Roku Streambar
+Set up your Roku Streambar Pro or Roku Smart Soundbar
+Set up your Roku Ultra or Ultra LT
+Set up your Roku wireless speakers
+Set up your Roku TV Wireless Soundbar
+Set up your Roku TV system
+ 
+
+ 
+
+
+Last updated on 7/14/2025, 12:56:08 PM
+
+What to do when you have lost your Roku remote
+Can I use the Roku Mobile app as a remote?
+
+You may want to use the Roku Mobile app as a replacement for your remote. There are several things to know about replacing your remote with the app.
+
+Your Roku device must already be powered on and connected to your home Wi-Fi network
+Your phone or tablet must be on the same Wi-Fi network as your Roku device
+If your Roku device isn’t connected to the Internet—such as after a reset or if you are setting it up for the first time—the mobile app cannot detect your device, and you will not be able to use it as a remote.
+
+Buy a Replacement Roku Remote
+
+You can purchase an official replacement remote online at Roku.com/products/accessories or at a major retailer like Amazon, Walmart, Target, and Best Buy.
+
+There are two main types of Roku remotes:
+
+Simple Remotes 
+Voice Remotes (learn whether your Roku device is compatible)
+ 
+
+Last updated on 4/28/2025, 5:12:16 PM
+
+
+How to find your Roku remote using the lost remote finder feature
+A feature called lost remote finder can help you locate your compatible Roku® remote the next time it gets stuffed behind a couch cushion or misplaced somewhere else in your home. When you trigger the feature from a hands-free voice command, the free Roku mobile app for iOS® and Android™, your Roku streaming device, or your TV powered by Roku OS, your remote plays a sound so you can quickly find it.
+
+This article helps you determine if your remote supports lost remote finder and explains how to use the feature and adjust its settings.
+
+Does my remote work with lost remote finder?
+Lost remote finder is supported on any Roku voice remote with a built-in speaker, such as the Roku Enhanced Voice Remote and Roku Voice Remote Pro (2nd edition). To determine if your voice remote is compatible, look for small speaker holes on the back of your remote. If you do not see any speaker holes and wish to use lost remote finder, you can purchase an upgraded remote on the Roku accessories store.
+
+Tip: For more help identifying your remote, learn more about the different types of Roku remotes and their features.
+Close up view of speaker holes on the back of a Roku voice remote that supports lost remote finder
+
+How to trigger lost remote finder
+You may be able to trigger lost remote finder using a hands-free voice command, the Roku mobile app, or the lost remote finder button on your Roku streaming device.
+
+After you trigger lost remote finder, your remote plays a sound for up to 60 seconds. When you locate your remote, press any button to stop the sound. Your remote will not play the lost remote finder sound if the alkaline batteries are dead or the rechargeable battery is too low, or if the remote is out of range of your wireless network.
+
+Trigger lost remote finder with hands-free voice command
+If you have a Roku Voice Remote Pro or Roku Voice Remote Pro (2nd edition), you can trigger lost remote finder by saying "Hey Roku, where's my remote?" in a clear and direct conversational tone. If hands-free voice was not turned on when your remote was misplaced or your remote could not hear your command, you must use one of the other methods to trigger the feature.
+
+Tip: For help using hands-free voice, read more about how you can use your voice to search and control your Roku device.
+Trigger lost remote finder in the Roku mobile app
+After you install the free Roku mobile app on your phone, you can open it and trigger lost remote finder in one of the following ways.
+
+Use the following steps to trigger the lost remote finder in the app.
+
+Select the Devices Devices icon on Roku mobile app icon from the navigation bar
+Tap on your Roku device to connect to it
+Next to your connected device, tap the three dots Three dots icon on Roku mobile app and select Ping Remote
+Alternatively, you can use the mobile app like a remote to activate the lost remote finder in the Settings menu.
+
+Select the Remote icon remote icon on Roku mobile app from the navigation bar to control your Roku device
+Press HOME Home icon on Roku mobile app to go to Home screen on your streaming device
+Select Settings
+Select Remotes & devices
+Select Remotes
+Select your remote
+Select Find remote
+Trigger lost remote finder on your streaming player
+Some devices, such as Roku Ultra, have a physical lost remote finder button located on the top or side of the player. Press this button to trigger lost remote finder.
+
+Image showing a Roku Ultra device with labels indicating the location of the lost remote finder button. On the left, the top view highlights the button on the surface of the device to the right of the Roku logo. On the right, the side view shows the ports and connections, with the lost remote finder button located on the left.
+
+Trigger lost remote finder on your TV powered by Roku OS
+There are various methods of triggering the lost remote finder on your TV powered by Roku OS. Follow the instructions below that match your TV. Note that some Select Roku TVs do not have a button control and only have a power button.
+
+If your TV has a single button control:
+
+Press the button to open the Inputs menu
+Press the button again until you highlight Find Remote
+If your TV has a three button control:
+
+Press the middle button to open the Inputs menu
+Press the button again until you highlight Find Remote
+If your TV has a joystick-style control:
+
+Move the joystick to the left or right to open the Inputs menu
+Move the joystick right to scroll down and highlight Find Remote
+If your TV has a column of labeled panel buttons:
+
+Press the INPUT button to open the Inputs menu
+Press the INPUT button again until you highlight Find Remote
+If you have a Roku Pro Series TV:
+
+Press the Find My Remote button located on the right side of the TV (located above the power button).
+Note: The panel button(s) on some models might be difficult to find. If the location is not obvious, check the bottom center of your TV behind the status indicator LED, or the back panel of your TV near the lower right or left side.
+How to change the lost remote finder sound
+From the Settings menu on your Roku device, you can change the sound your remote plays when the feature is triggered using the steps below.
+
+Press Home home button on Roku remote on your Roku remote
+Scroll and select Settings
+Select Remotes & devices
+Select Remotes and then select your voice remote
+Select Change remote finder sound
+As you move up and down the list, remain on a selection for a moment to hear a sample played on your TV speakers. When you find a sound you like, press OK OK button on Roku remote to download it to your remote.
+To hear the new sound played on the speaker in your remote, select Preview remote finder sound.
+Note: Not all remotes support changing the remote finder sound.
+ 
+
+Last updated on 8/25/2025, 1:16:30 AM
+
+How to play games through Netflix on your Roku streaming device
+Netflix Games on TV is a beta experience available to a limited number of Netflix subscribers in Canada, the United Kingdom, and the United States. This article provides instructions on how to play games through Netflix on your Roku® streaming device and where to get help with any issues.
+
+How to play Netflix Games on TV
+A small number of Netflix subscribers in Canada, the United Kingdom, and the United States will have access to play games through Netflix on their supported Roku streaming devices. More members, countries, and supported devices may be added in the future.
+
+Is Netflix Games on TV available on my Roku Streaming device?
+See the chart below for a list of Roku Streaming devices that support games through Netflix. Learn how to find the model number of your Roku device.
+
+Product	Model
+Express 4K	3940X2
+Roku TV™	G000GB, G000X
+Note: Even if you have a compatible device, you might not be selected for the beta experience.
+What do I use for a game controller?
+You can use your Android™ or iOS® mobile device as a game controller. Open Netflix Games on TV and scan the QR code shown on the screen to connect your mobile device as a controller.
+
+How to fix issues with Netflix Games on TV
+You can get troubleshooting assistance and find support contact options for Netflix Games on TV through the Netflix Help Center.
+
+Last updated on 1/29/2024, 7:12:17 PM
+
+How to adjust ambient light sensing on your Roku TV system
+Whether viewing in a room filled with sunlight or a dark environment at night, Roku TV™ systems equipped with an ambient light sensor can automatically adjust the brightness of the picture to provide a consistent viewing experience during varying lighting conditions. This article describes the feature in more detail and provides instructions for adjusting the setting.
+
+How the ambient light sensor works
+The ambient light sensor in your compatible Roku TV system continually measures the amount of available light in the environment and uses this information to calculate adjustments to picture brightness. When a significant amount of light is measured, picture brightness is increased to combat brighter ambient light. When minimal to no light is measured, picture brightness is reduced, or dimmed, to avoid a bright screen when your eyes are adjusted to a dark room.
+
+Matching the response of the human eye in this manner helps you to see details and colors the same on your TV whether viewing in a bright or dark room.
+
+How to change ambient light sensor setting
+You can enable automatic brightness, if your TV has an ambient light sensor, or choose a specific brightness level in the TV Picture Settings menu. Use the instructions below to change the TV brightness setting on your TV.
+
+Press Home home button on Roku remote on your TV remote
+Scroll and select Settings
+Select TV picture settings
+Select TV brightness
+Select Auto to enable ambient sensing or select a constant brightness level
+Press OK OK button on Roku remote on your remote
+Note: If you do not see the Auto selection, your TV does not have an ambient light sensor.
+Last updated on 1/29/2024, 7:09:14 PM
+
+How to use Google to control your Roku streaming device
+When you use Google with Roku® Voice, you can speak commands like “Hey Google, show me action movies on bedroom Roku” or “Hey Google, launch Apple TV on living room Roku” to help find entertainment and control your compatible Roku device. If you have a Roku TV™ system, you can also use your voice to adjust volume, switch inputs, and turn the TV screen off or on without needing your Roku remote.
+
+This article helps you integrate a Google Assistant-enabled device with Roku Voice, and provides some examples of voice commands you can use to search and control your Roku device.
+
+Notes:
+The Roku Action on Google is supported in Canada, Ireland, Mexico, the United Kingdom, and the United States.
+The Roku Action on Google is supported on all Roku TV system models and current generation Roku players.
+Using your voice to launch Netflix, or access and interact with Netflix content is not currently supported when using the Roku Action on Google. Other voice commands like those for adjusting volume are also not supported when using Netflix.
+Launching an app on your Roku device using Google works for more than 100 top apps on the Roku platform. However, the launch app command does not work with all apps on the Roku platform at this time.
+The Roku Action on Google does not support all Roku voice capabilities. Learn about additional capabilities you can use with a Roku voice remote.
+Be aware that you can also use Google Assistant to control your Roku Smart Home cameras, doorbells, bulbs, plugs, and light strips.
+
+What you need to get started
+Before you can use Roku Action on Google, make sure your Roku device is running Roku OS 9.1 or higher. You can find the software version by visiting Settings > System > About. Your Roku device checks for an update every 24-36 hours or you can manually check for a software update if needed.
+
+In addition to a compatible Roku player or Roku TV system with the correct software, you will need the following:
+
+A free Roku account
+A Google Assistant-enabled device such as a Google Pixel phone, Google Home, Google Home Mini, or Google Home Max.
+The Google Home mobile app downloaded to your iOS® or Android™ device.
+Note: For help setting up a Google Assistant-enabled device or downloading the mobile app, visit Google help.
+To learn more about which Roku devices support voice search and voice control, read about what you need to use voice commands with your Roku device.
+
+What you can do with Google
+When you use the Roku Action on Google, you can:
+
+Control media playback
+Issue a command by saying "Hey Google" followed by:
+
+“pause on kitchen Roku"
+"fast forward on living room Roku"
+"rewind on bedroom Roku"
+“launch The Roku Channel on office Roku"
+Search for entertainment
+Issue a command by saying "Hey Google" followed by:
+
+"find documentaries on bedroom Roku"
+"show me comedies on kitchen Roku"
+Control your Roku TV system
+Issue a command by saying "Hey Google" followed by:
+
+"turn on office Roku"
+"raise the volume on living room Roku"
+"mute on bedroom Roku"
+"change to channel 7.1 on living room Roku"
+"switch to HDMI 2 on kitchen Roku"
+[1] An HDTV antenna must be connected to your TV to use Google to change broadcast channels.
+How to set up Google on your Roku device
+To use the Roku Action on Google, you need to link your Roku account to your Google account using the Google Home mobile app on your iOS or Android device.
+
+Launch the Google Home mobile app on your smartphone
+Tap the Plus icon Add or plus icon from google home app in the top corner
+Tap Set up device from the list
+Select Works with Google
+Tap the Magnifying glass icon search or magnifying icon on Roku Home app and search for Roku
+Select Roku from the list
+When prompted, sign in to your Roku account. Learn what to do if you forgot your email address or password.
+Select Continue and follow the prompts to return to the Google Home app
+
+Last updated on 4/29/2025, 3:22:18 PM
+
+Can I use a voice remote with my Roku streaming device?
+This article helps you determine if your Roku streaming device is compatible with Roku voice remotes. You can learn how to use voice to search and control your Roku streaming device in another article.
+
+Note: Voice search and voice control is supported in English, German, Portuguese, French, and Spanish. To change the language on your Roku device, go to Settings > System > Language.
+Is my Roku streaming device compatible with a Roku voice remote?
+Voice search and voice control is supported on all Roku devices shipped since 2017, along with several older devices. A quick way to confirm if you are already using a Roku voice remote with your Roku streaming device is to look at your remote.
+
+All Roku voice remotes have a voice button located near the purple directional pad that has either a microphone microphone icon or magnifying glass magnifying glass icon on Roku mobile app icon.
+
+If your remote has a voice button, you have a Roku voice remote. If it does not, you have a Roku simple remote.
+
+Roku remote face search button
+
+Tip: Learn how you can use push-to-talk voice to search and control your Roku device.
+Roku models that support Roku voice
+The streaming device models listed in the chart below work with Roku voice remotes. If you have one of these devices but do not have a Roku voice remote, you can can upgrade to a new voice remote like a Roku Voice Remote Pro (2nd edition) from the Roku accessories store. Alternatively, you can install the free Roku mobile app and use it for voice control.
+
+To find the model of your device, go to the Home home button on Roku remote screen and select Settings > System > About.
+
+ Device	 Model	 Voice Remote Model
+ 	Roku TV Remote, Voice Remote, and Voice Remote Pro	 RC-BR1, RC-BR2, RC-BR5, RC-BR6
+ Roku TV System	 **R4CX (Select Series 4k 2025), **R2CX (Select Series 2025), **R6CX (Plus Series 2025), **R8CX (Pro Series 2025), **R8BX (Pro Series 2025)	 Supported	 Supported
+ All other models	 Supported	 Not supported
+ Roku Streambar	9104R, 9102, 9101R2	 Supported	 Not supported
+ Roku Soundbar	9101, 9100	 Supported	 Not supported
+ Roku Express	 3900, 3930, 3960, 3910, 3931, 3932, 3940, 3941	 Supported	 Not supported
+ Roku Streaming Stick	 3600, 3800, 3810, 3811, 3820, 3821, 3840, 3830	 Supported	 Supported
+ Roku Premiere	3920, 4620, 3921, 4630	 Supported	 Not supported
+ Roku Ultra	4640, 4660, 4661, 4662, 4670, 4850	 Supported	 Not supported
+4800, 4801, 4802	 Supported	 Supported
+ Roku 2, 3, 4	4210, 4200, 4230, 4400	 Supported	 Not supported
+Note: Some older Roku devices not included in the list above may support limited voice capabilities.
+Last updated on 10/13/2025, 5:43:14 PM
+
+
+How to change the default media apps your Roku streaming device launches for voice requests
+Speaking naturally to a Roku® voice remote or the free Roku mobile app, you can use voice commands for quick access to your favorite music, podcasts, and radio stations from Pandora, iHeartRadio, TuneIn, and Spotify. When you use commands such as "listen to classical music on Pandora", "play Carrie Underwood on iHeartRadio", "launch Today's Hits on TuneIn", or "play Daft Punk on Spotify" your compatible Roku streaming player or Roku TV™ will launch the requested streaming service and begin playing audio. When you use a simpler voice command that does not specify a streaming service (e.g., play classic rock), your Roku streaming device will automatically determine which service offers the type of content requested, and launch the media app for that service.
+
+Pandora is the default media app your streaming device launches for music requests, while iHeartRadio is the default media app for radio and podcasts requests. If you prefer, you can turn off the automatic selection and configure voice commands to only launch a specific app for each type of audio content you play. This article will help you make this change for music, radio stations, and podcasts.
+
+Note: Using voice commands to launch audio content on your streaming device is only supported in the United States.
+Using voice commands: Any of the examples in this article can be used as a push-to-talk voice command with any Roku voice remote, or a hands-free voice command with the Roku Voice Remote Pro. To issue a push-to-talk command, press and hold the voice button microphone icon on your remote. To issue a hands-free command, simply keep your remote nearby and say "Hey Roku..." followed by your request. For detailed instructions, learn more about both ways you can use your voice to search and control your Roku streaming device.
+
+What you need to use voice commands
+Before you can take advantage of the latest enhancements to voice search and voice control, make sure your compatible Roku streaming device is running Roku OS 9.4 or higher, and you have one of the following control devices:
+
+Roku Voice Remote
+Roku Enhanced Voice Remote
+Roku Voice Remote Pro
+Roku Touch™ tabletop remote
+Roku mobile app for iOS® and Android™
+To learn more about which streaming devices support voice, or to determine if your existing remote has voice capabilities, read about what you need to use voice commands with your streaming device.
+
+How to turn off the automatic setting and switch the default media apps
+You can turn off the automatic setting on your streaming device and change the default app for music, radio stations, and podcasts using the instructions below.
+
+Open your Roku account from your computer or smartphone.by visiting my.roku.com.
+If prompted, sign in to your Roku account.
+Tip: If you cannot sign in to your Roku account, learn what to do if you have forgotten your email address or password.
+Under the Manage Account section, select Voice settings.
+For Music, Radio, and Podcasts, select Auto or the desired streaming service.
+Notes:
+Auto provides the best results considering all streaming services in a category are checked to find the requested content. For example, if you say "listen to Wild 94.9" and TuneIn is set as the default Radio app, audio will not start playing because Wild 94.9 is only available on iHeartRadio.
+Pandora can only be selected as the default app for Music.
+When you are finished making selections, scroll to the bottom of the page and select Done to save.
+More help using voice commands
+After you set your default media apps, you can use simple voice commands to begin listening to your favorite audio content. If you find that some content does not play on the default app you selected, that content is likely only available from another streaming service. Try your voice command again adding the specific streaming service. Remember, you can switch back to Auto using the steps above at any time to have your streaming device check all streaming services to find the requested content. For more help with voice commands, refer to the articles below:
+
+What do I need to use voice commands?
+What voice commands can I use?
+How do I use my voice to search and control my Roku streaming device?
+How do I listen to music on my streaming device?
+Last updated on 7/5/2023, 11:39:25 AM
+
+How to use Amazon Alexa to control your Roku streaming device
+When you use Amazon Alexa with Roku® Voice, you can speak commands like “Alexa, show me action movies on bedroom Roku”, or “Alexa, launch Disney plus on living room Roku” to help find entertainment and control your compatible Roku device. If you have a Roku TV™ system, you can also use your voice to adjust volume, switch inputs, and turn the TV screen off or on without needing your Roku remote.
+
+This article helps you integrate an Alexa-enabled device with Roku Voice and provides some examples of voice commands you can use to search and control your Roku device.
+
+Notes:
+The Roku skill for Alexa is supported in Germany, Canada, Ireland, Mexico and Latin America (excluding Brazil), the United Kingdom, and the United States.
+The Roku skill for Alexa is supported on all Roku TV system models and all current generation Roku streaming players.
+Using your voice to launch Netflix, or access and interact with Netflix content is not currently supported when using the Roku skill for Alexa. Other voice commands like those for adjusting volume are also not supported when using Netflix.
+Launching an app on your Roku device using Alexa works for more than 100 top apps on the Roku platform. However, the launch app command does not work with all apps on the Roku platform at this time. 
+The Roku skill for Alexa does not support all Roku Voice capabilities. Learn about additional capabilities you can use with a Roku voice remote.
+Be aware that you can also use Alexa to control your Roku Smart Home cameras, doorbells, bulbs, plugs, and light strips.
+
+What you need to get started
+Before you can use the Roku skill for Alexa, make sure your Roku device is running Roku OS 9.1 or higher. You can find the software version by visiting Settings > System > About. Your Roku device checks for an update every 24-36 hours or you can manually check for a software update if needed.
+
+In addition to a compatible Roku player or Roku TV system with the correct software, you will need the following:
+
+A free Roku account
+An Alexa-enabled device such as an Amazon Echo, Echo Show, Echo Dot, Echo Spot, Echo Plus, or third-party device with Amazon Alexa
+Alexa mobile app downloaded to your iOS® or Android™ device
+Note: For help setting up an Amazon-branded Alexa device or downloading the Alexa mobile app, visit Amazon's device and digital content support.
+To learn more about which Roku devices support voice search and voice control, read about what you need to use voice commands with your Roku device.
+
+What you can do with Alexa
+When you use the Roku skill for Alexa, you can:
+
+Control media playback
+Issue a command by saying "Alexa" followed by:
+
+“pause on kitchen Roku”
+“fast forward on living room Roku”
+“rewind on bedroom Roku”
+“launch Prime Video on den Roku"
+“go home on office Roku”
+Search for entertainment
+Issue a command by saying "Alexa" followed by:
+
+“find documentaries on bedroom Roku”
+“show comedies on kitchen Roku"
+Control your Roku TV system
+Issue a command by saying "Alexa" followed by:
+
+“turn on office Roku TV"
+“raise the volume on living room Roku”
+“mute on bedroom Roku”
+“change to channel 7.1 on living room Roku” [1]
+“switch to HDMI 2 on kitchen Roku”
+[1] An HDTV antenna must be connected to your TV to use Alexa to change broadcast channels.
+How to set up Alexa on your Roku device
+To use the Roku skill for Alexa, you need to link your Roku account to your Amazon account using the following steps:
+
+Open the Alexa mobile app
+Tap or select the Menu icon Alexa app menu icon in the corner
+Tap Settings
+Scroll to TV & Video and select Roku from the list
+Tap the Enable button
+A prompt is opened in a browser, sign in to your Roku account. Learn what to do if you forgot your email address or password.
+Select Accept and Continue, and follow the prompts to return to the Alexa app
+Choose the Alexa devices you wish to use with your Roku devices
+Select LINK DEVICES
+How to link additional Roku devices
+If you previously set up the Roku skill for Alexa to control a single Roku device, you may need to disable and re-enable the skill if you want to link additional Roku devices. You can do this on your smartphone in the Alexa mobile app using the steps below:
+
+Perform steps 1 through 4 from the previous section
+Tap Disable Skill
+On the next screen, select Disable
+Tap Enable to Use
+Complete the account linking process as described in the previous section
+Last updated on 5/11/2025, 11:11:53 AM
+
+How to mount your Roku® wireless speakers
+You can mount your Roku wireless speakers to improve the look of your system and help position your speakers for optimal listening. This article provides guidelines and outlines some options for mounting your Roku wireless speakers.
+
+Roku wireless speakers are available in three varieties:
+
+ Product 	 Model 	 Included remotes 
+ Roku Wireless Speakers 	 9020 	 None 
+ Roku TV Wireless Speakers 	 9030 	 Roku TV Voice Remote 
+ Roku Touch™ tabletop remote 
+ onn.™ • Roku Wireless Surround Speakers 	 9040 	 None
+This article helps you find a mounting solution for any model.
+
+Which speaker mounts are right for me?
+There are a couple different ways you can move your Roku wireless speakers out of harm's way – mount your speakers to the wall with swivel mounts or attach them to floor-standing speaker stands. You may want to consider the SANUS® premium mounting solutions described below. You can also find details on the Roku accessories store.
+
+SANUS Premium Wireless Speaker Swivel Mounts
+SANUS Premium Wireless Speaker Swivel Mounts
+
+Enjoy full, rich audio from anywhere in the room with premium, easy to install swivel and tilt mounts. Set up in just 3 steps in less than 15 minutes. Includes hardware for drywall, wood studs, and concrete installation. You can view the instruction manual and technical drawing, and purchase the swivel mounts on the SANUS product website.
+SANUS Premium Wireless Speaker Stands
+SANUS Premium wireless speaker stands
+
+Level up your audio experience with sleek, height-adjustable stands that easily adjust from 26" to 39". Simple setup takes less than 5 minutes. You can view the instruction manual and technical drawing, and purchase the speaker stands on the SANUS product website.
+How to choose compatible mounting hardware for your wireless speakers
+Roku wireless speakers feature ¼” (6.35 mm) 20-threaded mounting sockets for compatibility with a wide range of mounting solutions. Any solution you choose must safely support the weight of your Roku wireless speakers. Confirm that your chosen hardware is designed to support a minimum of 4lbs (1.81kg).
+
+The speaker mounting sockets are located on the rear of each wireless speaker as seen below.
+
+mounting hole on back of Roku wireless speaker
+
+Last updated on 1/6/2022, 6:32:50 PM
+

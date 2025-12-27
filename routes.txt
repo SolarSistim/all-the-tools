@@ -2,8 +2,16 @@
 /about
 /accessibility
 /blog
+/blog/how-to-calculate-percentages-in-your-head
+/blog/i-switched-from-facebook-to-reddit-for-doomscrolling
+/blog/the-deneb-paradox-when-first-contact-means-last-contact
+/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway
+/blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him
+/blog/why-truckers-drift-to-the-right-on-the-highway
+/blog/wordpress-vs-angular-why-i-built-my-site-with-zero-backend
 /changelog
 /contact
+/disclaimer
 /presskit
 /privacy
 /terms
@@ -18,6 +26,7 @@
 /tools/password-generator
 /tools/percentage-calculator
 /tools/qr-code-generator
+/tools/roku-compatibility
 /tools/time-zone-converter
 /tools/timestamp-converter
 /tools/tip-calculator
