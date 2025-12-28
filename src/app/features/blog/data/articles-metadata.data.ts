@@ -13,7 +13,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     slug: 'my-wife-and-i-have-visited-georges-bistro-nearly-30-times',
     title: 'My Wife And I Have Visited George\'s Bistro Nearly 30 Times Over The Last Few Years. Here\'s Our Experience.',
     description:
-      'After 30 visits over several years, George\'s Bistro has become our happy place. Here\'s an honest, detailed review of everything we\'ve tried - from the bone marrow to the ribeye to every cocktail on the menu.',
+      'After nearly 30 visits over several years, George\'s Bistro has become our happy place. Here\'s an honest, detailed review of everything we\'ve tried, from the bone marrow to the ribeye and nearly every cocktail on the menu.',
     author: AUTHORS.joel_hansen,
     publishedDate: '12-28-2025',
     heroImage: {

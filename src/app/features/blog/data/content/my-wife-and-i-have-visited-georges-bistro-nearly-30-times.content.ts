@@ -7,26 +7,26 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'My wife and I have visited George\'s around 30 times over the last few years. We call it our happy place. It\'s where we go for nearly every anniversary, New Year\'s Eve, and the occasional weekend brunch. When you keep choosing the same restaurant for your most important nights out, that says something.',
+      text: 'My wife and I have visited George\'s around 30 times over the last few years. We call it our happy place. It\'s where we go for almost every anniversary, New Year\'s Eve, and the occasional weekend brunch. When you keep choosing the same restaurant for your most important nights out, that says something.',
       className: 'lead',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Expect to spend about $75 per person, or around $125 with a couple drinks. It\'s not cheap, but you\'re paying for consistently excellent food in a warm atmosphere.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'One thing to know before you go: parking can be tricky. George\'s is almost always packed, so the main lot fills up fast. But they\'ve either bought or leased the parking lot at the building next door, which helps. There\'s also a narrow driveway next to the fence that leads to a rear parking lot. It\'s easy to miss if you don\'t know it\'s there, but now you do.',
+      text: 'One thing to know before you go: parking can be tricky. George\'s is almost always packed, so the main lot fills up fast. But they\'ve either bought or leased the parking lot at the building next door, which helps. There\'s also a narrow driveway next to the fence that leads to a rear parking lot. It\'s easy to miss if you don\'t know it\'s there.',
     },
   },
   {
     type: 'paragraph',
     data: {
       text: 'We actually met George himself at his sister restaurant, Pearl & Horn. He seemed shy and humble, but clearly pleased that we kept coming back. That kind of genuine hospitality says a lot about a place.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Expect to spend about $75 per person, or around $125 with a couple drinks. It\'s not cheap, but you\'re paying for consistently excellent food in a warm atmosphere.',
     },
   },
   {
@@ -92,20 +92,20 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'My wife pushed me to try this one. I was hesitant because it sounded odd and I\'d never had it before. But I\'m glad I listened. This dish delivers enormous amounts of rich flavor. Paired with artisan bread and bacon onion jam, you could honestly leave the restaurant satisfied having ordered just this.',
+      text: 'My wife pushed me to try this one. I was hesitant because it sounded odd and I\'d never had it before, but I\'m glad I listened. This dish delivers enormous amounts of rich flavor. Paired with artisan bread and bacon onion jam, you could honestly leave the restaurant satisfied having ordered just this - however you wouldn\'t be quite full yet.',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'One note: George used to serve four bone marrows, dropped to two during Covid, and now serves three. Three is a tough number to split on a date. George, if you\'re reading this, bump it back to four.',
+      text: 'One note: George used to serve four bone marrows, but dropped to two during Covid, (presumably due to supply chain issues) and now serves three. Three is a tough number to split on a date. George, if you\'re reading this, bump it back to four please!',
     },
   },
   {
     type: 'heading',
     data: {
       level: 3,
-      text: 'George Fries',
+      text: 'George\'s Fries',
     },
   },
   {
@@ -131,7 +131,13 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'It\'s rare that we visit and don\'t order these. Hand cut fries loaded with andouille sausage, cremini mushrooms, parmesan, feta, rosemary, and sea salt. Served with curry ketchup, basil aioli, and chipotle aioli. This is one of the most satisfying finger-food experiences you\'ll find anywhere.',
+      text: 'It\'s rare that we visit and don\'t order these. French fries loaded with andouille sausage, cremini mushrooms, parmesan, feta, rosemary, and sea salt. Served with curry ketchup, basil aioli, and chipotle aioli. This is one of the most satisfying finger-food experiences you\'ll find anywhere.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The basil ailoi is incredeible - plan on ordering a second rammekin of this, it\'s worth it.',
     },
   },
   {
@@ -144,7 +150,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Crispy artichoke hearts with shaved parmesan and a dill jalapeño sauce. Lots of flavor packed into a simple appetizer. I come back to this one regularly.',
+      text: 'Lots of flavor packed into a simple appetizer. I come back to this one regularly.',
     },
   },
   {
@@ -177,13 +183,33 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 3,
+      text: 'Sweet Potato Bisque',
+    },
+  },
+  {
+    type: 'image',
+    data: {
+      src: '/assets/georges-bistro/allthethings-georges-sweet-potato-bisque-2.png',
+      alt: 'Georges sweet potato bisque 2',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Typically the soup of the day, with its sweet and savory flavors that will warm the inside of your soul.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
       text: 'The Others',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'The Mini Crab Cakes were tasty but didn\'t have that burst of flavor I\'ve come to expect from George\'s. The Sweet Bacon Brussels and Petit Kale Caesar are both competent and well-composed, but nothing that made me feel like I had to order them again. The Beef Carpaccio is enjoyable but mild. I\'m more of a bold flavor person, so I\'ve only ordered it once.',
+      text: 'The Mini Crab Cakes were tasty but didn\'t have that burst of flavor I\'ve come to expect from George\'s. The Sweet Bacon Brussels and Petit Kale Caesar are both competent and well-composed, but nothing that made me feel like I had to order them again. The Beef Carpaccio is enjoyable but mild. I\'m more of a bold flavor person, so I\'ve only ordered the Beef Carpaccio once.',
     },
   },
   {
@@ -305,7 +331,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The most competent and reliably healthy dish I can think of. Seared local snapper with sautéed Swiss chard, carrot emulsion, roasted delicata squash, cilantro scallion salad, pumpkin seeds, and chermoula sauce. I\'ve ordered it twice over the years and never regretted it.',
+      text: 'The most competent and reliably healthy dish I can think of. Seared local snapper with sautéed Swiss chard, carrot emulsion, roasted delicata squash, cilantro scallion salad, pumpkin seeds, and chermoula sauce. I\'ve ordered it twice over the years and it\'s about due for me to order again.',
     },
   },
   {
@@ -316,9 +342,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'image',
+    data: {
+      src: '/assets/georges-bistro/allthethings-georges-alfredo-papardelle.png',
+      alt: 'Georges alfredo papardelle',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
-      text: 'A fantastic carb-heavy main. House made pappardelle with creamy alfredo sauce, wild mushrooms, white truffle oil, parmesan, and scallions. I\'ve ordered this probably three times, particularly when I\'m hungry. It\'s heavy and it\'ll fill you up quick. Add chicken, shrimp, or salmon if you want some protein.',
+      text: 'A fantastic carb-heavy main. House made pappardelle with creamy alfredo sauce, wild mushrooms, white truffle oil, parmesan, and scallions. I\'ve ordered this probably three times, particularly when I\'m hungry. It\'s heavy and it\'ll fill you up quick. Comes with chicken, shrimp, or salmon, and I always default to the shrimp.',
     },
   },
   {
@@ -441,13 +474,13 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '<strong>Under the Mistle-Tallow</strong> – I think this is the most adventurous drink on the menu. Savory, smoky, and unlike anything you\'ve had before.',
+      text: '<strong>Under the Mistle-Tallow</strong> – Probably the most adventurous drink on the menu. Savory, smoky, and unlike anything you\'ve had before.',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: '<strong>Burnt Fashioned</strong> – A twist on the classic Old Fashioned. The burnt sugar adds caramel notes and the rosemary gives it an herbal finish. A safe choice for bourbon fans who want familiar territory with a slight twist.',
+      text: '<strong>Burnt Fashioned</strong> – A twist on the classic Old Fashioned. The burnt sugar adds caramel notes and the rosemary gives it an herbal finish. A safe choice for bourbon fans who want familiar territory with a twist.',
     },
   },
   {
@@ -479,6 +512,11 @@ export const content: ContentBlock[] = [
     data: {
       level: 2,
       text: 'The Desserts',
+    },
+  },  {
+    type: 'paragraph',
+    data: {
+      text: 'While George\'s dessert menu isn\'t particularly large, there\'s a couple desserts that my wife and I keep coming back to.',
     },
   },
   {
@@ -515,7 +553,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'And then there\'s the tuxedo cake. If you\'re a chocolate person, this is your dessert. It\'s a chocolatey journey from start to finish. Rich, indulgent, and exactly what you want when you\'re in the mood for chocolate.',
+      text: 'And then there\'s the tuxedo cake. If you\'re a chocolate person, this should be your go-to your dessert. It\'s a chocolatey journey from start to finish. Rich, indulgent, and exactly what you want when you\'re in the mood for chocolate.',
     },
   },
   {
@@ -523,6 +561,12 @@ export const content: ContentBlock[] = [
     data: {
       level: 2,
       text: 'A Quick Word About Pearl & Horn',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Pearl & Horn is George and and his wife Luba\'s second restaurant in Pensacola. After the success of George\'s Bistro, they wanted a new culinary adventure, and this is what they came up with.',
     },
   },
   {
