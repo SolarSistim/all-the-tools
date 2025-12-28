@@ -10,27 +10,27 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
     id: '9',
-    slug: 'my-wife-and-i-have-visited-georges-bistro-nearly-30-times',
-    title: 'My Wife And I Have Visited George\'s Bistro Nearly 30 Times Over The Last Few Years. Here\'s Our Experience.',
+    slug: 'my-wife-and-i-have-visited-george-bistro-nearly-30-times',
+    title: 'My Wife And I Have Visited George Bistro Nearly 30 Times Over The Last Few Years. Here\'s Our Experience.',
     description:
-      'After nearly 30 visits over several years, George\'s Bistro has become our happy place. Here\'s an honest, detailed review of everything we\'ve tried, from the bone marrow to the ribeye and nearly every cocktail on the menu.',
+      'After nearly 30 visits over several years, George Bistro has become our happy place. Here\'s an honest, detailed review of everything we\'ve tried, from the bone marrow to the ribeye and nearly every cocktail on the menu.',
     author: AUTHORS.joel_hansen,
     publishedDate: '12-28-2025',
     heroImage: {
       src: '/meta-images/og-georges-bistro-review.png',
-      alt: 'My Wife And I Have Visited George\'s Bistro Nearly 30 Times',
+      alt: 'My Wife And I Have Visited George Bistro Nearly 30 Times',
     },
-    tags: ['Restaurant Review', 'Food', 'Fine Dining', 'Pensacola', 'George\'s Bistro'],
+    tags: ['Restaurant Review', 'Food', 'Fine Dining', 'Pensacola', 'George Bistro'],
     category: 'Food & Dining',
     metaDescription:
-      'An honest, detailed review of George\'s Bistro after 30 visits.',
+      'An honest, detailed review of George Bistro after 30 visits.',
     metaKeywords: [
-      'George\'s Bistro',
+      'George Bistro',
       'Pensacola restaurants',
       'Fine dining',
       'Restaurant review',
       'Food review',
-      'George\'s Bistro menu',
+      'George Bistro menu',
       'Best restaurants Pensacola',
     ],
     featured: true,

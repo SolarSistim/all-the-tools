@@ -1,7 +1,7 @@
 import { ContentBlock } from '../../models/blog.models';
 
 /**
- * Article Content: My Wife And I Have Visited George's Bistro Nearly 30 Times Over The Last Few Years. Here's Our Experience.
+ * Article Content: My Wife And I Have Visited George Bistro Nearly 30 Times Over The Last Few Years. Here's Our Experience.
  */
 export const content: ContentBlock[] = [
   {
@@ -83,16 +83,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'paragraph',
+    data: {
+      text: 'My wife pushed me to try this one. I was hesitant because it sounded odd and I\'d never had it before, but I\'m glad I listened. This dish delivers enormous amounts of rich flavor. Paired with artisan bread and bacon onion jam, you could honestly leave the restaurant satisfied having ordered just this - however you wouldn\'t be quite full yet.',
+    },
+  },
+  {
     type: 'image',
     data: {
       src: '/assets/georges-bistro/allthethings-georges-bone-marrow.png',
       alt: 'Georges bone marrow',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'My wife pushed me to try this one. I was hesitant because it sounded odd and I\'d never had it before, but I\'m glad I listened. This dish delivers enormous amounts of rich flavor. Paired with artisan bread and bacon onion jam, you could honestly leave the restaurant satisfied having ordered just this - however you wouldn\'t be quite full yet.',
+      caption: 'George\'s bone marrow',
     },
   },
   {
@@ -115,14 +116,17 @@ export const content: ContentBlock[] = [
         {
           src: '/assets/georges-bistro/allthethings-georges-georges-fries.png',
           alt: 'Georges georges fries',
+          caption: 'George\'s fries',
         },
         {
           src: '/assets/georges-bistro/allthethings-georges-georges-fries-2.png',
           alt: 'Georges georges fries 2',
+          caption: 'George\'s fries',
         },
         {
           src: '/assets/georges-bistro/allthethings-georges-georges-fries-3.png',
           alt: 'Georges georges fries 3',
+          caption: 'George\'s fries',
         },
       ],
       layout: 'grid',
@@ -191,6 +195,7 @@ export const content: ContentBlock[] = [
     data: {
       src: '/assets/georges-bistro/allthethings-georges-sweet-potato-bisque-2.png',
       alt: 'Georges sweet potato bisque 2',
+      caption: 'George\'s sweet potato bisque',
     },
   },
   {
@@ -220,6 +225,151 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
+      text: 'Brunch',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Savory Bread Pudding Benedict',
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: '/assets/georges-bistro/allthethings-georges-bread-pudding-benedict-and-grits.png',
+          alt: 'Georges bread pudding benedict and grits',
+          caption: 'George\'s bread pudding benedict and grits',
+        },
+        {
+          src: '/assets/georges-bistro/allthethings-georges-bread-pudding-benedict-and-truffle-fries.png',
+          alt: 'Georges bread pudding benedict and truffle fries',
+          caption: 'George\'s bread pudding benedict and truffle fries',
+        },
+        {
+          src: '/assets/georges-bistro/allthethings-georges-bread-pudding-benedict-and-truffle-fries-2.png',
+          alt: 'Georges bread pudding benedict and truffle fries 2',
+          caption: 'George\'s bread pudding benedict and truffle fries',
+        },
+      ],
+      layout: 'grid',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'This is hands down one of the best brunch items I\'ve ever had. The biscuit and baguette bread pudding is made with bacon, leeks, thyme, and gruyère cheese, topped with perfectly poached eggs and a rich chive cayenne hollandaise that adds just the right amount of heat.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The bread pudding base is savory, rich, and has an incredible depth of flavor. It\'s not too heavy, but substantial enough to keep you satisfied. The hollandaise is the perfect complement - creamy with a subtle kick from the cayenne. Served with your choice of mixed greens salad, grits, or hand cut rosemary sea salt fries.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'If you\'re going to George Bistro for brunch and you only order one thing, make it this. You won\'t regret it.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Quiche',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Parisian ham, bacon, and sharp cheddar baked in a buttery puff pastry shell. Simple, satisfying, and consistently good. I\'ve ordered this a handful of times and it never disappoints.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Garden Omelette',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Loaded with grilled asparagus, spinach, red bell peppers, mushrooms, caramelized onions, and goat cheese. This one is still on the list of menu items I want to try.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Coastal Omelette',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Crab, blackened shrimp, tomatoes, chives, and gruyère, topped with avocado cilantro lime jalapeño sauce and fresh pico de gallo. This one packs serious flavor. The seafood is fresh, and that avocado jalapeño sauce brings everything together perfectly. If you like bold breakfast flavors, this is your dish.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Short Ribs Mac + Cheese',
+    },
+  },
+  {
+    type: 'image',
+    data: {
+      src: '/assets/georges-bistro/allthethings-georges-short-ribs-mac-and-cheese.png',
+      alt: 'Georges short ribs mac and cheese',
+      caption: 'George\'s short ribs mac and cheese',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Orecchiette pasta with sharp cheddar, mozzarella, and creamy alfredo sauce, topped with 48-hour braised short ribs. This is comfort food taken to the next level. The combination of cheeses makes this ridiculously rich and satisfying, and the noodles seem to be cooked fresh to order - not stored under a heat lamp.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Crab Cakes Eggs Benedict',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Lump crab cakes topped with poached eggs, grilled asparagus, and that excellent chive cayenne hollandaise. The crab cakes are tender and packed with flavor. This is a more indulgent option, and well worth it if you\'re in the mood to treat yourself.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Lobster Eggs Benedict',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Butter poached lobster over an English muffin with poached eggs and tarragon hollandaise. It\'s as luxurious as it sounds. The lobster is cooked perfectly, and the tarragon hollandaise adds an herbal note that elevates the whole dish. Expensive, yes. Worth it? Absolutely.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
       text: 'The Main Courses',
     },
   },
@@ -235,6 +385,7 @@ export const content: ContentBlock[] = [
     data: {
       src: '/assets/georges-bistro/allthethings-georges-ribeye-and-truffle-fries.png',
       alt: 'Georges ribeye and truffle fries',
+      caption: 'George\'s ribeye and truffle fries',
     },
   },
   {
@@ -346,6 +497,7 @@ export const content: ContentBlock[] = [
     data: {
       src: '/assets/georges-bistro/allthethings-georges-alfredo-papardelle.png',
       alt: 'Georges alfredo papardelle',
+      caption: 'George\'s alfredo pappardelle',
     },
   },
   {
@@ -378,53 +530,15 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'gallery',
-    data: {
-      images: [
-        {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-02.png',
-          alt: 'Georges bistro cocktails 02',
-        },
-        {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-03.png',
-          alt: 'Georges bistro cocktails 03',
-        },
-        {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-04.png',
-          alt: 'Georges bistro cocktails 04',
-        },
-      ],
-      layout: 'grid',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Pear Noel Mule</strong> – If you like Moscow mules but want something with more depth, this is it. The pear and cinnamon give it a cozy, fall-into-winter feel.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Naughty or Spice</strong> – This one has some heat to it. Order this if you like drinks that surprise you.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Pom Voyage</strong> – The chai adds warmth without being overpowering. A good choice if you lean toward rum but want something different.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Get Figgy With It</strong> – Rich and slightly sweet. The fig gives it an earthy depth that pairs well with the bourbon. Great for whiskey lovers who want to branch out.',
-    },
-  },
-  {
     type: 'paragraph',
     data: {
       text: '<strong>Luba\'s Favorite</strong> – Haven\'t tried this one.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Blood Orange Margarita</strong> – A margarita with deep complexity. The blood orange adds tartness, the vanilla smooths it out, and the Tajin rim gives it a spicy, salty kick.',
     },
   },
   {
@@ -434,29 +548,20 @@ export const content: ContentBlock[] = [
         {
           src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-05.png',
           alt: 'Georges bistro cocktails 05',
+          caption: 'George Bistro cocktails',
         },
         {
           src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-06.png',
           alt: 'Georges bistro cocktails 06',
+          caption: 'George Bistro cocktails',
         },
         {
           src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-07.png',
           alt: 'Georges bistro cocktails 07',
+          caption: 'George Bistro cocktails',
         },
       ],
       layout: 'grid',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Home for the Holidays Horchata</strong> – Creamy and dessert-like without being heavy. If you\'ve never had horchata, this is a memorable introduction.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Blood Orange Margarita</strong> – A margarita with deep complexity. The blood orange adds tartness, the vanilla smooths it out, and the Tajin rim gives it a spicy, salty kick.',
     },
   },
   {
@@ -490,14 +595,77 @@ export const content: ContentBlock[] = [
         {
           src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-08.png',
           alt: 'Georges bistro cocktails 08',
+          caption: 'George Bistro cocktails',
         },
         {
           src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-09.png',
           alt: 'Georges bistro cocktails 09',
+          caption: 'George Bistro cocktails',
         },
         {
           src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-10.png',
           alt: 'Georges bistro cocktails 10',
+          caption: 'George Bistro cocktails',
+        },
+      ],
+      layout: 'grid',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Seasonal Drinks',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Pear Noel Mule</strong> – If you like Moscow mules but want something with more depth, this is it. The pear and cinnamon give it a cozy, fall-into-winter feel.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Naughty or Spice</strong> – This one has some heat to it. Order this if you like drinks that surprise you.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Pom Voyage</strong> – The chai adds warmth without being overpowering. A good choice if you lean toward rum but want something different.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Get Figgy With It</strong> – Rich and slightly sweet. The fig gives it an earthy depth that pairs well with the bourbon. Great for whiskey lovers who want to branch out.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Home for the Holidays Horchata</strong> – Creamy and dessert-like without being heavy. If you\'ve never had horchata, this is a memorable introduction.',
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-02.png',
+          alt: 'Georges bistro cocktails 02',
+          caption: 'George Bistro cocktails',
+        },
+        {
+          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-03.png',
+          alt: 'Georges bistro cocktails 03',
+          caption: 'George Bistro cocktails',
+        },
+        {
+          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-04.png',
+          alt: 'Georges bistro cocktails 04',
+          caption: 'George Bistro cocktails',
         },
       ],
       layout: 'grid',
@@ -524,6 +692,7 @@ export const content: ContentBlock[] = [
     data: {
       src: '/assets/georges-bistro/allthethings-georges-bistro-creme-brulee.png',
       alt: 'Georges bistro creme brulee',
+      caption: 'George Bistro creme brulee',
     },
   },
   {
@@ -566,7 +735,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Pearl & Horn is George and and his wife Luba\'s second restaurant in Pensacola. After the success of George\'s Bistro, they wanted a new culinary adventure, and this is what they came up with.',
+      text: 'Pearl & Horn is George and his wife Luba\'s second restaurant in Pensacola. After the success of George Bistro, they wanted a new culinary adventure, and this is what they came up with.',
     },
   },
   {
@@ -589,7 +758,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'George\'s Bistro isn\'t just a restaurant to us. It\'s a place where we know we\'ll have a great meal every single time. The food is consistently excellent, the service is reliable, and you can tell that George cares about what he\'s putting on your plate and who he hires to serve it.',
+      text: 'George Bistro isn\'t just a restaurant to us. It\'s a place where we know we\'ll have a great meal every single time. The food is consistently excellent, the service is reliable, and you can tell that George cares about what he\'s putting on your plate and who he hires to serve it.',
     },
   },
   {
