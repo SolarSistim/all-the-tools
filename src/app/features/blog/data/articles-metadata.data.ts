@@ -9,6 +9,34 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '9',
+    slug: 'my-wife-and-i-have-visited-georges-bistro-nearly-30-times',
+    title: 'My Wife And I Have Visited George\'s Bistro Nearly 30 Times Over The Last Few Years. Here\'s Our Experience.',
+    description:
+      'After 30 visits over several years, George\'s Bistro has become our happy place. Here\'s an honest, detailed review of everything we\'ve tried - from the bone marrow to the ribeye to every cocktail on the menu.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-28-2025',
+    heroImage: {
+      src: '/meta-images/og-georges-bistro-review.png',
+      alt: 'My Wife And I Have Visited George\'s Bistro Nearly 30 Times',
+    },
+    tags: ['Restaurant Review', 'Food', 'Fine Dining', 'Pensacola', 'George\'s Bistro'],
+    category: 'Food & Dining',
+    metaDescription:
+      'An honest, detailed review of George\'s Bistro after 30 visits.',
+    metaKeywords: [
+      'George\'s Bistro',
+      'Pensacola restaurants',
+      'Fine dining',
+      'Restaurant review',
+      'Food review',
+      'George\'s Bistro menu',
+      'Best restaurants Pensacola',
+    ],
+    featured: true,
+    relatedArticles: ['1', '4', '2'],
+  },
+  {
     id: '8',
     slug: 'i-built-a-roku-compatibility-checker',
     title: 'I Built a Roku Compatibility Checker (And This Is Why You Might Need It)',

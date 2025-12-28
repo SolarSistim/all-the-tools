@@ -160,7 +160,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Or <a href="/tools/roku-compatibility">click here to go to the compatibility checker</a>',
+      text: 'Or <a href="/tools/roku-compatibility">click here to go to the full compatibility checker</a>',
     },
   },
   {

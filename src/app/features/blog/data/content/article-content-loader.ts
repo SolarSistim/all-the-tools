@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'my-wife-and-i-have-visited-georges-bistro-nearly-30-times':
+        const georgesModule = await import('./my-wife-and-i-have-visited-georges-bistro-nearly-30-times.content');
+        return georgesModule.content;
+
       case 'i-built-a-roku-compatibility-checker':
         const rokuModule = await import('./i-built-a-roku-compatibility-checker.content');
         return rokuModule.content;
