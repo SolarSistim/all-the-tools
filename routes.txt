@@ -3,7 +3,9 @@
 /accessibility
 /blog
 /blog/how-to-calculate-percentages-in-your-head
+/blog/i-built-a-roku-compatibility-checker
 /blog/i-switched-from-facebook-to-reddit-for-doomscrolling
+/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
 /blog/the-deneb-paradox-when-first-contact-means-last-contact
 /blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway
 /blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him

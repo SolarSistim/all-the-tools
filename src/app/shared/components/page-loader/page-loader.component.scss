@@ -1,0 +1,78 @@
+.page-loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1A1E2E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.page-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loader-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.loader-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #f5f5f5;
+}
+
+.loader-brand-text {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #f5f5f5;
+  letter-spacing: 0.05em;
+}
+
+.loader-text {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #e0e0e0;
+  letter-spacing: 0.15em;
+  margin-top: -0.5rem;
+}
+
+::ng-deep .page-loader-overlay mat-spinner circle {
+  stroke: #f5f5f5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .loader-icon {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .loader-brand-text {
+    font-size: 1.5rem;
+  }
+
+  .loader-text {
+    font-size: 0.875rem;
+  }
+}
