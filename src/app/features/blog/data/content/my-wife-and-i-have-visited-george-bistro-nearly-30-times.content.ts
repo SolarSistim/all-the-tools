@@ -14,6 +14,79 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
+      text: '<strong>George Bistro</strong><br>6205 N 9th Ave, Pensacola, FL 32504<br>(850) 912-4655',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<a href="https://georgebistroandbar.com/" target="_blank" rel="noopener noreferrer">View George Bistro\'s Menu</a>',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'The Bottom Line',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'After nearly 30 visits, George Bistro has earned its place as our go-to restaurant for anniversaries, celebrations, and any night we want a guaranteed great meal. The kitchen delivers remarkably consistent quality - from the perfectly cooked ribeye to the adventurous cocktail menu - and the service is some of the best we\'ve experienced anywhere. At around $75 per person (or $125 with drinks), it\'s an investment, but one that pays off every single time.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Know Before You Go',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Price:</strong> Expect to spend around $75 per person for food, or approximately $125 per person with a couple of cocktails.',
+        '<strong>Reservations:</strong> George Bistro is almost always packed, so reservations are strongly recommended, especially for weekends and holidays.',
+        '<strong>Parking:</strong> The main lot fills up quickly. Look for the narrow driveway next to the fence that leads to a rear parking lot, or use the overflow lot at the building next door.',
+        '<strong>Dress code:</strong> Smart casual. It\'s a nice atmosphere without being stuffy.',
+        '<strong>Brunch:</strong> Available on weekends. Don\'t skip it - the Savory Bread Pudding Benedict alone is worth the trip.',
+      ],
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'What to Order',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'If you\'re visiting George Bistro for the first time, these are the dishes we\'d recommend without hesitation:',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Ribeye Steak Frites</strong> – The signature dish for good reason. A 16oz split bone-in ribeye topped with herb butter, served with rosemary sea salt fries. I\'ve ordered this four times and it\'s been perfect every single time.',
+        '<strong>Savory Bread Pudding Benedict (brunch)</strong> – One of the best brunch items I\'ve ever had. The bacon, leek, and gruyère bread pudding base with poached eggs and chive cayenne hollandaise is unforgettable.',
+        '<strong>George\'s Fries</strong> – French fries loaded with andouille sausage, cremini mushrooms, parmesan, feta, and rosemary. Ask for extra basil aioli.',
+        '<strong>Bone Marrow</strong> – Rich, flavorful, and served with bacon onion jam. Perfect for sharing if you\'re feeling adventurous.',
+        '<strong>Pomegranate Grilled Lamb Chops</strong> – Consistently excellent with a beautiful pomegranate glaze and crispy broccolini.',
+        '<strong>Short Ribs + Mushroom Ravioli</strong> – 72-hour braised short ribs with wild mushroom parmesan ravioli. The flavor is outstanding.',
+        '<strong>Crème Brûlée</strong> – The seasonal flavors change throughout the year, but it\'s always worth saving room for dessert.',
+      ],
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
       text: 'One thing to know before you go: parking can be tricky. George\'s is almost always packed, so the main lot fills up fast. But they\'ve either bought or leased the parking lot at the building next door, which helps. There\'s also a narrow driveway next to the fence that leads to a rear parking lot. It\'s easy to miss if you don\'t know it\'s there.',
     },
   },
@@ -747,6 +820,65 @@ export const content: ContentBlock[] = [
   {
     type: 'adsense',
     data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Frequently Asked Questions',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is George Bistro good for date night?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'This is our date night spot. The atmosphere is warm and intimate without being overly formal, the lighting is flattering, and the cocktail menu gives you plenty to explore together. If you\'re celebrating something or just want a memorable night out, this is the place.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is it good for large groups?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'George Bistro works better for smaller parties - couples or groups of four to six. The dining room isn\'t huge, and the experience feels more personal than communal. For a large gathering, you might want to call ahead and ask about seating options.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is it good for special occasions?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Absolutely. We\'ve celebrated multiple anniversaries and New Year\'s Eves here. The staff handles special occasions well, and the consistent quality means you won\'t have an off night when it matters most.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Are there vegetarian options?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The menu leans toward meat and seafood, but vegetarians aren\'t left out. The Heirloom Tomato + Burrata, Crispy Artichokes, Cheese Board, and Garden Omelette (at brunch) are all solid options. The Alfredo Pappardelle can be ordered without meat. If you have dietary restrictions, the servers are knowledgeable and happy to help you navigate the menu.',
+    },
   },
   {
     type: 'heading',

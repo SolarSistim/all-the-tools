@@ -65,10 +65,24 @@ export class App implements AfterViewInit, OnInit {
         this.pageLoader.show();
       }
 
-      // Hide loader and log visit when navigation ends
+      // Hide loader, scroll to top, and log visit when navigation ends
       if (event instanceof NavigationEnd) {
         this.pageLoader.hide();
         this.visitLogger.logVisit(event.urlAfterRedirects);
+
+        // Scroll to top on navigation (only in browser)
+        if (isPlatformBrowser(this.platformId)) {
+          // Scroll window to top
+          window.scrollTo(0, 0);
+
+          // Also scroll the mat-sidenav-content to top
+          setTimeout(() => {
+            const sidenavContent = document.querySelector('mat-sidenav-content');
+            if (sidenavContent) {
+              sidenavContent.scrollTo(0, 0);
+            }
+          }, 0);
+        }
       }
 
       // Hide loader if navigation is cancelled or errors

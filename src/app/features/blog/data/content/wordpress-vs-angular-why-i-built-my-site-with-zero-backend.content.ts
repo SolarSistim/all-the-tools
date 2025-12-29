@@ -27,6 +27,40 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
+      text: 'The Bottom Line',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'I built AllTheTools.dev with Angular instead of WordPress because I wanted complete control, zero technical debt, and no database to manage. My blog runs entirely on JSON files—no CMS, no plugins, no backend. The site loads instantly, requires almost no maintenance, and has a minimal attack surface. This approach isn\'t for everyone (you need real development experience), but if you have the skills, it\'s worth considering over a traditional CMS.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Why I Chose Angular Over WordPress: Quick Summary',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Complete control</strong> – Every line of code is mine, no plugins or themes to work around',
+        '<strong>Zero technical debt</strong> – No database, no server-side code, no constant security patches',
+        '<strong>JSON-powered blog</strong> – Posts are simple JSON files, no CMS required',
+        '<strong>Built-in performance</strong> – Static files load instantly, no caching plugins needed',
+        '<strong>Minimal security surface</strong> – No database to hack, no login page to brute force, no plugin vulnerabilities',
+        '<strong>Full portability</strong> – JSON files can move anywhere, no database exports or migrations',
+      ],
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
       text: 'Complete Control Over Everything',
     },
   },
@@ -345,6 +379,134 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'If you\'re thinking about building a site and you\'re comfortable with code, consider going front-end only. It\'s not for everyone, but it might be exactly what you need.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Frequently Asked Questions',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Can you build a blog without WordPress?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Yes. I run my blog entirely on JSON files rendered by Angular. Each post is a JSON object with title, date, content, and metadata. There\'s no database, no admin panel, no CMS. I write in markdown, convert to JSON, and drop the file in a folder. It\'s fast, portable, and requires zero backend infrastructure.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is Angular better than WordPress?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'It depends on your skills and needs. WordPress is easier if you\'re not a developer—it powers 43% of the web for good reason. But if you\'re comfortable with JavaScript/TypeScript and want complete control over your site, a front-end framework like Angular (or React or Vue) eliminates plugin conflicts, database management, and most security concerns. The trade-off is a steeper learning curve and more upfront development work.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What is a front-end only website?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'A front-end only website (also called a static site or JAMstack site) has no server-side processing or database. Everything is rendered in the browser from static files. This makes the site faster, more secure, and easier to maintain. You can still have dynamic-feeling features—you just handle them with JavaScript instead of server-side code.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'How do you run a blog without a database?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Store your content in flat files like JSON or markdown. Your framework reads these files and renders them as HTML. There\'s no database queries, no CMS backend, no admin login. When you want to publish a new post, you just add a new file. This approach works well for personal blogs, portfolios, and documentation sites.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is a static site faster than WordPress?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Generally, yes. WordPress requires server processing and database queries for every page load (unless heavily cached). A static site serves pre-built files directly to the browser—no processing, no queries. Modern browsers handle this extremely efficiently. The result is near-instant page loads without caching plugins or CDN optimization.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is WordPress secure?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'WordPress can be secure, but it requires constant vigilance. It\'s the most popular CMS in the world, which makes it a massive target. You need to keep the core, themes, and plugins updated, and even then, plugin vulnerabilities are common. A front-end only site eliminates most of these attack vectors—there\'s no database to breach, no login page to brute force, and no server-side code to exploit.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What are the downsides of building a site with Angular instead of WordPress?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The main downside is the learning curve. You need to understand JavaScript, TypeScript, component architecture, routing, and build tools. WordPress handles all of that for you. Angular also requires more upfront development time—you\'re building features from scratch instead of installing plugins. If you need user accounts, e-commerce, or lots of dynamic content, a traditional CMS might be more practical.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Can I use React or Vue instead of Angular for a static blog?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Absolutely. The framework matters less than the approach. React (with Next.js or Gatsby) and Vue (with Nuxt) can both power JSON-driven static blogs. The benefits are the same: no database, fast performance, full control, minimal maintenance. Pick whichever framework you\'re most comfortable with.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What is technical debt in web development?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Technical debt is the accumulated cost of shortcuts, outdated code, and maintenance overhead. With WordPress, technical debt builds up through plugin updates, theme conflicts, database bloat, and security patches. A front-end only site with no dependencies has almost zero technical debt—there\'s nothing to update except the framework itself, and those updates are predictable and straightforward.',
     },
   },
 ];

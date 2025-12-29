@@ -39,6 +39,19 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
+      text: 'The Bottom Line',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'I replaced my Facebook doomscrolling habit with Reddit, and six months later, I don\'t miss Facebook at all. I\'m still on my phone too much—that didn\'t change. But instead of empty dopamine hits and vague irritation, I\'m actually learning things. Real people sharing real solutions to problems I\'ve had. It\'s not perfect, but it\'s scrolling that gives something back.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
       text: 'The Search for a Better Scroll',
     },
   },
@@ -158,6 +171,121 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Reddit worked for me. It might work for you too.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Frequently Asked Questions',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'How do I stop doomscrolling on Facebook?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'You probably won\'t stop doomscrolling entirely—the habit is deeply ingrained. What worked for me was redirecting it somewhere better. I switched to Reddit, where I still scroll, but I actually learn things instead of just consuming outrage and empty content. The key is finding a substitute that scratches the same itch but leaves you feeling better when you put the phone down.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is Reddit better than Facebook?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'For me, yes. Facebook\'s algorithm feeds you engagement bait—stuff designed to make you angry or keep you watching. Reddit is organized around topics and communities, so you control what you see. When I scroll Reddit, I find real people sharing experiences, solving problems, and answering questions I\'ve actually had. It\'s still social media, but it feels less like junk food.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What is doomscrolling?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Doomscrolling is the habit of endlessly scrolling through social media or news feeds, often consuming negative or emotionally charged content. It provides small dopamine hits that keep you engaged, but usually leaves you feeling empty, anxious, or irritated afterward. The term became popular during 2020, but the behavior has existed since smartphones made social media always accessible.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Why is Facebook so addictive?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Facebook\'s algorithm is designed to maximize engagement, which means showing you content that triggers strong emotional reactions—outrage, fear, nostalgia, validation. Each post gives you a small dopamine hit, training your brain to keep scrolling for the next one. The app also uses infinite scroll, autoplay videos, and notifications to keep you coming back. It\'s engineered to be hard to put down.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is TikTok worse than Facebook for doomscrolling?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'In my experience, yes. TikTok perfected what Facebook was trying to do—the dopamine hits come faster and harder. The algorithm learns your preferences almost instantly and serves an endless stream of perfectly targeted short videos. I deleted it within a week because I\'d lose hours without realizing it. If you\'re trying to break a scrolling habit, TikTok is probably the worst place to redirect it.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'How do I use Reddit without getting addicted?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Curate your subscriptions carefully. Unsubscribe from default subreddits and join communities around specific interests—hobbies, skills, questions you want answered. Avoid rage-bait and drama-focused subreddits. Reddit can be just as addictive as Facebook if you let the algorithm take over, but if you\'re intentional about what you follow, it becomes more like a library than a slot machine.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What\'s a healthier alternative to social media?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Reading books, going for walks, picking up a hobby—all better than any social media. But I\'m realistic about my habits. If you\'re going to scroll anyway, pick something that gives you value. Reddit communities around your interests, YouTube educational content, or even Wikipedia rabbit holes are all better than algorithmically-served outrage content.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'How long does it take to break a Facebook habit?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'For me, the first week was the hardest. I\'d instinctively open Facebook without thinking. Having Reddit as a replacement helped—when I caught myself reaching for Facebook, I\'d open Reddit instead. After a month, the urge mostly faded. After six months, I don\'t miss it at all except for occasional family check-ins.',
     },
   },
 ];

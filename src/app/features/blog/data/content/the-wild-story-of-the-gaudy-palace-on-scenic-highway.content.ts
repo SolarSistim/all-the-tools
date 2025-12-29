@@ -30,6 +30,19 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'The Short Version',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The golden-roofed mansion on Scenic Highway is owned by Dr. Mohammad Mikhchi, who also owns several assisted living facilities in Pensacola. Public records confirm he was ordered to restore wetlands he illegally cleared in 2015. Hurricane Sally damaged the property in 2020, and it sat in disrepair for years before recent repairs began. The assisted living facilities he owns—Northpointe and Westpointe—have brutal public reviews describing mice, roaches, and neglect. Beyond that, most of what you\'ve heard is local legend—some probably true, some impossible to verify.',
+    },
+  },
+  {
     type: 'image',
     data: {
       src: '/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpeg',

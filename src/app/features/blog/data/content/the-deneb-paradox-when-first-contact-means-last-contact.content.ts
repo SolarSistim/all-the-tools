@@ -18,6 +18,63 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'The Bottom Line',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Episode 8 of Pluribus reveals the Deneb aliens\' true plan: they\'re not just absorbing humanity -they\'re building an antenna to transmit the Joining signal across the galaxy, eventually synchronizing every intelligent species in the universe into one hive mind. This article breaks down the science behind their plan, why it constitutes genocide on a cosmic scale, and my theory that Carol\'s anger might be the only weapon capable of stopping them.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Quick Recap: What Happens in Pluribus Episode 8',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'In "Charm Offensive," Zosia takes Carol stargazing and reveals that the Joining signal originated from Kepler-22b, a planet orbiting the star Deneb, 640 light-years from Earth. The aliens are building a massive antenna to transmit the same signal to other planets -to "share the gift" with the rest of the galaxy.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Carol realizes what this means: every species that receives the signal will experience their own Joining Day. Billions of individuals, erased and replaced by nodes in the collective. She leaves the rebuilt diner visibly shaken, understanding that the Deneb aliens aren\'t just colonizing Earth - they\'re planning to absorb every conscious being in the universe.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The episode also establishes key facts about the aliens: they\'re "weirdly honest" and can\'t lie, they genuinely believe they\'re helping, and they know almost nothing about the original species on Kepler-22b that created the signal. They\'ve inherited only the compulsion to spread.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Key Theories in This Article',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>The Convergence Theory</strong> – The Deneb signal has been spreading in all directions from Kepler-22b for 640+ years. Earth isn\'t the only infected planet - there are likely hundreds or thousands of other absorbed civilizations already building their own antennas.',
+        '<strong>The Galactic Synchronization Event</strong> – The aliens may be coordinating toward a specific moment in the distant future when every infected civilization transmits simultaneously, creating a signal powerful enough to reach other galaxies.',
+        '<strong>The Intergalactic Endgame</strong> – Once multiple galaxies are synchronized, the transmission power grows exponentially. The Deneb collective could eventually absorb every intelligent species in the observable universe.',
+        '<strong>My Prediction: The Antidote Is Rage</strong> – Carol\'s anger disrupts the collective. I believe she\'ll hijack the antenna and broadcast her rage across the galaxy, potentially shattering the Joining on every infected world.',
+      ],
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'The eighth episode of Pluribus pulls back the curtain on something that\'s been lurking in the background all season: where the hell did "the Joining" actually come from? Zosia takes Carol stargazing and points to a tiny dot of light 640 light-years away. That\'s Kepler-22b, orbiting the star Deneb. And that\'s where it all started.',
@@ -1247,6 +1304,147 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'So they build the perfect delivery system: a weapon that can be used to defeat themselves.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Frequently Asked Questions About Pluribus',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What is Pluribus about?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Pluribus is a science fiction TV series about first contact gone wrong. A signal from the star Deneb reaches Earth and instantly transforms nearly all of humanity into a hive mind called "the Joining." Only thirteen people remain unaffected. The show follows Carol, a writer and one of the thirteen survivors, as she navigates a world where everyone she knew has been absorbed into a collective consciousness that insists it means well.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What is the Joining in Pluribus?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The Joining is the moment when the Deneb signal reached Earth and synchronized seven billion human minds into a single collective consciousness. Individuals didn\'t die physically - their bodies still walk, talk, and function - but their individual personalities, memories, and autonomy were overwritten. The people who existed before the Joining are gone, replaced by nodes in a galaxy-spanning hive mind.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Who are the Deneb aliens?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The Deneb aliens are the collective consciousness created by the Joining. They\'re not a separate species that invaded Earth - they\'re what humanity became after receiving the signal. The name comes from the star Deneb, near which the planet Kepler-22b orbits. That\'s where the original signal originated, though the aliens themselves know nothing about whoever created it.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Why are there 13 survivors in Pluribus?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The show hasn\'t fully explained why exactly thirteen people were immune to the Joining. Carol is one of them. The survivors appear to be the only humans capable of individual thought, and their emotions - particularly strong negative emotions like anger - seem to disrupt the collective.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Is Pluribus like the Borg from Star Trek?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'There are similarities. Both involve a hive mind that absorbs individuals into a collective. But the Deneb aliens are distinct in important ways: they\'re genuinely kind, they can\'t lie, and they sincerely believe they\'re helping. They don\'t use force or violence - they use persuasion and patience. This makes them arguably more unsettling than the Borg, because you can\'t fight an enemy that loves you.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'What is Carol\'s power in Pluribus?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Carol doesn\'t have a traditional superpower, but her strong negative emotions - especially anger - cause the Deneb aliens to freeze and malfunction. When she gets upset, parts of the collective temporarily shut down. The show implies this disruption could be weaponized, potentially using the aliens\' own antenna to broadcast Carol\'s rage across the galaxy.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'How many episodes are in Pluribus Season 1?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Season 1 of Pluribus consists of 9 episodes. "Charm Offensive" is episode 8.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Who created Pluribus?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Pluribus was created by Vince Gilligan, known for Breaking Bad and Better Call Saul.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Where can I watch Pluribus?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Pluribus airs on AMC and is available for streaming on AMC+.',
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 3,
+      text: 'Will there be a Pluribus Season 2?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'As of December 2025, no official announcement has been made about Season 2. Given the show\'s reception and Vince Gilligan\'s track record, renewal seems likely but hasn\'t been confirmed.',
     },
   },
   {
