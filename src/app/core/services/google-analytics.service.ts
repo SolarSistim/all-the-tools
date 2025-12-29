@@ -42,12 +42,14 @@ export class GoogleAnalyticsService {
     script.src = `https://www.googletagmanager.com/gtag/js?id=${this.GA_ID}`;
     document.head.appendChild(script);
 
-    // Initialize dataLayer and gtag
+    // Initialize dataLayer and gtag function
     (window as any).dataLayer = (window as any).dataLayer || [];
-    function gtag(...args: any[]): void {
-      (window as any).dataLayer.push(args);
-    }
-    gtag('js', new Date());
-    gtag('config', this.GA_ID);
+    (window as any).gtag = function(...args: any[]): void {
+      (window as any).dataLayer.push(arguments);
+    };
+
+    // Configure Google Analytics
+    (window as any).gtag('js', new Date());
+    (window as any).gtag('config', this.GA_ID);
   }
 }
