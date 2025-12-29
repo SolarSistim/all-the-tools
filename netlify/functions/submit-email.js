@@ -2,6 +2,7 @@
 // This function logs email list submissions to Google Sheets
 
 const { google } = require('googleapis');
+const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
   // Set CORS headers
@@ -118,6 +119,86 @@ exports.handler = async (event, context) => {
         values,
       },
     });
+
+    // Send email notification
+    const gmailUser = process.env.GMAIL_USER;
+    const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+
+    if (gmailUser && gmailAppPassword) {
+      try {
+        // Create transporter using Gmail
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: gmailUser,
+            pass: gmailAppPassword,
+          },
+        });
+
+        // Prepare email content
+        const emailSubject = `New Newsletter Signup: ${submissionInfo.email}`;
+
+        const emailHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #6DD4FF; border-bottom: 2px solid #6DD4FF; padding-bottom: 10px;">
+              New Newsletter Signup
+            </h2>
+
+            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="margin-top: 0; color: #333;">Subscriber Information</h3>
+              <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${submissionInfo.email}">${submissionInfo.email}</a></p>
+            </div>
+
+            <div style="background-color: #fff; padding: 20px; border-left: 4px solid #6DD4FF; margin: 20px 0;">
+              <h3 style="margin-top: 0; color: #333;">Submission Details</h3>
+              <p style="margin: 10px 0;"><strong>Page:</strong> ${submissionInfo.urlPath}</p>
+              <p style="margin: 10px 0;"><strong>Referrer:</strong> ${submissionInfo.referrer}</p>
+              <p style="margin: 10px 0;"><strong>Location:</strong> ${submissionInfo.city}, ${submissionInfo.region}, ${submissionInfo.country}</p>
+              <p style="margin: 10px 0;"><strong>IP Address:</strong> ${submissionInfo.ip}</p>
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
+              <p>Submitted on: ${submissionInfo.humanReadableDate}</p>
+              <p>This signup was submitted from the All The Tools newsletter form.</p>
+            </div>
+          </div>
+        `;
+
+        const emailText = `
+New Newsletter Signup
+
+Subscriber Information:
+Email: ${submissionInfo.email}
+
+Submission Details:
+Page: ${submissionInfo.urlPath}
+Referrer: ${submissionInfo.referrer}
+Location: ${submissionInfo.city}, ${submissionInfo.region}, ${submissionInfo.country}
+IP Address: ${submissionInfo.ip}
+
+---
+Submitted on: ${submissionInfo.humanReadableDate}
+This signup was submitted from the All The Tools newsletter form.
+        `.trim();
+
+        // Send email
+        const mailOptions = {
+          from: `"All The Tools Newsletter" <${gmailUser}>`,
+          to: 'allthethings.dev@gmail.com',
+          subject: emailSubject,
+          text: emailText,
+          html: emailHtml,
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log('Newsletter signup notification email sent successfully');
+      } catch (emailError) {
+        console.error('Error sending notification email:', emailError);
+        // Don't fail the request if email fails - the data was still saved to sheets
+      }
+    } else {
+      console.warn('Gmail credentials not configured - skipping email notification');
+    }
 
     return {
       statusCode: 200,

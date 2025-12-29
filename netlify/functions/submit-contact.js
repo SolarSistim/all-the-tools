@@ -163,7 +163,7 @@ This message was sent from the All The Tools contact form.
     // Send email
     const mailOptions = {
       from: `"All The Tools Contact Form" <${gmailUser}>`,
-      to: 'cwmpensacola@gmail.com',
+      to: 'allthethings.dev@gmail.com',
       replyTo: submissionData.email,
       subject: emailSubject,
       text: emailText,
