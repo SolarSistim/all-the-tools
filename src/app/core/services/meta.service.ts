@@ -71,6 +71,8 @@ export class MetaService {
 
     // Update Twitter Card tags
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:site', content: '@AllTheDev' });
+    this.meta.updateTag({ name: 'twitter:creator', content: '@AllTheDev' });
     this.meta.updateTag({ name: 'twitter:title', content: fullConfig.title });
     this.meta.updateTag({ name: 'twitter:description', content: fullConfig.description });
 
