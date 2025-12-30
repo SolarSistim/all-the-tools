@@ -338,6 +338,25 @@ app-root {
   border-radius: 6px !important;
 }
 
+// Material snackbar overrides
+.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    background: var(--bg-elevated) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+  }
+
+  .mat-mdc-snack-bar-label,
+  .mdc-snackbar__label {
+    color: var(--text-primary) !important;
+    font-family: 'Space Grotesk', sans-serif !important;
+  }
+
+  .mat-mdc-button {
+    color: var(--neon-cyan) !important;
+  }
+}
+
 // Dark mode tooltips (default)
 body:not(.light-theme) {
   .mat-mdc-tooltip {
