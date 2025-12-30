@@ -7,8 +7,10 @@
 /blog/i-switched-from-facebook-to-reddit-for-doomscrolling
 /blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
 /blog/the-deneb-paradox-when-first-contact-means-last-contact
+/blog/the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career
 /blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway
 /blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him
+/blog/we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential
 /blog/why-truckers-drift-to-the-right-on-the-highway
 /blog/wordpress-vs-angular-why-i-built-my-site-with-zero-backend
 /changelog

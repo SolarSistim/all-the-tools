@@ -627,3 +627,104 @@
     font-weight: 700;
   }
 }
+
+// ============================================
+// THE BOTTOM LINE SECTION
+// ============================================
+.bottom-line-section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--neon-cyan);
+  border-radius: 12px;
+  padding: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  .bottom-line-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-md 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    mat-icon {
+      color: var(--neon-cyan);
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+  }
+
+  .bottom-line-content {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+// ============================================
+// PROBLEMS SOLVED SECTION
+// ============================================
+.problems-solved-section {
+  margin-top: $spacing-xl;
+  padding: $spacing-xl;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+
+  h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 $spacing-lg 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    mat-icon {
+      color: #10b981;
+      font-size: 26px;
+      width: 26px;
+      height: 26px;
+      filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+    }
+  }
+
+  .problems-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    li {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding-left: $spacing-lg;
+      position: relative;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #10b981;
+        font-weight: bold;
+        font-size: 1.125rem;
+      }
+
+      strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+    }
+  }
+}
