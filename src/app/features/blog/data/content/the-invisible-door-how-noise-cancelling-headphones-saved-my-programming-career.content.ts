@@ -118,7 +118,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '<a href="https://armorsound.com/top-best-active-noise-cancelling-headphones-guide/" target="_blank" rel="noopener noreferrer">https://armorsound.com/top-best-active-noise-cancelling-headphones-guide/</a>',
+      text: '<a href="https://armorsound.com/top-best-active-noise-cancelling-headphones-guide/" target="_blank" rel="noopener noreferrer">Top 10 best ANC headphones</a>',
     },
   },
   {
