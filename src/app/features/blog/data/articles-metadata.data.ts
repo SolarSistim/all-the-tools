@@ -9,6 +9,35 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '11',
+    slug: 'we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential',
+    title: 'Why Your Childhood TV Habits Might Become a Professional Credential',
+    description:
+      'The generation that experienced pre-AI media firsthand may become valuable authenticity verification specialists - because we have the actual neural pathways from living through it.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-30-2025',
+    heroImage: {
+      src: '/meta-images/og-we-remember-childhood-tv-habits.png',
+      alt: 'Why Your Childhood TV Habits Might Become a Professional Credential',
+    },
+    tags: ['AI', 'Future of Work', 'Memory', 'Authenticity', 'Deepfakes'],
+    category: 'Technology',
+    metaDescription:
+      'The generation that experienced pre-AI media firsthand may become valuable authenticity verification specialists - because we have the actual neural pathways from living through it.',
+    metaKeywords: [
+      'AI detection',
+      'Deepfakes',
+      'Authenticity verification',
+      'Memory',
+      'Future of work',
+      'Generative AI',
+      'Expert witness',
+      'Pattern recognition',
+    ],
+    featured: true,
+    relatedArticles: ['10', '3', '6'],
+  },
+  {
     id: '10',
     slug: 'the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career',
     title: 'The Invisible Door - How noise cancelling headphones saved my programming career',
