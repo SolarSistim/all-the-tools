@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career':
+        const headphonesModule = await import('./the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career.content');
+        return headphonesModule.content;
+
       case 'my-wife-and-i-have-visited-george-bistro-nearly-30-times':
         const georgeModule = await import('./my-wife-and-i-have-visited-george-bistro-nearly-30-times.content');
         return georgeModule.content;

@@ -9,6 +9,35 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '10',
+    slug: 'the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career',
+    title: 'The Invisible Door - How noise cancelling headphones saved my programming career',
+    description:
+      'How noise cancelling headphones transformed my programming by eliminating unpredictable sounds and giving me back the ability to think deeply in a chaotic home environment.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-30-2025',
+    heroImage: {
+      src: '/meta-images/og-the-invisible-door-noise-cancelling-headphones.png',
+      alt: 'The Invisible Door - How noise cancelling headphones saved my programming career',
+    },
+    tags: ['Programming', 'Productivity', 'Remote Work', 'Focus', 'Noise Cancelling Headphones'],
+    category: 'Technology',
+    metaDescription:
+      'How noise cancelling headphones transformed my programming by eliminating unpredictable sounds and giving me back the ability to think deeply in a chaotic home environment.',
+    metaKeywords: [
+      'Noise cancelling headphones',
+      'Programming productivity',
+      'Remote work',
+      'Focus',
+      'Work from home',
+      'Developer tools',
+      'Concentration',
+      'Mental stack',
+    ],
+    featured: true,
+    relatedArticles: ['3', '2', '5'],
+  },
+  {
     id: '9',
     slug: 'my-wife-and-i-have-visited-george-bistro-nearly-30-times',
     title: 'My Wife And I Have Visited George Bistro Nearly 30 Times Over The Last Few Years. Here\'s Our Experience.',
