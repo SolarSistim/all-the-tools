@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys':
+        const willysModule = await import('./when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content');
+        return willysModule.content;
+
       case 'we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential':
         const weRememberModule = await import('./we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content');
         return weRememberModule.content;

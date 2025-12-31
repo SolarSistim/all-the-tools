@@ -9,6 +9,35 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '12',
+    slug: 'when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys',
+    title: 'When Nicholas Cage Made a Better Five Nights at Freddy\'s Movie Than Five Nights at Freddy\'s',
+    description:
+      'Why Willy\'s Wonderland remains the killer animatronic movie we actually deserved - a deep dive into how Nicolas Cage fighting possessed Chuck E. Cheese knockoffs delivered more than the official FNAF adaptation.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '12-31-2025',
+    heroImage: {
+      src: '/meta-images/og-willys-wonderland-better-than-fnaf.png',
+      alt: 'When Nicholas Cage Made a Better Five Nights at Freddy\'s Movie',
+    },
+    tags: ['Willy\'s Wonderland', 'Five Nights at Freddy\'s', 'Nicolas Cage', 'Horror', 'Movie Review'],
+    category: 'TV & Film',
+    metaDescription:
+      'Why Willy\'s Wonderland remains the killer animatronic movie we actually deserved - a deep dive into how Nicolas Cage fighting possessed Chuck E. Cheese knockoffs delivered more than the official FNAF adaptation.',
+    metaKeywords: [
+      'Willy\'s Wonderland',
+      'Five Nights at Freddy\'s',
+      'FNAF movie',
+      'Nicolas Cage',
+      'Horror movie review',
+      'Killer animatronics',
+      'B-movie',
+      'Cult classic',
+    ],
+    featured: true,
+    relatedArticles: ['7', '6', '1'],
+  },
+  {
     id: '11',
     slug: 'we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential',
     title: 'Why Your Childhood TV Habits Might Become a Professional Credential',
