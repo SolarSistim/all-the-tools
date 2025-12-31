@@ -223,7 +223,7 @@ export class CurrencyConverter implements OnInit {
   }
 
   scrollToConverter(): void {
-    const element = document.querySelector('.cta-button');
+    const element = document.querySelector('.converter-card');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

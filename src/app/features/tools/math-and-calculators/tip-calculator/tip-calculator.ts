@@ -122,7 +122,7 @@ export class TipCalculator implements OnInit {
   }
 
   scrollToTipCalculator(): void {
-    const element = document.querySelector('.cta-button');
+    const element = document.querySelector('.calculator-card');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

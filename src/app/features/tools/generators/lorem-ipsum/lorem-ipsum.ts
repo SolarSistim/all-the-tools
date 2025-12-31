@@ -144,7 +144,7 @@ export class LoremIpsum implements OnInit {
   }
 
   scrollToGenerator(): void {
-    const element = document.querySelector('.cta-button');
+    const element = document.querySelector('.output-card');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
