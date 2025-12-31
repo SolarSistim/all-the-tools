@@ -63,6 +63,28 @@
       </div>
     </div>
 
+    <!-- View Toggle -->
+    <div class="view-toggle">
+      <button
+        mat-icon-button
+        [class.active]="viewMode === 'tile'"
+        (click)="setViewMode('tile')"
+        aria-label="Tile view"
+        matTooltip="Tile view"
+      >
+        <mat-icon>view_module</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [class.active]="viewMode === 'list'"
+        (click)="setViewMode('list')"
+        aria-label="List view"
+        matTooltip="List view"
+      >
+        <mat-icon>view_list</mat-icon>
+      </button>
+    </div>
+
     <!-- Filters -->
     <div class="filters" *ngIf="selectedCategory || selectedTag">
       <div class="active-filters">
@@ -85,8 +107,8 @@
       </button>
     </div>
 
-    <!-- Articles Grid -->
-    <div class="articles-grid" *ngIf="!loading && articles.length > 0">
+    <!-- Articles Tile View -->
+    <div class="articles-grid" *ngIf="!loading && articles.length > 0 && viewMode === 'tile'">
       <article *ngFor="let article of articles" class="article-card">
         <a [routerLink]="['/blog', article.slug]" class="article-link">
           <div class="article-image-wrapper">
@@ -131,6 +153,36 @@
                 </button>
               </div>
             </div>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Articles List View -->
+    <div class="articles-list" *ngIf="!loading && articles.length > 0 && viewMode === 'list'">
+      <article *ngFor="let article of articles" class="article-list-item">
+        <a [routerLink]="['/blog', article.slug]" class="article-list-link">
+          <div class="article-list-image-wrapper">
+            <img
+              [src]="article.heroImage.src"
+              [alt]="article.heroImage.alt"
+              class="article-list-image"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="article-list-content">
+            <div class="article-list-header">
+              <span class="article-list-category">{{ article.category }}</span>
+              <div class="article-list-meta">
+                <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
+                <span class="article-reading-time">{{ article.readingTime | readingTime }}</span>
+              </div>
+            </div>
+
+            <h2 class="article-list-title">{{ article.title }}</h2>
+
+            <p class="article-list-description">{{ article.description }}</p>
           </div>
         </a>
       </article>

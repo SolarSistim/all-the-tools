@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ArticlePreview, PaginatedResponse } from '../../models/blog.models';
@@ -32,6 +33,7 @@ import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatTooltipModule,
     FormsModule,
     PaginationComponent,
     ReadingTimePipe,
@@ -58,8 +60,14 @@ export class BlogListingComponent implements OnInit {
   searchQuery = signal('');
   allArticles: ArticlePreview[] = [];
   filteredArticles = signal<ArticlePreview[]>([]);
+  viewMode: 'tile' | 'list' = 'tile';
 
   ngOnInit(): void {
+    // Load view mode from localStorage
+    const savedViewMode = localStorage.getItem('blog-view-mode');
+    if (savedViewMode === 'list' || savedViewMode === 'tile') {
+      this.viewMode = savedViewMode;
+    }
     // Load all articles for search autocomplete
     this.blogService.getArticlePreviews(1, 1000).subscribe({
       next: (response) => {
@@ -201,5 +209,10 @@ export class BlogListingComponent implements OnInit {
 
   displayArticle(article: ArticlePreview | null): string {
     return article ? article.title : '';
+  }
+
+  setViewMode(mode: 'tile' | 'list'): void {
+    this.viewMode = mode;
+    localStorage.setItem('blog-view-mode', mode);
   }
 }
