@@ -1,0 +1,51 @@
+<div
+  class="movie-poster-container"
+  (click)="openLightbox()"
+  [attr.aria-label]="'View movie poster: ' + alt"
+  role="button"
+  tabindex="0"
+  (keydown.enter)="openLightbox()"
+>
+  <img
+    [src]="src"
+    [alt]="alt"
+    [loading]="loading"
+    [width]="width"
+    [height]="height"
+    class="movie-poster-img"
+  />
+  <div class="poster-overlay">
+    <mat-icon>zoom_in</mat-icon>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div
+  *ngIf="lightboxOpen"
+  class="lightbox"
+  (click)="onBackdropClick($event)"
+  (keydown)="onKeyDown($event)"
+  tabindex="0"
+  role="dialog"
+  aria-modal="true"
+>
+  <button
+    mat-icon-button
+    class="lightbox-close"
+    (click)="closeLightbox()"
+    aria-label="Close lightbox"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="lightbox-content">
+    <img
+      [src]="src"
+      [alt]="alt"
+      class="lightbox-image"
+    />
+    <div class="lightbox-caption" *ngIf="caption">
+      {{ caption }}
+    </div>
+  </div>
+</div>

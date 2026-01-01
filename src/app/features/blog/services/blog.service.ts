@@ -69,6 +69,9 @@ export class BlogService {
   ): Observable<PaginatedResponse<ArticlePreview>> {
     let previews = this.previewsCache();
 
+    // Filter out non-displayed articles (display defaults to true if not specified)
+    previews = previews.filter((p) => p.display !== false);
+
     // Apply filters
     if (filters?.category) {
       previews = previews.filter((p) => p.category === filters.category);
@@ -158,10 +161,11 @@ export class BlogService {
     limit: number = 3
   ): Observable<ArticlePreview[]> {
     let related: ArticlePreview[] = [];
+    const displayedPreviews = this.previewsCache().filter((p) => p.display !== false);
 
     // First, try to get explicitly related articles
     if (article.relatedArticles && article.relatedArticles.length > 0) {
-      const relatedById = this.previewsCache().filter((p) =>
+      const relatedById = displayedPreviews.filter((p) =>
         article.relatedArticles!.includes(p.id)
       );
       related = [...relatedById];
@@ -169,7 +173,7 @@ export class BlogService {
 
     // If not enough, find articles with matching tags
     if (related.length < limit) {
-      const byTags = this.previewsCache()
+      const byTags = displayedPreviews
         .filter((p) => p.id !== article.id)
         .filter((p) => p.tags.some((tag) => article.tags.includes(tag)))
         .slice(0, limit - related.length);
@@ -178,7 +182,7 @@ export class BlogService {
 
     // If still not enough, get from same category
     if (related.length < limit) {
-      const byCategory = this.previewsCache()
+      const byCategory = displayedPreviews
         .filter((p) => p.id !== article.id)
         .filter((p) => p.category === article.category)
         .filter((p) => !related.find((r) => r.id === p.id))
@@ -215,6 +219,7 @@ export class BlogService {
    */
   getFeaturedArticles(limit: number = 3): Observable<ArticlePreview[]> {
     const featured = this.previewsCache()
+      .filter((p) => p.display !== false)
       .filter((p) => p.featured)
       .slice(0, limit);
     return of(featured);
@@ -225,6 +230,7 @@ export class BlogService {
    */
   getRecentArticles(limit: number = 5): Observable<ArticlePreview[]> {
     const recent = [...this.previewsCache()]
+      .filter((p) => p.display !== false)
       .sort((a, b) => {
         const dateA = new Date(a.publishedDate).getTime();
         const dateB = new Date(b.publishedDate).getTime();
@@ -288,6 +294,7 @@ export class BlogService {
       category: metadata.category,
       readingTime: this.calculateReadingTime(article),
       featured: metadata.featured,
+      display: metadata.display,
     };
   }
 

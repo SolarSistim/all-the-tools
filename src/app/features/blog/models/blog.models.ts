@@ -38,6 +38,7 @@ export interface Article {
   metaKeywords?: string[];
   ogImage?: string;
   featured?: boolean;
+  display?: boolean; // Controls visibility on blog listing (defaults to true)
   relatedArticles?: string[]; // Article IDs
 }
 
@@ -56,6 +57,7 @@ export interface ArticlePreview {
   category: string;
   readingTime: number; // in minutes
   featured?: boolean;
+  display?: boolean; // Controls visibility on blog listing (defaults to true)
 }
 
 /**
@@ -83,7 +85,8 @@ export type ContentBlockType =
   | 'affiliate'
   | 'divider'
   | 'adsense'
-  | 'component';
+  | 'component'
+  | 'moviePoster';
 
 /**
  * Base content block
@@ -127,6 +130,21 @@ export interface ImageBlock extends ContentBlock {
     caption?: string;
     credit?: string;
     creditUrl?: string;
+    width?: number;
+    height?: number;
+  };
+}
+
+/**
+ * Movie Poster block
+ * Displays a movie poster that floats left with text wrapping around it
+ */
+export interface MoviePosterBlock extends ContentBlock {
+  type: 'moviePoster';
+  data: {
+    src: string;
+    alt: string;
+    caption?: string; // Only shown in lightbox
     width?: number;
     height?: number;
   };

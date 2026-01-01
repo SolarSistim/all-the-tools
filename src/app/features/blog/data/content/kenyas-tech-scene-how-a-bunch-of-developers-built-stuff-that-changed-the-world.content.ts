@@ -338,7 +338,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '<a href="https://themwanikiReport.com" target="_blank" rel="noopener">The Mwaniki Report</a> – Independent Kenyan journalism',
+      text: '<a href="https://www.jonathanmwaniki.co.ke" target="_blank" rel="noopener">The Mwaniki Report</a> – Independent Kenyan journalism',
     },
   },
   {

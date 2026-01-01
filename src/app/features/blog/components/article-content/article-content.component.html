@@ -53,6 +53,16 @@
       [data]="block.data"
     ></app-article-image>
 
+    <!-- Movie Poster -->
+    <app-movie-poster
+      *ngIf="block.type === 'moviePoster'"
+      [src]="block.data.src"
+      [alt]="block.data.alt"
+      [caption]="block.data.caption"
+      [width]="block.data.width"
+      [height]="block.data.height"
+    ></app-movie-poster>
+
     <!-- Gallery -->
     <app-image-gallery
       *ngIf="block.type === 'gallery'"

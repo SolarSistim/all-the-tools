@@ -1,0 +1,139 @@
+.movie-poster-container {
+  float: left;
+  margin: 0 1.5rem 1rem 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  max-width: 400px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+
+  &:focus {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+  }
+
+  // Clear float after the poster on mobile
+  @media (max-width: 768px) {
+    float: none;
+    margin: 0 auto 1.5rem;
+    display: block;
+    max-width: 300px;
+  }
+}
+
+.movie-poster-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+
+  mat-icon {
+    color: white;
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.movie-poster-container:hover,
+.movie-poster-container:focus {
+  .movie-poster-img {
+    transform: scale(1.03);
+  }
+
+  .poster-overlay {
+    opacity: 1;
+  }
+}
+
+// Lightbox
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+  z-index: 10001;
+
+  mat-icon {
+    font-size: 2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: calc(90vh - 150px);
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-caption {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .poster-overlay {
+    mat-icon {
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .lightbox-caption {
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+  }
+}

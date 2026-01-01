@@ -9,6 +9,36 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '14',
+    slug: 'the-top-ten-best-and-worst-movie-remakes',
+    title: 'The Top Ten Best and Worst Movie Remakes',
+    description:
+      'Hollywood loves a remake. Sometimes they get it right, sometimes spectacularly wrong. From Total Recall to The Running Man, here\'s a breakdown of remakes that nailed it and others that completely missed the point.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-02-2026',
+    heroImage: {
+      src: '/meta-images/og-best-worst-movie-remakes.png',
+      alt: 'The Top Ten Best and Worst Movie Remakes',
+    },
+    tags: ['Movies', 'Remakes', 'Total Recall', 'The Running Man', 'Film Analysis'],
+    category: 'TV & Film',
+    metaDescription:
+      'Hollywood loves a remake. Sometimes they get it right, sometimes spectacularly wrong. A breakdown of the best and worst movie remakes.',
+    metaKeywords: [
+      'Movie remakes',
+      'Best remakes',
+      'Worst remakes',
+      'Total Recall',
+      'The Running Man',
+      'Film analysis',
+      'Hollywood remakes',
+      'Arnold Schwarzenegger',
+    ],
+    featured: true,
+    display: false, // Hide until article is complete
+    relatedArticles: ['12', '7', '6'],
+  },
+  {
     id: '13',
     slug: 'kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world',
     title: 'Kenya\'s Tech Scene: How a Bunch of Developers Built Stuff That Changed the World',

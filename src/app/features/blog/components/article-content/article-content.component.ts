@@ -8,6 +8,7 @@ import { BlockquoteComponent } from '../blockquote/blockquote.component';
 import { CodeBlockComponent } from '../code-block/code-block.component';
 import { AffiliateLinkComponent } from '../affiliate-link/affiliate-link.component';
 import { AdsenseComponent } from '../adsense/adsense.component';
+import { MoviePoster } from '../movie-poster/movie-poster';
 import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/roku-compatibility-checker/roku-programmatic-compatibility-checker/roku-programmatic-compatibility-checker';
 
 /**
@@ -26,6 +27,7 @@ import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/ro
     CodeBlockComponent,
     AffiliateLinkComponent,
     AdsenseComponent,
+    MoviePoster,
     RokuProgrammaticCompatibilityChecker,
   ],
   templateUrl: './article-content.component.html',

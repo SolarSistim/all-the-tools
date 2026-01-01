@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'the-top-ten-best-and-worst-movie-remakes':
+        const remakesModule = await import('./the-top-ten-best-and-worst-movie-remakes.content');
+        return remakesModule.content;
+
       case 'kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world':
         const kenyaModule = await import('./kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content');
         return kenyaModule.content;
