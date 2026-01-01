@@ -5,7 +5,6 @@
   position: relative;
   overflow: hidden;
   border-radius: 8px;
-  max-width: 400px;
   box-shadow: 0 4px 12px var(--shadow-color);
 
   &:focus {
@@ -18,7 +17,7 @@
     float: none;
     margin: 0 auto 1.5rem;
     display: block;
-    max-width: 300px;
+    max-width: px;
   }
 }
 

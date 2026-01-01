@@ -10,7 +10,7 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
-      case 'the-top-ten-best-and-worst-movie-remakes':
+      case 'the-top-ten-worst-movie-remakes':
         const remakesModule = await import('./the-top-ten-best-and-worst-movie-remakes.content');
         return remakesModule.content;
 

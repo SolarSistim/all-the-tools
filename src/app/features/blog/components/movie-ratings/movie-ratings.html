@@ -1,0 +1,37 @@
+<div class="movie-ratings-container">
+  <div class="movie-header">
+    <div class="header-row">
+      <h3 class="movie-title">{{ data.title }} ({{ data.year }})</h3>
+      <div class="overall-score">
+        <span class="overall-label">Overall Score:</span>
+        <span class="overall-value" [class]="getOverallScoreClass()">{{ getOverallScore() }}%</span>
+      </div>
+    </div>
+    <p class="ratings-date">Ratings as of {{ data.ratingsDate }}</p>
+  </div>
+
+  <div class="ratings-content">
+    <!-- Small Poster -->
+    <div class="poster-small">
+      <img [src]="data.posterSrc" [alt]="data.posterAlt" />
+    </div>
+
+    <!-- Ratings Grid -->
+    <div class="ratings-grid">
+      <div *ngFor="let rating of data.ratings" class="rating-item">
+        <div class="rating-header">
+          <span class="source-icon">{{ getSourceIcon(rating.source) }}</span>
+          <span class="source-name">{{ getSourceDisplayName(rating.source) }}</span>
+          <span class="rating-score">{{ getDisplayText(rating) }}</span>
+        </div>
+        <div class="progress-bar-container">
+          <div
+            class="progress-bar"
+            [class]="getRatingClass(rating)"
+            [style.width.%]="getPercentage(rating)"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

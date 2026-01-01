@@ -10,32 +10,33 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
     id: '14',
-    slug: 'the-top-ten-best-and-worst-movie-remakes',
-    title: 'The Top Ten Best and Worst Movie Remakes',
+    slug: 'the-top-ten-worst-movie-remakes',
+    title: 'The Top Ten Worst Movie Remakes',
     description:
-      'Hollywood loves a remake. Sometimes they get it right, sometimes spectacularly wrong. From Total Recall to The Running Man, here\'s a breakdown of remakes that nailed it and others that completely missed the point.',
+      'Hollywood loves a remake, but sometimes they get it spectacularly wrong. From Total Recall to The Crow, here\'s a breakdown of the ten worst remakes that completely missed the point of what made the originals work.',
     author: AUTHORS.joel_hansen,
     publishedDate: '01-02-2026',
     heroImage: {
-      src: '/meta-images/og-best-worst-movie-remakes.png',
-      alt: 'The Top Ten Best and Worst Movie Remakes',
+      src: '/meta-images/og-worst-movie-remakes.png',
+      alt: 'The Top Ten Worst Movie Remakes',
     },
-    tags: ['Movies', 'Remakes', 'Total Recall', 'The Running Man', 'Film Analysis'],
+    tags: ['Movies', 'Remakes', 'Total Recall', 'The Crow', 'Film Analysis', 'Bad Movies'],
     category: 'TV & Film',
     metaDescription:
-      'Hollywood loves a remake. Sometimes they get it right, sometimes spectacularly wrong. A breakdown of the best and worst movie remakes.',
+      'Hollywood loves a remake, but sometimes they get it spectacularly wrong. A breakdown of the ten worst movie remakes that completely missed the point.',
     metaKeywords: [
       'Movie remakes',
-      'Best remakes',
       'Worst remakes',
+      'Bad remakes',
       'Total Recall',
-      'The Running Man',
+      'The Crow',
+      'Hellboy',
       'Film analysis',
       'Hollywood remakes',
-      'Arnold Schwarzenegger',
+      'Failed remakes',
     ],
     featured: true,
-    display: false, // Hide until article is complete
+    display: true,
     relatedArticles: ['12', '7', '6'],
   },
   {

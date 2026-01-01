@@ -63,6 +63,12 @@
       [height]="block.data.height"
     ></app-movie-poster>
 
+    <!-- Movie Ratings -->
+    <app-movie-ratings
+      *ngIf="block.type === 'movieRatings'"
+      [data]="block.data"
+    ></app-movie-ratings>
+
     <!-- Gallery -->
     <app-image-gallery
       *ngIf="block.type === 'gallery'"

@@ -1,0 +1,206 @@
+.movie-ratings-container {
+  width: 100%;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.movie-header {
+  margin-bottom: 0.75rem;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.overall-score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  white-space: nowrap;
+
+  .overall-label {
+    color: var(--text-primary);
+  }
+
+  .overall-value {
+    font-weight: 700;
+  }
+}
+
+.overall-good {
+  color: #22c55e;
+}
+
+.overall-okay {
+  color: #f59e0b;
+}
+
+.overall-bad {
+  color: #ef4444;
+}
+
+.ratings-date {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.ratings-content {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.poster-small {
+  flex-shrink: 0;
+  width: 90px;
+  align-self: stretch;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.ratings-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+
+  // Row 1: IMDB, Letterboxd, Trakt (3 items, 2 columns each)
+  .rating-item:nth-child(1),
+  .rating-item:nth-child(2),
+  .rating-item:nth-child(3) {
+    grid-column: span 2;
+  }
+
+  // Row 2: RT Critic and RT Audience (2 items, 3 columns each)
+  .rating-item:nth-child(4),
+  .rating-item:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  // Row 3: Metacritic User Score and Metacritic (2 items, 3 columns each)
+  .rating-item:nth-child(6),
+  .rating-item:nth-child(7) {
+    grid-column: span 3;
+  }
+}
+
+.rating-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rating-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.source-icon {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.source-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.rating-score {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+}
+
+.progress-bar-container {
+  height: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(128, 128, 128, 0.2),
+    rgba(128, 128, 128, 0.2) 8px,
+    rgba(128, 128, 128, 0.35) 8px,
+    rgba(128, 128, 128, 0.35) 16px
+  );
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.rating-good {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.rating-okay {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.rating-bad {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .ratings-content {
+    flex-direction: column;
+  }
+
+  .poster-small {
+    display: none;
+  }
+
+  .ratings-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .rating-item {
+    width: 100%;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+  }
+
+  .movie-title {
+    font-size: 1rem;
+  }
+
+  .rating-header {
+    font-size: 0.8125rem;
+  }
+}

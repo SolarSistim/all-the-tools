@@ -86,7 +86,8 @@ export type ContentBlockType =
   | 'divider'
   | 'adsense'
   | 'component'
-  | 'moviePoster';
+  | 'moviePoster'
+  | 'movieRatings';
 
 /**
  * Base content block
@@ -147,6 +148,26 @@ export interface MoviePosterBlock extends ContentBlock {
     caption?: string; // Only shown in lightbox
     width?: number;
     height?: number;
+  };
+}
+
+/**
+ * Movie Ratings block
+ * Displays movie ratings from multiple review sources
+ */
+export interface MovieRatingsBlock extends ContentBlock {
+  type: 'movieRatings';
+  data: {
+    title: string;
+    year: number;
+    posterSrc: string;
+    posterAlt: string;
+    ratings: Array<{
+      source: 'RottenTomatoesCritic' | 'RottenTomatoesAudience' | 'Letterboxd' | 'IMDB' | 'MetacriticMetascore' | 'MetacriticUser' | 'Trakt';
+      score: number;
+      maxScore: number;
+    }>;
+    ratingsDate: string; // Date when ratings were captured
   };
 }
 
