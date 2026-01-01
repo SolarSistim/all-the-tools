@@ -9,6 +9,37 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '13',
+    slug: 'kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world',
+    title: 'Kenya\'s Tech Scene: How a Bunch of Developers Built Stuff That Changed the World',
+    description:
+      'From Ushahidi\'s crisis mapping to M-Pesa\'s mobile banking revolution, Kenya\'s tech ecosystem has quietly produced some of the most consequential digital tools of the last two decades. Here\'s the story nobody talks about.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-01-2026',
+    heroImage: {
+      src: '/meta-images/og-kenya-tech-scene.png',
+      alt: 'Kenya\'s Tech Scene: How Developers Changed the World',
+    },
+    tags: ['Kenya', 'Technology', 'M-Pesa', 'Ushahidi', 'African Tech', 'Innovation'],
+    category: 'Technology',
+    metaDescription:
+      'From Ushahidi\'s crisis mapping to M-Pesa\'s mobile banking revolution, Kenya\'s tech ecosystem has quietly produced some of the most consequential digital tools of the last two decades.',
+    metaKeywords: [
+      'Kenya tech scene',
+      'Ushahidi',
+      'M-Pesa',
+      'iHub Nairobi',
+      'BRCK',
+      'African technology',
+      'Silicon Savannah',
+      'Kenyan startups',
+      'Mobile banking',
+      'Crisis mapping',
+    ],
+    featured: true,
+    relatedArticles: ['10', '3', '8'],
+  },
+  {
     id: '12',
     slug: 'when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys',
     title: 'When Nicholas Cage Made a Better Five Nights at Freddy\'s Movie Than Five Nights at Freddy\'s',
