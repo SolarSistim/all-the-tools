@@ -621,7 +621,7 @@ section {
 // BENEFITS SECTION
 // ============================================
 .benefits {
-  background: #1a1e2e;
+  background: var(--bg-primary);
 }
 
 .benefits-grid {
@@ -681,7 +681,7 @@ section {
 // RECENT RESOURCES SECTION
 // ============================================
 .recent-resources {
-  background: #0a0e1a;
+  background: var(--bg-secondary);
 }
 
 .resources-grid {
@@ -889,7 +889,7 @@ section {
 // CTA SECTION
 // ============================================
 .cta {
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   padding: $spacing-4xl 0;
 }
 
@@ -902,7 +902,7 @@ section {
   max-width: 600px;
   margin: 0 auto;
   padding: $spacing-3xl;
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 24px;
   position: relative;
