@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'c-beams-the-top-down-space-action-rpg-that-gets-it':
+        const cBeamsModule = await import('./c-beams-the-top-down-space-action-rpg-that-gets-it.content');
+        return cBeamsModule.content;
+
       case 'the-top-ten-worst-movie-remakes':
         const remakesModule = await import('./the-top-ten-best-and-worst-movie-remakes.content');
         return remakesModule.content;

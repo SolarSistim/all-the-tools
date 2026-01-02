@@ -9,6 +9,37 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '15',
+    slug: 'c-beams-the-top-down-space-action-rpg-that-gets-it',
+    title: 'C-Beams: The Top-Down Space Action RPG That Gets It',
+    description:
+      'A deep dive into C-Beams, an upcoming top-down space action RPG that understands what makes the genre tick. From subsystem targeting to meaningful exploration, this one\'s worth watching.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-02-2026',
+    heroImage: {
+      src: '/meta-images/og-c-beams-the-space-action-rpg-that-gets-it.png',
+      alt: 'C-Beams: The Top-Down Space Action RPG That Gets It',
+    },
+    tags: ['Gaming', 'C-Beams', 'Space RPG', 'Top-Down Shooter', 'Indie Games', 'LevelCap'],
+    category: 'Gaming',
+    metaDescription:
+      'A deep dive into C-Beams, an upcoming top-down space action RPG from Distant Light Games. Why this indie space shooter is worth paying attention to.',
+    metaKeywords: [
+      'C-Beams',
+      'Space RPG',
+      'Top-down space game',
+      'Distant Light Games',
+      'LevelCap',
+      'Space action RPG',
+      'Indie games',
+      'Space exploration',
+      'Gaming preview',
+    ],
+    featured: true,
+    display: true,
+    relatedArticles: [],
+  },
+  {
     id: '14',
     slug: 'the-top-ten-worst-movie-remakes',
     title: 'The Top Ten Worst Movie Remakes',

@@ -87,7 +87,8 @@ export type ContentBlockType =
   | 'adsense'
   | 'component'
   | 'moviePoster'
-  | 'movieRatings';
+  | 'movieRatings'
+  | 'video';
 
 /**
  * Base content block
@@ -274,6 +275,19 @@ export interface ComponentBlock extends ContentBlock {
   type: 'component';
   data: {
     componentName: string;
+  };
+}
+
+/**
+ * Video block (YouTube embeds)
+ */
+export interface VideoBlock extends ContentBlock {
+  type: 'video';
+  data: {
+    url: string;
+    title?: string;
+    description?: string;
+    platform?: 'youtube' | 'vimeo';
   };
 }
 

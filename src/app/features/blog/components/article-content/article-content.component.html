@@ -127,6 +127,15 @@
       [adSlot]="block.data.adSlot"
     ></app-adsense>
 
+    <!-- Video -->
+    <app-video-embed
+      *ngIf="block.type === 'video'"
+      [url]="block.data.url"
+      [title]="block.data.title"
+      [description]="block.data.description"
+      [platform]="block.data.platform"
+    ></app-video-embed>
+
     <!-- Custom Component -->
     <app-roku-programmatic-compatibility-checker
       *ngIf="block.type === 'component' && block.data.componentName === 'roku-checker'"

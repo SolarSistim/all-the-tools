@@ -1,0 +1,25 @@
+<div class="video-embed-container">
+  @if (title) {
+    <h3 class="video-title">{{ title }}</h3>
+  }
+
+  @if (description) {
+    <p class="video-description">{{ description }}</p>
+  }
+
+  @if (embedUrl) {
+    <div class="video-wrapper">
+      <iframe
+        [src]="embedUrl"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  } @else {
+    <div class="video-error">
+      <p>Unable to load video. Invalid URL provided.</p>
+    </div>
+  }
+</div>
