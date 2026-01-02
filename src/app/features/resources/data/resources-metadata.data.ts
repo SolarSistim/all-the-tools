@@ -1,6 +1,27 @@
 import { ResourceMetadata } from '../models/resource.models';
 
-export const RESOURCES_METADATA: ResourceMetadata[] = [
+export const RESOURCES_METADATA: ResourceMetadata[] = [  {
+    id: '1',
+    slug: 'online-help-for-senior-citizens-by-a-senior-citizen',
+    title: 'Online Business Help for Senior Citizens by a Senior Citizen from Computer Help to SEO',
+    subtitle: 'Dual Certified Teacher J. Richard Kirkham B.Sc. is Finally Available for You!',
+    description: 'This new business service started out as a phone call from a senior citizen starting his first business online. If you have trouble like he did understanding how to use your computer, email, website, sales and anything else that comes with starting an online business, this is your solution BY A SENIOR CITIZEN!<br/><br/><a href="https://busybusinesspromotions.com/seoarticles/senior-business-lessons.php">Online Business Help for Senior Citizens by a Senior Citizen from Computer Help to SEO</a>',
+    externalUrl: 'https://busybusinesspromotions.com/seoarticles/senior-business-lessons.php',
+    publishedDate: '2025-12-01',
+    thumbnail: {
+      src: '/meta-images/og-resources.png',
+      alt: 'AllTheTHings.dev Resources',
+    },
+    tags: ['Senior Citizen', 'Computer Help', 'SEO', 'Dual Certified Teacher'],
+    category: 'Senior Citizen',
+    metaDescription: 'Online Business Help for Senior Citizens by a Senior Citizen from Computer Help to SEO! Dual Certified Teacher J. Richard Kirkham B.Sc. is Finally Available for You!',
+    metaKeywords: ['Senior Citizen', 'Computer Help', 'SEO', 'Dual Certified Teacher'],
+    featured: true,
+    display: true,
+    isPaid: false,
+    difficulty: 'beginner',
+    relatedResources: ['2', '3'],
+  },
   {
     id: '1',
     slug: 'angular-official-documentation',
