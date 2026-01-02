@@ -1,0 +1,185 @@
+<div class="resource-page-container" *ngIf="resource">
+  <div class="container">
+    <!-- Main Content Area -->
+    <div class="resource-main">
+      <!-- Thumbnail -->
+      <div class="resource-thumbnail">
+        <h1 class="resource-thumbnail-title">{{ resource.title }}</h1>
+        <div class="thumbnail-overlay">
+          <span class="resource-category-badge">{{ resource.category }}</span>
+        </div>
+      </div>
+
+      <!-- Resource Header -->
+      <div class="resource-header">
+        <div class="resource-meta-top">
+          <span class="publish-date">
+            <mat-icon>calendar_today</mat-icon>
+            {{ formatDate(resource.publishedDate) }}
+          </span>
+          @if (resource.difficulty) {
+            <span
+              class="difficulty-badge"
+              [style.background-color]="getDifficultyColor(resource.difficulty)"
+            >
+              <mat-icon>trending_up</mat-icon>
+              {{ resource.difficulty }}
+            </span>
+          }
+          @if (resource.isPaid) {
+            <span class="paid-badge">
+              <mat-icon>attach_money</mat-icon>
+              Paid Resource
+            </span>
+          }
+        </div>
+
+        <h1 class="resource-title">{{ resource.title }}</h1>
+        <p class="resource-subtitle">{{ resource.subtitle }}</p>
+
+        <!-- Prominent Visit Resource Button -->
+        <div class="cta-section">
+          <a
+            [href]="resource.externalUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="visit-resource-btn"
+            mat-raised-button
+            color="primary"
+          >
+            <mat-icon>open_in_new</mat-icon>
+            <span>Visit Resource</span>
+          </a>
+          <p class="external-notice">
+            <mat-icon>info</mat-icon>
+            This will open the external resource in a new tab
+          </p>
+        </div>
+      </div>
+
+      <!-- Resource Description -->
+      <div class="resource-description">
+        <h2 class="section-title">About This Resource</h2>
+        <p [innerHTML]="resource.description"></p>
+      </div>
+
+      <!-- Resource Tags -->
+      <div class="resource-tags-section">
+        <h3 class="tags-title">
+          <mat-icon>label</mat-icon>
+          Tags
+        </h3>
+        <div class="tags-container">
+          <mat-chip-set>
+            @for (tag of resource.tags; track tag) {
+              <mat-chip [routerLink]="['/resources']" [queryParams]="{ tag: tag }">
+                #{{ tag }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      </div>
+
+      <!-- Resource Details -->
+      <div class="resource-details">
+        <h3 class="details-title">Details</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-label">Category</span>
+            <span class="detail-value">{{ resource.category }}</span>
+          </div>
+          @if (resource.difficulty) {
+            <div class="detail-item">
+              <span class="detail-label">Difficulty Level</span>
+              <span
+                class="detail-value"
+                [style.color]="getDifficultyColor(resource.difficulty)"
+              >
+                {{ resource.difficulty | titlecase }}
+              </span>
+            </div>
+          }
+          <div class="detail-item">
+            <span class="detail-label">Published</span>
+            <span class="detail-value">{{ formatDate(resource.publishedDate) }}</span>
+          </div>
+          @if (resource.updatedDate) {
+            <div class="detail-item">
+              <span class="detail-label">Last Updated</span>
+              <span class="detail-value">{{ formatDate(resource.updatedDate) }}</span>
+            </div>
+          }
+          @if (resource.isPaid !== undefined) {
+            <div class="detail-item">
+              <span class="detail-label">Pricing</span>
+              <span class="detail-value">{{ resource.isPaid ? 'Paid' : 'Free' }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Another CTA at the bottom -->
+      <div class="bottom-cta">
+        <a
+          [href]="resource.externalUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="visit-resource-btn secondary"
+          mat-raised-button
+        >
+          <mat-icon>open_in_new</mat-icon>
+          <span>Visit {{ resource.title }}</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Related Resources -->
+    <section class="related-resources" *ngIf="relatedResources.length > 0">
+      <h2 class="related-title">
+        <mat-icon>link</mat-icon>
+        Related Resources
+      </h2>
+      <div class="related-grid">
+        @for (related of relatedResources; track related.id) {
+          <article class="related-card">
+            <a [routerLink]="['/resources', related.slug]" class="related-link">
+              <div class="related-image-wrapper">
+                <h4 class="related-title-text">{{ related.title }}</h4>
+                <span class="related-category">{{ related.category }}</span>
+              </div>
+
+              <div class="related-content">
+                <h3 class="related-card-title">{{ related.title }}</h3>
+                <p class="related-subtitle">{{ related.subtitle }}</p>
+
+                <div class="related-meta">
+                  @if (related.difficulty) {
+                    <span
+                      class="difficulty-badge small"
+                      [style.background-color]="getDifficultyColor(related.difficulty)"
+                    >
+                      {{ related.difficulty }}
+                    </span>
+                  }
+                  @if (related.isPaid) {
+                    <span class="paid-badge small">
+                      <mat-icon>attach_money</mat-icon>
+                    </span>
+                  }
+                </div>
+              </div>
+            </a>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- Back to Resources -->
+    <div class="back-to-resources">
+      <a [routerLink]="['/resources']" mat-button>
+        <mat-icon>arrow_back</mat-icon>
+        Back to Resources
+      </a>
+    </div>
+  </div>
+</div>

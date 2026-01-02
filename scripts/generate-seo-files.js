@@ -11,6 +11,7 @@ const path = require('path');
 const DOMAIN = 'https://www.allthethings.dev';
 const ROUTES_FILE = path.join(__dirname, '../src/app/app.routes.ts');
 const BLOG_METADATA_FILE = path.join(__dirname, '../src/app/features/blog/data/articles-metadata.data.ts');
+const RESOURCES_METADATA_FILE = path.join(__dirname, '../src/app/features/resources/data/resources-metadata.data.ts');
 const SITEMAP_OUTPUT = path.join(__dirname, '../public/sitemap.xml');
 const ROUTES_OUTPUT = path.join(__dirname, '../routes.txt');
 
@@ -33,6 +34,29 @@ function extractBlogArticles() {
     return articles;
   } catch (error) {
     console.warn('⚠️  Could not extract blog articles:', error.message);
+    return [];
+  }
+}
+
+/**
+ * Extract resource slugs from metadata file
+ */
+function extractResources() {
+  try {
+    const content = fs.readFileSync(RESOURCES_METADATA_FILE, 'utf-8');
+    const resources = [];
+
+    // Match slug definitions in the metadata
+    const slugRegex = /slug:\s*['"]([^'"]+)['"]/g;
+
+    let match;
+    while ((match = slugRegex.exec(content)) !== null) {
+      resources.push(`/resources/${match[1]}`);
+    }
+
+    return resources;
+  } catch (error) {
+    console.warn('⚠️  Could not extract resources:', error.message);
     return [];
   }
 }
@@ -67,6 +91,10 @@ function extractRoutes() {
   const blogArticles = extractBlogArticles();
   routes.push(...blogArticles);
 
+  // Add resource routes
+  const resources = extractResources();
+  routes.push(...resources);
+
   // Remove duplicates and sort
   return [...new Set(routes)].sort();
 }
@@ -88,7 +116,7 @@ function generateSitemap(routes) {
     if (route === '/') {
       priority = '1.0';
       changefreq = 'weekly';
-    } else if (route === '/tools' || route === '/blog') {
+    } else if (route === '/tools' || route === '/blog' || route === '/resources') {
       priority = '0.9';
       changefreq = 'weekly';
     } else if (route.startsWith('/tools/')) {
@@ -97,6 +125,9 @@ function generateSitemap(routes) {
     } else if (route.startsWith('/blog/')) {
       priority = '0.7';
       changefreq = 'weekly';
+    } else if (route.startsWith('/resources/')) {
+      priority = '0.7';
+      changefreq = 'monthly';
     } else if (['/about', '/privacy', '/terms'].includes(route)) {
       priority = '0.6';
       changefreq = 'yearly';

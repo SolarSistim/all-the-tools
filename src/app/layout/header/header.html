@@ -48,6 +48,15 @@
           Blog
         </a>
 
+        <!-- Resources Link -->
+        <a
+          routerLink="/resources"
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          Resources
+        </a>
+
         <!-- About Dropdown -->
         <button
           mat-button
@@ -340,6 +349,16 @@
         >
           <mat-icon>article</mat-icon>
           <span>Blog</span>
+        </a>
+
+        <a
+          routerLink="/resources"
+          routerLinkActive="active"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link"
+        >
+          <mat-icon>link</mat-icon>
+          <span>Resources</span>
         </a>
 
         <!-- Tool Categories -->

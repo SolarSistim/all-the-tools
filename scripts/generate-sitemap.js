@@ -41,6 +41,7 @@ const CONFIG = {
     '/': '1.0',              // Homepage
     '/tools': '0.9',         // Main tools page
     '/blog': '0.9',          // Blog listing
+    '/resources': '0.9',     // Resources listing
   }
 };
 

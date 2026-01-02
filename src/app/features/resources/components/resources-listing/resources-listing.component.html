@@ -1,0 +1,238 @@
+<div class="resources-listing-container">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="resources-hero">
+      <h1 class="resources-title">Resources</h1>
+      <p class="resources-subtitle">
+        Curated collection of tools, references, documentation, and learning materials for web developers.
+      </p>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+      <div class="search-container">
+        <mat-form-field class="search-field" appearance="fill">
+          <mat-label>Search resources...</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput($any($event.target).value)"
+            [matAutocomplete]="auto"
+            placeholder="Try 'Angular', 'documentation', 'tools'..."
+          />
+          <mat-icon matPrefix>search</mat-icon>
+          @if (searchQuery()) {
+            <button mat-icon-button matSuffix (click)="searchQuery.set(''); filteredResources.set([])" aria-label="Clear search">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onResourceSelected($event.option.value)"
+          [displayWith]="displayResource"
+          class="resources-autocomplete"
+        >
+          @for (resource of filteredResources(); track resource.id) {
+            <mat-option [value]="resource" class="resource-option">
+              <div class="autocomplete-item">
+                <div class="autocomplete-image">
+                  <img [src]="resource.thumbnail.src" [alt]="resource.title" />
+                </div>
+                <div class="autocomplete-content">
+                  <div class="autocomplete-title">{{ resource.title }}</div>
+                  <div class="autocomplete-meta">
+                    <span class="autocomplete-category">{{ resource.category }}</span>
+                    <span class="autocomplete-date">{{ formatDate(resource.publishedDate) }}</span>
+                  </div>
+                </div>
+              </div>
+            </mat-option>
+          }
+          @if (searchQuery() && filteredResources().length === 0) {
+            <mat-option disabled>
+              <div class="no-results-option">
+                <mat-icon>search_off</mat-icon>
+                <span>No resources found</span>
+              </div>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </div>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="view-toggle">
+      <button
+        mat-icon-button
+        [class.active]="viewMode === 'tile-4'"
+        (click)="setViewMode('tile-4')"
+        aria-label="Grid view"
+        matTooltip="Grid view"
+      >
+        <mat-icon>grid_view</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [class.active]="viewMode === 'list'"
+        (click)="setViewMode('list')"
+        aria-label="List view"
+        matTooltip="List view"
+      >
+        <mat-icon>view_list</mat-icon>
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters" *ngIf="selectedCategory || selectedTag">
+      <div class="active-filters">
+        <span class="filter-label">Filtered by:</span>
+        <mat-chip *ngIf="selectedCategory" class="filter-chip">
+          {{ selectedCategory }}
+          <button mat-icon-button (click)="clearFilters()" aria-label="Clear category filter">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-chip>
+        <mat-chip *ngIf="selectedTag" class="filter-chip">
+          #{{ selectedTag }}
+          <button mat-icon-button (click)="clearFilters()" aria-label="Clear tag filter">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-chip>
+      </div>
+      <button mat-button (click)="clearFilters()" class="clear-filters-btn">
+        Clear all filters
+      </button>
+    </div>
+
+    <!-- Resources Grid View -->
+    <div
+      class="resources-grid"
+      *ngIf="!loading && resources.length > 0 && viewMode !== 'list'"
+    >
+      <article *ngFor="let resource of resources" class="resource-card">
+        <a [routerLink]="['/resources', resource.slug]" class="resource-link">
+          <div class="resource-image-wrapper">
+            <h3 class="resource-card-title-text">{{ resource.title }}</h3>
+            <span class="resource-category">{{ resource.category }}</span>
+          </div>
+
+          <div class="resource-content">
+            <div class="resource-meta">
+              <span class="resource-date">{{ formatDate(resource.publishedDate) }}</span>
+              @if (resource.difficulty) {
+                <span
+                  class="difficulty-badge"
+                  [style.background-color]="getDifficultyColor(resource.difficulty)"
+                >
+                  {{ resource.difficulty }}
+                </span>
+              }
+            </div>
+
+            <h2 class="resource-title">{{ resource.title }}</h2>
+            <p class="resource-subtitle">{{ resource.subtitle }}</p>
+
+            <p class="resource-description">{{ resource.description }}</p>
+
+            <div class="resource-footer">
+              <div class="resource-tags">
+                <button
+                  mat-chip-button
+                  *ngFor="let tag of resource.tags.slice(0, 2)"
+                  (click)="filterByTag(tag); $event.preventDefault()"
+                  class="tag-chip"
+                >
+                  #{{ tag }}
+                </button>
+              </div>
+
+              @if (resource.isPaid) {
+                <span class="paid-badge">
+                  <mat-icon>attach_money</mat-icon>
+                  Paid
+                </span>
+              }
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Resources List View -->
+    <div class="resources-list" *ngIf="!loading && resources.length > 0 && viewMode === 'list'">
+      <article *ngFor="let resource of resources" class="resource-list-item">
+        <a [routerLink]="['/resources', resource.slug]" class="resource-list-link">
+          <div class="resource-list-image-wrapper">
+            <h3 class="resource-list-title-text">{{ resource.title }}</h3>
+          </div>
+
+          <div class="resource-list-content">
+            <div class="resource-list-header">
+              <span class="resource-list-category">{{ resource.category }}</span>
+              <div class="resource-list-meta">
+                <span class="resource-date">{{ formatDate(resource.publishedDate) }}</span>
+                @if (resource.difficulty) {
+                  <span
+                    class="difficulty-badge"
+                    [style.background-color]="getDifficultyColor(resource.difficulty)"
+                  >
+                    {{ resource.difficulty }}
+                  </span>
+                }
+                @if (resource.isPaid) {
+                  <span class="paid-badge">
+                    <mat-icon>attach_money</mat-icon>
+                    Paid
+                  </span>
+                }
+              </div>
+            </div>
+
+            <h2 class="resource-list-title">{{ resource.title }}</h2>
+            <p class="resource-list-subtitle">{{ resource.subtitle }}</p>
+
+            <p class="resource-list-description">{{ resource.description }}</p>
+
+            <div class="resource-list-tags">
+              <button
+                mat-chip-button
+                *ngFor="let tag of resource.tags.slice(0, 4)"
+                (click)="filterByTag(tag); $event.preventDefault()"
+                class="tag-chip"
+              >
+                #{{ tag }}
+              </button>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && resources.length === 0">
+      <mat-icon>link_off</mat-icon>
+      <h2>No resources found</h2>
+      <p>Try adjusting your filters or check back later for new resources.</p>
+      <button mat-raised-button color="primary" (click)="clearFilters()">
+        Clear Filters
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="loading-spinner">
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <app-pagination
+      *ngIf="!loading && resources.length > 0"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+</div>
