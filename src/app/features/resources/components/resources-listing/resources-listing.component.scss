@@ -12,12 +12,11 @@
 
 .resources-hero {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 3rem 0;
+  padding: 1rem 0;
 }
 
 .resources-title {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 3rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -34,6 +33,23 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
+}
+
+.resources-description {
+  text-align: center;
+  max-width: 800px;
+  margin: 1rem auto 3rem;
+
+  p {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .search-section {

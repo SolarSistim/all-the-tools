@@ -12,6 +12,8 @@ import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
 import { BlogService } from '../blog/services/blog.service';
 import { ArticlePreview } from '../blog/models/blog.models';
+import { ResourcesService } from '../resources/services/resources.service';
+import { ResourcePreview } from '../resources/models/resource.models';
 
 @Component({
   selector: 'app-home',
@@ -33,10 +35,12 @@ export class HomeComponent implements OnInit {
   private metaService = inject(MetaService);
   private structuredData = inject(StructuredDataService);
   private blogService = inject(BlogService);
+  private resourcesService = inject(ResourcesService);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
   recentArticles: ArticlePreview[] = [];
+  recentResources: ResourcePreview[] = [];
 
   // Icon pool for hero visual grid
   private iconPool = [
@@ -90,6 +94,13 @@ export class HomeComponent implements OnInit {
         this.recentArticles = articles;
       }
     });
+
+    // Load recent resources
+    this.resourcesService.getResourcePreviews(1, 4).subscribe({
+      next: (response) => {
+        this.recentResources = response.items;
+      }
+    });
   }
 
   getToolCountForCategory(categoryId: string): number {
@@ -107,5 +118,22 @@ export class HomeComponent implements OnInit {
       month: 'long',
       day: 'numeric',
     });
+  }
+
+  getDifficultyColor(difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A'): string {
+    switch (difficulty) {
+      case 'beginner':
+        return '#4caf50';
+      case 'easy':
+        return '#8bc34a';
+      case 'intermediate':
+        return '#ff9800';
+      case 'advanced':
+        return '#f44336';
+      case 'N/A':
+        return '#9e9e9e';
+      default:
+        return '#757575';
+    }
   }
 }

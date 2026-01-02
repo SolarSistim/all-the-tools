@@ -12,14 +12,14 @@ export interface Resource {
   category: string;
   publishedDate: Date | string;
   updatedDate?: Date | string;
-  thumbnail: ThumbnailData;
+  thumbnail?: ThumbnailData;
   metaDescription: string;
   metaKeywords?: string[];
   featured?: boolean;
   display?: boolean;
   relatedResources?: string[];
   isPaid?: boolean;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A';
 }
 
 /**
@@ -33,13 +33,13 @@ export interface ResourcePreview {
   description: string;
   externalUrl: string;
   publishedDate: Date | string;
-  thumbnail: ThumbnailData;
+  thumbnail?: ThumbnailData;
   tags: string[];
   category: string;
   featured?: boolean;
   display?: boolean;
   isPaid?: boolean;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A';
 }
 
 /**
@@ -84,7 +84,7 @@ export interface ResourceFilters {
   search?: string;
   featured?: boolean;
   isPaid?: boolean;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A';
 }
 
 /**

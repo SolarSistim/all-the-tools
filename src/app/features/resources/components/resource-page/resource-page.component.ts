@@ -102,14 +102,18 @@ export class ResourcePageComponent implements OnInit {
     });
   }
 
-  getDifficultyColor(difficulty?: 'beginner' | 'intermediate' | 'advanced'): string {
+  getDifficultyColor(difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A'): string {
     switch (difficulty) {
       case 'beginner':
         return '#4caf50';
+      case 'easy':
+        return '#8bc34a';
       case 'intermediate':
         return '#ff9800';
       case 'advanced':
         return '#f44336';
+      case 'N/A':
+        return '#9e9e9e';
       default:
         return '#757575';
     }

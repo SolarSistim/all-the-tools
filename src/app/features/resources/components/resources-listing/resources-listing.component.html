@@ -3,8 +3,15 @@
     <!-- Hero Section -->
     <section class="resources-hero">
       <h1 class="resources-title">Resources</h1>
-      <p class="resources-subtitle">
+      <!-- <p class="resources-subtitle">
         Curated collection of tools, references, documentation, and learning materials for web developers & Netizens.
+      </p> -->
+    </section>
+
+    <!-- Resources Description -->
+    <section class="resources-description">
+      <p>
+        Discover a curated collection of valuable tools, documentation, guides, and learning materials across diverse subjects and interests. This resource library features carefully selected references spanning technology, finance, education, productivity, and more to support your projects, learning, and personal growth.
       </p>
     </section>
 
@@ -38,9 +45,6 @@
           @for (resource of filteredResources(); track resource.id) {
             <mat-option [value]="resource" class="resource-option">
               <div class="autocomplete-item">
-                <div class="autocomplete-image">
-                  <img [src]="resource.thumbnail.src" [alt]="resource.title" />
-                </div>
                 <div class="autocomplete-content">
                   <div class="autocomplete-title">{{ resource.title }}</div>
                   <div class="autocomplete-meta">
