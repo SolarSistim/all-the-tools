@@ -96,6 +96,12 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'paragraph',
+    data: {
+      text: 'When I think about the soft skills it takes to turn lived experience into something valuable — shipping products, growing projects, or building a career that lasts — I often point people to perspectives outside pure tech. <a href="https://algonquinclubs.com/">Algonquin Clubs</a> publishes real-world essays and practical advice for founders and makers navigating exactly that kind of long-term thinking, and it complements the technical work we do here surprisingly well.',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
