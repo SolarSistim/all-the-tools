@@ -61,6 +61,7 @@ export class BlogListingComponent implements OnInit {
   allArticles: ArticlePreview[] = [];
   filteredArticles = signal<ArticlePreview[]>([]);
   viewMode: 'tile' | 'list' = 'tile';
+  categories: string[] = [];
 
   ngOnInit(): void {
     // Load view mode from localStorage
@@ -72,21 +73,23 @@ export class BlogListingComponent implements OnInit {
     this.blogService.getArticlePreviews(1, 1000).subscribe({
       next: (response) => {
         this.allArticles = response.items;
+        // Extract unique categories
+        this.categories = [...new Set(this.allArticles.map(article => article.category))].sort();
       },
     });
 
-    // Watch for query param changes
+    // Watch for query param changes (only for pagination)
     this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
-      this.currentPage = Number(params['page']) || 1;
-      this.selectedCategory = params['category'] || null;
-      this.selectedTag = params['tag'] || null;
-      this.loadArticles();
+      const newPage = Number(params['page']) || 1;
+      const pageChanged = newPage !== this.currentPage;
+      this.currentPage = newPage;
+      this.loadArticles(pageChanged);
     });
 
     this.updateMetaTags();
   }
 
-  private loadArticles(): void {
+  private loadArticles(shouldScrollToTop: boolean = false): void {
     this.loading = true;
 
     const filters: any = {};
@@ -101,7 +104,9 @@ export class BlogListingComponent implements OnInit {
           this.totalPages = response.totalPages;
           this.totalItems = response.totalItems;
           this.loading = false;
-          this.scrollToTop();
+          if (shouldScrollToTop) {
+            this.scrollToTop();
+          }
         },
         error: () => {
           this.loading = false;
@@ -142,32 +147,24 @@ export class BlogListingComponent implements OnInit {
   }
 
   filterByCategory(category: string): void {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        category,
-        page: null,
-        tag: null,
-      },
-    });
+    this.selectedCategory = category;
+    this.selectedTag = null;
+    this.currentPage = 1;
+    this.loadArticles(false);
   }
 
   filterByTag(tag: string): void {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        tag,
-        page: null,
-        category: null,
-      },
-    });
+    this.selectedTag = tag;
+    this.selectedCategory = null;
+    this.currentPage = 1;
+    this.loadArticles(false);
   }
 
   clearFilters(): void {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {},
-    });
+    this.selectedCategory = null;
+    this.selectedTag = null;
+    this.currentPage = 1;
+    this.loadArticles(false);
   }
 
   formatDate(date: Date | string): string {

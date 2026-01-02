@@ -53,7 +53,7 @@
 }
 
 .search-section {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .search-container {
@@ -199,11 +199,51 @@
   }
 }
 
+.filters-and-view-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.category-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.category-filter-btn {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  height: auto;
+  min-height: 36px;
+  border-radius: 20px;
+  color: var(--text-secondary);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  text-transform: none;
+
+  &:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    background-color: var(--bg-secondary);
+  }
+
+  &.active {
+    color: var(--bg-primary);
+    background-color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    font-weight: 600;
+  }
+}
+
 .view-toggle {
   display: flex;
-  justify-content: flex-end;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
 
   button {
     color: var(--text-secondary);
@@ -257,11 +297,20 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  background-color: var(--neon-cyan) !important;
+  color: var(--bg-primary) !important;
+  border: 1px solid var(--neon-cyan) !important;
+
+  ::ng-deep .mdc-evolution-chip__text-label {
+    transform: translateY(-3px);
+  }
 
   button {
     width: 18px;
     height: 18px;
     padding: 0;
+    color: var(--bg-primary) !important;
+    transform: translateY(3px);
 
     mat-icon {
       font-size: 14px;

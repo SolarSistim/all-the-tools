@@ -73,26 +73,51 @@
       </div>
     </div>
 
-    <!-- View Toggle -->
-    <div class="view-toggle">
-      <button
-        mat-icon-button
-        [class.active]="viewMode === 'tile'"
-        (click)="setViewMode('tile')"
-        aria-label="Tile view"
-        matTooltip="Tile view"
-      >
-        <mat-icon>view_module</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        [class.active]="viewMode === 'list'"
-        (click)="setViewMode('list')"
-        aria-label="List view"
-        matTooltip="List view"
-      >
-        <mat-icon>view_list</mat-icon>
-      </button>
+    <!-- Category Filters and View Toggle -->
+    <div class="filters-and-view-container">
+      <!-- Category Filters -->
+      <div class="category-filters">
+        <button
+          mat-button
+          [class.active]="!selectedCategory"
+          (click)="clearFilters()"
+          class="category-filter-btn"
+        >
+          All
+        </button>
+        @for (category of categories; track category) {
+          <button
+            mat-button
+            [class.active]="selectedCategory === category"
+            (click)="filterByCategory(category)"
+            class="category-filter-btn"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+
+      <!-- View Toggle -->
+      <div class="view-toggle">
+        <button
+          mat-icon-button
+          [class.active]="viewMode === 'tile'"
+          (click)="setViewMode('tile')"
+          aria-label="Tile view"
+          matTooltip="Tile view"
+        >
+          <mat-icon>view_module</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [class.active]="viewMode === 'list'"
+          (click)="setViewMode('list')"
+          aria-label="List view"
+          matTooltip="List view"
+        >
+          <mat-icon>view_list</mat-icon>
+        </button>
+      </div>
     </div>
 
     <!-- Filters -->
