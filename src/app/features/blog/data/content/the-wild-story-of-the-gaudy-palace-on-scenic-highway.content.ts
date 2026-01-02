@@ -39,7 +39,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The golden-roofed mansion on Scenic Highway is owned by Dr. Mohammad Mikhchi, who also owns several assisted living facilities in Pensacola. Public records confirm he was ordered to restore wetlands he illegally cleared in 2015. Hurricane Sally damaged the property in 2020, and it sat in disrepair for years before recent repairs began. The assisted living facilities he owns—Northpointe and Westpointe—have brutal public reviews describing mice, roaches, and neglect. Beyond that, most of what you\'ve heard is local legend—some probably true, some impossible to verify.',
+      text: 'The golden-roofed mansion on Scenic Highway is owned by Dr. Mohammad Mikhchi, who also owns several assisted living facilities in Pensacola. Public records confirm he was ordered to restore wetlands he illegally cleared in 2015. Hurricane Sally damaged the property in 2020, and it sat in disrepair for years before recent repairs began. The assisted living facilities he owns - Northpointe and Westpointe - have brutal public reviews describing mice, roaches, and neglect. Beyond that, most of what you\'ve heard is local legend - some probably true, some impossible to verify.',
     },
   },
   {
@@ -235,6 +235,12 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'These aren\'t rumors. These are real people, writing under their own accounts, describing mice, roaches, unexplained weight loss, falls, and dismissive behavior. It\'s on a public review site for anyone to see.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Not all challenges faced by seniors are physical or medical. Many older adults struggle quietly with technology, online systems, and digital literacy - things younger generations often take for granted. That’s why practical, peer-written resources like <a href="https://busybusinesspromotions.com/seoarticles/senior-business-lessons.php" target="_blank" rel="noopener">Online Business Help for Senior Citizens by a Senior Citizen from Computer Help to SEO</a> stand out, offering guidance that respects both experience and independence.',
     },
   },
   {
