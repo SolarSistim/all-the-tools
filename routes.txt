@@ -2,7 +2,9 @@
 /about
 /accessibility
 /blog
+/blog/c-beams-the-top-down-space-action-rpg-that-gets-it
 /blog/how-to-calculate-percentages-in-your-head
+/blog/how-to-sell-your-timber-for-top-dollar-in-ohio
 /blog/i-built-a-roku-compatibility-checker
 /blog/i-switched-from-facebook-to-reddit-for-doomscrolling
 /blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world
@@ -26,6 +28,7 @@
 /resources/angular-official-documentation
 /resources/mdn-web-docs
 /resources/money-market-funds-kenya-safety
+/resources/online-help-for-senior-citizens-by-a-senior-citizen
 /resources/rxjs-documentation
 /resources/typescript-handbook
 /terms

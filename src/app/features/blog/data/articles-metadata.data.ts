@@ -9,6 +9,38 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '16',
+    slug: 'how-to-sell-your-timber-for-top-dollar-in-ohio',
+    title: 'How to Sell Your Timber for Top Dollar in Ohio',
+    description:
+      'Selling timber is a major financial decision for southeast Ohio landowners. Learn the structured, transparent process that eliminates guesswork and consistently delivers top market value through competitive bidding and professional oversight.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-03-2026',
+    heroImage: {
+      src: '/meta-images/og-how-to-sell-timber-ohio.png',
+      alt: 'How to Sell Your Timber for Top Dollar in Ohio',
+    },
+    tags: ['Timber Sales', 'Ohio', 'Forestry', 'Land Management', 'Timber Buyers', 'Southeast Ohio'],
+    category: 'Amateur Sleuthing',
+    metaDescription:
+      'Learn how to get maximum value from timber sales in southeast Ohio. Professional forestry consultation, competitive bidding, and complete oversight ensure landowners get top dollar.',
+    metaKeywords: [
+      'Timber sales Ohio',
+      'Sell timber southeast Ohio',
+      'Timber buyers Ohio',
+      'Forestry consultation',
+      'Timber harvest',
+      'Land management Ohio',
+      'Timber value',
+      'Good Faith Timber Buyers',
+      'Professional forestry',
+      'Timber bidding',
+    ],
+    featured: true,
+    display: true,
+    relatedArticles: ['1', '4', '9'],
+  },
+  {
     id: '15',
     slug: 'c-beams-the-top-down-space-action-rpg-that-gets-it',
     title: 'C-Beams: The Top-Down Space Action RPG That Gets It',

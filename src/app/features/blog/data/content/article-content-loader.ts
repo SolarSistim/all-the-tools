@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'how-to-sell-your-timber-for-top-dollar-in-ohio':
+        const timberModule = await import('./how-to-sell-your-timber-for-top-dollar-in-ohio.content');
+        return timberModule.content;
+
       case 'c-beams-the-top-down-space-action-rpg-that-gets-it':
         const cBeamsModule = await import('./c-beams-the-top-down-space-action-rpg-that-gets-it.content');
         return cBeamsModule.content;
