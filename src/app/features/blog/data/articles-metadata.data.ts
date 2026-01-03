@@ -9,6 +9,38 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '17',
+    slug: 'we-need-to-talk-about-that-wormhole-scene-in-interstellar',
+    title: 'We Need to Talk About That Wormhole Scene in Interstellar',
+    description:
+      'Interstellar is a masterpiece, but that one scene where Romilly explains basic wormhole theory to Cooper - a trained NASA astronaut - keeps nagging at me. Let\'s talk about why it doesn\'t quite work.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-03-2026',
+    heroImage: {
+      src: '/meta-images/og-interstellar-wormhole-scene.png',
+      alt: 'We Need to Talk About That Wormhole Scene in Interstellar',
+    },
+    tags: ['Interstellar', 'Christopher Nolan', 'Science Fiction', 'Movie Analysis', 'Film Critique'],
+    category: 'TV & Film',
+    metaDescription:
+      'A critical look at Interstellar\'s wormhole explanation scene. Why does Romilly need to explain basic physics to a trained NASA astronaut? An analysis of exposition and character consistency.',
+    metaKeywords: [
+      'Interstellar',
+      'Interstellar wormhole scene',
+      'Christopher Nolan',
+      'Movie critique',
+      'Film analysis',
+      'Interstellar review',
+      'Science fiction movies',
+      'Movie plot holes',
+      'Kip Thorne',
+      'Wormhole theory',
+    ],
+    featured: true,
+    display: true,
+    relatedArticles: ['15', '6', '12'],
+  },
+  {
     id: '16',
     slug: 'how-to-sell-your-timber-for-top-dollar-in-ohio',
     title: 'How to Sell Your Timber for Top Dollar in Ohio',
