@@ -11,6 +11,7 @@ import { AdsenseComponent } from '../adsense/adsense.component';
 import { MoviePoster } from '../movie-poster/movie-poster';
 import { MovieRatings } from '../movie-ratings/movie-ratings';
 import { VideoEmbedComponent } from '../video-embed/video-embed.component';
+import { AudioPlayerComponent } from '../audio-player/audio-player.component';
 import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/roku-compatibility-checker/roku-programmatic-compatibility-checker/roku-programmatic-compatibility-checker';
 
 /**
@@ -32,6 +33,7 @@ import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/ro
     MoviePoster,
     MovieRatings,
     VideoEmbedComponent,
+    AudioPlayerComponent,
     RokuProgrammaticCompatibilityChecker,
   ],
   templateUrl: './article-content.component.html',

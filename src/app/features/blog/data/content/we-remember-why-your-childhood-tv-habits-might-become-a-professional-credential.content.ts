@@ -5,6 +5,14 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'audio',
+    data: {
+      src: '/assets/audio/why-your-childhood-tv-habits-might-beomce-a-professional-credential.mp3',
+      title: 'Listen to this article',
+      description: 'Prefer to listen? Play the audio version of this article.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Here\'s something nobody\'s talking about yet.',

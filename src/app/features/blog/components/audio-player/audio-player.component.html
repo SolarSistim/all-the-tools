@@ -1,0 +1,116 @@
+<div class="audio-player-container">
+  @if (title) {
+    <h3 class="audio-title">{{ title }}</h3>
+  }
+
+  @if (description) {
+    <p class="audio-description">{{ description }}</p>
+  }
+
+  @if (!error) {
+    <!-- Initial Play Button (Collapsed State) -->
+    @if (!isExpanded) {
+      <button class="expand-player-btn" (click)="expandPlayer()" aria-label="Play audio version of this article">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="play-icon">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    }
+
+    <!-- Full Audio Player (Expanded State) -->
+    @if (isExpanded) {
+      <div class="audio-player">
+      <!-- Hidden audio element -->
+      <audio
+        #audioElement
+        [src]="src"
+        (timeupdate)="onTimeUpdate()"
+        (loadedmetadata)="onLoadedMetadata()"
+        (error)="onError()"
+        (ended)="isPlaying = false"
+      ></audio>
+
+      <!-- Static Waveform Preview (Scrubbing) -->
+      <div class="preview-container">
+        <canvas
+          #previewCanvas
+          class="preview-canvas"
+          width="800"
+          height="100"
+          (mousedown)="onPreviewMouseDown($event)"
+          (mousemove)="onPreviewMouseMove($event)"
+          (mouseup)="onPreviewMouseUp()"
+          (mouseleave)="onPreviewMouseLeave()"
+        ></canvas>
+        @if (isLoadingWaveform) {
+          <div class="waveform-loading">
+            <span class="loading-text">Loading waveform...</span>
+          </div>
+        }
+      </div>
+
+      <!-- Real-time Waveform Analyzer -->
+      <div class="waveform-container">
+        <canvas
+          #waveformCanvas
+          class="waveform-canvas"
+          width="800"
+          height="100"
+        ></canvas>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <!-- Play/Pause Button -->
+        <button
+          class="play-pause-btn"
+          (click)="togglePlayPause()"
+          [disabled]="isLoading"
+          [attr.aria-label]="isPlaying ? 'Pause' : 'Play'"
+        >
+          @if (isLoading) {
+            <span class="loading-spinner"></span>
+          } @else if (isPlaying) {
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          }
+        </button>
+
+        <!-- Time Display -->
+        <div class="time-display">
+          <span class="current-time">{{ formatTime(currentTime) }}</span>
+          <span class="separator">/</span>
+          <span class="duration">{{ formatTime(duration) }}</span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container" (click)="seek($event)">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="progressPercent"></div>
+          </div>
+        </div>
+
+        <!-- Close Button -->
+        <button
+          class="close-btn"
+          (click)="collapsePlayer()"
+          aria-label="Close audio player"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    }
+  } @else {
+    <div class="audio-error">
+      <p>Unable to load audio file. Please check the file path.</p>
+    </div>
+  }
+</div>

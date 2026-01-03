@@ -88,7 +88,8 @@ export type ContentBlockType =
   | 'component'
   | 'moviePoster'
   | 'movieRatings'
-  | 'video';
+  | 'video'
+  | 'audio';
 
 /**
  * Base content block
@@ -288,6 +289,18 @@ export interface VideoBlock extends ContentBlock {
     title?: string;
     description?: string;
     platform?: 'youtube' | 'vimeo';
+  };
+}
+
+/**
+ * Audio block (MP3 player)
+ */
+export interface AudioBlock extends ContentBlock {
+  type: 'audio';
+  data: {
+    src: string;
+    title?: string;
+    description?: string;
   };
 }
 
