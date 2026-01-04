@@ -1,9 +1,6 @@
 .audio-player-container {
   margin: 2rem 0;
   width: 100%;
-  border: 2px solid #2f344b;
-  border-radius: 12px;
-  padding: 1.5rem;
 }
 
 .audio-title {
@@ -165,6 +162,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   transition: all 0.2s ease;
   flex-shrink: 0;
 
@@ -180,6 +178,11 @@
   svg {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
+  }
+
+  .close-text {
+    display: none;
   }
 }
 
@@ -268,6 +271,14 @@
     padding: 1rem;
   }
 
+  .preview-canvas {
+    height: 100px;
+  }
+
+  .waveform-canvas {
+    height: 100px;
+  }
+
   .controls {
     flex-wrap: wrap;
   }
@@ -290,6 +301,18 @@
 
   .close-btn {
     order: 4;
+    width: 100%;
     margin-top: 0.5rem;
+    height: 44px;
+
+    &:hover {
+      transform: none;
+    }
+
+    .close-text {
+      display: inline;
+      font-weight: 500;
+      font-size: 1rem;
+    }
   }
 }

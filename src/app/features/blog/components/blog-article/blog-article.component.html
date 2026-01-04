@@ -90,21 +90,8 @@
       <app-article-content [blocks]="article.content"></app-article-content>
     </article>
 
-    <!-- Social Share (bottom) -->
-    <div class="social-share-bottom">
-      <h3>Share this article</h3>
-      <app-social-share-buttons
-        [title]="article.title"
-        [url]="articleUrl"
-        [description]="article.description"
-      ></app-social-share-buttons>
-    </div>
-
     <!-- Author Signature -->
     <app-author-signature [author]="article.author"></app-author-signature>
-
-    <!-- Email CTA -->
-    <app-cta-email-list [darkThemeBg]="'primary'"></app-cta-email-list>
 
     <!-- Related Articles -->
     <section class="related-articles" *ngIf="relatedArticles.length > 0">
@@ -133,6 +120,19 @@
         </a>
       </div>
     </section>
+
+    <!-- Social Share (bottom) -->
+    <div class="social-share-bottom">
+      <h3>Share this article</h3>
+      <app-social-share-buttons
+        [title]="article.title"
+        [url]="articleUrl"
+        [description]="article.description"
+      ></app-social-share-buttons>
+    </div>
+
+    <!-- Email CTA -->
+    <app-cta-email-list [darkThemeBg]="'primary'"></app-cta-email-list>
   </div>
 </div>
 
