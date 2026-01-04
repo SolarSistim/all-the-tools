@@ -51,7 +51,6 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   relatedArticles: ArticlePreview[] = [];
   readingTime: number = 0;
   articleUrl: string = '';
-  loading = true;
   fontSize: 'small' | 'medium' | 'large' = 'small';
 
   private readonly FONT_SIZE_STORAGE_KEY = 'blog-article-font-size';
@@ -70,7 +69,6 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
       this.updateMetaTags();
       this.updateStructuredData();
       this.loadRelatedArticles();
-      this.loading = false;
     } else {
       this.router.navigate(['/blog']);
     }
@@ -85,7 +83,6 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
         this.updateMetaTags();
         this.updateStructuredData();
         this.loadRelatedArticles();
-        this.loading = false;
       }
     });
   }
