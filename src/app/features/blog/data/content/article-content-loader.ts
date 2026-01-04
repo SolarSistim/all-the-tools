@@ -78,6 +78,10 @@ export async function loadArticleContent(
         const palaceModule = await import('./the-wild-story-of-the-gaudy-palace-on-scenic-highway.content');
         return palaceModule.content;
 
+      case 'why-pensacon-has-gone-downhill':
+        const pensaconModule = await import('./why-pensacon-has-gone-downhill.content');
+        return pensaconModule.content;
+
       default:
         console.warn(`No content file found for article: ${slug}`);
         return null;

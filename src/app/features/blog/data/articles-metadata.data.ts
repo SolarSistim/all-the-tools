@@ -9,6 +9,38 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '18',
+    slug: 'why-pensacon-has-gone-downhill',
+    title: 'Why Pensacon Has Gone Downhill - And What Can Be Done About It',
+    description:
+      'After seven years of attending Pensacon, it\'s time to talk about what\'s broken. From venue issues to communication failures, here\'s an honest look at how Pensacola\'s beloved convention is struggling, and what needs to change.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-04-2026',
+    heroImage: {
+      src: '/meta-images/og-why-pensacon-has-gone-downhill.png',
+      alt: 'Why Pensacon Has Gone Downhill - And What Can Be Done About It',
+    },
+    tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community'],
+    category: 'Amateur Sleuthing',
+    metaDescription:
+      'A critical examination of Pensacon\'s operational problems after seven years of attendance. Venue overcrowding, scheduling disasters, and communication failures are hurting Pensacola\'s beloved convention.',
+    metaKeywords: [
+      'Pensacon',
+      'Pensacon problems',
+      'Pensacola Bay Center',
+      'Pensacola conventions',
+      'Comic con Pensacola',
+      'Pensacon reviews',
+      'Pensacon issues',
+      'Pensacola events',
+      'Convention planning',
+      'Pensacon schedule',
+    ],
+    featured: true,
+    display: true,
+    relatedArticles: ['13', '9', '1'],
+  },
+  {
     id: '17',
     slug: 'we-need-to-talk-about-that-wormhole-scene-in-interstellar',
     title: 'We Need to Talk About That Wormhole Scene in Interstellar',
