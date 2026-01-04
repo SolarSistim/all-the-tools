@@ -40,6 +40,7 @@ export interface Article {
   featured?: boolean;
   display?: boolean; // Controls visibility on blog listing (defaults to true)
   relatedArticles?: string[]; // Article IDs
+  hasAudio?: boolean; // Indicates if article has audio version
 }
 
 /**
@@ -58,6 +59,7 @@ export interface ArticlePreview {
   readingTime: number; // in minutes
   featured?: boolean;
   display?: boolean; // Controls visibility on blog listing (defaults to true)
+  hasAudio?: boolean; // Indicates if article has audio version
 }
 
 /**

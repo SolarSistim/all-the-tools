@@ -5,6 +5,14 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'audio',
+    data: {
+      src: '/assets/audio/why-pensacon-has-gone-downhill.mp3',
+      title: 'Listen to this article',
+      description: 'Prefer to listen? Play the audio version of this article.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I need to get something off my chest, and yeah, this might ruffle some feathers.',
@@ -20,13 +28,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'But here\'s the thing: Something\'s broken.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'I\'m not alone in thinking this.',
+      text: 'But here\'s the thing: Something\'s broken, and it looks like I\'m not alone in thinking this.',
     },
   },
   {
@@ -39,7 +41,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The Pensacola Bay Center is too small. There. I said it. Everyone\'s thinking it, but the organizers keep dancing around it like it\'s some kind of taboo subject.',
+      text: 'The Pensacola Bay Center is too small. There, I said it. Everyone\'s thinking it, but the organizers keep dancing around it like it\'s some kind of taboo subject.',
     },
   },
   {

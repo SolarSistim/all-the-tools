@@ -295,6 +295,7 @@ export class BlogService {
       readingTime: this.calculateReadingTime(article),
       featured: metadata.featured,
       display: metadata.display,
+      hasAudio: metadata.hasAudio,
     };
   }
 

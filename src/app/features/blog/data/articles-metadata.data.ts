@@ -37,6 +37,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Pensacon schedule',
     ],
     featured: true,
+    hasAudio: true,
     display: true,
     relatedArticles: ['13', '9', '1'],
   },
@@ -253,6 +254,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Pattern recognition',
     ],
     featured: true,
+    hasAudio: true,
     relatedArticles: ['10', '3', '6'],
   },
   {

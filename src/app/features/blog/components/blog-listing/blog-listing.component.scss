@@ -401,6 +401,15 @@
   gap: 1rem;
   font-size: 0.875rem;
   color: var(--text-secondary);
+  align-items: center;
+}
+
+.audio-indicator {
+  font-size: 1.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--neon-cyan);
+  cursor: default;
 }
 
 .article-title {
@@ -564,6 +573,7 @@
   font-size: 0.875rem;
   color: var(--text-secondary);
   flex-shrink: 0;
+  align-items: center;
 }
 
 .article-list-title {

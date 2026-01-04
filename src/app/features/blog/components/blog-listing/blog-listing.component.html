@@ -159,7 +159,10 @@
           <div class="article-content">
             <div class="article-meta">
               <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
-              <span class="article-reading-time">{{ article.readingTime | readingTime }}</span>
+              <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
+              @if (article.hasAudio) {
+                <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
+              }
             </div>
 
             <h2 class="article-title">{{ article.title }}</h2>
@@ -211,7 +214,10 @@
               <span class="article-list-category">{{ article.category }}</span>
               <div class="article-list-meta">
                 <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
-                <span class="article-reading-time">{{ article.readingTime | readingTime }}</span>
+                <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
+                @if (article.hasAudio) {
+                  <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
+                }
               </div>
             </div>
 
