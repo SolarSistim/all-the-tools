@@ -41,6 +41,10 @@
           (mousemove)="onPreviewMouseMove($event)"
           (mouseup)="onPreviewMouseUp()"
           (mouseleave)="onPreviewMouseLeave()"
+          (touchstart)="onPreviewMouseDown($event)"
+          (touchmove)="onPreviewMouseMove($event)"
+          (touchend)="onPreviewMouseUp()"
+          (touchcancel)="onPreviewMouseLeave()"
         ></canvas>
         @if (isLoadingWaveform) {
           <div class="waveform-loading">
@@ -89,7 +93,7 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="progress-bar-container" (click)="seek($event)">
+        <div class="progress-bar-container" (click)="seek($event)" (touchstart)="seek($event)">
           <div class="progress-bar">
             <div class="progress-fill" [style.width.%]="progressPercent"></div>
           </div>

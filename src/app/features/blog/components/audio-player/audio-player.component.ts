@@ -163,10 +163,20 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isLoading = false;
   }
 
-  seek(event: MouseEvent): void {
+  seek(event: MouseEvent | TouchEvent): void {
+    if (this.duration === 0) return; // Wait for metadata to load
+
     const progressBar = event.currentTarget as HTMLElement;
     const rect = progressBar.getBoundingClientRect();
-    const percent = (event.clientX - rect.left) / rect.width;
+
+    // Handle both mouse and touch events
+    const clientX = event instanceof MouseEvent
+      ? event.clientX
+      : event.touches[0]?.clientX || event.changedTouches[0]?.clientX;
+
+    if (!clientX) return;
+
+    const percent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const audioElement = this.audioElementRef.nativeElement;
     audioElement.currentTime = percent * this.duration;
   }
@@ -313,21 +323,33 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
     ctx.stroke();
   }
 
-  seekPreview(event: MouseEvent): void {
+  seekPreview(event: MouseEvent | TouchEvent): void {
+    if (this.duration === 0) return; // Wait for metadata to load
+
     const canvas = event.currentTarget as HTMLCanvasElement;
     const rect = canvas.getBoundingClientRect();
-    const percent = (event.clientX - rect.left) / rect.width;
+
+    // Handle both mouse and touch events
+    const clientX = event instanceof MouseEvent
+      ? event.clientX
+      : event.touches[0]?.clientX || event.changedTouches[0]?.clientX;
+
+    if (!clientX) return;
+
+    const percent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     const audioElement = this.audioElementRef.nativeElement;
     audioElement.currentTime = percent * this.duration;
   }
 
-  onPreviewMouseDown(event: MouseEvent): void {
+  onPreviewMouseDown(event: MouseEvent | TouchEvent): void {
+    event.preventDefault(); // Prevent default touch behavior
     this.isDragging = true;
     this.seekPreview(event);
   }
 
-  onPreviewMouseMove(event: MouseEvent): void {
+  onPreviewMouseMove(event: MouseEvent | TouchEvent): void {
     if (this.isDragging) {
+      event.preventDefault(); // Prevent scrolling while dragging
       this.seekPreview(event);
     }
   }
