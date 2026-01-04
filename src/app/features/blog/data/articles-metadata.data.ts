@@ -70,6 +70,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Wormhole theory',
     ],
     featured: true,
+    hasAudio: true,
     display: true,
     relatedArticles: ['15', '6', '12'],
   },

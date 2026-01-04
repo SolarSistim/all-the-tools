@@ -5,6 +5,14 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'audio',
+    data: {
+      src: '/assets/audio/interstellar-wormhole-explanation-scene.mp3',
+      title: 'Listen to this article',
+      description: 'Prefer to listen? Play the audio version of this article.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I love this movie. Like, genuinely love it - Hans Zimmer\'s organ-heavy score still gives me chills, and the docking sequence makes my palms sweat every time. Nolan absolutely knocked it out of the park.',
