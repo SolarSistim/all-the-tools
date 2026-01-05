@@ -346,7 +346,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Diaz didn\'t get defensive or make excuses. He explained constraints, acknowledged failures, and committed to specific improvements. When someone reported a rude volunteer from 2019, he asked for details so he could investigate - even though he wasn\'t on staff back then. When an attendee raised accessibility concerns for autistic attendees, he asked for specifics and offered to discuss via DM.',
+      text: 'Diaz didn\'t get defensive or make excuses. He explained constraints, acknowledged failures, and committed to specific improvements. When someone reported a rude volunteer from 2019, he asked for details so he could investigate. When an attendee raised accessibility concerns for autistic attendees, he asked for specifics and offered to discuss via DM.',
     },
   },
   {
@@ -439,7 +439,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The Reddit AMA with Julio Diaz remains open for questions. Pensacon 2026 runs February 13-15 at the Pensacola Bay Center and venues throughout downtown Pensacola.',
+      text: 'The Reddit AMA with Julio Diaz remains open for questions. Pensacon 2026 runs February 20-22 at the Pensacola Bay Center and venues throughout downtown Pensacola.',
     },
   },
   {

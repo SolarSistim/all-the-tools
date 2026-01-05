@@ -31,6 +31,22 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Blog listing pages - extra aggressive cache busting
+[[headers]]
+  for = "/blog/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+
+# Blog index page - extra aggressive cache busting
+[[headers]]
+  for = "/blog"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+
 # Sitemap and robots.txt - cache for 1 hour (allows frequent updates)
 [[headers]]
   for = "/sitemap.xml"
