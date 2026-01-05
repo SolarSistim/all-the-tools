@@ -91,7 +91,13 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'On scheduling - arguably the most painful criticism - he was blunt: "There\'s no getting around it: Scheduling was a mess at the 2025 show. We know where things went wrong. And we started on working on ways to fix it before the show even ended last year."',
+      text: 'On scheduling - arguably the most painful criticism - he was blunt:',
+    },
+  },  {
+    type: 'blockquote',
+    data: {
+      text: 'There\'s no getting around it: Scheduling was a mess at the 2025 show. We know where things went wrong. And we started on working on ways to fix it before the show even ended last year.',
+      citation: 'Julio Diaz',
     },
   },
   {
