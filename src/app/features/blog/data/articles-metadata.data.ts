@@ -9,6 +9,38 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '19',
+    slug: 'pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention',
+    title: 'Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention',
+    description:
+      'After a critical article about Pensacon went viral, something unexpected happened: Julio Diaz, Pensacon\'s media director, showed up on Reddit for an impromptu AMA. What followed was a rare glimpse into the challenges of running Pensacola\'s largest convention.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-05-2026',
+    heroImage: {
+      src: '/meta-images/og-pensacon-responds.png',
+      alt: 'Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention',
+    },
+    tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community', 'Reddit'],
+    category: 'Amateur Sleuthing',
+    metaDescription:
+      'After criticism went public, Pensacon\'s Julio Diaz hosted an impromptu Reddit AMA addressing venue issues, scheduling failures, and the uphill battle to save Pensacola\'s beloved convention. Here\'s what he said.',
+    metaKeywords: [
+      'Pensacon',
+      'Pensacon 2026',
+      'Julio Diaz Pensacon',
+      'Pensacola Bay Center',
+      'Pensacola conventions',
+      'Comic con Pensacola',
+      'Pensacon response',
+      'Pensacola events',
+      'Convention management',
+      'Reddit AMA',
+    ],
+    featured: true,
+    display: true,
+    relatedArticles: ['18', '13', '1'],
+  },
+  {
     id: '18',
     slug: 'why-pensacon-has-gone-downhill',
     title: 'Why Pensacon Has Gone Downhill - And What Can Be Done About It',

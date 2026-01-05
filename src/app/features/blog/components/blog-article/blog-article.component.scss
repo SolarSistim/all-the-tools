@@ -226,6 +226,14 @@
     ::ng-deep .code-content {
       font-size: 0.875rem;
     }
+
+    ::ng-deep .quote-text {
+      font-size: 1.125rem;
+    }
+
+    ::ng-deep .quote-footer {
+      font-size: 0.9rem;
+    }
   }
 
   // Medium font size (larger - middle button)
@@ -270,6 +278,14 @@
     ::ng-deep .code-content {
       font-size: 1rem;
     }
+
+    ::ng-deep .quote-text {
+      font-size: 1.3rem;
+    }
+
+    ::ng-deep .quote-footer {
+      font-size: 1.05rem;
+    }
   }
 
   // Large font size (even larger - right button)
@@ -313,6 +329,14 @@
 
     ::ng-deep .code-content {
       font-size: 1.125rem;
+    }
+
+    ::ng-deep .quote-text {
+      font-size: 1.5rem;
+    }
+
+    ::ng-deep .quote-footer {
+      font-size: 1.2rem;
     }
   }
 }

@@ -15,8 +15,14 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'I need to get something off my chest, and yeah, this might ruffle some feathers.',
+      text: '<strong>Editor\'s Note:</strong> Following the publication of this article, Pensacon\'s media director Julio Diaz engaged in an extensive Reddit AMA addressing these concerns. <a href="/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention">Read the follow-up: Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention</a>',
       className: 'lead',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'I need to get something off my chest, and yeah, this might ruffle some feathers.',
     },
   },
   {
@@ -60,6 +66,12 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Meanwhile, Mobile just announced a brand new $300 million, 10,000-seat civic center just sixty miles away. You think touring acts and big-name guests won\'t notice?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<em>Update: Pensacon\'s leadership has since <a href="/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention">responded directly to venue concerns</a>, explaining the difficult reality of infrastructure constraints and their ongoing efforts to expand beyond the Bay Center\'s limitations.</em>',
     },
   },
   {
@@ -141,6 +153,12 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'paragraph',
+    data: {
+      text: '<em>Following this article\'s publication, Pensacon\'s Julio Diaz <a href="/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention">addressed the scheduling challenges</a> in detail, acknowledging where things went wrong and outlining specific improvements for future events.</em>',
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -169,6 +187,12 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'If you\'re running an event for 30,000 - 40,000 people, communication shouldn\'t be this hard.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<em>Pensacon has since <a href="/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention">acknowledged the app visibility issue</a> and committed to making the app more prominent on their website and communications for future events.</em>',
     },
   },
   {
@@ -335,6 +359,12 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'But love alone won\'t sustain it. At some point, operational competence has to match the ambition. The people running this thing need to hear the complaints - <i>really</i> hear them - and make concrete changes. Not just "we\'re sorry you had a negative experience" form responses.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Update:</strong> The organizers did hear these complaints. In a rare display of transparency, Pensacon\'s media director engaged directly with critics in an extensive public discussion. <a href="/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention">Read the full follow-up: Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention</a>',
     },
   },
   {

@@ -97,6 +97,10 @@ export async function loadArticleContent(
         const pensaconModule = await withTimeout(import('./why-pensacon-has-gone-downhill.content'));
         return pensaconModule.content;
 
+      case 'pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention':
+        const pensaconRespondsModule = await withTimeout(import('./pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content'));
+        return pensaconRespondsModule.content;
+
       default:
         console.warn(`No content file found for article: ${slug}`);
         return null;
