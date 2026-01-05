@@ -403,7 +403,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'This thing matters.',
+      text: 'This thing <i>matters</i>.',
     },
   },
   {
@@ -452,6 +452,30 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<a href="https://www.reddit.com/r/Pensacola/comments/1q3ywic/comment/nxqifwy/" target="_blank" rel="noopener noreferrer">This article about Pensacon\'s problems pretty much nails it</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'View the original Blog post here:',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<a href="https://www.allthethings.dev/blog/why-pensacon-has-gone-downhill" target="_blank" rel="noopener noreferrer">Why Pensacon Has Gone Downhill - And What Can Be Done About It</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Visit the Pensacon website here:',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<a href="https://www.pensacon.com/" target="_blank" rel="noopener noreferrer">Pensacon - February 20-22, 2026</a>',
     },
   },
 ];
