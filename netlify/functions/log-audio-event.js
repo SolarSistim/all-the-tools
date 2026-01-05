@@ -59,6 +59,8 @@ exports.handler = async (event, context) => {
       action: data.action || 'Unknown', // 'play' or 'pause'
       urlPath: data.urlPath || '/',
       country: geoData?.country?.code || event.headers['x-country'] || 'Unknown',
+      city: geoData?.city || 'Unknown',
+      region: geoData?.subdivision?.code || 'Unknown',
       sessionId: data.sessionId || '',
       deviceType: data.deviceType || 'Unknown',
       userAgent: data.userAgent || event.headers['user-agent'] || 'Unknown',
@@ -79,15 +81,17 @@ exports.handler = async (event, context) => {
 
     // Use the audio_player sheet
     const sheetName = 'audio_player';
-    const range = `${sheetName}!A:H`;
+    const range = `${sheetName}!A:J`;
 
     // Prepare the row data matching the headers:
-    // Date, Action, URL Path, Country, Session ID, Device Type, User Agent, Screen Resolution
+    // Date, Action, URL Path, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
     const values = [[
       audioEventInfo.humanReadableDate,
       audioEventInfo.action,
       audioEventInfo.urlPath,
       audioEventInfo.country,
+      audioEventInfo.city,
+      audioEventInfo.region,
       audioEventInfo.sessionId,
       audioEventInfo.deviceType,
       audioEventInfo.userAgent,
