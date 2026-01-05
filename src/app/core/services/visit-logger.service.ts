@@ -111,7 +111,7 @@ export class VisitLoggerService {
    */
   private getDeviceType(): string {
     const ua = navigator.userAgent;
-    
+
     if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
       return 'Tablet';
     }
@@ -119,5 +119,56 @@ export class VisitLoggerService {
       return 'Mobile';
     }
     return 'Desktop';
+  }
+
+  /**
+   * Log an audio player event (play/pause)
+   */
+  logAudioEvent(action: 'play' | 'pause', urlPath: string): void {
+    // Only run in browser
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Use requestIdleCallback to ensure this doesn't impact performance
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => this.sendAudioEventLog(action, urlPath), { timeout: 2000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(() => this.sendAudioEventLog(action, urlPath), 100);
+    }
+  }
+
+  /**
+   * Send audio event data to the Netlify function
+   */
+  private async sendAudioEventLog(action: 'play' | 'pause', urlPath: string): Promise<void> {
+    try {
+      const audioEventData = {
+        action: action,
+        urlPath: urlPath,
+        sessionId: this.sessionId,
+        deviceType: this.getDeviceType(),
+        userAgent: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+      };
+
+      // Send to Netlify function (fire and forget)
+      fetch('/.netlify/functions/log-audio-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(audioEventData),
+        // Use keepalive to ensure the request completes even if user navigates away
+        keepalive: true,
+      }).catch(err => {
+        // Silently fail - we don't want to impact user experience
+        console.debug('Audio event logging failed:', err);
+      });
+    } catch (error) {
+      // Silently fail
+      console.debug('Error preparing audio event log:', error);
+    }
   }
 }

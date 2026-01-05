@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { VisitLoggerService } from '../../../../core/services/visit-logger.service';
 
 /**
  * Audio Player Component
@@ -20,6 +21,9 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('audioElement') audioElementRef!: ElementRef<HTMLAudioElement>;
   @ViewChild('waveformCanvas') waveformCanvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('previewCanvas') previewCanvasRef!: ElementRef<HTMLCanvasElement>;
+
+  private visitLogger = inject(VisitLoggerService);
+  private location = inject(Location);
 
   isPlaying = false;
   currentTime = 0;
@@ -130,12 +134,16 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.isPlaying) {
       audioElement.pause();
+      // Log pause event
+      this.visitLogger.logAudioEvent('pause', this.location.path());
     } else {
       // Resume audio context if suspended
       if (this.audioContext?.state === 'suspended') {
         this.audioContext.resume();
       }
       audioElement.play();
+      // Log play event
+      this.visitLogger.logAudioEvent('play', this.location.path());
     }
 
     this.isPlaying = !this.isPlaying;
@@ -390,6 +398,8 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
           const audioElement = this.audioElementRef.nativeElement;
           audioElement.play().then(() => {
             this.isPlaying = true;
+            // Log play event when auto-playing on expand
+            this.visitLogger.logAudioEvent('play', this.location.path());
           }).catch((err) => {
             console.warn('Auto-play prevented by browser:', err);
           });
@@ -407,6 +417,8 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
       audioElement.pause();
       audioElement.currentTime = 0;
       this.isPlaying = false;
+      // Log pause event when collapsing
+      this.visitLogger.logAudioEvent('pause', this.location.path());
     }
   }
 }
