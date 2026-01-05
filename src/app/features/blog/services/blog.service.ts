@@ -69,6 +69,14 @@ export class BlogService {
   ): Observable<PaginatedResponse<ArticlePreview>> {
     let previews = this.previewsCache();
 
+    // Fallback to metadata if previews cache is not yet initialized
+    if (previews.length === 0 && this.metadataCache().length > 0) {
+      previews = this.metadataCache().map(metadata => ({
+        ...metadata,
+        readingTime: this.estimateReadingTime(metadata),
+      }));
+    }
+
     // Filter out non-displayed articles (display defaults to true if not specified)
     previews = previews.filter((p) => p.display !== false);
 
@@ -161,7 +169,17 @@ export class BlogService {
     limit: number = 3
   ): Observable<ArticlePreview[]> {
     let related: ArticlePreview[] = [];
-    const displayedPreviews = this.previewsCache().filter((p) => p.display !== false);
+    let previews = this.previewsCache();
+
+    // Fallback to metadata if previews cache is not yet initialized
+    if (previews.length === 0 && this.metadataCache().length > 0) {
+      previews = this.metadataCache().map(metadata => ({
+        ...metadata,
+        readingTime: this.estimateReadingTime(metadata),
+      }));
+    }
+
+    const displayedPreviews = previews.filter((p) => p.display !== false);
 
     // First, try to get explicitly related articles
     if (article.relatedArticles && article.relatedArticles.length > 0) {
@@ -218,7 +236,17 @@ export class BlogService {
    * Get featured articles
    */
   getFeaturedArticles(limit: number = 3): Observable<ArticlePreview[]> {
-    const featured = this.previewsCache()
+    let previews = this.previewsCache();
+
+    // Fallback to metadata if previews cache is not yet initialized
+    if (previews.length === 0 && this.metadataCache().length > 0) {
+      previews = this.metadataCache().map(metadata => ({
+        ...metadata,
+        readingTime: this.estimateReadingTime(metadata),
+      }));
+    }
+
+    const featured = previews
       .filter((p) => p.display !== false)
       .filter((p) => p.featured)
       .slice(0, limit);
@@ -229,7 +257,17 @@ export class BlogService {
    * Get recent articles
    */
   getRecentArticles(limit: number = 5): Observable<ArticlePreview[]> {
-    const recent = [...this.previewsCache()]
+    let previews = this.previewsCache();
+
+    // Fallback to metadata if previews cache is not yet initialized
+    if (previews.length === 0 && this.metadataCache().length > 0) {
+      previews = this.metadataCache().map(metadata => ({
+        ...metadata,
+        readingTime: this.estimateReadingTime(metadata),
+      }));
+    }
+
+    const recent = [...previews]
       .filter((p) => p.display !== false)
       .sort((a, b) => {
         const dateA = new Date(a.publishedDate).getTime();

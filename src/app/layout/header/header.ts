@@ -183,6 +183,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Load theme preference from localStorage
    */
   private loadThemeFromStorage(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     try {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {

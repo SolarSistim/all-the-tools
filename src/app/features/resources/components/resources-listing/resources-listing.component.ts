@@ -1,5 +1,5 @@
-import { Component, OnInit, inject, DestroyRef, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, DestroyRef, signal, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -46,6 +46,7 @@ export class ResourcesListingComponent implements OnInit {
   private metaService = inject(MetaService);
   private structuredDataService = inject(StructuredDataService);
   private destroyRef = inject(DestroyRef);
+  private platformId = inject(PLATFORM_ID);
 
   resources: ResourcePreview[] = [];
   currentPage = 1;
@@ -61,10 +62,12 @@ export class ResourcesListingComponent implements OnInit {
   viewMode: ViewMode = 'tile-4';
 
   ngOnInit(): void {
-    // Load view mode from localStorage
-    const savedViewMode = localStorage.getItem('resources-view-mode');
-    if (this.isValidViewMode(savedViewMode)) {
-      this.viewMode = savedViewMode as ViewMode;
+    // Load view mode from localStorage (only in browser)
+    if (isPlatformBrowser(this.platformId)) {
+      const savedViewMode = localStorage.getItem('resources-view-mode');
+      if (this.isValidViewMode(savedViewMode)) {
+        this.viewMode = savedViewMode as ViewMode;
+      }
     }
 
     // Load all resources for search autocomplete
@@ -226,7 +229,9 @@ export class ResourcesListingComponent implements OnInit {
 
   setViewMode(mode: ViewMode): void {
     this.viewMode = mode;
-    localStorage.setItem('resources-view-mode', mode);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('resources-view-mode', mode);
+    }
   }
 
   getDifficultyColor(difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A'): string {

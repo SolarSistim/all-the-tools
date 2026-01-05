@@ -1,5 +1,5 @@
-import { Component, OnInit, inject, DestroyRef, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject, DestroyRef, signal, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -48,6 +48,7 @@ export class BlogListingComponent implements OnInit {
   private metaService = inject(MetaService);
   private structuredDataService = inject(StructuredDataService);
   private destroyRef = inject(DestroyRef);
+  private platformId = inject(PLATFORM_ID);
 
   articles: ArticlePreview[] = [];
   currentPage = 1;
@@ -64,10 +65,12 @@ export class BlogListingComponent implements OnInit {
   categories: string[] = [];
 
   ngOnInit(): void {
-    // Load view mode from localStorage
-    const savedViewMode = localStorage.getItem('blog-view-mode');
-    if (savedViewMode === 'list' || savedViewMode === 'tile') {
-      this.viewMode = savedViewMode;
+    // Load view mode from localStorage (only in browser)
+    if (isPlatformBrowser(this.platformId)) {
+      const savedViewMode = localStorage.getItem('blog-view-mode');
+      if (savedViewMode === 'list' || savedViewMode === 'tile') {
+        this.viewMode = savedViewMode;
+      }
     }
     // Load all articles for search autocomplete
     this.blogService.getArticlePreviews(1, 1000).subscribe({
@@ -210,6 +213,8 @@ export class BlogListingComponent implements OnInit {
 
   setViewMode(mode: 'tile' | 'list'): void {
     this.viewMode = mode;
-    localStorage.setItem('blog-view-mode', mode);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('blog-view-mode', mode);
+    }
   }
 }

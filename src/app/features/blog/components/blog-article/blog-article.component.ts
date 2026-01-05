@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, inject, DestroyRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, inject, DestroyRef, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -46,6 +46,7 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   private metaService = inject(MetaService);
   private structuredDataService = inject(StructuredDataService);
   private destroyRef = inject(DestroyRef);
+  private platformId = inject(PLATFORM_ID);
 
   article: Article | null = null;
   relatedArticles: ArticlePreview[] = [];
@@ -165,22 +166,32 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   }
 
   private loadFontSizePreference(): void {
+    // Only access localStorage in browser
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     try {
       const savedSize = localStorage.getItem(this.FONT_SIZE_STORAGE_KEY);
       if (savedSize && (savedSize === 'small' || savedSize === 'medium' || savedSize === 'large')) {
         this.fontSize = savedSize;
       }
     } catch (error) {
-      // LocalStorage might not be available (e.g., in SSR or private browsing mode)
+      // LocalStorage might not be available (e.g., private browsing mode)
       console.warn('Unable to load font size preference from localStorage:', error);
     }
   }
 
   private saveFontSizePreference(size: 'small' | 'medium' | 'large'): void {
+    // Only access localStorage in browser
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     try {
       localStorage.setItem(this.FONT_SIZE_STORAGE_KEY, size);
     } catch (error) {
-      // LocalStorage might not be available (e.g., in SSR or private browsing mode)
+      // LocalStorage might not be available (e.g., private browsing mode)
       console.warn('Unable to save font size preference to localStorage:', error);
     }
   }
