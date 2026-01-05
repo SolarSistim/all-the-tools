@@ -37,6 +37,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Reddit AMA',
     ],
     featured: true,
+    hasAudio: true,
     display: true,
     relatedArticles: ['18', '13', '1'],
   },

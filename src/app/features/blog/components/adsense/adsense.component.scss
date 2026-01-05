@@ -3,9 +3,13 @@
   display: block;
   width: 100%;
   min-height: 250px;
-  border: 24px solid #212537;
-  border-radius: 16px;
   padding: 0;
+
+  // Only show border on desktop (768px and above)
+  @media (min-width: 768px) {
+    border: 24px solid #212537;
+    border-radius: 16px;
+  }
 
   .adsbygoogle {
     display: block;
