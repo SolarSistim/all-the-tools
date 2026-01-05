@@ -5,6 +5,14 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'audio',
+    data: {
+      src: '/assets/audio/c-beams-the-top-down-space-action-rpg-that-gets-it.mp3',
+      title: 'Listen to this article',
+      description: 'Prefer to listen? Play the audio version of this article.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'There\'s a particular kind of quiet that settles in when you\'re staring at a star map. Not the peaceful kind—more like the something-is-about-to-go-wrong kind. That\'s the feeling I got the first time I dug into C-Beams, an upcoming top-down space action RPG that\'s been slowly, methodically worming its way into my most-anticipated list.',
