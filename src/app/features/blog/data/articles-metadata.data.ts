@@ -9,6 +9,41 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '20',
+    slug: 'lighthuggers-when-fan-art-captures-the-impossible',
+    title: 'LIGHTHUGGERS: Fan Art Captures Alastair Reynolds\' "Revelation Space"',
+    description:
+      'Alastair Reynolds\'s Revelation Space lighthuggers are magnificent, terrifying vessels that take months just to reach cruising velocity. Here\'s the incredible fan art that brings these starships to life.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-06-2026',
+    heroImage: {
+      src: '/meta-images/og-lighthuggers-fan-art.png',
+      alt: 'LIGHTHUGGERS: When Fan Art Captures the Impossible',
+    },
+    tags: ['Revelation Space', 'Alastair Reynolds', 'Science Fiction', 'Fan Art', 'Lighthuggers', 'Concept Art'],
+    category: 'Books & Literature',
+    metaDescription:
+      'Exploring the incredible fan art inspired by Alastair Reynolds\'s lighthuggers from the Revelation Space series. From Zandoarts to Victor Tomioka, these artists capture the haunting scale of near-lightspeed starships.',
+    metaKeywords: [
+      'Lighthuggers',
+      'Revelation Space',
+      'Alastair Reynolds',
+      'Nostalgia for Infinity',
+      'Redemption Ark',
+      'Absolution Gap',
+      'Science fiction art',
+      'Concept art',
+      'Fan art',
+      'Space opera',
+      'Hard science fiction',
+      'Revelation Space art',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['17', '15', '12'],
+  },
+  {
     id: '19',
     slug: 'pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention',
     title: 'Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention',
