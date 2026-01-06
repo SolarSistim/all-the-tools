@@ -13,6 +13,7 @@ import { MovieRatings } from '../movie-ratings/movie-ratings';
 import { VideoEmbedComponent } from '../video-embed/video-embed.component';
 import { AudioPlayerComponent } from '../audio-player/audio-player.component';
 import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/roku-compatibility-checker/roku-programmatic-compatibility-checker/roku-programmatic-compatibility-checker';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 /**
  * Article Content Component
@@ -35,6 +36,7 @@ import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/ro
     VideoEmbedComponent,
     AudioPlayerComponent,
     RokuProgrammaticCompatibilityChecker,
+    CtaEmailList,
   ],
   templateUrl: './article-content.component.html',
   styleUrls: ['./article-content.component.scss'],

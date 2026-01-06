@@ -86,6 +86,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: '<strong>What went wrong:</strong> They tried to make a "serious" version of material that only works when you lean into the ridiculousness. You can\'t make Total Recall grounded and gritty. Commit to the bit or don\'t bother.',
@@ -280,6 +287,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: '<strong>What went wrong:</strong> Everything felt half-hearted. The scares weren\'t scary. The action wasn\'t exciting. The family drama wasn\'t moving. It\'s a Stephen King adaptation that forgot to include any of the tension, dread, or human stakes that make King\'s work resonate. When a movie can\'t hold my attention for 30 minutes, it\'s failed at its most basic job.',
@@ -471,6 +485,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'The 2011 version tries to be more faithful to the source material, which sounds good, but in execution it just feels generic. The action is fine but forgettable. The villain is unmemorable. The story lacks weight. It\'s competent in a way that makes it instantly disposable.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

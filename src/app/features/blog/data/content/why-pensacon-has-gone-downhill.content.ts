@@ -106,6 +106,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Once inside, things didn\'t improve. "No one understood where to go, where we COULD go, nor where we could NOT go," they wrote. The schedule? Only accessible through an app that wouldn\'t load because cell reception in the building is abysmal. The big screens in the arena that could\'ve displayed upcoming events? Just... nothing useful.',
@@ -250,6 +257,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'But community goodwill isn\'t infinite. You can\'t keep cramming people into an inadequate venue, failing to communicate schedule changes, running a broken app, and expecting everyone to just shrug it off because hey, at least we have this event at all.',
@@ -294,6 +308,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Communication has to improve dramatically. The app needs to work. Schedule changes need to go out immediately - via push notification, email, text, and social media, all of it. When you\'re charging people $70+ for a single day, they deserve to know if the person they came to see moved to a different day.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

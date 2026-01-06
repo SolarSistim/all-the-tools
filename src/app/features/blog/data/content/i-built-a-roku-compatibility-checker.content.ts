@@ -83,6 +83,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -188,6 +195,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Check it out. Bookmark it. Hopefully it saves you from the same rabbit holes I\'ve been stuck in.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

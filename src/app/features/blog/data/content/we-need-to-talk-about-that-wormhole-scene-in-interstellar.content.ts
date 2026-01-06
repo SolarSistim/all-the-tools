@@ -70,6 +70,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I learned about wormhole theory in eighth grade. Maybe earlier, actually - I can\'t remember if it was a science class or just me reading too many Brian Greene books as a teenager. Point is, this isn\'t obscure knowledge. Einstein-Rosen bridges have been pop culture currency since, what, the 1980s? Contact? Event Horizon? Every Stargate episode ever made?',
@@ -139,6 +146,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I refuse to believe that. These are scientists. Obsessive, meticulous, the-fate-of-humanity-rests-on-our-shoulders scientists. They would have briefed Cooper until his eyes bled. There would have been PowerPoints, diagrams. Probably a whole week dedicated to "Wormhole 101" and another week for "Advanced Wormhole Topics."',
@@ -199,6 +213,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'In an otherwise meticulous film - a movie that hired Kip Thorne as a scientific consultant, that rendered a black hole so accurately it led to actual scientific papers - this moment feels lazy. It\'s the one crack in the facade. The one time Nolan prioritized audience hand-holding over internal logic.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

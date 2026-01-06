@@ -148,5 +148,11 @@
     <app-roku-programmatic-compatibility-checker
       *ngIf="block.type === 'component' && block.data.componentName === 'roku-checker'"
     ></app-roku-programmatic-compatibility-checker>
+
+    <!-- Email CTA Component -->
+    <app-cta-email-list
+      *ngIf="block.type === 'component' && block.data.componentName === 'email-cta'"
+      [darkThemeBg]="block.data.darkThemeBg || 'secondary'"
+    ></app-cta-email-list>
   </ng-container>
 </div>

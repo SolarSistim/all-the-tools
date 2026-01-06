@@ -66,6 +66,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {
       adClient: 'ca-pub-7077792325295668',
@@ -96,6 +103,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'The timber is then marketed to a large group of reputable, honest buyers and loggers. Typically, 25 to 30 buyers are invited to evaluate the stand. Every buyer knows that others are competing for the same timber, which helps drive bids upward and protects the landowner from being taken advantage of.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

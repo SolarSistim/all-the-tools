@@ -175,6 +175,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: '35% of 80:',
@@ -342,6 +349,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'It\'s not about being a math genius. It\'s about having a handful of shortcuts that work.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
 ];

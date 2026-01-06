@@ -103,6 +103,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -379,6 +386,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Then they target the next galaxy. And the next.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {
@@ -1035,6 +1049,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'That\'s not a gift: that\'s apocalypse.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

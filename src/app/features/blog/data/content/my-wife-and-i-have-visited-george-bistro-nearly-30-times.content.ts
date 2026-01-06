@@ -103,6 +103,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -288,6 +295,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'The Mini Crab Cakes were tasty but didn\'t have that burst of flavor I\'ve come to expect from George\'s. The Sweet Bacon Brussels and Petit Kale Caesar are both competent and well-composed, but nothing that made me feel like I had to order them again. The Beef Carpaccio is enjoyable but mild. I\'m more of a bold flavor person, so I\'ve only ordered the Beef Carpaccio once.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {
@@ -577,6 +591,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'A fantastic carb-heavy main. House made pappardelle with creamy alfredo sauce, wild mushrooms, white truffle oil, parmesan, and scallions. I\'ve ordered this probably three times, particularly when I\'m hungry. It\'s heavy and it\'ll fill you up quick. Comes with chicken, shrimp, or salmon, and I always default to the shrimp.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

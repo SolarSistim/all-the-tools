@@ -105,6 +105,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {
       adClient: 'ca-pub-7077792325295668',
@@ -195,6 +202,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<strong>Recommended pairing:</strong> Energy drinks, obviously. And maybe some pinball afterward.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

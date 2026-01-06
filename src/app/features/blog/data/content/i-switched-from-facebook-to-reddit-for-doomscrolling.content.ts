@@ -80,6 +80,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -171,6 +178,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Reddit worked for me. It might work for you too.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

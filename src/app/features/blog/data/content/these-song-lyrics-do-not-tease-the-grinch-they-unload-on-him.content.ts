@@ -70,6 +70,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'It also frames him as actively hostile to joy. Not indifferent, or tired, but outright hostile. Wherever happiness appears, he ruins it. Celebrations, shared excitement - he doesn\'t opt out, he actively destroys. Psychologically, that points to envy. Not the loud kind, but the quiet, corrosive kind that can\'t stand seeing others enjoy what you\'ve given up on.',
@@ -136,6 +143,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<strong>If the Grinch can come back from that, maybe no one is actually past saving.</strong>',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

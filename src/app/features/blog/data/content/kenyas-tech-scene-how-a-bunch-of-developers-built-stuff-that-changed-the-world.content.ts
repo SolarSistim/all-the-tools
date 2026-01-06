@@ -43,6 +43,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Except it wasn\'t just done. That emergency hack job? It\'s now been deployed in something like 160 countries. Haiti earthquake response. Election monitoring across three continents. Even tracking medicine shortages in Southeast Africa. The code\'s been downloaded over 125,000 times.',
@@ -246,6 +253,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Something I find interesting: Kenya\'s tech-forward culture has bled into media too. Independent creators are using web technologies to build journalism platforms from scratch.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

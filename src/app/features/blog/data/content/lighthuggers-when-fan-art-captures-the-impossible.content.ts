@@ -198,6 +198,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'And the ships themselves age. They get patched. Rebuilt. Modified beyond recognition. The Nostalgia for Infinity has been flying for centuries. Centuries! With crews coming and going, with cargo and passengers cycling through, with battles and repairs. These aren\'t gleaming Federation starships fresh off the assembly line. They\'re survivors.',
@@ -705,6 +712,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'If any of this art moves you half as much as it moved me, do yourself a favor: go visit these artists\' pages, leave comments, support their work. Fan communities thrive when we celebrate the people who add to our shared imaginative spaces.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

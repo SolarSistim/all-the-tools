@@ -4,20 +4,21 @@
   position: relative;
   transition: background-color 0.3s ease;
 
-  // Dark theme background overrides
+  // Dark theme background overrides - now reactive to theme
   &.dark-bg-primary {
-    background: #0A0E1A !important;
+    padding: 0;
+    background: var(--bg-primary);
 
     .email-cta-card {
-      background: #1A1E2E !important;
+      background: var(--bg-secondary);
     }
   }
 
   &.dark-bg-secondary {
-    background: #1A1E2E !important;
+    background: var(--bg-secondary);
 
     .email-cta-card {
-      background: #0A0E1A !important;
+      background: var(--bg-primary);
     }
   }
 

@@ -162,6 +162,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -379,6 +386,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'If you\'re thinking about building a site and you\'re comfortable with code, consider going front-end only. It\'s not for everyone, but it might be exactly what you need.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

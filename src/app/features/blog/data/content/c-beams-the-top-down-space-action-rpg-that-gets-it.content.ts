@@ -68,6 +68,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'So seeing him now, years later, pouring that same attention to detail into documenting the development of his own game? That hits differently. There\'s a weird sense of continuity there, like watching someone you grew up listening to step behind the curtain and start building the thing instead of just analyzing it. It makes the project feel personal in a way marketing trailers never quite manage.',
@@ -145,6 +152,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'I can\'t shake the feeling that C-Beams is a quiet nod to Blade Runner - specifically Rutger Hauer\'s legendary monologue. "I watched attack ships on fire off the shoulder of Orion… C-beams glitter in the dark near the Tannhäuser Gate."',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

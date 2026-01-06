@@ -89,6 +89,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -190,6 +197,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'A momentary lapse in focus, and the truck drifts right. It\'s just what happens when you\'re staring at the same stretch of asphalt for tens of hours.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

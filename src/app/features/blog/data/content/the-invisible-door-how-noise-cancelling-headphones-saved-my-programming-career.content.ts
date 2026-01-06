@@ -93,6 +93,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
   },
@@ -222,6 +229,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Turns out I was fine at concentrating. I just needed a door.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

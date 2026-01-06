@@ -115,6 +115,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'What he couldn\'t promise was perfection. These are human beings - actors with filming schedules, flights that get delayed, illnesses that strike at the worst possible moment. "Change does happen," Diaz acknowledged. But the goal is having a rock-solid schedule before it goes public, and communicating immediately when the inevitable curveballs arrive.',
@@ -214,6 +221,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'That tension - loving something while acknowledging its flaws - ran through most of the comments.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {
@@ -424,6 +438,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'But conventions don\'t survive on goodwill alone. They survive on execution. On delivering experiences that justify the ticket prices. On making people feel like they got more than they paid for.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {
