@@ -75,6 +75,12 @@ export class BarcodeReader implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stopScanning();
     this.codeReader?.reset();
+
+    // Ensure camera stream is stopped
+    if (this.videoElement?.nativeElement?.srcObject) {
+      const stream = this.videoElement.nativeElement.srcObject as MediaStream;
+      stream.getTracks().forEach(track => track.stop());
+    }
   }
 
   private updateMetaTags(): void {
@@ -159,39 +165,40 @@ export class BarcodeReader implements OnInit, OnDestroy {
 
       const selectedDeviceId = this.selectedCamera();
 
-      await this.codeReader.decodeFromVideoDevice(
-        selectedDeviceId || null,
-        this.videoElement.nativeElement,
-        (result, error) => {
-          if (result) {
-            const code = result.getText();
-            const format = result.getBarcodeFormat().toString();
-            const now = Date.now();
-
-            // Prevent duplicate rapid scans of the same code
-            if (code === this.lastScannedCode && now - this.lastScannedTime < this.DUPLICATE_SCAN_WINDOW) {
-              return;
-            }
-
-            this.lastScannedCode = code;
-            this.lastScannedTime = now;
-
-            // Show scan result for approval
-            this.currentScan.set({ code, format });
-            this.pauseScanning();
-            this.state.set('scanResult');
-
-            // Optional: vibrate if available
-            if ('vibrate' in navigator) {
-              navigator.vibrate(200);
-            }
-          }
-
-          if (error && !(error instanceof NotFoundException)) {
-            console.error('Scan error:', error);
-          }
+      // Request camera with autofocus constraints for better barcode scanning
+      const constraints: MediaStreamConstraints = {
+        video: {
+          deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
+          facingMode: selectedDeviceId ? undefined : { ideal: 'environment' },
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+          // @ts-ignore - focusMode is supported but not in TypeScript types
+          focusMode: 'continuous',
+          // @ts-ignore
+          focusDistance: 0,
         }
-      );
+      };
+
+      // Get media stream with autofocus
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+      // Set video source
+      this.videoElement.nativeElement.srcObject = stream;
+      await this.videoElement.nativeElement.play();
+
+      // Apply advanced camera settings for autofocus if supported
+      const track = stream.getVideoTracks()[0];
+      const capabilities = track.getCapabilities() as any;
+
+      if (capabilities.focusMode && capabilities.focusMode.includes('continuous')) {
+        await track.applyConstraints({
+          // @ts-ignore
+          advanced: [{ focusMode: 'continuous' }]
+        });
+      }
+
+      // Start continuous scanning loop
+      this.continuousScanning();
     } catch (error) {
       console.error('Error starting scanner:', error);
       const errorDetails = error instanceof Error ? error.message : String(error);
@@ -199,6 +206,49 @@ export class BarcodeReader implements OnInit, OnDestroy {
       this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
       this.state.set('error');
       this.scanningInProgress = false;
+    }
+  }
+
+  private async continuousScanning(): Promise<void> {
+    if (!this.scanningInProgress || !this.codeReader || !this.videoElement?.nativeElement) {
+      return;
+    }
+
+    try {
+      const result = await this.codeReader.decodeFromVideoElement(this.videoElement.nativeElement);
+
+      if (result) {
+        const code = result.getText();
+        const format = result.getBarcodeFormat().toString();
+        const now = Date.now();
+
+        // Prevent duplicate rapid scans of the same code
+        if (code !== this.lastScannedCode || now - this.lastScannedTime >= this.DUPLICATE_SCAN_WINDOW) {
+          this.lastScannedCode = code;
+          this.lastScannedTime = now;
+
+          // Show scan result for approval
+          this.currentScan.set({ code, format });
+          this.pauseScanning();
+          this.state.set('scanResult');
+
+          // Optional: vibrate if available
+          if ('vibrate' in navigator) {
+            navigator.vibrate(200);
+          }
+          return; // Stop continuous scanning
+        }
+      }
+    } catch (error) {
+      // Ignore NotFoundException - just means no barcode found yet
+      if (!(error instanceof NotFoundException)) {
+        console.error('Scan error:', error);
+      }
+    }
+
+    // Continue scanning if still in scanning state
+    if (this.scanningInProgress && this.state() === 'scanning') {
+      requestAnimationFrame(() => this.continuousScanning());
     }
   }
 
@@ -210,9 +260,10 @@ export class BarcodeReader implements OnInit, OnDestroy {
   }
 
   private resumeScanning(): void {
-    // Resume the video
+    // Resume the video and restart scanning loop
     if (this.videoElement?.nativeElement) {
       this.videoElement.nativeElement.play();
+      this.continuousScanning();
     }
   }
 
@@ -220,6 +271,14 @@ export class BarcodeReader implements OnInit, OnDestroy {
     if (this.codeReader) {
       this.codeReader.reset();
     }
+
+    // Stop the camera stream
+    if (this.videoElement?.nativeElement?.srcObject) {
+      const stream = this.videoElement.nativeElement.srcObject as MediaStream;
+      stream.getTracks().forEach(track => track.stop());
+      this.videoElement.nativeElement.srcObject = null;
+    }
+
     this.scanningInProgress = false;
     this.state.set('idle');
     this.currentScan.set(null);
