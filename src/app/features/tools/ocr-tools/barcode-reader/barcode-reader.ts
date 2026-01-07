@@ -165,7 +165,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
 
       const selectedDeviceId = this.selectedCamera();
 
-      // Use simpler constraints - lower resolution often focuses better on mobile
+      // Request camera with autofocus enabled
       const constraints: MediaStreamConstraints = {
         video: {
           deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
@@ -181,6 +181,56 @@ export class BarcodeReader implements OnInit, OnDestroy {
       // Set video source
       this.videoElement.nativeElement.srcObject = stream;
       await this.videoElement.nativeElement.play();
+
+      // Try to enable autofocus after stream is active
+      const track = stream.getVideoTracks()[0];
+      const capabilities = track.getCapabilities() as any;
+      const settings = track.getSettings() as any;
+
+      console.log('Camera capabilities:', capabilities);
+      console.log('Current settings:', settings);
+
+      // Try different focus modes
+      if (capabilities.focusMode) {
+        console.log('Available focus modes:', capabilities.focusMode);
+
+        // Try continuous autofocus first
+        if (capabilities.focusMode.includes('continuous')) {
+          try {
+            await track.applyConstraints({
+              advanced: [{ focusMode: 'continuous' } as any]
+            });
+            console.log('Continuous autofocus enabled');
+          } catch (e) {
+            console.log('Continuous autofocus failed:', e);
+          }
+        }
+        // Fallback to single-shot autofocus
+        else if (capabilities.focusMode.includes('single-shot')) {
+          try {
+            await track.applyConstraints({
+              advanced: [{ focusMode: 'single-shot' } as any]
+            });
+            console.log('Single-shot autofocus enabled');
+          } catch (e) {
+            console.log('Single-shot autofocus failed:', e);
+          }
+        }
+      } else {
+        console.log('Focus mode not supported by this device');
+      }
+
+      // Try to disable zoom to improve focus
+      if (capabilities.zoom) {
+        try {
+          await track.applyConstraints({
+            advanced: [{ zoom: capabilities.zoom.min || 1 } as any]
+          });
+          console.log('Zoom set to minimum');
+        } catch (e) {
+          console.log('Zoom constraint failed:', e);
+        }
+      }
 
       // Start continuous scanning loop
       this.continuousScanning();
