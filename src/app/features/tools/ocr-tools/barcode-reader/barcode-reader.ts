@@ -165,36 +165,37 @@ export class BarcodeReader implements OnInit, OnDestroy {
 
       const selectedDeviceId = this.selectedCamera();
 
-      // Request camera with autofocus constraints for better barcode scanning
+      // Use simpler constraints - lower resolution often focuses better on mobile
       const constraints: MediaStreamConstraints = {
         video: {
           deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
           facingMode: selectedDeviceId ? undefined : { ideal: 'environment' },
-          width: { ideal: 1920 },
-          height: { ideal: 1080 },
-          // @ts-ignore - focusMode is supported but not in TypeScript types
-          focusMode: 'continuous',
-          // @ts-ignore
-          focusDistance: 0,
+          width: { ideal: 1280, max: 1920 },
+          height: { ideal: 720, max: 1080 },
         }
       };
 
-      // Get media stream with autofocus
+      // Get media stream
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
       // Set video source
       this.videoElement.nativeElement.srcObject = stream;
       await this.videoElement.nativeElement.play();
 
-      // Apply advanced camera settings for autofocus if supported
+      // Try to enable torch/flashlight if available (helps with focus and scanning)
       const track = stream.getVideoTracks()[0];
       const capabilities = track.getCapabilities() as any;
 
-      if (capabilities.focusMode && capabilities.focusMode.includes('continuous')) {
-        await track.applyConstraints({
-          // @ts-ignore
-          advanced: [{ focusMode: 'continuous' }]
-        });
+      if (capabilities.torch) {
+        try {
+          await track.applyConstraints({
+            // @ts-ignore - torch is supported but not in TypeScript types
+            advanced: [{ torch: true }]
+          });
+        } catch (e) {
+          // Torch not available or user denied, continue without it
+          console.log('Torch not available:', e);
+        }
       }
 
       // Start continuous scanning loop
