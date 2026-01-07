@@ -5,6 +5,14 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'audio',
+    data: {
+      src: '/assets/blog/when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content/nicholas-cagewillys-wonderland.mp3',
+      title: 'Listen to this article',
+      description: 'Prefer to listen? Play the audio version of this article.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Here\'s the deal - Willy\'s Wonderland shouldn\'t work. A mute Nicolas Cage fighting possessed Chuck E. Cheese knockoffs in a single location over one night, armed primarily with duct tape and unshakeable commitment to his custodial contract? That premise screams "direct-to-DVD garbage fire." And yet somehow, against all odds and good taste, it delivers.',

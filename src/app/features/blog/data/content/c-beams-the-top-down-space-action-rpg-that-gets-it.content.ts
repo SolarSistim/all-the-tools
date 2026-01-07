@@ -15,7 +15,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'There\'s a particular kind of quiet that settles in when you\'re staring at a star map. Not the peaceful kind—more like the something-is-about-to-go-wrong kind. That\'s the feeling I got the first time I dug into C-Beams, an upcoming top-down space action RPG that\'s been slowly, methodically worming its way into my most-anticipated list.',
+      text: 'There\'s a particular kind of quiet that settles in when you\'re staring at a star map. Not the peaceful kind - more like the something-is-about-to-go-wrong kind. That\'s the feeling I got the first time I dug into C-Beams, an upcoming top-down space action RPG that\'s been slowly, methodically worming its way into my most-anticipated list.',
       className: 'lead',
     },
   },
@@ -109,7 +109,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Combat swings between frantic, claustrophobic brawls—gatling turrets rattling your teeth loose - to slower, almost surgical engagements where missiles arc through space and railguns punch holes exactly where you want to put them. Subsystem targeting lets you cripple ships instead of annihilating them outright, which opens the door to boarding, looting, and making some morally flexible choices. I\'m very much here for that.',
+      text: 'Combat swings between frantic, claustrophobic brawls - gatling turrets rattling your teeth loose - to slower, almost surgical engagements where missiles arc through space and railguns punch holes exactly where you want to put them. Subsystem targeting lets you cripple ships instead of annihilating them outright, which opens the door to boarding, looting, and making some morally flexible choices. I\'m very much here for that.',
     },
   },
   {

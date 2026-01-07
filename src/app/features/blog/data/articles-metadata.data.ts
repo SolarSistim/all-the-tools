@@ -297,6 +297,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Cult classic',
     ],
     featured: true,
+    hasAudio: true,
     relatedArticles: ['7', '6', '1'],
   },
   {

@@ -583,7 +583,7 @@ export const content: ContentBlock[] = [
     data: {
       src: '/assets/blog/revelation-space-lighthugger-images/quinnthomson-01.jpg',
       alt: 'Nostalgia for Infinity by Quinnthomson',
-      caption: '"Some fanart of the good ship “Nostalgia for Infinity” from Alastair Reynolds’ Revelation Space, which I’d definitely recommend if you love weird scifi stuff!" - DanSylvest on Deviant Art',
+      caption: '"Some fanart of the good ship “Nostalgia for Infinity” from Alastair Reynolds’ Revelation Space, which I’d definitely recommend if you love weird scifi stuff!" - Quinnthomson on Deviant Art',
     },
   },
   {
