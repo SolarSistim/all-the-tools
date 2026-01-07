@@ -126,7 +126,9 @@ export class BarcodeReader implements OnInit, OnDestroy {
       }
     } catch (error) {
       console.error('Error initializing scanner:', error);
-      this.errorMessage.set('Failed to initialize camera. Please check permissions.');
+      const errorDetails = error instanceof Error ? error.message : String(error);
+      const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
+      this.errorMessage.set(`Failed to initialize camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
       this.state.set('error');
     }
   }
@@ -184,7 +186,9 @@ export class BarcodeReader implements OnInit, OnDestroy {
       );
     } catch (error) {
       console.error('Error starting scanner:', error);
-      this.errorMessage.set('Failed to start camera. Please check permissions and try again.');
+      const errorDetails = error instanceof Error ? error.message : String(error);
+      const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
+      this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
       this.state.set('error');
       this.scanningInProgress = false;
     }

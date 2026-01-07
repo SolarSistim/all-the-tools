@@ -516,11 +516,19 @@ mat-card {
   }
 
   .error-message {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.125rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
     color: var(--text-primary);
     margin-bottom: $spacing-lg;
-    max-width: 500px;
+    max-width: 90%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: left;
+    background: rgba(244, 67, 54, 0.1);
+    padding: $spacing-md;
+    border-radius: 8px;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    overflow-x: auto;
   }
 
   .error-actions {
