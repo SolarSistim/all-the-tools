@@ -207,6 +207,8 @@ export class BarcodeReader implements OnInit, OnDestroy {
         const format = result.getBarcodeFormat().toString();
         const now = Date.now();
 
+        console.log('Barcode detected:', code, format); // Debug log
+
         // Prevent duplicate rapid scans of the same code
         if (code !== this.lastScannedCode || now - this.lastScannedTime >= this.DUPLICATE_SCAN_WINDOW) {
           this.lastScannedCode = code;
@@ -231,9 +233,9 @@ export class BarcodeReader implements OnInit, OnDestroy {
       }
     }
 
-    // Continue scanning if still in scanning state
+    // Continue scanning with a small delay (300ms) instead of every frame
     if (this.scanningInProgress && this.state() === 'scanning') {
-      requestAnimationFrame(() => this.continuousScanning());
+      setTimeout(() => this.continuousScanning(), 300);
     }
   }
 
