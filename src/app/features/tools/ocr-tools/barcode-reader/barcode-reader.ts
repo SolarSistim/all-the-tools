@@ -149,6 +149,14 @@ export class BarcodeReader implements OnInit, OnDestroy {
       this.scanningInProgress = true;
       this.errorMessage.set('');
 
+      // Wait for the view to update and render the video element
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Check if video element is now available
+      if (!this.videoElement?.nativeElement) {
+        throw new Error('Video element not found in DOM. The view may not have rendered yet.');
+      }
+
       const selectedDeviceId = this.selectedCamera();
 
       await this.codeReader.decodeFromVideoDevice(
