@@ -1,0 +1,281 @@
+<div class="barcode-reader-container">
+  <div class="content-wrapper">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">qr_code_scanner</mat-icon>
+        </div>
+        <h1 class="hero-title">Barcode Reader</h1>
+        <p class="hero-subtitle">
+          Scan and store retail product barcodes using your device camera. Supports UPC, EAN, Code 128, Code 39, and more with instant recognition and local storage.
+        </p>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="startScanning()"
+            class="cta-button"
+            *ngIf="state() === 'idle'"
+          >
+            <mat-icon>camera_alt</mat-icon>
+            Start Scanning
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="barcode-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-item">
+              <div class="barcode-icon">
+                <mat-icon>qr_code_2</mat-icon>
+              </div>
+              <span>QR Code</span>
+            </div>
+            <div class="showcase-item">
+              <div class="barcode-icon">
+                <mat-icon>view_week</mat-icon>
+              </div>
+              <span>UPC/EAN</span>
+            </div>
+            <div class="showcase-item">
+              <div class="barcode-icon">
+                <mat-icon>linear_scale</mat-icon>
+              </div>
+              <span>Code 128</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Instant multi-format recognition</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This barcode reader scans retail product barcodes instantly using your device camera with support for UPC-A, UPC-E, EAN-13, EAN-8, Code 128, Code 39, ITF, and QR codes. Features an approval workflow that lets you verify each scan before saving, preventing duplicate entries and rapid-fire misreads. All scanned codes are stored locally in your browser with timestamps and format information. Export options include copying individual codes, bulk copying all codes, or downloading as a text file. Manual entry fallback available for codes that won't scan. Perfect for inventory management, shopping lists, price comparison research, or product cataloging. Completely privacy-focused—all processing happens in your browser with no server uploads or external API calls.
+      </p>
+    </section>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Scanner Card -->
+    <mat-card class="scanner-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>qr_code_scanner</mat-icon>
+          Barcode Scanner
+        </h2>
+      </div>
+
+      <!-- Idle State -->
+      <div *ngIf="state() === 'idle'" class="scanner-state idle-state">
+        <div class="scanner-icon">
+          <mat-icon>qr_code_scanner</mat-icon>
+        </div>
+        <p class="scanner-message">Ready to scan barcodes</p>
+        <p class="scanner-hint">Supports UPC-A, UPC-E, EAN-13, EAN-8, Code 128, Code 39, ITF, and QR codes</p>
+        <button mat-raised-button color="primary" (click)="startScanning()" class="scan-button">
+          <mat-icon>camera_alt</mat-icon>
+          Start Scanning
+        </button>
+      </div>
+
+      <!-- Scanning State -->
+      <div *ngIf="state() === 'scanning'" class="scanner-state scanning-state">
+        <div class="video-container">
+          <video #videoElement autoplay playsinline></video>
+          <div class="scan-region"></div>
+        </div>
+        <p class="scanner-message">Position barcode within the frame</p>
+        <button mat-stroked-button (click)="stopScanning()" class="stop-button">
+          <mat-icon>stop</mat-icon>
+          Stop Scanning
+        </button>
+      </div>
+
+      <!-- Scan Result State (Approval Workflow) -->
+      <div *ngIf="state() === 'scanResult' && currentScan()" class="scanner-state result-state">
+        <div class="result-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <h3 class="result-title">Barcode Detected</h3>
+        <div class="result-code">{{ currentScan()!.code }}</div>
+        <div class="result-format">{{ formatBarcodeFormat(currentScan()!.format) }}</div>
+
+        <div class="result-actions">
+          <button mat-raised-button color="primary" (click)="approveScan()" class="approve-button">
+            <mat-icon>save</mat-icon>
+            Approve & Save
+          </button>
+          <button mat-stroked-button (click)="retryScan()" class="retry-button">
+            <mat-icon>refresh</mat-icon>
+            Retry
+          </button>
+        </div>
+        <button mat-button (click)="stopScanning()" class="cancel-button">
+          <mat-icon>close</mat-icon>
+          Cancel
+        </button>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="state() === 'error'" class="scanner-state error-state">
+        <div class="error-icon">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <p class="error-message">{{ errorMessage() }}</p>
+        <div class="error-actions">
+          <button mat-raised-button color="primary" (click)="retryCamera()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+          </button>
+        </div>
+        <p class="error-hint">
+          Make sure to allow camera permissions in your browser settings.
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- Manual Input Fallback -->
+    <mat-card class="manual-input-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>keyboard</mat-icon>
+          Manual Entry
+        </h2>
+      </div>
+      <p class="manual-hint">If scanning doesn't work, you can manually enter a barcode:</p>
+      <div class="manual-input-row">
+        <mat-form-field appearance="outline" class="manual-input-field">
+          <mat-label>Enter barcode manually</mat-label>
+          <input
+            matInput
+            [(ngModel)]="manualInput"
+            placeholder="e.g., 012345678912"
+            (keyup.enter)="addManualCode()"
+          />
+          <mat-icon matPrefix>edit</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="addManualCode()" class="add-button">
+          <mat-icon>add</mat-icon>
+          Add
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- Scanned Barcodes List -->
+    <mat-card class="scanned-list-card" *ngIf="scannedBarcodes().length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>list</mat-icon>
+          Scanned Barcodes<span> ({{ scannedBarcodes().length }})</span>
+        </h2>
+        <div class="header-actions">
+          <button mat-stroked-button (click)="copyAllCodes()" matTooltip="Copy all codes to clipboard" class="action-btn">
+            <mat-icon>content_copy</mat-icon>
+            Copy All
+          </button>
+          <button mat-stroked-button (click)="downloadCodes()" matTooltip="Download as text file" class="action-btn">
+            <mat-icon>download</mat-icon>
+            Download
+          </button>
+          <button mat-stroked-button color="warn" (click)="clearAllCodes()" matTooltip="Clear all scanned codes" class="action-btn">
+            <mat-icon>delete_sweep</mat-icon>
+            Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table mat-table [dataSource]="scannedBarcodes()" class="barcode-table">
+
+          <!-- Code Column -->
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Code</th>
+            <td mat-cell *matCellDef="let scan" class="code-cell">
+              <span class="code-value">{{ scan.code }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Format Column -->
+          <ng-container matColumnDef="format">
+            <th mat-header-cell *matHeaderCellDef>Format</th>
+            <td mat-cell *matCellDef="let scan">
+              <span class="format-badge">{{ formatBarcodeFormat(scan.format) }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Timestamp Column -->
+          <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef>Scanned At</th>
+            <td mat-cell *matCellDef="let scan" class="timestamp-cell">
+              {{ formatTimestamp(scan.scannedAt) }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let scan" class="actions-cell">
+              <button mat-icon-button (click)="copyCode(scan.code)" matTooltip="Copy to clipboard" color="primary">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteCode(scan.code)" matTooltip="Delete" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card>
+
+    <!-- Empty State -->
+    <mat-card class="empty-state-card" *ngIf="scannedBarcodes().length === 0">
+      <div class="empty-state">
+        <mat-icon class="empty-icon">inventory_2</mat-icon>
+        <p class="empty-message">No barcodes scanned yet. Start scanning to build your collection.</p>
+      </div>
+    </mat-card>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Problems This Tool Solves Section -->
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Barcode Reader Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates manual barcode entry errors</strong> - Stop typing long barcode numbers by hand and risking mistakes. Scan instantly with your device camera for perfect accuracy every time.</li>
+          <li><strong>Prevents duplicate inventory entries</strong> - Built-in duplicate detection automatically rejects codes you've already scanned, keeping your inventory list clean and preventing count errors.</li>
+          <li><strong>Removes dependency on dedicated scanners</strong> - No need to buy expensive barcode scanner hardware. Use the camera already in your phone or tablet to scan any retail barcode.</li>
+          <li><strong>Saves time with approval workflow</strong> - Review each scan before saving to catch misreads. The pause-and-approve system prevents rapid-fire incorrect entries while keeping the workflow fast.</li>
+          <li><strong>Eliminates format confusion</strong> - Automatically detects whether you're scanning UPC, EAN, Code 128, QR codes, or other formats—no need to configure settings or guess the barcode type.</li>
+          <li><strong>Streamlines bulk scanning tasks</strong> - Scan multiple items back-to-back without breaking flow. Export all scanned codes at once as a text file or copy to clipboard for batch processing.</li>
+          <li><strong>Ensures privacy for sensitive products</strong> - All scanning and storage happens in your browser. No codes are uploaded to servers, perfect for confidential inventory, prototype products, or business-sensitive cataloging.</li>
+          <li><strong>Removes compatibility barriers</strong> - Works across desktop and mobile browsers without installing apps. No App Store approvals, no platform restrictions, no software to maintain.</li>
+          <li><strong>Prevents data loss from app crashes</strong> - Codes are saved to localStorage immediately after approval. Even if your browser closes or crashes, your scanned inventory persists.</li>
+          <li><strong>Enables offline inventory work</strong> - Scan and store barcodes with no internet connection required. Perfect for warehouses, stockrooms, or areas with poor connectivity.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>

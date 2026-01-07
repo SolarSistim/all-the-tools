@@ -138,6 +138,11 @@ export const routes: Routes = [
     title: 'Roku Compatibility - All The Things'
   },
   {
+    path: 'tools/barcode-reader',
+    loadComponent: () => import('./features/tools/ocr-tools/barcode-reader/barcode-reader').then(m => m.BarcodeReader),
+    title: 'Barcode Reader - All The Things'
+  },
+  {
     path: 'blog',
     loadChildren: () => import('./features/blog/blog.routes').then(m => m.BLOG_ROUTES),
   },

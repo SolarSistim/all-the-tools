@@ -8,6 +8,7 @@
 /blog/i-built-a-roku-compatibility-checker
 /blog/i-switched-from-facebook-to-reddit-for-doomscrolling
 /blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world
+/blog/lighthuggers-when-fan-art-captures-the-impossible
 /blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
 /blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention
 /blog/the-deneb-paradox-when-first-contact-means-last-contact
@@ -36,6 +37,7 @@
 /resources/typescript-handbook
 /terms
 /tools
+/tools/barcode-reader
 /tools/bmi-calculator
 /tools/case-converter
 /tools/color-picker

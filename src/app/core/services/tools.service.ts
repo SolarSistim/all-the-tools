@@ -235,6 +235,22 @@ export class ToolsService {
     tags: ['hardware', 'roku', 'streaming', 'compatibility'],
     available: true
   },
+
+  // ========================================
+  // OCR TOOLS
+  // ========================================
+  {
+    id: 'barcode-reader',
+    name: 'Barcode Reader',
+    description: 'Scan and store retail product barcodes using your device camera',
+    longDescription: 'Powerful barcode scanner tool that scans UPC, EAN, Code 128, Code 39, and other retail product barcodes. Features camera scanning, approval workflow, local storage, and bulk export options.',
+    category: 'ocr',
+    icon: 'qr_code_scanner',
+    route: 'barcode-reader',
+    featured: true,
+    tags: ['barcode', 'scanner', 'ocr', 'camera', 'inventory'],
+    available: true
+  },
   ];
 
   /**
@@ -296,6 +312,13 @@ export class ToolsService {
     description: 'Hardware compatibility and device utilities',
     icon: 'devices',
     color: 'var(--neon-pink)'
+  },
+  {
+    id: 'ocr',
+    name: 'OCR Tools',
+    description: 'Optical character recognition and barcode scanning',
+    icon: 'qr_code_scanner',
+    color: 'var(--neon-cyan-bright)'
   },
   {
     id: 'other',
