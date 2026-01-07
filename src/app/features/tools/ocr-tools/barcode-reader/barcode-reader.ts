@@ -182,22 +182,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
       this.videoElement.nativeElement.srcObject = stream;
       await this.videoElement.nativeElement.play();
 
-      // Try to enable torch/flashlight if available (helps with focus and scanning)
-      const track = stream.getVideoTracks()[0];
-      const capabilities = track.getCapabilities() as any;
-
-      if (capabilities.torch) {
-        try {
-          await track.applyConstraints({
-            // @ts-ignore - torch is supported but not in TypeScript types
-            advanced: [{ torch: true }]
-          });
-        } catch (e) {
-          // Torch not available or user denied, continue without it
-          console.log('Torch not available:', e);
-        }
-      }
-
       // Start continuous scanning loop
       this.continuousScanning();
     } catch (error) {
