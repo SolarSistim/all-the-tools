@@ -267,6 +267,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       'Crisis mapping',
     ],
     featured: true,
+    hasAudio: true,
     relatedArticles: ['10', '3', '8'],
   },
   {

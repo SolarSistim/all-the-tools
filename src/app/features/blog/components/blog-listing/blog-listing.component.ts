@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ArticlePreview, PaginatedResponse } from '../../models/blog.models';
@@ -34,6 +35,7 @@ import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
     MatInputModule,
     MatAutocompleteModule,
     MatTooltipModule,
+    MatSelectModule,
     FormsModule,
     PaginationComponent,
     ReadingTimePipe,
@@ -154,6 +156,14 @@ export class BlogListingComponent implements OnInit {
     this.selectedTag = null;
     this.currentPage = 1;
     this.loadArticles(false);
+  }
+
+  onCategoryDropdownChange(category: string | null): void {
+    if (category === 'all') {
+      this.clearFilters();
+    } else if (category) {
+      this.filterByCategory(category);
+    }
   }
 
   filterByTag(tag: string): void {

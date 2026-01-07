@@ -75,7 +75,21 @@
 
     <!-- Category Filters and View Toggle -->
     <div class="filters-and-view-container">
-      <!-- Category Filters -->
+      <!-- Mobile Category Dropdown -->
+      <mat-form-field class="category-dropdown-mobile" appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select
+          [value]="selectedCategory || 'all'"
+          (selectionChange)="onCategoryDropdownChange($event.value)"
+        >
+          <mat-option value="all">All</mat-option>
+          @for (category of categories; track category) {
+            <mat-option [value]="category">{{ category }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Desktop Category Filters -->
       <div class="category-filters">
         <button
           mat-button
