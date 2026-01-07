@@ -89,7 +89,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/earthsky-dot-org-Summer-Triangle-Northeast-Mid-Evening-525-1.jpg',
+      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/earthsky-dot-org-Summer-Triangle-Northeast-Mid-Evening-525-1.jpg',
       alt: 'Deneb star location in relation to Earth',
       caption: 'The location of Deneb in the night sky',
       credit: 'Deborah Byrd',
@@ -129,7 +129,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/pluribus-carols-dry-erase-board.png',
+      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/pluribus-carols-dry-erase-board.png',
       alt: 'Carol\'s dry erase board with notes about the Deneb aliens',
       caption: 'Carol\'s notes about the Deneb aliens reveal their unsettling honesty',
     },

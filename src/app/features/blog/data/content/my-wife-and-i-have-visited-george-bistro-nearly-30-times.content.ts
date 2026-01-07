@@ -171,7 +171,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/georges-bistro/allthethings-georges-bone-marrow.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bone-marrow.png',
       alt: 'Georges bone marrow',
       caption: 'George\'s bone marrow',
     },
@@ -194,17 +194,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/georges-bistro/allthethings-georges-georges-fries.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-georges-fries.png',
           alt: 'Georges georges fries',
           caption: 'George\'s fries',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-georges-fries-2.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-georges-fries-2.png',
           alt: 'Georges georges fries 2',
           caption: 'George\'s fries',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-georges-fries-3.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-georges-fries-3.png',
           alt: 'Georges georges fries 3',
           caption: 'George\'s fries',
         },
@@ -273,7 +273,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/georges-bistro/allthethings-georges-sweet-potato-bisque-2.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-sweet-potato-bisque-2.png',
       alt: 'Georges sweet potato bisque 2',
       caption: 'George\'s sweet potato bisque',
     },
@@ -327,17 +327,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/georges-bistro/allthethings-georges-bread-pudding-benedict-and-grits.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bread-pudding-benedict-and-grits.png',
           alt: 'Georges bread pudding benedict and grits',
           caption: 'George\'s bread pudding benedict and grits',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bread-pudding-benedict-and-truffle-fries.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bread-pudding-benedict-and-truffle-fries.png',
           alt: 'Georges bread pudding benedict and truffle fries',
           caption: 'George\'s bread pudding benedict and truffle fries',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bread-pudding-benedict-and-truffle-fries-2.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bread-pudding-benedict-and-truffle-fries-2.png',
           alt: 'Georges bread pudding benedict and truffle fries 2',
           caption: 'George\'s bread pudding benedict and truffle fries',
         },
@@ -412,7 +412,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/georges-bistro/allthethings-georges-short-ribs-mac-and-cheese.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-short-ribs-mac-and-cheese.png',
       alt: 'Georges short ribs mac and cheese',
       caption: 'George\'s short ribs mac and cheese',
     },
@@ -470,7 +470,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/georges-bistro/allthethings-georges-ribeye-and-truffle-fries.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-ribeye-and-truffle-fries.png',
       alt: 'Georges ribeye and truffle fries',
       caption: 'George\'s ribeye and truffle fries',
     },
@@ -582,7 +582,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/georges-bistro/allthethings-georges-alfredo-papardelle.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-alfredo-papardelle.png',
       alt: 'Georges alfredo papardelle',
       caption: 'George\'s alfredo pappardelle',
     },
@@ -640,17 +640,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-05.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-05.png',
           alt: 'Georges bistro cocktails 05',
           caption: 'George Bistro cocktails',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-06.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-06.png',
           alt: 'Georges bistro cocktails 06',
           caption: 'George Bistro cocktails',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-07.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-07.png',
           alt: 'Georges bistro cocktails 07',
           caption: 'George Bistro cocktails',
         },
@@ -687,17 +687,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-08.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-08.png',
           alt: 'Georges bistro cocktails 08',
           caption: 'George Bistro cocktails',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-09.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-09.png',
           alt: 'Georges bistro cocktails 09',
           caption: 'George Bistro cocktails',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-10.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-10.png',
           alt: 'Georges bistro cocktails 10',
           caption: 'George Bistro cocktails',
         },
@@ -747,17 +747,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-02.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-02.png',
           alt: 'Georges bistro cocktails 02',
           caption: 'George Bistro cocktails',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-03.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-03.png',
           alt: 'Georges bistro cocktails 03',
           caption: 'George Bistro cocktails',
         },
         {
-          src: '/assets/georges-bistro/allthethings-georges-bistro-cocktails-04.png',
+          src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-cocktails-04.png',
           alt: 'Georges bistro cocktails 04',
           caption: 'George Bistro cocktails',
         },
@@ -784,7 +784,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/georges-bistro/allthethings-georges-bistro-creme-brulee.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/allthethings-georges-bistro-creme-brulee.png',
       alt: 'Georges bistro creme brulee',
       caption: 'George Bistro creme brulee',
     },

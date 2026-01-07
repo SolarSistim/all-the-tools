@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/audio/good-faith-timber-buyers.mp3',
+      src: '/assets/blog/how-to-sell-your-timber-for-top-dollar-in-ohio.content/good-faith-timber-buyers.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },

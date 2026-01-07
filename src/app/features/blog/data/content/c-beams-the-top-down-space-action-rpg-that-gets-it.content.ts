@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/audio/c-beams-the-top-down-space-action-rpg-that-gets-it.mp3',
+      src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-the-top-down-space-action-rpg-that-gets-it.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },
@@ -117,17 +117,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/images/blog/c-beams/c-beams-01.png',
+          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-01.png',
           alt: 'C-Beams intense space combat with gatling turrets',
           caption: 'Frantic combat with gatling turrets and missile barrages',
         },
         {
-          src: '/assets/images/blog/c-beams/c-beams-02.png',
+          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-02.png',
           alt: 'C-Beams tactical subsystem targeting',
           caption: 'Surgical strikes using subsystem targeting',
         },
         {
-          src: '/assets/images/blog/c-beams/c-beams-03.png',
+          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-03.png',
           alt: 'C-Beams ship boarding and looting',
           caption: 'Boarding disabled ships for valuable loot',
         },
@@ -235,17 +235,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/images/blog/c-beams/c-beams-04.png',
+          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-04.png',
           alt: 'C-Beams asteroid field exploration',
           caption: 'Navigating treacherous asteroid fields',
         },
         {
-          src: '/assets/images/blog/c-beams/c-beams-05.png',
+          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-05.png',
           alt: 'C-Beams space station docking',
           caption: 'Manual docking at orbital stations',
         },
         {
-          src: '/assets/images/blog/c-beams/c-beams-06.png',
+          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-06.png',
           alt: 'C-Beams derelict ship discovery',
           caption: 'Discovering derelict ships and anomalies',
         },

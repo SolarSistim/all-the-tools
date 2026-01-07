@@ -45,7 +45,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpeg',
+      src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpeg',
       alt: 'The Golden Palace on Scenic Highway',
       caption: 'The golden palace sits prominently on Escambia Bay - impossible to miss',
     },
@@ -161,17 +161,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-doctor-mikhchi.png',
+          src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-doctor-mikhchi.png',
           alt: 'Dr. Mohammad Mikhchi',
           caption: 'Dr. Mohammad Mikhchi'
         },
         {
-          src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-now.png',
+          src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-now.png',
           alt: 'The palace today',
           caption: 'The golden palace as it appeared a few years ago'
         },
         {
-          src: 'https://www.allthethings.dev/assets/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-christmas.png',
+          src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-christmas.png',
           alt: 'The palace decorated for Christmas',
           caption: 'The palace during the holidays with its famous Christmas light display'
         }

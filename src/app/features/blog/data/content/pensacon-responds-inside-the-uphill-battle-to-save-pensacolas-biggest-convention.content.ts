@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/audio/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.mp3',
+      src: '/assets/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },

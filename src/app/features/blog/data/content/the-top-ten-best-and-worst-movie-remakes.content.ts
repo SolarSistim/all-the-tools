@@ -43,7 +43,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Total Recall',
       year: 2012,
-      posterSrc: '/assets/posters/total-recall-2012.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/total-recall-2012.png',
       posterAlt: 'Total Recall (2012) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -60,7 +60,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/total-recall-2012.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/total-recall-2012.png',
       alt: 'Total Recall (2012) Movie Poster',
       caption: 'Total Recall (2012) - A sterile, forgettable remake that stripped away all the gonzo excess that made the original memorable.',
       width: 70,
@@ -117,7 +117,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'The Running Man',
       year: 2025,
-      posterSrc: '/assets/posters/running-man-2025.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/running-man-2025.png',
       posterAlt: 'The Running Man (2025) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -134,7 +134,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/running-man-2025.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/running-man-2025.png',
       alt: 'The Running Man (2025) Movie Poster',
       caption: 'The Running Man (2025) - A humorless remake that forgot what made the 1987 version so entertaining.',
       width: 70,
@@ -184,7 +184,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'The Crow',
       year: 2024,
-      posterSrc: '/assets/posters/the-crow-2024.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/the-crow-2024.png',
       posterAlt: 'The Crow (2024) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -201,7 +201,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/the-crow-2024.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/the-crow-2024.png',
       alt: 'The Crow (2024) Movie Poster',
       caption: 'The Crow (2024) - A lifeless remake that couldn\'t capture the gothic intensity of the original.',
       width: 70,
@@ -244,7 +244,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Firestarter',
       year: 2022,
-      posterSrc: '/assets/posters/firestarter-2022.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/firestarter-2022.png',
       posterAlt: 'Firestarter (2022) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -261,7 +261,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/firestarter-2022.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/firestarter-2022.png',
       alt: 'Firestarter (2022) Movie Poster',
       caption: 'Firestarter (2022) - So bad we couldn\'t make it past 30 minutes.',
       width: 70,
@@ -318,7 +318,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Hellboy',
       year: 2019,
-      posterSrc: '/assets/posters/hellboy-2019.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/hellboy-2019.png',
       posterAlt: 'Hellboy (2019) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -335,7 +335,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/hellboy-2019.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/hellboy-2019.png',
       alt: 'Hellboy (2019) Movie Poster',
       caption: 'Hellboy (2019) - Even David Harbour couldn\'t save this mess.',
       width: 70,
@@ -378,7 +378,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'War of the Worlds',
       year: 2005,
-      posterSrc: '/assets/posters/war-of-the-worlds-2005.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/war-of-the-worlds-2005.png',
       posterAlt: 'War of the Worlds (2005) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -395,7 +395,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/war-of-the-worlds-2005.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/war-of-the-worlds-2005.png',
       alt: 'War of the Worlds (2005) Movie Poster',
       caption: 'War of the Worlds (2005) - Great spectacle, but hides the action and barely has an ending.',
       width: 70,
@@ -445,7 +445,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Conan the Barbarian',
       year: 2011,
-      posterSrc: '/assets/posters/conan-2011.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/conan-2011.png',
       posterAlt: 'Conan the Barbarian (2011) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -462,7 +462,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/conan-2011.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/conan-2011.png',
       alt: 'Conan the Barbarian (2011) Movie Poster',
       caption: 'Conan the Barbarian (2011) - Jason Momoa was the right choice, but the movie fell flat.',
       width: 70,
@@ -512,7 +512,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Flatliners',
       year: 2017,
-      posterSrc: '/assets/posters/flatliners-2017.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/flatliners-2017.png',
       posterAlt: 'Flatliners (2017) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -529,7 +529,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/flatliners-2017.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/flatliners-2017.png',
       alt: 'Flatliners (2017) Movie Poster',
       caption: 'Flatliners (2017) - Not even Kiefer Sutherland could save this one.',
       width: 70,
@@ -579,7 +579,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Point Break',
       year: 2015,
-      posterSrc: '/assets/posters/point-break-2015.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/point-break-2015.png',
       posterAlt: 'Point Break (2015) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -596,7 +596,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/point-break-2015.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/point-break-2015.png',
       alt: 'Point Break (2015) Movie Poster',
       caption: 'Point Break (2015) - The original was nostalgic fun. The remake was unwatchable.',
       width: 70,
@@ -639,7 +639,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Red Dawn',
       year: 2012,
-      posterSrc: '/assets/posters/red-dawn-2012.png',
+      posterSrc: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/red-dawn-2012.png',
       posterAlt: 'Red Dawn (2012) Poster',
       ratingsDate: 'January 1, 2026',
       ratings: [
@@ -656,7 +656,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/posters/red-dawn-2012.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/red-dawn-2012.png',
       alt: 'Red Dawn (2012) Movie Poster',
       caption: 'Red Dawn (2012) - Thank goodness Chris Hemsworth got the Thor role.',
       width: 70,

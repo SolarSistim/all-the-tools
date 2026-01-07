@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/audio/interstellar-wormhole-explanation-scene.mp3',
+      src: '/assets/blog/we-need-to-talk-about-that-wormhole-scene-in-interstellar.content/interstellar-wormhole-explanation-scene.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },
