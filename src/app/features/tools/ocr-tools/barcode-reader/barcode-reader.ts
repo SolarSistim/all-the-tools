@@ -140,56 +140,96 @@ export class BarcodeReader implements OnInit, OnDestroy {
   }
 
   async startScanning(): Promise<void> {
-    if (!this.codeReader || this.scanningInProgress) {
-      return;
+  if (!this.codeReader || this.scanningInProgress) {
+    return;
+  }
+
+  if (this.availableCameras().length === 0) {
+    this.errorMessage.set('No camera found. Please ensure your device has a camera and permissions are granted.');
+    this.state.set('error');
+    return;
+  }
+
+  try {
+    this.state.set('scanning');
+    this.scanningInProgress = true;
+    this.errorMessage.set('');
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    if (!this.videoElement?.nativeElement) {
+      throw new Error('Video element not found in DOM. The view may not have rendered yet.');
     }
 
-    if (this.availableCameras().length === 0) {
-      this.errorMessage.set('No camera found. Please ensure your device has a camera and permissions are granted.');
-      this.state.set('error');
-      return;
-    }
+    const videoElem = this.videoElement.nativeElement;
+    const selectedDeviceId = this.selectedCamera();
 
-    try {
-      // Set state to 'scanning' first to trigger the overlay to appear
-      this.state.set('scanning');
-      this.scanningInProgress = true;
-      this.errorMessage.set('');
-
-      // Wait for the view to update and render the video element in the overlay
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Check if video element is now available
-      if (!this.videoElement?.nativeElement) {
-        throw new Error('Video element not found in DOM. The view may not have rendered yet.');
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: {
+        deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
+        facingMode: selectedDeviceId ? undefined : { ideal: 'environment' },
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+        frameRate: { ideal: 30 },
+        aspectRatio: { ideal: 16 / 9 }
       }
+    });
 
-      const selectedDeviceId = this.selectedCamera();
-      const videoElem = this.videoElement.nativeElement;
+    videoElem.srcObject = stream;
+    await videoElem.play();
 
-      // Use decodeFromVideoDevice which manages the video srcObject and decoding loop automatically
-      // The library will use native browser autofocus with environment-facing camera
-      this.codeReader.decodeFromVideoDevice(
-        selectedDeviceId,
-        videoElem,
-        (result, error) => {
-          if (result && this.state() === 'scanning') {
-            // Success!
-            this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
-          }
-          // NotFoundException errors are ignored as they happen every frame where no barcode is found
-        }
-      );
+    const track = stream.getVideoTracks()[0];
+    if (track) {
+      await this.applyVideoEnhancements(track);
+    }
 
-    } catch (error) {
-      console.error('Camera initialization failed:', error);
-      const errorDetails = error instanceof Error ? error.message : String(error);
-      const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
-      this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
-      this.state.set('error');
-      this.scanningInProgress = false;
+    this.codeReader.decodeFromVideoElementContinuously(videoElem, (result, error) => {
+      if (result && this.state() === 'scanning') {
+        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+      }
+    });
+  } catch (error) {
+    console.error('Camera initialization failed:', error);
+    const errorDetails = error instanceof Error ? error.message : String(error);
+    const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
+    this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
+    this.state.set('error');
+    this.scanningInProgress = false;
+
+    if (this.videoElement?.nativeElement?.srcObject) {
+      const stream = this.videoElement.nativeElement.srcObject as MediaStream;
+      stream.getTracks().forEach(t => t.stop());
+      this.videoElement.nativeElement.srcObject = null;
     }
   }
+}
+
+private async applyVideoEnhancements(track: MediaStreamTrack): Promise<void> {
+  const caps: any = track.getCapabilities ? track.getCapabilities() : {};
+  const adv: any = {};
+
+  if (Array.isArray(caps.focusMode) && caps.focusMode.length) {
+    adv.focusMode = caps.focusMode.includes('continuous') ? 'continuous' : caps.focusMode[0];
+  }
+
+  if (Array.isArray(caps.exposureMode) && caps.exposureMode.length) {
+    adv.exposureMode = caps.exposureMode.includes('continuous') ? 'continuous' : caps.exposureMode[0];
+  }
+
+  if (Array.isArray(caps.whiteBalanceMode) && caps.whiteBalanceMode.length) {
+    adv.whiteBalanceMode = caps.whiteBalanceMode.includes('continuous') ? 'continuous' : caps.whiteBalanceMode[0];
+  }
+
+  if (caps.zoom && typeof caps.zoom === 'object' && typeof caps.zoom.max === 'number') {
+    adv.zoom = caps.zoom.max;
+  }
+
+  if (Object.keys(adv).length) {
+    await track.applyConstraints({ advanced: [adv] });
+  }
+}
+
 
   private handleSuccessfulScan(code: string, format: string): void {
     const now = Date.now();
@@ -218,17 +258,22 @@ export class BarcodeReader implements OnInit, OnDestroy {
     this.state.set('scanResult');
   }
 
-  stopScanning(): void {
-    // Return to idle state - this will hide the overlay
-    this.state.set('idle');
-    this.scanningInProgress = false;
-    this.currentScan.set(null);
-    this.lastScannedCode = '';
+stopScanning(): void {
+  this.state.set('idle');
+  this.scanningInProgress = false;
+  this.currentScan.set(null);
+  this.lastScannedCode = '';
 
-    if (this.codeReader) {
-      this.codeReader.reset(); // This stops the camera stream and the decoding loop
-    }
+  if (this.codeReader) {
+    this.codeReader.reset();
   }
+
+  if (this.videoElement?.nativeElement?.srcObject) {
+    const stream = this.videoElement.nativeElement.srcObject as MediaStream;
+    stream.getTracks().forEach(track => track.stop());
+    this.videoElement.nativeElement.srcObject = null;
+  }
+}
 
   approveScan(): void {
     const scan = this.currentScan();
