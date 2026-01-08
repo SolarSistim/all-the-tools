@@ -163,32 +163,22 @@ export class BarcodeReader implements OnInit, OnDestroy {
 
     const videoElem = this.videoElement.nativeElement;
     const selectedDeviceId = this.selectedCamera();
+    const deviceIdForZXing = selectedDeviceId && selectedDeviceId.trim().length > 0 ? selectedDeviceId : null;
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: {
-        deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
-        facingMode: selectedDeviceId ? undefined : { ideal: 'environment' },
-        width: { ideal: 1920 },
-        height: { ideal: 1080 },
-        frameRate: { ideal: 30 },
-        aspectRatio: { ideal: 16 / 9 }
+
+    await this.codeReader.decodeFromVideoDevice(
+      deviceIdForZXing,
+      videoElem,
+      (result, error) => {
+        if (result && this.state() === 'scanning') {
+          this.handleSuccessfulScan(
+            result.getText(),
+            result.getBarcodeFormat().toString()
+          );
+        }
       }
-    });
-
-    videoElem.srcObject = stream;
-    await videoElem.play();
-
-    const track = stream.getVideoTracks()[0];
-    if (track) {
-      await this.applyVideoEnhancements(track);
-    }
-
-    this.codeReader.decodeFromVideoElementContinuously(videoElem, (result, error) => {
-      if (result && this.state() === 'scanning') {
-        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
-      }
-    });
+    );
+    
   } catch (error) {
     console.error('Camera initialization failed:', error);
     const errorDetails = error instanceof Error ? error.message : String(error);
@@ -196,39 +186,9 @@ export class BarcodeReader implements OnInit, OnDestroy {
     this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
     this.state.set('error');
     this.scanningInProgress = false;
-
-    if (this.videoElement?.nativeElement?.srcObject) {
-      const stream = this.videoElement.nativeElement.srcObject as MediaStream;
-      stream.getTracks().forEach(t => t.stop());
-      this.videoElement.nativeElement.srcObject = null;
-    }
   }
 }
 
-private async applyVideoEnhancements(track: MediaStreamTrack): Promise<void> {
-  const caps: any = track.getCapabilities ? track.getCapabilities() : {};
-  const adv: any = {};
-
-  if (Array.isArray(caps.focusMode) && caps.focusMode.length) {
-    adv.focusMode = caps.focusMode.includes('continuous') ? 'continuous' : caps.focusMode[0];
-  }
-
-  if (Array.isArray(caps.exposureMode) && caps.exposureMode.length) {
-    adv.exposureMode = caps.exposureMode.includes('continuous') ? 'continuous' : caps.exposureMode[0];
-  }
-
-  if (Array.isArray(caps.whiteBalanceMode) && caps.whiteBalanceMode.length) {
-    adv.whiteBalanceMode = caps.whiteBalanceMode.includes('continuous') ? 'continuous' : caps.whiteBalanceMode[0];
-  }
-
-  if (caps.zoom && typeof caps.zoom === 'object' && typeof caps.zoom.max === 'number') {
-    adv.zoom = caps.zoom.max;
-  }
-
-  if (Object.keys(adv).length) {
-    await track.applyConstraints({ advanced: [adv] });
-  }
-}
 
 
   private handleSuccessfulScan(code: string, format: string): void {
@@ -266,12 +226,6 @@ stopScanning(): void {
 
   if (this.codeReader) {
     this.codeReader.reset();
-  }
-
-  if (this.videoElement?.nativeElement?.srcObject) {
-    const stream = this.videoElement.nativeElement.srcObject as MediaStream;
-    stream.getTracks().forEach(track => track.stop());
-    this.videoElement.nativeElement.srcObject = null;
   }
 }
 
