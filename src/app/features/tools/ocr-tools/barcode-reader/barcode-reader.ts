@@ -64,6 +64,8 @@ export class BarcodeReader implements OnInit, OnDestroy {
   private lastScannedCode = '';
   private lastScannedTime = 0;
   private readonly DUPLICATE_SCAN_WINDOW = 2000; // 2 seconds
+  private imageCapture: ImageCapture | null = null;
+  private isCapturingPhoto = false;
 
   displayedColumns: string[] = ['code', 'format', 'timestamp', 'actions'];
 
@@ -215,7 +217,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
     const capabilities = videoTrack.getCapabilities() as any;
 
     const advancedConstraints: any = {};
-    
+
     // If the device supports continuous focus, force it again explicitly
     if (capabilities.focusMode?.includes('continuous')) {
       advancedConstraints.focusMode = 'continuous';
@@ -235,10 +237,20 @@ export class BarcodeReader implements OnInit, OnDestroy {
       }
     }
 
+    // Initialize ImageCapture for high-res photo capture
+    try {
+      this.imageCapture = new ImageCapture(videoTrack);
+    } catch (e) {
+      console.warn('ImageCapture API not available:', e);
+      this.imageCapture = null;
+    }
+
     // Start the ZXing decoding loop
+    // This scans the video preview at lower quality to DETECT barcodes
+    // When detected, we'll capture a high-res photo for accurate scanning
     this.codeReader.decodeFromVideoElementContinuously(videoElem, (result) => {
-      if (result && this.state() === 'scanning') {
-        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+      if (result && this.state() === 'scanning' && !this.isCapturingPhoto) {
+        this.handleBarcodeDetection(result.getText(), result.getBarcodeFormat().toString());
       }
     });
 
@@ -250,6 +262,49 @@ export class BarcodeReader implements OnInit, OnDestroy {
     this.scanningInProgress = false;
   }
 }
+
+  /**
+   * Called when ZXing detects a barcode in the video preview.
+   * Triggers high-res photo capture for accurate scanning.
+   */
+  private async handleBarcodeDetection(code: string, format: string): Promise<void> {
+    const now = Date.now();
+
+    // Prevent duplicate rapid scans of the same code
+    if (code === this.lastScannedCode && now - this.lastScannedTime < this.DUPLICATE_SCAN_WINDOW) {
+      return;
+    }
+
+    // Prevent multiple simultaneous photo captures
+    if (this.isCapturingPhoto) {
+      return;
+    }
+
+    this.isCapturingPhoto = true;
+
+    try {
+      // If ImageCapture API is available, capture high-res photo for accurate scanning
+      if (this.imageCapture) {
+        const blob = await this.imageCapture.takePhoto();
+        const imageBitmap = await createImageBitmap(blob);
+
+        // Scan the high-res photo with ZXing
+        const result = await this.codeReader!.decodeFromImageElement(imageBitmap as any);
+
+        // Use result from high-res photo
+        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+      } else {
+        // Fallback: use the result from video scanning if ImageCapture isn't available
+        this.handleSuccessfulScan(code, format);
+      }
+    } catch (error) {
+      // If photo capture or scanning fails, fall back to video result
+      console.warn('High-res photo capture failed, using video result:', error);
+      this.handleSuccessfulScan(code, format);
+    } finally {
+      this.isCapturingPhoto = false;
+    }
+  }
 
   private handleSuccessfulScan(code: string, format: string): void {
     const now = Date.now();
@@ -283,6 +338,8 @@ stopScanning(): void {
   this.scanningInProgress = false;
   this.currentScan.set(null);
   this.lastScannedCode = '';
+  this.isCapturingPhoto = false;
+  this.imageCapture = null;
 
   if (this.codeReader) {
     this.codeReader.reset();
