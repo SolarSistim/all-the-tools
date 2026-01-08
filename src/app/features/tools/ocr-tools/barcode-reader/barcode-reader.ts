@@ -111,35 +111,35 @@ export class BarcodeReader implements OnInit, OnDestroy {
         BarcodeFormat.CODE_128,
         BarcodeFormat.CODE_39,
         BarcodeFormat.ITF,
-        BarcodeFormat.QR_CODE, // Bonus support
+        BarcodeFormat.QR_CODE,
       ];
       hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
-      hints.set(DecodeHintType.TRY_HARDER, false); // Reduced CPU load for better frame rate
+      
+      // FIX: Enable TRY_HARDER to help with blurry/small barcodes
+      hints.set(DecodeHintType.TRY_HARDER, true); 
 
       this.codeReader = new BrowserMultiFormatReader(hints);
 
       // Get available cameras
       let devices: MediaDeviceInfo[] = [];
-        try {
-          devices = await this.codeReader.listVideoInputDevices();
-        } catch (e) {
-          devices = [];
-        }
+      try {
+        devices = await this.codeReader.listVideoInputDevices();
+      } catch (e) {
+        devices = [];
+      }
 
-        this.availableCameras.set(devices);
+      this.availableCameras.set(devices);
 
-        if (devices.length > 0) {
-          const backCamera = devices.find(device =>
-            device.label.toLowerCase().includes('back') ||
-            device.label.toLowerCase().includes('rear') ||
-            device.label.toLowerCase().includes('environment')
-          );
-          this.selectedCamera.set(backCamera?.deviceId || devices[0].deviceId);
-        } else {
-          // Enumeration not available; scanning can still work using default camera selection
-          this.selectedCamera.set('');
-        }
-
+      if (devices.length > 0) {
+        const backCamera = devices.find(device =>
+          device.label.toLowerCase().includes('back') ||
+          device.label.toLowerCase().includes('rear') ||
+          device.label.toLowerCase().includes('environment')
+        );
+        this.selectedCamera.set(backCamera?.deviceId || devices[0].deviceId);
+      } else {
+        this.selectedCamera.set('');
+      }
 
     } catch (error) {
       console.error('Error initializing scanner:', error);
@@ -151,68 +151,73 @@ export class BarcodeReader implements OnInit, OnDestroy {
   }
 
   async startScanning(): Promise<void> {
-  if (!this.codeReader || this.scanningInProgress) {
-    return;
-  }
-
-  if (!navigator.mediaDevices?.getUserMedia) {
-    this.errorMessage.set('Camera API not available in this browser/context.');
-    this.state.set('error');
-    return;
-  }
-
-  try {
-    this.state.set('scanning');
-    this.scanningInProgress = true;
-    this.errorMessage.set('');
-
-    await new Promise(resolve => setTimeout(resolve, 100));
-
-    if (!this.videoElement?.nativeElement) {
-      throw new Error('Video element not found in DOM. The view may not have rendered yet.');
+    if (!this.codeReader || this.scanningInProgress) {
+      return;
     }
 
-    const videoElem = this.videoElement.nativeElement;
+    if (!navigator.mediaDevices?.getUserMedia) {
+      this.errorMessage.set('Camera API not available in this browser/context.');
+      this.state.set('error');
+      return;
+    }
 
-    videoElem.muted = true;
-    videoElem.setAttribute('muted', '');
-    videoElem.setAttribute('playsinline', 'true');
-    videoElem.playsInline = true;
+    try {
+      this.state.set('scanning');
+      this.scanningInProgress = true;
+      this.errorMessage.set('');
 
-    const selectedDeviceId = this.selectedCamera();
-    const videoConstraints: MediaTrackConstraints =
-      selectedDeviceId && selectedDeviceId.trim().length > 0
-        ? { deviceId: { exact: selectedDeviceId } }
-        : {
-            facingMode: { ideal: 'environment' },
-            width: { ideal: 1280 },
-            height: { ideal: 720 }
-          };
+      await new Promise(resolve => setTimeout(resolve, 100));
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: videoConstraints
-    });
-
-    this.activeStream = stream;
-    videoElem.srcObject = stream;
-
-    await videoElem.play();
-
-    this.codeReader.decodeFromVideoElementContinuously(videoElem, (result) => {
-      if (result && this.state() === 'scanning') {
-        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+      if (!this.videoElement?.nativeElement) {
+        throw new Error('Video element not found in DOM. The view may not have rendered yet.');
       }
-    });
-  } catch (error) {
-    console.error('Camera initialization failed:', error);
-    const errorDetails = error instanceof Error ? error.message : String(error);
-    const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
-    this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
-    this.state.set('error');
-    this.scanningInProgress = false;
+
+      const videoElem = this.videoElement.nativeElement;
+
+      videoElem.muted = true;
+      videoElem.setAttribute('muted', '');
+      videoElem.setAttribute('playsinline', 'true');
+      videoElem.playsInline = true;
+
+      const selectedDeviceId = this.selectedCamera();
+      
+      // FIX: Combine Device ID with high-resolution constraints
+      // This ensures 1080p/720p is requested even when a specific camera is picked
+      const videoConstraints: MediaTrackConstraints = {
+        ...(selectedDeviceId && selectedDeviceId.trim().length > 0 
+            ? { deviceId: { exact: selectedDeviceId } } 
+            : { facingMode: { ideal: 'environment' } }),
+        width: { ideal: 1920, min: 1280 },
+        height: { ideal: 1080, min: 720 },
+        // Attempt to trigger continuous autofocus if supported
+        // @ts-ignore
+        advanced: [{ focusMode: 'continuous' }]
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: videoConstraints
+      });
+
+      this.activeStream = stream;
+      videoElem.srcObject = stream;
+
+      await videoElem.play();
+
+      this.codeReader.decodeFromVideoElementContinuously(videoElem, (result) => {
+        if (result && this.state() === 'scanning') {
+          this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+        }
+      });
+    } catch (error) {
+      console.error('Camera initialization failed:', error);
+      const errorDetails = error instanceof Error ? error.message : String(error);
+      const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
+      this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
+      this.state.set('error');
+      this.scanningInProgress = false;
+    }
   }
-}
 
   private handleSuccessfulScan(code: string, format: string): void {
     const now = Date.now();
