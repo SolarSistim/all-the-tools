@@ -151,73 +151,105 @@ export class BarcodeReader implements OnInit, OnDestroy {
   }
 
   async startScanning(): Promise<void> {
-    if (!this.codeReader || this.scanningInProgress) {
-      return;
-    }
-
-    if (!navigator.mediaDevices?.getUserMedia) {
-      this.errorMessage.set('Camera API not available in this browser/context.');
-      this.state.set('error');
-      return;
-    }
-
-    try {
-      this.state.set('scanning');
-      this.scanningInProgress = true;
-      this.errorMessage.set('');
-
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      if (!this.videoElement?.nativeElement) {
-        throw new Error('Video element not found in DOM. The view may not have rendered yet.');
-      }
-
-      const videoElem = this.videoElement.nativeElement;
-
-      videoElem.muted = true;
-      videoElem.setAttribute('muted', '');
-      videoElem.setAttribute('playsinline', 'true');
-      videoElem.playsInline = true;
-
-      const selectedDeviceId = this.selectedCamera();
-      
-      // FIX: Combine Device ID with high-resolution constraints
-      // This ensures 1080p/720p is requested even when a specific camera is picked
-      const videoConstraints: MediaTrackConstraints = {
-        ...(selectedDeviceId && selectedDeviceId.trim().length > 0 
-            ? { deviceId: { exact: selectedDeviceId } } 
-            : { facingMode: { ideal: 'environment' } }),
-        width: { ideal: 1920, min: 1280 },
-        height: { ideal: 1080, min: 720 },
-        // Attempt to trigger continuous autofocus if supported
-        // @ts-ignore
-        advanced: [{ focusMode: 'continuous' }]
-      };
-
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: videoConstraints
-      });
-
-      this.activeStream = stream;
-      videoElem.srcObject = stream;
-
-      await videoElem.play();
-
-      this.codeReader.decodeFromVideoElementContinuously(videoElem, (result) => {
-        if (result && this.state() === 'scanning') {
-          this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
-        }
-      });
-    } catch (error) {
-      console.error('Camera initialization failed:', error);
-      const errorDetails = error instanceof Error ? error.message : String(error);
-      const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
-      this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
-      this.state.set('error');
-      this.scanningInProgress = false;
-    }
+  if (!this.codeReader || this.scanningInProgress) {
+    return;
   }
+
+  if (!navigator.mediaDevices?.getUserMedia) {
+    this.errorMessage.set('Camera API not available in this browser/context.');
+    this.state.set('error');
+    return;
+  }
+
+  try {
+    this.state.set('scanning');
+    this.scanningInProgress = true;
+    this.errorMessage.set('');
+
+    // Small delay to ensure the DOM is ready
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    if (!this.videoElement?.nativeElement) {
+      throw new Error('Video element not found in DOM.');
+    }
+
+    const videoElem = this.videoElement.nativeElement;
+    videoElem.muted = true;
+    videoElem.setAttribute('playsinline', 'true');
+    videoElem.playsInline = true;
+
+    const selectedDeviceId = this.selectedCamera();
+    
+    /**
+     * ADVANCED CONSTRAINTS
+     * We request high resolution AND advanced focus/zoom properties.
+     * Note: 'advanced' constraints are often ignored by browsers if they aren't supported,
+     * so we include them safely here.
+     */
+    const videoConstraints: any = {
+      ...(selectedDeviceId && selectedDeviceId.trim().length > 0 
+          ? { deviceId: { exact: selectedDeviceId } } 
+          : { facingMode: { ideal: 'environment' } }),
+      width: { ideal: 1920 },
+      height: { ideal: 1080 },
+      advanced: [
+        { focusMode: 'continuous' }, // Force continuous autofocus
+        { zoom: 2.0 }                // Start with a 2x zoom so users hold the phone further back
+      ]
+    };
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: videoConstraints
+    });
+
+    this.activeStream = stream;
+    videoElem.srcObject = stream;
+
+    // Wait for metadata to load so we can inspect the track capabilities
+    await videoElem.play();
+
+    // POST-LOAD OPTIMIZATION:
+    // Some Android devices require applying constraints AFTER the stream has started.
+    const videoTrack = stream.getVideoTracks()[0];
+    const capabilities = videoTrack.getCapabilities() as any;
+
+    const advancedConstraints: any = {};
+    
+    // If the device supports continuous focus, force it again explicitly
+    if (capabilities.focusMode?.includes('continuous')) {
+      advancedConstraints.focusMode = 'continuous';
+    }
+
+    // If the device supports zoom, we can set it here if the initial constraint failed
+    if (capabilities.zoom) {
+      // Set zoom to 2.0 or the maximum supported if 2.0 is too high
+      advancedConstraints.zoom = Math.min(2.0, capabilities.zoom.max);
+    }
+
+    if (Object.keys(advancedConstraints).length > 0) {
+      try {
+        await videoTrack.applyConstraints({ advanced: [advancedConstraints] });
+      } catch (e) {
+        console.warn('Could not apply advanced focus/zoom constraints:', e);
+      }
+    }
+
+    // Start the ZXing decoding loop
+    this.codeReader.decodeFromVideoElementContinuously(videoElem, (result) => {
+      if (result && this.state() === 'scanning') {
+        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+      }
+    });
+
+  } catch (error) {
+    console.error('Camera initialization failed:', error);
+    const errorDetails = error instanceof Error ? error.message : String(error);
+    this.errorMessage.set(`Failed to start camera: ${errorDetails}`);
+    this.state.set('error');
+    this.scanningInProgress = false;
+  }
+}
 
   private handleSuccessfulScan(code: string, format: string): void {
     const now = Date.now();
