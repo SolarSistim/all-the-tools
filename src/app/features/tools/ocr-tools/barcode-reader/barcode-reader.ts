@@ -17,6 +17,14 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
+// Type declarations for ImageCapture API
+declare class ImageCapture {
+  constructor(track: MediaStreamTrack);
+  takePhoto(photoSettings?: any): Promise<Blob>;
+  getPhotoCapabilities(): Promise<any>;
+  getPhotoSettings(): Promise<any>;
+}
+
 type ScannerState = 'idle' | 'scanning' | 'scanResult' | 'error';
 
 @Component({
