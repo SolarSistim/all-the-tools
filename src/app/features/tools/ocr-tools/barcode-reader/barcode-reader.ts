@@ -164,78 +164,46 @@ export class BarcodeReader implements OnInit, OnDestroy {
       }
 
       const selectedDeviceId = this.selectedCamera();
+      const videoElem = this.videoElement.nativeElement;
 
-      // Request camera with autofocus enabled
-      const constraints: MediaStreamConstraints = {
-        video: {
-          deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
-          facingMode: selectedDeviceId ? undefined : { ideal: 'environment' },
-          width: { ideal: 1280, max: 1920 },
-          height: { ideal: 720, max: 1080 },
+      // Use decodeFromVideoDevice which manages the video srcObject and decoding loop automatically
+      this.codeReader.decodeFromVideoDevice(
+        selectedDeviceId,
+        videoElem,
+        (result, error) => {
+          if (result && this.state() === 'scanning') {
+            // Success!
+            this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
+          }
+          // NotFoundException errors are ignored as they happen every frame where no barcode is found
         }
-      };
+      );
 
-      // Get media stream
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      // FOCUS WORKAROUND:
+      // Mobile browsers often need a moment after the stream starts to apply focus constraints.
+      setTimeout(async () => {
+        const stream = videoElem.srcObject as MediaStream;
+        const track = stream?.getVideoTracks()[0];
+        if (track) {
+          const capabilities = track.getCapabilities() as any;
+          console.log('Camera capabilities:', capabilities);
 
-      // Set video source
-      this.videoElement.nativeElement.srcObject = stream;
-      await this.videoElement.nativeElement.play();
-
-      // Try to enable autofocus after stream is active
-      const track = stream.getVideoTracks()[0];
-      const capabilities = track.getCapabilities() as any;
-      const settings = track.getSettings() as any;
-
-      console.log('Camera capabilities:', capabilities);
-      console.log('Current settings:', settings);
-
-      // Try different focus modes
-      if (capabilities.focusMode) {
-        console.log('Available focus modes:', capabilities.focusMode);
-
-        // Try continuous autofocus first
-        if (capabilities.focusMode.includes('continuous')) {
-          try {
-            await track.applyConstraints({
-              advanced: [{ focusMode: 'continuous' } as any]
-            });
-            console.log('Continuous autofocus enabled');
-          } catch (e) {
-            console.log('Continuous autofocus failed:', e);
+          // If the hardware supports continuous autofocus, we force it on.
+          if (capabilities.focusMode?.includes('continuous')) {
+            try {
+              await track.applyConstraints({
+                advanced: [{ focusMode: 'continuous' } as any]
+              });
+              console.log('Continuous autofocus enabled');
+            } catch (e) {
+              console.warn('Manual focus constraint failed, falling back to auto.', e);
+            }
           }
         }
-        // Fallback to single-shot autofocus
-        else if (capabilities.focusMode.includes('single-shot')) {
-          try {
-            await track.applyConstraints({
-              advanced: [{ focusMode: 'single-shot' } as any]
-            });
-            console.log('Single-shot autofocus enabled');
-          } catch (e) {
-            console.log('Single-shot autofocus failed:', e);
-          }
-        }
-      } else {
-        console.log('Focus mode not supported by this device');
-      }
+      }, 1000);
 
-      // Try to disable zoom to improve focus
-      if (capabilities.zoom) {
-        try {
-          await track.applyConstraints({
-            advanced: [{ zoom: capabilities.zoom.min || 1 } as any]
-          });
-          console.log('Zoom set to minimum');
-        } catch (e) {
-          console.log('Zoom constraint failed:', e);
-        }
-      }
-
-      // Start continuous scanning loop
-      this.continuousScanning();
     } catch (error) {
-      console.error('Error starting scanner:', error);
+      console.error('Camera initialization failed:', error);
       const errorDetails = error instanceof Error ? error.message : String(error);
       const stackTrace = error instanceof Error && error.stack ? error.stack : 'No stack trace available';
       this.errorMessage.set(`Failed to start camera.\n\nError: ${errorDetails}\n\nStack Trace:\n${stackTrace}`);
@@ -244,82 +212,42 @@ export class BarcodeReader implements OnInit, OnDestroy {
     }
   }
 
-  private async continuousScanning(): Promise<void> {
-    if (!this.scanningInProgress || !this.codeReader || !this.videoElement?.nativeElement) {
+  private handleSuccessfulScan(code: string, format: string): void {
+    const now = Date.now();
+
+    // Prevent duplicate rapid scans of the same code
+    if (code === this.lastScannedCode && now - this.lastScannedTime < this.DUPLICATE_SCAN_WINDOW) {
       return;
     }
 
-    try {
-      const result = await this.codeReader.decodeFromVideoElement(this.videoElement.nativeElement);
+    this.lastScannedCode = code;
+    this.lastScannedTime = now;
 
-      if (result) {
-        const code = result.getText();
-        const format = result.getBarcodeFormat().toString();
-        const now = Date.now();
-
-        console.log('Barcode detected:', code, format); // Debug log
-
-        // Prevent duplicate rapid scans of the same code
-        if (code !== this.lastScannedCode || now - this.lastScannedTime >= this.DUPLICATE_SCAN_WINDOW) {
-          this.lastScannedCode = code;
-          this.lastScannedTime = now;
-
-          // Show scan result for approval
-          this.currentScan.set({ code, format });
-          this.pauseScanning();
-          this.state.set('scanResult');
-
-          // Optional: vibrate if available
-          if ('vibrate' in navigator) {
-            navigator.vibrate(200);
-          }
-          return; // Stop continuous scanning
-        }
-      }
-    } catch (error) {
-      // Ignore NotFoundException - just means no barcode found yet
-      if (!(error instanceof NotFoundException)) {
-        console.error('Scan error:', error);
-      }
+    // 1. Vibrate for feedback
+    if ('vibrate' in navigator) {
+      navigator.vibrate(200);
     }
 
-    // Continue scanning with a small delay (300ms) instead of every frame
-    if (this.scanningInProgress && this.state() === 'scanning') {
-      setTimeout(() => this.continuousScanning(), 300);
-    }
-  }
+    // 2. Stop the video feed visually
+    this.videoElement.nativeElement.pause();
 
-  private pauseScanning(): void {
-    // Pause the video to freeze the camera feed
-    if (this.videoElement?.nativeElement) {
-      this.videoElement.nativeElement.pause();
-    }
-  }
-
-  private resumeScanning(): void {
-    // Resume the video and restart scanning loop
-    if (this.videoElement?.nativeElement) {
-      this.videoElement.nativeElement.play();
-      this.continuousScanning();
-    }
+    // 3. Update state
+    this.currentScan.set({
+      code: code,
+      format: this.formatBarcodeFormat(format)
+    });
+    this.state.set('scanResult');
   }
 
   stopScanning(): void {
-    if (this.codeReader) {
-      this.codeReader.reset();
-    }
-
-    // Stop the camera stream
-    if (this.videoElement?.nativeElement?.srcObject) {
-      const stream = this.videoElement.nativeElement.srcObject as MediaStream;
-      stream.getTracks().forEach(track => track.stop());
-      this.videoElement.nativeElement.srcObject = null;
-    }
-
-    this.scanningInProgress = false;
     this.state.set('idle');
+    this.scanningInProgress = false;
     this.currentScan.set(null);
     this.lastScannedCode = '';
+
+    if (this.codeReader) {
+      this.codeReader.reset(); // This stops the camera stream and the decoding loop
+    }
   }
 
   approveScan(): void {
@@ -337,13 +265,23 @@ export class BarcodeReader implements OnInit, OnDestroy {
 
     // Return to scanning state
     this.currentScan.set(null);
-    this.resumeScanning();
+
+    // Resume video playback
+    if (this.videoElement?.nativeElement) {
+      this.videoElement.nativeElement.play();
+    }
+
     this.state.set('scanning');
   }
 
   retryScan(): void {
     this.currentScan.set(null);
-    this.resumeScanning();
+
+    // Resume video playback
+    if (this.videoElement?.nativeElement) {
+      this.videoElement.nativeElement.play();
+    }
+
     this.state.set('scanning');
   }
 
