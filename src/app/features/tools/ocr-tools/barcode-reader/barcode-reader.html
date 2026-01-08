@@ -12,15 +12,25 @@
           Scan and store retail product barcodes using your device camera. Supports UPC, EAN, Code 128, Code 39, and more with instant recognition and local storage.
         </p>
         <div class="hero-cta">
+          <!-- Hidden file input for native camera -->
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            capture="environment"
+            (change)="handlePhotoCapture($event)"
+            style="display: none;"
+          />
+
           <button
             mat-raised-button
             color="primary"
-            (click)="startScanning()"
+            (click)="openNativeCamera()"
             class="cta-button"
             *ngIf="state() === 'idle'"
           >
             <mat-icon>camera_alt</mat-icon>
-            Start Scanning
+            Scan Barcode
           </button>
         </div>
       </div>
@@ -84,9 +94,13 @@
         </div>
         <p class="scanner-message">Ready to scan barcodes</p>
         <p class="scanner-hint">Supports UPC-A, UPC-E, EAN-13, EAN-8, Code 128, Code 39, ITF, and QR codes</p>
-        <button mat-raised-button color="primary" (click)="startScanning()" class="scan-button">
+        <button mat-raised-button color="primary" (click)="openNativeCamera()" class="scan-button">
           <mat-icon>camera_alt</mat-icon>
-          Start Scanning
+          Scan Barcode
+        </button>
+        <button mat-stroked-button (click)="startScanning()" class="scan-button" style="margin-top: 8px;">
+          <mat-icon>videocam</mat-icon>
+          Use Live Video Scanner
         </button>
       </div>
 
@@ -108,30 +122,47 @@
       </div>
     </mat-card>
 
-    <!-- Full-Screen Scanner Overlay -->
-    <div *ngIf="state() === 'scanning' || state() === 'scanResult'" class="scanner-overlay">
+    <!-- Full-Screen Scanner Overlay (for video scanning) -->
+    <div *ngIf="state() === 'scanning'" class="scanner-overlay">
       <!-- Close Button -->
       <button mat-icon-button class="close-button" (click)="stopScanning()">
         <mat-icon>close</mat-icon>
       </button>
 
       <!-- Scanning State -->
-      <div *ngIf="state() === 'scanning'" class="scanner-state scanning-state">
+      <div class="scanner-state scanning-state">
         <div class="video-container">
           <video #videoElement autoplay playsinline muted></video>
           <div class="scan-region"></div>
         </div>
-        <p class="scanner-message">Position barcode within the frame</p>
+        <p class="scanner-message">Center the barcode in the frame, then tap the button below</p>
+
+        <!-- Manual Capture Button -->
+        <div class="manual-capture-controls">
+          <button mat-fab extended color="primary" (click)="manuallyCapture()" class="capture-button">
+            <mat-icon>photo_camera</mat-icon>
+            Capture Photo
+          </button>
+          <p class="capture-hint">Or wait for automatic detection</p>
+        </div>
       </div>
+    </div>
+
+    <!-- Scan Result Overlay (works for both native camera and video scanning) -->
+    <div *ngIf="state() === 'scanResult' && currentScan()" class="scanner-overlay">
+      <!-- Close Button -->
+      <button mat-icon-button class="close-button" (click)="closeResult()">
+        <mat-icon>close</mat-icon>
+      </button>
 
       <!-- Scan Result State (Approval Workflow) -->
-      <div *ngIf="state() === 'scanResult' && currentScan()" class="scanner-state result-state">
+      <div class="scanner-state result-state">
         <div class="result-icon">
           <mat-icon>check_circle</mat-icon>
         </div>
         <h3 class="result-title">Barcode Detected</h3>
         <div class="result-code">{{ currentScan()!.code }}</div>
-        <div class="result-format">{{ formatBarcodeFormat(currentScan()!.format) }}</div>
+        <div class="result-format">{{ currentScan()!.format }}</div>
 
         <div class="result-actions">
           <button mat-raised-button color="primary" (click)="approveScan()" class="approve-button">

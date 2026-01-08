@@ -372,7 +372,7 @@ mat-card {
 
   .scanner-message {
     position: absolute;
-    bottom: $spacing-lg;
+    bottom: 140px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -384,6 +384,33 @@ mat-card {
     background: rgba(0, 0, 0, 0.6);
     border-radius: 8px;
     max-width: 90%;
+  }
+
+  .manual-capture-controls {
+    position: absolute;
+    bottom: $spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+
+    .capture-button {
+      box-shadow: 0 4px 20px rgba(109, 212, 255, 0.4);
+
+      &:hover {
+        box-shadow: 0 6px 30px rgba(109, 212, 255, 0.6);
+      }
+    }
+
+    .capture-hint {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+      text-align: center;
+      margin: 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
   }
 
   .scanner-state {
