@@ -315,6 +315,80 @@ mat-card {
     }
   }
 
+  // Fullscreen mode styles
+  &:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+
+    .card-header {
+      padding: $spacing-md $spacing-lg;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .video-container {
+      flex: 1;
+      margin: 0;
+      border-radius: 0;
+      max-width: 100%;
+      min-height: 100%;
+      aspect-ratio: unset;
+    }
+
+    .scan-result-container,
+    .scanner-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+
+  // Webkit fullscreen support
+  &:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+
+    .card-header {
+      padding: $spacing-md $spacing-lg;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .video-container {
+      flex: 1;
+      margin: 0;
+      border-radius: 0;
+      max-width: 100%;
+      min-height: 100%;
+      aspect-ratio: unset;
+    }
+
+    .scan-result-container,
+    .scanner-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+
   .scan-region {
     position: absolute;
     top: 50%;
