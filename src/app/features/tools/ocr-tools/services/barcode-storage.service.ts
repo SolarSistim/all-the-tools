@@ -12,6 +12,11 @@ export interface ScannedBarcode {
 export class BarcodeStorageService {
   private readonly STORAGE_KEY = 'barcode_reader_scans';
 
+  private getStorage(): Storage | null {
+    if (typeof window === 'undefined') return null;
+    return window.localStorage ?? null;
+  }
+
   constructor() {}
 
   /**
@@ -19,7 +24,9 @@ export class BarcodeStorageService {
    */
   loadScans(): ScannedBarcode[] {
     try {
-      const stored = localStorage.getItem(this.STORAGE_KEY);
+      const storage = this.getStorage();
+      if (!storage) return [];
+      const stored = storage.getItem(this.STORAGE_KEY);
       if (!stored) {
         return [];
       }
@@ -53,7 +60,9 @@ export class BarcodeStorageService {
     scans.unshift(newScan);
 
     try {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(scans));
+      const storage = this.getStorage();
+      if (!storage) return false;
+      storage.setItem(this.STORAGE_KEY, JSON.stringify(scans));
       return true;
     } catch (error) {
       console.error('Error saving scan to localStorage:', error);
@@ -66,7 +75,9 @@ export class BarcodeStorageService {
    */
   clearAll(): void {
     try {
-      localStorage.removeItem(this.STORAGE_KEY);
+      const storage = this.getStorage();
+      if (!storage) return;
+      storage.removeItem(this.STORAGE_KEY);
     } catch (error) {
       console.error('Error clearing scans from localStorage:', error);
     }

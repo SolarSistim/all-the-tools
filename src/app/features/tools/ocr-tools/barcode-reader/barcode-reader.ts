@@ -118,18 +118,28 @@ export class BarcodeReader implements OnInit, OnDestroy {
       this.codeReader = new BrowserMultiFormatReader(hints);
 
       // Get available cameras
-      const devices = await this.codeReader.listVideoInputDevices();
-      this.availableCameras.set(devices);
+      let devices: MediaDeviceInfo[] = [];
+        try {
+          devices = await this.codeReader.listVideoInputDevices();
+        } catch (e) {
+          devices = [];
+        }
 
-      if (devices.length > 0) {
-        // Prefer back camera on mobile
-        const backCamera = devices.find(device =>
-          device.label.toLowerCase().includes('back') ||
-          device.label.toLowerCase().includes('rear') ||
-          device.label.toLowerCase().includes('environment')
-        );
-        this.selectedCamera.set(backCamera?.deviceId || devices[0].deviceId);
-      }
+        this.availableCameras.set(devices);
+
+        if (devices.length > 0) {
+          const backCamera = devices.find(device =>
+            device.label.toLowerCase().includes('back') ||
+            device.label.toLowerCase().includes('rear') ||
+            device.label.toLowerCase().includes('environment')
+          );
+          this.selectedCamera.set(backCamera?.deviceId || devices[0].deviceId);
+        } else {
+          // Enumeration not available; scanning can still work using default camera selection
+          this.selectedCamera.set('');
+        }
+
+
     } catch (error) {
       console.error('Error initializing scanner:', error);
       const errorDetails = error instanceof Error ? error.message : String(error);
@@ -144,8 +154,8 @@ export class BarcodeReader implements OnInit, OnDestroy {
     return;
   }
 
-  if (this.availableCameras().length === 0) {
-    this.errorMessage.set('No camera found. Please ensure your device has a camera and permissions are granted.');
+  if (!navigator.mediaDevices?.getUserMedia) {
+    this.errorMessage.set('Camera API not available in this browser/context.');
     this.state.set('error');
     return;
   }
@@ -162,23 +172,26 @@ export class BarcodeReader implements OnInit, OnDestroy {
     }
 
     const videoElem = this.videoElement.nativeElement;
+
+    videoElem.muted = true;
+    videoElem.setAttribute('muted', '');
+    videoElem.setAttribute('playsinline', 'true');
+    videoElem.playsInline = true;
+
     const selectedDeviceId = this.selectedCamera();
     const deviceIdForZXing = selectedDeviceId && selectedDeviceId.trim().length > 0 ? selectedDeviceId : null;
 
 
     await this.codeReader.decodeFromVideoDevice(
-      deviceIdForZXing,
+      (this.selectedCamera() && this.selectedCamera()!.trim().length > 0) ? this.selectedCamera()! : null,
       videoElem,
       (result, error) => {
         if (result && this.state() === 'scanning') {
-          this.handleSuccessfulScan(
-            result.getText(),
-            result.getBarcodeFormat().toString()
-          );
+          this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
         }
       }
     );
-    
+
   } catch (error) {
     console.error('Camera initialization failed:', error);
     const errorDetails = error instanceof Error ? error.message : String(error);
