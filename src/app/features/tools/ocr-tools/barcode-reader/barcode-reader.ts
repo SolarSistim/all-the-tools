@@ -194,7 +194,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
       height: { ideal: 1080 },
       advanced: [
         { focusMode: 'continuous' }, // Force continuous autofocus
-        { zoom: 2.0 }                // Start with a 2x zoom so users hold the phone further back
+        { zoom: 1.0 }                // Start with a 2x zoom so users hold the phone further back
       ]
     };
 
