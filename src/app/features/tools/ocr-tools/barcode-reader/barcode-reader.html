@@ -1,5 +1,14 @@
 <div class="barcode-reader-container">
   <div class="content-wrapper">
+    <!-- Hidden file input for native camera -->
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      capture="environment"
+      (change)="handlePhotoCapture($event)"
+      style="display: none;"
+    />
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -12,22 +21,11 @@
           Scan and store retail product barcodes using your device camera. Supports UPC, EAN, Code 128, Code 39, and more with instant recognition and local storage.
         </p>
         <div class="hero-cta">
-          <!-- Hidden file input for native camera -->
-          <input
-            #fileInput
-            type="file"
-            accept="image/*"
-            capture="environment"
-            (change)="handlePhotoCapture($event)"
-            style="display: none;"
-          />
-
           <button
             mat-raised-button
             color="primary"
-            (click)="openNativeCamera()"
+            (click)="scrollToScanner()"
             class="cta-button"
-            *ngIf="state() === 'idle'"
           >
             <mat-icon>camera_alt</mat-icon>
             Scan Barcode
@@ -76,7 +74,9 @@
     </section>
 
     <!-- AdSense Ad -->
-    <app-adsense></app-adsense>
+    <div #scannerSection>
+      <app-adsense></app-adsense>
+    </div>
 
     <!-- Scanner Card -->
     <mat-card class="scanner-card">
@@ -157,7 +157,7 @@
       </div>
       <p class="manual-hint">If scanning doesn't work, you can manually enter a barcode:</p>
       <div class="manual-input-row">
-        <mat-form-field appearance="outline" class="manual-input-field">
+        <mat-form-field appearance="fill" class="manual-input-field">
           <mat-label>Enter barcode manually</mat-label>
           <input
             matInput

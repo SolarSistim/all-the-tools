@@ -10,14 +10,14 @@
 
 .barcode-reader-container {
   min-height: 100vh;
-  padding: $spacing-2xl 0;
+  padding: 48px 0 $spacing-xl 0;
   background: var(--bg-primary);
   width: 100%;
 
   .content-wrapper {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 $spacing-lg;
+    padding: 0 $spacing-md;
   }
 }
 
@@ -30,7 +30,7 @@
   grid-template-columns: 1fr 1fr;
   gap: $spacing-3xl;
   margin-bottom: 32px;
-  padding: $spacing-2xl;
+  padding: $spacing-xl;
   align-items: center;
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);
@@ -51,6 +51,7 @@
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
     gap: $spacing-2xl;
+    text-align: center;
   }
 }
 
@@ -58,6 +59,10 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-lg;
+
+  @media (max-width: 968px) {
+    align-items: center;
+  }
 }
 
 .hero-icon-wrapper {
@@ -90,7 +95,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
-  @media (max-width: 768px) {
+  @media (max-width: 968px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
     font-size: 2rem;
   }
 }
@@ -108,6 +117,19 @@
   gap: $spacing-md;
   margin-top: $spacing-md;
   flex-wrap: wrap;
+
+  @media (max-width: 968px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
 }
 
 .cta-button {
@@ -144,6 +166,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
 }
 
 .barcode-showcase {
@@ -724,12 +750,12 @@ mat-card {
 
 .scanned-list-card {
   .header-actions {
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
       width: 100%;
+      flex-direction: column;
 
       button {
-        flex: 1;
-        min-width: 0;
+        width: 100%;
       }
     }
   }
@@ -737,18 +763,20 @@ mat-card {
 
 .action-btn {
   font-family: 'Space Grotesk', sans-serif !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  background: var(--bg-secondary) !important;
+  color: var(--neon-cyan) !important;
+  border: 1px solid var(--neon-cyan) !important;
   transition: all 0.3s ease !important;
 
-  &:hover {
-    border-color: var(--neon-cyan) !important;
-    color: var(--neon-cyan) !important;
-    box-shadow: 0 0 12px var(--neon-cyan-glow) !important;
+  &:hover:not(:disabled) {
+    background: rgba(109, 212, 255, 0.1) !important;
+    box-shadow: 0 0 20px rgba(109, 212, 255, 0.3);
   }
 
   mat-icon {
     margin-right: $spacing-xs;
+    color: var(--neon-cyan) !important;
   }
 }
 
@@ -837,12 +865,12 @@ mat-card {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: $spacing-3xl $spacing-lg;
+    padding: $spacing-xl $spacing-lg;
     text-align: center;
     min-height: 300px;
 
-    @media (max-width: 768px) {
-      padding: $spacing-2xl $spacing-md;
+    @media (max-width: 640px) {
+      padding: $spacing-xl $spacing-md;
     }
 
     .empty-icon {
@@ -974,20 +1002,18 @@ mat-card {
 // RESPONSIVE DESIGN
 // ============================================
 
-@media (max-width: 768px) {
-  .barcode-reader-container {
-    padding: $spacing-lg $spacing-md;
-  }
-
+@media (max-width: 640px) {
   .card-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: $spacing-md;
 
     .header-actions {
       width: 100%;
+      flex-direction: column;
 
       button {
-        flex: 1;
+        width: 100%;
       }
     }
   }

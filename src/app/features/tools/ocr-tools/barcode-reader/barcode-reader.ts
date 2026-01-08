@@ -42,6 +42,7 @@ type ScannerState = 'idle' | 'scanResult' | 'error';
 })
 export class BarcodeReader implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('scannerSection') scannerSection!: ElementRef<HTMLDivElement>;
 
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
@@ -272,6 +273,19 @@ export class BarcodeReader implements OnInit, OnDestroy {
     this.errorMessage.set('');
     this.state.set('idle');
     this.initializeScanner();
+  }
+
+  /**
+   * Scrolls to the scanner section
+   */
+  scrollToScanner(): void {
+    console.log('📍 [SCROLL] Scrolling to scanner section');
+    if (this.scannerSection?.nativeElement) {
+      this.scannerSection.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   }
 
   /**
