@@ -69,7 +69,7 @@
     <app-adsense></app-adsense>
 
     <!-- Scanner Card -->
-    <mat-card class="scanner-card" #scannerCard>
+    <mat-card class="scanner-card">
       <div class="card-header">
         <h2>
           <mat-icon>qr_code_scanner</mat-icon>
@@ -90,6 +90,31 @@
         </button>
       </div>
 
+      <!-- Error State -->
+      <div *ngIf="state() === 'error'" class="scanner-state error-state">
+        <div class="error-icon">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <p class="error-message">{{ errorMessage() }}</p>
+        <div class="error-actions">
+          <button mat-raised-button color="primary" (click)="retryCamera()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+          </button>
+        </div>
+        <p class="error-hint">
+          Make sure to allow camera permissions in your browser settings.
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- Full-Screen Scanner Overlay -->
+    <div *ngIf="state() === 'scanning' || state() === 'scanResult'" class="scanner-overlay">
+      <!-- Close Button -->
+      <button mat-icon-button class="close-button" (click)="stopScanning()">
+        <mat-icon>close</mat-icon>
+      </button>
+
       <!-- Scanning State -->
       <div *ngIf="state() === 'scanning'" class="scanner-state scanning-state">
         <div class="video-container">
@@ -97,10 +122,6 @@
           <div class="scan-region"></div>
         </div>
         <p class="scanner-message">Position barcode within the frame</p>
-        <button mat-stroked-button (click)="stopScanning()" class="stop-button">
-          <mat-icon>stop</mat-icon>
-          Stop Scanning
-        </button>
       </div>
 
       <!-- Scan Result State (Approval Workflow) -->
@@ -122,29 +143,8 @@
             Retry
           </button>
         </div>
-        <button mat-button (click)="stopScanning()" class="cancel-button">
-          <mat-icon>close</mat-icon>
-          Cancel
-        </button>
       </div>
-
-      <!-- Error State -->
-      <div *ngIf="state() === 'error'" class="scanner-state error-state">
-        <div class="error-icon">
-          <mat-icon>error_outline</mat-icon>
-        </div>
-        <p class="error-message">{{ errorMessage() }}</p>
-        <div class="error-actions">
-          <button mat-raised-button color="primary" (click)="retryCamera()">
-            <mat-icon>refresh</mat-icon>
-            Retry
-          </button>
-        </div>
-        <p class="error-hint">
-          Make sure to allow camera permissions in your browser settings.
-        </p>
-      </div>
-    </mat-card>
+    </div>
 
     <!-- Manual Input Fallback -->
     <mat-card class="manual-input-card">

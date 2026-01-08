@@ -42,7 +42,6 @@ type ScannerState = 'idle' | 'scanning' | 'scanResult' | 'error';
 })
 export class BarcodeReader implements OnInit, OnDestroy {
   @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
-  @ViewChild('scannerCard') scannerCard!: ElementRef<HTMLElement>;
 
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
@@ -152,14 +151,12 @@ export class BarcodeReader implements OnInit, OnDestroy {
     }
 
     try {
+      // Set state to 'scanning' first to trigger the overlay to appear
       this.state.set('scanning');
       this.scanningInProgress = true;
       this.errorMessage.set('');
 
-      // Request fullscreen for better scanning experience
-      await this.enterFullscreen();
-
-      // Wait for the view to update and render the video element
+      // Wait for the view to update and render the video element in the overlay
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Check if video element is now available
@@ -194,50 +191,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
     }
   }
 
-  private async enterFullscreen(): Promise<void> {
-    try {
-      const element = this.scannerCard?.nativeElement;
-      if (!element) return;
-
-      // Request fullscreen
-      if (element.requestFullscreen) {
-        await element.requestFullscreen();
-      }
-
-      // Try to lock orientation to landscape
-      if (screen.orientation && (screen.orientation as any).lock) {
-        try {
-          await (screen.orientation as any).lock('landscape');
-        } catch (e) {
-          // Orientation lock might fail, but that's okay
-          console.log('Orientation lock not supported or failed:', e);
-        }
-      }
-    } catch (e) {
-      // Fullscreen might fail, but continue anyway
-      console.log('Fullscreen request failed:', e);
-    }
-  }
-
-  private async exitFullscreen(): Promise<void> {
-    try {
-      if (document.fullscreenElement) {
-        await document.exitFullscreen();
-      }
-
-      // Unlock orientation
-      if (screen.orientation && (screen.orientation as any).unlock) {
-        try {
-          (screen.orientation as any).unlock();
-        } catch (e) {
-          console.log('Orientation unlock failed:', e);
-        }
-      }
-    } catch (e) {
-      console.log('Exit fullscreen failed:', e);
-    }
-  }
-
   private handleSuccessfulScan(code: string, format: string): void {
     const now = Date.now();
 
@@ -266,6 +219,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
   }
 
   stopScanning(): void {
+    // Return to idle state - this will hide the overlay
     this.state.set('idle');
     this.scanningInProgress = false;
     this.currentScan.set(null);
@@ -274,9 +228,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
     if (this.codeReader) {
       this.codeReader.reset(); // This stops the camera stream and the decoding loop
     }
-
-    // Exit fullscreen when stopping
-    this.exitFullscreen();
   }
 
   approveScan(): void {
