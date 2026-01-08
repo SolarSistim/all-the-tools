@@ -372,7 +372,7 @@ mat-card {
 
   .scanner-message {
     position: absolute;
-    bottom: 100px;
+    bottom: $spacing-lg;
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -383,6 +383,7 @@ mat-card {
     padding: $spacing-md $spacing-lg;
     background: rgba(0, 0, 0, 0.6);
     border-radius: 8px;
+    max-width: 90%;
   }
 
   .scanner-state {
