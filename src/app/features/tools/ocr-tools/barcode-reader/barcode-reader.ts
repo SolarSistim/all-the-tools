@@ -74,8 +74,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
     console.log('🌐 Platform:', navigator.platform);
     console.log('🖥️ Screen Resolution:', typeof screen !== 'undefined' ? `${screen.width}x${screen.height}` : 'N/A (SSR)');
     console.log('📐 Viewport Size:', typeof window !== 'undefined' ? `${window.innerWidth}x${window.innerHeight}` : 'N/A (SSR)');
-    console.log('🎥 MediaDevices API:', !!navigator.mediaDevices ? 'Available' : 'Not Available');
-    console.log('📸 ImageCapture API:', typeof ImageCapture !== 'undefined' ? 'Available' : 'Not Available');
     console.log('📳 Vibration API:', 'vibrate' in navigator ? 'Available' : 'Not Available');
     console.log('🔒 Secure Context:', typeof window !== 'undefined' && window.isSecureContext ? 'Yes' : 'No');
     console.log('════════════════════════════════════════════════════════');
