@@ -52,3 +52,27 @@
     }
   }
 }
+
+.adsense-container {
+  width: 100%;
+  display: block;
+  position: relative;
+
+  /* CRITICAL: never constrain height */
+  height: auto;
+  min-height: unset;
+  max-height: none;
+}
+
+.adsense-container ins.adsbygoogle {
+  display: block;
+  width: 100%;
+
+  /* CRITICAL: let Google decide height */
+  height: auto;
+}
+
+.adsense-container iframe {
+  width: 100% !important;
+}
+
