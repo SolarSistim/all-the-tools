@@ -68,16 +68,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
   }
 
   private logEnvironmentInfo(): void {
-    console.log('════════════════════════════════════════════════════════');
-    console.log('🚀 BARCODE SCANNER - ENVIRONMENT INFO');
-    console.log('════════════════════════════════════════════════════════');
-    console.log('📱 User Agent:', navigator.userAgent);
-    console.log('🌐 Platform:', navigator.platform);
-    console.log('🖥️ Screen Resolution:', typeof screen !== 'undefined' ? `${screen.width}x${screen.height}` : 'N/A (SSR)');
-    console.log('📐 Viewport Size:', typeof window !== 'undefined' ? `${window.innerWidth}x${window.innerHeight}` : 'N/A (SSR)');
-    console.log('📳 Vibration API:', 'vibrate' in navigator ? 'Available' : 'Not Available');
-    console.log('🔒 Secure Context:', typeof window !== 'undefined' && window.isSecureContext ? 'Yes' : 'No');
-    console.log('════════════════════════════════════════════════════════');
   }
 
   ngOnDestroy(): void {
