@@ -60,6 +60,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
   // Scanner instance
   private codeReader: BrowserMultiFormatReader | null = null;
   private scanningInProgress = false;
+  private activeStream: MediaStream | null = null;
   private lastScannedCode = '';
   private lastScannedTime = 0;
   private readonly DUPLICATE_SCAN_WINDOW = 2000; // 2 seconds
@@ -179,19 +180,30 @@ export class BarcodeReader implements OnInit, OnDestroy {
     videoElem.playsInline = true;
 
     const selectedDeviceId = this.selectedCamera();
-    const deviceIdForZXing = selectedDeviceId && selectedDeviceId.trim().length > 0 ? selectedDeviceId : null;
+    const videoConstraints: MediaTrackConstraints =
+      selectedDeviceId && selectedDeviceId.trim().length > 0
+        ? { deviceId: { exact: selectedDeviceId } }
+        : {
+            facingMode: { ideal: 'environment' },
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+          };
 
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: videoConstraints
+    });
 
-    await this.codeReader.decodeFromVideoDevice(
-      (this.selectedCamera() && this.selectedCamera()!.trim().length > 0) ? this.selectedCamera()! : null,
-      videoElem,
-      (result, error) => {
-        if (result && this.state() === 'scanning') {
-          this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
-        }
+    this.activeStream = stream;
+    videoElem.srcObject = stream;
+
+    await videoElem.play();
+
+    this.codeReader.decodeFromVideoElementContinuously(videoElem, (result) => {
+      if (result && this.state() === 'scanning') {
+        this.handleSuccessfulScan(result.getText(), result.getBarcodeFormat().toString());
       }
-    );
-
+    });
   } catch (error) {
     console.error('Camera initialization failed:', error);
     const errorDetails = error instanceof Error ? error.message : String(error);
@@ -201,8 +213,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
     this.scanningInProgress = false;
   }
 }
-
-
 
   private handleSuccessfulScan(code: string, format: string): void {
     const now = Date.now();
@@ -240,7 +250,19 @@ stopScanning(): void {
   if (this.codeReader) {
     this.codeReader.reset();
   }
+
+  if (this.activeStream) {
+    for (const track of this.activeStream.getTracks()) {
+      track.stop();
+    }
+    this.activeStream = null;
+  }
+
+  if (this.videoElement?.nativeElement) {
+    this.videoElement.nativeElement.srcObject = null;
+  }
 }
+
 
   approveScan(): void {
     const scan = this.currentScan();
