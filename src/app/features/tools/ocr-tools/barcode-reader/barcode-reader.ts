@@ -113,7 +113,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
         BarcodeFormat.QR_CODE, // Bonus support
       ];
       hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
-      hints.set(DecodeHintType.TRY_HARDER, true);
+      hints.set(DecodeHintType.TRY_HARDER, false); // Reduced CPU load for better frame rate
 
       this.codeReader = new BrowserMultiFormatReader(hints);
 
@@ -167,6 +167,7 @@ export class BarcodeReader implements OnInit, OnDestroy {
       const videoElem = this.videoElement.nativeElement;
 
       // Use decodeFromVideoDevice which manages the video srcObject and decoding loop automatically
+      // The library will use native browser autofocus with environment-facing camera
       this.codeReader.decodeFromVideoDevice(
         selectedDeviceId,
         videoElem,
@@ -178,29 +179,6 @@ export class BarcodeReader implements OnInit, OnDestroy {
           // NotFoundException errors are ignored as they happen every frame where no barcode is found
         }
       );
-
-      // FOCUS WORKAROUND:
-      // Mobile browsers often need a moment after the stream starts to apply focus constraints.
-      setTimeout(async () => {
-        const stream = videoElem.srcObject as MediaStream;
-        const track = stream?.getVideoTracks()[0];
-        if (track) {
-          const capabilities = track.getCapabilities() as any;
-          console.log('Camera capabilities:', capabilities);
-
-          // If the hardware supports continuous autofocus, we force it on.
-          if (capabilities.focusMode?.includes('continuous')) {
-            try {
-              await track.applyConstraints({
-                advanced: [{ focusMode: 'continuous' } as any]
-              });
-              console.log('Continuous autofocus enabled');
-            } catch (e) {
-              console.warn('Manual focus constraint failed, falling back to auto.', e);
-            }
-          }
-        }
-      }, 1000);
 
     } catch (error) {
       console.error('Camera initialization failed:', error);
