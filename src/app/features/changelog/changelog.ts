@@ -71,17 +71,6 @@ export class Changelog implements OnInit {
     },
     {
       version: '1.2.0',
-      date: 'January 8, 2026',
-      changes: [
-        {
-          type: 'added',
-          description: 'Barcode Reader',
-          route: '/tools/barcode-reader'
-        }
-      ]
-    },
-    {
-      version: '1.2.0',
       date: 'December 26, 2025',
       changes: [
         {

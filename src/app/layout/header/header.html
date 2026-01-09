@@ -105,10 +105,10 @@
         <mat-tab label="All Tools">
           <div class="mega-menu-tab-content">
             <div class="mega-menu-columns">
-              <!-- Column 1: First 6 tools -->
+              <!-- Column 1: First 7 tools -->
               <div class="mega-menu-column">
                 @for (tool of sortedTools; track tool.id; let i = $index) {
-                  @if (i < 6) {
+                  @if (i < 7) {
                     <a
                       mat-menu-item
                       [routerLink]="['/tools', tool.route]"
@@ -122,10 +122,10 @@
                 }
               </div>
 
-              <!-- Column 2: Next 5 tools (6-10) -->
+              <!-- Column 2: Next 6 tools (7-12) -->
               <div class="mega-menu-column">
                 @for (tool of sortedTools; track tool.id; let i = $index) {
-                  @if (i >= 6 && i < 11) {
+                  @if (i >= 7 && i < 13) {
                     <a
                       mat-menu-item
                       [routerLink]="['/tools', tool.route]"
@@ -139,10 +139,10 @@
                 }
               </div>
 
-              <!-- Column 3: Last 5 tools (11-15) -->
+              <!-- Column 3: Last 6 tools (13-18) -->
               <div class="mega-menu-column">
                 @for (tool of sortedTools; track tool.id; let i = $index) {
-                  @if (i >= 11 && i < 16) {
+                  @if (i >= 13 && i < 19) {
                     <a
                       mat-menu-item
                       [routerLink]="['/tools', tool.route]"
