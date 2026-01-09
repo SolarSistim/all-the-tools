@@ -89,6 +89,18 @@ export class ToolsService {
       tags: ['math', 'health', 'calculator'],
       available: true
     },
+    {
+      id: 'roman-numeral-converter',
+      name: 'Roman Numeral Converter',
+      description: 'Convert regular numbers to Roman numerals instantly',
+      longDescription: 'Free online Roman numeral converter. Convert regular numbers (1-3999) to Roman numerals instantly. Save conversions, download as text, and manage your conversion history locally.',
+      category: 'math',
+      icon: 'history_edu',
+      route: 'roman-numeral-converter',
+      featured: false,
+      tags: ['math', 'converter', 'roman', 'numerals', 'education'],
+      available: true
+    },
 
     // ========================================
     // CONVERTER TOOLS

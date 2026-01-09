@@ -49,6 +49,7 @@
 /tools/percentage-calculator
 /tools/qr-code-generator
 /tools/roku-compatibility
+/tools/roman-numeral-converter
 /tools/time-zone-converter
 /tools/timestamp-converter
 /tools/tip-calculator

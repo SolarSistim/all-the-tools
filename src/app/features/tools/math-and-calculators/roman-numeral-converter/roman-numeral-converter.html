@@ -1,0 +1,227 @@
+<div class="roman-converter-container">
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">history_edu</mat-icon>
+        </div>
+        <h1 class="hero-title">Roman Numeral Converter</h1>
+        <p class="hero-subtitle">
+          Convert regular numbers to Roman numerals instantly. Supports standard notation (1-3,999) and vinculum notation for larger numbers (up to 3,999,999). Save your conversions, download as text files, and manage your conversion history locally with full privacy.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <div class="roman-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-item">
+              <div class="roman-icon">
+                <span class="roman-example">I</span>
+              </div>
+              <span>1</span>
+            </div>
+            <div class="showcase-item">
+              <div class="roman-icon">
+                <span class="roman-example">V</span>
+              </div>
+              <span>5</span>
+            </div>
+            <div class="showcase-item">
+              <div class="roman-icon">
+                <span class="roman-example">X</span>
+              </div>
+              <span>10</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Instant conversion for 1-3999</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This Roman numeral converter instantly transforms regular numbers into their Roman numeral equivalents. Supports standard notation (1-3,999) and vinculum (overline) notation for larger numbers up to 3,999,999. Type any number and see the conversion appear in real-time. Save frequently used conversions to a list stored locally in your browser. Export options include copying individual conversions, bulk copying all conversions, or downloading as a text file. Perfect for educational purposes, historical documents, clock faces, or any project requiring Roman numerals. Completely privacy-focused—all processing and storage happens in your browser with no server uploads or external API calls.
+      </p>
+    </section>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Converter Card -->
+    <mat-card class="converter-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>history_edu</mat-icon>
+          Number to Roman Numeral
+        </h2>
+      </div>
+
+      <div class="converter-content">
+        <!-- Vinculum Checkbox -->
+        <div class="vinculum-option">
+          <mat-checkbox
+            [(ngModel)]="useVinculum"
+            (ngModelChange)="onVinculumChange()"
+            color="primary"
+          >
+            Use Vinculum (allows numbers up to 3,999,999)
+          </mat-checkbox>
+          <div class="vinculum-info">
+            <mat-icon>info</mat-icon>
+            <span>The vinculum is an overline that multiplies values by 1,000 (e.g., V̅ = 5,000)</span>
+          </div>
+        </div>
+
+        <div class="input-section">
+          <mat-form-field appearance="fill" class="number-input-field">
+            <mat-label>Enter a number (1-{{ useVinculum() ? '3,999,999' : '3,999' }})</mat-label>
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="numberInput"
+              (ngModelChange)="onNumberInput()"
+              placeholder="e.g., 2024"
+            />
+            <mat-icon matPrefix>tag</mat-icon>
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="saveConversion()"
+            [disabled]="!romanNumeral()"
+            class="save-button"
+          >
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+        </div>
+
+        <!-- Result Display -->
+        <div class="result-section" *ngIf="romanNumeral()">
+          <div class="result-label">Roman Numeral:</div>
+          <div class="result-display">{{ romanNumeral() }}</div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-section" *ngIf="errorMessage()">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage() }}</span>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Saved Conversions List -->
+    <mat-card class="saved-list-card" *ngIf="savedConversions().length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>list</mat-icon>
+          Saved Conversions<span> ({{ savedConversions().length }})</span>
+        </h2>
+        <div class="header-actions">
+          <button mat-stroked-button (click)="copyAllConversions()" matTooltip="Copy all conversions to clipboard" class="action-btn">
+            <mat-icon>content_copy</mat-icon>
+            Copy All
+          </button>
+          <button mat-stroked-button (click)="downloadConversions()" matTooltip="Download as text file" class="action-btn">
+            <mat-icon>download</mat-icon>
+            Download
+          </button>
+          <button mat-stroked-button color="warn" (click)="clearAllConversions()" matTooltip="Clear all saved conversions" class="action-btn">
+            <mat-icon>delete_sweep</mat-icon>
+            Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table mat-table [dataSource]="savedConversions()" class="conversion-table">
+
+          <!-- Number Column -->
+          <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef>Number</th>
+            <td mat-cell *matCellDef="let conversion" class="number-cell">
+              <span class="number-value">{{ conversion.number }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Roman Numeral Column -->
+          <ng-container matColumnDef="roman">
+            <th mat-header-cell *matHeaderCellDef>Roman Numeral</th>
+            <td mat-cell *matCellDef="let conversion" class="roman-cell">
+              <span class="roman-value">{{ conversion.roman }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Timestamp Column -->
+          <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef>Saved At</th>
+            <td mat-cell *matCellDef="let conversion" class="timestamp-cell">
+              {{ formatTimestamp(conversion.savedAt) }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let conversion" class="actions-cell">
+              <button mat-icon-button (click)="copyConversion(conversion)" matTooltip="Copy to clipboard" color="primary">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteConversion(conversion.number)" matTooltip="Delete" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card>
+
+    <!-- Empty State -->
+    <mat-card class="empty-state-card" *ngIf="savedConversions().length === 0">
+      <div class="empty-state">
+        <mat-icon class="empty-icon">history_edu</mat-icon>
+        <p class="empty-message">No conversions saved yet. Convert a number and save it to build your collection.</p>
+      </div>
+    </mat-card>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Problems This Tool Solves Section -->
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Roman Numeral Converter Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates manual Roman numeral conversion errors</strong> - Stop calculating Roman numerals by hand and risking mistakes. Convert instantly with perfect accuracy every time.</li>
+          <li><strong>Saves time for historical documents</strong> - Quickly convert dates and numbers for historical papers, academic work, or period-accurate documents without consulting conversion tables.</li>
+          <li><strong>Prevents duplicate conversion work</strong> - Save frequently used conversions to avoid repeating the same calculations. Perfect for recurring numbers in your projects.</li>
+          <li><strong>Streamlines clock and watch design</strong> - Generate Roman numerals for clock faces and timepiece designs without manual lookup or conversion.</li>
+          <li><strong>Simplifies educational exercises</strong> - Teachers and students can quickly verify Roman numeral homework and practice problems with instant conversion.</li>
+          <li><strong>Ensures format consistency</strong> - Get standardized Roman numeral formatting every time, eliminating concerns about subtractive notation rules.</li>
+          <li><strong>Enables bulk conversion</strong> - Convert multiple numbers and export all at once as a text file for batch processing in documents or designs.</li>
+          <li><strong>Maintains complete privacy</strong> - All conversions and storage happen in your browser. No data is uploaded to servers, perfect for sensitive or proprietary work.</li>
+          <li><strong>Works offline after loading</strong> - Convert and save Roman numerals with no internet connection required. Perfect for fieldwork or low-connectivity environments.</li>
+          <li><strong>Removes dependency on reference tables</strong> - No need to memorize or look up Roman numeral rules. Just type a number and get the correct Roman representation.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>

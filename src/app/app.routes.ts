@@ -68,6 +68,11 @@ export const routes: Routes = [
     title: 'BMI Calculator - All The Things'
   },
   {
+    path: 'tools/roman-numeral-converter',
+    loadComponent: () => import('./features/tools/math-and-calculators/roman-numeral-converter/roman-numeral-converter').then(m => m.RomanNumeralConverter),
+    title: 'Roman Numeral Converter - All The Things'
+  },
+  {
     path: 'tools/unit-converter',
     loadComponent: () => import('./features/tools/converters/unit-converter/unit-converter').then(m => m.UnitConverter),
     title: 'Unit Converter - All The Things'

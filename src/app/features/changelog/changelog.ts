@@ -49,6 +49,39 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'January 9, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Roman Numeral Converter',
+          route: '/tools/roman-numeral-converter'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
+      date: 'January 8, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Barcode Reader',
+          route: '/tools/barcode-reader'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
+      date: 'January 8, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Barcode Reader',
+          route: '/tools/barcode-reader'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'December 26, 2025',
       changes: [
         {
