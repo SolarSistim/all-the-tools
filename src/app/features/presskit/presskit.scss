@@ -4733,3 +4733,95 @@
     opacity: 0;
   }
 }
+
+// ============================================
+// HERO SECTION - ROMAN NUMERAL CONVERTER
+// ============================================
+.hero-roman-numeral-converter {
+  // Inherits base .hero styles
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 968px) {
+      display: none;
+    }
+  }
+}
+
+// ============================================
+// HERO VISUAL - ROMAN NUMERAL CONVERTER THEME
+// ============================================
+.roman-numeral-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 2rem;
+
+  .roman-icon {
+    font-size: 180px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow));
+    animation: icon-pulse 3s ease-in-out infinite;
+  }
+
+  .roman-numerals-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3rem;
+    background: var(--bg-elevated);
+    border: 3px solid var(--neon-pink);
+    border-radius: 20px;
+    box-shadow: 0 0 40px var(--neon-pink-glow),
+      inset 0 0 20px rgba(255, 140, 176, 0.1);
+    animation: numeral-glow 2s ease-in-out infinite;
+
+    .numeral-large {
+      font-family: 'Orbitron', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5rem;
+      text-shadow: 0 0 30px var(--neon-cyan-glow);
+    }
+  }
+}
+
+@keyframes icon-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow));
+  }
+
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 60px var(--neon-cyan-glow));
+  }
+}
+
+@keyframes numeral-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 40px var(--neon-pink-glow),
+      inset 0 0 20px rgba(255, 140, 176, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 60px var(--neon-pink-glow),
+      inset 0 0 30px rgba(255, 140, 176, 0.2);
+  }
+}
