@@ -76,7 +76,7 @@ export class MorseCodeConverterComponent implements OnInit, OnDestroy {
       title: 'Morse Code Converter - Text to Morse Code Translator',
       description: 'Free online Morse code converter. Convert text to Morse code with real-time translation, audio playback, and visual representation. Save conversions and export to text files.',
       keywords: ['morse code', 'morse converter', 'morse translator', 'text to morse', 'morse audio', 'morse code generator'],
-      image: 'https://www.allthethings.dev/meta-images/og-morse-code-converter.png',
+      image: 'https://www.allthethings.dev/meta-images/og-morse-code-converter-and-downloader.png',
       url: 'https://www.allthethings.dev/tools/morse-code-converter'
     });
   }
