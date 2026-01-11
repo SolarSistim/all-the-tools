@@ -269,6 +269,16 @@ mat-card {
 
   .text-input-field {
     width: 100%;
+
+    mat-label {
+      @media (max-width: 640px) {
+        white-space: normal;
+        overflow: visible;
+        display: block;
+        line-height: 1.2;
+        font-size: 14px;
+      }
+    }
   }
 
   .action-row {
@@ -504,6 +514,7 @@ mat-card {
 
 .conversion-table {
   width: 100%;
+  min-width: 800px; // Ensure table doesn't squash on mobile
   background: transparent;
 
   th {
@@ -531,9 +542,7 @@ mat-card {
     padding: $spacing-xs $spacing-sm;
     background: rgba(109, 212, 255, 0.1);
     border-radius: 4px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    white-space: nowrap; // Prevent text from stacking
     max-width: 100%;
   }
 
@@ -550,9 +559,7 @@ mat-card {
     border-radius: 4px;
     color: var(--neon-pink);
     letter-spacing: 2px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    white-space: nowrap; // Prevent symbols from stacking
     max-width: 100%;
   }
 
@@ -563,6 +570,7 @@ mat-card {
 
   .actions-cell {
     text-align: right;
+    white-space: nowrap; // Keep all buttons on one line
 
     button {
       margin-left: $spacing-xs;

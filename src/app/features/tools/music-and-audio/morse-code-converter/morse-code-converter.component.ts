@@ -57,6 +57,7 @@ export class MorseCodeConverterComponent implements OnInit, OnDestroy {
   frequency = signal<number>(600);
   volume = signal<number>(0.5);
   isPlaying = signal<boolean>(false);
+  currentlyPlayingMorse = signal<string | null>(null);
 
   savedConversions = signal<SavedMorseConversion[]>([]);
   displayedColumns: string[] = ['text', 'morse', 'timestamp', 'actions'];
@@ -118,7 +119,10 @@ export class MorseCodeConverterComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.audioService.stop();
     this.isPlaying.set(true);
+    this.currentlyPlayingMorse.set(null);
+
     this.audioService.playMorse(morse, {
       wpm: this.wpm(),
       frequency: this.frequency(),
@@ -127,12 +131,86 @@ export class MorseCodeConverterComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.isPlaying.set(false);
+      this.currentlyPlayingMorse.set(null);
     }, this.estimatePlaybackDuration(morse));
   }
 
   stopMorse(): void {
     this.audioService.stop();
     this.isPlaying.set(false);
+    this.currentlyPlayingMorse.set(null);
+  }
+
+  playSavedMorse(morse: string): void {
+    if (this.currentlyPlayingMorse() === morse) {
+      this.stopMorse();
+      return;
+    }
+
+    this.audioService.stop();
+    this.currentlyPlayingMorse.set(morse);
+    this.isPlaying.set(true);
+
+    this.audioService.playMorse(morse, {
+      wpm: this.wpm(),
+      frequency: this.frequency(),
+      volume: this.volume()
+    });
+
+    setTimeout(() => {
+      this.isPlaying.set(false);
+      this.currentlyPlayingMorse.set(null);
+    }, this.estimatePlaybackDuration(morse));
+  }
+
+  isPlayingSaved(morse: string): boolean {
+    return this.currentlyPlayingMorse() === morse;
+  }
+
+  async downloadCurrentMorse(): Promise<void> {
+    const morse = this.morseOutput();
+    const text = this.textInput().trim();
+
+    if (!morse) {
+      this.snackbar.warning('Enter some text to convert first', 2000);
+      return;
+    }
+
+    try {
+      const sanitizedText = text ? text.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50) : 'morse';
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `morse_${sanitizedText}_${timestamp}.wav`;
+
+      await this.audioService.downloadMorseAsWav(morse, {
+        wpm: this.wpm(),
+        frequency: this.frequency(),
+        volume: this.volume()
+      }, filename);
+
+      this.snackbar.success('Audio file downloaded!', 2000);
+    } catch (error) {
+      console.error('Error downloading audio:', error);
+      this.snackbar.error('Failed to download audio', 2000);
+    }
+  }
+
+  async downloadSavedMorse(text: string, morse: string): Promise<void> {
+    try {
+      const sanitizedText = text.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `morse_${sanitizedText}_${timestamp}.wav`;
+
+      await this.audioService.downloadMorseAsWav(morse, {
+        wpm: this.wpm(),
+        frequency: this.frequency(),
+        volume: this.volume()
+      }, filename);
+
+      this.snackbar.success('Audio file downloaded!', 2000);
+    } catch (error) {
+      console.error('Error downloading audio:', error);
+      this.snackbar.error('Failed to download audio', 2000);
+    }
   }
 
   private estimatePlaybackDuration(morse: string): number {

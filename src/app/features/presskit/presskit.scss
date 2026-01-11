@@ -4752,6 +4752,23 @@
 }
 
 // ============================================
+// HERO SECTION - MORSE CODE CONVERTER
+// ============================================
+.hero-morse-code-converter {
+  // Inherits base .hero styles
+
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 968px) {
+      display: none;
+    }
+  }
+}
+
+// ============================================
 // HERO VISUAL - ROMAN NUMERAL CONVERTER THEME
 // ============================================
 .roman-numeral-visual {
@@ -4823,5 +4840,67 @@
   50% {
     box-shadow: 0 0 60px var(--neon-pink-glow),
       inset 0 0 30px rgba(255, 140, 176, 0.2);
+  }
+}
+
+// ============================================
+// HERO VISUAL - MORSE CODE CONVERTER THEME
+// ============================================
+.morse-code-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 2rem;
+
+  .morse-icon {
+    font-size: 180px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px var(--neon-cyan-glow));
+    animation: icon-pulse 3s ease-in-out infinite;
+  }
+
+  .morse-code-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3rem;
+    background: var(--bg-elevated);
+    border: 3px solid var(--neon-cyan);
+    border-radius: 20px;
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+      inset 0 0 20px rgba(109, 212, 255, 0.1);
+    animation: morse-glow 2s ease-in-out infinite;
+
+    .morse-example {
+      font-family: 'Courier New', monospace;
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5rem;
+      text-shadow: 0 0 30px var(--neon-cyan-glow);
+    }
+  }
+}
+
+@keyframes morse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 40px var(--neon-cyan-glow),
+      inset 0 0 20px rgba(109, 212, 255, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 60px var(--neon-cyan-glow),
+      inset 0 0 30px rgba(109, 212, 255, 0.2);
   }
 }

@@ -187,6 +187,16 @@
             <mat-icon>stop</mat-icon>
             Stop
           </button>
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="downloadCurrentMorse()"
+            [disabled]="!morseOutput()"
+            class="download-button"
+          >
+            <mat-icon>download</mat-icon>
+            Download WAV
+          </button>
         </div>
       </div>
     </mat-card>
@@ -245,6 +255,12 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let conversion" class="actions-cell">
+              <button mat-icon-button (click)="playSavedMorse(conversion.morse)" matTooltip="Play Morse code" color="primary">
+                <mat-icon>{{ isPlayingSaved(conversion.morse) ? 'stop' : 'play_arrow' }}</mat-icon>
+              </button>
+              <button mat-icon-button (click)="downloadSavedMorse(conversion.text, conversion.morse)" matTooltip="Download as WAV audio file" color="primary">
+                <mat-icon>download</mat-icon>
+              </button>
               <button mat-icon-button (click)="loadConversion(conversion)" matTooltip="Load into converter" color="accent">
                 <mat-icon>input</mat-icon>
               </button>
