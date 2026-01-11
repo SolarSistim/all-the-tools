@@ -1,0 +1,232 @@
+<div class="spotify-exporter-container">
+  <div class="content-wrapper">
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">library_music</mat-icon>
+        </div>
+        <h1 class="hero-title">Spotify Playlist Exporter</h1>
+        <p class="hero-subtitle">
+          Export your Spotify playlist metadata to CSV or TXT format. Connect with your Spotify account, select a playlist, and download track information including song names, artists, albums, and Spotify URLs.
+        </p>
+        <div class="hero-cta">
+          <button
+            *ngIf="state() === 'unauthenticated'"
+            mat-raised-button
+            color="primary"
+            (click)="scrollToExport()"
+            class="cta-button"
+          >
+            <mat-icon>cloud</mat-icon>
+            Get Started
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="barcode-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-item">
+              <div class="barcode-icon">
+                <mat-icon>playlist_play</mat-icon>
+              </div>
+              <span>Playlists</span>
+            </div>
+            <div class="showcase-item">
+              <div class="barcode-icon">
+                <mat-icon>download</mat-icon>
+              </div>
+              <span>Export CSV</span>
+            </div>
+            <div class="showcase-item">
+              <div class="barcode-icon">
+                <mat-icon>description</mat-icon>
+              </div>
+              <span>Export TXT</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Export playlist metadata instantly</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This Spotify Playlist Exporter lets you export your playlist metadata to CSV or TXT files. After connecting your Spotify account, you can browse all your playlists and download track information including song names, artists, albums, duration, and Spotify URLs. Perfect for backup, sharing, analysis, or migrating to other platforms. Uses secure OAuth authentication with PKCE flow. All processing happens in your browser—no server storage of your data.
+      </p>
+    </section>
+
+    <div #exportSection>
+      <app-alert-primary
+        title="Important Notice"
+        content="This is NOT a music downloader. This tool exports playlist metadata only. No audio files will be downloaded."
+        icon="info"
+      ></app-alert-primary>
+    </div>
+
+    <mat-card class="scanner-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>cloud</mat-icon>
+          Spotify Connection
+        </h2>
+      </div>
+
+      <div *ngIf="state() === 'unauthenticated'" class="scanner-state idle-state">
+        <div class="scanner-icon">
+          <mat-icon>cloud_off</mat-icon>
+        </div>
+        <p class="scanner-message">Connect to Spotify to get started</p>
+        <p class="scanner-hint">You'll be redirected to Spotify to authorize access to your playlists</p>
+        <button mat-raised-button color="primary" (click)="connectSpotify()" class="scan-button">
+          <mat-icon>cloud</mat-icon>
+          Connect Spotify
+        </button>
+      </div>
+
+      <div *ngIf="state() === 'authenticated'" class="scanner-state idle-state">
+        <div class="scanner-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <p class="scanner-message">Connected to Spotify</p>
+        <p class="scanner-hint">Load your playlists to begin exporting</p>
+        <div class="button-row">
+          <button mat-raised-button color="primary" (click)="loadPlaylists()" class="scan-button">
+            <mat-icon>playlist_play</mat-icon>
+            Load Playlists
+          </button>
+          <button mat-stroked-button color="warn" (click)="disconnect()" class="disconnect-button">
+            <mat-icon>logout</mat-icon>
+            Disconnect
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="state() === 'loading-playlists'" class="scanner-state idle-state">
+        <mat-spinner></mat-spinner>
+        <p class="scanner-message">Loading your playlists...</p>
+      </div>
+
+      <div *ngIf="state() === 'error'" class="scanner-state error-state">
+        <div class="error-icon">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <p class="error-message">{{ errorMessage() }}</p>
+        <div class="error-actions">
+          <button mat-raised-button color="primary" (click)="connectSpotify()">
+            <mat-icon>refresh</mat-icon>
+            Reconnect
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="scanned-list-card" *ngIf="state() === 'playlists-loaded' && playlists().length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>playlist_play</mat-icon>
+          Your Playlists<span> ({{ playlists().length }})</span>
+        </h2>
+        <div class="header-actions">
+          <button mat-stroked-button color="warn" (click)="disconnect()" matTooltip="Disconnect from Spotify" class="action-btn">
+            <mat-icon>logout</mat-icon>
+            Disconnect
+          </button>
+        </div>
+      </div>
+
+      <mat-progress-bar *ngIf="state() === 'loading-tracks'" mode="indeterminate"></mat-progress-bar>
+
+      <mat-selection-list [multiple]="false" class="playlist-list">
+        <mat-list-option
+          *ngFor="let playlist of playlists()"
+          [selected]="selectedPlaylist()?.id === playlist.id"
+          (click)="selectPlaylist(playlist)"
+          class="playlist-item"
+        >
+          <div class="playlist-info">
+            <div class="playlist-image" *ngIf="playlist.images && playlist.images.length > 0">
+              <img [src]="playlist.images[0].url" [alt]="playlist.name">
+            </div>
+            <div class="playlist-image placeholder" *ngIf="!playlist.images || playlist.images.length === 0">
+              <mat-icon>music_note</mat-icon>
+            </div>
+            <div class="playlist-details">
+              <div class="playlist-name">{{ playlist.name }}</div>
+              <div class="playlist-count">{{ playlist.tracks.total }} tracks</div>
+            </div>
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card>
+
+    <mat-card class="scanned-list-card" *ngIf="selectedPlaylist() && tracks().length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>music_note</mat-icon>
+          {{ selectedPlaylist()!.name }}<span> ({{ tracks().length }} tracks)</span>
+        </h2>
+      </div>
+
+      <div class="export-actions">
+        <p class="export-hint">Download playlist metadata:</p>
+        <div class="button-row">
+          <button mat-raised-button color="primary" (click)="downloadCSV()" class="export-button">
+            <mat-icon>table_chart</mat-icon>
+            Download CSV
+          </button>
+          <button mat-raised-button color="accent" (click)="downloadTXT()" class="export-button">
+            <mat-icon>description</mat-icon>
+            Download TXT
+          </button>
+        </div>
+      </div>
+
+      <div class="tracks-preview">
+        <h3>Track Preview (first 5)</h3>
+        <div class="track-list">
+          <div *ngFor="let item of tracks().slice(0, 5)" class="track-item">
+            <div class="track-name">{{ item.track.name }}</div>
+            <div class="track-artist">{{ getArtistNames(item) }}</div>
+            <div class="track-album">{{ item.track.album.name }}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="empty-state-card" *ngIf="state() === 'playlists-loaded' && playlists().length === 0">
+      <div class="empty-state">
+        <mat-icon class="empty-icon">playlist_remove</mat-icon>
+        <p class="empty-message">No playlists found. Create some playlists in Spotify first.</p>
+      </div>
+    </mat-card>
+
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Spotify Playlist Exporter Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates manual playlist documentation</strong> - Stop manually copying song names and artists. Export all playlist metadata instantly to CSV or TXT format for easy backup and sharing.</li>
+          <li><strong>Enables cross-platform migration</strong> - Moving to a different music service? Export your Spotify playlists to use as a reference when rebuilding your collection on Apple Music, YouTube Music, or other platforms.</li>
+          <li><strong>Simplifies playlist backup</strong> - Create permanent backups of your curated playlists. If a playlist gets accidentally deleted or modified, you have a complete record of what was in it.</li>
+          <li><strong>Supports music analysis and research</strong> - Export playlist data to analyze listening patterns, track durations, artist frequencies, or album distributions using spreadsheet tools or custom scripts.</li>
+          <li><strong>Facilitates playlist sharing</strong> - Share playlist details with friends, collaborators, or on social media without requiring them to have Spotify. Send a simple text file instead of a link.</li>
+          <li><strong>Removes dependency on Spotify interface</strong> - Access your playlist information offline and outside the Spotify app. View, search, and organize track lists using your preferred text editor or spreadsheet software.</li>
+          <li><strong>Ensures privacy and data ownership</strong> - All processing happens in your browser. No third-party servers store your playlist data or listening history. You control the exported files completely.</li>
+          <li><strong>Streamlines DJ and event prep</strong> - DJs and event planners can export setlists to reference tracks, verify song availability on other platforms, or share planned music lineups with clients.</li>
+          <li><strong>Prevents vendor lock-in</strong> - Maintain ownership of your music curation work independent of any streaming service. Your exported playlists are yours forever, regardless of subscription status.</li>
+          <li><strong>Enables bulk editing workflows</strong> - Export to CSV, make bulk changes using spreadsheet formulas or scripts, then use the data to rebuild or update playlists programmatically using Spotify's API.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

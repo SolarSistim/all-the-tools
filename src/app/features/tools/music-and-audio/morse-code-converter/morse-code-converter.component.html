@@ -1,0 +1,302 @@
+<div class="morse-converter-container">
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">graphic_eq</mat-icon>
+        </div>
+        <h1 class="hero-title">Morse Code Converter</h1>
+        <p class="hero-subtitle">
+          Convert text to Morse code instantly with real-time translation, audio playback, and visual representation. Supports letters, numbers, and common punctuation with local storage for your saved conversions.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <div class="morse-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-item">
+              <div class="morse-icon">
+                <span class="morse-example">• —</span>
+              </div>
+              <span>A</span>
+            </div>
+            <div class="showcase-item">
+              <div class="morse-icon">
+                <span class="morse-example">— • • •</span>
+              </div>
+              <span>B</span>
+            </div>
+            <div class="showcase-item">
+              <div class="morse-icon">
+                <span class="morse-example">— • — •</span>
+              </div>
+              <span>C</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Real-time text to Morse conversion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This Morse code converter instantly transforms your text into Morse code with live translation as you type. Supports A-Z letters, 0-9 digits, and common punctuation (. , ? ! / ( ) & : ; = + - _ " ' $ @). Features audio playback with adjustable speed (WPM), frequency, and volume using Web Audio API. Visual representations include standard dot/dash notation and ASCII timing bars showing signal patterns. Save frequently used conversions to a table stored locally in your browser. Export options include copying individual conversions, bulk copying all conversions, or downloading as a text file. Perfect for learning Morse code, radio communication practice, or educational purposes. Completely privacy-focused—all processing and storage happens in your browser with no server uploads or external API calls.
+      </p>
+    </section>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Converter Card -->
+    <mat-card class="converter-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>translate</mat-icon>
+          Text to Morse Code
+        </h2>
+      </div>
+
+      <div class="converter-content">
+        <p class="converter-hint">Enter your text below and see the Morse code translation instantly:</p>
+
+        <mat-form-field appearance="fill" class="text-input-field">
+          <mat-label>Enter text ({{ getSupportedChars() }})</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="textInput"
+            (ngModelChange)="onTextInput()"
+            placeholder="Type your message here..."
+            rows="4"
+          ></textarea>
+          <mat-icon matPrefix>edit</mat-icon>
+        </mat-form-field>
+
+        <div class="action-row">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="saveConversion()"
+            [disabled]="!morseOutput()"
+            class="save-button"
+          >
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+        </div>
+
+        <!-- Warning Message -->
+        <div class="warning-section" *ngIf="warningMessage()">
+          <mat-icon>warning</mat-icon>
+          <span>{{ warningMessage() }}</span>
+        </div>
+
+        <!-- Output Display -->
+        <div class="output-section" *ngIf="morseOutput()">
+          <div class="output-group">
+            <div class="output-label">Standard Morse Code:</div>
+            <div class="output-display morse-display">{{ morseOutput() }}</div>
+          </div>
+
+          <div class="output-group">
+            <div class="output-label">Visual Representation:</div>
+            <div class="output-display visual-display">{{ visualOutput() }}</div>
+          </div>
+
+          <div class="output-group">
+            <div class="output-label">Timing Signal:</div>
+            <div class="output-display timing-display">{{ timingBar() }}</div>
+            <div class="timing-legend">
+              <span><strong>█</strong> = dot tone</span>
+              <span><strong>███</strong> = dash tone</span>
+              <span><strong>▁</strong> = silence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Audio Playback Card -->
+    <mat-card class="playback-card" *ngIf="morseOutput()">
+      <div class="card-header">
+        <h2>
+          <mat-icon>volume_up</mat-icon>
+          Audio Playback
+        </h2>
+      </div>
+
+      <div class="playback-content">
+        <p class="playback-hint">Listen to your Morse code with customizable settings:</p>
+
+        <div class="playback-controls">
+          <div class="control-group">
+            <label class="control-label">
+              <mat-icon>speed</mat-icon>
+              Speed: {{ wpm() }} WPM
+            </label>
+            <mat-slider min="5" max="30" step="1" discrete>
+              <input matSliderThumb [(ngModel)]="wpm">
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">
+              <mat-icon>tune</mat-icon>
+              Frequency: {{ frequency() }} Hz
+            </label>
+            <mat-slider min="400" max="1000" step="50" discrete>
+              <input matSliderThumb [(ngModel)]="frequency">
+            </mat-slider>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">
+              <mat-icon>volume_up</mat-icon>
+              Volume: {{ (volume() * 100).toFixed(0) }}%
+            </label>
+            <mat-slider min="0" max="1" step="0.1" discrete>
+              <input matSliderThumb [(ngModel)]="volume">
+            </mat-slider>
+          </div>
+        </div>
+
+        <div class="playback-buttons">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="playMorse()"
+            [disabled]="isPlaying()"
+            class="play-button"
+          >
+            <mat-icon>play_arrow</mat-icon>
+            Play
+          </button>
+          <button
+            mat-stroked-button
+            (click)="stopMorse()"
+            [disabled]="!isPlaying()"
+            class="stop-button"
+          >
+            <mat-icon>stop</mat-icon>
+            Stop
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Saved Conversions List -->
+    <mat-card class="saved-list-card" *ngIf="savedConversions().length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>list</mat-icon>
+          Saved Conversions<span> ({{ savedConversions().length }})</span>
+        </h2>
+        <div class="header-actions">
+          <button mat-stroked-button (click)="copyAllConversions()" matTooltip="Copy all conversions to clipboard" class="action-btn">
+            <mat-icon>content_copy</mat-icon>
+            Copy All
+          </button>
+          <button mat-stroked-button (click)="downloadConversions()" matTooltip="Download as text file" class="action-btn">
+            <mat-icon>download</mat-icon>
+            Download
+          </button>
+          <button mat-stroked-button color="warn" (click)="clearAllConversions()" matTooltip="Clear all saved conversions" class="action-btn">
+            <mat-icon>delete_sweep</mat-icon>
+            Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table mat-table [dataSource]="savedConversions()" class="conversion-table">
+
+          <!-- Text Column -->
+          <ng-container matColumnDef="text">
+            <th mat-header-cell *matHeaderCellDef>Text</th>
+            <td mat-cell *matCellDef="let conversion" class="text-cell">
+              <span class="text-value">{{ conversion.text }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Morse Column -->
+          <ng-container matColumnDef="morse">
+            <th mat-header-cell *matHeaderCellDef>Morse Code</th>
+            <td mat-cell *matCellDef="let conversion" class="morse-cell">
+              <span class="morse-value">{{ conversion.morse }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Timestamp Column -->
+          <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef>Saved At</th>
+            <td mat-cell *matCellDef="let conversion" class="timestamp-cell">
+              {{ formatTimestamp(conversion.savedAt) }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let conversion" class="actions-cell">
+              <button mat-icon-button (click)="loadConversion(conversion)" matTooltip="Load into converter" color="accent">
+                <mat-icon>input</mat-icon>
+              </button>
+              <button mat-icon-button (click)="copyMorse(conversion.morse)" matTooltip="Copy Morse code" color="primary">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteConversion(conversion.text)" matTooltip="Delete" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card>
+
+    <!-- Empty State -->
+    <mat-card class="empty-state-card" *ngIf="savedConversions().length === 0">
+      <div class="empty-state">
+        <mat-icon class="empty-icon">graphic_eq</mat-icon>
+        <p class="empty-message">No conversions saved yet. Convert some text and save it to build your collection.</p>
+      </div>
+    </mat-card>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Problems This Tool Solves Section -->
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Morse Code Converter Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates manual Morse code lookup</strong> - Stop searching conversion tables for individual letters. Type any text and get instant, accurate Morse code translation.</li>
+          <li><strong>Removes learning curve for Morse timing</strong> - Audio playback with visual timing bars teaches proper dot/dash lengths and spacing without memorizing duration rules.</li>
+          <li><strong>Prevents incorrect Morse translations</strong> - Automatically handles letter spacing (3 units) and word spacing (7 units) correctly every time, eliminating common beginner mistakes.</li>
+          <li><strong>Saves time for radio operators</strong> - Quickly convert messages for amateur radio (ham radio) or emergency communication practice without manual encoding.</li>
+          <li><strong>Streamlines Morse code practice</strong> - Adjustable WPM speeds from 5 to 30 words per minute let you start slow and gradually increase speed as you improve.</li>
+          <li><strong>Ensures consistent audio quality</strong> - Web Audio API generates clean sine wave tones at customizable frequencies (400-1000 Hz) for optimal listening practice.</li>
+          <li><strong>Prevents repetitive conversion work</strong> - Save frequently used messages and phrases to avoid re-typing the same text for recurring transmissions or study sessions.</li>
+          <li><strong>Maintains complete privacy</strong> - All conversions, storage, and audio generation happen in your browser. No messages are sent to servers—perfect for sensitive or confidential communications.</li>
+          <li><strong>Works offline after loading</strong> - Convert text and play audio with no internet connection required. Ideal for field operations or low-connectivity environments.</li>
+          <li><strong>Removes punctuation confusion</strong> - Supports 18 punctuation marks with standard ITU Morse encodings, eliminating uncertainty about how to encode special characters.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>

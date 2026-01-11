@@ -148,6 +148,21 @@ export const routes: Routes = [
     title: 'Barcode Reader - All The Things'
   },
   {
+    path: 'tools/spotify-playlist-export',
+    loadComponent: () => import('./features/tools/music-and-audio/spotify-playlist-exporter/spotify-playlist-exporter').then(m => m.SpotifyPlaylistExporter),
+    title: 'Spotify Playlist Exporter - All The Things'
+  },
+  {
+    path: 'tools/spotify/callback',
+    loadComponent: () => import('./features/tools/music-and-audio/spotify-playlist-exporter/spotify-callback.component').then(m => m.SpotifyCallbackComponent),
+    title: 'Spotify Authentication - All The Things'
+  },
+  {
+    path: 'tools/morse-code-converter',
+    loadComponent: () => import('./features/tools/music-and-audio/morse-code-converter/morse-code-converter.component').then(m => m.MorseCodeConverterComponent),
+    title: 'Morse Code Converter - All The Things'
+  },
+  {
     path: 'blog',
     loadChildren: () => import('./features/blog/blog.routes').then(m => m.BLOG_ROUTES),
   },

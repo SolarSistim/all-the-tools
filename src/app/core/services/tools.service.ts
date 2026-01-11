@@ -263,6 +263,34 @@ export class ToolsService {
     tags: ['barcode', 'scanner', 'ocr', 'camera', 'inventory'],
     available: true
   },
+
+  // ========================================
+  // MUSIC & AUDIO TOOLS
+  // ========================================
+  {
+    id: 'spotify-playlist-export',
+    name: 'Spotify Playlist Exporter',
+    description: 'Export your Spotify playlists to CSV or TXT format',
+    longDescription: 'Export your Spotify playlist metadata to CSV or TXT files. Connect with your Spotify account, select a playlist, and download track information including song names, artists, albums, and Spotify URLs. Perfect for backup, sharing, or migration.',
+    category: 'music',
+    icon: 'library_music',
+    route: 'spotify-playlist-export',
+    featured: true,
+    tags: ['music', 'spotify', 'playlist', 'export', 'backup'],
+    available: false
+  },
+  {
+    id: 'morse-code-converter',
+    name: 'Morse Code Converter',
+    description: 'Convert text to Morse code with real-time translation and audio playback',
+    longDescription: 'Convert text to Morse code instantly with real-time translation, audio playback, and visual representation. Supports A-Z letters, 0-9 digits, and common punctuation. Features adjustable WPM speed, frequency, and volume controls. Save conversions and export to text files.',
+    category: 'music',
+    icon: 'graphic_eq',
+    route: 'morse-code-converter',
+    featured: true,
+    tags: ['morse', 'audio', 'converter', 'code', 'communication', 'radio'],
+    available: true
+  },
   ];
 
   /**
@@ -331,6 +359,13 @@ export class ToolsService {
     description: 'Optical character recognition and barcode scanning',
     icon: 'qr_code_scanner',
     color: 'var(--neon-cyan-bright)'
+  },
+  {
+    id: 'music',
+    name: 'Music & Audio',
+    description: 'Music and audio utilities',
+    icon: 'library_music',
+    color: 'var(--neon-pink)'
   },
   {
     id: 'other',

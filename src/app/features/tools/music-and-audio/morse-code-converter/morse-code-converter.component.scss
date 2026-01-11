@@ -1,6 +1,5 @@
 @import '../../../../../styles/utilities';
 
-// Ensure full background (adapts to theme)
 :host {
   display: block;
   min-height: 100vh;
@@ -8,7 +7,7 @@
   width: 100%;
 }
 
-.roman-converter-container {
+.morse-converter-container {
   min-height: 100vh;
   padding: 48px 0 $spacing-xl 0;
   background: var(--bg-primary);
@@ -20,10 +19,6 @@
     padding: 0 $spacing-md;
   }
 }
-
-// ============================================
-// HERO SECTION
-// ============================================
 
 .hero-section {
   display: grid;
@@ -122,7 +117,7 @@
   }
 }
 
-.roman-showcase {
+.morse-showcase {
   width: 100%;
   max-width: 500px;
 }
@@ -141,7 +136,7 @@
   align-items: center;
   gap: $spacing-sm;
 
-  .roman-icon {
+  .morse-icon {
     background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
@@ -157,9 +152,9 @@
       box-shadow: 0 8px 20px rgba(0, 188, 212, 0.5);
     }
 
-    .roman-example {
-      font-family: 'Orbitron', serif;
-      font-size: 32px;
+    .morse-example {
+      font-family: 'Courier New', monospace;
+      font-size: 20px;
       font-weight: 700;
       color: white;
     }
@@ -193,10 +188,6 @@
     height: 18px;
   }
 }
-
-// ============================================
-// COMMON CARD STYLES
-// ============================================
 
 mat-card {
   background: var(--bg-elevated) !important;
@@ -263,10 +254,6 @@ mat-card {
   }
 }
 
-// ============================================
-// CONVERTER CARD
-// ============================================
-
 .converter-card {
   .converter-content {
     display: flex;
@@ -274,111 +261,43 @@ mat-card {
     gap: $spacing-lg;
   }
 
-  .vinculum-option {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-sm;
-    padding: $spacing-md;
-    background: rgba(109, 212, 255, 0.05);
-    border: 1px solid rgba(109, 212, 255, 0.2);
-    border-radius: 8px;
-
-    mat-checkbox {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-    }
-  }
-
-  .vinculum-info {
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
+  .converter-hint {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.875rem;
+    margin-bottom: $spacing-sm;
     color: var(--text-secondary);
-    padding-left: $spacing-lg;
-
-    mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
-      color: var(--neon-cyan);
-    }
   }
 
-  .input-section {
+  .text-input-field {
+    width: 100%;
+  }
+
+  .action-row {
     display: flex;
     gap: $spacing-md;
-    align-items: flex-start;
+    justify-content: flex-end;
 
     @media (max-width: 768px) {
       flex-direction: column;
-      width: 100%;
-    }
-  }
 
-  .number-input-field {
-    flex: 1;
-    min-width: 0;
-
-    @media (max-width: 768px) {
-      width: 100%;
+      button {
+        width: 100%;
+      }
     }
   }
 
   .save-button {
     font-family: 'Space Grotesk', sans-serif;
-    margin-top: 8px;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      margin-top: 0;
-    }
   }
 
-  .result-section {
-    padding: $spacing-lg;
-    background: rgba(109, 212, 255, 0.05);
-    border: 2px solid var(--neon-cyan);
-    border-radius: 12px;
-    text-align: center;
-
-    .result-label {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      margin-bottom: $spacing-sm;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .result-display {
-      font-family: 'Orbitron', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 20px var(--neon-cyan-glow);
-      letter-spacing: 4px;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      word-break: break-word;
-
-      @media (max-width: 768px) {
-        font-size: 2rem;
-        letter-spacing: 1px;
-      }
-    }
-  }
-
-  .error-section {
+  .warning-section {
     display: flex;
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-md;
-    background: rgba(244, 67, 54, 0.1);
-    border: 1px solid rgba(244, 67, 54, 0.3);
+    background: rgba(255, 152, 0, 0.1);
+    border: 1px solid rgba(255, 152, 0, 0.3);
     border-radius: 8px;
-    color: #f44336;
+    color: #ff9800;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.875rem;
 
@@ -388,11 +307,163 @@ mat-card {
       height: 20px;
     }
   }
+
+  .output-section {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    padding: $spacing-lg;
+    background: rgba(109, 212, 255, 0.05);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 12px;
+  }
+
+  .output-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .output-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .output-display {
+    font-family: 'Courier New', monospace;
+    padding: $spacing-md;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow-x: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .morse-display {
+    font-size: 1.5rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan-glow);
+    letter-spacing: 3px;
+
+    @media (max-width: 768px) {
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+    }
+  }
+
+  .visual-display {
+    font-size: 1.5rem;
+    color: var(--neon-pink);
+    letter-spacing: 2px;
+
+    @media (max-width: 768px) {
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+    }
+  }
+
+  .timing-display {
+    font-size: 1rem;
+    color: var(--text-primary);
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  .timing-legend {
+    display: flex;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+    margin-top: $spacing-sm;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      strong {
+        font-family: 'Courier New', monospace;
+        color: var(--text-primary);
+      }
+    }
+  }
 }
 
-// ============================================
-// SAVED LIST CARD
-// ============================================
+.playback-card {
+  .playback-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .playback-hint {
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 0;
+    color: var(--text-secondary);
+  }
+
+  .playback-controls {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .control-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: var(--neon-cyan);
+    }
+  }
+
+  mat-slider {
+    width: 100%;
+  }
+
+  .playback-buttons {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .play-button {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  .stop-button {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
 
 .saved-list-card {
   .header-actions {
@@ -450,25 +521,29 @@ mat-card {
     font-family: 'Space Grotesk', sans-serif;
   }
 
-  .number-cell {
+  .text-cell {
     font-weight: 600;
     font-size: 1rem;
   }
 
-  .number-value {
+  .text-value {
     display: inline-block;
     padding: $spacing-xs $spacing-sm;
     background: rgba(109, 212, 255, 0.1);
     border-radius: 4px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
   }
 
-  .roman-cell {
-    font-family: 'Orbitron', serif;
+  .morse-cell {
+    font-family: 'Courier New', monospace;
     font-weight: 700;
     font-size: 1.125rem;
   }
 
-  .roman-value {
+  .morse-value {
     display: inline-block;
     padding: $spacing-xs $spacing-sm;
     background: rgba(255, 140, 176, 0.2);
@@ -502,10 +577,6 @@ mat-card {
     }
   }
 }
-
-// ============================================
-// EMPTY STATE CARD
-// ============================================
 
 .empty-state-card {
   background: rgba(109, 212, 255, 0.03) !important;
@@ -543,10 +614,6 @@ mat-card {
   }
 }
 
-// ============================================
-// THE BOTTOM LINE SECTION
-// ============================================
-
 .bottom-line-section {
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);
@@ -582,10 +649,6 @@ mat-card {
     margin: 0;
   }
 }
-
-// ============================================
-// PROBLEMS SOLVED SECTION
-// ============================================
 
 .info-section {
   margin: $spacing-xl 0;
@@ -648,10 +711,6 @@ mat-card {
     }
   }
 }
-
-// ============================================
-// RESPONSIVE DESIGN
-// ============================================
 
 @media (max-width: 640px) {
   .card-header {
