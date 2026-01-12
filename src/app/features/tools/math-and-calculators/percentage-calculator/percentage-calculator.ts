@@ -50,7 +50,13 @@ export class PercentageCalculatorComponent implements OnInit {
       description: 'Calculate percentages, percentage increase/decrease, and find what percent one number is of another. Fast, accurate, and completely free.',
       keywords: ['percentage calculator', 'percent calculator', 'calculate percentage', 'percentage increase', 'percentage decrease', 'online calculator'],
       image: 'https://www.allthethings.dev/meta-images/og-percentage-calculator.png',
-      url: 'https://www.allthethings.dev/tools/percentage-calculator'
+      url: 'https://www.allthethings.dev/tools/percentage-calculator',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Percentage Calculator - Free Online Tool | All The Things',
+        description: 'Calculate percentages, percentage increase/decrease, and find what percent one number is of another. Fast, accurate, and completely free.',
+        url: 'https://www.allthethings.dev/tools/percentage-calculator',
+        image: 'https://www.allthethings.dev/meta-images/og-percentage-calculator.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

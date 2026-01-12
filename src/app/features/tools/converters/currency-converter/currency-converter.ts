@@ -106,7 +106,13 @@ export class CurrencyConverter implements OnInit {
       description: 'Convert between 20+ world currencies with real-time exchange rates. Fast, accurate currency conversion for USD, EUR, GBP, JPY, and more.',
       keywords: ['currency converter', 'exchange rate', 'currency exchange', 'forex converter', 'money converter', 'currency calculator', 'foreign exchange', 'convert currency', 'USD to EUR', 'real-time exchange rates'],
       image: 'https://www.allthethings.dev/meta-images/og-currency-converter.png',
-      url: 'https://www.allthethings.dev/tools/currency-converter'
+      url: 'https://www.allthethings.dev/tools/currency-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Currency Converter - Real-Time Exchange Rates for 20+ Currencies',
+        description: 'Convert between 20+ world currencies with real-time exchange rates. Fast, accurate currency conversion for USD, EUR, GBP, JPY, and more.',
+        url: 'https://www.allthethings.dev/tools/currency-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-currency-converter.png'
+      })
     });
   }
 

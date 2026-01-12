@@ -63,7 +63,13 @@ export class RomanNumeralConverter implements OnInit {
       description: 'Free online Roman numeral converter. Convert numbers 1-3,999,999 to Roman numerals with vinculum support. Save conversions, download as text, and manage your conversion history locally.',
       keywords: ['roman numeral converter', 'number converter', 'roman numerals', 'ancient numerals', 'numeral conversion', 'vinculum'],
       image: 'https://www.allthethings.dev/meta-images/og-roman-numeral-converter.png',
-      url: 'https://www.allthethings.dev/tools/roman-numeral-converter'
+      url: 'https://www.allthethings.dev/tools/roman-numeral-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Roman Numeral Converter - Convert Numbers to Roman Numerals',
+        description: 'Free online Roman numeral converter. Convert numbers 1-3,999,999 to Roman numerals with vinculum support. Save conversions, download as text, and manage your conversion history locally.',
+        url: 'https://www.allthethings.dev/tools/roman-numeral-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-roman-numeral-converter.png'
+      })
     });
   }
 

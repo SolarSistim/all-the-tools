@@ -109,7 +109,13 @@ export class IconGenerator implements AfterViewInit {
       description: 'Convert any image into an icon or transparent PNG using the Icon Generator.',
       keywords: ['icon generator','convert icon','convert ico','convert png'],
       image: 'https://www.allthethings.dev/meta-images/og-icon-generator.png',
-      url: 'https://www.allthethings.dev/tools/icon-generator'
+      url: 'https://www.allthethings.dev/tools/icon-generator',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Icon Generator - ICO, PNG, adjust dimensions and download as ZIP.',
+        description: 'Convert any image into an icon or transparent PNG using the Icon Generator.',
+        url: 'https://www.allthethings.dev/tools/icon-generator',
+        image: 'https://www.allthethings.dev/meta-images/og-icon-generator.png'
+      })
     });
   }
 

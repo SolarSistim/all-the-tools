@@ -182,7 +182,13 @@ export class TimezoneConverter implements OnInit, OnDestroy {
       description: 'Compare time zones across the world with live clocks. View time differences, schedule meetings, and convert times between multiple time zones instantly.',
       keywords: ['timezone converter', 'world clock', 'time zone comparison', 'international time', 'time difference calculator', 'meeting scheduler', 'timezone calculator'],
       image: 'https://www.allthethings.dev/meta-images/og-timezone-converter.png',
-      url: 'https://www.allthethings.dev/tools/timezone-converter'
+      url: 'https://www.allthethings.dev/tools/timezone-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Timezone Converter - World Clock & Time Zone Comparison',
+        description: 'Compare time zones across the world with live clocks. View time differences, schedule meetings, and convert times between multiple time zones instantly.',
+        url: 'https://www.allthethings.dev/tools/timezone-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-timezone-converter.png'
+      })
     });
 
     // Load saved timezones from local storage, or add popular ones if none saved

@@ -77,7 +77,13 @@ export class PhotoFilterStudio implements OnInit {
       description: 'Apply beautiful filters and adjustments to your photos. Choose from preset styles or customize brightness, contrast, saturation, and more. Download your edited images instantly.',
       keywords: ['photo editor', 'filters', 'image editing', 'presets', 'brightness', 'contrast'],
       image: 'https://www.allthethings.dev/meta-images/og-photo-filter-studio.png',
-      url: 'https://www.allthethings.dev/tools/photo-filter-studio'
+      url: 'https://www.allthethings.dev/tools/photo-filter-studio',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Photo Filter Studio - Edit Images with Presets Online',
+        description: 'Apply beautiful filters and adjustments to your photos. Choose from preset styles or customize brightness, contrast, saturation, and more. Download your edited images instantly.',
+        url: 'https://www.allthethings.dev/tools/photo-filter-studio',
+        image: 'https://www.allthethings.dev/meta-images/og-photo-filter-studio.png'
+      })
     });
   }
 

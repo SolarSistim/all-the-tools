@@ -57,7 +57,13 @@ export class CaseConverter implements OnInit {
       description: 'Convert text between different cases: lowercase, UPPERCASE, Title Case, camelCase, snake_case, kebab-case, and more.',
       keywords: ['case converter', 'text transform', 'uppercase', 'lowercase', 'camelCase', 'snake_case'],
       image: 'https://www.allthethings.dev/meta-images/og-case-converter.png',
-      url: 'https://www.allthethings.dev/tools/case-converter'
+      url: 'https://www.allthethings.dev/tools/case-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Case Conversion & Text Transforms',
+        description: 'Convert text between different cases: lowercase, UPPERCASE, Title Case, camelCase, snake_case, kebab-case, and more.',
+        url: 'https://www.allthethings.dev/tools/case-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-case-converter.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

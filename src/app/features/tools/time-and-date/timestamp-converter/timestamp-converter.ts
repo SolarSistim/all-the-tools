@@ -177,7 +177,13 @@ export class TimestampConverter implements OnInit, OnDestroy {
       description: 'Convert timestamps between Unix epoch, ISO 8601, UTC, and human-readable formats. Parse and convert timestamps instantly with timezone support.',
       keywords: ['timestamp converter', 'unix timestamp', 'epoch converter', 'iso 8601', 'utc time', 'unix time', 'timestamp parser', 'date converter', 'time converter'],
       image: 'https://www.allthethings.dev/meta-images/og-timestamp-converter.png',
-      url: 'https://www.allthethings.dev/tools/timestamp-converter'
+      url: 'https://www.allthethings.dev/tools/timestamp-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Timestamp Converter - Unix, ISO, UTC Converter',
+        description: 'Convert timestamps between Unix epoch, ISO 8601, UTC, and human-readable formats. Parse and convert timestamps instantly with timezone support.',
+        url: 'https://www.allthethings.dev/tools/timestamp-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-timestamp-converter.png'
+      })
     });
   }
 

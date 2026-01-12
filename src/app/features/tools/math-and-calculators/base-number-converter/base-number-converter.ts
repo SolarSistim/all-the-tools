@@ -62,7 +62,13 @@ export class BaseNumberConverterComponent implements OnInit {
       description: 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36. Supports large integers and live conversion.',
       keywords: ['base converter', 'number system converter', 'binary', 'hex', 'decimal', 'octal', 'base conversion'],
       image: 'https://www.allthethings.dev/meta-images/og-base-number-converter.png',
-      url: 'https://www.allthethings.dev/tools/base-number-converter'
+      url: 'https://www.allthethings.dev/tools/base-number-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Base Number Converter - Convert Between Number Systems',
+        description: 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36. Supports large integers and live conversion.',
+        url: 'https://www.allthethings.dev/tools/base-number-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-base-number-converter.png'
+      })
     });
   }
 

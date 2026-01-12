@@ -12,6 +12,7 @@ import { SidenavService } from './core/services/sidenav.service';
 import { ToolsService } from './core/services/tools.service';
 import { VisitLoggerService } from './core/services/visit-logger.service';
 import { GoogleAnalyticsService } from './core/services/google-analytics.service';
+import { MetaService } from './core/services/meta.service';
 import { ToolCategoryMeta, Tool } from './core/models/tool.interface';
 
 @Component({
@@ -40,11 +41,20 @@ export class App implements AfterViewInit, OnInit {
   private router = inject(Router);
   private visitLogger = inject(VisitLoggerService);
   private googleAnalytics = inject(GoogleAnalyticsService);
+  private metaService = inject(MetaService);
   private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
     // Initialize Google Analytics (only in production, not localhost)
     this.googleAnalytics.initialize();
+
+    this.metaService.setSiteJsonLd(
+      this.metaService.buildWebSiteJsonLd({
+        name: 'All The Things',
+        url: 'https://www.allthethings.dev/',
+        searchUrl: 'https://www.allthethings.dev/tools?search={search_term_string}'
+      })
+    );
 
     // Set up router event handling for visit logging and scroll behavior
     this.router.events.subscribe((event) => {

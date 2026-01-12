@@ -48,7 +48,13 @@ export class LoremIpsum implements OnInit {
       description: 'Generate Lorem Ipsum placeholder text with customizable word count. Choose from non-sensical, Cicero Latin, or Cicero English variations.',
       keywords: ['lorem ipsum', 'placeholder text', 'text generator', 'cicero', 'dummy text'],
       image: 'https://www.allthethings.dev/meta-images/og-lorem-ipsum.png',
-      url: 'https://www.allthethings.dev/tools/lorem-ipsum'
+      url: 'https://www.allthethings.dev/tools/lorem-ipsum',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Lorem Ipsum Generator',
+        description: 'Generate Lorem Ipsum placeholder text with customizable word count. Choose from non-sensical, Cicero Latin, or Cicero English variations.',
+        url: 'https://www.allthethings.dev/tools/lorem-ipsum',
+        image: 'https://www.allthethings.dev/meta-images/og-lorem-ipsum.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

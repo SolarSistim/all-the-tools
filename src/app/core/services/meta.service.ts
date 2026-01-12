@@ -12,6 +12,22 @@ export interface MetaConfig {
   image?: string;
   url?: string;
   type?: string;
+  robots?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+export interface ToolJsonLdOptions {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  breadcrumbs?: Array<{ name: string; item: string }>;
+}
+
+export interface WebSiteJsonLdOptions {
+  name: string;
+  url: string;
+  searchUrl: string;
 }
 
 /**
@@ -33,7 +49,8 @@ export class MetaService {
     keywords: ['online tools', 'web utilities', 'free tools'],
     image: 'https://www.allthethings.dev/meta-images/og-home.png',
     url: 'https://www.allthethings.dev/',
-    type: 'website'
+    type: 'website',
+    robots: 'index,follow'
   };
 
   /**
@@ -51,6 +68,10 @@ export class MetaService {
 
     if (fullConfig.keywords && fullConfig.keywords.length > 0) {
       this.meta.updateTag({ name: 'keywords', content: fullConfig.keywords.join(', ') });
+    }
+
+    if (fullConfig.robots) {
+      this.meta.updateTag({ name: 'robots', content: fullConfig.robots });
     }
 
     // Update Open Graph tags
@@ -81,6 +102,12 @@ export class MetaService {
       this.meta.updateTag({ name: 'twitter:image:alt', content: fullConfig.title });
     }
 
+    if (fullConfig.jsonLd) {
+      this.updateJsonLd(fullConfig.jsonLd, 'structured-data');
+    } else {
+      this.removeJsonLd('structured-data');
+    }
+
     // Add canonical URL
     if (fullConfig.url) {
       this.updateCanonicalUrl(fullConfig.url);
@@ -105,6 +132,87 @@ export class MetaService {
       link.setAttribute('rel', 'canonical');
       link.setAttribute('href', url);
       this.document.head.appendChild(link);
+    }
+  }
+
+  setSiteJsonLd(data: Record<string, unknown>): void {
+    this.updateJsonLd(data, 'structured-data-site');
+  }
+
+  clearSiteJsonLd(): void {
+    this.removeJsonLd('structured-data-site');
+  }
+
+  buildToolJsonLd(options: ToolJsonLdOptions): Record<string, unknown> {
+    const webApplication: Record<string, unknown> = {
+      '@type': 'WebApplication',
+      name: options.name,
+      description: options.description,
+      url: options.url,
+      applicationCategory: 'WebApplication',
+      operatingSystem: 'All'
+    };
+
+    if (options.image) {
+      webApplication['image'] = options.image;
+    }
+
+    const breadcrumbs = options.breadcrumbs ?? [
+      { name: 'Home', item: 'https://www.allthethings.dev/' },
+      { name: 'Tools', item: 'https://www.allthethings.dev/tools' },
+      { name: options.name, item: options.url }
+    ];
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        webApplication,
+        this.buildBreadcrumbList(breadcrumbs)
+      ]
+    };
+  }
+
+  buildWebSiteJsonLd(options: WebSiteJsonLdOptions): Record<string, unknown> {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: options.name,
+      url: options.url,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: options.searchUrl,
+        'query-input': 'required name=search_term_string'
+      }
+    };
+  }
+
+  private buildBreadcrumbList(items: Array<{ name: string; item: string }>): Record<string, unknown> {
+    return {
+      '@type': 'BreadcrumbList',
+      itemListElement: items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: item.item
+      }))
+    };
+  }
+
+  private updateJsonLd(data: Record<string, unknown>, scriptId: string): void {
+    const existing = this.document.head.querySelector(`script#${scriptId}`);
+    const script = existing ?? this.document.createElement('script');
+    script.setAttribute('type', 'application/ld+json');
+    script.setAttribute('id', scriptId);
+    script.textContent = JSON.stringify(data);
+    if (!existing) {
+      this.document.head.appendChild(script);
+    }
+  }
+
+  private removeJsonLd(scriptId: string): void {
+    const existing = this.document.head.querySelector(`script#${scriptId}`);
+    if (existing) {
+      existing.remove();
     }
   }
 

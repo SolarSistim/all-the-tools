@@ -80,7 +80,13 @@ export class BarcodeReader implements OnInit, OnDestroy {
       description: 'Free online barcode scanner tool. Scan UPC, EAN, Code 128, Code 39, and other retail product barcodes using your device camera. Store and manage scanned codes locally.',
       keywords: ['barcode scanner', 'UPC scanner', 'EAN scanner', 'barcode reader', 'product scanner', 'code 128', 'code 39'],
       image: 'https://www.allthethings.dev/meta-images/og-barcode-reader.png',
-      url: 'https://www.allthethings.dev/tools/barcode-reader'
+      url: 'https://www.allthethings.dev/tools/barcode-reader',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Barcode Reader - Scan & Store Product Barcodes',
+        description: 'Free online barcode scanner tool. Scan UPC, EAN, Code 128, Code 39, and other retail product barcodes using your device camera. Store and manage scanned codes locally.',
+        url: 'https://www.allthethings.dev/tools/barcode-reader',
+        image: 'https://www.allthethings.dev/meta-images/og-barcode-reader.png'
+      })
     });
   }
 

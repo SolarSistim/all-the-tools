@@ -114,7 +114,13 @@ export class ColorPicker implements OnInit {
       description: 'Advanced color picker tool with multiple color formats (Hex, RGB, HSL) and WCAG contrast checker. Perfect for accessible web design.',
       keywords: ['color picker', 'color palette', 'hex color', 'rgb color', 'hsl color', 'contrast checker', 'wcag contrast', 'color converter', 'accessibility'],
       image: 'https://www.allthethings.dev/meta-images/og-color-picker.png',
-      url: 'https://www.allthethings.dev/tools/color-picker'
+      url: 'https://www.allthethings.dev/tools/color-picker',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Color Picker & Contrast Checker',
+        description: 'Advanced color picker tool with multiple color formats (Hex, RGB, HSL) and WCAG contrast checker. Perfect for accessible web design.',
+        url: 'https://www.allthethings.dev/tools/color-picker',
+        image: 'https://www.allthethings.dev/meta-images/og-color-picker.png'
+      })
     });
 
     // Initialize with a nice blue color

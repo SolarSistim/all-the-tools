@@ -78,7 +78,13 @@ export class PasswordGenerator implements OnInit {
       description: 'Generate strong, secure, random passwords with customizable options. Uppercase, lowercase, numbers, symbols, and advanced security options.',
       keywords: ['password generator', 'secure password', 'random password', 'strong password', 'password creator'],
       image: 'https://www.allthethings.dev/meta-images/og-password-generator.png',
-      url: 'https://www.allthethings.dev/tools/password-generator'
+      url: 'https://www.allthethings.dev/tools/password-generator',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Password Generator',
+        description: 'Generate strong, secure, random passwords with customizable options. Uppercase, lowercase, numbers, symbols, and advanced security options.',
+        url: 'https://www.allthethings.dev/tools/password-generator',
+        image: 'https://www.allthethings.dev/meta-images/og-password-generator.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

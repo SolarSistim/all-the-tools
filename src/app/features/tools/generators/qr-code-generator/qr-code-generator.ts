@@ -135,7 +135,13 @@ export class QrCodeGenerator implements OnInit {
       description: 'Create QR codes for URLs, text, emails, WiFi, vCards, and more. Customize colors, size, and download as PNG or SVG.',
       keywords: ['qr code generator', 'qr code', 'barcode', 'qr scanner', 'wifi qr code'],
       image: 'https://www.allthethings.dev/meta-images/og-qr-code-generator.png',
-      url: 'https://www.allthethings.dev/tools/qr-code-generator'
+      url: 'https://www.allthethings.dev/tools/qr-code-generator',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'QR Code Generator',
+        description: 'Create QR codes for URLs, text, emails, WiFi, vCards, and more. Customize colors, size, and download as PNG or SVG.',
+        url: 'https://www.allthethings.dev/tools/qr-code-generator',
+        image: 'https://www.allthethings.dev/meta-images/og-qr-code-generator.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

@@ -64,7 +64,13 @@ export class WordCounter implements OnInit {
       description: 'Count words, characters, sentences, paragraphs, and estimates reading time.',
       keywords: ['word counter', 'character counter', 'text analysis', 'word count', 'writing tool'],
       image: 'https://www.allthethings.dev/meta-images/og-word-counter.png',
-      url: 'https://www.allthethings.dev/tools/word-counter'
+      url: 'https://www.allthethings.dev/tools/word-counter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Word & Character Counter',
+        description: 'Count words, characters, sentences, paragraphs, and estimates reading time.',
+        url: 'https://www.allthethings.dev/tools/word-counter',
+        image: 'https://www.allthethings.dev/meta-images/og-word-counter.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

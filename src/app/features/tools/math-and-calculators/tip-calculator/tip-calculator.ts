@@ -50,7 +50,13 @@ export class TipCalculator implements OnInit {
       description: 'Calculate tip amounts and split bills easily. Perfect for restaurants, delivery services, and more.',
       keywords: ['tip calculator', 'split bill', 'gratuity calculator', 'restaurant tip', 'bill splitter'],
       image: 'https://www.allthethings.dev/meta-images/og-tip-calculator.png',
-      url: 'https://www.allthethings.dev/tools/tip-calculator'
+      url: 'https://www.allthethings.dev/tools/tip-calculator',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Tip Calculator',
+        description: 'Calculate tip amounts and split bills easily. Perfect for restaurants, delivery services, and more.',
+        url: 'https://www.allthethings.dev/tools/tip-calculator',
+        image: 'https://www.allthethings.dev/meta-images/og-tip-calculator.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

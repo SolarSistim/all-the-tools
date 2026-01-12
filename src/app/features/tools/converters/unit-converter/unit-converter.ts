@@ -65,7 +65,13 @@ export class UnitConverter implements OnInit {
       description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
       keywords: ['unit converter', 'measurement converter', 'metric converter', 'imperial converter'],
       image: 'https://www.allthethings.dev/meta-images/og-unit-converter.png',
-      url: 'https://www.allthethings.dev/tools/unit-converter'
+      url: 'https://www.allthethings.dev/tools/unit-converter',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Unit Converter - Length, Weight, Temp, Volume, Area & Speed',
+        description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
+        url: 'https://www.allthethings.dev/tools/unit-converter',
+        image: 'https://www.allthethings.dev/meta-images/og-unit-converter.png'
+      })
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();

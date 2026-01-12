@@ -321,7 +321,13 @@ export class GradientGenerator implements OnInit {
       description: 'Create beautiful CSS gradients with our visual gradient generator. Support for linear, radial, and conic gradients with live preview and one-click CSS copy.',
       keywords: ['gradient generator', 'css gradients', 'linear gradient', 'radial gradient', 'conic gradient', 'gradient tool', 'color gradients', 'css generator'],
       image: 'https://www.allthethings.dev/meta-images/og-gradient-generator.png',
-      url: 'https://www.allthethings.dev/tools/gradient-generator'
+      url: 'https://www.allthethings.dev/tools/gradient-generator',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Gradient Generator - CSS Linear & Radial Gradients',
+        description: 'Create beautiful CSS gradients with our visual gradient generator. Support for linear, radial, and conic gradients with live preview and one-click CSS copy.',
+        url: 'https://www.allthethings.dev/tools/gradient-generator',
+        image: 'https://www.allthethings.dev/meta-images/og-gradient-generator.png'
+      })
     });
   }
 
