@@ -13,7 +13,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     slug: 'lighthuggers-when-fan-art-captures-the-impossible',
     title: 'LIGHTHUGGERS: Fan Art Captures Alastair Reynolds\' "Revelation Space"',
     description:
-      'Alastair Reynolds\'s Revelation Space lighthuggers are magnificent, terrifying vessels that take months just to reach cruising velocity. Here\'s the incredible fan art that brings these starships to life.',
+      'Alastair Reynolds\'s Revelation Space lighthuggers are magnificent, terrifying vessels that take months just to reach cruising velocity.',
     author: AUTHORS.joel_hansen,
     publishedDate: '01-06-2026',
     heroImage: {
