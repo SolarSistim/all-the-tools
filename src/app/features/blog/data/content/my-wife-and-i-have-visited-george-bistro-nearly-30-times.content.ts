@@ -123,7 +123,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Before I get into the food, I want to talk about the staff. George\'s has some of the most polite and well-trained servers I\'ve ever encountered. They know the menu inside and out, they\'re attentive without hovering, and they genuinely seem to enjoy their work. There\'s been no circumstance where I\'ve tipped less than 20%.',
+      text: 'Before I get into the food, I want to talk about the staff. George\'s has some of the most polite and well-trained servers I\'ve ever encountered. They know the menu inside and out, they\'re attentive without hovering, and they genuinely seem to enjoy their work. There\'s been no circumstance where I\'ve tipped less than <a href=\"/tools/tip-calculator\">20%</a>.',
     },
   },
   {

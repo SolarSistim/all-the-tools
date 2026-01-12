@@ -102,7 +102,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'And here\'s the kicker: when they finally reached the booth, nobody even scanned their tickets. Volunteers just took their printouts, asked how many were in the group, and handed over orange wristbands. The whole careful pre-purchase system? Apparently meaningless.',
+      text: 'And here\'s the kicker: when they finally reached the booth, nobody even <a href="/tools/barcode-reader">scanned their tickets</a>. Volunteers just took their printouts, asked how many were in the group, and handed over orange wristbands. The whole careful pre-purchase system? Apparently meaningless.',
     },
   },
   {

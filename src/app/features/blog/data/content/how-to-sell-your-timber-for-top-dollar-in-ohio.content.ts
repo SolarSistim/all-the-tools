@@ -142,7 +142,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'All bids are reviewed together, looking beyond just the headline price. Payment terms, harvest timing, and contract conditions all matter. Once the best bid is selected, a sales contract is prepared. At least 25 percent of the sale price is paid upfront, with the remaining balance paid in full before harvesting begins.',
+      text: 'All bids are reviewed together, looking beyond just the headline price. Payment terms, harvest timing, and contract conditions all matter. Once the best bid is selected, a sales contract is prepared. At least <a href="/tools/percentage-calculator">25 percent</a> of the sale price is paid upfront, with the remaining balance paid in full before harvesting begins.',
     },
   },
   {

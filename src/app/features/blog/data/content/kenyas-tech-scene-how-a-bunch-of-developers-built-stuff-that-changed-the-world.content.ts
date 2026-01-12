@@ -104,7 +104,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Today? Over 50 million users across multiple countries. In Kenya alone, the transactions flowing through M-Pesa equal roughly 44% of the national GDP every year. The World Bank figures it pulled around 2% of Kenyan households above the poverty line.',
+      text: 'Today? Over 50 million users across multiple countries. In Kenya alone, the transactions flowing through M-Pesa equal roughly <a href="/tools/percentage-calculator">44%</a> of the national GDP every year. The World Bank figures it pulled around <a href="/tools/percentage-calculator">2%</a> of Kenyan households above the poverty line.',
     },
   },
   {

@@ -296,7 +296,7 @@ export const content: ContentBlock[] = [
   {
     type: 'blockquote',
     data: {
-      text: 'From what I\'ve seen, $300 is LOW for a Mark Hamill autograph. I\'d probably jump on that myself, because that\'s like a 25 percent off sale!',
+      text: 'From what I\'ve seen, $300 is LOW for a Mark Hamill autograph. I\'d probably jump on that myself, because that\'s like a <a href=\"/tools/percentage-calculator\">25 percent off</a> sale!',
       citation: 'Julio Diaz',
     },
   },

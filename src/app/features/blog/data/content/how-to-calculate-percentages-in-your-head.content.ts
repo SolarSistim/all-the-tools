@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'A lot of us regular folk panic when someone asks them to figure out a percentage on the spot.',
+      text: 'A lot of us regular folk panic when someone asks them to figure out a <a href="/tools/percentage-calculator">percentage</a> on the spot.',
       className: 'lead',
     },
   },
@@ -58,7 +58,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Need to tip 20%? Find 10%, then double it.',
+      text: 'Need to <a href="/tools/tip-calculator">tip 20%</a>? Find 10%, then double it.',
     },
   },
   {
