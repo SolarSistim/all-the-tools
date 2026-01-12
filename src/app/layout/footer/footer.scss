@@ -81,6 +81,37 @@
   max-width: 280px;
 }
 
+.rss-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--neon-cyan);
+  }
+
+  &:hover {
+    color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 6px 16px var(--neon-cyan-glow);
+    transform: translateY(-1px);
+  }
+}
+
 // ============================================
 // SOCIAL LINKS
 // ============================================
