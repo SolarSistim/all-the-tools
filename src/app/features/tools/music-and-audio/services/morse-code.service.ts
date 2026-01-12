@@ -148,4 +148,37 @@ export class MorseCodeService {
   getSupportedCharacters(): string {
     return 'A-Z, 0-9, . , ? ! / ( ) & : ; = + - _ " \' $ @';
   }
+
+  getAllMorseCharacters(): MorseCharacter[] {
+    const characters: MorseCharacter[] = [];
+
+    // Add letters
+    for (let i = 0; i < 26; i++) {
+      const char = String.fromCharCode(65 + i); // A-Z
+      const morse = this.morseMap.get(char);
+      if (morse) {
+        characters.push({ char, morse });
+      }
+    }
+
+    // Add numbers
+    for (let i = 0; i < 10; i++) {
+      const char = i.toString();
+      const morse = this.morseMap.get(char);
+      if (morse) {
+        characters.push({ char, morse });
+      }
+    }
+
+    // Add special characters in order of the morseMap
+    const specialChars = ['.', ',', '?', '!', '/', '(', ')', '&', ':', ';', '=', '+', '-', '_', '"', "'", '$', '@'];
+    for (const char of specialChars) {
+      const morse = this.morseMap.get(char);
+      if (morse) {
+        characters.push({ char, morse });
+      }
+    }
+
+    return characters;
+  }
 }

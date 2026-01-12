@@ -101,6 +101,18 @@ export class ToolsService {
       tags: ['math', 'converter', 'roman', 'numerals', 'education'],
       available: true
     },
+    {
+      id: 'base-number-converter',
+      name: 'Base Number Converter',
+      description: 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36',
+      longDescription: 'Convert numbers between different number systems instantly. Supports binary (base 2), octal (base 8), decimal (base 10), duodecimal (base 12), hexadecimal (base 16), and base 36. Uses BigInt internally to handle arbitrarily large integers. Features live conversion, validation with clear error messages, and a reference panel showing all bases simultaneously.',
+      category: 'math',
+      icon: 'calculate',
+      route: 'base-number-converter',
+      featured: true,
+      tags: ['math', 'converter', 'base', 'binary', 'hex', 'decimal', 'number'],
+      available: true
+    },
 
     // ========================================
     // CONVERTER TOOLS

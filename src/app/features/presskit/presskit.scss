@@ -945,6 +945,96 @@
 }
 
 // ============================================
+// HERO VISUAL - BASE NUMBER CONVERTER THEME
+// ============================================
+.hero-base-number-converter .hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    display: none;
+  }
+}
+
+.base-converter-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+}
+
+.base-converter-circle {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 3px solid var(--neon-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 40px var(--neon-cyan-glow),
+    inset 0 0 30px rgba(109, 212, 255, 0.1);
+  animation: pulse-glow 3s ease-in-out infinite;
+
+  .base-converter-icon {
+    font-size: 120px;
+    width: 120px;
+    height: 120px;
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 20px var(--neon-cyan-glow));
+    animation: float 2s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .base-converter-rings {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid;
+      animation: ring-pulse 3s ease-in-out infinite;
+
+      &.ring-1 {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: rgba(16, 185, 129, 0.4);
+        animation-delay: 0s;
+      }
+
+      &.ring-2 {
+        width: 260px;
+        height: 260px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: rgba(245, 158, 11, 0.4);
+        animation-delay: 1s;
+      }
+
+      &.ring-3 {
+        width: 320px;
+        height: 320px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: rgba(239, 68, 68, 0.4);
+        animation-delay: 2s;
+      }
+    }
+  }
+}
+
+// ============================================
 // HERO VISUAL - UNIT CONVERTER THEME
 // ============================================
 .hero-unit-converter .hero-visual {

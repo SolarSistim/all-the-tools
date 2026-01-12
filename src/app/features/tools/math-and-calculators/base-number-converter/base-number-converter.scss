@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-.morse-converter-container {
+.base-converter-container {
   min-height: 100vh;
   padding: 48px 0 $spacing-xl 0;
   background: var(--bg-primary);
@@ -117,7 +117,7 @@
   }
 }
 
-.morse-showcase {
+.base-showcase {
   width: 100%;
   max-width: 500px;
 }
@@ -136,7 +136,7 @@
   align-items: center;
   gap: $spacing-sm;
 
-  .morse-icon {
+  .base-icon {
     background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
@@ -152,9 +152,9 @@
       box-shadow: 0 8px 20px rgba(0, 188, 212, 0.5);
     }
 
-    .morse-example {
+    .base-label {
       font-family: 'Courier New', monospace;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
       color: white;
     }
@@ -246,12 +246,6 @@ mat-card {
       color: var(--neon-pink);
     }
   }
-
-  .header-actions {
-    display: flex;
-    gap: $spacing-sm;
-    flex-wrap: wrap;
-  }
 }
 
 .converter-card {
@@ -263,43 +257,38 @@ mat-card {
 
   .converter-hint {
     font-family: 'Space Grotesk', sans-serif;
-    margin-bottom: $spacing-sm;
+    margin-bottom: 0;
     color: var(--text-secondary);
+  }
+
+  .input-row {
+    display: grid;
+    gap: $spacing-md;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .input-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: $spacing-md;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .text-input-field {
     width: 100%;
-
-    mat-label {
-      @media (max-width: 640px) {
-        white-space: normal;
-        overflow: visible;
-        display: block;
-        line-height: 1.2;
-        font-size: 14px;
-      }
-    }
   }
 
-  .action-row {
-    display: flex;
-    gap: $spacing-md;
-    justify-content: flex-end;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-
-      button {
-        width: 100%;
-      }
-    }
+  .base-select-field {
+    width: 100%;
   }
 
-  .save-button {
-    font-family: 'Space Grotesk', sans-serif;
-  }
-
-  .warning-section {
+  .error-section {
     display: flex;
     align-items: center;
     gap: $spacing-sm;
@@ -318,6 +307,19 @@ mat-card {
     }
   }
 
+  .conversion-controls {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: $spacing-md;
+    align-items: flex-end;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+  }
+
   .output-section {
     display: flex;
     flex-direction: column;
@@ -332,6 +334,7 @@ mat-card {
     display: flex;
     flex-direction: column;
     gap: $spacing-sm;
+    position: relative;
   }
 
   .output-label {
@@ -351,273 +354,126 @@ mat-card {
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
-  }
-
-  .morse-display {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--neon-cyan);
-    text-shadow: 0 0 10px var(--neon-cyan-glow);
-    letter-spacing: 3px;
-
-    @media (max-width: 768px) {
-      font-size: 1.25rem;
-      letter-spacing: 2px;
-    }
-  }
-
-  .visual-display {
-    font-size: 1.5rem;
-    color: var(--neon-pink);
     letter-spacing: 2px;
-
-    @media (max-width: 768px) {
-      font-size: 1.25rem;
-      letter-spacing: 1px;
-    }
+    padding-right: 3rem;
   }
 
-  .timing-display {
-    font-size: 1rem;
-    color: var(--text-primary);
-    letter-spacing: 0;
-    line-height: 1.5;
-  }
-
-  .timing-legend {
-    display: flex;
-    gap: $spacing-lg;
-    flex-wrap: wrap;
-    margin-top: $spacing-sm;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.75rem;
-    color: var(--text-tertiary);
-
-    span {
-      display: flex;
-      align-items: center;
-      gap: $spacing-xs;
-
-      strong {
-        font-family: 'Courier New', monospace;
-        color: var(--text-primary);
-      }
-    }
+  .copy-button {
+    position: absolute;
+    right: $spacing-md;
+    top: 2.5rem;
   }
 }
 
-.playback-card {
-  .playback-content {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-lg;
+.all-bases-card {
+  .bases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-md;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .playback-hint {
-    font-family: 'Space Grotesk', sans-serif;
-    margin-bottom: 0;
-    color: var(--text-secondary);
-  }
-
-  .playback-controls {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-lg;
-  }
-
-  .control-group {
+  .base-item {
     display: flex;
     flex-direction: column;
     gap: $spacing-sm;
-  }
-
-  .control-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
-
-    mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
-      color: var(--neon-cyan);
-    }
-  }
-
-  mat-slider {
-    width: 100%;
-  }
-
-  .playback-buttons {
-    display: flex;
-    gap: $spacing-md;
-    margin-top: $spacing-md;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
-
-  .play-button {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-  }
-
-  .stop-button {
-    font-family: 'Space Grotesk', sans-serif;
-  }
-}
-
-.saved-list-card {
-  .header-actions {
-    @media (max-width: 640px) {
-      width: 100%;
-      flex-direction: column;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
-}
-
-.action-btn {
-  font-family: 'Space Grotesk', sans-serif !important;
-  font-weight: 600 !important;
-  background: var(--bg-secondary) !important;
-  color: var(--neon-cyan) !important;
-  border: 1px solid var(--neon-cyan) !important;
-  transition: all 0.3s ease !important;
-
-  &:hover:not(:disabled) {
-    background: rgba(109, 212, 255, 0.1) !important;
-    box-shadow: 0 0 20px rgba(109, 212, 255, 0.3);
-  }
-
-  mat-icon {
-    margin-right: $spacing-xs;
-    color: var(--neon-cyan) !important;
-  }
-}
-
-.table-container {
-  overflow-x: auto;
-  margin-top: $spacing-md;
-}
-
-.conversion-table {
-  width: 100%;
-  min-width: 800px; // Ensure table doesn't squash on mobile
-  background: transparent;
-
-  th {
-    background: rgba(109, 212, 255, 0.1);
-    color: var(--neon-cyan);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    letter-spacing: 0.5px;
-    font-family: 'Space Grotesk', sans-serif;
-  }
-
-  td {
-    color: var(--text-primary);
-    font-family: 'Space Grotesk', sans-serif;
-  }
-
-  .text-cell {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .text-value {
-    display: inline-block;
-    padding: $spacing-xs $spacing-sm;
-    background: rgba(109, 212, 255, 0.1);
-    border-radius: 4px;
-    white-space: nowrap; // Prevent text from stacking
-    max-width: 100%;
-  }
-
-  .morse-cell {
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 1.125rem;
-  }
-
-  .morse-value {
-    display: inline-block;
-    padding: $spacing-xs $spacing-sm;
-    background: rgba(255, 140, 176, 0.2);
-    border-radius: 4px;
-    color: var(--neon-pink);
-    letter-spacing: 2px;
-    white-space: nowrap; // Prevent symbols from stacking
-    max-width: 100%;
-  }
-
-  .timestamp-cell {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-  }
-
-  .actions-cell {
-    text-align: right;
-    white-space: nowrap; // Keep all buttons on one line
-
-    button {
-      margin-left: $spacing-xs;
-    }
-  }
-
-  tr {
-    transition: background-color 0.2s ease;
+    padding: $spacing-md;
+    background: rgba(109, 212, 255, 0.05);
+    border: 1px solid rgba(109, 212, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
 
     &:hover {
-      background: rgba(109, 212, 255, 0.05);
+      background: rgba(109, 212, 255, 0.1);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(109, 212, 255, 0.3);
+    }
+
+    .base-info {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+    }
+
+    .base-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .base-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+
+    .base-value {
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: var(--neon-cyan);
+      word-break: break-all;
+      padding-right: 2rem;
+    }
+
+    .copy-btn {
+      position: absolute;
+      right: $spacing-sm;
+      top: $spacing-sm;
     }
   }
 }
 
-.empty-state-card {
-  background: rgba(109, 212, 255, 0.03) !important;
-  border: 1px dashed rgba(109, 212, 255, 0.3) !important;
-
-  .empty-state {
+.helper-card {
+  .helper-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-xl $spacing-lg;
-    text-align: center;
-    min-height: 300px;
+    gap: $spacing-2xl;
+  }
 
-    @media (max-width: 640px) {
-      padding: $spacing-xl $spacing-md;
+  .helper-section {
+    h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 $spacing-md 0;
     }
 
-    .empty-icon {
-      font-size: 4rem !important;
-      width: 4rem !important;
-      height: 4rem !important;
-      color: var(--text-tertiary);
-      opacity: 0.5;
-      margin-bottom: $spacing-lg;
-    }
-
-    .empty-message {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
-      color: var(--text-secondary);
+    .base-list,
+    .tips-list {
+      list-style: none;
+      padding: 0;
       margin: 0;
-      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      li {
+        font-family: 'Space Grotesk', sans-serif;
+        color: var(--text-secondary);
+        line-height: 1.6;
+
+        strong {
+          color: var(--text-primary);
+          font-weight: 600;
+        }
+
+        code {
+          font-family: 'Courier New', monospace;
+          background: rgba(109, 212, 255, 0.1);
+          border: 1px solid rgba(109, 212, 255, 0.2);
+          border-radius: 4px;
+          padding: 0 $spacing-xs;
+          color: var(--neon-cyan);
+        }
+      }
     }
   }
 }
@@ -660,6 +516,29 @@ mat-card {
 
 .info-section {
   margin: $spacing-xl 0;
+}
+
+.action-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+
+  &.copy-btn {
+    background: var(--bg-secondary) !important;
+    color: var(--neon-cyan) !important;
+    border: 1px solid var(--neon-cyan);
+
+    &:hover:not(:disabled) {
+      background: var(--neon-cyan) !important;
+      color: var(--bg-primary) !important;
+      box-shadow: 0 0 16px var(--neon-cyan-glow);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .problems-solved-section {
@@ -720,108 +599,10 @@ mat-card {
   }
 }
 
-.reference-toggle-section {
-  display: flex;
-  justify-content: center;
-  margin: $spacing-xl 0;
-
-  button {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-  }
-}
-
-.reference-panel-card {
-  .reference-content {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-lg;
-  }
-
-  .filter-input-field {
-    width: 100%;
-  }
-
-  .reference-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: $spacing-md;
-    padding: $spacing-md;
-
-    @media (max-width: 640px) {
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: $spacing-sm;
-    }
-  }
-
-  .reference-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-sm;
-    padding: $spacing-md;
-    background: rgba(109, 212, 255, 0.05);
-    border: 1px solid rgba(109, 212, 255, 0.2);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(109, 212, 255, 0.1);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 12px rgba(109, 212, 255, 0.3);
-      transform: translateY(-2px);
-    }
-
-    .character {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .morse-code {
-      font-family: 'Courier New', monospace;
-      font-size: 1rem;
-      color: var(--neon-cyan);
-      letter-spacing: 2px;
-    }
-  }
-
-  .no-results {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-md;
-    padding: $spacing-2xl;
-    color: var(--text-secondary);
-
-    mat-icon {
-      font-size: 3rem;
-      width: 3rem;
-      height: 3rem;
-      opacity: 0.5;
-    }
-
-    p {
-      font-family: 'Space Grotesk', sans-serif;
-      margin: 0;
-    }
-  }
-}
-
 @media (max-width: 640px) {
   .card-header {
     flex-direction: column;
     align-items: flex-start;
     gap: $spacing-md;
-
-    .header-actions {
-      width: 100%;
-      flex-direction: column;
-
-      button {
-        width: 100%;
-      }
-    }
   }
 }

@@ -38,6 +38,7 @@
 /terms
 /tools
 /tools/barcode-reader
+/tools/base-number-converter
 /tools/bmi-calculator
 /tools/case-converter
 /tools/color-picker
@@ -45,11 +46,14 @@
 /tools/gradient-generator
 /tools/icon-generator
 /tools/lorem-ipsum
+/tools/morse-code-converter
 /tools/password-generator
 /tools/percentage-calculator
 /tools/qr-code-generator
 /tools/roku-compatibility
 /tools/roman-numeral-converter
+/tools/spotify-playlist-export
+/tools/spotify/callback
 /tools/time-zone-converter
 /tools/timestamp-converter
 /tools/tip-calculator

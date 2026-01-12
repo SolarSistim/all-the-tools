@@ -49,6 +49,28 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'January 12, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Base Number Converter',
+          route: '/tools/base-number-converter'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
+      date: 'January 11, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Morse Code Converter',
+          route: '/tools/morse-code-converter'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'January 9, 2026',
       changes: [
         {

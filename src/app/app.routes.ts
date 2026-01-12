@@ -73,6 +73,11 @@ export const routes: Routes = [
     title: 'Roman Numeral Converter - All The Things'
   },
   {
+    path: 'tools/base-number-converter',
+    loadComponent: () => import('./features/tools/math-and-calculators/base-number-converter/base-number-converter').then(m => m.BaseNumberConverterComponent),
+    title: 'Base Number Converter - All The Things'
+  },
+  {
     path: 'tools/unit-converter',
     loadComponent: () => import('./features/tools/converters/unit-converter/unit-converter').then(m => m.UnitConverter),
     title: 'Unit Converter - All The Things'

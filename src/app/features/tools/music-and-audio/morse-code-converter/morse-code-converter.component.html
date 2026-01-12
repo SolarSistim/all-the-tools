@@ -55,6 +55,59 @@
     <!-- AdSense Ad -->
     <app-adsense></app-adsense>
 
+    <!-- Reference Panel Toggle -->
+    <div class="reference-toggle-section">
+      <button mat-raised-button color="primary" (click)="toggleReferencePanel()">
+        <mat-icon>{{ showReferencePanel() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        {{ showReferencePanel() ? 'Hide' : 'Show' }} Morse Code Reference
+      </button>
+    </div>
+
+    <!-- Morse Code Reference Panel -->
+    <mat-card class="reference-panel-card" *ngIf="showReferencePanel()">
+      <div class="card-header">
+        <h2>
+          <mat-icon>library_books</mat-icon>
+          Morse Code Reference
+        </h2>
+      </div>
+
+      <div class="reference-content">
+        <mat-form-field appearance="fill" class="filter-input-field">
+          <mat-label>Filter by character or morse code</mat-label>
+          <input
+            matInput
+            [(ngModel)]="referenceFilter"
+            placeholder="Type to filter..."
+          />
+          <mat-icon matPrefix>search</mat-icon>
+          <button
+            *ngIf="referenceFilter()"
+            matSuffix
+            mat-icon-button
+            (click)="clearReferenceFilter()"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div class="reference-grid">
+          <div
+            class="reference-item"
+            *ngFor="let ref of filteredReferences()"
+          >
+            <div class="character">{{ ref.char }}</div>
+            <div class="morse-code">{{ ref.morse }}</div>
+          </div>
+        </div>
+
+        <div class="no-results" *ngIf="filteredReferences().length === 0">
+          <mat-icon>search_off</mat-icon>
+          <p>No matches found</p>
+        </div>
+      </div>
+    </mat-card>
+
     <!-- Converter Card -->
     <mat-card class="converter-card">
       <div class="card-header">

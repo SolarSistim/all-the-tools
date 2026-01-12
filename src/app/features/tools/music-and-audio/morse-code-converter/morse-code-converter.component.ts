@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
-import { MorseCodeService } from '../services/morse-code.service';
+import { MorseCodeService, MorseCharacter } from '../services/morse-code.service';
 import { MorseAudioService } from '../services/morse-audio.service';
 import { MorseStorageService, SavedMorseConversion } from '../services/morse-storage.service';
 import { MetaService } from '../../../../core/services/meta.service';
@@ -59,12 +59,27 @@ export class MorseCodeConverterComponent implements OnInit, OnDestroy {
   isPlaying = signal<boolean>(false);
   currentlyPlayingMorse = signal<string | null>(null);
 
+  showReferencePanel = signal<boolean>(false);
+  referenceFilter = signal<string>('');
+  morseReferences: MorseCharacter[] = [];
+
+  filteredReferences = computed(() => {
+    const filter = this.referenceFilter().toLowerCase();
+    if (!filter) {
+      return this.morseReferences;
+    }
+    return this.morseReferences.filter(ref =>
+      ref.char.toLowerCase().includes(filter) || ref.morse.includes(filter)
+    );
+  });
+
   savedConversions = signal<SavedMorseConversion[]>([]);
   displayedColumns: string[] = ['text', 'morse', 'timestamp', 'actions'];
 
   ngOnInit(): void {
     this.updateMetaTags();
     this.loadSavedConversions();
+    this.morseReferences = this.morseService.getAllMorseCharacters();
   }
 
   ngOnDestroy(): void {
@@ -328,5 +343,13 @@ export class MorseCodeConverterComponent implements OnInit, OnDestroy {
 
   getSupportedChars(): string {
     return this.morseService.getSupportedCharacters();
+  }
+
+  toggleReferencePanel(): void {
+    this.showReferencePanel.set(!this.showReferencePanel());
+  }
+
+  clearReferenceFilter(): void {
+    this.referenceFilter.set('');
   }
 }

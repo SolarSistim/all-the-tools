@@ -158,18 +158,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get all tools sorted alphabetically by name
+   * Get all available tools sorted alphabetically by name
    */
   get sortedTools(): Tool[] {
-    return [...this.allTools].sort((a, b) => a.name.localeCompare(b.name));
+    return [...this.toolsService.getAvailableTools()].sort((a, b) => a.name.localeCompare(b.name));
   }
 
   /**
-   * Get non-featured tools for the mega menu
+   * Get non-featured available tools for the mega menu
    */
   get nonFeaturedTools(): Tool[] {
     const featured = this.featuredTools;
-    return this.allTools.filter(tool => !featured.some(ft => ft.id === tool.id));
+    return this.toolsService.getAvailableTools().filter(tool => !featured.some(ft => ft.id === tool.id));
   }
 
   /**
@@ -234,5 +234,49 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
   getToolCount(categoryId: string): number {
     return this.toolsService.getToolCountByCategory(categoryId as any);
+  }
+
+  /**
+   * Split tools into columns dynamically based on total count
+   * Distributes tools evenly across 3 columns
+   */
+  getToolsForColumn(columnIndex: number): Tool[] {
+    const tools = this.sortedTools;
+    const toolsPerColumn = Math.ceil(tools.length / 3);
+    const startIdx = columnIndex * toolsPerColumn;
+    const endIdx = Math.min(startIdx + toolsPerColumn, tools.length);
+    return tools.slice(startIdx, endIdx);
+  }
+
+  /**
+   * Get number of columns needed (maximum 3)
+   */
+  getNumberOfColumns(): number {
+    return Math.min(3, Math.ceil(this.sortedTools.length / 7));
+  }
+
+  /**
+   * Check if a column should be shown
+   */
+  shouldShowColumn(columnIndex: number): boolean {
+    return columnIndex < this.getNumberOfColumns();
+  }
+
+  /**
+   * Split categories into columns dynamically
+   */
+  getCategoriesForColumn(columnIndex: number): ToolCategoryMeta[] {
+    const categories = this.categoriesWithTools;
+    const categoriesPerColumn = Math.ceil(categories.length / 3);
+    const startIdx = columnIndex * categoriesPerColumn;
+    const endIdx = Math.min(startIdx + categoriesPerColumn, categories.length);
+    return categories.slice(startIdx, endIdx);
+  }
+
+  /**
+   * Check if a category column should be shown
+   */
+  shouldShowCategoryColumn(columnIndex: number): boolean {
+    return columnIndex < Math.min(3, Math.ceil(this.categoriesWithTools.length / 3));
   }
 }

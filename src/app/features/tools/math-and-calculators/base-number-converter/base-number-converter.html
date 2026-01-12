@@ -1,0 +1,245 @@
+<div class="base-converter-container">
+  <div class="content-wrapper">
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">calculate</mat-icon>
+        </div>
+        <h1 class="hero-title">Base Number Converter</h1>
+        <p class="hero-subtitle">
+          Convert numbers between different number systems instantly. Supports binary, octal, decimal, duodecimal, hexadecimal, and base 36 with live conversion and support for large integers.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <div class="base-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-item">
+              <div class="base-icon">
+                <span class="base-label">10</span>
+              </div>
+              <span>Decimal</span>
+            </div>
+            <div class="showcase-item">
+              <div class="base-icon">
+                <span class="base-label">2</span>
+              </div>
+              <span>Binary</span>
+            </div>
+            <div class="showcase-item">
+              <div class="base-icon">
+                <span class="base-label">16</span>
+              </div>
+              <span>Hex</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Instant multi-base conversion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This base number converter instantly transforms numbers between different number systems with live translation as you type. Supports binary (base 2), octal (base 8), decimal (base 10), duodecimal (base 12), hexadecimal (base 16), and base 36. Uses BigInt internally to handle arbitrarily large integers without overflow. Features automatic validation with clear error messages if you type invalid digits for the selected base. Swap bases and chain conversions with a single click. View all supported bases simultaneously for quick reference and copying. Accepts spaces and underscores in input for readability (e.g., 1010_1010 or 1_000_000). Completely privacy-focused—all conversion happens in your browser with no server uploads.
+      </p>
+    </section>
+
+    <app-adsense></app-adsense>
+
+    <mat-card class="converter-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>calculate</mat-icon>
+          Number Base Converter
+        </h2>
+      </div>
+
+      <div class="converter-content">
+        <p class="converter-hint">Enter a number and select the base to convert from and to:</p>
+
+        <div class="input-row">
+          <div class="input-group">
+            <mat-form-field appearance="fill" class="text-input-field">
+              <mat-label>Enter number</mat-label>
+              <input
+                matInput
+                [(ngModel)]="input"
+                (ngModelChange)="onInputChange()"
+                placeholder="e.g., 255 or 1010 or A5F"
+              />
+              <mat-icon matPrefix>edit</mat-icon>
+              <button
+                *ngIf="input()"
+                matSuffix
+                mat-icon-button
+                (click)="clearInput()"
+                matTooltip="Clear"
+              >
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="base-select-field">
+              <mat-label>From base</mat-label>
+              <mat-select [(ngModel)]="fromBase" (ngModelChange)="onFromBaseChange()">
+                <mat-optgroup label="Primary Bases">
+                  <mat-option *ngFor="let base of primaryBases" [value]="base">
+                    {{ getBaseLabel(base) }} ({{ base }})
+                  </mat-option>
+                </mat-optgroup>
+                <mat-optgroup label="Extra Bases">
+                  <mat-option *ngFor="let base of extraBases" [value]="base">
+                    {{ getBaseLabel(base) }} ({{ base }})
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="error-section" *ngIf="errorMessage()">
+          <mat-icon>warning</mat-icon>
+          <span>{{ errorMessage() }}</span>
+        </div>
+
+        <div class="conversion-controls">
+          <mat-form-field appearance="fill" class="base-select-field">
+            <mat-label>To base</mat-label>
+            <mat-select [(ngModel)]="toBase" (ngModelChange)="onToBaseChange()">
+              <mat-optgroup label="Primary Bases">
+                <mat-option *ngFor="let base of primaryBases" [value]="base">
+                  {{ getBaseLabel(base) }} ({{ base }})
+                </mat-option>
+              </mat-optgroup>
+              <mat-optgroup label="Extra Bases">
+                <mat-option *ngFor="let base of extraBases" [value]="base">
+                  {{ getBaseLabel(base) }} ({{ base }})
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            (click)="swapBases()"
+            matTooltip="Swap from/to bases and use output as new input"
+            class="swap-button action-btn copy-btn"
+          >
+            <mat-icon>swap_horiz</mat-icon>
+            Swap
+          </button>
+        </div>
+
+        <div class="output-section" *ngIf="output()">
+          <div class="output-group">
+            <div class="output-label">{{ getBaseLabel(toBase()) }} Output</div>
+            <div class="output-display">{{ output() }}</div>
+            <button
+              mat-icon-button
+              (click)="copyToClipboard(output(), getBaseLabel(toBase()))"
+              matTooltip="Copy to clipboard"
+              color="primary"
+              class="copy-button"
+            >
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="all-bases-card" *ngIf="allBases()">
+      <div class="card-header">
+        <h2>
+          <mat-icon>category</mat-icon>
+          All Bases Reference
+        </h2>
+      </div>
+
+      <div class="bases-grid">
+        <div class="base-item" *ngFor="let base of allBasesArray()">
+          <div class="base-info">
+            <div class="base-name">{{ getBaseLabel(base) }}</div>
+            <div class="base-number">Base {{ base }}</div>
+          </div>
+          <div class="base-value">{{ getBaseValue(base) }}</div>
+          <button
+            mat-icon-button
+            (click)="copyToClipboard(getBaseValue(base), getBaseLabel(base))"
+            matTooltip="Copy"
+            color="primary"
+            class="copy-btn"
+          >
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="helper-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>info</mat-icon>
+          Base System Guide
+        </h2>
+      </div>
+
+      <div class="helper-content">
+        <div class="helper-section">
+          <h3>Supported Bases</h3>
+          <ul class="base-list">
+            <li><strong>Binary (Base 2):</strong> Digits 0-1</li>
+            <li><strong>Octal (Base 8):</strong> Digits 0-7</li>
+            <li><strong>Decimal (Base 10):</strong> Digits 0-9</li>
+            <li><strong>Duodecimal (Base 12):</strong> Digits 0-9, A, B</li>
+            <li><strong>Hexadecimal (Base 16):</strong> Digits 0-9, A-F</li>
+            <li><strong>Base 36:</strong> Digits 0-9, A-Z</li>
+          </ul>
+        </div>
+
+        <div class="helper-section">
+          <h3>Input Tips</h3>
+          <ul class="tips-list">
+            <li>Spaces and underscores are automatically ignored (e.g., <code>1010_1010</code>)</li>
+            <li>Negative numbers are supported (e.g., <code>-FF</code>)</li>
+            <li>Integers only; fractional numbers are not supported</li>
+            <li>Input is case-insensitive for letters (a, A, B, b work the same)</li>
+            <li>Large integers are supported using BigInt internally</li>
+          </ul>
+        </div>
+      </div>
+    </mat-card>
+
+    <app-adsense></app-adsense>
+
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Base Number Converter Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates manual base conversion</strong> - Stop converting between number systems by hand and risking calculation errors. Get instant, accurate conversions between any supported base.</li>
+          <li><strong>Prevents integer overflow</strong> - Uses BigInt internally to handle arbitrarily large integers without precision loss, perfect for cryptography and low-level systems work.</li>
+          <li><strong>Removes confusion about allowed digits</strong> - Clear error messages tell you exactly which digits are valid for your selected base and which digit you typed wrong.</li>
+          <li><strong>Simplifies hexadecimal work</strong> - Convert hex values from memory addresses, color codes, or API responses instantly without external tools.</li>
+          <li><strong>Enables binary debugging</strong> - Quickly convert between decimal and binary to understand bitwise operations and debug hardware-level issues.</li>
+          <li><strong>Supports duodecimal calculations</strong> - Base 12 is useful in historical and theoretical contexts; this tool makes it accessible.</li>
+          <li><strong>Allows base 36 encoding</strong> - Convert numbers to base 36 for compact alphanumeric representation in URLs and identifiers.</li>
+          <li><strong>Chains conversions with swap</strong> - The swap button lets you flip the from/to bases and use the output as the new input, enabling quick conversion chains.</li>
+          <li><strong>Shows all bases at once</strong> - View the same number in all supported bases simultaneously for instant reference without recalculating.</li>
+          <li><strong>Accepts flexible input format</strong> - Input with spaces and underscores for readability (e.g., 1010_1010) and they're automatically stripped during conversion.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>
