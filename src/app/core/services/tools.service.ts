@@ -243,6 +243,18 @@ export class ToolsService {
     tags: ['image', 'icon', 'generator', 'graphics'],
     available: true
   },
+  {
+    id: 'photo-filter-studio',
+    name: 'Photo Filter Studio',
+    description: 'Apply professional photo filters and adjustments with real-time preview',
+    longDescription: 'Advanced photo editing tool with 8 professionally designed preset filters (Clean, Vivid, Warm Glow, Cool Fade, Matte, Classic, Punch, and Noir) and 8 adjustment sliders (brightness, contrast, saturation, warmth, tint, vignette, and sharpness). Apply filters in real-time with instant canvas preview. Download edited photos as PNG or JPEG with quality control. All processing happens locally in your browser—no files are uploaded or stored anywhere.',
+    category: 'image',
+    icon: 'image_edit',
+    route: 'photo-filter-studio',
+    featured: true,
+    tags: ['image', 'photo', 'editor', 'filters', 'adjustments', 'editing'],
+    available: true
+  },
 
   // ========================================
   // HARDWARE TOOLS

@@ -1,0 +1,482 @@
+<div class="photo-filter-studio-container">
+  <div class="content-wrapper">
+    <!-- Hidden file input -->
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      style="display: none"
+      (change)="onFileSelected($event)"
+    />
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">image_edit</mat-icon>
+        </div>
+        <h1 class="hero-title">Photo Filter Studio</h1>
+        <p class="hero-subtitle">
+          Upload your photos and apply beautiful preset filters or customize brightness, contrast, saturation, and more.
+          All edits happen locally in your browser—nothing is uploaded.
+        </p>
+      </div>
+      <div class="hero-visual">
+        <div class="filter-showcase">
+          <div class="showcase-grid">
+            <div class="showcase-item">
+              <div class="filter-icon">
+                <mat-icon>brightness_5</mat-icon>
+              </div>
+              <span>Brightness</span>
+            </div>
+            <div class="showcase-item">
+              <div class="filter-icon">
+                <mat-icon>contrast</mat-icon>
+              </div>
+              <span>Contrast</span>
+            </div>
+            <div class="showcase-item">
+              <div class="filter-icon">
+                <mat-icon>palette</mat-icon>
+              </div>
+              <span>Filters</span>
+            </div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Professional editing tools</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This photo filter studio lets you apply beautiful preset filters or fine-tune your images with individual adjustment controls. Choose from 8 professionally designed presets like Clean, Vivid, Warm Glow, Cool Fade, Matte, Classic, Punch, and Noir, or customize brightness, contrast, saturation, warmth, tint, vignette, and sharpness. See changes in real-time as you adjust sliders. Download your edited photos in PNG or JPEG format at any time. All processing happens in your browser—no files are uploaded or stored on any server. Perfect for social media, portfolio work, or just touching up personal photos with instant results.
+      </p>
+    </section>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Privacy Notice -->
+    <div class="helper-text">
+      <mat-icon>info</mat-icon>
+      <p><strong>Privacy:</strong> All edits happen locally in your browser. No images are uploaded to servers or stored anywhere.</p>
+    </div>
+
+    <!-- Two-Column Layout: Preview and Controls -->
+    <div class="controls-wrapper">
+      <!-- Left Column: Preview -->
+      <div class="preview-column">
+        <mat-card class="preview-card">
+          <div class="card-header">
+            <h2>
+              <mat-icon *ngIf="hasImage(); else uploadIcon">preview</mat-icon>
+              <ng-template #uploadIcon>
+                <mat-icon>photo_camera</mat-icon>
+              </ng-template>
+              {{ hasImage() ? 'Preview' : 'Upload Photo' }}
+            </h2>
+            <button
+              mat-stroked-button
+              (click)="openFilePicker()"
+              class="upload-button"
+              *ngIf="hasImage()"
+            >
+              <mat-icon>upload</mat-icon>
+              Change Photo
+            </button>
+          </div>
+
+          <div class="preview-content" *ngIf="hasImage(); else uploadSection">
+            <div class="canvas-wrapper">
+              <canvas #canvas class="preview-canvas"></canvas>
+            </div>
+          </div>
+
+          <ng-template #uploadSection>
+            <div class="preview-upload-content">
+              <p class="upload-hint">Select or drag a photo to begin editing</p>
+
+              <div
+                class="upload-area"
+                (dragover)="onDragOver($event)"
+                (dragleave)="onDragLeave()"
+                (drop)="onDrop($event)"
+                [class.dragging]="isDragging()"
+              >
+                <mat-icon class="upload-icon">cloud_upload</mat-icon>
+                <p class="upload-text">Drag your photo here or click to browse</p>
+                <button mat-raised-button color="primary" (click)="openFilePicker()">
+                  <mat-icon>image</mat-icon>
+                  Choose Photo
+                </button>
+              </div>
+
+              <p class="file-name" *ngIf="uploadedImageName()">
+                <strong>Selected:</strong> {{ uploadedImageName() }}
+              </p>
+
+              <!-- Error Section -->
+              <div class="error-section" *ngIf="errorMessage()">
+                <mat-icon>warning</mat-icon>
+                <span>{{ errorMessage() }}</span>
+              </div>
+
+              <!-- Loading Progress -->
+              <mat-progress-bar
+                *ngIf="isLoading()"
+                mode="indeterminate"
+                class="upload-progress"
+              ></mat-progress-bar>
+            </div>
+          </ng-template>
+        </mat-card>
+      </div>
+
+      <!-- Right Column: Presets and Adjustments -->
+      <div class="controls-column">
+        <!-- Presets Card -->
+        <mat-card class="presets-card">
+          <div class="card-header">
+            <h2>
+              <mat-icon>palette</mat-icon>
+              Filter Presets
+            </h2>
+          </div>
+
+          <div class="presets-content">
+            <div class="presets-scroll">
+              <button
+                mat-stroked-button
+                *ngFor="let preset of filteredPresets()"
+                (click)="applyPreset(preset)"
+                class="preset-button"
+                [matTooltip]="preset.name"
+                [disabled]="!hasImage()"
+              >
+                {{ preset.name }}
+              </button>
+            </div>
+          </div>
+        </mat-card>
+
+        <!-- Adjustments Card -->
+        <mat-card class="adjustments-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>tune</mat-icon>
+          Adjustments
+        </h2>
+      </div>
+
+      <div class="adjustments-content">
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('brightness') }}</label>
+            <span class="adjustment-value">{{ adjustments().brightness }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('brightness')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="-100"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().brightness"
+              (valueChange)="adjustments().brightness = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('contrast') }}</label>
+            <span class="adjustment-value">{{ adjustments().contrast }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('contrast')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="-100"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().contrast"
+              (valueChange)="adjustments().contrast = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('saturation') }}</label>
+            <span class="adjustment-value">{{ adjustments().saturation }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('saturation')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="-100"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().saturation"
+              (valueChange)="adjustments().saturation = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('warmth') }}</label>
+            <span class="adjustment-value">{{ adjustments().warmth }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('warmth')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="-100"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().warmth"
+              (valueChange)="adjustments().warmth = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('tint') }}</label>
+            <span class="adjustment-value">{{ adjustments().tint }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('tint')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="-100"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().tint"
+              (valueChange)="adjustments().tint = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('vignette') }}</label>
+            <span class="adjustment-value">{{ adjustments().vignette }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('vignette')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="0"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().vignette"
+              (valueChange)="adjustments().vignette = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="adjustment-group">
+          <div class="adjustment-header">
+            <label>{{ getAdjustmentLabel('sharpness') }}</label>
+            <span class="adjustment-value">{{ adjustments().sharpness }}</span>
+            <button
+              mat-icon-button
+              (click)="resetAdjustment('sharpness')"
+              matTooltip="Reset"
+              class="reset-btn"
+              [disabled]="!hasImage()"
+            >
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+          </div>
+          <mat-slider
+            [disabled]="!hasImage()"
+            [min]="0"
+            [max]="100"
+            [step]="1"
+            class="adjustment-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="adjustments().sharpness"
+              (valueChange)="adjustments().sharpness = $event; onAdjustmentChange()"
+            />
+          </mat-slider>
+        </div>
+      </div>
+      </mat-card>
+      </div>
+    </div>
+
+    <!-- Download Options Card -->
+    <mat-card class="download-options-card" *ngIf="hasImage()">
+      <div class="card-header">
+        <h2>
+          <mat-icon>download</mat-icon>
+          Download & Export
+        </h2>
+      </div>
+
+      <div class="download-options-content">
+        <mat-form-field appearance="fill" class="format-field">
+          <mat-label>File Format</mat-label>
+          <mat-select [(ngModel)]="downloadFormat">
+            <mat-option value="png">PNG (Lossless)</mat-option>
+            <mat-option value="jpeg">JPEG (Compressed)</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="quality-control" *ngIf="downloadFormat() === 'jpeg'">
+          <div class="quality-header">
+            <label>JPEG Quality</label>
+            <span class="quality-value">{{ jpegQuality() }}%</span>
+          </div>
+          <mat-slider
+            [min]="10"
+            [max]="100"
+            [step]="10"
+            class="quality-slider"
+            discrete
+          >
+            <input
+              matSliderThumb
+              [value]="jpegQuality()"
+              (valueChange)="jpegQuality.set($event)"
+            />
+          </mat-slider>
+        </div>
+
+        <div class="action-buttons">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="downloadImage()"
+            class="download-button"
+          >
+            <mat-icon>download</mat-icon>
+            Download Image
+          </button>
+          <button
+            mat-stroked-button
+            (click)="resetFilters()"
+            class="reset-button"
+          >
+            <mat-icon>refresh</mat-icon>
+            Reset All Filters
+          </button>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Tool Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates need for expensive photo editing software</strong> - Apply professional filters and adjustments without purchasing Adobe Creative Cloud or Photoshop.</li>
+          <li><strong>Removes privacy concerns with cloud uploads</strong> - All processing happens in your browser. Your photos never leave your device.</li>
+          <li><strong>Speeds up social media photo prep</strong> - Apply curated presets in seconds instead of tweaking individual settings for hours.</li>
+          <li><strong>Provides instant previews</strong> - See changes in real-time as you adjust sliders instead of waiting for renders or exports.</li>
+          <li><strong>Eliminates compatibility issues</strong> - Works on any device with a modern web browser. No software installation required.</li>
+          <li><strong>Offers quick learning curve</strong> - Preset filters let beginners get professional results without understanding color theory or composition.</li>
+          <li><strong>Saves disk space on mobile</strong> - No heavy app installation. Just open in browser and edit photos directly.</li>
+          <li><strong>Enables batch editing workflow</strong> - Quickly apply the same preset to multiple photos for consistent visual branding.</li>
+          <li><strong>Prevents accidental overwrites</strong> - Download edited versions without touching your originals, keeping backups safe.</li>
+          <li><strong>Works offline after page load</strong> - No internet connection needed once the tool is loaded. Perfect for editing on planes or in areas with poor connectivity.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>

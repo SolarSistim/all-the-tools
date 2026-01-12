@@ -138,6 +138,11 @@ export const routes: Routes = [
     title: 'Icon Generator - All The Things'
   },
   {
+    path: 'tools/photo-filter-studio',
+    loadComponent: () => import('./features/tools/image-tools/photo-filter-studio/photo-filter-studio').then(m => m.PhotoFilterStudio),
+    title: 'Photo Filter Studio - All The Things'
+  },
+  {
     path: 'tools/currency-converter',
     loadComponent: () => import('./features/tools/converters/currency-converter/currency-converter').then(m => m.CurrencyConverter),
     title: 'Currency Converter - All The Things'

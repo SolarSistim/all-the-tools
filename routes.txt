@@ -49,6 +49,7 @@
 /tools/morse-code-converter
 /tools/password-generator
 /tools/percentage-calculator
+/tools/photo-filter-studio
 /tools/qr-code-generator
 /tools/roku-compatibility
 /tools/roman-numeral-converter

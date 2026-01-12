@@ -307,6 +307,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.allthethings.dev/tools/photo-filter-studio</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.allthethings.dev/tools/qr-code-generator</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
