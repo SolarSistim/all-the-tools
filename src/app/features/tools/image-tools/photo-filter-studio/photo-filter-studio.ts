@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
 import { PhotoFilterStudioService, FilterAdjustments, FilterPreset } from './photo-filter-studio.service';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
@@ -32,6 +33,7 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     MatTooltipModule,
     MatProgressBarModule,
     MatDividerModule,
+    MatTabsModule,
     PageHeaderComponent,
     CtaEmailList,
     AdsenseComponent
@@ -46,7 +48,8 @@ export class PhotoFilterStudio implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('editorCanvas') editorCanvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('previewCanvas') previewCanvasRef!: ElementRef<HTMLCanvasElement>;
 
   uploadedImageName = signal<string>('');
   sourceImage = signal<HTMLImageElement | null>(null);
@@ -60,6 +63,7 @@ export class PhotoFilterStudio implements OnInit {
   canvasHeight = signal<number>(600);
 
   isDragging = signal<boolean>(false);
+  isEditorOpen = signal<boolean>(false);
 
   filteredPresets = computed(() => this.presets());
 
@@ -127,12 +131,17 @@ export class PhotoFilterStudio implements OnInit {
 
       this.adjustments.set(this.filterService.getDefaultAdjustments());
 
+      // Open the editor first
+      this.isEditorOpen.set(true);
+
       // Force change detection to ensure canvas is rendered in the DOM
       this.cdr.detectChanges();
 
       // Render the canvas after DOM has been updated
       // Use setTimeout to defer rendering until after the DOM update is complete
-      setTimeout(() => this.renderCanvas(), 0);
+      setTimeout(() => {
+        this.renderCanvas();
+      }, 50);
     } catch (error) {
       this.errorMessage.set('Failed to load image. Please try a different file.');
       this.uploadedImageName.set('');
@@ -151,17 +160,33 @@ export class PhotoFilterStudio implements OnInit {
   }
 
   private renderCanvas(): void {
-    if (!this.canvasRef || !this.sourceImage()) return;
+    if (!this.sourceImage()) return;
 
-    const canvas = this.canvasRef.nativeElement;
-    canvas.width = this.canvasWidth();
-    canvas.height = this.canvasHeight();
+    // Render to editor canvas if it exists and editor is open
+    if (this.isEditorOpen() && this.editorCanvasRef) {
+      const canvas = this.editorCanvasRef.nativeElement;
+      canvas.width = this.canvasWidth();
+      canvas.height = this.canvasHeight();
 
-    this.filterService.applyFiltersToCanvas(
-      canvas,
-      this.sourceImage()!,
-      this.adjustments()
-    );
+      this.filterService.applyFiltersToCanvas(
+        canvas,
+        this.sourceImage()!,
+        this.adjustments()
+      );
+    }
+
+    // Render to preview canvas if it exists and editor is closed
+    if (!this.isEditorOpen() && this.previewCanvasRef) {
+      const canvas = this.previewCanvasRef.nativeElement;
+      canvas.width = this.canvasWidth();
+      canvas.height = this.canvasHeight();
+
+      this.filterService.applyFiltersToCanvas(
+        canvas,
+        this.sourceImage()!,
+        this.adjustments()
+      );
+    }
   }
 
   applyPreset(preset: FilterPreset): void {
@@ -171,7 +196,6 @@ export class PhotoFilterStudio implements OnInit {
     };
     this.adjustments.set(newAdjustments);
     this.renderCanvas();
-    this.snackbar.success(`Applied ${preset.name} filter`, 2000);
   }
 
   resetFilters(): void {
@@ -181,9 +205,11 @@ export class PhotoFilterStudio implements OnInit {
   }
 
   downloadImage(): void {
-    if (!this.canvasRef) return;
+    // Use editor canvas if open, otherwise preview canvas
+    const canvasRef = this.isEditorOpen() ? this.editorCanvasRef : this.previewCanvasRef;
+    if (!canvasRef) return;
 
-    const canvas = this.canvasRef.nativeElement;
+    const canvas = canvasRef.nativeElement;
     const filename = this.filterService.getTimestampFilename();
 
     this.filterService.downloadImage(
@@ -219,4 +245,24 @@ export class PhotoFilterStudio implements OnInit {
   }
 
   hasImage = computed(() => this.sourceImage() !== null);
+
+  openEditor(): void {
+    this.isEditorOpen.set(true);
+    // Force change detection to ensure editor canvas is in DOM
+    this.cdr.detectChanges();
+    // Render to the editor canvas after a short delay
+    setTimeout(() => {
+      this.renderCanvas();
+    }, 50);
+  }
+
+  closeEditor(): void {
+    this.isEditorOpen.set(false);
+    // Force change detection to ensure preview canvas is in DOM
+    this.cdr.detectChanges();
+    // Render to the preview canvas after a short delay
+    setTimeout(() => {
+      this.renderCanvas();
+    }, 50);
+  }
 }

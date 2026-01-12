@@ -9,6 +9,300 @@
       (change)="onFileSelected($event)"
     />
 
+    <!-- Full-Screen Editor Overlay -->
+    <div class="editor-overlay" *ngIf="hasImage() && isEditorOpen()">
+      <!-- Header Bar -->
+      <div class="editor-header">
+        <button
+          mat-icon-button
+          class="close-button"
+          (click)="closeEditor()"
+          matTooltip="Close Editor"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2 class="editor-title">
+          <mat-icon>edit</mat-icon>
+          Edit Photo
+        </h2>
+        <button
+          mat-stroked-button
+          (click)="openFilePicker()"
+          class="change-photo-button"
+        >
+          <mat-icon>upload</mat-icon>
+          Change Photo
+        </button>
+      </div>
+
+      <!-- Image Preview Section (Always Visible) -->
+      <div class="editor-preview-section">
+        <div class="editor-canvas-wrapper">
+          <canvas #editorCanvas class="editor-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Tabbed Controls Section -->
+      <div class="editor-controls-section">
+        <mat-tab-group class="editor-tabs" animationDuration="200ms">
+          <!-- Filter Presets Tab -->
+          <mat-tab label="Filter Presets">
+            <div class="tab-content presets-tab-content">
+              <div class="presets-grid">
+                <button
+                  mat-stroked-button
+                  *ngFor="let preset of filteredPresets()"
+                  (click)="applyPreset(preset)"
+                  class="preset-button"
+                  [matTooltip]="preset.name"
+                >
+                  {{ preset.name }}
+                </button>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Adjustments Tab -->
+          <mat-tab label="Adjustments">
+            <div class="tab-content adjustments-tab-content">
+              <!-- Brightness -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('brightness') }}</label>
+                  <span class="adjustment-value">{{ adjustments().brightness }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('brightness')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="-100"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().brightness"
+                    (valueChange)="adjustments().brightness = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+
+              <!-- Contrast -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('contrast') }}</label>
+                  <span class="adjustment-value">{{ adjustments().contrast }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('contrast')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="-100"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().contrast"
+                    (valueChange)="adjustments().contrast = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+
+              <!-- Saturation -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('saturation') }}</label>
+                  <span class="adjustment-value">{{ adjustments().saturation }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('saturation')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="-100"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().saturation"
+                    (valueChange)="adjustments().saturation = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+
+              <!-- Warmth -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('warmth') }}</label>
+                  <span class="adjustment-value">{{ adjustments().warmth }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('warmth')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="-100"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().warmth"
+                    (valueChange)="adjustments().warmth = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+
+              <!-- Tint -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('tint') }}</label>
+                  <span class="adjustment-value">{{ adjustments().tint }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('tint')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="-100"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().tint"
+                    (valueChange)="adjustments().tint = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+
+              <!-- Vignette -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('vignette') }}</label>
+                  <span class="adjustment-value">{{ adjustments().vignette }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('vignette')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="0"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().vignette"
+                    (valueChange)="adjustments().vignette = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+
+              <!-- Sharpness -->
+              <div class="adjustment-group">
+                <div class="adjustment-header">
+                  <label>{{ getAdjustmentLabel('sharpness') }}</label>
+                  <span class="adjustment-value">{{ adjustments().sharpness }}</span>
+                  <button
+                    mat-icon-button
+                    (click)="resetAdjustment('sharpness')"
+                    matTooltip="Reset"
+                    class="reset-btn"
+                  >
+                    <mat-icon>restart_alt</mat-icon>
+                  </button>
+                </div>
+                <mat-slider
+                  [min]="0"
+                  [max]="100"
+                  [step]="1"
+                  class="adjustment-slider"
+                  discrete
+                >
+                  <input
+                    matSliderThumb
+                    [value]="adjustments().sharpness"
+                    (valueChange)="adjustments().sharpness = $event; onAdjustmentChange()"
+                  />
+                </mat-slider>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+        <!-- Download Controls -->
+        <div class="editor-download-section">
+          <mat-form-field appearance="fill" class="format-field">
+            <mat-label>File Format</mat-label>
+            <mat-select [(ngModel)]="downloadFormat">
+              <mat-option value="png">PNG (Lossless)</mat-option>
+              <mat-option value="jpeg">JPEG (Compressed)</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button
+            mat-stroked-button
+            (click)="resetFilters()"
+            class="reset-button"
+          >
+            <mat-icon>refresh</mat-icon>
+            Reset All Filters
+          </button>
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="downloadImage()"
+            class="download-button"
+          >
+            <mat-icon>download</mat-icon>
+            Download Image
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
@@ -72,7 +366,7 @@
     </div>
 
     <!-- Two-Column Layout: Preview and Controls -->
-    <div class="controls-wrapper">
+    <div class="controls-wrapper" *ngIf="!isEditorOpen()">
       <!-- Left Column: Preview -->
       <div class="preview-column">
         <mat-card class="preview-card">
@@ -84,20 +378,30 @@
               </ng-template>
               {{ hasImage() ? 'Preview' : 'Upload Photo' }}
             </h2>
-            <button
-              mat-stroked-button
-              (click)="openFilePicker()"
-              class="upload-button"
-              *ngIf="hasImage()"
-            >
-              <mat-icon>upload</mat-icon>
-              Change Photo
-            </button>
+            <div class="header-actions" *ngIf="hasImage()">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="openEditor()"
+                class="edit-button"
+              >
+                <mat-icon>edit</mat-icon>
+                Edit Photo
+              </button>
+              <button
+                mat-stroked-button
+                (click)="openFilePicker()"
+                class="upload-button"
+              >
+                <mat-icon>upload</mat-icon>
+                Change Photo
+              </button>
+            </div>
           </div>
 
           <div class="preview-content" *ngIf="hasImage(); else uploadSection">
             <div class="canvas-wrapper">
-              <canvas #canvas class="preview-canvas"></canvas>
+              <canvas #previewCanvas class="preview-canvas"></canvas>
             </div>
           </div>
 
@@ -142,7 +446,7 @@
       </div>
 
       <!-- Right Column: Presets and Adjustments -->
-      <div class="controls-column">
+      <div class="controls-column" style="display: none;">
         <!-- Presets Card -->
         <mat-card class="presets-card">
           <div class="card-header">
@@ -393,7 +697,7 @@
     </div>
 
     <!-- Download Options Card -->
-    <mat-card class="download-options-card" *ngIf="hasImage()">
+    <mat-card class="download-options-card" *ngIf="hasImage() && !isEditorOpen()">
       <div class="card-header">
         <h2>
           <mat-icon>download</mat-icon>
@@ -410,45 +714,24 @@
           </mat-select>
         </mat-form-field>
 
-        <div class="quality-control" *ngIf="downloadFormat() === 'jpeg'">
-          <div class="quality-header">
-            <label>JPEG Quality</label>
-            <span class="quality-value">{{ jpegQuality() }}%</span>
-          </div>
-          <mat-slider
-            [min]="10"
-            [max]="100"
-            [step]="10"
-            class="quality-slider"
-            discrete
-          >
-            <input
-              matSliderThumb
-              [value]="jpegQuality()"
-              (valueChange)="jpegQuality.set($event)"
-            />
-          </mat-slider>
-        </div>
+        <button
+          mat-stroked-button
+          (click)="resetFilters()"
+          class="reset-button"
+        >
+          <mat-icon>refresh</mat-icon>
+          Reset All Filters
+        </button>
 
-        <div class="action-buttons">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="downloadImage()"
-            class="download-button"
-          >
-            <mat-icon>download</mat-icon>
-            Download Image
-          </button>
-          <button
-            mat-stroked-button
-            (click)="resetFilters()"
-            class="reset-button"
-          >
-            <mat-icon>refresh</mat-icon>
-            Reset All Filters
-          </button>
-        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="downloadImage()"
+          class="download-button"
+        >
+          <mat-icon>download</mat-icon>
+          Download Image
+        </button>
       </div>
     </mat-card>
 

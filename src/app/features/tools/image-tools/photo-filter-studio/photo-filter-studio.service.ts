@@ -190,12 +190,12 @@ export class PhotoFilterStudioService {
       0,
       width / 2,
       height / 2,
-      Math.max(width, height)
+      Math.max(width, height) * 0.7
     );
 
-    const alpha = Math.min(intensity / 100, 0.8);
+    const alpha = Math.min(intensity / 100, 0.95);
     gradient.addColorStop(0, `rgba(0, 0, 0, 0)`);
-    gradient.addColorStop(0.5, `rgba(0, 0, 0, 0)`);
+    gradient.addColorStop(0.3, `rgba(0, 0, 0, 0)`);
     gradient.addColorStop(1, `rgba(0, 0, 0, ${alpha})`);
 
     ctx.fillStyle = gradient;
