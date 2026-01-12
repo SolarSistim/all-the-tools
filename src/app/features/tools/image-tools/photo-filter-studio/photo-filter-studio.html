@@ -26,7 +26,7 @@
           Edit Photo
         </h2>
         <button
-          mat-stroked-button
+          mat-button
           (click)="openFilePicker()"
           class="change-photo-button"
         >
@@ -378,7 +378,13 @@
               </ng-template>
               {{ hasImage() ? 'Preview' : 'Upload Photo' }}
             </h2>
-            <div class="header-actions" *ngIf="hasImage()">
+          </div>
+
+          <div class="preview-content" *ngIf="hasImage(); else uploadSection">
+            <div class="canvas-wrapper">
+              <canvas #previewCanvas class="preview-canvas"></canvas>
+            </div>
+            <div class="preview-actions">
               <button
                 mat-raised-button
                 color="primary"
@@ -396,12 +402,6 @@
                 <mat-icon>upload</mat-icon>
                 Change Photo
               </button>
-            </div>
-          </div>
-
-          <div class="preview-content" *ngIf="hasImage(); else uploadSection">
-            <div class="canvas-wrapper">
-              <canvas #previewCanvas class="preview-canvas"></canvas>
             </div>
           </div>
 
