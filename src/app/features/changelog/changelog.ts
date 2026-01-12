@@ -55,6 +55,11 @@ export class Changelog implements OnInit {
           type: 'added',
           description: 'Base Number Converter',
           route: '/tools/base-number-converter'
+        },
+        {
+          type: 'added',
+          description: 'Photo Filter Studio',
+          route: '/tools/photo-filter-studio'
         }
       ]
     },

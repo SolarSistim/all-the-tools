@@ -73,7 +73,7 @@ export class PhotoFilterStudio implements OnInit {
 
   private updateMetaTags(): void {
     this.metaService.updateTags({
-      title: 'Photo Filter Studio - Edit Images with Presets',
+      title: 'Photo Filter Studio - Edit Images with Presets Online',
       description: 'Apply beautiful filters and adjustments to your photos. Choose from preset styles or customize brightness, contrast, saturation, and more. Download your edited images instantly.',
       keywords: ['photo editor', 'filters', 'image editing', 'presets', 'brightness', 'contrast'],
       image: 'https://www.allthethings.dev/meta-images/og-photo-filter-studio.png',
