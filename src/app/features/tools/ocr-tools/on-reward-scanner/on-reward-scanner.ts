@@ -43,6 +43,12 @@ export class OnRewardScanner implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @ViewChild('scannerSection') scannerSection!: ElementRef<HTMLDivElement>;
 
+  @ViewChild('capturedImg') capturedImg!: ElementRef<HTMLImageElement>;
+
+  private displayedImageRect: DOMRect | null = null;
+  private capturedNaturalWidth = 0;
+  private capturedNaturalHeight = 0;
+
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
   private storageService = inject(OnRewardStorageService);
@@ -163,42 +169,43 @@ export class OnRewardScanner implements OnInit, OnDestroy {
    * Extract reward code from OCR text
    */
   private extractRewardCode(rawText: string): string | null {
-    console.log('🔍 [EXTRACT] Raw OCR text:', rawText);
+  console.log('🔍 [EXTRACT] Raw OCR text:', rawText);
 
-    // Strategy 1: Look for pattern with hyphens
-    const patternWithHyphens = /[A-Z0-9]{5}-[A-Z0-9]{4}-[A-Z0-9]{4}/g;
-    const matchWithHyphens = rawText.toUpperCase().match(patternWithHyphens);
-    if (matchWithHyphens && matchWithHyphens.length > 0) {
-      console.log('✅ [EXTRACT] Found code with hyphens:', matchWithHyphens[0]);
-      return matchWithHyphens[0];
+  const lines = rawText
+    .toUpperCase()
+    .split(/\r?\n/)
+    .map(l => l.trim())
+    .filter(Boolean);
+
+  const hyphenPattern = /[A-Z0-9]{5}-[A-Z0-9]{4}-[A-Z0-9]{4}/g;
+
+  for (const line of lines) {
+    const m = line.match(hyphenPattern);
+    if (m && m[0] && /\d/.test(m[0])) {
+      console.log('✅ [EXTRACT] Found code with hyphens:', m[0]);
+      return m[0];
     }
+  }
 
-    // Strategy 2: Look for 14-character sequence and add hyphens
-    const normalized = rawText.toUpperCase().replace(/[^A-Z0-9]/g, '');
-    const patternContinuous = /[A-Z0-9]{14}/g;
-    const matchContinuous = normalized.match(patternContinuous);
+  for (const line of lines) {
+    const normalized = line.replace(/[^A-Z0-9]/g, '');
+    const runs = normalized.match(/[A-Z0-9]{13}/g);
+    if (!runs || runs.length === 0) continue;
 
-    if (matchContinuous && matchContinuous.length > 0) {
-      const code = matchContinuous[0];
-      const formatted = `${code.slice(0,5)}-${code.slice(5,9)}-${code.slice(9,13)}`;
+    for (const run of runs) {
+      if (!/\d/.test(run)) continue;
+      const formatted = `${run.slice(0, 5)}-${run.slice(5, 9)}-${run.slice(9, 13)}`;
       console.log('✅ [EXTRACT] Found continuous code, formatted:', formatted);
       return formatted;
     }
-
-    // Strategy 3: Look for partial matches and try to reconstruct
-    if (normalized.length >= 13 && normalized.length <= 15) {
-      // Attempt to extract 14 characters
-      const bestGuess = normalized.slice(0, 14);
-      if (bestGuess.length === 14) {
-        const formatted = `${bestGuess.slice(0,5)}-${bestGuess.slice(5,9)}-${bestGuess.slice(9,13)}`;
-        console.log('⚠️ [EXTRACT] Best guess code:', formatted);
-        return formatted;
-      }
-    }
-
-    console.log('❌ [EXTRACT] No valid code pattern found');
-    return null;
   }
+
+  console.log('❌ [EXTRACT] No valid code pattern found');
+  return null;
+}
+
+
+
 
   /**
    * Validate reward code format
@@ -500,14 +507,7 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       this.capturedImage.set(imageUrl);
 
       // Initialize crop region in the center of the image
-      const centerX = Math.floor(img.width / 2 - 150);
-      const centerY = Math.floor(img.height / 2 - 50);
-      this.cropRegion.set({
-        x: Math.max(0, centerX),
-        y: Math.max(0, centerY),
-        width: 300,
-        height: 100
-      });
+this.cropRegion.set({ x: 0, y: 0, width: 420, height: 50 });
 
       // Show region selection UI
       this.state.set('selectRegion');
@@ -523,6 +523,58 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       this.processingProgress.set(0);
     }
   }
+
+private getDisplayedImageBox(): { x: number; y: number; width: number; height: number } | null {
+  if (!this.capturedNaturalWidth || !this.capturedNaturalHeight) return null;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  const imgAR = this.capturedNaturalWidth / this.capturedNaturalHeight;
+  const viewAR = vw / vh;
+
+  let width = 0;
+  let height = 0;
+  let x = 0;
+  let y = 0;
+
+  if (viewAR > imgAR) {
+    height = vh;
+    width = vh * imgAR;
+    x = (vw - width) / 2;
+    y = 0;
+  } else {
+    width = vw;
+    height = vw / imgAR;
+    x = 0;
+    y = (vh - height) / 2;
+  }
+
+  return { x, y, width, height };
+}
+
+onCapturedImageLoad(): void {
+  const el = this.capturedImg?.nativeElement;
+  if (!el) return;
+
+  this.capturedNaturalWidth = el.naturalWidth;
+  this.capturedNaturalHeight = el.naturalHeight;
+
+  const box = this.getDisplayedImageBox();
+  if (!box) return;
+
+  const width = Math.min(420, box.width * 0.85);
+  const height = 50;
+
+  this.cropRegion.set({
+    x: box.x + (box.width - width) / 2,
+    y: box.y + (box.height - height) / 2,
+    width,
+    height
+  });
+}
+
+
 
   /**
    * Start dragging the crop region
@@ -554,15 +606,45 @@ export class OnRewardScanner implements OnInit, OnDestroy {
     const deltaX = clientX - this.dragStartX;
     const deltaY = clientY - this.dragStartY;
 
-    const newX = this.initialCropX + deltaX;
-    const newY = this.initialCropY + deltaY;
+    const rect = this.displayedImageRect;
+let newX = this.initialCropX + deltaX;
+let newY = this.initialCropY + deltaY;
+
+if (rect) {
+  const minX = rect.left;
+  const minY = rect.top;
+  const maxX = rect.right - this.cropRegion().width;
+  const maxY = rect.bottom - this.cropRegion().height;
+
+  newX = Math.max(minX, Math.min(maxX, newX));
+  newY = Math.max(minY, Math.min(maxY, newY));
+}
+
+this.cropRegion.update(region => ({
+  ...region,
+  x: newX,
+  y: newY
+}));
 
     // Update crop region (bounds will be checked when cropping)
-    this.cropRegion.update(region => ({
-      ...region,
-      x: newX,
-      y: newY
-    }));
+const box = this.getDisplayedImageBox();
+if (!box) return;
+
+const region = this.cropRegion();
+const minX = box.x;
+const minY = box.y;
+const maxX = box.x + box.width - region.width;
+const maxY = box.y + box.height - region.height;
+
+const clampedX = Math.max(minX, Math.min(newX, maxX));
+const clampedY = Math.max(minY, Math.min(newY, maxY));
+
+this.cropRegion.update(r => ({
+  ...r,
+  x: clampedX,
+  y: clampedY
+}));
+
   }
 
   /**
@@ -613,7 +695,29 @@ export class OnRewardScanner implements OnInit, OnDestroy {
 
       // Crop the image to the selected region
       console.log('✂️ [CROP] Cropping image to selected region...');
-      const croppedImageUrl = this.cropImage(img, this.cropRegion());
+      const rect = this.displayedImageRect;
+const region = this.cropRegion();
+
+let scaledRegion = region;
+
+if (rect && this.capturedNaturalWidth && this.capturedNaturalHeight) {
+  const scaleX = this.capturedNaturalWidth / rect.width;
+  const scaleY = this.capturedNaturalHeight / rect.height;
+
+  scaledRegion = {
+    x: (region.x - rect.left) * scaleX,
+    y: (region.y - rect.top) * scaleY,
+    width: region.width * scaleX,
+    height: region.height * scaleY
+  };
+}
+
+const boundsW = this.capturedNaturalWidth || img.width;
+const boundsH = this.capturedNaturalHeight || img.height;
+
+const paddedRegion = this.padRegion(scaledRegion, boundsW, boundsH);
+const croppedImageUrl = this.cropImage(img, paddedRegion);
+
 
       // Preprocess cropped image for better OCR accuracy
       const croppedImg = new Image();
@@ -673,29 +777,65 @@ export class OnRewardScanner implements OnInit, OnDestroy {
     }
   }
 
+  private padRegion(
+  region: { x: number; y: number; width: number; height: number },
+  boundsWidth: number,
+  boundsHeight: number
+): { x: number; y: number; width: number; height: number } {
+  const padX = region.width * 0.12;
+  const padY = region.height * 0.35;
+
+  const x = Math.max(0, region.x - padX);
+  const y = Math.max(0, region.y - padY);
+
+  const width = Math.min(boundsWidth - x, region.width + padX * 2);
+  const height = Math.min(boundsHeight - y, region.height + padY * 2);
+
+  return { x, y, width, height };
+}
+
+
   /**
    * Crop an image to a specific region
    */
-  private cropImage(img: HTMLImageElement, region: { x: number; y: number; width: number; height: number }): string {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d')!;
-
-    // Ensure crop region is within image bounds
-    const x = Math.max(0, Math.min(region.x, img.width - region.width));
-    const y = Math.max(0, Math.min(region.y, img.height - region.height));
-    const width = Math.min(region.width, img.width - x);
-    const height = Math.min(region.height, img.height - y);
-
-    canvas.width = width;
-    canvas.height = height;
-
-    // Draw the cropped portion
-    ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
-
-    console.log(`✂️ [CROP] Cropped to: ${width}x${height} at (${x}, ${y})`);
-
-    return canvas.toDataURL('image/png');
+private cropImage(
+  img: HTMLImageElement,
+  region: { x: number; y: number; width: number; height: number }
+): string {
+  const box = this.getDisplayedImageBox();
+  if (!box) {
+    const canvasFallback = document.createElement('canvas');
+    const ctxFallback = canvasFallback.getContext('2d')!;
+    canvasFallback.width = region.width;
+    canvasFallback.height = region.height;
+    ctxFallback.drawImage(img, region.x, region.y, region.width, region.height, 0, 0, region.width, region.height);
+    return canvasFallback.toDataURL('image/png');
   }
+
+  const scaleX = img.width / box.width;
+  const scaleY = img.height / box.height;
+
+  let sx = (region.x - box.x) * scaleX;
+  let sy = (region.y - box.y) * scaleY;
+  let sw = region.width * scaleX;
+  let sh = region.height * scaleY;
+
+  sx = Math.max(0, Math.min(sx, img.width - 1));
+  sy = Math.max(0, Math.min(sy, img.height - 1));
+  sw = Math.max(1, Math.min(sw, img.width - sx));
+  sh = Math.max(1, Math.min(sh, img.height - sy));
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d')!;
+  canvas.width = sw;
+  canvas.height = sh;
+
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+
+  console.log(`✂️ [CROP] Cropped to: ${sw}x${sh} at (${sx}, ${sy})`);
+  return canvas.toDataURL('image/png');
+}
+
 
   /**
    * Close the scan result overlay without saving

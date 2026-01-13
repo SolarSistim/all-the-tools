@@ -151,7 +151,13 @@
          (touchend)="stopDrag()">
 
       <!-- Captured Image -->
-      <img [src]="capturedImage()" alt="Captured image" class="captured-image" />
+      <img
+        #capturedImg
+        [src]="capturedImage()"
+        alt="Captured image"
+        class="captured-image"
+        (load)="onCapturedImageLoad()"
+      />
 
       <!-- Dark Overlay (50% black) -->
       <div class="dark-overlay"></div>
