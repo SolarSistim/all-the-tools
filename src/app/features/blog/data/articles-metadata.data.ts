@@ -11,19 +11,19 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
     id: '21',
     slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand',
-    title: 'Stop Typing In Those Tiny On! Reward Codes By Hand - There\'s a Better Way',
+    title: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
     description:
-      'Tired of manually typing 14-character On! nicotine pouch reward codes? I built a free OCR-powered scanner that processes codes right in your browser. Point, scan, redeem - no servers, no tracking, just results.',
+      'Tired of typing in tiny alphanumeric codes from On! brand nicotine boxes? Use our free scanning tool to instantly capture reward codes using your camera.',
     author: AUTHORS.joel_hansen,
     publishedDate: '01-13-2026',
     heroImage: {
       src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/og-on-reward-scanner-blog-post.png',
-      alt: 'Stop Typing In Those Tiny On! Reward Codes By Hand - There\'s a Better Way',
+      alt: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
     },
     tags: ['On! Rewards', 'OCR', 'Tools', 'Productivity', 'Mobile', 'Privacy'],
     category: 'Technology',
     metaDescription:
-      'Stop wasting time typing On! nicotine pouch reward codes. This free OCR scanner processes codes locally in your browser - fast, private, and accurate. Point your camera, scan, and redeem.',
+      'Tired of typing in tiny alphanumeric codes from On! brand nicotine boxes? Use our free scanning tool to instantly capture reward codes using your camera.',
     metaKeywords: [
       'On! rewards',
       'On! reward codes',
