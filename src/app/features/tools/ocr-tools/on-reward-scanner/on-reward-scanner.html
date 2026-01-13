@@ -220,6 +220,12 @@
           <mat-icon>check_circle</mat-icon>
         </div>
         <h3 class="result-title">Reward Code Detected</h3>
+        <img
+          *ngIf="scannedRegionImage()"
+          class="scanned-region-preview"
+          [src]="scannedRegionImage()!"
+          alt="Scanned area"
+        />
         <div class="result-code">{{ currentScan()!.code }}</div>
 
         <div class="result-actions">

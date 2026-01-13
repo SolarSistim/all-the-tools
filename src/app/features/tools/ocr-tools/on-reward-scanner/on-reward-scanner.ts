@@ -58,6 +58,7 @@ private pendingCropInit = false;
   state = signal<ScannerState>('idle');
   scannedCodes = signal<ScannedRewardCode[]>([]);
   currentScan = signal<{ code: string } | null>(null);
+  scannedRegionImage = signal<string | null>(null);
   manualInput = signal<string>('');
   errorMessage = signal<string>('');
   processingProgress = signal<number>(0);
@@ -716,6 +717,7 @@ this.cropRegion.update(r => ({
       URL.revokeObjectURL(this.capturedImage()!);
     }
     this.capturedImage.set(null);
+    this.scannedRegionImage.set(null);
     this.state.set('idle');
   }
 
@@ -766,7 +768,9 @@ const boundsW = this.capturedNaturalWidth || img.width;
 const boundsH = this.capturedNaturalHeight || img.height;
 
 const paddedRegion = this.padRegion(scaledRegion, boundsW, boundsH);
-const croppedImageUrl = this.cropImage(img, paddedRegion);
+const padded = this.padCropRegionForOcr(scaledRegion);
+const croppedImageUrl = this.cropImage(img, this.cropRegion());
+this.scannedRegionImage.set(croppedImageUrl);
 
 
       // Preprocess cropped image for better OCR accuracy
@@ -844,6 +848,19 @@ const croppedImageUrl = this.cropImage(img, paddedRegion);
   return { x, y, width, height };
 }
 
+private padCropRegionForOcr(region: { x: number; y: number; width: number; height: number }): { x: number; y: number; width: number; height: number } {
+  const padX = region.width * 0.12;
+  const padY = region.height * 0.9;
+
+  const x = Math.max(0, region.x - padX);
+  const y = Math.max(0, region.y - padY);
+
+  const width = region.width + padX * 2;
+  const height = region.height + padY * 2;
+
+  return { x, y, width, height };
+}
+
 
   /**
    * Crop an image to a specific region
@@ -872,10 +889,10 @@ private cropImage(img: HTMLImageElement, region: { x: number; y: number; width: 
   const sw = Math.min(width, img.width - sx);
   const sh = Math.min(height, img.height - sy);
 
-  canvas.width = sw;
-  canvas.height = sh;
-
-  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+const upscale = 2;
+canvas.width = Math.round(sw * upscale);
+canvas.height = Math.round(sh * upscale);
+ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
 
   console.log(`✂️ [CROP] Cropped to: ${sw}x${sh} at (${sx}, ${sy})`);
 
@@ -890,6 +907,7 @@ private cropImage(img: HTMLImageElement, region: { x: number; y: number; width: 
   closeResult(): void {
     console.log('❌ [RESULT] User closed result without saving');
     this.currentScan.set(null);
+    this.scannedRegionImage.set(null);
     this.state.set('idle');
   }
 
