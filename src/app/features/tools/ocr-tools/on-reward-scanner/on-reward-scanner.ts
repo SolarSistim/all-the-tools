@@ -65,12 +65,13 @@ private pendingCropInit = false;
 
   // Crop region selection
   capturedImage = signal<string | null>(null);
-  cropRegion = signal<{ x: number; y: number; width: number; height: number }>({ x: 0, y: 0, width: 300, height: 100 });
+  cropRegion = signal<{ x: number; y: number; width: number; height: number }>({ x: 0, y: 0, width: 420, height: 140 });
+
   cropSizeLevels = [1, 2, 3, 4, 5];
 cropSizeLevel = signal<number>(3);
 
 private cropAspectRatio = 6;
-private cropBaseWidthFraction = 0.35;
+private cropBaseWidthFraction = 0.50;
 private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
   isDragging = signal<boolean>(false);
   private dragStartX = 0;
