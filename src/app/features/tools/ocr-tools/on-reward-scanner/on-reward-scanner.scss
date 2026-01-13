@@ -8,6 +8,15 @@
   width: 100%;
 }
 
+::ng-deep {
+  .region-selection-overlay ~ app-back-to-top,
+  body:has(.region-selection-overlay) app-back-to-top,
+  .scanner-overlay ~ app-back-to-top,
+  body:has(.scanner-overlay) app-back-to-top {
+    display: none !important;
+  }
+}
+
 .reward-scanner-container {
   min-height: 100vh;
   padding: 48px 0 $spacing-xl 0;
