@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-import Tesseract from 'tesseract.js';
 import { OnRewardStorageService, ScannedRewardCode } from '../services/on-reward-storage.service';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
@@ -17,7 +16,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
-type ScannerState = 'idle' | 'processing' | 'scanResult' | 'error';
+type ScannerState = 'idle' | 'selectRegion' | 'processing' | 'scanResult' | 'error';
 
 @Component({
   selector: 'app-on-reward-scanner',
@@ -56,8 +55,18 @@ export class OnRewardScanner implements OnInit, OnDestroy {
   errorMessage = signal<string>('');
   processingProgress = signal<number>(0);
 
-  // Tesseract worker
-  private worker: Tesseract.Worker | null = null;
+  // Crop region selection
+  capturedImage = signal<string | null>(null);
+  cropRegion = signal<{ x: number; y: number; width: number; height: number }>({ x: 0, y: 0, width: 300, height: 100 });
+  isDragging = signal<boolean>(false);
+  private dragStartX = 0;
+  private dragStartY = 0;
+  private initialCropX = 0;
+  private initialCropY = 0;
+
+  // Tesseract worker and module
+  private worker: any = null;
+  private Tesseract: any = null;
 
   displayedColumns: string[] = ['code', 'timestamp', 'actions'];
 
@@ -101,10 +110,23 @@ export class OnRewardScanner implements OnInit, OnDestroy {
   }
 
   private async initializeScanner(): Promise<void> {
+    // Only initialize in browser environment
+    if (typeof window === 'undefined') {
+      console.log('⚠️ [INIT] Skipping initialization (SSR environment)');
+      return;
+    }
+
     console.log('🔧 [INIT] Initializing OCR scanner...');
     try {
-      this.worker = await Tesseract.createWorker('eng', 1, {
-        logger: (m) => {
+      // Dynamically import Tesseract.js only in browser
+      if (!this.Tesseract) {
+        console.log('📦 [INIT] Loading Tesseract.js...');
+        this.Tesseract = await import('tesseract.js');
+        console.log('✅ [INIT] Tesseract.js loaded');
+      }
+
+      this.worker = await this.Tesseract.createWorker('eng', 1, {
+        logger: (m: any) => {
           if (m.status === 'recognizing text') {
             this.processingProgress.set(Math.round(m.progress * 100));
           }
@@ -114,7 +136,7 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       // Configure for better accuracy with alphanumeric codes
       await this.worker.setParameters({
         tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-',
-        tessedit_pageseg_mode: Tesseract.PSM.SINGLE_BLOCK,
+        tessedit_pageseg_mode: this.Tesseract.PSM.SINGLE_BLOCK,
         preserve_interword_spaces: '0',
       });
 
@@ -225,10 +247,15 @@ export class OnRewardScanner implements OnInit, OnDestroy {
    * Try OCR with multiple PSM modes for better accuracy
    */
   private async tryMultiplePSMModes(imageUrl: string): Promise<string | null> {
+    if (!this.Tesseract || !this.worker) {
+      console.error('❌ [OCR] Tesseract not initialized');
+      return null;
+    }
+
     const psmModes = [
-      Tesseract.PSM.SINGLE_BLOCK,
-      Tesseract.PSM.SINGLE_LINE,
-      Tesseract.PSM.SPARSE_TEXT,
+      this.Tesseract.PSM.SINGLE_BLOCK,
+      this.Tesseract.PSM.SINGLE_LINE,
+      this.Tesseract.PSM.SPARSE_TEXT,
     ];
 
     let bestResult: { code: string; confidence: number } | null = null;
@@ -236,11 +263,11 @@ export class OnRewardScanner implements OnInit, OnDestroy {
     for (const psmMode of psmModes) {
       try {
         console.log(`🔄 [OCR] Trying PSM mode: ${psmMode}`);
-        await this.worker!.setParameters({
+        await this.worker.setParameters({
           tessedit_pageseg_mode: psmMode,
         });
 
-        const result = await this.worker!.recognize(imageUrl);
+        const result = await this.worker.recognize(imageUrl);
         const code = this.extractRewardCode(result.data.text);
 
         if (code) {
@@ -257,8 +284,8 @@ export class OnRewardScanner implements OnInit, OnDestroy {
     }
 
     // Reset to default PSM mode
-    await this.worker!.setParameters({
-      tessedit_pageseg_mode: Tesseract.PSM.SINGLE_BLOCK,
+    await this.worker.setParameters({
+      tessedit_pageseg_mode: this.Tesseract.PSM.SINGLE_BLOCK,
     });
 
     return bestResult?.code || null;
@@ -447,10 +474,6 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       console.log('🔄 [NATIVE] Converting file to image...');
       const imageUrl = URL.createObjectURL(file);
 
-      // Show processing state
-      this.state.set('processing');
-      this.processingProgress.set(0);
-
       // Load image into HTMLImageElement
       const img = new Image();
       await new Promise<void>((resolve, reject) => {
@@ -465,11 +488,137 @@ export class OnRewardScanner implements OnInit, OnDestroy {
         img.src = imageUrl;
       });
 
-      // Preprocess image for better OCR accuracy
-      console.log('🎨 [PREPROCESS] Enhancing image...');
-      const processedImageUrl = this.preprocessImage(img);
+      // Store the captured image
+      this.capturedImage.set(imageUrl);
 
-      console.log('🔎 [OCR] Running OCR with multiple strategies...');
+      // Initialize crop region in the center of the image
+      const centerX = Math.floor(img.width / 2 - 150);
+      const centerY = Math.floor(img.height / 2 - 50);
+      this.cropRegion.set({
+        x: Math.max(0, centerX),
+        y: Math.max(0, centerY),
+        width: 300,
+        height: 100
+      });
+
+      // Show region selection UI
+      this.state.set('selectRegion');
+      console.log('📍 [SELECT] Region selection mode activated');
+
+    } catch (error) {
+      console.error('❌ [OCR] Failed to scan photo:', error);
+      this.errorMessage.set('No reward code found in photo. Please ensure the code is clearly visible and in good lighting.');
+      this.state.set('error');
+    } finally {
+      // Reset the input so the same file can be selected again
+      input.value = '';
+      this.processingProgress.set(0);
+    }
+  }
+
+  /**
+   * Start dragging the crop region
+   */
+  startDrag(event: MouseEvent | TouchEvent): void {
+    event.preventDefault();
+    const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    const clientY = 'touches' in event ? event.touches[0].clientY : event.clientY;
+
+    this.isDragging.set(true);
+    this.dragStartX = clientX;
+    this.dragStartY = clientY;
+    this.initialCropX = this.cropRegion().x;
+    this.initialCropY = this.cropRegion().y;
+
+    console.log('🖱️ [DRAG] Started dragging crop region');
+  }
+
+  /**
+   * Handle dragging the crop region
+   */
+  onDrag(event: MouseEvent | TouchEvent): void {
+    if (!this.isDragging()) return;
+
+    event.preventDefault();
+    const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    const clientY = 'touches' in event ? event.touches[0].clientY : event.clientY;
+
+    const deltaX = clientX - this.dragStartX;
+    const deltaY = clientY - this.dragStartY;
+
+    const newX = this.initialCropX + deltaX;
+    const newY = this.initialCropY + deltaY;
+
+    // Update crop region (bounds will be checked when cropping)
+    this.cropRegion.update(region => ({
+      ...region,
+      x: newX,
+      y: newY
+    }));
+  }
+
+  /**
+   * Stop dragging the crop region
+   */
+  stopDrag(): void {
+    if (this.isDragging()) {
+      this.isDragging.set(false);
+      console.log('🖱️ [DRAG] Stopped dragging crop region');
+    }
+  }
+
+  /**
+   * Cancel region selection and return to idle
+   */
+  cancelCrop(): void {
+    console.log('❌ [CROP] User cancelled crop selection');
+    if (this.capturedImage()) {
+      URL.revokeObjectURL(this.capturedImage()!);
+    }
+    this.capturedImage.set(null);
+    this.state.set('idle');
+  }
+
+  /**
+   * Confirm crop selection and process the selected region
+   */
+  async confirmCrop(): Promise<void> {
+    console.log('✅ [CROP] User confirmed crop selection');
+
+    if (!this.capturedImage()) {
+      console.error('❌ [CROP] No captured image available');
+      return;
+    }
+
+    try {
+      // Show processing state
+      this.state.set('processing');
+      this.processingProgress.set(0);
+
+      // Load the captured image
+      const img = new Image();
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error('Failed to load captured image'));
+        img.src = this.capturedImage()!;
+      });
+
+      // Crop the image to the selected region
+      console.log('✂️ [CROP] Cropping image to selected region...');
+      const croppedImageUrl = this.cropImage(img, this.cropRegion());
+
+      // Preprocess cropped image for better OCR accuracy
+      const croppedImg = new Image();
+      await new Promise<void>((resolve, reject) => {
+        croppedImg.onload = () => resolve();
+        croppedImg.onerror = () => reject(new Error('Failed to load cropped image'));
+        croppedImg.src = croppedImageUrl;
+      });
+
+      console.log('🎨 [PREPROCESS] Enhancing cropped image...');
+      const processedImageUrl = this.preprocessImage(croppedImg);
+
+      console.log('🔎 [OCR] Running OCR on cropped region...');
       const scanStartTime = performance.now();
 
       if (!this.worker) {
@@ -495,21 +644,49 @@ export class OnRewardScanner implements OnInit, OnDestroy {
           console.log('📳 [NATIVE] Vibration triggered');
         }
       } else {
-        throw new Error('No valid reward code found in image');
+        throw new Error('No valid reward code found in selected region');
       }
 
       // Cleanup
-      URL.revokeObjectURL(imageUrl);
+      URL.revokeObjectURL(this.capturedImage()!);
+      this.capturedImage.set(null);
 
     } catch (error) {
-      console.error('❌ [OCR] Failed to scan photo:', error);
-      this.errorMessage.set('No reward code found in photo. Please ensure the code is clearly visible and in good lighting.');
+      console.error('❌ [OCR] Failed to process cropped region:', error);
+      this.errorMessage.set('No reward code found in the selected area. Please try selecting the code area more precisely.');
       this.state.set('error');
+
+      if (this.capturedImage()) {
+        URL.revokeObjectURL(this.capturedImage()!);
+        this.capturedImage.set(null);
+      }
     } finally {
-      // Reset the input so the same file can be selected again
-      input.value = '';
       this.processingProgress.set(0);
     }
+  }
+
+  /**
+   * Crop an image to a specific region
+   */
+  private cropImage(img: HTMLImageElement, region: { x: number; y: number; width: number; height: number }): string {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+
+    // Ensure crop region is within image bounds
+    const x = Math.max(0, Math.min(region.x, img.width - region.width));
+    const y = Math.max(0, Math.min(region.y, img.height - region.height));
+    const width = Math.min(region.width, img.width - x);
+    const height = Math.min(region.height, img.height - y);
+
+    canvas.width = width;
+    canvas.height = height;
+
+    // Draw the cropped portion
+    ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
+
+    console.log(`✂️ [CROP] Cropped to: ${width}x${height} at (${x}, ${y})`);
+
+    return canvas.toDataURL('image/png');
   }
 
   /**

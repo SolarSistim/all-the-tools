@@ -143,6 +143,50 @@
       </div>
     </mat-card>
 
+    <!-- Region Selection Overlay -->
+    <div *ngIf="state() === 'selectRegion' && capturedImage()" class="region-selection-overlay"
+         (mousemove)="onDrag($event)"
+         (touchmove)="onDrag($event)"
+         (mouseup)="stopDrag()"
+         (touchend)="stopDrag()">
+
+      <!-- Captured Image -->
+      <img [src]="capturedImage()" alt="Captured image" class="captured-image" />
+
+      <!-- Dark Overlay (50% black) -->
+      <div class="dark-overlay"></div>
+
+      <!-- Crop Rectangle -->
+      <div class="crop-rectangle"
+           [style.left.px]="cropRegion().x"
+           [style.top.px]="cropRegion().y"
+           [style.width.px]="cropRegion().width"
+           [style.height.px]="cropRegion().height"
+           (mousedown)="startDrag($event)"
+           (touchstart)="startDrag($event)">
+        <div class="crop-handle"></div>
+        <div class="crop-instructions">Drag to position over reward code</div>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="region-controls">
+        <button mat-raised-button color="primary" (click)="confirmCrop()" class="confirm-button">
+          <mat-icon>check</mat-icon>
+          Scan This Area
+        </button>
+        <button mat-stroked-button (click)="cancelCrop()" class="cancel-button">
+          <mat-icon>close</mat-icon>
+          Cancel
+        </button>
+      </div>
+
+      <!-- Instructions -->
+      <div class="region-instructions">
+        <mat-icon>info</mat-icon>
+        <span>Position the rectangle over the reward code (XXXXX-XXXX-XXXX format)</span>
+      </div>
+    </div>
+
     <!-- Scan Result Overlay -->
     <div *ngIf="state() === 'scanResult' && currentScan()" class="scanner-overlay">
       <!-- Close Button -->
