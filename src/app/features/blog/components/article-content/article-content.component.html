@@ -154,5 +154,13 @@
       *ngIf="block.type === 'component' && block.data.componentName === 'email-cta'"
       [darkThemeBg]="block.data.darkThemeBg || 'secondary'"
     ></app-cta-email-list>
+
+    <!-- Alert Primary Component -->
+    <app-alert-primary
+      *ngIf="block.type === 'component' && block.data.componentName === 'alert-primary'"
+      [title]="block.data.title || 'Information'"
+      [content]="block.data.content || block.data.message || ''"
+      [icon]="block.data.icon || 'info'"
+    ></app-alert-primary>
   </ng-container>
 </div>

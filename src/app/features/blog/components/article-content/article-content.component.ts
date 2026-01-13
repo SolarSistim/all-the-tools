@@ -14,6 +14,7 @@ import { VideoEmbedComponent } from '../video-embed/video-embed.component';
 import { AudioPlayerComponent } from '../audio-player/audio-player.component';
 import { RokuProgrammaticCompatibilityChecker } from '../../../tools/hardware/roku-compatibility-checker/roku-programmatic-compatibility-checker/roku-programmatic-compatibility-checker';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AlertPrimary } from '../../../reusable-components/alerts/alert-primary/alert-primary';
 
 /**
  * Article Content Component
@@ -37,6 +38,7 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     AudioPlayerComponent,
     RokuProgrammaticCompatibilityChecker,
     CtaEmailList,
+    AlertPrimary,
   ],
   templateUrl: './article-content.component.html',
   styleUrls: ['./article-content.component.scss'],

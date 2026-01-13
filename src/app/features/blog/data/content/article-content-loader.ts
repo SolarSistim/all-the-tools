@@ -105,6 +105,10 @@ export async function loadArticleContent(
         const lighthuggersModule = await withTimeout(import('./lighthuggers-when-fan-art-captures-the-impossible.content'));
         return lighthuggersModule.content;
 
+      case 'stop-typing-in-those-tiny-on-reward-codes-by-hand':
+        const onRewardModule = await withTimeout(import('./stop-typing-in-those-tiny-on-reward-codes-by-hand.content'));
+        return onRewardModule.content;
+
       default:
         console.warn(`No content file found for article: ${slug}`);
         return null;

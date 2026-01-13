@@ -9,6 +9,41 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '21',
+    slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand',
+    title: 'Stop Typing In Those Tiny On! Reward Codes By Hand - There\'s a Better Way',
+    description:
+      'Tired of manually typing 14-character On! nicotine pouch reward codes? I built a free OCR-powered scanner that processes codes right in your browser. Point, scan, redeem - no servers, no tracking, just results.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-13-2026',
+    heroImage: {
+      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/og-on-reward-scanner-blog-post.png',
+      alt: 'Stop Typing In Those Tiny On! Reward Codes By Hand - There\'s a Better Way',
+    },
+    tags: ['On! Rewards', 'OCR', 'Tools', 'Productivity', 'Mobile', 'Privacy'],
+    category: 'Technology',
+    metaDescription:
+      'Stop wasting time typing On! nicotine pouch reward codes. This free OCR scanner processes codes locally in your browser - fast, private, and accurate. Point your camera, scan, and redeem.',
+    metaKeywords: [
+      'On! rewards',
+      'On! reward codes',
+      'On! nicotine pouches',
+      'Reward code scanner',
+      'OCR scanner',
+      'Code scanner tool',
+      'On! app',
+      'Free OCR tool',
+      'Browser OCR',
+      'Mobile scanner',
+      'Privacy tools',
+      'Local processing',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['8', '3', '10'],
+  },
+  {
     id: '20',
     slug: 'lighthuggers-when-fan-art-captures-the-impossible',
     title: 'LIGHTHUGGERS: Fan Art Captures Alastair Reynolds\' "Revelation Space"',
