@@ -111,10 +111,11 @@ export class OnRewardScanner implements OnInit, OnDestroy {
         },
       });
 
-      // Configure for better alphanumeric recognition
+      // Configure for better accuracy with alphanumeric codes
       await this.worker.setParameters({
         tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-',
-        tessedit_pageseg_mode: Tesseract.PSM.SPARSE_TEXT,
+        tessedit_pageseg_mode: Tesseract.PSM.SINGLE_BLOCK,
+        preserve_interword_spaces: '0',
       });
 
       console.log('✅ [INIT] Tesseract worker initialized');
@@ -175,6 +176,92 @@ export class OnRewardScanner implements OnInit, OnDestroy {
   private isValidRewardCode(code: string): boolean {
     const regex = /^[A-Z0-9]{5}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
     return regex.test(code);
+  }
+
+  /**
+   * Preprocess image for better OCR accuracy
+   * Converts to grayscale, increases contrast, and sharpens
+   */
+  private preprocessImage(imageElement: HTMLImageElement): string {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+
+    // Set canvas size to match image
+    canvas.width = imageElement.width;
+    canvas.height = imageElement.height;
+
+    // Draw original image
+    ctx.drawImage(imageElement, 0, 0);
+
+    // Get image data
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    // Convert to grayscale and increase contrast
+    for (let i = 0; i < data.length; i += 4) {
+      // Calculate grayscale using luminosity method
+      const gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+
+      // Increase contrast (multiply by factor, then clamp)
+      const contrast = 1.5;
+      const factor = (259 * (contrast * 255 + 255)) / (255 * (259 - contrast * 255));
+      const enhanced = factor * (gray - 128) + 128;
+      const clamped = Math.max(0, Math.min(255, enhanced));
+
+      // Apply to all RGB channels
+      data[i] = clamped;
+      data[i + 1] = clamped;
+      data[i + 2] = clamped;
+    }
+
+    // Put processed image back
+    ctx.putImageData(imageData, 0, 0);
+
+    // Return as data URL
+    return canvas.toDataURL('image/png');
+  }
+
+  /**
+   * Try OCR with multiple PSM modes for better accuracy
+   */
+  private async tryMultiplePSMModes(imageUrl: string): Promise<string | null> {
+    const psmModes = [
+      Tesseract.PSM.SINGLE_BLOCK,
+      Tesseract.PSM.SINGLE_LINE,
+      Tesseract.PSM.SPARSE_TEXT,
+    ];
+
+    let bestResult: { code: string; confidence: number } | null = null;
+
+    for (const psmMode of psmModes) {
+      try {
+        console.log(`🔄 [OCR] Trying PSM mode: ${psmMode}`);
+        await this.worker!.setParameters({
+          tessedit_pageseg_mode: psmMode,
+        });
+
+        const result = await this.worker!.recognize(imageUrl);
+        const code = this.extractRewardCode(result.data.text);
+
+        if (code) {
+          const confidence = result.data.confidence;
+          console.log(`✅ [OCR] Found code with confidence ${confidence.toFixed(1)}%: ${code}`);
+
+          if (!bestResult || confidence > bestResult.confidence) {
+            bestResult = { code, confidence };
+          }
+        }
+      } catch (error) {
+        console.warn(`⚠️ [OCR] PSM mode ${psmMode} failed:`, error);
+      }
+    }
+
+    // Reset to default PSM mode
+    await this.worker!.setParameters({
+      tessedit_pageseg_mode: Tesseract.PSM.SINGLE_BLOCK,
+    });
+
+    return bestResult?.code || null;
   }
 
   approveScan(): void {
@@ -364,21 +451,36 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       this.state.set('processing');
       this.processingProgress.set(0);
 
-      console.log('🔎 [OCR] Running OCR on image...');
+      // Load image into HTMLImageElement
+      const img = new Image();
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => {
+          console.log(`📐 [NATIVE] Image loaded: ${img.width}x${img.height}`);
+          resolve();
+        };
+        img.onerror = () => {
+          console.error('❌ [NATIVE] Failed to load image');
+          reject(new Error('Failed to load image'));
+        };
+        img.src = imageUrl;
+      });
+
+      // Preprocess image for better OCR accuracy
+      console.log('🎨 [PREPROCESS] Enhancing image...');
+      const processedImageUrl = this.preprocessImage(img);
+
+      console.log('🔎 [OCR] Running OCR with multiple strategies...');
       const scanStartTime = performance.now();
 
       if (!this.worker) {
         throw new Error('OCR worker not initialized');
       }
 
-      const result = await this.worker.recognize(imageUrl);
+      // Try multiple PSM modes for better accuracy
+      const code = await this.tryMultiplePSMModes(processedImageUrl);
       const scanTime = performance.now() - scanStartTime;
 
       console.log(`✅ [OCR] OCR completed in ${scanTime.toFixed(2)}ms`);
-      console.log('📝 [OCR] Raw text:', result.data.text);
-
-      // Extract reward code
-      const code = this.extractRewardCode(result.data.text);
 
       if (code) {
         console.log('✅ [OCR] Reward code extracted:', code);
