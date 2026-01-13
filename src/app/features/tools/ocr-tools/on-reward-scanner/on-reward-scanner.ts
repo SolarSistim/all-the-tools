@@ -58,6 +58,15 @@ private pendingCropInit = false;
   state = signal<ScannerState>('idle');
   scannedCodes = signal<ScannedRewardCode[]>([]);
   currentScan = signal<{ code: string } | null>(null);
+  editedCode = signal<string>('');
+  isEditingCode = signal<boolean>(false);
+  get editedCodeValue(): string {
+    return this.editedCode();
+  }
+
+  set editedCodeValue(v: string) {
+    this.editedCode.set(v.toUpperCase());
+  }
   scannedRegionImage = signal<string | null>(null);
   manualInput = signal<string>('');
   errorMessage = signal<string>('');
@@ -70,7 +79,7 @@ private pendingCropInit = false;
   cropSizeLevels = [1, 2, 3, 4, 5];
 cropSizeLevel = signal<number>(3);
 
-private cropAspectRatio = 6;
+private cropAspectRatio = 4.5;
 private cropBaseWidthFraction = 0.50;
 private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
   isDragging = signal<boolean>(false);
@@ -324,7 +333,8 @@ private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
     }
 
     console.log('💾 [APPROVE] Saving scan:', scan);
-    const saved = this.storageService.saveScan(scan.code);
+    const codeToSave = this.editedCode().trim().toUpperCase();
+    const saved = this.storageService.saveScan(codeToSave);
 
     if (saved) {
       this.snackbar.success('Reward code saved!', 2000);
@@ -337,6 +347,8 @@ private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
 
     // Return to idle state
     this.currentScan.set(null);
+    this.editedCode.set('');
+    this.isEditingCode.set(false);
     this.state.set('idle');
     console.log('🔄 [APPROVE] Returned to idle state');
   }
@@ -344,11 +356,33 @@ private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
   retryScan(): void {
     console.log('🔄 [RETRY] User requested retry');
     this.currentScan.set(null);
+    this.editedCode.set('');
+    this.isEditingCode.set(false);
     this.state.set('idle');
     this.processingProgress.set(0);
     console.log('✅ [RETRY] Returned to idle state');
     // Automatically open camera again for retry
     setTimeout(() => this.openNativeCamera(), 100);
+  }
+
+  enableCodeEditing(): void {
+    console.log('✏️ [EDIT] Enabling code editing mode');
+    this.isEditingCode.set(true);
+  }
+
+  confirmCodeEdit(): void {
+    console.log('✅ [EDIT] Code edit confirmed');
+    const edited = this.editedCode().trim().toUpperCase();
+
+    // Validate format
+    if (!this.isValidRewardCode(edited)) {
+      this.snackbar.error('Invalid format. Use XXXXX-XXXX-XXXX', 3000);
+      return;
+    }
+
+    this.editedCode.set(edited);
+    this.isEditingCode.set(false);
+    console.log('✅ [EDIT] Updated code:', edited);
   }
 
   addManualCode(): void {
@@ -598,7 +632,7 @@ private applyCropSize(level: number, centerInImage: boolean): void {
   const baseW = imgW * this.cropBaseWidthFraction;
   const scale = this.cropSizeScale[level - 1] ?? 1;
   let w = baseW * scale;
-  let h = w / this.cropAspectRatio;
+  let h = (w / this.cropAspectRatio) * 1.2;
 
   const maxW = imgW * 0.95;
   const maxH = imgH * 0.5;
@@ -803,6 +837,7 @@ this.scannedRegionImage.set(croppedImageUrl);
 
         // Show the result
         this.currentScan.set({ code });
+        this.editedCode.set(code);
         this.state.set('scanResult');
 
         // Vibrate for feedback
@@ -909,6 +944,7 @@ ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
     console.log('❌ [RESULT] User closed result without saving');
     this.currentScan.set(null);
     this.scannedRegionImage.set(null);
+    this.isEditingCode.set(false);
     this.state.set('idle');
   }
 

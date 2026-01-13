@@ -58,7 +58,7 @@
     </section>
 
     <!-- Reference Image Card -->
-    <mat-card class="reference-image-card">
+    <!-- <mat-card class="reference-image-card">
       <div class="card-header">
         <h2>
           <mat-icon>photo_library</mat-icon>
@@ -75,7 +75,7 @@
           Look for the reward code on the bottom of your On! Nicotine product packaging. It follows the format: <strong>XXXXX-XXXX-XXXX</strong>
         </p>
       </div>
-    </mat-card>
+    </mat-card> -->
 
     <!-- AdSense Ad -->
     <div #scannerSection>
@@ -226,14 +226,40 @@
           [src]="scannedRegionImage()!"
           alt="Scanned area"
         />
-        <div class="result-code">{{ currentScan()!.code }}</div>
+
+        <!-- Read-only display (click to edit) -->
+        <div *ngIf="!isEditingCode()" class="result-code-display" (click)="enableCodeEditing()">
+          <div class="result-code">{{ editedCode() }}</div>
+          <div class="edit-hint">
+            <mat-icon>edit</mat-icon>
+            <span>Click to edit</span>
+          </div>
+        </div>
+
+        <!-- Edit mode with checkmark -->
+        <div *ngIf="isEditingCode()" class="result-code-edit-container">
+          <mat-form-field appearance="fill" class="result-code-field">
+            <mat-label>Reward code</mat-label>
+            <input
+              matInput
+              [(ngModel)]="editedCodeValue"
+              [ngModelOptions]="{ standalone: true }"
+              autocomplete="off"
+              spellcheck="false"
+              (keyup.enter)="confirmCodeEdit()"
+            />
+          </mat-form-field>
+          <button mat-mini-fab color="primary" (click)="confirmCodeEdit()" class="confirm-edit-button" matTooltip="Confirm edit">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
 
         <div class="result-actions">
-          <button mat-raised-button color="primary" (click)="approveScan()" class="approve-button">
+          <button mat-raised-button color="primary" (click)="approveScan()" class="approve-button" [disabled]="isEditingCode()">
             <mat-icon>save</mat-icon>
             Approve & Save
           </button>
-          <button mat-stroked-button (click)="retryScan()" class="retry-button">
+          <button mat-stroked-button (click)="retryScan()" class="retry-button" [disabled]="isEditingCode()">
             <mat-icon>refresh</mat-icon>
             Retry
           </button>

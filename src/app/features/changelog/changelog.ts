@@ -53,6 +53,17 @@ export class Changelog implements OnInit {
       changes: [
         {
           type: 'added',
+          description: 'On! Nicotine Reward Code Scanner',
+          route: '/tools/on-reward-scanner'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
+      date: 'January 12, 2026',
+      changes: [
+        {
+          type: 'added',
           description: 'Base Number Converter',
           route: '/tools/base-number-converter'
         },
