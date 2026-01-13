@@ -521,20 +521,53 @@ mat-card {
     }
   }
 
-  .region-controls {
+    .region-bottom-bar {
     position: absolute;
     bottom: $spacing-xl;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 4;
+    width: min(720px, 92vw);
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    align-items: center;
+  }
+
+  .size-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-xs;
+
+    .size-button {
+      flex: 1;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: white;
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(0, 0, 0, 0.35);
+      padding: $spacing-sm 0;
+      min-width: 0;
+    }
+
+    .size-button.active {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(109, 212, 255, 0.7);
+      background: rgba(109, 212, 255, 0.12);
+    }
+  }
+
+  .region-controls {
+    width: 100%;
     display: flex;
     gap: $spacing-md;
-    z-index: 4;
     flex-wrap: wrap;
     justify-content: center;
 
     @media (max-width: 640px) {
       flex-direction: column;
-      width: 90%;
+      width: 100%;
       gap: $spacing-sm;
 
       button {
@@ -567,6 +600,7 @@ mat-card {
       }
     }
   }
+
 
   .region-instructions {
     position: absolute;

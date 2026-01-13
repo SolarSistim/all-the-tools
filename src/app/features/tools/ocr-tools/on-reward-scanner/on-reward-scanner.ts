@@ -45,9 +45,10 @@ export class OnRewardScanner implements OnInit, OnDestroy {
 
   @ViewChild('capturedImg') capturedImg!: ElementRef<HTMLImageElement>;
 
-  private displayedImageRect: DOMRect | null = null;
-  private capturedNaturalWidth = 0;
-  private capturedNaturalHeight = 0;
+private displayedImageRect: DOMRect | null = null;
+private capturedNaturalWidth = 0;
+private capturedNaturalHeight = 0;
+private pendingCropInit = false;
 
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
@@ -64,6 +65,12 @@ export class OnRewardScanner implements OnInit, OnDestroy {
   // Crop region selection
   capturedImage = signal<string | null>(null);
   cropRegion = signal<{ x: number; y: number; width: number; height: number }>({ x: 0, y: 0, width: 300, height: 100 });
+  cropSizeLevels = [1, 2, 3, 4, 5];
+cropSizeLevel = signal<number>(3);
+
+private cropAspectRatio = 6;
+private cropBaseWidthFraction = 0.35;
+private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
   isDragging = signal<boolean>(false);
   private dragStartX = 0;
   private dragStartY = 0;
@@ -507,7 +514,7 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       this.capturedImage.set(imageUrl);
 
       // Initialize crop region in the center of the image
-this.cropRegion.set({ x: 0, y: 0, width: 420, height: 50 });
+this.pendingCropInit = true;
 
       // Show region selection UI
       this.state.set('selectRegion');
@@ -557,23 +564,66 @@ onCapturedImageLoad(): void {
   const el = this.capturedImg?.nativeElement;
   if (!el) return;
 
-  this.capturedNaturalWidth = el.naturalWidth;
-  this.capturedNaturalHeight = el.naturalHeight;
+  this.displayedImageRect = el.getBoundingClientRect();
+  this.capturedNaturalWidth = el.naturalWidth || el.width;
+  this.capturedNaturalHeight = el.naturalHeight || el.height;
 
-  const box = this.getDisplayedImageBox();
-  if (!box) return;
+  const rect = this.displayedImageRect;
 
-  const width = Math.min(420, box.width * 0.85);
-  const height = 50;
+  const desiredW = Math.min(300, Math.max(160, rect.width * 0.6));
+  const desiredH = Math.min(120, Math.max(80, rect.height * 0.15));
 
-  this.cropRegion.set({
-    x: box.x + (box.width - width) / 2,
-    y: box.y + (box.height - height) / 2,
-    width,
-    height
-  });
+  const x = rect.left + (rect.width - desiredW) / 2;
+  const y = rect.top + (rect.height - desiredH) / 2;
+
+  this.cropRegion.set({ x, y, width: desiredW, height: desiredH });
 }
 
+setCropSize(level: number): void {
+  if (!this.displayedImageRect) return;
+  if (level < 1 || level > 5) return;
+
+  this.cropSizeLevel.set(level);
+  this.applyCropSize(level, false);
+}
+
+private applyCropSize(level: number, centerInImage: boolean): void {
+  if (!this.displayedImageRect) return;
+
+  const imgW = this.displayedImageRect.width;
+  const imgH = this.displayedImageRect.height;
+
+  const baseW = imgW * this.cropBaseWidthFraction;
+  const scale = this.cropSizeScale[level - 1] ?? 1;
+  let w = baseW * scale;
+  let h = w / this.cropAspectRatio;
+
+  const maxW = imgW * 0.95;
+  const maxH = imgH * 0.5;
+
+  if (w > maxW) {
+    w = maxW;
+    h = w / this.cropAspectRatio;
+  }
+  if (h > maxH) {
+    h = maxH;
+    w = h * this.cropAspectRatio;
+  }
+
+  const current = this.cropRegion();
+  const cx = centerInImage ? imgW / 2 : current.x + current.width / 2;
+  const cy = centerInImage ? imgH / 2 : current.y + current.height / 2;
+
+  let x = cx - w / 2;
+  let y = cy - h / 2;
+
+  if (x < 0) x = 0;
+  if (y < 0) y = 0;
+  if (x + w > imgW) x = imgW - w;
+  if (y + h > imgH) y = imgH - h;
+
+  this.cropRegion.set({ x, y, width: w, height: h });
+}
 
 
   /**
@@ -798,43 +848,40 @@ const croppedImageUrl = this.cropImage(img, paddedRegion);
   /**
    * Crop an image to a specific region
    */
-private cropImage(
-  img: HTMLImageElement,
-  region: { x: number; y: number; width: number; height: number }
-): string {
-  const box = this.getDisplayedImageBox();
-  if (!box) {
-    const canvasFallback = document.createElement('canvas');
-    const ctxFallback = canvasFallback.getContext('2d')!;
-    canvasFallback.width = region.width;
-    canvasFallback.height = region.height;
-    ctxFallback.drawImage(img, region.x, region.y, region.width, region.height, 0, 0, region.width, region.height);
-    return canvasFallback.toDataURL('image/png');
-  }
-
-  const scaleX = img.width / box.width;
-  const scaleY = img.height / box.height;
-
-  let sx = (region.x - box.x) * scaleX;
-  let sy = (region.y - box.y) * scaleY;
-  let sw = region.width * scaleX;
-  let sh = region.height * scaleY;
-
-  sx = Math.max(0, Math.min(sx, img.width - 1));
-  sy = Math.max(0, Math.min(sy, img.height - 1));
-  sw = Math.max(1, Math.min(sw, img.width - sx));
-  sh = Math.max(1, Math.min(sh, img.height - sy));
-
+private cropImage(img: HTMLImageElement, region: { x: number; y: number; width: number; height: number }): string {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d')!;
+
+  let x = region.x;
+  let y = region.y;
+  let width = region.width;
+  let height = region.height;
+
+  if (this.displayedImageRect && this.capturedNaturalWidth && this.capturedNaturalHeight) {
+    const scaleX = this.capturedNaturalWidth / this.displayedImageRect.width;
+    const scaleY = this.capturedNaturalHeight / this.displayedImageRect.height;
+
+    x = region.x * scaleX;
+    y = region.y * scaleY;
+    width = region.width * scaleX;
+    height = region.height * scaleY;
+  }
+
+  const sx = Math.max(0, Math.min(x, img.width - width));
+  const sy = Math.max(0, Math.min(y, img.height - height));
+  const sw = Math.min(width, img.width - sx);
+  const sh = Math.min(height, img.height - sy);
+
   canvas.width = sw;
   canvas.height = sh;
 
   ctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
 
   console.log(`✂️ [CROP] Cropped to: ${sw}x${sh} at (${sx}, ${sy})`);
+
   return canvas.toDataURL('image/png');
 }
+
 
 
   /**

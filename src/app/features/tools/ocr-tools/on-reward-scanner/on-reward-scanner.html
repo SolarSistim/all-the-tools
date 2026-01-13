@@ -152,12 +152,12 @@
 
       <!-- Captured Image -->
       <img
-        #capturedImg
-        [src]="capturedImage()"
-        alt="Captured image"
-        class="captured-image"
-        (load)="onCapturedImageLoad()"
-      />
+          #capturedImg
+          [src]="capturedImage()"
+          alt="Captured image"
+          class="captured-image"
+          (load)="onCapturedImageLoad()"
+        />
 
       <!-- Dark Overlay (50% black) -->
       <div class="dark-overlay"></div>
@@ -174,17 +174,31 @@
         <div class="crop-instructions">Drag to position over reward code</div>
       </div>
 
-      <!-- Control Buttons -->
-      <div class="region-controls">
-        <button mat-raised-button color="primary" (click)="confirmCrop()" class="confirm-button">
-          <mat-icon>check</mat-icon>
-          Scan This Area
-        </button>
-        <button mat-stroked-button (click)="cancelCrop()" class="cancel-button">
-          <mat-icon>close</mat-icon>
-          Cancel
-        </button>
-      </div>
+      <div class="region-bottom-bar">
+  <div class="size-controls">
+    <button
+      *ngFor="let level of cropSizeLevels"
+      mat-stroked-button
+      class="size-button"
+      [class.active]="cropSizeLevel() === level"
+      (click)="setCropSize(level)"
+    >
+      {{ level }}
+    </button>
+  </div>
+
+  <div class="region-controls">
+    <button mat-raised-button color="primary" (click)="confirmCrop()" class="confirm-button">
+      <mat-icon>check</mat-icon>
+      Scan This Area
+    </button>
+    <button mat-stroked-button (click)="cancelCrop()" class="cancel-button">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+  </div>
+</div>
+
 
       <!-- Instructions -->
       <div class="region-instructions">
