@@ -66,7 +66,9 @@ export class OnRewardScanner implements OnInit, OnDestroy {
 
   // Tesseract worker and module
   private worker: any = null;
-  private Tesseract: any = null;
+  private tesseractModule: any = null;
+  private createWorker: any = null;
+  private PSM: any = null;
 
   displayedColumns: string[] = ['code', 'timestamp', 'actions'];
 
@@ -119,13 +121,19 @@ export class OnRewardScanner implements OnInit, OnDestroy {
     console.log('🔧 [INIT] Initializing OCR scanner...');
     try {
       // Dynamically import Tesseract.js only in browser
-      if (!this.Tesseract) {
+      if (!this.tesseractModule) {
         console.log('📦 [INIT] Loading Tesseract.js...');
-        this.Tesseract = await import('tesseract.js');
+        this.tesseractModule = await import('tesseract.js');
+        this.createWorker = this.tesseractModule.createWorker ?? this.tesseractModule.default?.createWorker;
+        this.PSM = this.tesseractModule.PSM ?? this.tesseractModule.default?.PSM;
+
+        if (!this.createWorker || !this.PSM) {
+          throw new Error('Tesseract.js module missing createWorker/PSM exports');
+        }
         console.log('✅ [INIT] Tesseract.js loaded');
       }
 
-      this.worker = await this.Tesseract.createWorker('eng', 1, {
+      this.worker = await this.createWorker('eng', 1, {
         logger: (m: any) => {
           if (m.status === 'recognizing text') {
             this.processingProgress.set(Math.round(m.progress * 100));
@@ -136,7 +144,7 @@ export class OnRewardScanner implements OnInit, OnDestroy {
       // Configure for better accuracy with alphanumeric codes
       await this.worker.setParameters({
         tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-',
-        tessedit_pageseg_mode: this.Tesseract.PSM.SINGLE_BLOCK,
+        tessedit_pageseg_mode: this.PSM.SINGLE_BLOCK,
         preserve_interword_spaces: '0',
       });
 
@@ -247,15 +255,15 @@ export class OnRewardScanner implements OnInit, OnDestroy {
    * Try OCR with multiple PSM modes for better accuracy
    */
   private async tryMultiplePSMModes(imageUrl: string): Promise<string | null> {
-    if (!this.Tesseract || !this.worker) {
+    if (!this.PSM || !this.worker) {
       console.error('❌ [OCR] Tesseract not initialized');
       return null;
     }
 
     const psmModes = [
-      this.Tesseract.PSM.SINGLE_BLOCK,
-      this.Tesseract.PSM.SINGLE_LINE,
-      this.Tesseract.PSM.SPARSE_TEXT,
+      this.PSM.SINGLE_BLOCK,
+      this.PSM.SINGLE_LINE,
+      this.PSM.SPARSE_TEXT,
     ];
 
     let bestResult: { code: string; confidence: number } | null = null;
@@ -285,7 +293,7 @@ export class OnRewardScanner implements OnInit, OnDestroy {
 
     // Reset to default PSM mode
     await this.worker.setParameters({
-      tessedit_pageseg_mode: this.Tesseract.PSM.SINGLE_BLOCK,
+      tessedit_pageseg_mode: this.PSM.SINGLE_BLOCK,
     });
 
     return bestResult?.code || null;
