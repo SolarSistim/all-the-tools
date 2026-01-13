@@ -158,6 +158,11 @@ export const routes: Routes = [
     title: 'Barcode Reader - All The Things'
   },
   {
+    path: 'tools/on-reward-scanner',
+    loadComponent: () => import('./features/tools/ocr-tools/on-reward-scanner/on-reward-scanner').then(m => m.OnRewardScanner),
+    title: 'On! Reward Code Scanner - All The Things'
+  },
+  {
     path: 'tools/spotify-playlist-export',
     loadComponent: () => import('./features/tools/music-and-audio/spotify-playlist-exporter/spotify-playlist-exporter').then(m => m.SpotifyPlaylistExporter),
     title: 'Spotify Playlist Exporter - All The Things'

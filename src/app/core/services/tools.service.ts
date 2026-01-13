@@ -287,6 +287,18 @@ export class ToolsService {
     tags: ['barcode', 'scanner', 'ocr', 'camera', 'inventory'],
     available: true
   },
+  {
+    id: 'on-reward-scanner',
+    name: 'On! Reward Code Scanner',
+    description: 'Scan and store On! Nicotine reward codes from product packaging',
+    longDescription: 'OCR-based reward code scanner for On! Nicotine products. Scan packaging with your camera to extract XXXXX-XXXX-XXXX format codes. Features approval workflow, local storage, and bulk export options.',
+    category: 'ocr',
+    icon: 'document_scanner',
+    route: 'on-reward-scanner',
+    featured: true,
+    tags: ['ocr', 'scanner', 'camera', 'nicotine', 'rewards'],
+    available: true
+  },
 
   // ========================================
   // MUSIC & AUDIO TOOLS

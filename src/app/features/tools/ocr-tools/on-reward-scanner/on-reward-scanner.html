@@ -1,0 +1,299 @@
+<div class="reward-scanner-container">
+  <div class="content-wrapper">
+    <!-- Hidden file input for native camera -->
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      capture="environment"
+      (change)="handlePhotoCapture($event)"
+      style="display: none;"
+    />
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">document_scanner</mat-icon>
+        </div>
+        <h1 class="hero-title">On! Reward Code Scanner</h1>
+        <p class="hero-subtitle">
+          Scan and store On! Nicotine reward codes from product packaging using OCR technology. Extract XXXXX-XXXX-XXXX format codes with instant recognition and local storage.
+        </p>
+        <div class="hero-cta">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="scrollToScanner()"
+            class="cta-button"
+          >
+            <mat-icon>camera_alt</mat-icon>
+            Scan Reward Code
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="code-showcase">
+          <div class="showcase-format">
+            <div class="format-example">XXXXX-XXXX-XXXX</div>
+            <div class="format-description">14-character alphanumeric code</div>
+          </div>
+          <div class="showcase-label">
+            <mat-icon>auto_awesome</mat-icon>
+            <span>Automatic OCR recognition</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This On! Nicotine reward code scanner uses OCR technology to extract reward codes from product packaging photos. Simply snap a picture of the code on the bottom of your On! product, and the tool automatically recognizes the XXXXX-XXXX-XXXX format. Features an approval workflow to verify each scan before saving, preventing duplicates and errors. All codes are stored locally in your browser with timestamps. Export options include copying individual codes, bulk copying all codes, or downloading as a text file. Manual entry available for codes that don't scan well. Perfect for tracking rewards, managing multiple codes, or bulk submissions. Completely privacy-focused—all OCR processing happens in your browser with no server uploads.
+      </p>
+    </section>
+
+    <!-- Reference Image Card -->
+    <mat-card class="reference-image-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>photo_library</mat-icon>
+          Where to Find Your Reward Code
+        </h2>
+      </div>
+      <div class="reference-content">
+        <img
+          src="/on-nicotine-number.jpg"
+          alt="On! Nicotine reward code location"
+          class="reference-image"
+        />
+        <p class="reference-hint">
+          Look for the reward code on the bottom of your On! Nicotine product packaging. It follows the format: <strong>XXXXX-XXXX-XXXX</strong>
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- AdSense Ad -->
+    <div #scannerSection>
+      <app-adsense></app-adsense>
+    </div>
+
+    <!-- Scanner Card -->
+    <mat-card class="scanner-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>document_scanner</mat-icon>
+          Reward Code Scanner
+        </h2>
+      </div>
+
+      <!-- Idle State -->
+      <div *ngIf="state() === 'idle'" class="scanner-state idle-state">
+        <div class="scanner-icon">
+          <mat-icon>document_scanner</mat-icon>
+        </div>
+        <p class="scanner-message">Ready to scan reward codes</p>
+        <p class="scanner-hint">Format: XXXXX-XXXX-XXXX (14 alphanumeric characters)</p>
+        <button mat-raised-button color="primary" (click)="openNativeCamera()" class="scan-button">
+          <mat-icon>camera_alt</mat-icon>
+          Scan Reward Code
+        </button>
+        <div class="scanning-tips">
+          <h4>Tips for Better Scanning:</h4>
+          <ul>
+            <li>Ensure good lighting (avoid shadows)</li>
+            <li>Hold camera steady and close to code</li>
+            <li>Make sure code is in focus</li>
+            <li>Avoid glare on packaging surface</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Processing State -->
+      <div *ngIf="state() === 'processing'" class="scanner-state processing-state">
+        <div class="processing-icon">
+          <mat-icon class="spinning">sync</mat-icon>
+        </div>
+        <p class="processing-message">Scanning reward code...</p>
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="processingProgress()"></div>
+        </div>
+        <p class="processing-hint">This may take a few seconds</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="state() === 'error'" class="scanner-state error-state">
+        <div class="error-icon">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <p class="error-message">{{ errorMessage() }}</p>
+        <div class="error-actions">
+          <button mat-raised-button color="primary" (click)="retryCamera()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+          </button>
+        </div>
+        <p class="error-hint">
+          Make sure the reward code is clearly visible and well-lit in the photo.
+        </p>
+      </div>
+    </mat-card>
+
+    <!-- Scan Result Overlay -->
+    <div *ngIf="state() === 'scanResult' && currentScan()" class="scanner-overlay">
+      <!-- Close Button -->
+      <button mat-icon-button class="close-button" (click)="closeResult()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <!-- Scan Result State (Approval Workflow) -->
+      <div class="scanner-state result-state">
+        <div class="result-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <h3 class="result-title">Reward Code Detected</h3>
+        <div class="result-code">{{ currentScan()!.code }}</div>
+
+        <div class="result-actions">
+          <button mat-raised-button color="primary" (click)="approveScan()" class="approve-button">
+            <mat-icon>save</mat-icon>
+            Approve & Save
+          </button>
+          <button mat-stroked-button (click)="retryScan()" class="retry-button">
+            <mat-icon>refresh</mat-icon>
+            Retry
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manual Input Fallback -->
+    <mat-card class="manual-input-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>keyboard</mat-icon>
+          Manual Entry
+        </h2>
+      </div>
+      <p class="manual-hint">If scanning doesn't work, you can manually enter a reward code:</p>
+      <div class="manual-input-row">
+        <mat-form-field appearance="fill" class="manual-input-field">
+          <mat-label>Enter reward code manually</mat-label>
+          <input
+            matInput
+            [(ngModel)]="manualInput"
+            placeholder="e.g., VBVTJ-49FZ-7FLB"
+            (keyup.enter)="addManualCode()"
+            pattern="[A-Z0-9]{5}-[A-Z0-9]{4}-[A-Z0-9]{4}"
+          />
+          <mat-icon matPrefix>edit</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="addManualCode()" class="add-button">
+          <mat-icon>add</mat-icon>
+          Add
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- Scanned Codes List -->
+    <mat-card class="scanned-list-card" *ngIf="scannedCodes().length > 0">
+      <div class="card-header">
+        <h2>
+          <mat-icon>list</mat-icon>
+          Scanned Reward Codes<span> ({{ scannedCodes().length }})</span>
+        </h2>
+        <div class="header-actions">
+          <button mat-stroked-button (click)="copyAllCodes()" matTooltip="Copy all codes to clipboard" class="action-btn">
+            <mat-icon>content_copy</mat-icon>
+            Copy All
+          </button>
+          <button mat-stroked-button (click)="downloadCodes()" matTooltip="Download as text file" class="action-btn">
+            <mat-icon>download</mat-icon>
+            Download
+          </button>
+          <button mat-stroked-button color="warn" (click)="clearAllCodes()" matTooltip="Clear all scanned codes" class="action-btn">
+            <mat-icon>delete_sweep</mat-icon>
+            Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table mat-table [dataSource]="scannedCodes()" class="codes-table">
+
+          <!-- Code Column -->
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Code</th>
+            <td mat-cell *matCellDef="let scan" class="code-cell">
+              <span class="code-value">{{ scan.code }}</span>
+            </td>
+          </ng-container>
+
+          <!-- Timestamp Column -->
+          <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef>Scanned At</th>
+            <td mat-cell *matCellDef="let scan" class="timestamp-cell">
+              {{ formatTimestamp(scan.scannedAt) }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let scan" class="actions-cell">
+              <button mat-icon-button (click)="copyCode(scan.code)" matTooltip="Copy to clipboard" color="primary">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteCode(scan.code)" matTooltip="Delete" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card>
+
+    <!-- Empty State -->
+    <mat-card class="empty-state-card" *ngIf="scannedCodes().length === 0">
+      <div class="empty-state">
+        <mat-icon class="empty-icon">inventory_2</mat-icon>
+        <p class="empty-message">No reward codes scanned yet. Start scanning to build your collection.</p>
+      </div>
+    </mat-card>
+
+    <!-- AdSense Ad -->
+    <app-adsense></app-adsense>
+
+    <!-- Problems This Tool Solves Section -->
+    <div class="info-section">
+      <div class="problems-solved-section">
+        <h4>
+          <mat-icon>check_circle</mat-icon>
+          Problems This Reward Code Scanner Solves
+        </h4>
+        <ul class="problems-list">
+          <li><strong>Eliminates manual reward code entry errors</strong> - Stop typing long alphanumeric codes by hand and risking mistakes. Scan instantly with your device camera using OCR for accurate recognition.</li>
+          <li><strong>Prevents duplicate code submissions</strong> - Built-in duplicate detection automatically rejects codes you've already scanned, keeping your rewards list clean and preventing submission errors.</li>
+          <li><strong>Removes dependency on typing 14-character codes</strong> - No need to carefully transcribe XXXXX-XXXX-XXXX codes. The OCR scanner automatically extracts codes from photos of your packaging.</li>
+          <li><strong>Saves time with approval workflow</strong> - Review each scanned code before saving to verify OCR accuracy. The pause-and-approve system prevents incorrect entries while keeping the workflow fast.</li>
+          <li><strong>Streamlines bulk code collection</strong> - Scan multiple reward codes back-to-back without breaking flow. Export all codes at once as a text file or copy to clipboard for batch submissions to the rewards program.</li>
+          <li><strong>Ensures privacy for personal reward codes</strong> - All OCR processing and storage happens in your browser. No codes are uploaded to servers, perfect for keeping your personal rewards information private.</li>
+          <li><strong>Prevents data loss from app crashes</strong> - Codes are saved to localStorage immediately after approval. Even if your browser closes or crashes, your scanned codes persist.</li>
+          <li><strong>Enables offline code scanning</strong> - Scan and store reward codes with no internet connection required. Perfect for collecting codes when you're away from WiFi.</li>
+          <li><strong>Removes the need for perfect lighting</strong> - OCR technology works with various lighting conditions. While good lighting helps, you don't need studio-perfect photos to extract codes.</li>
+          <li><strong>Works across all devices</strong> - Use your phone, tablet, or desktop camera to scan codes. No app installation required—works directly in your browser.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-cta-email-list></app-cta-email-list>
