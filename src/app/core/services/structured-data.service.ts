@@ -55,6 +55,27 @@ export class StructuredDataService {
   private scriptId = 'structured-data-script';
 
   /**
+   * Convert relative URLs to absolute URLs
+   * @param url URL to convert (can be relative or absolute)
+   * @returns Absolute URL
+   */
+  private toAbsoluteUrl(url: string): string {
+    if (!url) return url;
+
+    // If already absolute, return as-is
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+
+    // Convert relative to absolute
+    if (url.startsWith('/')) {
+      return `https://www.allthethings.dev${url}`;
+    }
+
+    return url;
+  }
+
+  /**
    * Add WebApplication schema (for tool pages)
    * @param config WebApplication configuration
    */
@@ -151,7 +172,7 @@ export class StructuredDataService {
       '@type': 'Article',
       headline: config.headline,
       description: config.description,
-      image: config.image,
+      image: this.toAbsoluteUrl(config.image),
       url: config.url,
       author: {
         '@type': 'Person',

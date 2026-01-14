@@ -106,21 +106,14 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   private updateMetaTags(): void {
     if (!this.article) return;
 
-    // Get image URL and ensure it's absolute for social media scrapers
-    let imageUrl = this.article.ogImage ||
-                   this.article.heroImage.src ||
-                   this.blogService.getConfig().defaultOgImage;
-
-    // Convert relative URLs to absolute URLs
-    if (imageUrl && imageUrl.startsWith('/')) {
-      imageUrl = `https://www.allthethings.dev${imageUrl}`;
-    }
-
     const config = {
       title: this.article.title,
       description: this.article.metaDescription || this.article.description,
       keywords: this.article.metaKeywords || this.article.tags,
-      image: imageUrl,
+      image:
+        this.article.ogImage ||
+        this.article.heroImage.src ||
+        this.blogService.getConfig().defaultOgImage,
       url: this.articleUrl,
       type: 'article',
     };
@@ -131,20 +124,13 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   private updateStructuredData(): void {
     if (!this.article) return;
 
-    // Get image URL and ensure it's absolute for structured data
-    let imageUrl = this.article.ogImage ||
-                   this.article.heroImage.src ||
-                   this.blogService.getConfig().defaultOgImage;
-
-    // Convert relative URLs to absolute URLs
-    if (imageUrl && imageUrl.startsWith('/')) {
-      imageUrl = `https://www.allthethings.dev${imageUrl}`;
-    }
-
     this.structuredDataService.addArticle({
       headline: this.article.title,
       description: this.article.metaDescription || this.article.description,
-      image: imageUrl,
+      image:
+        this.article.ogImage ||
+        this.article.heroImage.src ||
+        this.blogService.getConfig().defaultOgImage,
       url: this.articleUrl,
       author: {
         name: this.article.author.name,

@@ -54,11 +54,35 @@ export class MetaService {
   };
 
   /**
+   * Convert relative URLs to absolute URLs for social media
+   * @param url URL to convert (can be relative or absolute)
+   * @returns Absolute URL
+   */
+  private toAbsoluteUrl(url: string): string {
+    if (!url) return url;
+
+    // If already absolute, return as-is
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+
+    // Convert relative to absolute
+    if (url.startsWith('/')) {
+      return `https://www.allthethings.dev${url}`;
+    }
+
+    return url;
+  }
+
+  /**
    * Update all meta tags for a page
    * @param config Meta configuration for the page
    */
   updateTags(config: MetaConfig): void {
     const fullConfig = { ...this.defaultConfig, ...config };
+
+    // Convert image URL to absolute if it's relative
+    const absoluteImageUrl = fullConfig.image ? this.toAbsoluteUrl(fullConfig.image) : undefined;
 
     // Update page title
     this.titleService.setTitle(fullConfig.title);
@@ -83,8 +107,8 @@ export class MetaService {
       this.meta.updateTag({ property: 'og:url', content: fullConfig.url });
     }
 
-    if (fullConfig.image) {
-      this.meta.updateTag({ property: 'og:image', content: fullConfig.image });
+    if (absoluteImageUrl) {
+      this.meta.updateTag({ property: 'og:image', content: absoluteImageUrl });
       this.meta.updateTag({ property: 'og:image:width', content: '1200' });
       this.meta.updateTag({ property: 'og:image:height', content: '630' });
       this.meta.updateTag({ property: 'og:image:alt', content: fullConfig.title });
@@ -97,8 +121,8 @@ export class MetaService {
     this.meta.updateTag({ name: 'twitter:title', content: fullConfig.title });
     this.meta.updateTag({ name: 'twitter:description', content: fullConfig.description });
 
-    if (fullConfig.image) {
-      this.meta.updateTag({ name: 'twitter:image', content: fullConfig.image });
+    if (absoluteImageUrl) {
+      this.meta.updateTag({ name: 'twitter:image', content: absoluteImageUrl });
       this.meta.updateTag({ name: 'twitter:image:alt', content: fullConfig.title });
     }
 
