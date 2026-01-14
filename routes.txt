@@ -13,6 +13,7 @@
 /blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention
 /blog/the-deneb-paradox-when-first-contact-means-last-contact
 /blog/the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career
+/blog/the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz
 /blog/the-top-ten-worst-movie-remakes
 /blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway
 /blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him

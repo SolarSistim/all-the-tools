@@ -109,6 +109,10 @@ export async function loadArticleContent(
         const onRewardModule = await withTimeout(import('./stop-typing-in-those-tiny-on-reward-codes-by-hand.content'));
         return onRewardModule.content;
 
+      case 'the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz':
+        const postizModule = await withTimeout(import('./the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz.content'));
+        return postizModule.content;
+
       default:
         console.warn(`No content file found for article: ${slug}`);
         return null;

@@ -9,6 +9,41 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '22',
+    slug: 'the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz',
+    title: 'The "Silent 502": Solving Internal Proxy Conflicts in Self-Hosted Postiz',
+    description:
+      'Self-hosting Postiz behind Caddy and Cloudflare? Learn how to fix 502 Bad Gateway errors caused by internal loopback issues with Docker networking.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-14-2026',
+    heroImage: {
+      src: '/assets/blog/the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz/og-postiz-502-error.png',
+      alt: 'Fixing 502 Bad Gateway errors in self-hosted Postiz with Docker and reverse proxy',
+    },
+    tags: ['Docker', 'Self-Hosting', 'Postiz', 'DevOps', 'Networking', 'Troubleshooting'],
+    category: 'Technology',
+    metaDescription:
+      'Fix 502 Bad Gateway errors in self-hosted Postiz. Learn how to solve internal loopback problems when running Docker containers behind Caddy and Cloudflare.',
+    metaKeywords: [
+      'Postiz 502 error',
+      'Self-hosting Postiz',
+      'Docker networking',
+      'Reverse proxy configuration',
+      'Caddy proxy',
+      'Cloudflare CDN',
+      'Internal loopback',
+      'Docker container networking',
+      'Prisma database sync',
+      'NestJS backend',
+      'Next.js frontend',
+      'Proxy trust headers',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['3', '21', '1'],
+  },
+  {
     id: '21',
     slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand',
     title: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
