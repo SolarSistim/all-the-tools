@@ -75,15 +75,15 @@ export class MetaService {
   }
 
   private normalizeUrl(url: string): string {
-    if (!url) return url;
+    if (!url) return 'https://www.allthethings.dev';
 
     const productionDomain = 'https://www.allthethings.dev';
 
-    if (url.startsWith('/')) {
-      return `${productionDomain}${url}`;
-    }
-
     try {
+      if (url.startsWith('/')) {
+        return `${productionDomain}${url === '/' ? '' : url}`;
+      }
+
       const path = new URL(url).pathname;
       return `${productionDomain}${path === '/' ? '' : path}`;
     } catch {
