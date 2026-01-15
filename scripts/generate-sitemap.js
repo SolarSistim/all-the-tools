@@ -10,13 +10,26 @@
 const fs = require('fs');
 const path = require('path');
 
+function normalizeSiteOrigin(origin) {
+  const trimmed = String(origin || '').trim().replace(/\/+$/, '');
+  const withProtocol = /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
+  const url = new URL(withProtocol);
+  const hostname = url.hostname.startsWith('www.')
+    ? url.hostname
+    : `www.${url.hostname}`;
+  const port = url.port ? `:${url.port}` : '';
+  return `${url.protocol}//${hostname}${port}`;
+}
+
 // ============================================================================
 // Configuration
 // ============================================================================
 
 const CONFIG = {
   // Site origin - used for all URLs in sitemap
-  siteOrigin: 'https://allthethings.dev',
+  siteOrigin: normalizeSiteOrigin('https://www.allthethings.dev'),
 
   // Build output directory (relative to project root)
   buildDir: path.join(__dirname, '../dist/all-the-tools/browser'),

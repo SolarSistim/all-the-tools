@@ -24,7 +24,7 @@ Edit `scripts/generate-sitemap.js` to customize:
 
 ```javascript
 const CONFIG = {
-  siteOrigin: 'https://allthethings.dev',  // Your site URL
+  siteOrigin: 'https://www.allthethings.dev',  // Your site URL
   buildDir: path.join(__dirname, '../dist/all-the-tools/browser'),
 
   // Add patterns to exclude routes
@@ -89,14 +89,14 @@ grep -c "<loc>" dist/all-the-tools/browser/sitemap.xml
 ## Production Verification (After Deploy)
 
 ### 1. Check Sitemap is Live
-Visit: https://allthethings.dev/sitemap.xml
+Visit: https://www.allthethings.dev/sitemap.xml
 
 Should show valid XML like:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://allthethings.dev/</loc>
+    <loc>https://www.allthethings.dev/</loc>
     <lastmod>2025-12-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -106,14 +106,14 @@ Should show valid XML like:
 ```
 
 ### 2. Check Robots.txt
-Visit: https://allthethings.dev/robots.txt
+Visit: https://www.allthethings.dev/robots.txt
 
 Should show:
 ```
 User-agent: *
 Allow: /
 
-Sitemap: https://allthethings.dev/sitemap.xml
+Sitemap: https://www.allthethings.dev/sitemap.xml
 ```
 
 ### 3. Submit to Search Engines
@@ -121,13 +121,13 @@ Sitemap: https://allthethings.dev/sitemap.xml
 **Google Search Console:**
 1. Go to: https://search.google.com/search-console
 2. Click "Sitemaps" in left menu
-3. Enter: `https://allthethings.dev/sitemap.xml`
+3. Enter: `https://www.allthethings.dev/sitemap.xml`
 4. Click "Submit"
 
 **Bing Webmaster Tools:**
 1. Go to: https://www.bing.com/webmasters
 2. Navigate to Sitemaps section
-3. Submit: `https://allthethings.dev/sitemap.xml`
+3. Submit: `https://www.allthethings.dev/sitemap.xml`
 
 ## Troubleshooting
 
