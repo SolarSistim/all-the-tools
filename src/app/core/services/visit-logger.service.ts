@@ -19,6 +19,7 @@ export class VisitLoggerService {
   /**
    * Log a page visit asynchronously
    * This won't block the page load
+   * Deferred by 3 seconds to improve initial page load performance
    */
   logVisit(urlPath: string): void {
     // Only run in browser
@@ -26,20 +27,23 @@ export class VisitLoggerService {
       return;
     }
 
-    // Log initial visit to visitor_logs (once per session)
-    if (!this.hasLogged) {
-      this.hasLogged = true;
-      this.sendLog(urlPath, 'visitor_logs');
-    }
+    // Defer all logging by 3 seconds to improve page load performance
+    setTimeout(() => {
+      // Log initial visit to visitor_logs (once per session)
+      if (!this.hasLogged) {
+        this.hasLogged = true;
+        this.sendLog(urlPath, 'visitor_logs');
+      }
 
-    // Log page view to page_views (every navigation)
-    // Use requestIdleCallback to ensure this doesn't impact performance
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => this.sendLog(urlPath, 'page_views'), { timeout: 2000 });
-    } else {
-      // Fallback for browsers that don't support requestIdleCallback
-      setTimeout(() => this.sendLog(urlPath, 'page_views'), 100);
-    }
+      // Log page view to page_views (every navigation)
+      // Use requestIdleCallback to ensure this doesn't impact performance
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => this.sendLog(urlPath, 'page_views'), { timeout: 2000 });
+      } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        setTimeout(() => this.sendLog(urlPath, 'page_views'), 100);
+      }
+    }, 3000); // Wait 3 seconds before logging
   }
 
   /**
