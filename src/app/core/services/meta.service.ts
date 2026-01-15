@@ -156,6 +156,11 @@ export class MetaService {
     }
   }
 
+  setCanonicalForPath(path: string): void {
+    const canonicalUrl = this.normalizeUrl(path);
+    this.updateCanonicalUrl(canonicalUrl);
+  }
+
   /**
    * Update canonical URL
    * @param url Canonical URL for the page

@@ -61,6 +61,7 @@ export class App implements AfterViewInit, OnInit {
       // Log visit and scroll to top when navigation ends
       if (event instanceof NavigationEnd) {
         this.visitLogger.logVisit(event.urlAfterRedirects);
+        this.metaService.setCanonicalForPath(event.urlAfterRedirects);
 
         // Scroll to top on navigation (only in browser)
         if (isPlatformBrowser(this.platformId)) {
