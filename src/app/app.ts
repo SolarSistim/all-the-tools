@@ -13,6 +13,7 @@ import { ToolsService } from './core/services/tools.service';
 import { VisitLoggerService } from './core/services/visit-logger.service';
 import { GoogleAnalyticsService } from './core/services/google-analytics.service';
 import { MetaService } from './core/services/meta.service';
+import { AdsenseService } from './core/services/adsense.service';
 import { ToolCategoryMeta, Tool } from './core/models/tool.interface';
 
 @Component({
@@ -42,9 +43,12 @@ export class App implements AfterViewInit, OnInit {
   private visitLogger = inject(VisitLoggerService);
   private googleAnalytics = inject(GoogleAnalyticsService);
   private metaService = inject(MetaService);
+  private adsenseService = inject(AdsenseService);
   private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
+    this.adsenseService.init();
+
     // Initialize Google Analytics (only in production, not localhost)
     this.googleAnalytics.initialize();
 
