@@ -74,12 +74,26 @@ export class MetaService {
     return url;
   }
 
+  private toCanonicalUrl(url: string): string {
+    if (!url) return url;
+
+    const absoluteUrl = this.toAbsoluteUrl(url);
+    const parsed = new URL(absoluteUrl);
+    const hostname = parsed.hostname.startsWith('www.')
+      ? parsed.hostname
+      : `www.${parsed.hostname}`;
+    const port = parsed.port ? `:${parsed.port}` : '';
+
+    return `${parsed.protocol}//${hostname}${port}${parsed.pathname}${parsed.search}${parsed.hash}`;
+  }
+
   /**
    * Update all meta tags for a page
    * @param config Meta configuration for the page
    */
   updateTags(config: MetaConfig): void {
     const fullConfig = { ...this.defaultConfig, ...config };
+    const canonicalUrl = fullConfig.url ? this.toCanonicalUrl(fullConfig.url) : undefined;
 
     // Convert image URL to absolute if it's relative
     const absoluteImageUrl = fullConfig.image ? this.toAbsoluteUrl(fullConfig.image) : undefined;
@@ -103,8 +117,8 @@ export class MetaService {
     this.meta.updateTag({ property: 'og:description', content: fullConfig.description });
     this.meta.updateTag({ property: 'og:type', content: fullConfig.type || 'website' });
 
-    if (fullConfig.url) {
-      this.meta.updateTag({ property: 'og:url', content: fullConfig.url });
+    if (canonicalUrl) {
+      this.meta.updateTag({ property: 'og:url', content: canonicalUrl });
     }
 
     if (absoluteImageUrl) {
@@ -133,8 +147,8 @@ export class MetaService {
     }
 
     // Add canonical URL
-    if (fullConfig.url) {
-      this.updateCanonicalUrl(fullConfig.url);
+    if (canonicalUrl) {
+      this.updateCanonicalUrl(canonicalUrl);
     }
   }
 
@@ -143,20 +157,17 @@ export class MetaService {
    * @param url Canonical URL for the page
    */
   private updateCanonicalUrl(url: string): void {
-    // Only update canonical link in browser
-    if (isPlatformBrowser(this.platformId)) {
-      // Remove existing canonical link if it exists
-      const existingLink = this.document.querySelector('link[rel="canonical"]');
-      if (existingLink) {
-        existingLink.remove();
-      }
-
-      // Create new canonical link
-      const link = this.document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      link.setAttribute('href', url);
-      this.document.head.appendChild(link);
+    // Remove existing canonical link if it exists
+    const existingLink = this.document.querySelector('link[rel="canonical"]');
+    if (existingLink) {
+      existingLink.remove();
     }
+
+    // Create new canonical link
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', url);
+    this.document.head.appendChild(link);
   }
 
   setSiteJsonLd(data: Record<string, unknown>): void {
