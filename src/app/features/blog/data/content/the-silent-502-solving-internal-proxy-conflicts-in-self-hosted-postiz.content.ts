@@ -158,7 +158,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'When self-hosting monorepo apps, localhost is your friend. By pointing the frontend to the backend\'s internal port and ensuring the database schema is manually synced, we cleared the path for stable operation behind multiple proxy layers.',
+      text: 'When self hosting monorepo apps, localhost is your friend. By pointing the frontend to the backend\'s internal port and ensuring the database schema is manually synced, we cleared the path for stable operation behind multiple proxy layers.',
     },
   },
   {
