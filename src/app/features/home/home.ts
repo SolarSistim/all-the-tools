@@ -85,8 +85,14 @@ export class HomeComponent implements OnInit {
     // Add structured data for homepage
     this.structuredData.addOrganization();
 
-    this.featuredTools = this.toolsService.getFeaturedTools();
-    this.categories = this.toolsService.getAllCategories();
+    // Get 6 random featured tools
+    const allFeaturedTools = this.toolsService.getFeaturedTools();
+    this.featuredTools = this.getRandomItems(allFeaturedTools, 6);
+
+    // Get 4 random categories (only those with tools)
+    const allCategories = this.toolsService.getAllCategories();
+    const categoriesWithTools = allCategories.filter(cat => this.getToolCountForCategory(cat.id) > 0);
+    this.categories = this.getRandomItems(categoriesWithTools, 4);
 
     // Load recent blog articles
     this.blogService.getRecentArticles(3).subscribe({
@@ -135,5 +141,23 @@ export class HomeComponent implements OnInit {
       default:
         return '#757575';
     }
+  }
+
+  /**
+   * Get random items from an array
+   * Uses Fisher-Yates shuffle algorithm for unbiased random selection
+   */
+  private getRandomItems<T>(array: T[], count: number): T[] {
+    if (array.length <= count) {
+      return array;
+    }
+
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled.slice(0, count);
   }
 }

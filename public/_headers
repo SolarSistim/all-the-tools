@@ -1,0 +1,32 @@
+# Cache Control for Static Assets
+# This file provides additional caching rules for assets in the public folder
+
+# All assets - cache for 1 year (immutable for better performance)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Author images specifically - cache for 1 year
+/assets/author-images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Blog content assets - cache for 1 year
+/assets/blog/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts - cache forever (already in netlify.toml but reinforcing here)
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Meta images - cache for 1 year
+/meta-images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Root level images - cache for 30 days (reasonable for images that might change)
+/*.jpg
+  Cache-Control: public, max-age=2592000
+
+/*.png
+  Cache-Control: public, max-age=2592000
+
+/*.webp
+  Cache-Control: public, max-age=2592000

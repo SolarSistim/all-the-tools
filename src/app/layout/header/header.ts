@@ -61,6 +61,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Scroll state for dynamic header styling
   isScrolled = signal(false);
 
+  // Track if we have a pending scroll update
+  private scrollTicking = false;
+
   // Bind scrolled class to host element
   @HostBinding('class.scrolled') get scrolledClass() {
     return this.isScrolled();
@@ -104,12 +107,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   /**
    * Handle scroll event - update header state
+   * Uses requestAnimationFrame to prevent forced reflows
    */
   private onScroll(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const scrollPosition = window.scrollY || this.document.documentElement.scrollTop;
-      // Consider scrolled if user has scrolled more than 50px
-      this.isScrolled.set(scrollPosition > 50);
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // Only schedule one update per frame
+    if (!this.scrollTicking) {
+      requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY || this.document.documentElement.scrollTop;
+        // Consider scrolled if user has scrolled more than 50px
+        this.isScrolled.set(scrollPosition > 50);
+        this.scrollTicking = false;
+      });
+      this.scrollTicking = true;
     }
   }
 
