@@ -17,7 +17,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-14-2026',
     heroImage: {
-      src: '/assets/blog/the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz/og-postiz-502-error.png',
+      src: '/assets/blog/the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz/og-postiz-502-error.jpg',
       alt: 'Fixing 502 Bad Gateway errors in self-hosted Postiz with Docker and reverse proxy',
     },
     tags: ['Docker', 'Self-Hosting', 'Postiz', 'DevOps', 'Networking', 'Troubleshooting'],
@@ -52,7 +52,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-13-2026',
     heroImage: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/og-on-reward-scanner-blog-post.png',
+      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/og-on-reward-scanner-blog-post.jpg',
       alt: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
     },
     tags: ['On! Rewards', 'OCR', 'Tools', 'Productivity', 'Mobile', 'Privacy'],
@@ -87,7 +87,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-06-2026',
     heroImage: {
-      src: '/assets/blog/lighthuggers-when-fan-art-captures-the-impossible.content/og-lighthuggers-fan-art.png',
+      src: '/assets/blog/lighthuggers-when-fan-art-captures-the-impossible.content/og-lighthuggers-fan-art.jpg',
       alt: 'LIGHTHUGGERS: When Fan Art Captures the Impossible',
     },
     tags: ['Revelation Space', 'Alastair Reynolds', 'Science Fiction', 'Fan Art', 'Lighthuggers', 'Concept Art'],
@@ -122,7 +122,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-05-2026',
     heroImage: {
-      src: '/assets/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content/og-pensacon-responds.png',
+      src: '/assets/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content/og-pensacon-responds.jpg',
       alt: 'Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention',
     },
     tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community', 'Reddit'],
@@ -155,7 +155,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-04-2026',
     heroImage: {
-      src: '/assets/blog/why-pensacon-has-gone-downhill.content/og-why-pensacon-has-gone-downhill.png',
+      src: '/assets/blog/why-pensacon-has-gone-downhill.content/og-why-pensacon-has-gone-downhill.jpg',
       alt: 'Why Pensacon Has Gone Downhill - And What Can Be Done About It',
     },
     tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community'],
@@ -188,7 +188,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-03-2026',
     heroImage: {
-      src: '/assets/blog/we-need-to-talk-about-that-wormhole-scene-in-interstellar.content/og-interstellar-wormhole-scene.png',
+      src: '/assets/blog/we-need-to-talk-about-that-wormhole-scene-in-interstellar.content/og-interstellar-wormhole-scene.jpg',
       alt: 'We Need to Talk About That Wormhole Scene in Interstellar',
     },
     tags: ['Interstellar', 'Christopher Nolan', 'Science Fiction', 'Movie Analysis', 'Film Critique'],
@@ -221,7 +221,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-03-2026',
     heroImage: {
-      src: '/assets/blog/how-to-sell-your-timber-for-top-dollar-in-ohio.content/og-how-to-sell-timber-ohio.png',
+      src: '/assets/blog/how-to-sell-your-timber-for-top-dollar-in-ohio.content/og-how-to-sell-timber-ohio.jpg',
       alt: 'How to Sell Your Timber for Top Dollar in Ohio',
     },
     tags: ['Timber Sales', 'Ohio', 'Forestry', 'Land Management', 'Timber Buyers', 'Southeast Ohio'],
@@ -254,7 +254,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-02-2026',
     heroImage: {
-      src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/og-c-beams-the-space-action-rpg-that-gets-it.png',
+      src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/og-c-beams-the-space-action-rpg-that-gets-it.jpg',
       alt: 'C-Beams: The Top-Down Space Action RPG That Gets It',
     },
     tags: ['Gaming', 'C-Beams', 'Space RPG', 'Top-Down Shooter', 'Indie Games', 'LevelCap'],
@@ -286,7 +286,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-02-2026',
     heroImage: {
-      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/og-worst-movie-remakes.png',
+      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/og-worst-movie-remakes.jpg',
       alt: 'The Top Ten Worst Movie Remakes',
     },
     tags: ['Movies', 'Remakes', 'Total Recall', 'The Crow', 'Film Analysis', 'Bad Movies'],
@@ -317,7 +317,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-01-2026',
     heroImage: {
-      src: '/assets/blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content/og-kenya-tech-scene.png',
+      src: '/assets/blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content/og-kenya-tech-scene.jpg',
       alt: 'Kenya\'s Tech Scene: How Developers Changed the World',
     },
     tags: ['Kenya', 'Technology', 'M-Pesa', 'Ushahidi', 'African Tech', 'Innovation'],
@@ -349,7 +349,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-31-2025',
     heroImage: {
-      src: '/assets/blog/when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content/og-willys-wonderland-better-than-fnaf.png',
+      src: '/assets/blog/when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content/og-willys-wonderland-better-than-fnaf.jpg',
       alt: 'When Nicholas Cage Made a Better Five Nights at Freddy\'s Movie',
     },
     tags: ['Willy\'s Wonderland', 'Five Nights at Freddy\'s', 'Nicolas Cage', 'Horror', 'Movie Review'],
@@ -379,7 +379,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-30-2025',
     heroImage: {
-      src: '/assets/blog/we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content/og-we-remember-childhood-tv-habits.png',
+      src: '/assets/blog/we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content/og-we-remember-childhood-tv-habits.jpg',
       alt: 'Why Your Childhood TV Habits Might Become a Professional Credential',
     },
     tags: ['AI', 'Future of Work', 'Memory', 'Authenticity', 'Deepfakes'],
@@ -409,7 +409,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-30-2025',
     heroImage: {
-      src: '/assets/blog/the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career.content/og-the-invisible-door-noise-cancelling-headphones.png',
+      src: '/assets/blog/the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career.content/og-the-invisible-door-noise-cancelling-headphones.jpg',
       alt: 'The Invisible Door - How noise cancelling headphones saved my programming career',
     },
     tags: ['Programming', 'Productivity', 'Remote Work', 'Focus', 'Noise Cancelling Headphones'],
@@ -438,7 +438,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-28-2025',
     heroImage: {
-      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/og-georges-bistro-review.png',
+      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/og-georges-bistro-review.jpg',
       alt: 'My Wife And I Have Visited George Bistro Nearly 30 Times',
     },
     tags: ['Restaurant Review', 'Food', 'Fine Dining', 'Pensacola', 'George Bistro'],
@@ -466,7 +466,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-27-2025',
     heroImage: {
-      src: '/assets/blog/i-built-a-roku-compatibility-checker.content/og-roku-compatibility-checker.png',
+      src: '/assets/blog/i-built-a-roku-compatibility-checker.content/og-roku-compatibility-checker.jpg',
       alt: 'I Built a Roku Compatibility Checker',
     },
     tags: ['Roku', 'Tools', 'Hardware', 'Compatibility', 'Product Review'],
@@ -495,7 +495,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-24-2025',
     heroImage: {
-      src: '/assets/blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.content/og-these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.png',
+      src: '/assets/blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.content/og-these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.jpg',
       alt: 'These Song Lyrics Do Not Tease the Grinch. They Unload on Him.',
     },
     tags: ['The Grinch', 'Psychology', 'Christmas', 'Pop Culture Analysis'],
@@ -523,7 +523,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-21-2025',
     heroImage: {
-      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/og-pluribus-the-deneb-paradox-when-first-contact-means-last-contact.png',
+      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/og-pluribus-the-deneb-paradox-when-first-contact-means-last-contact.jpg',
       alt: 'The Deneb Paradox: When First Contact Means Last Contact',
     },
     tags: ['Pluribus', 'TV Analysis', 'Science Fiction', 'Vince Gilligan'],
@@ -551,7 +551,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-21-2025',
     heroImage: {
-      src: '/assets/blog/how-to-calculate-percentages-in-your-head.content/og-how-to-calculate-percentages-in-your-head.png',
+      src: '/assets/blog/how-to-calculate-percentages-in-your-head.content/og-how-to-calculate-percentages-in-your-head.jpg',
       alt: 'How to Calculate Percentages in Your Head',
     },
     tags: ['Math', 'Mental Math', 'Tips', 'Life Skills'],
@@ -578,7 +578,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-21-2025',
     heroImage: {
-      src: '/assets/blog/why-truckers-drift-to-the-right-on-the-highway.content/og-why-do-semi-truckers-veer-to-the-right-on-the-highway.png',
+      src: '/assets/blog/why-truckers-drift-to-the-right-on-the-highway.content/og-why-do-semi-truckers-veer-to-the-right-on-the-highway.jpg',
       alt: 'Why Truckers Drift to the Right on the Highway',
     },
     tags: ['Trucking', 'Highway Safety', 'Transportation', 'Road Safety'],
@@ -605,7 +605,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-06-2025',
     heroImage: {
-      src: '/assets/blog/wordpress-vs-angular-why-i-built-my-site-with-zero-backend.content/og-why-i-build-my-site-with-zero-backend.png',
+      src: '/assets/blog/wordpress-vs-angular-why-i-built-my-site-with-zero-backend.content/og-why-i-build-my-site-with-zero-backend.jpg',
       alt: 'WordPress vs. Angular: Why I Built My Site With Zero Backend',
     },
     tags: ['Angular', 'WordPress', 'Web Development', 'Static Sites'],
@@ -632,7 +632,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-04-2025',
     heroImage: {
-      src: '/assets/blog/i-switched-from-facebook-to-reddit-for-doomscrolling.content/og-i-switched-from-facebook-to-reddit-for-doomscrolling.png',
+      src: '/assets/blog/i-switched-from-facebook-to-reddit-for-doomscrolling.content/og-i-switched-from-facebook-to-reddit-for-doomscrolling.jpg',
       alt: 'I Switched from Facebook to Reddit for Doomscrolling',
     },
     tags: ['Social Media', 'Reddit', 'Facebook', 'Productivity'],
@@ -658,7 +658,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-02-2025',
     heroImage: {
-      src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/og-the-wild-story-of-the-gaudy-palace.png',
+      src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/og-the-wild-story-of-the-gaudy-palace.jpg',
       alt: 'The WILD Story of the Gaudy Palace on Scenic Highway',
     },
     tags: ['Pensacola', 'Scenic Highway', 'Palace'],

@@ -129,7 +129,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/pluribus-carols-dry-erase-board.png',
+      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/pluribus-carols-dry-erase-board.jpg',
       alt: 'Carol\'s dry erase board with notes about the Deneb aliens',
       caption: 'Carol\'s notes about the Deneb aliens reveal their unsettling honesty',
     },
