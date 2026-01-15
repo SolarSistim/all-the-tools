@@ -74,17 +74,21 @@ export class MetaService {
     return url;
   }
 
-  private toCanonicalUrl(url: string): string {
+  private normalizeUrl(url: string): string {
     if (!url) return url;
 
-    const absoluteUrl = this.toAbsoluteUrl(url);
-    const parsed = new URL(absoluteUrl);
-    const hostname = parsed.hostname.startsWith('www.')
-      ? parsed.hostname
-      : `www.${parsed.hostname}`;
-    const port = parsed.port ? `:${parsed.port}` : '';
+    const productionDomain = 'https://www.allthethings.dev';
 
-    return `${parsed.protocol}//${hostname}${port}${parsed.pathname}${parsed.search}${parsed.hash}`;
+    if (url.startsWith('/')) {
+      return `${productionDomain}${url}`;
+    }
+
+    try {
+      const path = new URL(url).pathname;
+      return `${productionDomain}${path === '/' ? '' : path}`;
+    } catch {
+      return productionDomain;
+    }
   }
 
   /**
@@ -93,7 +97,7 @@ export class MetaService {
    */
   updateTags(config: MetaConfig): void {
     const fullConfig = { ...this.defaultConfig, ...config };
-    const canonicalUrl = fullConfig.url ? this.toCanonicalUrl(fullConfig.url) : undefined;
+    const canonicalUrl = fullConfig.url ? this.normalizeUrl(fullConfig.url) : undefined;
 
     // Convert image URL to absolute if it's relative
     const absoluteImageUrl = fullConfig.image ? this.toAbsoluteUrl(fullConfig.image) : undefined;
