@@ -9,6 +9,37 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '23',
+    slug: 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja',
+    title: 'When Your Monster Becomes A Friend: How Badlands Demystifies the Yautja',
+    description:
+      'Badlands trades the Predator\'s unknowable terror for something more human. This is a look at what the film gains - and what it loses - when the monster starts talking.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-15-2026',
+    heroImage: {
+      src: '/assets/blog/how-badlands-demystifies-the-yautja/how-badlands-demystifies-the-yautja.jpg',
+      alt: 'When Your Monster Becomes Your Friend: How Badlands Demystifies the Yautja',
+    },
+    tags: ['Predator', 'Badlands', 'Yautja', 'Science Fiction', 'Film Analysis', 'Alien', 'SciFi'],
+    category: 'TV & Film',
+    metaDescription:
+      'Badlands gives the Predator a voice and a soul. An analysis of how the film reframes the Yautja and why the mystery still mattered.',
+    metaKeywords: [
+      'Badlands',
+      'Predator franchise',
+      'Yautja',
+      'Predator analysis',
+      'Weyland-Yutani',
+      'Alien universe',
+      'Science fiction film',
+      'Movie critique',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['12', '17', '6'],
+  },
+  {
     id: '22',
     slug: 'the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz',
     title: 'The "Silent 502": Solving Internal Proxy Conflicts in Self-Hosted Postiz',

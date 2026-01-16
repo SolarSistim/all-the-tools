@@ -23,6 +23,12 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja':
+        const badlandsModule = await withTimeout(
+          import('./when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja.content')
+        );
+        return badlandsModule.content;
+
       case 'we-need-to-talk-about-that-wormhole-scene-in-interstellar':
         const interstellarModule = await withTimeout(
           import('./we-need-to-talk-about-that-wormhole-scene-in-interstellar.content')
