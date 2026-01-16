@@ -26,7 +26,7 @@
       <!-- Hero Visual Element -->
       <div class="hero-visual">
         <div class="visual-grid">
-          <div class="grid-item" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+          <div class="grid-item" *ngFor="let i of [1,2,3,4,5,6]">
             <mat-icon>{{ getRandomIcon(i) }}</mat-icon>
           </div>
         </div>
@@ -161,6 +161,7 @@
                           [src]="article.author.avatar"
                           [alt]="article.author.name"
                           class="author-avatar"
+                          loading="lazy"
                         />
                       }
                       <span class="author-name">{{ article.author.name }}</span>

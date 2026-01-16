@@ -82,6 +82,44 @@ export class App implements AfterViewInit, OnInit {
         }
       }
     });
+
+    // Defer Ahrefs analytics loading for better initial page performance
+    this.loadAhrefsAnalytics();
+  }
+
+  /**
+   * Load Ahrefs analytics script with requestIdleCallback for optimal performance
+   */
+  private loadAhrefsAnalytics(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Defer loading by 3 seconds, then use requestIdleCallback
+    setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => this.injectAhrefsScript(), { timeout: 5000 });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => this.injectAhrefsScript(), 100);
+      }
+    }, 3000);
+  }
+
+  /**
+   * Inject Ahrefs analytics script into the document
+   */
+  private injectAhrefsScript(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://analytics.ahrefs.com/analytics.js';
+    script.setAttribute('data-key', 'IMRR+4XlBgUJq9UHvjq07g');
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
   }
 
   ngAfterViewInit() {

@@ -19,6 +19,9 @@
   cursor: pointer;
   height: 340px;
 
+  // CSS containment for better performance
+  contain: layout style paint;
+
   // Neon glow effect on hover
   .card-glow {
     position: absolute;

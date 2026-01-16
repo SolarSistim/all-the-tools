@@ -49,7 +49,7 @@
             <mat-option [value]="article" class="blog-option">
               <div class="autocomplete-item">
                 <div class="autocomplete-image">
-                  <img [src]="article.heroImage.src" [alt]="article.title" />
+                  <img [src]="article.heroImage.src" [alt]="article.title" loading="lazy" />
                 </div>
                 <div class="autocomplete-content">
                   <div class="autocomplete-title">{{ article.title }}</div>
