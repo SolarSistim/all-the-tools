@@ -130,7 +130,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Excuse me?? The Tauja <i>are</i> an FTL culture, correct me if I\'m wrong.',
+      text: 'Excuse me?? The Yautja <i>are</i> an FTL culture, correct me if I\'m wrong.',
     },
   },
   {
