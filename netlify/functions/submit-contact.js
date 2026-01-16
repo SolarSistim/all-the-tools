@@ -3,6 +3,7 @@
 
 const nodemailer = require('nodemailer');
 const https = require('https');
+const { google } = require('googleapis');
 
 exports.handler = async (event, context) => {
   // Set CORS headers
@@ -33,6 +34,17 @@ exports.handler = async (event, context) => {
   try {
     // Parse the request body
     const data = JSON.parse(event.body);
+
+    // Decode Netlify geo data from x-nf-geo header (base64 encoded JSON)
+    let geoData = null;
+    if (event.headers['x-nf-geo']) {
+      try {
+        const decoded = Buffer.from(event.headers['x-nf-geo'], 'base64').toString('utf-8');
+        geoData = JSON.parse(decoded);
+      } catch (error) {
+        console.error('Error decoding geo data:', error);
+      }
+    }
 
     // Validate required fields
     if (!data.email || !data.email.trim()) {
@@ -173,6 +185,70 @@ This message was sent from the All The Tools contact form.
     await transporter.sendMail(mailOptions);
 
     console.log('Contact form email sent successfully');
+
+    // Log submission to Google Sheets
+    try {
+      // Initialize Google Sheets API
+      const auth = new google.auth.GoogleAuth({
+        credentials: {
+          client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+          private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        },
+        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+      });
+
+      const sheets = google.sheets({ version: 'v4', auth });
+      const spreadsheetId = '1NDJC3E6n9rGkILd0IKI58vksBSW9eAJQ9gDTzBzoWbs';
+      const sheetName = 'contact_form_submissions';
+      const range = `${sheetName}!A:P`; // 16 columns (A-P)
+
+      // Extract server-side data
+      const ip = event.headers['cf-connecting-ip'] ||
+                 event.headers['x-nf-client-connection-ip'] ||
+                 event.headers['client-ip'] ||
+                 'Unknown';
+      const country = geoData?.country?.code || event.headers['x-country'] || 'Unknown';
+      const city = geoData?.city || 'Unknown';
+      const region = geoData?.subdivision?.code || 'Unknown';
+      const latitude = geoData?.latitude || 'Unknown';
+      const longitude = geoData?.longitude || 'Unknown';
+      const coordinates = `${latitude}, ${longitude}`;
+
+      // Prepare the row data matching your column order
+      const values = [[
+        submissionData.humanReadableDate,  // Date/Time
+        submissionData.firstName,          // First
+        submissionData.lastName,           // Last
+        submissionData.email,              // Email
+        submissionData.phone,              // Phone
+        submissionData.message,            // Message
+        ip,                                // IP Address
+        country,                           // Country
+        city,                              // City
+        region,                            // Region
+        coordinates,                       // Coordinates
+        data.sessionId || 'Unknown',       // Session ID
+        data.deviceType || 'Unknown',      // Device Type
+        data.userAgent || event.headers['user-agent'] || 'Unknown',  // User Agent
+        data.screenResolution || 'Unknown',  // Screen resolution
+        data.language || 'Unknown',        // Language
+      ]];
+
+      // Append the data to the sheet
+      await sheets.spreadsheets.values.append({
+        spreadsheetId,
+        range,
+        valueInputOption: 'RAW',
+        requestBody: {
+          values,
+        },
+      });
+
+      console.log('Contact form submission logged to Google Sheets');
+    } catch (sheetError) {
+      // Log error but don't fail the request since email was sent
+      console.error('Error logging to Google Sheets:', sheetError);
+    }
 
     return {
       statusCode: 200,

@@ -142,6 +142,12 @@ export class ContactForm implements OnInit {
         email: this.email().trim(),
         message: this.message().trim(),
         recaptchaToken: this.recaptchaToken(),
+        // Additional tracking data for Google Sheets
+        sessionId: this.getSessionId(),
+        deviceType: this.getDeviceType(),
+        userAgent: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+        language: navigator.language,
       };
 
       // Call Netlify function to submit contact form
@@ -203,5 +209,48 @@ export class ContactForm implements OnInit {
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
+  }
+
+  /**
+   * Get or create a session ID
+   */
+  private getSessionId(): string {
+    const storageKey = 'visitor_session_id';
+
+    try {
+      let sessionId = sessionStorage.getItem(storageKey);
+
+      if (!sessionId) {
+        sessionId = this.generateSessionId();
+        sessionStorage.setItem(storageKey, sessionId);
+      }
+
+      return sessionId;
+    } catch (error) {
+      // If sessionStorage is not available, generate a temporary ID
+      return this.generateSessionId();
+    }
+  }
+
+  /**
+   * Generate a unique session ID
+   */
+  private generateSessionId(): string {
+    return `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
+  }
+
+  /**
+   * Detect device type
+   */
+  private getDeviceType(): string {
+    const ua = navigator.userAgent;
+
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+      return 'Tablet';
+    }
+    if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+      return 'Mobile';
+    }
+    return 'Desktop';
   }
 }
