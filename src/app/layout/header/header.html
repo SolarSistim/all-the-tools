@@ -99,137 +99,144 @@
 
   <!-- Tools Dropdown Menu (Desktop) - Mega Menu with Tabs -->
   <mat-menu #toolsMenu="matMenu" class="tools-menu mega-menu" xPosition="after">
-    <div class="mega-menu-content">
-      <mat-tab-group class="mega-menu-tabs" (click)="$event.stopPropagation()">
-        <!-- Tab 1: All Tools -->
-        <mat-tab label="All Tools">
-          <div class="mega-menu-tab-content">
-            <div class="mega-menu-columns">
-              <!-- Column 1 -->
-              <div class="mega-menu-column" *ngIf="shouldShowColumn(0)">
-                @for (tool of getToolsForColumn(0); track tool.id) {
-                  <a
-                    mat-menu-item
-                    [routerLink]="['/tools', tool.route]"
-                    (click)="closeMegaMenu()"
-                    class="tool-menu-item"
-                  >
-                    <mat-icon>{{ tool.icon }}</mat-icon>
-                    <span>{{ tool.name }}</span>
-                  </a>
-                }
-              </div>
+    @defer (on idle) {
+      <div class="mega-menu-content">
+        <mat-tab-group class="mega-menu-tabs" (click)="$event.stopPropagation()">
+          <!-- Tab 1: All Tools -->
+          <mat-tab label="All Tools">
+            <div class="mega-menu-tab-content">
+              <div class="mega-menu-columns">
+                <!-- Column 1 -->
+                <div class="mega-menu-column" *ngIf="shouldShowColumn(0)">
+                  @for (tool of getToolsForColumn(0); track tool.id) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools', tool.route]"
+                      (click)="closeMegaMenu()"
+                      class="tool-menu-item"
+                    >
+                      <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span>{{ tool.name }}</span>
+                    </a>
+                  }
+                </div>
 
-              <!-- Column 2 -->
-              <div class="mega-menu-column" *ngIf="shouldShowColumn(1)">
-                @for (tool of getToolsForColumn(1); track tool.id) {
-                  <a
-                    mat-menu-item
-                    [routerLink]="['/tools', tool.route]"
-                    (click)="closeMegaMenu()"
-                    class="tool-menu-item"
-                  >
-                    <mat-icon>{{ tool.icon }}</mat-icon>
-                    <span>{{ tool.name }}</span>
-                  </a>
-                }
-              </div>
+                <!-- Column 2 -->
+                <div class="mega-menu-column" *ngIf="shouldShowColumn(1)">
+                  @for (tool of getToolsForColumn(1); track tool.id) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools', tool.route]"
+                      (click)="closeMegaMenu()"
+                      class="tool-menu-item"
+                    >
+                      <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span>{{ tool.name }}</span>
+                    </a>
+                  }
+                </div>
 
-              <!-- Column 3 -->
-              <div class="mega-menu-column" *ngIf="shouldShowColumn(2)">
-                @for (tool of getToolsForColumn(2); track tool.id) {
-                  <a
-                    mat-menu-item
-                    [routerLink]="['/tools', tool.route]"
-                    (click)="closeMegaMenu()"
-                    class="tool-menu-item"
-                  >
-                    <mat-icon>{{ tool.icon }}</mat-icon>
-                    <span>{{ tool.name }}</span>
-                  </a>
-                }
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-
-        <!-- Tab 2: Categories -->
-        <mat-tab label="Categories">
-          <div class="mega-menu-tab-content">
-            <div class="mega-menu-columns">
-              <!-- Column 1 -->
-              <div class="mega-menu-column" *ngIf="shouldShowCategoryColumn(0)">
-                @for (category of getCategoriesForColumn(0); track category.id) {
-                  <a
-                    mat-menu-item
-                    [routerLink]="['/tools']"
-                    [queryParams]="{category: category.id}"
-                    (click)="closeMegaMenu()"
-                    class="category-menu-item"
-                  >
-                    <mat-icon>{{ category.icon }}</mat-icon>
-                    <div class="category-info">
-                      <span class="category-name">{{ category.name }}</span>
-                      <span class="category-count">{{ getToolCount(category.id) }} tools</span>
-                    </div>
-                  </a>
-                }
-              </div>
-
-              <!-- Column 2 -->
-              <div class="mega-menu-column" *ngIf="shouldShowCategoryColumn(1)">
-                @for (category of getCategoriesForColumn(1); track category.id) {
-                  <a
-                    mat-menu-item
-                    [routerLink]="['/tools']"
-                    [queryParams]="{category: category.id}"
-                    (click)="closeMegaMenu()"
-                    class="category-menu-item"
-                  >
-                    <mat-icon>{{ category.icon }}</mat-icon>
-                    <div class="category-info">
-                      <span class="category-name">{{ category.name }}</span>
-                      <span class="category-count">{{ getToolCount(category.id) }} tools</span>
-                    </div>
-                  </a>
-                }
-              </div>
-
-              <!-- Column 3 -->
-              <div class="mega-menu-column" *ngIf="shouldShowCategoryColumn(2)">
-                @for (category of getCategoriesForColumn(2); track category.id) {
-                  <a
-                    mat-menu-item
-                    [routerLink]="['/tools']"
-                    [queryParams]="{category: category.id}"
-                    (click)="closeMegaMenu()"
-                    class="category-menu-item"
-                  >
-                    <mat-icon>{{ category.icon }}</mat-icon>
-                    <div class="category-info">
-                      <span class="category-name">{{ category.name }}</span>
-                      <span class="category-count">{{ getToolCount(category.id) }} tools</span>
-                    </div>
-                  </a>
-                }
+                <!-- Column 3 -->
+                <div class="mega-menu-column" *ngIf="shouldShowColumn(2)">
+                  @for (tool of getToolsForColumn(2); track tool.id) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools', tool.route]"
+                      (click)="closeMegaMenu()"
+                      class="tool-menu-item"
+                    >
+                      <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span>{{ tool.name }}</span>
+                    </a>
+                  }
+                </div>
               </div>
             </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+          </mat-tab>
 
-      <!-- View All Link - Bottom Right -->
-      <div class="mega-menu-footer">
-        <a
-          mat-raised-button
-          [routerLink]="['/tools']"
-          class="view-all-link"
-        >
-          <mat-icon>apps</mat-icon>
-          <span>View All Tools</span>
-        </a>
+          <!-- Tab 2: Categories -->
+          <mat-tab label="Categories">
+            <div class="mega-menu-tab-content">
+              <div class="mega-menu-columns">
+                <!-- Column 1 -->
+                <div class="mega-menu-column" *ngIf="shouldShowCategoryColumn(0)">
+                  @for (category of getCategoriesForColumn(0); track category.id) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools']"
+                      [queryParams]="{category: category.id}"
+                      (click)="closeMegaMenu()"
+                      class="category-menu-item"
+                    >
+                      <mat-icon>{{ category.icon }}</mat-icon>
+                      <div class="category-info">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+                      </div>
+                    </a>
+                  }
+                </div>
+
+                <!-- Column 2 -->
+                <div class="mega-menu-column" *ngIf="shouldShowCategoryColumn(1)">
+                  @for (category of getCategoriesForColumn(1); track category.id) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools']"
+                      [queryParams]="{category: category.id}"
+                      (click)="closeMegaMenu()"
+                      class="category-menu-item"
+                    >
+                      <mat-icon>{{ category.icon }}</mat-icon>
+                      <div class="category-info">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+                      </div>
+                    </a>
+                  }
+                </div>
+
+                <!-- Column 3 -->
+                <div class="mega-menu-column" *ngIf="shouldShowCategoryColumn(2)">
+                  @for (category of getCategoriesForColumn(2); track category.id) {
+                    <a
+                      mat-menu-item
+                      [routerLink]="['/tools']"
+                      [queryParams]="{category: category.id}"
+                      (click)="closeMegaMenu()"
+                      class="category-menu-item"
+                    >
+                      <mat-icon>{{ category.icon }}</mat-icon>
+                      <div class="category-info">
+                        <span class="category-name">{{ category.name }}</span>
+                        <span class="category-count">{{ getToolCount(category.id) }} tools</span>
+                      </div>
+                    </a>
+                  }
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+        <!-- View All Link - Bottom Right -->
+        <div class="mega-menu-footer">
+          <a
+            mat-raised-button
+            [routerLink]="['/tools']"
+            class="view-all-link"
+          >
+            <mat-icon>apps</mat-icon>
+            <span>View All Tools</span>
+          </a>
+        </div>
       </div>
-    </div>
+    } @placeholder {
+      <div class="mega-menu-loading">
+        <mat-icon>apps</mat-icon>
+        <span>Loading tools menu...</span>
+      </div>
+    }
   </mat-menu>
 
   <!-- About Dropdown Menu (Desktop) -->
