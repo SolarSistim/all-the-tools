@@ -18,7 +18,7 @@ export const articleResolver: ResolveFn<Article | null> = (
   const slug = route.paramMap.get('slug');
 
   if (!slug) {
-    router.navigate(['/blog']);
+    router.navigate(['/404']);
     return of(null);
   }
 
@@ -27,14 +27,14 @@ export const articleResolver: ResolveFn<Article | null> = (
     map((article) => {
       if (!article) {
         console.error(`Article not found: ${slug}`);
-        router.navigate(['/blog']);
+        router.navigate(['/404']);
         return null;
       }
       return article;
     }),
     catchError((error) => {
       console.error(`Error loading article: ${slug}`, error);
-      router.navigate(['/blog']);
+      router.navigate(['/404']);
       return of(null);
     })
   );
@@ -44,7 +44,7 @@ export const articleResolver: ResolveFn<Article | null> = (
     switchMap(() => {
       console.error(`Article load timeout after 8 seconds: ${slug}`);
       console.error('User agent:', navigator.userAgent);
-      router.navigate(['/blog']);
+      router.navigate(['/404']);
       return of(null);
     })
   );

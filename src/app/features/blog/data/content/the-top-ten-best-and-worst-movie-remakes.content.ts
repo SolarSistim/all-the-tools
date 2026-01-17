@@ -25,6 +25,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'When Your Monster Becomes A Friend: How Badlands Demystifies the Yautja',
+          slug: 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja'
+        }
+      ]
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -300,6 +312,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'When Your Monster Becomes A Friend: How Badlands Demystifies the Yautja',
+          slug: 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja'
+        }
+      ]
+    },
+  },
+  {
     type: 'adsense',
     data: {
       adClient: 'ca-pub-7077792325295668',
@@ -552,6 +576,18 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'The original 1990 film wasn\'t a masterpiece, but it had atmosphere, interesting ideas about guilt and mortality, and a committed cast. The remake has none of that. It goes through the motions, hits every expected beat, and never surprises or unsettles the viewer. Even Kiefer Sutherland, in a small supporting role, can\'t inject life into it.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'When Your Monster Becomes A Friend: How Badlands Demystifies the Yautja',
+          slug: 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja'
+        }
+      ]
     },
   },
   {

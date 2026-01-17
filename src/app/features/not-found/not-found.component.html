@@ -1,0 +1,58 @@
+<div class="not-found-container">
+  <div class="content-wrapper">
+    <!-- Error Message Section -->
+    <div class="error-section">
+      <div class="error-icon-wrapper">
+        <mat-icon class="error-icon">error_outline</mat-icon>
+      </div>
+      <h1 class="error-title">404</h1>
+      <h2 class="error-subtitle">Page Not Found</h2>
+      <p class="error-message">
+        The page you're looking for doesn't exist. It may have been moved, deleted, or the URL might be incorrect.
+      </p>
+      <div class="error-actions">
+        <a mat-raised-button color="primary" routerLink="/" class="home-button">
+          <mat-icon>home</mat-icon>
+          Back to Home
+        </a>
+        <a mat-stroked-button routerLink="/blog" class="blog-button">
+          <mat-icon>article</mat-icon>
+          Browse Blog
+        </a>
+      </div>
+    </div>
+
+    <!-- Latest Posts Section -->
+    <div class="latest-posts-section">
+      <h3 class="section-title">
+        <mat-icon>trending_up</mat-icon>
+        Latest Articles
+      </h3>
+      <div class="posts-grid">
+        <mat-card *ngFor="let post of latestPosts" class="post-card">
+          <a [routerLink]="['/blog', post.slug]" class="post-link">
+            <div class="post-image-wrapper">
+              <img
+                [src]="post.heroImage.src"
+                [alt]="post.heroImage.alt"
+                class="post-image"
+                loading="lazy"
+              />
+              <div class="post-overlay">
+                <mat-icon class="read-icon">arrow_forward</mat-icon>
+              </div>
+            </div>
+            <div class="post-content">
+              <div class="post-meta">
+                <span class="post-category">{{ post.category }}</span>
+                <span class="post-date">{{ post.publishedDate }}</span>
+              </div>
+              <h4 class="post-title">{{ post.title }}</h4>
+              <p class="post-description">{{ post.description }}</p>
+            </div>
+          </a>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

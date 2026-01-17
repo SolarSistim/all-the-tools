@@ -25,6 +25,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
+          slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand'
+        }
+      ]
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Unlike traditional barcode scanners that require expensive hardware, this tool works entirely in your browser. All processing happens locally on your device, which means your scanned codes never leave your computer or phone—perfect for privacy-sensitive inventory management or personal cataloging.',
@@ -225,6 +237,18 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<strong>Hold steady.</strong> Blurry photos lead to failed scans. Brace your arms or rest your device on a stable surface to minimize camera shake. On mobile, use two hands for extra stability.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
+          slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand'
+        }
+      ]
     },
   },
   {

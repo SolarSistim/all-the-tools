@@ -72,6 +72,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'The Top Ten Worst Movie Remakes',
+          slug: 'the-top-ten-worst-movie-remakes'
+        }
+      ]
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -229,6 +241,18 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: "Thia being a Weyland-Yutani synthetic deployed because humans wouldn't last a day on this planet feels extremely on-brand for the Company: clinical, cowardly, exploitative. And Tessa's whole descent into Company obedience - the way she starts sounding less like a person and more like corporate machinery - that's classic Alien energy. When she calls Dek \"property\" I actually felt that ugly little chill, like oh right... Weyland-Yutani doesn't just buy planets, they buy lives.",
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'The Top Ten Worst Movie Remakes',
+          slug: 'the-top-ten-worst-movie-remakes'
+        }
+      ]
     },
   },
   {

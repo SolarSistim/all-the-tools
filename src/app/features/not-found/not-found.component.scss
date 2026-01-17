@@ -1,0 +1,324 @@
+@import '../../../styles/utilities';
+
+.not-found-container {
+  min-height: 100vh;
+  padding: $spacing-2xl 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 $spacing-md;
+  margin: 0 auto;
+}
+
+// ============================================
+// ERROR SECTION
+// ============================================
+
+.error-section {
+  text-align: center;
+  padding: $spacing-3xl $spacing-md;
+  margin-bottom: $spacing-3xl;
+}
+
+.error-icon-wrapper {
+  margin-bottom: $spacing-lg;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.error-icon {
+  font-size: 120px !important;
+  width: 120px !important;
+  height: 120px !important;
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 30px var(--neon-cyan-glow));
+
+  @media (max-width: 768px) {
+    font-size: 80px !important;
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+
+.error-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 8rem;
+  font-weight: 700;
+  margin: 0 0 $spacing-md 0;
+  background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+
+  @media (max-width: 768px) {
+    font-size: 5rem;
+  }
+}
+
+.error-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-lg 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.error-message {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto $spacing-2xl auto;
+  line-height: 1.6;
+}
+
+.error-actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+.home-button,
+.blog-button {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0 $spacing-xl !important;
+  height: 48px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: $spacing-xs !important;
+
+  mat-icon {
+    margin: 0 !important;
+  }
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+}
+
+.home-button {
+  background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: 0 4px 15px var(--neon-cyan-glow) !important;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--neon-cyan-glow), 0 0 30px var(--neon-pink-glow) !important;
+  }
+}
+
+.blog-button {
+  color: var(--neon-cyan) !important;
+  border-color: var(--neon-cyan) !important;
+  border-width: 2px !important;
+
+  &:hover {
+    background: rgba(109, 212, 255, 0.1) !important;
+    box-shadow: 0 0 20px rgba(109, 212, 255, 0.3);
+  }
+}
+
+// ============================================
+// LATEST POSTS SECTION
+// ============================================
+
+.latest-posts-section {
+  margin-top: $spacing-3xl;
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-xl 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  justify-content: center;
+
+  mat-icon {
+    color: var(--neon-cyan);
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.post-card {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 8px 24px rgba(0, 188, 212, 0.2) !important;
+
+    &::before {
+      opacity: 1;
+    }
+
+    .post-image {
+      transform: scale(1.05);
+    }
+
+    .post-overlay {
+      opacity: 1;
+    }
+  }
+}
+
+.post-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.post-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.read-icon {
+  color: var(--neon-cyan);
+  font-size: 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  filter: drop-shadow(0 0 12px var(--neon-cyan-glow));
+}
+
+.post-content {
+  padding: $spacing-lg;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-sm;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.post-category {
+  color: var(--neon-pink);
+  font-weight: 600;
+}
+
+.post-date {
+  color: var(--text-tertiary);
+}
+
+.post-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-sm 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-description {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -30,6 +30,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'How to Use the Barcode Scanner Tool: Complete Guide',
+          slug: 'how-to-use-the-barcode-scanner-tool'
+        }
+      ]
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -239,6 +251,18 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'If OCR got something wrong (happens with poorly framed or unfocused images), tap to edit manually. Fix mistakes, tap the checkmark button, then hit "Approve & Save."',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'How to Use the Barcode Scanner Tool: Complete Guide',
+          slug: 'how-to-use-the-barcode-scanner-tool'
+        }
+      ]
     },
   },
   {
