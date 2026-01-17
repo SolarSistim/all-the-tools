@@ -654,6 +654,14 @@ mat-card {
     font-family: 'Space Grotesk', sans-serif;
     padding: $spacing-md $spacing-xl;
     font-size: 1.125rem;
+    color: var(--neon-cyan) !important;
+    border-color: var(--neon-cyan) !important;
+    border-width: 2px !important;
+
+    &:hover {
+      background: rgba(109, 212, 255, 0.1) !important;
+      box-shadow: 0 0 20px rgba(109, 212, 255, 0.3);
+    }
   }
 
   .cancel-button {

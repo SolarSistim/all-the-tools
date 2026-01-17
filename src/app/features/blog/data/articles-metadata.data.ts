@@ -9,6 +9,40 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '24',
+    slug: 'how-to-use-the-barcode-scanner-tool',
+    title: 'How to Use the Barcode Scanner Tool: Complete Guide',
+    description:
+      'Learn how to scan product barcodes using your phone or computer camera with our free barcode scanner. Step-by-step instructions, tips for best results, and everything you need to know.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-17-2026',
+    heroImage: {
+      src: '/assets/blog/how-to-use-the-barcode-scanner-tool/og-barcode-scanner-guide.jpg',
+      alt: 'How to Use the Barcode Scanner Tool: Complete Guide',
+    },
+    tags: ['Barcode Scanner', 'Tools', 'How-To', 'Tutorial', 'UPC', 'EAN', 'Productivity'],
+    category: 'Technology',
+    metaDescription:
+      'Complete guide to using the free barcode scanner tool. Learn how to scan UPC, EAN, Code 128, and QR codes with your device camera, manage scanned codes, and troubleshoot common issues.',
+    metaKeywords: [
+      'Barcode scanner tutorial',
+      'How to scan barcodes',
+      'UPC scanner guide',
+      'EAN scanner tutorial',
+      'Barcode reader how-to',
+      'Product scanner guide',
+      'QR code scanner',
+      'Code 128 scanner',
+      'Mobile barcode scanning',
+      'Inventory scanning',
+      'Free barcode tool',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['21', '8', '3'],
+  },
+  {
     id: '23',
     slug: 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja',
     title: 'When Your Monster Becomes A Friend: How Badlands Demystifies the Yautja',

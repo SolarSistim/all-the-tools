@@ -16,6 +16,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 type ScannerState = 'idle' | 'scanResult' | 'error';
 
@@ -35,7 +36,8 @@ type ScannerState = 'idle' | 'scanResult' | 'error';
     MatDialogModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './barcode-reader.html',
   styleUrl: './barcode-reader.scss',
@@ -59,6 +61,13 @@ export class BarcodeReader implements OnInit, OnDestroy {
   private codeReader: BrowserMultiFormatReader | null = null;
 
   displayedColumns: string[] = ['code', 'format', 'timestamp', 'actions'];
+
+  relatedBlogPosts = [
+    {
+      title: 'How to Use the Barcode Scanner Tool',
+      slug: 'how-to-use-the-barcode-scanner-tool'
+    }
+  ];
 
   ngOnInit(): void {
     this.logEnvironmentInfo();

@@ -1,0 +1,15 @@
+<div class="related-blog-posts">
+  <div class="related-header">
+    <mat-icon class="related-icon">article</mat-icon>
+    <span class="related-label">Related:</span>
+  </div>
+  <div class="related-links">
+    <a
+      *ngFor="let post of posts; let isLast = last"
+      [routerLink]="['/blog', post.slug]"
+      class="related-link"
+    >
+      {{ post.title }}<span *ngIf="!isLast" class="separator">,</span>
+    </a>
+  </div>
+</div>

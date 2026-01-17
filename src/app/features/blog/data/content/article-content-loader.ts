@@ -23,6 +23,12 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'how-to-use-the-barcode-scanner-tool':
+        const barcodeScannerModule = await withTimeout(
+          import('./how-to-use-the-barcode-scanner-tool.content')
+        );
+        return barcodeScannerModule.content;
+
       case 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja':
         const badlandsModule = await withTimeout(
           import('./when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja.content')

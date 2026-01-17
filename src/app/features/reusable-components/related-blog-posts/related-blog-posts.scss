@@ -1,0 +1,115 @@
+@import '../../../../styles/utilities';
+
+.related-blog-posts {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-xl;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--neon-cyan);
+  border-radius: 12px;
+  margin-bottom: $spacing-xl;
+  transition: all 0.3s ease;
+  flex-wrap: wrap;
+
+  &:hover {
+    border-left-color: var(--neon-pink);
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: $spacing-md;
+  }
+}
+
+.related-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+}
+
+.related-icon {
+  color: var(--neon-cyan);
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+}
+
+.related-label {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  font-size: 1.875rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  align-items: center;
+  flex: 1;
+}
+
+.related-link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.875rem;
+  color: var(--neon-cyan);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  padding: 2px 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: var(--neon-pink);
+    transform: translateX(2px);
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateX(0);
+  }
+}
+
+.separator {
+  color: var(--text-tertiary);
+  margin-left: 2px;
+  user-select: none;
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  .related-blog-posts {
+    gap: $spacing-sm;
+  }
+
+  .related-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-xs;
+  }
+
+  .separator {
+    display: none;
+  }
+}
