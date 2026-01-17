@@ -45,6 +45,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'When Snow Falls on the Sunshine State: Pensacola Braces for Another Unlikely Winter',
+          slug: 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter'
+        }
+      ]
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -192,6 +204,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'When Snow Falls on the Sunshine State: Pensacola Braces for Another Unlikely Winter',
+          slug: 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter'
+        }
+      ]
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -311,6 +335,18 @@ export const content: ContentBlock[] = [
     data: {
       adClient: 'ca-pub-7077792325295668',
       adSlot: '3887470191',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'When Snow Falls on the Sunshine State: Pensacola Braces for Another Unlikely Winter',
+          slug: 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter'
+        }
+      ]
     },
   },
   {

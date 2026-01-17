@@ -75,6 +75,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'Why Pensacon Has Gone Downhill - And What Can Be Done About It',
+          slug: 'why-pensacon-has-gone-downhill'
+        }
+      ]
+    },
+  },
+  {
     type: 'adsense',
     data: {
       adClient: 'ca-pub-7077792325295668',
@@ -130,6 +142,18 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Climate conversations got complicated in the comments too. One user suggested the snow somehow proved climate change, prompting: "Warming or cooling, which is it?!" The answer, as scientists have explained, is both. Global warming doesn\'t mean everywhere gets hotter constantly; it means weather patterns become more extreme and less predictable.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention',
+          slug: 'pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention'
+        }
+      ]
     },
   },
   {

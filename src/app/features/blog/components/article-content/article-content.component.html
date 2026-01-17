@@ -162,5 +162,11 @@
       [content]="block.data.content || block.data.message || ''"
       [icon]="block.data.icon || 'info'"
     ></app-alert-primary>
+
+    <!-- Related Blog Posts Component -->
+    <app-related-blog-posts
+      *ngIf="block.type === 'component' && block.data.componentName === 'related-blog-posts'"
+      [posts]="block.data.posts"
+    ></app-related-blog-posts>
   </ng-container>
 </div>
