@@ -23,6 +23,12 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter':
+        const pensacolaSnowModule = await withTimeout(
+          import('./when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter.content')
+        );
+        return pensacolaSnowModule.content;
+
       case 'how-to-use-the-barcode-scanner-tool':
         const barcodeScannerModule = await withTimeout(
           import('./how-to-use-the-barcode-scanner-tool.content')

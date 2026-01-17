@@ -9,6 +9,39 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '25',
+    slug: 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter',
+    title: 'When Snow Falls on the Sunshine State: Pensacola Braces for Another Unlikely Winter',
+    description:
+      'Pensacola recorded 8.9 inches of snow last January, shattering a 130-year record. Now the Florida panhandle might see snow again. Here\'s why the polar vortex keeps sending Arctic air to the Sunshine State.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-18-2026',
+    heroImage: {
+      src: '/assets/blog/when-snowflakes-land-on-the-sunshine-state/og-pensacola-snow.jpg',
+      alt: 'When Snowflakes Land on the Sunshine State: Pensacola Braces for Another Unlikely Winter',
+    },
+    tags: ['Pensacola', 'Weather', 'Florida', 'Snow', 'Climate', 'Polar Vortex'],
+    category: 'Amateur Sleuthing',
+    metaDescription:
+      'Pensacola shattered a 130-year snow record with 8.9 inches last January. Now the Florida panhandle might see snow again as the polar vortex disrupts normal weather patterns.',
+    metaKeywords: [
+      'Pensacola snow',
+      'Florida snow',
+      'Polar vortex',
+      'Pensacola weather',
+      'Florida winter storm',
+      'Arctic blast Florida',
+      'Pensacola January 2025',
+      'Climate change Florida',
+      'Florida panhandle snow',
+      'Unusual weather Florida',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['18', '19', '1'],
+  },
+  {
     id: '24',
     slug: 'how-to-use-the-barcode-scanner-tool',
     title: 'How to Use the Barcode Scanner Tool: Complete Guide',
