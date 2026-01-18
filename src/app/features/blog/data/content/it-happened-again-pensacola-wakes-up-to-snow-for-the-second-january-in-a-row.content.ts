@@ -85,6 +85,13 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
+      type: 'adsense',
+      data: {
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
+      },
+    },
+    {
       type: 'divider',
       data: {},
     },
@@ -136,13 +143,6 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
             caption: 'A once-in-a-lifetime event that broke 130-year records',
           },
         ],
-      },
-    },
-    {
-      type: 'adsense',
-      data: {
-        adClient: 'ca-pub-7077792325295668',
-        adSlot: '3887470191',
       },
     },
     {
@@ -200,13 +200,6 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'adsense',
-      data: {
-        adClient: 'ca-pub-7077792325295668',
-        adSlot: '3887470191',
-      },
-    },
-    {
       type: 'divider',
       data: {},
     },
@@ -224,15 +217,16 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'paragraph',
+      type: 'adsense',
       data: {
-        text: 'Meteorologists had pegged the chances pretty low for this weekend, somewhere in that 10-15% range for any accumulation at all. The European model was more optimistic than the American GFS, and for a brief window this morning, conditions aligned just enough for the European model to claim victory. The cold front moved through fast, the moisture was there, and for maybe two or three hours, Pensacola looked like it belonged somewhere much further north.',
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
       },
     },
     {
       type: 'paragraph',
       data: {
-        text: 'Then the sun came up properly and reminded everyone where we actually live.',
+        text: 'Meteorologists had pegged the chances pretty low for this weekend, somewhere in that 10-15% range for any accumulation at all. The European model was more optimistic than the American GFS, and for a brief window this morning, conditions aligned just enough for the European model to claim victory. The cold front moved through fast, the moisture was there, and for maybe two or three hours, Pensacola looked like it belonged somewhere much further north.',
       },
     },
     {
@@ -240,6 +234,12 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       data: {
         adClient: 'ca-pub-7077792325295668',
         adSlot: '3887470191',
+      },
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text: 'Then the sun came up properly and reminded everyone where we actually live.',
       },
     },
     {
@@ -293,6 +293,13 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
+      type: 'adsense',
+      data: {
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
+      },
+    },
+    {
       type: 'paragraph',
       data: {
         text: 'But Florida getting snow two Januarys straight, after going decades between significant accumulation events? That feels less like a pattern and more like the atmosphere playing pranks on us.',
@@ -302,13 +309,6 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       type: 'paragraph',
       data: {
         text: 'Will January 2027 bring a third helping? Honestly, who knows. A year ago I would have said the chances of seeing snow again in 2026 were basically zero, and yet here I am writing about watching flakes fall on my porch this morning. Predictions feel kind of pointless at this point.',
-      },
-    },
-    {
-      type: 'adsense',
-      data: {
-        adClient: 'ca-pub-7077792325295668',
-        adSlot: '3887470191',
       },
     },
     {
