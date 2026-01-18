@@ -35,6 +35,13 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
+      type: 'adsense',
+      data: {
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
+      },
+    },
+    {
       type: 'heading',
       data: {
         level: 2,
@@ -70,6 +77,13 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       type: 'paragraph',
       data: {
         text: 'The contrast between 2025 and 2026 couldn\'t be sharper, honestly. Last January felt apocalyptic in the best possible way. Nearly eight inches of snow blanketed everything, the interstate became a parking lot, schools closed for almost a week, and neighbors who\'d never held a snowball suddenly discovered the pure joy of pelting each other with one. Dogs lost their minds. Surfboards became sleds. Someone drew... well, you know what someone drew.',
+      },
+    },
+    {
+      type: 'adsense',
+      data: {
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
       },
     },
     {
@@ -217,23 +231,9 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'adsense',
-      data: {
-        adClient: 'ca-pub-7077792325295668',
-        adSlot: '3887470191',
-      },
-    },
-    {
       type: 'paragraph',
       data: {
         text: 'Meteorologists had pegged the chances pretty low for this weekend, somewhere in that 10-15% range for any accumulation at all. The European model was more optimistic than the American GFS, and for a brief window this morning, conditions aligned just enough for the European model to claim victory. The cold front moved through fast, the moisture was there, and for maybe two or three hours, Pensacola looked like it belonged somewhere much further north.',
-      },
-    },
-    {
-      type: 'adsense',
-      data: {
-        adClient: 'ca-pub-7077792325295668',
-        adSlot: '3887470191',
       },
     },
     {
