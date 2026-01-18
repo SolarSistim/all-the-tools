@@ -52,7 +52,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-18-2026',
     heroImage: {
-      src: '/assets/blog/pensacola-snow-second-year/pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.jpg',
       alt: 'It Happened Again: Pensacola Wakes Up to Snow for the Second January in a Row',
     },
     tags: ['Pensacola', 'Weather', 'Florida', 'Snow', 'Climate', 'Polar Vortex'],

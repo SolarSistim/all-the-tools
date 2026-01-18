@@ -24,7 +24,7 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
     'Pensacola Beach snow',
   ],
   heroImage: {
-    src: '/assets/blog/pensacola-snow-second-year/pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.jpg',
+    src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.jpg',
     alt: 'Snow falling in Pensacola, Florida for the second January in a row',
   },
   content: [
@@ -127,32 +127,32 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       data: {
         images: [
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2025-snow-01.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-01.jpg?updatedAt=1768755053870',
             alt: 'Pensacola snow January 2025',
             caption: 'The historic 2025 snowfall that blanketed Pensacola',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2025-snow-02.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-02.jpg?updatedAt=1768755054167',
             alt: 'Pensacola snow accumulation 2025',
             caption: 'Nearly 8 inches of snow accumulated across the city',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2025-snow-03.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-03.jpg?updatedAt=1768755053843',
             alt: 'Pensacola winter storm 2025',
             caption: 'The snow lasted for days in freezing temperatures',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2025-snow-04.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-04.jpg?updatedAt=1768755053898',
             alt: 'Pensacola snow day 2025',
             caption: 'Schools closed and the interstate became a parking lot',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2025-snow-05.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-05.jpg?updatedAt=1768755053860',
             alt: 'Pensacola snowfall January 2025',
             caption: 'Neighbors experiencing their first real snowfall',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2025-snow-06.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-06.jpg?updatedAt=1768755054068',
             alt: 'Historic Pensacola snow 2025',
             caption: 'A once-in-a-lifetime event that broke 130-year records',
           },
@@ -181,32 +181,32 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       data: {
         images: [
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2026-snow-01.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2025-snow-06.jpg?updatedAt=1768755054068',
             alt: 'Pensacola snow January 2026',
             caption: 'The second consecutive January with snow in Pensacola',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2026-snow-02.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2026-snow-02.jpg?updatedAt=1768755054189',
             alt: 'Light snow dusting Pensacola 2026',
             caption: 'A lighter dusting compared to 2025, but still remarkable',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2026-snow-03.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2026-snow-03.jpg?updatedAt=1768755054223',
             alt: 'Pensacola wintry mix 2026',
             caption: 'Early morning flakes mixing with sleet',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2026-snow-04.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2026-snow-04.jpg?updatedAt=1768755054251',
             alt: 'Pensacola Beach snow 2026',
             caption: 'Even Pensacola Beach reported some accumulation',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2026-snow-05.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2026-snow-05.jpg?updatedAt=1768755054263',
             alt: 'Florida panhandle snow 2026',
             caption: 'The snow melted quickly as the sun came up',
           },
           {
-            src: '/assets/blog/pensacola-snow-second-year/pensacola-2026-snow-06.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Wakes%20Up%20to%20Snow%20for%20the%20Second%20January%20in%20a%20Row/pensacola-2026-snow-06.jpg?updatedAt=1768755054262',
             alt: 'Second year Pensacola snow',
             caption: 'Brief but beautiful - a reminder that 2025 wasn\'t a dream',
           },

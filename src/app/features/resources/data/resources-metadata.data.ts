@@ -1,6 +1,25 @@
 import { ResourceMetadata } from '../models/resource.models';
 
-export const RESOURCES_METADATA: ResourceMetadata[] = [  {
+export const RESOURCES_METADATA: ResourceMetadata[] = [  
+  {
+    id: '2', // Adjusted ID for sequence
+    slug: 'how-to-convert-video-to-webp-with-ezgif',
+    title: 'Convert MP4 Videos to High-Quality WebP Animations with EZGif',
+    subtitle: 'A Fast, Free, and Easy Way to Create Web-Friendly Animations Without Slowing Down Your Site',
+    description: 'Looking for a way to add movement to your website without the bulky file size of a GIF? EZGif allows you to convert MP4 and other video files (up to 200MB) into Animated WebP images. WebP files offer better quality and smaller sizes than traditional GIFs, making your website load faster for your visitors. No software installation is required—just upload and convert!<br/><br/><a href="https://ezgif.com/video-to-webp">Convert Your Videos to WebP with EZGif</a>',
+    externalUrl: 'https://ezgif.com/video-to-webp',
+    publishedDate: '2024-05-22', // Current date
+    tags: ['Web Optimization', 'Video Conversion', 'WebP', 'Website Performance'],
+    category: 'Digital Tools',
+    metaDescription: 'Easily convert MP4, AVI, and MOV videos to Animated WebP format using EZGif. Improve your website speed with high-quality, small-file-size animations.',
+    metaKeywords: ['Video to WebP', 'EZGif', 'Website Speed', 'Animated Images', 'Image Compression'],
+    featured: true,
+    display: true,
+    isPaid: false,
+    difficulty: 'easy',
+    relatedResources: ['1'],
+},
+  {
     id: '1',
     slug: 'online-help-for-senior-citizens-by-a-senior-citizen',
     title: 'Online Business Help for Senior Citizens by a Senior Citizen from Computer Help to SEO',
