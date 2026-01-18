@@ -137,6 +137,18 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
         text: 'What separates Howard\'s work from typical fan renders isn\'t just talent, though there\'s certainly plenty of that. It\'s his deep understanding of how real cinematography works, combined with mastery of professional-grade tools that most hobbyists are barely even aware of.',
       },
     },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'LIGHTHUGGERS: Fan Art Captures Alastair Reynolds\' Revelation Space',
+          slug: 'lighthuggers-when-fan-art-captures-the-impossible'
+        }
+      ]
+    },
+  },
     {
       type: 'paragraph',
       data: {
@@ -312,6 +324,18 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
         text: 'Here\'s something that recently happened that needs addressing: someone accused Howard\'s work of being AI-generated.',
       },
     },
+  {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'LIGHTHUGGERS: Fan Art Captures Alastair Reynolds\' Revelation Space',
+          slug: 'lighthuggers-when-fan-art-captures-the-impossible'
+        }
+      ]
+    },
+  },
     {
       type: 'paragraph',
       data: {
