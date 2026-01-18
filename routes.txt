@@ -1,4 +1,5 @@
 /
+/404
 /about
 /accessibility
 /blog
@@ -11,6 +12,7 @@
 /blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world
 /blog/lighthuggers-when-fan-art-captures-the-impossible
 /blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
+/blog/pensacola-snow-second-year
 /blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention
 /blog/stop-typing-in-those-tiny-on-reward-codes-by-hand
 /blog/the-deneb-paradox-when-first-contact-means-last-contact
@@ -39,8 +41,8 @@
 /resources/money-market-funds-kenya-safety
 /resources/online-help-for-senior-citizens-by-a-senior-citizen
 /resources/rxjs-documentation
+/resources/squoosh-image-optimizer
 /resources/typescript-handbook
-/404
 /terms
 /tools
 /tools/barcode-reader

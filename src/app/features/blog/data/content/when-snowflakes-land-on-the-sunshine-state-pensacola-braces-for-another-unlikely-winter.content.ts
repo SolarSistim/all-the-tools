@@ -183,6 +183,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'related-blog-posts',
+      posts: [
+        {
+          title: 'It Happened Again: Pensacola Wakes Up to Snow for the Second January in a Row',
+          slug: 'pensacola-snow-second-year'
+        }
+      ]
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,

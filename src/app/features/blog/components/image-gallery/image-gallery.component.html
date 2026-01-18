@@ -1,4 +1,4 @@
-<div class="image-gallery" [ngClass]="'layout-' + (data.layout || 'grid')">
+<div class="image-gallery" [ngClass]="gridClass">
   <div
     *ngFor="let image of data.images; let i = index"
     class="gallery-item"

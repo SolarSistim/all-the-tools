@@ -23,6 +23,12 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'pensacola-snow-second-year':
+        const pensacolaSnow2026Module = await withTimeout(
+          import('./it-happened-again-pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.content')
+        );
+        return pensacolaSnow2026Module.IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY_IN_A_ROW.content;
+
       case 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter':
         const pensacolaSnowModule = await withTimeout(
           import('./when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter.content')

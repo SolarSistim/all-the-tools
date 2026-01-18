@@ -9,6 +9,39 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '26',
+    slug: 'pensacola-snow-second-year',
+    title: 'It Happened Again: Pensacola Wakes Up to Snow for the Second January in a Row',
+    description:
+      'Pensacola gets snow for the second consecutive January, though this year\'s light dusting was far more modest than 2025\'s historic 7.6-inch dump.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-18-2026',
+    heroImage: {
+      src: '/assets/blog/pensacola-snow-second-year/pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.jpg',
+      alt: 'It Happened Again: Pensacola Wakes Up to Snow for the Second January in a Row',
+    },
+    tags: ['Pensacola', 'Weather', 'Florida', 'Snow', 'Climate', 'Polar Vortex'],
+    category: 'Amateur Sleuthing',
+    metaDescription:
+      'Pensacola wakes up to snow for the second January in a row on January 18, 2026. A light dusting unlike last year\'s historic 7.6-inch dump, but still unprecedented for the Florida Panhandle.',
+    metaKeywords: [
+      'Pensacola snow 2026',
+      'Florida snow January 2026',
+      'Pensacola weather',
+      'Florida winter storm',
+      'Arctic blast Florida',
+      'Second consecutive January snow',
+      'Climate change Florida',
+      'Florida panhandle snow',
+      'Unusual weather Florida',
+      'Pensacola Beach snow',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: ['25', '18', '19'],
+  },
+  {
     id: '25',
     slug: 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter',
     title: 'When Snow Falls on the Sunshine State: Pensacola Braces for Another Unlikely Winter',

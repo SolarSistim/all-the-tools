@@ -21,6 +21,16 @@ export class ImageGalleryComponent {
   lightboxOpen = false;
   currentImageIndex = 0;
 
+  get imageCount(): number {
+    return this.data.images.length;
+  }
+
+  get gridClass(): string {
+    if (this.imageCount === 1) return 'grid-single';
+    if (this.imageCount === 2) return 'grid-double';
+    return 'grid-triple';
+  }
+
   openLightbox(index: number): void {
     this.currentImageIndex = index;
     this.lightboxOpen = true;
