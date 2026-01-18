@@ -23,6 +23,12 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'one-man-one-pc-cinema-quality-starships-howard-day':
+        const howardDayModule = await withTimeout(
+          import('./one-man-one-pc-cinema-quality-starships-howard-day.content')
+        );
+        return howardDayModule.ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY.content;
+
       case 'pensacola-snow-second-year':
         const pensacolaSnow2026Module = await withTimeout(
           import('./it-happened-again-pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.content')

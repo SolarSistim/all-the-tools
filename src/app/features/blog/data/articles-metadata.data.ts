@@ -9,6 +9,41 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '27',
+    slug: 'one-man-one-pc-cinema-quality-starships-howard-day',
+    title: 'One Man, One PC, Cinema-Quality Starships: The Remarkable Work of Howard Day',
+    description:
+      'Howard Day creates cinema-quality starship renders from his home PC that rival big-budget studio productions. His Star Trek and Star Wars CGI work is so impressive, some people think it\'s AI-generated.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-18-2026',
+    heroImage: {
+      src: '/assets/blog/cinema-quality-starships-howard-day/cinema-quality-starships-howard-day.jpg',
+      alt: 'Cinema-quality starship render by Howard Day',
+    },
+    tags: ['CGI', '3D Art', 'Star Trek', 'Star Wars', 'Digital Art', 'VFX', 'Fan Art'],
+    category: 'Pop Culture Chronicles',
+    metaDescription:
+      'Howard Day creates cinema-quality Star Trek and Star Wars starship renders from his home PC using 3ds Max and V-Ray. His work is so professional, people think it\'s AI-generated.',
+    metaKeywords: [
+      'Howard Day',
+      'Howie Day',
+      'Star Trek CGI',
+      'Star Wars CGI',
+      '3D starships',
+      'Cinema quality renders',
+      '3ds Max',
+      'V-Ray rendering',
+      'Starship animation',
+      'Fan art',
+      'Digital art',
+      'VFX artist',
+    ],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: [],
+  },
+  {
     id: '26',
     slug: 'pensacola-snow-second-year',
     title: 'It Happened Again: Pensacola Wakes Up to Snow for the Second January in a Row',
