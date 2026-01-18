@@ -96,7 +96,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/navigate-to-reward-code-scanner.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/navigate-to-reward-code-scanner.jpg',
       alt: 'Navigate to the On! Reward Code Scanner tool',
       caption: 'Navigate to the On! Nicotine Rewards Scanner on AllTheThings.dev',
     },
@@ -117,7 +117,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/click-the-scan-reward-code-button.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/click-the-scan-reward-code-button.jpg',
       alt: 'Select the Scan Reward Code button.',
       caption: 'Select the Scan Reward Code button.',
     },
@@ -151,7 +151,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/take-picture-of-nicotine-pouch.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/take-picture-of-nicotine-pouch.jpg',
       alt: 'Take a picture of the nicotine pouch.',
       caption: 'Take a picture of the nicotine pouch.',
     },
@@ -182,7 +182,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/position-crop-box.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/position-crop-box.jpg',
       alt: 'Size and position the crop box over the reward code.',
       caption: 'Size and position the crop box over the reward code.',
     },
@@ -242,7 +242,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/review-and-approve-scan.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/review-and-approve-scan.jpg',
       alt: 'Review and approved reward code scan.',
       caption: 'Review and approved reward code scan.',
     },
@@ -310,7 +310,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/managing-your-codes.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/managing-your-codes.jpg',
       alt: 'Managing your reward codes.',
       caption: 'Managing your reward codes.',
     },

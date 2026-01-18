@@ -117,17 +117,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-01.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/c-beams-01.jpg',
           alt: 'C-Beams intense space combat with gatling turrets',
           caption: 'Frantic combat with gatling turrets and missile barrages',
         },
         {
-          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-02.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/c-beams-02.jpg',
           alt: 'C-Beams tactical subsystem targeting',
           caption: 'Surgical strikes using subsystem targeting',
         },
         {
-          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-03.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/c-beams-03.jpg',
           alt: 'C-Beams ship boarding and looting',
           caption: 'Boarding disabled ships for valuable loot',
         },
@@ -235,17 +235,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-04.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/c-beams-04.jpg',
           alt: 'C-Beams asteroid field exploration',
           caption: 'Navigating treacherous asteroid fields',
         },
         {
-          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-05.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/c-beams-05.jpg',
           alt: 'C-Beams space station docking',
           caption: 'Manual docking at orbital stations',
         },
         {
-          src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-06.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/c-beams-06.jpg',
           alt: 'C-Beams derelict ship discovery',
           caption: 'Discovering derelict ships and anomalies',
         },

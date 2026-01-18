@@ -26,7 +26,7 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
     'VFX artist',
   ],
   heroImage: {
-    src: '/assets/blog/cinema-quality-starships-howard-day/cinema-quality-starships-howard-day.jpg',
+    src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/cinema-quality-starships-howard-day.jpg',
     alt: 'Cinema-quality starship render by Howard Day',
   },
   content: [
@@ -35,7 +35,7 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       data: {
         images: [
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-Dynamic-pursuit-shot.webp',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-Dynamic-pursuit-shot.webp?updatedAt=1768758216745',
             alt: 'USS Niimiipuu Dynamic Pursuit Shot',
             caption: 'USS Niimiipuu Dynamic Pursuit Shot',
           }
@@ -79,32 +79,32 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       data: {
         images: [
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Krakatoa-01.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-01.jpg?updatedAt=1768758216413',
             alt: 'USS Krakatoa render by Howard Day - view 1',
             caption: 'USS Krakatoa showcasing cinema-quality detail',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Krakatoa-02.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-01.jpg?updatedAt=1768758216413',
             alt: 'USS Krakatoa render by Howard Day - view 2',
             caption: 'Multiple angles revealing the intricate modeling work',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Krakatoa-03.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-03.jpg?updatedAt=1768758216433',
             alt: 'USS Krakatoa render by Howard Day - view 3',
             caption: 'Professional-grade lighting and material work',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Krakatoa-04.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-03.jpg?updatedAt=1768758216433',
             alt: 'USS Krakatoa render by Howard Day - view 4',
             caption: 'Detail shots highlighting the craftsmanship',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Krakatoa-05.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-05.jpg?updatedAt=1768758216510',
             alt: 'USS Krakatoa render by Howard Day - view 5',
             caption: 'Every angle tells a story',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Krakatoa-06.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-06.jpg?updatedAt=1768758216488',
             alt: 'USS Krakatoa render by Howard Day - view 6',
             caption: 'The level of detail rivals official productions',
           },
@@ -173,32 +173,32 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       data: {
         images: [
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-01.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-01.jpg?updatedAt=1768758216429',
             alt: 'USS Niimiipuu render by Howard Day - view 1',
             caption: 'USS Niimiipuu demonstrating Howard\'s lighting expertise',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-02.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-02.jpg?updatedAt=1768758216483',
             alt: 'USS Niimiipuu render by Howard Day - view 2',
             caption: 'Cinematic angles that tell a visual story',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-03.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-03.jpg?updatedAt=1768758216471',
             alt: 'USS Niimiipuu render by Howard Day - view 3',
             caption: 'Professional cinematography meets 3D artistry',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-04.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-04.jpg?updatedAt=1768758216411',
             alt: 'USS Niimiipuu render by Howard Day - view 4',
             caption: 'Materials and textures that feel authentic',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-05.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-05.jpg?updatedAt=1768758216418',
             alt: 'USS Niimiipuu render by Howard Day - view 5',
             caption: 'Attention to detail at every scale',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/USS-Niimiipuu-06.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-06.jpg?updatedAt=1768758216361',
             alt: 'USS Niimiipuu render by Howard Day - view 6',
             caption: 'The result of thousands of hours of dedicated practice',
           },
@@ -235,32 +235,32 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       data: {
         images: [
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Immobilizer-418-01.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Immobilizer-418-01.jpg?updatedAt=1768758216514',
             alt: 'Immobilizer 418 render by Howard Day - view 1',
             caption: 'Immobilizer 418 - crossing universes with equal mastery',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Immobilizer-418-02.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Immobilizer-418-02.jpg?updatedAt=1768758216537',
             alt: 'Immobilizer 418 render by Howard Day - view 2',
             caption: 'Star Wars designs rendered with cinema-quality precision',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Immobilizer-418-03.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Immobilizer-418-03.jpg?updatedAt=1768758216594',
             alt: 'Immobilizer 418 render by Howard Day - view 3',
             caption: 'Authentic to the established universe',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Immobilizer-418-04.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Immobilizer-418-04.jpg?updatedAt=1768758216490',
             alt: 'Immobilizer 418 render by Howard Day - view 4',
             caption: 'Could easily appear in an official production',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Immobilizer-418-05.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Immobilizer-418-05.jpg?updatedAt=1768758216488',
             alt: 'Immobilizer 418 render by Howard Day - view 5',
             caption: 'Production-ready quality from a solo artist',
           },
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Immobilizer-418-06.jpg',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Immobilizer-418-06.jpg?updatedAt=1768758216470',
             alt: 'Immobilizer 418 render by Howard Day - view 6',
             caption: 'The raw computational power and skill on display',
           },
@@ -298,7 +298,7 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       data: {
         images: [
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/Star-Wars-Dive-Bomb.webp',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/Star-Wars-Dive-Bomb.webp?updatedAt=1768758216878',
             alt: 'Alliance B-Wings Dive Bomb an Imperial Star Destroyer',
             caption: 'Alliance B-Wings Dive Bomb an Imperial Star Destroyer',
           }
@@ -385,7 +385,7 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       data: {
         images: [
           {
-            src: '/assets/blog/cinema-quality-starships-howard-day/b-wing-versus-tie-interceptor.webp',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/b-wing-versus-tie-interceptor.webp?updatedAt=1768758216829',
             alt: 'Alliance B-Wings Melle with Tie Interceptor',
             caption: 'Alliance B-Wings Melle with Tie Interceptor',
           }

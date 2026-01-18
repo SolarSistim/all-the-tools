@@ -17,7 +17,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-18-2026',
     heroImage: {
-      src: '/assets/blog/cinema-quality-starships-howard-day/cinema-quality-starships-howard-day.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/cinema-quality-starships-howard-day.jpg?updatedAt=1768758216339',
       alt: 'Cinema-quality starship render by Howard Day',
     },
     tags: ['CGI', '3D Art', 'Star Trek', 'Star Wars', 'Digital Art', 'VFX', 'Fan Art'],
@@ -85,7 +85,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-18-2026',
     heroImage: {
-      src: '/assets/blog/when-snowflakes-land-on-the-sunshine-state/og-pensacola-snow.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Braces%20for%20Another%20Unlikely%20Winter/og-pensacola-snow.jpg',
       alt: 'When Snowflakes Land on the Sunshine State: Pensacola Braces for Another Unlikely Winter',
     },
     tags: ['Pensacola', 'Weather', 'Florida', 'Snow', 'Climate', 'Polar Vortex'],
@@ -118,7 +118,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-17-2026',
     heroImage: {
-      src: '/assets/blog/how-to-use-the-barcode-scanner-tool/og-barcode-scanner-guide.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/og-barcode-scanner-guide.jpg',
       alt: 'How to Use the Barcode Scanner Tool: Complete Guide',
     },
     tags: ['Barcode Scanner', 'Tools', 'How-To', 'Tutorial', 'UPC', 'EAN', 'Productivity'],
@@ -152,7 +152,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-15-2026',
     heroImage: {
-      src: '/assets/blog/how-badlands-demystifies-the-yautja/how-badlands-demystifies-the-yautja.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20Badlands%20Demystifies%20the%20Yautja/how-badlands-demystifies-the-yautja.jpg',
       alt: 'When Your Monster Becomes Your Friend: How Badlands Demystifies the Yautja',
     },
     tags: ['Predator', 'Badlands', 'Yautja', 'Science Fiction', 'Film Analysis', 'Alien', 'SciFi'],
@@ -183,7 +183,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-14-2026',
     heroImage: {
-      src: '/assets/blog/the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz/og-postiz-502-error.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Solving%20Internal%20Proxy%20Conflicts%20in%20Self-Hosted%20Postiz/og-postiz-502-error.jpg',
       alt: 'Fixing 502 Bad Gateway errors in self-hosted Postiz with Docker and reverse proxy',
     },
     tags: ['Docker', 'Self-Hosting', 'Postiz', 'DevOps', 'Networking', 'Troubleshooting'],
@@ -218,7 +218,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-13-2026',
     heroImage: {
-      src: '/assets/blog/stop-typing-in-those-tiny-on-reward-codes-by-hand/og-on-reward-scanner-blog-post.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/og-on-reward-scanner-blog-post.jpg',
       alt: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
     },
     tags: ['On! Rewards', 'OCR', 'Tools', 'Productivity', 'Mobile', 'Privacy'],
@@ -253,7 +253,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-06-2026',
     heroImage: {
-      src: '/assets/blog/lighthuggers-when-fan-art-captures-the-impossible.content/og-lighthuggers-fan-art.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/og-lighthuggers-fan-art.jpg',
       alt: 'LIGHTHUGGERS: When Fan Art Captures the Impossible',
     },
     tags: ['Revelation Space', 'Alastair Reynolds', 'Science Fiction', 'Fan Art', 'Lighthuggers', 'Concept Art'],
@@ -288,7 +288,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-05-2026',
     heroImage: {
-      src: '/assets/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content/og-pensacon-responds.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacon%20Responds/og-pensacon-responds.jpg',
       alt: 'Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention',
     },
     tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community', 'Reddit'],
@@ -321,7 +321,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-04-2026',
     heroImage: {
-      src: '/assets/blog/why-pensacon-has-gone-downhill.content/og-why-pensacon-has-gone-downhill.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Why%20Pensacon%20Has%20Gone%20Downhill/og-why-pensacon-has-gone-downhill.jpg',
       alt: 'Why Pensacon Has Gone Downhill - And What Can Be Done About It',
     },
     tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community'],
@@ -354,7 +354,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-03-2026',
     heroImage: {
-      src: '/assets/blog/we-need-to-talk-about-that-wormhole-scene-in-interstellar.content/og-interstellar-wormhole-scene.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/That%20Wormhole%20Scene%20in%20Interstellar/og-interstellar-wormhole-scene.jpg',
       alt: 'We Need to Talk About That Wormhole Scene in Interstellar',
     },
     tags: ['Interstellar', 'Christopher Nolan', 'Science Fiction', 'Movie Analysis', 'Film Critique'],
@@ -387,7 +387,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-03-2026',
     heroImage: {
-      src: '/assets/blog/how-to-sell-your-timber-for-top-dollar-in-ohio.content/og-how-to-sell-timber-ohio.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Sell%20Your%20Timber%20for%20Top%20Dollar%20in%20Ohio/og-how-to-sell-timber-ohio.jpg',
       alt: 'How to Sell Your Timber for Top Dollar in Ohio',
     },
     tags: ['Timber Sales', 'Ohio', 'Forestry', 'Land Management', 'Timber Buyers', 'Southeast Ohio'],
@@ -420,7 +420,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-02-2026',
     heroImage: {
-      src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/og-c-beams-the-space-action-rpg-that-gets-it.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/C-Beams%20The%20Top-Down%20Space%20Action%20RPG/og-c-beams-the-space-action-rpg-that-gets-it.jpg',
       alt: 'C-Beams: The Top-Down Space Action RPG That Gets It',
     },
     tags: ['Gaming', 'C-Beams', 'Space RPG', 'Top-Down Shooter', 'Indie Games', 'LevelCap'],
@@ -452,7 +452,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-02-2026',
     heroImage: {
-      src: '/assets/blog/the-top-ten-best-and-worst-movie-remakes.content/og-worst-movie-remakes.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%20Top%20Ten%20Worst%20Movie%20Remakes/og-worst-movie-remakes.jpg',
       alt: 'The Top Ten Worst Movie Remakes',
     },
     tags: ['Movies', 'Remakes', 'Total Recall', 'The Crow', 'Film Analysis', 'Bad Movies'],
@@ -483,7 +483,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-01-2026',
     heroImage: {
-      src: '/assets/blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content/og-kenya-tech-scene.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Kenyas%20Tech%20Scene/og-kenya-tech-scene.jpg',
       alt: 'Kenya\'s Tech Scene: How Developers Changed the World',
     },
     tags: ['Kenya', 'Technology', 'M-Pesa', 'Ushahidi', 'African Tech', 'Innovation'],

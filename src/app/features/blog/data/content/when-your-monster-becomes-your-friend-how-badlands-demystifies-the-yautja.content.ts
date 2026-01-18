@@ -16,7 +16,7 @@ export const content: ContentBlock[] = [
     data: {
       title: 'Predator: Badlands',
       year: 2025,
-      posterSrc: '/assets/blog/how-badlands-demystifies-the-yautja/predator-badlands-dvd-cover-art.jpg',
+      posterSrc: 'https://ik.imagekit.io/allthethingsdev/How%20Badlands%20Demystifies%20the%20Yautja/predator-badlands-dvd-cover-art.jpg?updatedAt=1768759474134',
       posterAlt: 'Predator: Badlands (2025) Poster',
       ratingsDate: 'January 16, 2026',
       ratings: [
@@ -33,7 +33,7 @@ export const content: ContentBlock[] = [
   {
     type: 'moviePoster',
     data: {
-      src: '/assets/blog/how-badlands-demystifies-the-yautja/predator-badlands-dvd-cover-art.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20Badlands%20Demystifies%20the%20Yautja/predator-badlands-dvd-cover-art.jpg?updatedAt=1768759474134',
       alt: 'Predator: Badlands (2025) Movie Poster',
       caption: 'Predator: Badlands (2025) - When your monster becomes your friend, is it still scary?',
       width: 70,
