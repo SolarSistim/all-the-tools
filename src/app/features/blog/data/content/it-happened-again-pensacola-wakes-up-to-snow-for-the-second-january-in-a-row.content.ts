@@ -139,10 +139,10 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'component',
+      type: 'adsense',
       data: {
-        componentName: 'adsense',
-        adSlot: '1234567890',
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
       },
     },
     {
@@ -200,10 +200,10 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'component',
+      type: 'adsense',
       data: {
-        componentName: 'adsense',
-        adSlot: '1234567890',
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
       },
     },
     {
@@ -236,10 +236,10 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'component',
+      type: 'adsense',
       data: {
-        componentName: 'adsense',
-        adSlot: '1234567890',
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
       },
     },
     {
@@ -305,10 +305,10 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
       },
     },
     {
-      type: 'component',
+      type: 'adsense',
       data: {
-        componentName: 'adsense',
-        adSlot: '1234567890',
+        adClient: 'ca-pub-7077792325295668',
+        adSlot: '3887470191',
       },
     },
     {
