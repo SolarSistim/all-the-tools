@@ -1,5 +1,5 @@
-<div class="article-content">
-  <ng-container *ngFor="let block of blocks">
+<div class="article-content" *ngIf="blocks && blocks.length > 0">
+  <div *ngFor="let block of blocks; trackBy: trackByIndex" class="content-block">
     <!-- Paragraph -->
     <p
       *ngIf="block.type === 'paragraph'"
@@ -9,43 +9,41 @@
     ></p>
 
     <!-- Heading -->
-    <ng-container *ngIf="block.type === 'heading'">
-      <h2
-        *ngIf="block.data.level === 2"
-        class="content-heading"
-        [id]="block.data.id || generateId(block.data.text)"
-      >
-        {{ block.data.text }}
-      </h2>
-      <h3
-        *ngIf="block.data.level === 3"
-        class="content-heading"
-        [id]="block.data.id || generateId(block.data.text)"
-      >
-        {{ block.data.text }}
-      </h3>
-      <h4
-        *ngIf="block.data.level === 4"
-        class="content-heading"
-        [id]="block.data.id || generateId(block.data.text)"
-      >
-        {{ block.data.text }}
-      </h4>
-      <h5
-        *ngIf="block.data.level === 5"
-        class="content-heading"
-        [id]="block.data.id || generateId(block.data.text)"
-      >
-        {{ block.data.text }}
-      </h5>
-      <h6
-        *ngIf="block.data.level === 6"
-        class="content-heading"
-        [id]="block.data.id || generateId(block.data.text)"
-      >
-        {{ block.data.text }}
-      </h6>
-    </ng-container>
+    <h2
+      *ngIf="block.type === 'heading' && block.data.level === 2"
+      class="content-heading"
+      [id]="block.data.id || generateId(block.data.text)"
+    >
+      {{ block.data.text }}
+    </h2>
+    <h3
+      *ngIf="block.type === 'heading' && block.data.level === 3"
+      class="content-heading"
+      [id]="block.data.id || generateId(block.data.text)"
+    >
+      {{ block.data.text }}
+    </h3>
+    <h4
+      *ngIf="block.type === 'heading' && block.data.level === 4"
+      class="content-heading"
+      [id]="block.data.id || generateId(block.data.text)"
+    >
+      {{ block.data.text }}
+    </h4>
+    <h5
+      *ngIf="block.type === 'heading' && block.data.level === 5"
+      class="content-heading"
+      [id]="block.data.id || generateId(block.data.text)"
+    >
+      {{ block.data.text }}
+    </h5>
+    <h6
+      *ngIf="block.type === 'heading' && block.data.level === 6"
+      class="content-heading"
+      [id]="block.data.id || generateId(block.data.text)"
+    >
+      {{ block.data.text }}
+    </h6>
 
     <!-- Image -->
     <app-article-image
@@ -88,14 +86,12 @@
     ></app-code-block>
 
     <!-- List -->
-    <ng-container *ngIf="block.type === 'list'">
-      <ul *ngIf="block.data.style === 'unordered'" class="content-list">
-        <li *ngFor="let item of block.data.items" [innerHTML]="item"></li>
-      </ul>
-      <ol *ngIf="block.data.style === 'ordered'" class="content-list">
-        <li *ngFor="let item of block.data.items" [innerHTML]="item"></li>
-      </ol>
-    </ng-container>
+    <ul *ngIf="block.type === 'list' && block.data.style === 'unordered'" class="content-list">
+      <li *ngFor="let item of block.data.items" [innerHTML]="item"></li>
+    </ul>
+    <ol *ngIf="block.type === 'list' && block.data.style === 'ordered'" class="content-list">
+      <li *ngFor="let item of block.data.items" [innerHTML]="item"></li>
+    </ol>
 
     <!-- CTA -->
     <div *ngIf="block.type === 'cta'" class="content-cta">
@@ -168,5 +164,5 @@
       *ngIf="block.type === 'component' && block.data.componentName === 'related-blog-posts'"
       [posts]="block.data.posts"
     ></app-related-blog-posts>
-  </ng-container>
+  </div>
 </div>

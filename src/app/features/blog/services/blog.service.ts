@@ -28,31 +28,10 @@ export class BlogService {
 
   // Cache for article metadata and previews
   private metadataCache = signal<ArticleMetadata[]>(BLOG_ARTICLES_METADATA);
-  private previewsCache = signal<ArticlePreview[]>([]);
   private fullArticlesCache = new Map<string, Article>(); // Cache loaded articles
 
   constructor() {
-    this.initializePreviewCache();
-  }
-
-  /**
-   * Initialize article preview cache
-   * Loads all article content to calculate accurate reading times
-   */
-  private async initializePreviewCache(): Promise<void> {
-    const previews = await Promise.all(
-      this.metadataCache().map(async (metadata) => {
-        // Load content to calculate accurate reading time
-        const content = await loadArticleContent(metadata.slug);
-        const article: Article = {
-          ...metadata,
-          content: content || [],
-        };
-
-        return this.convertMetadataToPreview(metadata, article);
-      })
-    );
-    this.previewsCache.set(previews);
+    // No initialization needed - metadata is already loaded from constant
   }
 
   /**
@@ -67,15 +46,11 @@ export class BlogService {
       featured?: boolean;
     }
   ): Observable<PaginatedResponse<ArticlePreview>> {
-    let previews = this.previewsCache();
-
-    // Fallback to metadata if previews cache is not yet initialized
-    if (previews.length === 0 && this.metadataCache().length > 0) {
-      previews = this.metadataCache().map(metadata => ({
-        ...metadata,
-        readingTime: this.estimateReadingTime(metadata),
-      }));
-    }
+    // Use metadata with estimated reading times
+    let previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
+      ...metadata,
+      readingTime: this.estimateReadingTime(metadata),
+    }));
 
     // Filter out non-displayed articles (display defaults to true if not specified)
     previews = previews.filter((p) => p.display !== false);
@@ -169,15 +144,12 @@ export class BlogService {
     limit: number = 3
   ): Observable<ArticlePreview[]> {
     let related: ArticlePreview[] = [];
-    let previews = this.previewsCache();
 
-    // Fallback to metadata if previews cache is not yet initialized
-    if (previews.length === 0 && this.metadataCache().length > 0) {
-      previews = this.metadataCache().map(metadata => ({
-        ...metadata,
-        readingTime: this.estimateReadingTime(metadata),
-      }));
-    }
+    // Use metadata with estimated reading times
+    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
+      ...metadata,
+      readingTime: this.estimateReadingTime(metadata),
+    }));
 
     const displayedPreviews = previews.filter((p) => p.display !== false);
 
@@ -236,15 +208,11 @@ export class BlogService {
    * Get featured articles
    */
   getFeaturedArticles(limit: number = 3): Observable<ArticlePreview[]> {
-    let previews = this.previewsCache();
-
-    // Fallback to metadata if previews cache is not yet initialized
-    if (previews.length === 0 && this.metadataCache().length > 0) {
-      previews = this.metadataCache().map(metadata => ({
-        ...metadata,
-        readingTime: this.estimateReadingTime(metadata),
-      }));
-    }
+    // Use metadata with estimated reading times
+    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
+      ...metadata,
+      readingTime: this.estimateReadingTime(metadata),
+    }));
 
     const featured = previews
       .filter((p) => p.display !== false)
@@ -257,15 +225,11 @@ export class BlogService {
    * Get recent articles
    */
   getRecentArticles(limit: number = 5): Observable<ArticlePreview[]> {
-    let previews = this.previewsCache();
-
-    // Fallback to metadata if previews cache is not yet initialized
-    if (previews.length === 0 && this.metadataCache().length > 0) {
-      previews = this.metadataCache().map(metadata => ({
-        ...metadata,
-        readingTime: this.estimateReadingTime(metadata),
-      }));
-    }
+    // Use metadata with estimated reading times
+    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
+      ...metadata,
+      readingTime: this.estimateReadingTime(metadata),
+    }));
 
     const recent = [...previews]
       .filter((p) => p.display !== false)
@@ -314,27 +278,6 @@ export class BlogService {
     });
 
     return Math.ceil(totalWords / wordsPerMinute);
-  }
-
-  /**
-   * Convert ArticleMetadata to ArticlePreview
-   */
-  private convertMetadataToPreview(metadata: ArticleMetadata, article: Article): ArticlePreview {
-    return {
-      id: metadata.id,
-      slug: metadata.slug,
-      title: metadata.title,
-      description: metadata.description,
-      author: metadata.author,
-      publishedDate: metadata.publishedDate,
-      heroImage: metadata.heroImage,
-      tags: metadata.tags,
-      category: metadata.category,
-      readingTime: this.calculateReadingTime(article),
-      featured: metadata.featured,
-      display: metadata.display,
-      hasAudio: metadata.hasAudio,
-    };
   }
 
   /**

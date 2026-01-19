@@ -21,7 +21,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       alt: 'Cinema-quality starship render by Howard Day',
     },
     tags: ['CGI', '3D Art', 'Star Trek', 'Star Wars', 'Digital Art', 'VFX', 'Fan Art'],
-    category: 'Pop Culture Chronicles',
+    category: '3D RENDERING',
     metaDescription:
       'Howard Day creates cinema-quality Star Trek and Star Wars starship renders from his home PC using 3ds Max and V-Ray. His work is so professional, people think it\'s AI-generated.',
     metaKeywords: [

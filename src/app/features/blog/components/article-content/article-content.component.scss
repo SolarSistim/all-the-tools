@@ -9,6 +9,11 @@
   }
 }
 
+// Wrapper for each content block - should be transparent
+.content-block {
+  display: contents; // This makes the wrapper "invisible" for layout purposes
+}
+
 .content-paragraph {
   margin: 1.5rem 0;
   line-height: 1.8;

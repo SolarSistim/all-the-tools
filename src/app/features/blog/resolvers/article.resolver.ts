@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { Observable, of, race, timer } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Article } from '../models/blog.models';
 import { BlogService } from '../services/blog.service';
 
@@ -22,11 +22,9 @@ export const articleResolver: ResolveFn<Article | null> = (
     return of(null);
   }
 
-  // Add resolver-level timeout for Safari compatibility
-  const articleLoad$ = blogService.getArticleBySlug(slug).pipe(
+  return blogService.getArticleBySlug(slug).pipe(
     map((article) => {
       if (!article) {
-        console.error(`Article not found: ${slug}`);
         router.navigate(['/404']);
         return null;
       }
@@ -38,16 +36,4 @@ export const articleResolver: ResolveFn<Article | null> = (
       return of(null);
     })
   );
-
-  // Race against a 8-second timeout
-  const timeout$ = timer(8000).pipe(
-    switchMap(() => {
-      console.error(`Article load timeout after 8 seconds: ${slug}`);
-      console.error('User agent:', navigator.userAgent);
-      router.navigate(['/404']);
-      return of(null);
-    })
-  );
-
-  return race(articleLoad$, timeout$);
 };

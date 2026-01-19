@@ -57,4 +57,11 @@ export class ArticleContentComponent {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
   }
+
+  /**
+   * TrackBy function for ngFor to improve performance and hydration
+   */
+  trackByIndex(index: number): number {
+    return index;
+  }
 }

@@ -1,19 +1,6 @@
 import { ContentBlock } from '../../models/blog.models';
 
 /**
- * Timeout helper for imports
- * Safari iOS sometimes hangs on dynamic imports - this prevents infinite loading
- */
-function withTimeout<T>(promise: Promise<T>, timeoutMs: number = 10000): Promise<T> {
-  return Promise.race([
-    promise,
-    new Promise<T>((_, reject) =>
-      setTimeout(() => reject(new Error(`Import timeout after ${timeoutMs}ms`)), timeoutMs)
-    )
-  ]);
-}
-
-/**
  * Load article content by slug
  * Uses explicit imports so the bundler knows which files to include
  */
@@ -24,123 +11,111 @@ export async function loadArticleContent(
     // Explicit import mapping for each article
     switch (slug) {
       case 'one-man-one-pc-cinema-quality-starships-howard-day':
-        const howardDayModule = await withTimeout(
-          import('./one-man-one-pc-cinema-quality-starships-howard-day.content')
-        );
+        const howardDayModule = await import('./one-man-one-pc-cinema-quality-starships-howard-day.content');
         return howardDayModule.ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY.content;
 
       case 'pensacola-snow-second-year':
-        const pensacolaSnow2026Module = await withTimeout(
-          import('./it-happened-again-pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.content')
-        );
+        const pensacolaSnow2026Module = await import('./it-happened-again-pensacola-wakes-up-to-snow-for-the-second-january-in-a-row.content');
         return pensacolaSnow2026Module.IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY_IN_A_ROW.content;
 
       case 'when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter':
-        const pensacolaSnowModule = await withTimeout(
-          import('./when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter.content')
-        );
+        const pensacolaSnowModule = await import('./when-snowflakes-land-on-the-sunshine-state-pensacola-braces-for-another-unlikely-winter.content');
         return pensacolaSnowModule.content;
 
       case 'how-to-use-the-barcode-scanner-tool':
-        const barcodeScannerModule = await withTimeout(
-          import('./how-to-use-the-barcode-scanner-tool.content')
-        );
+        const barcodeScannerModule = await import('./how-to-use-the-barcode-scanner-tool.content');
         return barcodeScannerModule.content;
 
       case 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja':
-        const badlandsModule = await withTimeout(
-          import('./when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja.content')
-        );
+        const badlandsModule = await import('./when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja.content');
         return badlandsModule.content;
 
       case 'we-need-to-talk-about-that-wormhole-scene-in-interstellar':
-        const interstellarModule = await withTimeout(
-          import('./we-need-to-talk-about-that-wormhole-scene-in-interstellar.content')
-        );
+        const interstellarModule = await import('./we-need-to-talk-about-that-wormhole-scene-in-interstellar.content');
         return interstellarModule.content;
 
       case 'how-to-sell-your-timber-for-top-dollar-in-ohio':
-        const timberModule = await withTimeout(import('./how-to-sell-your-timber-for-top-dollar-in-ohio.content'));
+        const timberModule = await import('./how-to-sell-your-timber-for-top-dollar-in-ohio.content');
         return timberModule.content;
 
       case 'c-beams-the-top-down-space-action-rpg-that-gets-it':
-        const cBeamsModule = await withTimeout(import('./c-beams-the-top-down-space-action-rpg-that-gets-it.content'));
+        const cBeamsModule = await import('./c-beams-the-top-down-space-action-rpg-that-gets-it.content');
         return cBeamsModule.content;
 
       case 'the-top-ten-worst-movie-remakes':
-        const remakesModule = await withTimeout(import('./the-top-ten-best-and-worst-movie-remakes.content'));
+        const remakesModule = await import('./the-top-ten-best-and-worst-movie-remakes.content');
         return remakesModule.content;
 
       case 'kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world':
-        const kenyaModule = await withTimeout(import('./kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content'));
+        const kenyaModule = await import('./kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content');
         return kenyaModule.content;
 
       case 'when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys':
-        const willysModule = await withTimeout(import('./when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content'));
+        const willysModule = await import('./when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content');
         return willysModule.content;
 
       case 'we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential':
-        const weRememberModule = await withTimeout(import('./we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content'));
+        const weRememberModule = await import('./we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content');
         return weRememberModule.content;
 
       case 'the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career':
-        const headphonesModule = await withTimeout(import('./the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career.content'));
+        const headphonesModule = await import('./the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career.content');
         return headphonesModule.content;
 
       case 'my-wife-and-i-have-visited-george-bistro-nearly-30-times':
-        const georgeModule = await withTimeout(import('./my-wife-and-i-have-visited-george-bistro-nearly-30-times.content'));
+        const georgeModule = await import('./my-wife-and-i-have-visited-george-bistro-nearly-30-times.content');
         return georgeModule.content;
 
       case 'i-built-a-roku-compatibility-checker':
-        const rokuModule = await withTimeout(import('./i-built-a-roku-compatibility-checker.content'));
+        const rokuModule = await import('./i-built-a-roku-compatibility-checker.content');
         return rokuModule.content;
 
       case 'these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him':
-        const grinchModule = await withTimeout(import('./these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.content'));
+        const grinchModule = await import('./these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.content');
         return grinchModule.content;
 
       case 'the-deneb-paradox-when-first-contact-means-last-contact':
-        const denebModule = await withTimeout(import('./the-deneb-paradox-when-first-contact-means-last-contact.content'));
+        const denebModule = await import('./the-deneb-paradox-when-first-contact-means-last-contact.content');
         return denebModule.content;
 
       case 'how-to-calculate-percentages-in-your-head':
-        const percentagesModule = await withTimeout(import('./how-to-calculate-percentages-in-your-head.content'));
+        const percentagesModule = await import('./how-to-calculate-percentages-in-your-head.content');
         return percentagesModule.content;
 
       case 'why-truckers-drift-to-the-right-on-the-highway':
-        const truckersModule = await withTimeout(import('./why-truckers-drift-to-the-right-on-the-highway.content'));
+        const truckersModule = await import('./why-truckers-drift-to-the-right-on-the-highway.content');
         return truckersModule.content;
 
       case 'wordpress-vs-angular-why-i-built-my-site-with-zero-backend':
-        const wpModule = await withTimeout(import('./wordpress-vs-angular-why-i-built-my-site-with-zero-backend.content'));
+        const wpModule = await import('./wordpress-vs-angular-why-i-built-my-site-with-zero-backend.content');
         return wpModule.content;
 
       case 'i-switched-from-facebook-to-reddit-for-doomscrolling':
-        const redditModule = await withTimeout(import('./i-switched-from-facebook-to-reddit-for-doomscrolling.content'));
+        const redditModule = await import('./i-switched-from-facebook-to-reddit-for-doomscrolling.content');
         return redditModule.content;
 
       case 'the-wild-story-of-the-gaudy-palace-on-scenic-highway':
-        const palaceModule = await withTimeout(import('./the-wild-story-of-the-gaudy-palace-on-scenic-highway.content'));
+        const palaceModule = await import('./the-wild-story-of-the-gaudy-palace-on-scenic-highway.content');
         return palaceModule.content;
 
       case 'why-pensacon-has-gone-downhill':
-        const pensaconModule = await withTimeout(import('./why-pensacon-has-gone-downhill.content'));
+        const pensaconModule = await import('./why-pensacon-has-gone-downhill.content');
         return pensaconModule.content;
 
       case 'pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention':
-        const pensaconRespondsModule = await withTimeout(import('./pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content'));
+        const pensaconRespondsModule = await import('./pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention.content');
         return pensaconRespondsModule.content;
 
       case 'lighthuggers-when-fan-art-captures-the-impossible':
-        const lighthuggersModule = await withTimeout(import('./lighthuggers-when-fan-art-captures-the-impossible.content'));
+        const lighthuggersModule = await import('./lighthuggers-when-fan-art-captures-the-impossible.content');
         return lighthuggersModule.content;
 
       case 'stop-typing-in-those-tiny-on-reward-codes-by-hand':
-        const onRewardModule = await withTimeout(import('./stop-typing-in-those-tiny-on-reward-codes-by-hand.content'));
+        const onRewardModule = await import('./stop-typing-in-those-tiny-on-reward-codes-by-hand.content');
         return onRewardModule.content;
 
       case 'the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz':
-        const postizModule = await withTimeout(import('./the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz.content'));
+        const postizModule = await import('./the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz.content');
         return postizModule.content;
 
       default:
@@ -150,7 +125,7 @@ export async function loadArticleContent(
   } catch (error) {
     console.error(`Failed to load content for article: ${slug}`, error);
 
-    // Log specific error details for Safari debugging
+    // Log specific error details for debugging
     if (error instanceof Error) {
       console.error('Error details:', {
         message: error.message,

@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { skip } from 'rxjs/operators';
 import { Article, ArticlePreview } from '../../models/blog.models';
 import { BlogService } from '../../services/blog.service';
 import { MetaService } from '../../../../core/services/meta.service';
@@ -74,16 +75,28 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
       this.router.navigate(['/blog']);
     }
 
-    // Watch for route changes (if navigating between articles)
-    this.route.data.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
-      const newArticle = data['article'] as Article | null;
-      if (newArticle && newArticle.id !== this.article?.id) {
-        this.article = newArticle;
-        this.readingTime = this.blogService.calculateReadingTime(newArticle);
-        this.articleUrl = this.blogService.getArticleUrl(newArticle.slug);
-        this.updateMetaTags();
-        this.updateStructuredData();
-        this.loadRelatedArticles();
+    // Watch for route changes (only for navigating between articles, not initial load)
+    // Skip the first emission since we already handled it above with snapshot.data
+    this.route.data.pipe(
+      skip(1), // Skip first emission (already handled with snapshot)
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: (data) => {
+        const newArticle = data['article'] as Article | null;
+
+        if (!newArticle) {
+          this.router.navigate(['/blog']);
+          return;
+        }
+
+        if (newArticle.id !== this.article?.id) {
+          this.article = newArticle;
+          this.readingTime = this.blogService.calculateReadingTime(newArticle);
+          this.articleUrl = this.blogService.getArticleUrl(newArticle.slug);
+          this.updateMetaTags();
+          this.updateStructuredData();
+          this.loadRelatedArticles();
+        }
       }
     });
   }
