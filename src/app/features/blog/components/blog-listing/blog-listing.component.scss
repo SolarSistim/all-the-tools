@@ -417,14 +417,10 @@
 
 .article-title {
   margin: 0;
-  font-size: 1.375rem;
+  font-size: 1.23rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .article-description {
@@ -580,14 +576,10 @@
 
 .article-list-title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.33rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .article-list-description {
@@ -774,6 +766,6 @@
   }
 
   .article-list-title {
-    font-size: 1.25rem;
+    font-size: 1.13rem;
   }
 }
