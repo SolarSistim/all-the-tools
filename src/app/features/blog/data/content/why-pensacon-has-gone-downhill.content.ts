@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/blog/why-pensacon-has-gone-downhill.content/why-pensacon-has-gone-downhill.mp3',
+      src: 'https://5l50ubfz3u.ucarecd.net/e33b2d36-9d76-4fbb-9d22-baa0413621b3/whypensaconhasgonedownhill.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },

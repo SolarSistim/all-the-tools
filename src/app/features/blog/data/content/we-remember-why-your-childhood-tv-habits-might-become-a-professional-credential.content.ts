@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/blog/we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content/why-your-childhood-tv-habits-might-beomce-a-professional-credential.mp3',
+      src: 'https://5l50ubfz3u.ucarecd.net/62fd4f18-df9e-4cc3-8b11-286be25eb208/whyyourchildhoodtvhabitsmightbeomceaprofessionalcredential.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },

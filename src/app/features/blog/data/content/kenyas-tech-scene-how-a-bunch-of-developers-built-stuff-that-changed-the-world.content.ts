@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.content/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world.mp3',
+      src: 'https://5l50ubfz3u.ucarecd.net/c67a9cd3-a1cb-471e-98cb-bd0eaba5664e/kenyastechscenehowabunchofdevelopersbuiltstuffthatchangedtheworld.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },

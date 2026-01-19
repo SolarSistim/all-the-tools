@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/blog/c-beams-the-top-down-space-action-rpg-that-gets-it.content/c-beams-the-top-down-space-action-rpg-that-gets-it.mp3',
+      src: 'https://5l50ubfz3u.ucarecd.net/62d7d09b-ddc5-439a-b325-3acaf5b83175/cbeamsthetopdownspaceactionrpgthatgetsit.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },

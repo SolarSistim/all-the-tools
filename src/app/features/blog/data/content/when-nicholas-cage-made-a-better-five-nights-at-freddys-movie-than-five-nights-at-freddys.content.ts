@@ -7,7 +7,7 @@ export const content: ContentBlock[] = [
   {
     type: 'audio',
     data: {
-      src: '/assets/blog/when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content/nicholas-cagewillys-wonderland.mp3',
+      src: 'https://5l50ubfz3u.ucarecd.net/d48acd8a-41a1-4568-89b0-6e29cada92da/nicholascagewillyswonderland.mp3',
       title: 'Listen to this article',
       description: 'Prefer to listen? Play the audio version of this article.',
     },
