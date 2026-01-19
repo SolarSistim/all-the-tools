@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'blog-components-showcase':
+        const showcaseModule = await import('./blog-components-showcase.content');
+        return showcaseModule.BLOG_COMPONENTS_SHOWCASE.content;
+
       case 'one-man-one-pc-cinema-quality-starships-howard-day':
         const howardDayModule = await import('./one-man-one-pc-cinema-quality-starships-howard-day.content');
         return howardDayModule.ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY.content;

@@ -9,6 +9,26 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '100',
+    slug: 'blog-components-showcase',
+    title: 'Blog Components Showcase - Developer Reference',
+    description: 'A comprehensive showcase of all available blog components with JSON examples for easy reference.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-19-2026',
+    heroImage: {
+      src: 'https://placehold.co/1200x630/1a1f35/00d9ff?text=Component+Showcase',
+      alt: 'Blog Components Showcase',
+    },
+    tags: ['Documentation', 'Reference', 'Components'],
+    category: 'Documentation',
+    metaDescription: 'Complete reference guide for all blog components available in the system.',
+    metaKeywords: ['blog components', 'documentation', 'reference', 'examples'],
+    featured: false,
+    hasAudio: false,
+    display: false,
+    relatedArticles: [],
+  },
+  {
     id: '27',
     slug: 'one-man-one-pc-cinema-quality-starships-howard-day',
     title: 'One Man, One PC, Cinema-Quality Starships: The Remarkable Work of Howard Day',
