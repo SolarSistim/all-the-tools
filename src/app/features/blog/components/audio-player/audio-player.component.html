@@ -24,6 +24,7 @@
       <audio
         #audioElement
         [src]="src"
+        crossorigin="anonymous"
         (timeupdate)="onTimeUpdate()"
         (loadedmetadata)="onLoadedMetadata()"
         (error)="onError()"
