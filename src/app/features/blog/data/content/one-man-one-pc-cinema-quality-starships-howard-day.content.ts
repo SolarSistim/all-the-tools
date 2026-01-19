@@ -156,6 +156,14 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       },
     },
     {
+      type: 'video',
+      data: {
+        url: 'https://www.youtube.com/watch?v=NR_lO2beqgc',
+        title: 'The Niimiipuu Retaliates!',
+        description: 'Watch Howard Day\'s stunning USS Niimiipuu animation',
+      },
+    },
+    {
       type: 'paragraph',
       data: {
         text: 'But the software is just the beginning. What truly sets his work apart is his obsessive attention to the details that make CGI feel real rather than synthetic. In forum posts on Trek BBS, Howard has discussed his process for replicating the pearlescent paint effects seen on the TMP-era Enterprise refit, describing his solution as "extremely hacky and fake" while acknowledging it "against all reason seems to work really well." This kind of experimental problem-solving - finding unconventional paths to authentic results - defines his approach.',
@@ -312,6 +320,14 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       },
     },
     {
+      type: 'video',
+      data: {
+        url: 'https://www.youtube.com/watch?v=pRjrIgYewwU',
+        title: 'USS Monro tows a disabled Merchantman!',
+        description: 'Watch Howard Day\'s stunning USS Monro animation',
+      },
+    },
+    {
       type: 'heading',
       data: {
         level: 2,
@@ -340,6 +356,14 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
       type: 'paragraph',
       data: {
         text: 'Let that sink in for a moment. Work that involves custom 3D modeling at polygon counts in the tens of millions. Work that requires deep understanding of physically-based rendering, UV mapping, material creation, and animation principles. Work that Howard has documented extensively through forum posts, work-in-progress screenshots, and behind-the-scenes breakdowns. Someone looked at all of that and thought a text prompt could produce it.',
+      },
+    },
+    {
+      type: 'video',
+      data: {
+        url: 'https://www.youtube.com/watch?v=NR_lO2beqgc',
+        title: 'The Niimiipuu Retaliates!',
+        description: 'Watch Howard Day\'s stunning USS Niimiipuu animation',
       },
     },
     {

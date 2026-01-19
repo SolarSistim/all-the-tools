@@ -681,6 +681,41 @@
   }
 }
 
+// Pagination dividers
+.pagination-divider {
+  border: none;
+  height: 1px;
+  background-color: #2a3140;
+  margin: 0;
+}
+
+.top-divider-upper {
+  margin-bottom: 0.5rem;
+}
+
+.top-divider-lower {
+  margin-top: 0.5rem;
+  margin-bottom: 16px;
+}
+
+.bottom-divider-upper {
+  margin-bottom: 0.5rem;
+}
+
+.bottom-divider-lower {
+  margin-top: 0.5rem;
+}
+
+// Top pagination override
+::ng-deep .top-pagination .pagination {
+  margin: 0;
+}
+
+// Bottom pagination override
+::ng-deep .bottom-pagination .pagination {
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .blog-title {
     font-size: 2rem;
