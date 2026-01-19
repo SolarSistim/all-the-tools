@@ -84,12 +84,12 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
             caption: 'USS Krakatoa showcasing cinema-quality detail',
           },
           {
-            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-01.jpg?updatedAt=1768758216413',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-04.jpg?updatedAt=1768758216418',
             alt: 'USS Krakatoa render by Howard Day - view 2',
             caption: 'Multiple angles revealing the intricate modeling work',
           },
           {
-            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-03.jpg?updatedAt=1768758216433',
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Krakatoa-02.jpg?updatedAt=1768758216520',
             alt: 'USS Krakatoa render by Howard Day - view 3',
             caption: 'Professional-grade lighting and material work',
           },

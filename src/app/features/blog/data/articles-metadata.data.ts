@@ -515,7 +515,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-31-2025',
     heroImage: {
-      src: '/assets/blog/when-nicholas-cage-made-a-better-five-nights-at-freddys-movie-than-five-nights-at-freddys.content/og-willys-wonderland-better-than-fnaf.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/When%20Nicholas%20Cage%20made%20a%20better%20FNAF%20movie%20than%20FNAF/og-willys-wonderland-better-than-fnaf.jpg',
       alt: 'When Nicholas Cage Made a Better Five Nights at Freddy\'s Movie',
     },
     tags: ['Willy\'s Wonderland', 'Five Nights at Freddy\'s', 'Nicolas Cage', 'Horror', 'Movie Review'],
@@ -545,7 +545,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-30-2025',
     heroImage: {
-      src: '/assets/blog/we-remember-why-your-childhood-tv-habits-might-become-a-professional-credential.content/og-we-remember-childhood-tv-habits.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/We%20remember%20childhood%20TV%20habits/og-we-remember-childhood-tv-habits.jpg',
       alt: 'Why Your Childhood TV Habits Might Become a Professional Credential',
     },
     tags: ['AI', 'Future of Work', 'Memory', 'Authenticity', 'Deepfakes'],
@@ -575,7 +575,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-30-2025',
     heroImage: {
-      src: '/assets/blog/the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career.content/og-the-invisible-door-noise-cancelling-headphones.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%20Invisible%20Door%20-%20Noise%20Cancelling%20Headphones/og-the-invisible-door-noise-cancelling-headphones.jpg',
       alt: 'The Invisible Door - How noise cancelling headphones saved my programming career',
     },
     tags: ['Programming', 'Productivity', 'Remote Work', 'Focus', 'Noise Cancelling Headphones'],
@@ -604,7 +604,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-28-2025',
     heroImage: {
-      src: '/assets/blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times.content/og-georges-bistro-review.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/og-georges-bistro-review.jpg',
       alt: 'My Wife And I Have Visited George Bistro Nearly 30 Times',
     },
     tags: ['Restaurant Review', 'Food', 'Fine Dining', 'Pensacola', 'George Bistro'],
@@ -661,7 +661,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-24-2025',
     heroImage: {
-      src: '/assets/blog/these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.content/og-these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/These%20Grinch%20lyrics%20unload%20on%20him/og-these-song-lyrics-do-not-tease-the-grinch-they-unload-on-him.jpg',
       alt: 'These Song Lyrics Do Not Tease the Grinch. They Unload on Him.',
     },
     tags: ['The Grinch', 'Psychology', 'Christmas', 'Pop Culture Analysis'],
@@ -689,7 +689,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-21-2025',
     heroImage: {
-      src: '/assets/blog/the-deneb-paradox-when-first-contact-means-last-contact.content/og-pluribus-the-deneb-paradox-when-first-contact-means-last-contact.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%20Debeb%20paradox/og-pluribus-the-deneb-paradox-when-first-contact-means-last-contact.jpg',
       alt: 'The Deneb Paradox: When First Contact Means Last Contact',
     },
     tags: ['Pluribus', 'TV Analysis', 'Science Fiction', 'Vince Gilligan'],
@@ -717,7 +717,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-21-2025',
     heroImage: {
-      src: '/assets/blog/how-to-calculate-percentages-in-your-head.content/og-how-to-calculate-percentages-in-your-head.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20calculate%20percentages%20in%20your%20head/og-how-to-calculate-percentages-in-your-head.jpg',
       alt: 'How to Calculate Percentages in Your Head',
     },
     tags: ['Math', 'Mental Math', 'Tips', 'Life Skills'],
@@ -744,7 +744,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-21-2025',
     heroImage: {
-      src: '/assets/blog/why-truckers-drift-to-the-right-on-the-highway.content/og-why-do-semi-truckers-veer-to-the-right-on-the-highway.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Why%20do%20truckers%20veer%20to%20the%20right/og-why-do-semi-truckers-veer-to-the-right-on-the-highway.jpg',
       alt: 'Why Truckers Drift to the Right on the Highway',
     },
     tags: ['Trucking', 'Highway Safety', 'Transportation', 'Road Safety'],
@@ -771,7 +771,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-06-2025',
     heroImage: {
-      src: '/assets/blog/wordpress-vs-angular-why-i-built-my-site-with-zero-backend.content/og-why-i-build-my-site-with-zero-backend.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Wordpress%20versus%20angular/og-why-i-build-my-site-with-zero-backend.jpg',
       alt: 'WordPress vs. Angular: Why I Built My Site With Zero Backend',
     },
     tags: ['Angular', 'WordPress', 'Web Development', 'Static Sites'],
@@ -798,7 +798,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-04-2025',
     heroImage: {
-      src: '/assets/blog/i-switched-from-facebook-to-reddit-for-doomscrolling.content/og-i-switched-from-facebook-to-reddit-for-doomscrolling.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/I%20switched%20from%20Facebook%20to%20Reddit%20for%20doomscrolling/og-i-switched-from-facebook-to-reddit-for-doomscrolling.jpg',
       alt: 'I Switched from Facebook to Reddit for Doomscrolling',
     },
     tags: ['Social Media', 'Reddit', 'Facebook', 'Productivity'],
@@ -824,7 +824,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-02-2025',
     heroImage: {
-      src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/og-the-wild-story-of-the-gaudy-palace.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/og-the-wild-story-of-the-gaudy-palace.jpg',
       alt: 'The WILD Story of the Gaudy Palace on Scenic Highway',
     },
     tags: ['Pensacola', 'Scenic Highway', 'Palace'],

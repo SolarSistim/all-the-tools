@@ -45,7 +45,7 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpg',
       alt: 'The Golden Palace on Scenic Highway',
       caption: 'The golden palace sits prominently on Escambia Bay - impossible to miss',
     },
@@ -161,17 +161,17 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-doctor-mikhchi.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-doctor-mikhchi.jpg',
           alt: 'Dr. Mohammad Mikhchi',
           caption: 'Dr. Mohammad Mikhchi'
         },
         {
-          src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-now.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-now.jpg',
           alt: 'The palace today',
           caption: 'The golden palace as it appeared a few years ago'
         },
         {
-          src: '/assets/blog/the-wild-story-of-the-gaudy-palace-on-scenic-highway.content/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-christmas.jpg',
+          src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-christmas.jpg',
           alt: 'The palace decorated for Christmas',
           caption: 'The palace during the holidays with its famous Christmas light display'
         }
