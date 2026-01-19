@@ -632,7 +632,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '12-27-2025',
     heroImage: {
-      src: '/assets/blog/i-built-a-roku-compatibility-checker.content/og-roku-compatibility-checker.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/I%20built%20a%20roku%20compatibility%20checker/og-roku-compatibility-checker.jpg',
       alt: 'I Built a Roku Compatibility Checker',
     },
     tags: ['Roku', 'Tools', 'Hardware', 'Compatibility', 'Product Review'],
