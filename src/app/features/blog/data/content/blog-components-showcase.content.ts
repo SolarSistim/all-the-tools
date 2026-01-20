@@ -491,12 +491,208 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
       data: {},
     },
 
+    // MOVIE POSTER COMPONENT
+    {
+      type: 'heading',
+      data: {
+        level: 2,
+        text: '11. Movie Poster Component',
+      },
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text: 'Display movie posters with captions and custom dimensions.',
+      },
+    },
+    {
+      type: 'moviePoster',
+      data: {
+        src: 'https://ik.imagekit.io/allthethingsdev/How%20Badlands%20Demystifies%20the%20Yautja/predator-badlands-dvd-cover-art.jpg?updatedAt=1768759474134',
+        alt: 'Predator: Badlands (2025) Movie Poster',
+        caption: 'Example movie poster with custom width and height',
+        width: 70,
+        height: 105,
+      },
+    },
+    {
+      type: 'code',
+      data: {
+        code: `{
+  type: 'moviePoster',
+  data: {
+    src: 'https://example.com/poster.jpg',
+    alt: 'Movie poster description',
+    caption: 'Optional caption text',
+    width: 70, // percentage width
+    height: 105, // percentage height
+  },
+}`,
+        language: 'json',
+      },
+    },
+    {
+      type: 'divider',
+      data: {},
+    },
+
+    // ALERT COMPONENTS
+    {
+      type: 'heading',
+      data: {
+        level: 2,
+        text: '12. Alert Components',
+      },
+    },
+    {
+      type: 'paragraph',
+      data: {
+        text: 'Display alert messages in different styles: primary (info), success, warning, and danger.',
+      },
+    },
+
+    // Alert Primary
+    {
+      type: 'heading',
+      data: {
+        level: 3,
+        text: 'Alert Primary (Information)',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'alert-primary',
+        title: 'Information',
+        content: 'This is an informational alert to provide helpful context or guidance.',
+        icon: 'info',
+      },
+    },
+    {
+      type: 'code',
+      data: {
+        code: `{
+  type: 'component',
+  data: {
+    componentName: 'alert-primary',
+    title: 'Information',
+    content: 'Your alert message here',
+    icon: 'info', // optional
+  },
+}`,
+        language: 'json',
+      },
+    },
+
+    // Alert Success
+    {
+      type: 'heading',
+      data: {
+        level: 3,
+        text: 'Alert Success',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'alert-success',
+        title: 'Success!',
+        content: 'Operation completed successfully. Your changes have been saved.',
+        icon: 'check_circle',
+      },
+    },
+    {
+      type: 'code',
+      data: {
+        code: `{
+  type: 'component',
+  data: {
+    componentName: 'alert-success',
+    title: 'Success!',
+    content: 'Your success message here',
+    icon: 'check_circle', // optional
+  },
+}`,
+        language: 'json',
+      },
+    },
+
+    // Alert Warning
+    {
+      type: 'heading',
+      data: {
+        level: 3,
+        text: 'Alert Warning',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'alert-warning',
+        title: 'Warning',
+        content: 'Please review your input. Some fields may need attention before proceeding.',
+        icon: 'warning',
+      },
+    },
+    {
+      type: 'code',
+      data: {
+        code: `{
+  type: 'component',
+  data: {
+    componentName: 'alert-warning',
+    title: 'Warning',
+    content: 'Your warning message here',
+    icon: 'warning', // optional
+  },
+}`,
+        language: 'json',
+      },
+    },
+
+    // Alert Danger
+    {
+      type: 'heading',
+      data: {
+        level: 3,
+        text: 'Alert Danger (Error)',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'alert-danger',
+        title: 'Error',
+        content: 'An error occurred. Please check your input and try again.',
+        icon: 'error',
+      },
+    },
+    {
+      type: 'code',
+      data: {
+        code: `{
+  type: 'component',
+  data: {
+    componentName: 'alert-danger',
+    title: 'Error',
+    content: 'Your error message here',
+    icon: 'error', // optional
+  },
+}`,
+        language: 'json',
+      },
+    },
+    {
+      type: 'divider',
+      data: {},
+    },
+
     // DIVIDER COMPONENT
     {
       type: 'heading',
       data: {
         level: 2,
-        text: '11. Divider Component',
+        text: '13. Divider Component',
       },
     },
     {
@@ -525,7 +721,7 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
       type: 'heading',
       data: {
         level: 2,
-        text: '12. AdSense Component',
+        text: '14. AdSense Component',
       },
     },
     {
@@ -564,7 +760,7 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
       type: 'heading',
       data: {
         level: 2,
-        text: '13. Custom Components',
+        text: '15. Other Custom Components',
       },
     },
     {
@@ -597,39 +793,6 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
   data: {
     componentName: 'email-cta',
     darkThemeBg: 'secondary', // or 'primary'
-  },
-}`,
-        language: 'json',
-      },
-    },
-
-    // Alert Primary
-    {
-      type: 'heading',
-      data: {
-        level: 3,
-        text: 'Alert/Notice Component',
-      },
-    },
-    {
-      type: 'component',
-      data: {
-        componentName: 'alert-primary',
-        title: 'Important Notice',
-        content: 'This is an important alert or notice that stands out from the regular content.',
-        icon: 'info',
-      },
-    },
-    {
-      type: 'code',
-      data: {
-        code: `{
-  type: 'component',
-  data: {
-    componentName: 'alert-primary',
-    title: 'Alert Title',
-    content: 'Alert message content',
-    icon: 'info', // or 'warning', 'error', etc.
   },
 }`,
         language: 'json',

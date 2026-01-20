@@ -159,6 +159,30 @@
       [icon]="block.data.icon || 'info'"
     ></app-alert-primary>
 
+    <!-- Alert Success Component -->
+    <app-alert-success
+      *ngIf="block.type === 'component' && block.data.componentName === 'alert-success'"
+      [title]="block.data.title || 'Success'"
+      [content]="block.data.content || block.data.message || ''"
+      [icon]="block.data.icon || 'check_circle'"
+    ></app-alert-success>
+
+    <!-- Alert Warning Component -->
+    <app-alert-warning
+      *ngIf="block.type === 'component' && block.data.componentName === 'alert-warning'"
+      [title]="block.data.title || 'Warning'"
+      [content]="block.data.content || block.data.message || ''"
+      [icon]="block.data.icon || 'warning'"
+    ></app-alert-warning>
+
+    <!-- Alert Danger Component -->
+    <app-alert-danger
+      *ngIf="block.type === 'component' && block.data.componentName === 'alert-danger'"
+      [title]="block.data.title || 'Error'"
+      [content]="block.data.content || block.data.message || ''"
+      [icon]="block.data.icon || 'error'"
+    ></app-alert-danger>
+
     <!-- Related Blog Posts Component -->
     <app-related-blog-posts
       *ngIf="block.type === 'component' && block.data.componentName === 'related-blog-posts'"

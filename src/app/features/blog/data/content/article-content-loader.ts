@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'the-16-wealthiest-criminals-of-the-last-100-years':
+        const wealthiestCriminalsModule = await import('./the-16-wealthiest-criminals-of-the-last-100-years.content');
+        return wealthiestCriminalsModule.content;
+
       case 'base-number-converter-tutorial':
         const baseConverterModule = await import('./how-to-use-the-base-number-converter-tool.content');
         return baseConverterModule.content;

@@ -9,6 +9,26 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '102',
+    slug: 'the-16-wealthiest-criminals-of-the-last-100-years',
+    title: 'The 16 Wealthiest Criminals of the Last 100 Years',
+    description: 'From Bernie Madoff\'s $64.8 billion Ponzi scheme to Pablo Escobar\'s drug empire, these criminals amassed unimaginable wealth through fraud, drugs, and corruption.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-20-2026',
+    heroImage: {
+      src: 'https://ik.imagekit.io/allthethingsdev/The%2016%20wealthiest%20criminals%20of%20the%20last%20100%20years/the-16-wealthiest-crominals-of-the-last-100-years.jpg',
+      alt: 'The 16 Wealthiest Criminals of the Last 100 Years',
+    },
+    tags: ['True Crime', 'History', 'Finance', 'Crime', 'Biography'],
+    category: 'Amateur Sleuthing',
+    metaDescription: 'Explore the 16 wealthiest criminals of the last 100 years, from Bernie Madoff\'s massive Ponzi scheme to Pablo Escobar\'s drug empire. Discover how these criminals amassed billions through fraud, corruption, and organized crime.',
+    metaKeywords: ['Bernie Madoff', 'Pablo Escobar', 'Al Capone', 'Ponzi scheme', 'Wealthiest criminals', 'True crime', 'Financial fraud', 'Drug cartels', 'Organized crime', 'Criminal history'],
+    featured: true,
+    hasAudio: false,
+    display: true,
+    relatedArticles: [],
+  },
+  {
     id: '101',
     slug: 'base-number-converter-tutorial',
     title: 'Base Number Converter Tutorial: How to Convert Between Binary, Octal, Decimal, and Hex',
