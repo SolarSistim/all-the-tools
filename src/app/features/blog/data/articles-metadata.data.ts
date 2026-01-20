@@ -19,7 +19,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       src: 'https://ik.imagekit.io/allthethingsdev/The%2016%20wealthiest%20criminals%20of%20the%20last%20100%20years/the-16-wealthiest-crominals-of-the-last-100-years.jpg',
       alt: 'The 16 Wealthiest Criminals of the Last 100 Years',
     },
-    tags: ['True Crime', 'History', 'Finance', 'Crime', 'Biography'],
+    tags: ['True Crime', 'History', 'Finance', 'Crime', 'Biography', "PabloEscabar"],
     category: 'Amateur Sleuthing',
     metaDescription: 'Explore the 16 wealthiest criminals of the last 100 years, from Bernie Madoff\'s massive Ponzi scheme to Pablo Escobar\'s drug empire. Discover how these criminals amassed billions through fraud, corruption, and organized crime.',
     metaKeywords: ['Bernie Madoff', 'Pablo Escobar', 'Al Capone', 'Ponzi scheme', 'Wealthiest criminals', 'True crime', 'Financial fraud', 'Drug cartels', 'Organized crime', 'Criminal history'],
