@@ -162,7 +162,7 @@ export const content: ContentBlock[] = [
     data: {
       src: 'https://ik.imagekit.io/allthethingsdev/The%2016%20wealthiest%20criminals%20of%20the%20last%20100%20years/allthethings-sam-bankman-fried.jpg',
       alt: 'Sam Bankman-Fried',
-      caption: 'Sam Bankman-Fried - The face of crypto\'s spectacular collapse',
+      caption: 'Sam Bankman-Fried - The face of crypto\'s incredible collapse',
       width: 50,
       height: 75,
     },
