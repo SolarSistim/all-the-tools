@@ -5,16 +5,17 @@
     "ng": "ng",
     "start": "ng serve",
     "start:network": "ng serve --host 0.0.0.0",
-    "build": "npm run generate:seo && ng build && npm run generate:sitemap && npm run generate:rss",
+    "build": "npm run calculate:readtimes && npm run generate:seo && ng build && npm run generate:sitemap && npm run generate:rss",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng serve",
-    "build:ssr": "npm run generate:seo && ng build && npm run generate:sitemap && npm run generate:rss",
-    "prerender": "npm run generate:seo && ng build --configuration production && npm run generate:sitemap && npm run generate:rss",
+    "build:ssr": "npm run calculate:readtimes && npm run generate:seo && ng build && npm run generate:sitemap && npm run generate:rss",
+    "prerender": "npm run calculate:readtimes && npm run generate:seo && ng build --configuration production && npm run generate:sitemap && npm run generate:rss",
     "serve:ssr:all-the-tools": "node dist/all-the-tools/server/server.mjs",
     "generate:seo": "node scripts/generate-seo-files.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
-    "generate:rss": "node tools/generate-rss.js"
+    "generate:rss": "node tools/generate-rss.js",
+    "calculate:readtimes": "node scripts/calculate-read-times.js"
   },
   "prettier": {
     "overrides": [

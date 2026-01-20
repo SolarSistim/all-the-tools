@@ -282,9 +282,15 @@ export class BlogService {
 
   /**
    * Estimate reading time from metadata (without content)
-   * Uses a rough estimation based on title and description
+   * Uses the readTime from metadata if available, otherwise estimates
    */
   private estimateReadingTime(metadata: ArticleMetadata): number {
+    // If readTime is already calculated and stored in metadata, use it
+    if (metadata.readTime && metadata.readTime > 0) {
+      return metadata.readTime;
+    }
+
+    // Otherwise, fall back to estimation
     const wordsPerMinute = 200;
     let totalWords = 0;
 

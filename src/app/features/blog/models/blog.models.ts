@@ -41,6 +41,7 @@ export interface Article {
   display?: boolean; // Controls visibility on blog listing (defaults to true)
   relatedArticles?: string[]; // Article IDs
   hasAudio?: boolean; // Indicates if article has audio version
+  readTime?: number; // Estimated read time in minutes
 }
 
 /**
