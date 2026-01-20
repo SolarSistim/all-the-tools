@@ -361,9 +361,9 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
     {
       type: 'video',
       data: {
-        url: 'https://www.youtube.com/watch?v=NR_lO2beqgc',
-        title: 'The Niimiipuu Retaliates!',
-        description: 'Watch Howard Day\'s stunning USS Niimiipuu animation',
+        url: 'https://www.youtube.com/watch?v=OyjvcuaGXGM',
+        title: 'Romulan Warbird Wreck Fly-by!',
+        description: 'Watch Howard Day\'s stunning Romulan Warbird Wreck animation',
       },
     },
     {

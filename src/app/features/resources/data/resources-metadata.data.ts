@@ -2,6 +2,24 @@ import { ResourceMetadata } from '../models/resource.models';
 
 export const RESOURCES_METADATA: ResourceMetadata[] = [  
   {
+  "id": "3",
+  "slug": "how-to-generate-placeholder-images-with-placehold-co",
+  "title": "Quickly Generate Custom Image Placeholders with Placehold.co",
+  "subtitle": "A Simple and Fast API for Creating Dummy Images for Web Layouts and Mockups",
+  "description": "Placehold.co is an essential tool for web developers and designers who need temporary image assets during the development process. By simply appending dimensions and parameters to their URL, you can generate custom-sized placeholders with specific text, colors, and file formats (like WebP, SVG, or PNG). It eliminates the need for manual image creation, allowing you to focus on code and layout.<br/><br/><a href=\"https://placehold.co/\">Start Generating Placeholders with Placehold.co</a>",
+  "externalUrl": "https://placehold.co/",
+  "publishedDate": "2026-01-20",
+  "tags": ["Web Development", "Prototyping", "Design Tools", "Frontend"],
+  "category": "Digital Tools",
+  "metaDescription": "Learn how to use Placehold.co to generate custom image placeholders for your website mockups. Fast, free, and easy to use via a simple URL API.",
+  "metaKeywords": ["Image Placeholders", "Dummy Images", "Web Design Tools", "Placehold.co", "Placeholder API"],
+  "featured": true,
+  "display": true,
+  "isPaid": false,
+  "difficulty": "easy",
+  "relatedResources": ["1", "2"]
+},
+  {
     id: '2', // Adjusted ID for sequence
     slug: 'how-to-convert-video-to-webp-with-ezgif',
     title: 'Convert MP4 Videos to High-Quality WebP Animations with EZGif',

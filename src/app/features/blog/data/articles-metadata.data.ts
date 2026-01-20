@@ -9,6 +9,26 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '101',
+    slug: 'base-number-converter-tutorial',
+    title: 'Base Number Converter Tutorial: How to Convert Between Binary, Octal, Decimal, and Hex',
+    description: 'A straightforward tutorial for converting between binary, octal, decimal, and hexadecimal number systems using our free browser-based converter.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-19-2026',
+    heroImage: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Base%20number%20converter%20tutorial/base-number-converter-tutorial.jpg',
+      alt: 'Base Number Converter Tool Guide',
+    },
+    tags: ['Tools', 'Tutorials', 'Programming', 'Web Development', 'Computer Science'],
+    category: 'Tutorials',
+    metaDescription: 'Learn how to convert between binary, octal, decimal, and hexadecimal using our free base number converter tool. Perfect for developers, students, and anyone working with different number systems.',
+    metaKeywords: ['base number converter', 'binary to decimal', 'hex to decimal', 'octal converter', 'number system converter', 'binary calculator', 'hexadecimal converter'],
+    featured: false,
+    hasAudio: false,
+    display: true,
+    relatedArticles: [],
+  },
+  {
     id: '100',
     slug: 'blog-components-showcase',
     title: 'Blog Components Showcase - Developer Reference',

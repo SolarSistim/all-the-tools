@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'base-number-converter-tutorial':
+        const baseConverterModule = await import('./how-to-use-the-base-number-converter-tool.content');
+        return baseConverterModule.content;
+
       case 'blog-components-showcase':
         const showcaseModule = await import('./blog-components-showcase.content');
         return showcaseModule.BLOG_COMPONENTS_SHOWCASE.content;
