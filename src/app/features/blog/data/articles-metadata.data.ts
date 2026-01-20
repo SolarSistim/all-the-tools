@@ -16,7 +16,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-20-2026',
     heroImage: {
-      src: 'https://ik.imagekit.io/allthethingsdev/The%2016%20wealthiest%20criminals%20of%20the%20last%20100%20years/the-16-wealthiest-crominals-of-the-last-100-years.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/The%2016%20wealthiest%20criminals%20of%20the%20last%20100%20years/allthethings-the-16-wealthiest-criminals.jpg',
       alt: 'The 16 Wealthiest Criminals of the Last 100 Years',
     },
     tags: ['True Crime', 'History', 'Finance', 'Crime', 'Biography', "PabloEscabar"],
