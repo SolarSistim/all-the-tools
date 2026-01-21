@@ -60,17 +60,17 @@ export class SnowGlobeShake implements AfterViewInit, OnDestroy {
   }
 
   private async loadAssets() {
-    const assetNames = ['component-background', 'globe-background', 'castle', 'glass', 'reflection', 'base'];
+    const assetNames = ['component-background', 'background', 'castle', 'glass', 'reflection', 'base'];
     const promises = assetNames.map(name => {
       return new Promise<void>((resolve, reject) => {
         const img = new Image();
-        img.src = `assets/snowglobe/${name}.png`;
+        img.src = `assets/snowglobe/${name}.webp`;
         img.onload = () => {
           this.images[name] = img;
           resolve();
         };
         img.onerror = () => {
-          console.warn(`Failed to load ${name}.png`); // Proceed anyway
+          console.warn(`Failed to load ${name}.webp`); // Proceed anyway
           resolve();
         };
       });
@@ -458,7 +458,7 @@ export class SnowGlobeShake implements AfterViewInit, OnDestroy {
     // With translation, it moves with the globe. Correct.
 
     // Order: background -> castle -> snowflakes -> glass -> reflection -> base
-    if (this.images['globe-background']) ctx.drawImage(this.images['globe-background'], 0, 0);
+    if (this.images['background']) ctx.drawImage(this.images['background'], 0, 0);
 
     if (this.images['castle']) ctx.drawImage(this.images['castle'], 0, 0);
 
