@@ -1,4 +1,12 @@
 declare module 'matter-js' {
+  namespace Matter {
+    type Engine = any;
+    type Body = any;
+    type World = any;
+    type Bodies = any;
+    type Sleeping = any;
+  }
+
   const Matter: {
     Engine: any;
     Body: any;
@@ -6,5 +14,6 @@ declare module 'matter-js' {
     Bodies: any;
     Sleeping: any;
   };
+
   export default Matter;
 }
