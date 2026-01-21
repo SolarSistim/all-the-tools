@@ -192,7 +192,7 @@ export class SnowGlobeShake implements AfterViewInit, OnDestroy {
   private initInteraction() {
     const canvas = this.canvasRef.nativeElement;
 
-    canvas.addEventListener('mousedown', (e) => {
+    const startDrag = (e: MouseEvent | TouchEvent) => {
       e.preventDefault(); // Prevent text selection/scrolling
       const pos = this.getMousePos(e);
 
@@ -215,13 +215,14 @@ export class SnowGlobeShake implements AfterViewInit, OnDestroy {
         this.currentMousePos = pos;
         this.lastMousePos = pos;
       }
-    });
+    };
 
-    window.addEventListener('mousemove', (e) => {
+    const moveDrag = (e: MouseEvent | TouchEvent) => {
+      if (!this.isDragging) return;
+      e.preventDefault();
+
       const pos = this.getMousePos(e);
       this.currentMousePos = pos;
-
-      if (!this.isDragging) return;
 
       // Audio trigger calculation (moved from drag logic effectively, but we can keep it simpler)
       // We calculate "instant" speed for audio
@@ -237,16 +238,25 @@ export class SnowGlobeShake implements AfterViewInit, OnDestroy {
       }
 
       this.lastMousePos = pos;
-    });
+    };
 
-    window.addEventListener('mouseup', () => {
+    const endDrag = () => {
       if (this.isDragging) {
         this.isDragging = false;
         // Keep the globe pinned in place when released
         Matter.Body.setStatic(this.globeBody, true);
         Matter.Body.setVelocity(this.globeBody, { x: 0, y: 0 });
       }
-    });
+    };
+
+    canvas.addEventListener('mousedown', startDrag);
+    window.addEventListener('mousemove', moveDrag);
+    window.addEventListener('mouseup', endDrag);
+
+    canvas.addEventListener('touchstart', startDrag, { passive: false });
+    window.addEventListener('touchmove', moveDrag, { passive: false });
+    window.addEventListener('touchend', endDrag);
+    window.addEventListener('touchcancel', endDrag);
 
     // Toggle Debug (D key)
     window.addEventListener('keydown', (e) => {
@@ -271,8 +281,9 @@ export class SnowGlobeShake implements AfterViewInit, OnDestroy {
       cx = e.clientX;
       cy = e.clientY;
     } else {
-      cx = e.touches[0].clientX;
-      cy = e.touches[0].clientY;
+      const touch = e.touches[0] || e.changedTouches[0];
+      cx = touch.clientX;
+      cy = touch.clientY;
     }
     return {
       x: (cx - rect.left) * scaleX,
