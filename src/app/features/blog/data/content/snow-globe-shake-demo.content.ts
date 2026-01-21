@@ -60,7 +60,7 @@ export const SNOW_GLOBE_SHAKE_DEMO: Article = {
     {
       type: 'paragraph',
       data: {
-        text: 'If you poke around the component, you will see I load a handful of PNG layers and draw them in order, like a little stage play: background, castle, snow, glass, reflection, base. That order matters, and I learned it the hard way when my snowflakes looked like they were floating outside the glass. There is a translation step that keeps the visuals glued to the globe body, which was another humbling lesson in coordinate space.',
+        text: 'If you poke around the component, you will see I load a handful of transparent layers and draw them in order, like a little stage play: background, castle, snow, glass, reflection, base. That order matters, and I learned it the hard way when my snowflakes looked like they were floating outside the glass. There is a translation step that keeps the visuals glued to the globe body, which was another humbling lesson in coordinate space.',
       },
     },
     {
