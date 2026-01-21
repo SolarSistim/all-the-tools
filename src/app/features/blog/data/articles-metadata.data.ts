@@ -11,7 +11,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
     id: '103',
     slug: 'snow-globe-shake-demo',
-    title: 'Snow Globe Shake Demo',
+    title: 'Pixel Art Fantasy Castle Snowglobe Shake Demo',
     description: 'A minimal demo post that showcases my interactive Pixel Art Snowglobe. Click/tap to select the snowglobe and give it a shake!',
     author: AUTHORS.joel_hansen,
     publishedDate: '01-21-2026',
