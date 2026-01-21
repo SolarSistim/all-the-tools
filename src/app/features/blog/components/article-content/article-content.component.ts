@@ -19,6 +19,7 @@ import { AlertSuccess } from '../../../reusable-components/alerts/alert-success/
 import { AlertWarning } from '../../../reusable-components/alerts/alert-warning/alert-warning';
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
 import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
+import { SnowGlobeShake } from '../../../art/snow-globe-shake/snow-globe-shake';
 
 /**
  * Article Content Component
@@ -47,6 +48,7 @@ import { RelatedBlogPosts } from '../../../reusable-components/related-blog-post
     AlertWarning,
     AlertDanger,
     RelatedBlogPosts,
+    SnowGlobeShake,
   ],
   templateUrl: './article-content.component.html',
   styleUrls: ['./article-content.component.scss'],

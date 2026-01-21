@@ -1,0 +1,22 @@
+:host {
+  display: block;      /* Changed from flex to block for normal flow */
+  width: 100%;         /* Component takes full width of parent */
+  height: auto;        /* Height adjusts based on content */
+  background-color: #1a1a1a;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;      /* Removes bottom whitespace common in inline elements */
+  width: 100%;         /* Forces canvas to fill host width */
+  height: auto;        /* Aspect ratio 1/1 will be preserved by width 100% */
+  
+  /* Keeps the pixel art sharp if your assets are low-res */
+  image-rendering: pixelated; 
+  
+  /* Optional: prevents the globe from becoming absurdly large on giant monitors */
+  max-width: 1024px;   
+  margin: 0 auto;      /* Centers the globe if it hits max-width */
+  
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}

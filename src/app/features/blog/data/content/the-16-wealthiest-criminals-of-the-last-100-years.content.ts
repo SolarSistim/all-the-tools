@@ -602,7 +602,7 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 3,
-      text: 'The Mexican',
+      text: '"El Mexicano"',
     },
   },
   {

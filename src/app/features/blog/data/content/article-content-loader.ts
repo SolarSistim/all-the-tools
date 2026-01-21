@@ -14,6 +14,10 @@ export async function loadArticleContent(
         const wealthiestCriminalsModule = await import('./the-16-wealthiest-criminals-of-the-last-100-years.content');
         return wealthiestCriminalsModule.content;
 
+      case 'snow-globe-shake-demo':
+        const snowGlobeModule = await import('./snow-globe-shake-demo.content');
+        return snowGlobeModule.SNOW_GLOBE_SHAKE_DEMO.content;
+
       case 'base-number-converter-tutorial':
         const baseConverterModule = await import('./how-to-use-the-base-number-converter-tool.content');
         return baseConverterModule.content;

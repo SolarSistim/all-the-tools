@@ -3,12 +3,15 @@
 /about
 /accessibility
 /blog
+/blog/base-number-converter-tutorial
+/blog/blog-components-showcase
 /blog/c-beams-the-top-down-space-action-rpg-that-gets-it
 /blog/how-to-calculate-percentages-in-your-head
 /blog/how-to-sell-your-timber-for-top-dollar-in-ohio
 /blog/how-to-use-the-barcode-scanner-tool
 /blog/i-built-a-roku-compatibility-checker
 /blog/i-switched-from-facebook-to-reddit-for-doomscrolling
+/blog/interactive-physics-snow-globe
 /blog/kenyas-tech-scene-how-a-bunch-of-developers-built-stuff-that-changed-the-world
 /blog/lighthuggers-when-fan-art-captures-the-impossible
 /blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
@@ -16,6 +19,7 @@
 /blog/pensacola-snow-second-year
 /blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention
 /blog/stop-typing-in-those-tiny-on-reward-codes-by-hand
+/blog/the-16-wealthiest-criminals-of-the-last-100-years
 /blog/the-deneb-paradox-when-first-contact-means-last-contact
 /blog/the-invisible-door-how-noise-cancelling-headphones-saved-my-programming-career
 /blog/the-silent-502-solving-internal-proxy-conflicts-in-self-hosted-postiz
@@ -38,6 +42,7 @@
 /resources
 /resources/active-noise-cancelling-vs-passive-noise-isolation
 /resources/angular-official-documentation
+/resources/how-to-convert-video-to-webp-with-ezgif
 /resources/mdn-web-docs
 /resources/money-market-funds-kenya-safety
 /resources/online-help-for-senior-citizens-by-a-senior-citizen

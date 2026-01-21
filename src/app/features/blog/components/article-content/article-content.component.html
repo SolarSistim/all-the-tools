@@ -145,6 +145,11 @@
       *ngIf="block.type === 'component' && block.data.componentName === 'roku-checker'"
     ></app-roku-programmatic-compatibility-checker>
 
+    <!-- Snow Globe Shake Component -->
+    <app-snow-globe-shake
+      *ngIf="block.type === 'component' && block.data.componentName === 'snow-globe-shake'"
+    ></app-snow-globe-shake>
+
     <!-- Email CTA Component -->
     <app-cta-email-list
       *ngIf="block.type === 'component' && block.data.componentName === 'email-cta'"

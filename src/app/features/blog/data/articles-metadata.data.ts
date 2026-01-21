@@ -9,6 +9,27 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '103',
+    slug: 'snow-globe-shake-demo',
+    title: 'Snow Globe Shake Demo',
+    description: 'A minimal demo post that showcases my interactive Pixel Art Snowglobe. Click/tap to select the snowglobe and give it a shake!',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '01-21-2026',
+    heroImage: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Snow%20globe%20shake%20demo/og-snow-globe-shake-demo.jpg',
+      alt: 'Snow Globe Shake demo',
+    },
+    tags: ['Art', 'Interactive', 'Demo', 'Snow Globe'],
+    category: 'Art',
+    metaDescription: 'Watch the Snow Globe Shake component in action in this minimal demo post.',
+    metaKeywords: ['snow globe', 'snowglobe', 'interactive art', 'canvas demo', 'matter.js'],
+    featured: false,
+    hasAudio: false,
+    display: true,
+    relatedArticles: [],
+      readTime: 1,
+  },
+  {
     id: '102',
     slug: 'the-16-wealthiest-criminals-of-the-last-100-years',
     title: 'The 16 Wealthiest Criminals of the Last 100 Years',
@@ -27,7 +48,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: [],
-      readTime: 1,
+      readTime: 15,
   },
   {
     id: '101',
