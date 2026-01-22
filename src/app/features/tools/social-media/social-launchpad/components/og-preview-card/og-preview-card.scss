@@ -3,7 +3,9 @@
 .og-preview-container {
   width: 100%;
   min-height: 400px;
-  overflow: hidden; // Ensure any child bleed is contained
+  overflow: hidden;
+  border: 2px solid #6dd4ff;
+  border-radius: 10px;
 }
 
 .og-loading,
