@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'masters-of-the-universe-2026-he-man-returns-to-the-big-screen':
+        const heManModule = await import('./masters-of-the-universe-2026-he-man-returns-to-the-big-screen.content');
+        return heManModule.content;
+
       case 'the-16-wealthiest-criminals-of-the-last-100-years':
         const wealthiestCriminalsModule = await import('./the-16-wealthiest-criminals-of-the-last-100-years.content');
         return wealthiestCriminalsModule.content;
