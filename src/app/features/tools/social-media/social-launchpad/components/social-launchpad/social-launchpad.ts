@@ -21,6 +21,7 @@ import { CharacterCounterComponent } from '../character-counter/character-counte
 import { EmojiSuggestionsComponent } from '../emoji-suggestions/emoji-suggestions';
 import { ContentVariationsComponent } from '../content-variations/content-variations';
 import { PlatformPreviewComponent, PlatformPreviewData } from '../platform-preview/platform-preview';
+import { DeviceWarningDialogComponent } from '../device-warning-dialog/device-warning-dialog';
 
 @Component({
   selector: 'app-social-launchpad',
@@ -72,6 +73,24 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadContentFromStorage();
     this.loadVariations();
+    this.checkDeviceAndShowWarning();
+  }
+
+  private checkDeviceAndShowWarning(): void {
+    // Only check if we are in the browser
+    if (typeof window !== 'undefined') {
+      const isMobileOrTablet = window.innerWidth < 1024 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const hasSeenWarning = localStorage.getItem('social-launchpad-device-warning-seen') === 'true';
+
+      if (isMobileOrTablet && !hasSeenWarning) {
+        this.dialog.open(DeviceWarningDialogComponent, {
+          width: '500px',
+          disableClose: false
+        }).afterClosed().subscribe(() => {
+          localStorage.setItem('social-launchpad-device-warning-seen', 'true');
+        });
+      }
+    }
   }
 
   ngOnDestroy(): void {
