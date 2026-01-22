@@ -5,6 +5,12 @@
   min-height: 200px;
 }
 
+.og-preview-container {
+  width: 100%;
+  min-height: 200px;
+  overflow: hidden; // Ensure any child bleed is contained
+}
+
 .og-loading,
 .og-error,
 .og-empty {
@@ -28,116 +34,122 @@
     color: var(--text-secondary);
     font-family: 'Space Grotesk', sans-serif;
   }
+}
 
+.og-empty {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px dashed var(--border-color);
+}
 
-
-  .og-empty {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    border: 1px dashed var(--border-color);
+.og-error {
+  mat-icon {
+    color: #f44336;
   }
+}
 
-  .og-error {
-    mat-icon {
-      color: #f44336;
-    }
+.og-card {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
   }
+}
 
-  .og-card {
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--bg-elevated);
-    transition: all 0.3s ease;
+.og-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.91 / 1;
+  overflow: hidden;
+  background: var(--bg-secondary);
 
-    &:hover {
-      border-color: var(--neon-cyan);
-      box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
-    }
-  }
-
-  .og-image-container {
-    position: relative;
+  .og-image {
     width: 100%;
-    aspect-ratio: 1.91 / 1;
-    overflow: hidden;
-    background: var(--bg-secondary);
-
-    .og-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .og-image-info {
-      position: absolute;
-      bottom: $spacing-sm;
-      right: $spacing-sm;
-      background: rgba(0, 0, 0, 0.7);
-      padding: $spacing-xs $spacing-sm;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      gap: $spacing-xs;
-
-      mat-icon {
-        font-size: 16px;
-        width: 16px;
-        height: 16px;
-        color: white;
-      }
-
-      span {
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 0.75rem;
-        color: white;
-      }
-    }
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  .og-content {
-    padding: $spacing-lg;
-  }
-
-  .og-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 $spacing-sm 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .og-description {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    margin: 0 0 $spacing-md 0;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .og-meta {
+  .og-image-info {
+    position: absolute;
+    bottom: $spacing-sm;
+    right: $spacing-sm;
+    background: rgba(0, 0, 0, 0.7);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     gap: $spacing-xs;
-    color: var(--text-tertiary);
 
     mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      color: white;
     }
 
     span {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.75rem;
+      color: white;
     }
+  }
+}
+
+.og-content {
+  padding: $spacing-lg;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.og-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-sm 0;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.og-description {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0 0 $spacing-md 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.og-meta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  color: var(--text-tertiary);
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
   }
 }
