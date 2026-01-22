@@ -1,0 +1,91 @@
+<div class="social-launchpad-container">
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">rocket_launch</mat-icon>
+        </div>
+        <h1 class="hero-title">Social Media Launchpad</h1>
+        <p class="hero-subtitle">
+          Compose once, share everywhere. Format your content for multiple social platforms with real-time character
+          counts, hashtag recommendations, and instant preview.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <mat-card class="combined-editor-card">
+      <div class="combined-content">
+        <!-- Top Section: Editor and Platform Selector -->
+        <div class="top-section">
+          <!-- Left: Content Editor -->
+          <div class="editor-section">
+            <app-content-editor [url]="url()" [description]="description()" [hashtags]="hashtags()" [ogData]="ogData()"
+              [ogLoading]="ogLoading()" [ogError]="ogError()" [lowercase]="preferences.lowercaseHashtags"
+              [selectedPlatforms]="selectedPlatforms()" (urlChange)="onUrlChange($event)"
+              (descriptionChange)="onDescriptionChange($event)" (hashtagsChange)="onHashtagsChange($event)"
+              (fetchOG)="onFetchOG()" (retryOG)="onRetryOG()" (cursorPositionChange)="onCursorPositionChange($event)"
+              (emojiSelect)="onEmojiSelect($event)"></app-content-editor>
+
+            <div class="editor-actions">
+              <button mat-raised-button color="primary" (click)="onCopyContent()" class="copy-content-button">
+                <mat-icon>content_copy</mat-icon>
+                Copy
+              </button>
+              <button mat-stroked-button color="warn" (click)="onClearAll()" class="clear-button">
+                <mat-icon>clear_all</mat-icon>
+                Clear All
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Platform Selector -->
+          <div class="platform-section">
+            <app-platform-selector [selectedPlatforms]="selectedPlatforms()" [platformStatuses]="platformStatusMap()"
+              (platformToggle)="onPlatformToggle($event)"
+              (platformClick)="onPlatformClick($event)"></app-platform-selector>
+          </div>
+        </div>
+
+        <!-- Bottom Section: Character Counter (Full Width) -->
+        <div class="bottom-section">
+          <app-character-counter [platformStatuses]="platformStatuses()"
+            [hashtagCount]="hashtags().length"></app-character-counter>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Action Buttons -->
+    <mat-card class="actions-card">
+      <h3 class="actions-title">
+        <mat-icon>send</mat-icon>
+        Launch Actions
+      </h3>
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" (click)="onOpenAllPlatforms()"
+          [disabled]="selectedPlatforms().length === 0" class="action-button primary-action">
+          <mat-icon>launch</mat-icon>
+          Open All Selected
+        </button>
+        <button mat-raised-button (click)="onCopyAll()" [disabled]="selectedPlatforms().length === 0"
+          class="action-button">
+          <mat-icon>content_copy</mat-icon>
+          Copy All
+        </button>
+        <button mat-raised-button (click)="onGetShareLinks()" [disabled]="selectedPlatforms().length === 0"
+          class="action-button">
+          <mat-icon>link</mat-icon>
+          Get Share Links
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- Variations Section -->
+    <mat-card class="variations-card">
+      <app-content-variations [variations]="variations()" [currentDescription]="description()"
+        [currentHashtags]="hashtags()" (variationCreate)="onCreateVariation()" (variationLoad)="onLoadVariation($event)"
+        (variationDelete)="onDeleteVariation($event)"></app-content-variations>
+    </mat-card>
+  </div>
+</div>

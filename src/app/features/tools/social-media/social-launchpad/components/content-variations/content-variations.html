@@ -1,0 +1,60 @@
+<div class="variations-container">
+  <div class="variations-header">
+    <h3>
+      <mat-icon>science</mat-icon>
+      A/B Variations <span class="count">({{ variations.length }}/5)</span>
+    </h3>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onCreateVariation()"
+      [disabled]="!canCreateMore"
+      matTooltip="Save current content as a variation"
+    >
+      <mat-icon>add</mat-icon>
+      Create Variation
+    </button>
+  </div>
+
+  <div *ngIf="variations.length === 0" class="empty-state">
+    <mat-icon>lightbulb_outline</mat-icon>
+    <p>No variations yet. Create variations to test different content approaches!</p>
+  </div>
+
+  <div class="variations-grid">
+    <mat-card *ngFor="let variation of variations" class="variation-card">
+      <div class="variation-header">
+        <h4>{{ variation.name }}</h4>
+        <button
+          mat-icon-button
+          (click)="onDeleteVariation(variation.id)"
+          matTooltip="Delete variation"
+          color="warn"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+      <p class="variation-description">{{ variation.description }}</p>
+
+      <div class="variation-hashtags" *ngIf="variation.hashtags.length > 0">
+        <mat-icon>tag</mat-icon>
+        <span>{{ variation.hashtags.join(' ') }}</span>
+      </div>
+
+      <div class="variation-meta">
+        <span class="created-date">{{ formatDate(variation.createdAt) }}</span>
+      </div>
+
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="onLoadVariation(variation)"
+        class="load-button"
+      >
+        <mat-icon>upload</mat-icon>
+        Load Variation
+      </button>
+    </mat-card>
+  </div>
+</div>

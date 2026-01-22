@@ -1,0 +1,38 @@
+<div class="character-counter-container">
+  <div *ngIf="platformStatuses.length === 0" class="empty-state">
+    <mat-icon>select_all</mat-icon>
+    <p>Select platforms to see character counts</p>
+  </div>
+
+  <div class="platform-counters" *ngIf="platformStatuses.length > 0">
+    <div
+      *ngFor="let status of platformStatuses"
+      class="platform-counter-item"
+      [class]="getStatusClass(status)"
+      [class.most-restrictive]="isMostRestrictive(status)"
+    >
+      <div class="platform-info">
+        <mat-icon class="status-icon">{{ getStatusIcon(status) }}</mat-icon>
+        <span class="platform-name">
+          {{ getPlatformName(status) }}
+          <mat-icon *ngIf="isMostRestrictive(status)" class="restrictive-badge" matTooltip="Most restrictive platform">warning_amber</mat-icon>
+        </span>
+      </div>
+      <span class="char-count" [class.over-limit]="status.isOverLimit">
+        {{ status.characterCount }} / {{ getPlatformLimit(status) }}
+        <span *ngIf="status.isOverLimit" class="over-amount">
+          (+{{ getOverLimitAmount(status) }})
+        </span>
+      </span>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="status.percentage > 100 ? 100 : status.percentage"
+        [color]="getProgressColor(status)"
+      ></mat-progress-bar>
+      <p *ngIf="status.hashtagWarning" class="warning-text">
+        <mat-icon>info</mat-icon>
+        <span>{{ getHashtagRecommendation(status.platform) }}</span>
+      </p>
+    </div>
+  </div>
+</div>

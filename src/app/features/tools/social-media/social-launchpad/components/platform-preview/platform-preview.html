@@ -1,0 +1,33 @@
+<h2 mat-dialog-title class="preview-title">
+  <mat-icon>{{ platformConfig.icon }}</mat-icon>
+  {{ platformConfig.name }} Preview
+</h2>
+
+<mat-dialog-content class="preview-content">
+  <div class="platform-mock" [style.border-color]="platformConfig.color">
+    <div class="mock-header" [style.background]="platformConfig.color">
+      <mat-icon>account_circle</mat-icon>
+      <span>Your Account</span>
+    </div>
+    <div class="mock-post">
+      <pre class="post-text">{{ data.formattedText }}</pre>
+    </div>
+    <div class="mock-footer">
+      <span class="char-count">
+        {{ data.characterCount }} / {{ platformConfig.charLimit }}
+      </span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="preview-actions">
+  <button mat-button (click)="close()">Close</button>
+  <button mat-stroked-button (click)="copyText()">
+    <mat-icon>content_copy</mat-icon>
+    Copy Text
+  </button>
+  <button mat-raised-button color="primary" (click)="openInPlatform()">
+    <mat-icon>open_in_new</mat-icon>
+    Open in {{ platformConfig.name }}
+  </button>
+</mat-dialog-actions>

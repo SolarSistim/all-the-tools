@@ -1,0 +1,33 @@
+<button [matMenuTriggerFor]="emojiMenu" class="emoji-trigger-link">
+  <mat-icon>insert_emoticon</mat-icon>
+  Add Emoji
+</button>
+
+<mat-menu #emojiMenu="matMenu" class="emoji-menu">
+  <div class="emoji-category" (click)="$event.stopPropagation()">
+    <h4>Professional</h4>
+    <div class="emoji-grid">
+      <button *ngFor="let emoji of professionalEmojis" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
+        {{ emoji }}
+      </button>
+    </div>
+  </div>
+
+  <div class="emoji-category" (click)="$event.stopPropagation()">
+    <h4>Casual</h4>
+    <div class="emoji-grid">
+      <button *ngFor="let emoji of casualEmojis" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
+        {{ emoji }}
+      </button>
+    </div>
+  </div>
+
+  <div class="emoji-category" (click)="$event.stopPropagation()">
+    <h4>Engaging</h4>
+    <div class="emoji-grid">
+      <button *ngFor="let emoji of engagingEmojis" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
+        {{ emoji }}
+      </button>
+    </div>
+  </div>
+</mat-menu>

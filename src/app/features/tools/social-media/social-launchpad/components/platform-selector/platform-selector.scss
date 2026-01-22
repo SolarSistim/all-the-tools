@@ -1,0 +1,129 @@
+@import '../../../../../../../styles/utilities';
+
+.platform-selector-container {
+  width: 100%;
+}
+
+.selector-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-lg 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  mat-icon {
+    color: var(--neon-cyan);
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: $spacing-sm;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.platform-button {
+  height: 44px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: $spacing-sm !important;
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  padding: $spacing-xs $spacing-md $spacing-xs $spacing-md !important;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .platform-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-align: left;
+    line-height: 1.2;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .check-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 4px;
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+    color: var(--neon-cyan);
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3) !important;
+  }
+
+  &.selected {
+    background: var(--bg-elevated) !important;
+
+    // Green - under limit (success)
+    &.status-success {
+      border-color: #4caf50 !important;
+      border-width: 2px !important;
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3) !important;
+
+      .check-icon {
+        color: #4caf50;
+      }
+    }
+
+    // Red - at or over limit (error)
+    &.status-error {
+      border-color: #f44336 !important;
+      border-width: 2px !important;
+      box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3) !important;
+
+      .check-icon {
+        color: #f44336;
+      }
+    }
+  }
+
+  &.has-warning {
+    &.selected {
+      // Status colors will override this via status-warning or status-error classes
+    }
+  }
+
+  // Adjust spacing for checkmark when platform name is short
+  &.selected {
+    padding-right: 22px !important;
+  }
+}

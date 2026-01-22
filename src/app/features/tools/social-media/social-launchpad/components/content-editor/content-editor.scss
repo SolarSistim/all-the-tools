@@ -1,0 +1,92 @@
+@import '../../../../../../../styles/utilities';
+
+.content-editor-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.editor-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  mat-icon {
+    color: var(--neon-cyan);
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.url-input-section {
+  display: flex;
+  gap: $spacing-md;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.url-input-field {
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.fetch-og-button {
+  margin-top: 8px;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.og-preview-section {
+  width: 100%;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 $spacing-md 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--neon-pink);
+  }
+}
+
+.description-input-field,
+.hashtag-section {
+  width: 100%;
+}
+
+.emoji-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -$spacing-md;
+  margin-bottom: $spacing-md;
+}

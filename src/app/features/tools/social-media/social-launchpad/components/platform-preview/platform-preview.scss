@@ -1,0 +1,71 @@
+@import '../../../../../../../styles/utilities';
+
+.preview-title {
+  font-family: 'Orbitron', sans-serif !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: $spacing-sm !important;
+
+  mat-icon {
+    color: var(--neon-cyan);
+  }
+}
+
+.preview-content {
+  padding: $spacing-lg !important;
+}
+
+.platform-mock {
+  border: 2px solid;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+}
+
+.mock-header {
+  padding: $spacing-md;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+
+  mat-icon {
+    color: white;
+  }
+}
+
+.mock-post {
+  padding: $spacing-lg;
+  background: var(--bg-secondary);
+  min-height: 150px;
+}
+
+.post-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.mock-footer {
+  padding: $spacing-sm $spacing-md;
+  background: var(--bg-elevated);
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border-color);
+}
+
+.char-count {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.preview-actions {
+  padding: $spacing-md !important;
+}

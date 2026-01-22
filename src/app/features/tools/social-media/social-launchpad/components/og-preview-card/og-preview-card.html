@@ -1,0 +1,42 @@
+<div class="og-preview-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="og-loading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Fetching Open Graph data...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="og-error">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-stroked-button color="primary" (click)="onRetry()">
+      <mat-icon>refresh</mat-icon>
+      Retry
+    </button>
+  </div>
+
+  <!-- OG Data Preview -->
+  <div *ngIf="hasOGData && !loading && !error" class="og-card">
+    <div class="og-image-container" *ngIf="ogData!.image">
+      <img [src]="ogData!.image" [alt]="ogData!.title" class="og-image" />
+      <div class="og-image-info">
+        <mat-icon>photo</mat-icon>
+        <span>{{ imageDimensions }}</span>
+      </div>
+    </div>
+    <div class="og-content">
+      <h3 class="og-title">{{ ogData!.title }}</h3>
+      <p class="og-description">{{ ogData!.description }}</p>
+      <div class="og-meta" *ngIf="ogData!.siteName">
+        <mat-icon>language</mat-icon>
+        <span>{{ ogData!.siteName }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!hasOGData && !loading && !error" class="og-empty">
+    <mat-icon>image_not_supported</mat-icon>
+    <p>No Open Graph data available</p>
+  </div>
+</div>

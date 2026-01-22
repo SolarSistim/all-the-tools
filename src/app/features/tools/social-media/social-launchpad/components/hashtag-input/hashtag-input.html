@@ -1,0 +1,33 @@
+<div class="hashtag-input-container">
+  <mat-form-field appearance="fill" class="hashtag-input-field">
+    <mat-label>Hashtags</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Hashtag selection" class="hidden-chip-grid">
+    </mat-chip-grid>
+    <input
+      matInput
+      placeholder="Type hashtag and press Enter..."
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="addHashtag($event)"
+      [(ngModel)]="currentInput"
+      (ngModelChange)="onInputChange($event)"
+    />
+    <mat-icon matPrefix>tag</mat-icon>
+    <mat-icon matSuffix class="enter-hint-icon" matTooltip="Press Enter, Space, or Comma to add hashtag">keyboard_return</mat-icon>
+  </mat-form-field>
+
+  <div class="hashtag-chips-display" *ngIf="hashtags.length > 0">
+    <mat-chip-set>
+      <mat-chip
+        *ngFor="let hashtag of hashtags"
+        (removed)="removeHashtag(hashtag)"
+        class="hashtag-chip"
+      >
+        {{ hashtag }}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+</div>

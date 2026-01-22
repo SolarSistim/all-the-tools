@@ -163,6 +163,11 @@ export const routes: Routes = [
     title: 'On! Reward Code Scanner - All The Things'
   },
   {
+    path: 'tools/social-media-launchpad',
+    loadComponent: () => import('./features/tools/social-media/social-launchpad/components/social-launchpad/social-launchpad').then(m => m.SocialLaunchpadComponent),
+    title: 'Social Media Launchpad - All The Things'
+  },
+  {
     path: 'tools/spotify-playlist-export',
     loadComponent: () => import('./features/tools/music-and-audio/spotify-playlist-exporter/spotify-playlist-exporter').then(m => m.SpotifyPlaylistExporter),
     title: 'Spotify Playlist Exporter - All The Things'

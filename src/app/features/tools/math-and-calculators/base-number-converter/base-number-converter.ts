@@ -14,6 +14,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-base-number-converter',
@@ -30,7 +31,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     MatTooltipModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './base-number-converter.html',
   styleUrl: './base-number-converter.scss'
@@ -51,6 +53,13 @@ export class BaseNumberConverterComponent implements OnInit {
   primaryBases = this.baseService.getPrimaryBases();
   extraBases = this.baseService.getExtraBases();
   allBasesArray = computed(() => this.baseService.getSupportedBases());
+
+  relatedBlogPosts = [
+    {
+      title: 'Base Number Converter Tutorial: How to Convert Between Binary, Octal, Decimal, and Hex',
+      slug: 'base-number-converter-tutorial'
+    }
+  ];
 
   ngOnInit(): void {
     this.updateMetaTags();
