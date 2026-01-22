@@ -44,21 +44,68 @@
   mat-icon {
     color: #f44336;
   }
+
+  .mat-mdc-button,
+  .mat-mdc-raised-button,
+  .mat-mdc-outlined-button,
+  .mat-mdc-flat-button {
+    margin-top: $spacing-md;
+
+    .mat-icon {
+      font-size: 18px !important;
+      width: 18px !important;
+      height: 18px !important;
+      color: inherit;
+    }
+  }
+
+  // Add the neon border to error state too for consistency
+  background: rgba(244, 67, 54, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(244, 67, 54, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #f44336;
+    opacity: 0.8;
+  }
 }
 
 .og-card {
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
   overflow: hidden;
   background: var(--bg-elevated);
   transition: all 0.3s ease;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    opacity: 0.8;
+    z-index: 1;
+  }
 
   &:hover {
     border-color: var(--neon-cyan);
-    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 188, 212, 0.25);
+    transform: translateY(-2px);
   }
 }
 
