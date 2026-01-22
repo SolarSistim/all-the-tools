@@ -2,12 +2,7 @@
 
 .og-preview-container {
   width: 100%;
-  min-height: 200px;
-}
-
-.og-preview-container {
-  width: 100%;
-  min-height: 200px;
+  min-height: 400px;
   overflow: hidden; // Ensure any child bleed is contained
 }
 
@@ -21,6 +16,9 @@
   padding: $spacing-xl;
   text-align: center;
   gap: $spacing-md;
+  min-height: 400px;
+  width: 100%;
+  box-sizing: border-box;
 
   mat-icon {
     font-size: 48px;
