@@ -12,7 +12,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     id: '105',
     slug: 'exploding-trees-in-winter-what-causes-the-loud-cracks',
     title: 'Exploding Trees in Winter: What\'s Behind the Loud Cracks During Extreme Cold',
-    description: 'Exploding trees in winter are real—frost cracking causes loud gunshot-like sounds when frozen sap expands inside tree trunks during extreme cold. Here\'s the science behind this startling winter phenomenon.',
+    description: 'Exploding trees in winter are real - frost cracking causes loud gunshot-like sounds when frozen sap expands inside tree trunks during extreme cold. Here\'s the science behind this startling winter phenomenon.',
     author: AUTHORS.joel_hansen,
     publishedDate: '01-22-2026',
     heroImage: {
