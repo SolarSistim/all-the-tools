@@ -30,4 +30,9 @@
       </mat-chip>
     </mat-chip-set>
   </div>
+
+  <div class="hashtag-empty-state" *ngIf="hashtags.length === 0">
+    <mat-icon>tag</mat-icon>
+    <p>No hashtags added</p>
+  </div>
 </div>

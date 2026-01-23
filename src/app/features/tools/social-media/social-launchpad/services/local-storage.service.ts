@@ -122,7 +122,7 @@ export class LocalStorageService {
 
   private getDefaultPreferences(): UserPreferences {
     return {
-      defaultPlatforms: ['twitter', 'facebook', 'linkedin'] as PlatformId[],
+      defaultPlatforms: [] as PlatformId[],
       lowercaseHashtags: false,
       theme: 'dark'
     };

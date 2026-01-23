@@ -17,8 +17,14 @@
     <!-- Main Content Grid -->
     <mat-card class="combined-editor-card">
       <div class="combined-content">
-        <!-- Top Section: Editor and Platform Selector -->
-        <div class="top-section">
+        <!-- Top Section: Character Counter (Full Width) -->
+        <div class="character-counter-section">
+          <app-character-counter [platformStatuses]="platformStatuses()"
+            [hashtagCount]="hashtags().length"></app-character-counter>
+        </div>
+
+        <!-- Middle Section: Editor and Platform Selector -->
+        <div class="editor-platform-section">
           <!-- Left: Content Editor -->
           <div class="editor-section">
             <app-content-editor [url]="url()" [description]="description()" [hashtags]="hashtags()" [ogData]="ogData()"
@@ -46,12 +52,6 @@
               (platformToggle)="onPlatformToggle($event)"
               (platformClick)="onPlatformClick($event)"></app-platform-selector>
           </div>
-        </div>
-
-        <!-- Bottom Section: Character Counter (Full Width) -->
-        <div class="bottom-section">
-          <app-character-counter [platformStatuses]="platformStatuses()"
-            [hashtagCount]="hashtags().length"></app-character-counter>
         </div>
       </div>
     </mat-card>

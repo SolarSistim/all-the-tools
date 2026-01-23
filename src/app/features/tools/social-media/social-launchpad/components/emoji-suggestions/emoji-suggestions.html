@@ -4,30 +4,43 @@
 </button>
 
 <mat-menu #emojiMenu="matMenu" class="emoji-menu">
-  <div class="emoji-category" (click)="$event.stopPropagation()">
-    <h4>Professional</h4>
-    <div class="emoji-grid">
-      <button *ngFor="let emoji of professionalEmojis" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
-        {{ emoji }}
+  <div class="emoji-search-container" (click)="$event.stopPropagation()">
+    <mat-form-field appearance="fill" class="emoji-search-field">
+      <mat-label>Search emojis</mat-label>
+      <input matInput [(ngModel)]="searchValue" (ngModelChange)="onSearchChange($event)" placeholder="Type to filter..." autocomplete="off" />
+      <mat-icon matPrefix>search</mat-icon>
+      <button mat-icon-button matSuffix *ngIf="searchValue" (click)="clearSearch()" type="button">
+        <mat-icon>close</mat-icon>
       </button>
-    </div>
+    </mat-form-field>
   </div>
 
-  <div class="emoji-category" (click)="$event.stopPropagation()">
-    <h4>Casual</h4>
-    <div class="emoji-grid">
-      <button *ngFor="let emoji of casualEmojis" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
-        {{ emoji }}
-      </button>
+  <div class="emoji-categories-wrapper">
+    <div class="emoji-category" (click)="$event.stopPropagation()">
+      <h4>Professional</h4>
+      <div class="emoji-grid">
+        <button *ngFor="let emoji of professionalEmojis()" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
+          {{ emoji }}
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="emoji-category" (click)="$event.stopPropagation()">
-    <h4>Engaging</h4>
-    <div class="emoji-grid">
-      <button *ngFor="let emoji of engagingEmojis" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
-        {{ emoji }}
-      </button>
+    <div class="emoji-category" (click)="$event.stopPropagation()">
+      <h4>Casual</h4>
+      <div class="emoji-grid">
+        <button *ngFor="let emoji of casualEmojis()" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
+          {{ emoji }}
+        </button>
+      </div>
+    </div>
+
+    <div class="emoji-category" (click)="$event.stopPropagation()">
+      <h4>Engaging</h4>
+      <div class="emoji-grid">
+        <button *ngFor="let emoji of engagingEmojis()" mat-button (click)="onEmojiClick(emoji)" class="emoji-button">
+          {{ emoji }}
+        </button>
+      </div>
     </div>
   </div>
 </mat-menu>

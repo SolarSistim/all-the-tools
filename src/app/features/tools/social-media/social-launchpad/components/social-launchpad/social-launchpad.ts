@@ -22,6 +22,8 @@ import { EmojiSuggestionsComponent } from '../emoji-suggestions/emoji-suggestion
 import { ContentVariationsComponent } from '../content-variations/content-variations';
 import { PlatformPreviewComponent, PlatformPreviewData } from '../platform-preview/platform-preview';
 import { DeviceWarningDialogComponent } from '../device-warning-dialog/device-warning-dialog';
+import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog';
+import { InputDialogComponent, InputDialogData } from '../input-dialog/input-dialog';
 
 @Component({
   selector: 'app-social-launchpad',
@@ -246,21 +248,35 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
 
   // Variation handlers
   onCreateVariation(): void {
-    const name = prompt('Enter variation name:', `Variation ${this.variations().length + 1}`);
-    if (!name) return;
+    const dialogData: InputDialogData = {
+      title: 'Create Variation',
+      message: 'Enter a name for this content variation:',
+      placeholder: 'Variation name',
+      defaultValue: `Variation ${this.variations().length + 1}`,
+      confirmText: 'Create',
+      cancelText: 'Cancel',
+      icon: 'save'
+    };
 
-    const variation = this.variationService.createVariation(
-      name,
-      this.description(),
-      [...this.hashtags()]
-    );
+    this.dialog.open(InputDialogComponent, {
+      width: '500px',
+      data: dialogData
+    }).afterClosed().subscribe((name: string | null) => {
+      if (!name) return;
 
-    if (variation) {
-      this.loadVariations();
-      this.snackBar.open('Variation created!', 'Close', { duration: 3000 });
-    } else {
-      this.snackBar.open('Maximum 5 variations reached', 'Close', { duration: 3000 });
-    }
+      const variation = this.variationService.createVariation(
+        name,
+        this.description(),
+        [...this.hashtags()]
+      );
+
+      if (variation) {
+        this.loadVariations();
+        this.snackBar.open('Variation created!', 'Close', { duration: 3000 });
+      } else {
+        this.snackBar.open('Maximum 5 variations reached', 'Close', { duration: 3000 });
+      }
+    });
   }
 
   onLoadVariation(variation: ContentVariation): void {
@@ -317,20 +333,32 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
 
   // Clear/Reset handler
   onClearAll(): void {
-    const confirmed = confirm('Are you sure you want to clear all content? This will reset everything except saved variations.');
-    if (!confirmed) return;
+    const dialogData: ConfirmDialogData = {
+      title: 'Clear All Content',
+      message: 'Are you sure you want to clear all content? This will reset everything except saved variations.',
+      confirmText: 'Clear All',
+      cancelText: 'Cancel',
+      icon: 'warning'
+    };
 
-    this.url.set('');
-    this.description.set('');
-    this.hashtags.set([]);
-    this.ogData.set(null);
-    this.ogError.set(null);
-    this.selectedPlatforms.set(this.preferences.defaultPlatforms);
-    this.cursorPosition.set(0);
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '500px',
+      data: dialogData
+    }).afterClosed().subscribe((confirmed: boolean) => {
+      if (!confirmed) return;
 
-    this.localStorageService.clearCurrentContent();
-    this.updatePlatformStatuses();
-    this.snackBar.open('All content cleared!', 'Close', { duration: 3000 });
+      this.url.set('');
+      this.description.set('');
+      this.hashtags.set([]);
+      this.ogData.set(null);
+      this.ogError.set(null);
+      this.selectedPlatforms.set(this.preferences.defaultPlatforms);
+      this.cursorPosition.set(0);
+
+      this.localStorageService.clearCurrentContent();
+      this.updatePlatformStatuses();
+      this.snackBar.open('All content cleared!', 'Close', { duration: 3000 });
+    });
   }
 
   // Action handlers

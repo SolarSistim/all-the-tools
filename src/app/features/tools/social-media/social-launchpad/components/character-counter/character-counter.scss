@@ -2,18 +2,24 @@
 
 .character-counter-container {
   width: 100%;
+
+  &:has(.platform-counters) {
+    min-height: 112px;
+  }
 }
 
 .empty-state {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: $spacing-xl;
-  text-align: center;
-  gap: $spacing-md;
-  background: var(--bg-secondary);
-  border-radius: 8px;
+  padding: 15px;
+  height: 112px;
+  box-sizing: border-box;
+  text-align: left;
+  gap: calc($spacing-md * 0.8);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
   border: 1px dashed var(--border-color);
 
   mat-icon {
@@ -21,7 +27,6 @@
     width: 48px;
     height: 48px;
     color: var(--text-tertiary);
-    opacity: 0.5;
   }
 
   p {
@@ -35,7 +40,10 @@
 .platform-counters {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
   gap: $spacing-md;
+  align-items: stretch;
+  height: 100%;
 
   @media (max-width: 1400px) {
     grid-template-columns: repeat(4, 1fr);
@@ -63,6 +71,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-xs;
+  height: 100%;
 
   &:hover {
     border-color: var(--neon-cyan);
@@ -169,5 +178,15 @@
     height: 14px;
     flex-shrink: 0;
     margin-top: 1px;
+  }
+}
+
+mat-progress-bar {
+  ::ng-deep .mdc-linear-progress__buffer {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  ::ng-deep .mdc-linear-progress__buffer-bar {
+    background-color: rgba(255, 255, 255, 0.15) !important;
   }
 }

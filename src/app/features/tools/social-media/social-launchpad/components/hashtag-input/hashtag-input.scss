@@ -28,7 +28,7 @@
 
 .hashtag-chips-display {
   margin-top: $spacing-md;
-  padding: $spacing-md;
+  padding: 16px;
   background: rgba(0, 188, 212, 0.05);
   border-radius: 8px;
   border: 1px solid rgba(0, 188, 212, 0.2);
@@ -52,5 +52,35 @@
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+.hashtag-empty-state {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  height: 72px;
+  box-sizing: border-box;
+  text-align: left;
+  gap: $spacing-sm;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px dashed var(--border-color);
+  margin-top: $spacing-md;
+
+  mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: var(--text-tertiary);
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
   }
 }
