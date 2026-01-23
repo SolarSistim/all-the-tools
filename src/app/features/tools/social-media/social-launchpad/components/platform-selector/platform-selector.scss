@@ -9,7 +9,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin: 0 0 $spacing-lg 0;
+  margin: 0 0 $spacing-xs 0;
   display: flex;
   align-items: center;
   gap: $spacing-sm;
@@ -19,6 +19,64 @@
     font-size: 24px;
     width: 24px;
     height: 24px;
+  }
+}
+
+.selector-hint {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: $spacing-md;
+  opacity: 0.8;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--neon-cyan);
+  }
+
+  strong {
+    color: var(--neon-cyan);
+    font-weight: 600;
+  }
+}
+
+.platform-groups {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.platform-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.group-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: $spacing-xs;
+  opacity: 0.9;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--neon-pink);
   }
 }
 
@@ -116,14 +174,13 @@
     }
   }
 
-  &.has-warning {
-    &.selected {
-      // Status colors will override this via status-warning or status-error classes
-    }
-  }
 
   // Adjust spacing for checkmark when platform name is short
   &.selected {
     padding-right: 22px !important;
+  }
+
+  &.ctrl-pressed {
+    cursor: alias !important;
   }
 }

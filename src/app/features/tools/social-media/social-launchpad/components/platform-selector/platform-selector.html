@@ -3,17 +3,30 @@
     <mat-icon>share</mat-icon>
     Select Platforms
   </h3>
+  <p class="selector-hint">
+    <mat-icon>info</mat-icon>
+    <span><strong>Ctrl + Click</strong> to open platform</span>
+  </p>
 
-  <div class="platform-grid">
-    <button *ngFor="let platform of platforms" mat-raised-button [class.selected]="isPlatformSelected(platform.id)"
-      [class.has-warning]="hasWarning(platform.id)"
-      [class]="isPlatformSelected(platform.id) ? getStatusClass(platform.id) : ''"
-      [matBadgeHidden]="!hasWarning(platform.id)" [matBadge]="'!'" [matBadgeColor]="getStatusBadgeColor(platform.id)"
-      matBadgeSize="small" (click)="onPlatformToggle(platform.id)" class="platform-button"
-      [style.--platform-color]="platform.color">
-      <mat-icon>{{ platform.icon }}</mat-icon>
-      <span class="platform-name">{{ platform.name }}</span>
-      <mat-icon *ngIf="isPlatformSelected(platform.id)" class="check-icon">check_circle</mat-icon>
-    </button>
+  <div class="platform-groups">
+    <div class="platform-group" *ngFor="let group of groupedPlatforms">
+      <h4 class="group-label">
+        <mat-icon>label</mat-icon>
+        {{ group.label }}
+      </h4>
+      <div class="platform-grid">
+        <button *ngFor="let platform of group.platforms" mat-raised-button
+          [class.selected]="isPlatformSelected(platform.id)" [class.has-warning]="hasWarning(platform.id)"
+          [class]="isPlatformSelected(platform.id) ? getStatusClass(platform.id) : ''"
+          [class.ctrl-pressed]="isCtrlPressed" [matBadgeHidden]="!hasWarning(platform.id)" [matBadge]="'!'"
+          [matBadgeColor]="getStatusBadgeColor(platform.id)" matBadgeSize="small"
+          (click)="onPlatformToggle(platform.id, $event)" class="platform-button"
+          [style.--platform-color]="platform.color">
+          <mat-icon>{{ platform.icon }}</mat-icon>
+          <span class="platform-name">{{ platform.name }}</span>
+          <mat-icon *ngIf="isPlatformSelected(platform.id)" class="check-icon">check_circle</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

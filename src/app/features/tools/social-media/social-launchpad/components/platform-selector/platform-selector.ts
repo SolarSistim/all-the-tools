@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,42 @@ export class PlatformSelectorComponent {
   @Output() platformToggle = new EventEmitter<PlatformId>();
   @Output() platformClick = new EventEmitter<PlatformId>();
 
+  isCtrlPressed = false;
+
   platforms = Object.values(PLATFORM_CONFIGS);
+
+  groupedPlatforms = [
+    {
+      label: 'No Hashtags',
+      platforms: this.platforms.filter(p => p.hashtagRecommendation.max === 0)
+    },
+    {
+      label: 'Few Hashtags (1-3)',
+      platforms: this.platforms.filter(p => p.hashtagRecommendation.max > 0 && p.hashtagRecommendation.max <= 3)
+    },
+    {
+      label: 'Regular Use (4-10)',
+      platforms: this.platforms.filter(p => p.hashtagRecommendation.max > 3 && p.hashtagRecommendation.max <= 10)
+    },
+    {
+      label: 'High Hashtags (10+)',
+      platforms: this.platforms.filter(p => p.hashtagRecommendation.max > 10)
+    }
+  ].filter(group => group.platforms.length > 0);
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    if (event.ctrlKey || event.metaKey) {
+      this.isCtrlPressed = true;
+    }
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  handleKeyUp(event: KeyboardEvent): void {
+    if (!event.ctrlKey && !event.metaKey) {
+      this.isCtrlPressed = false;
+    }
+  }
 
   isPlatformSelected(platformId: PlatformId): boolean {
     return this.selectedPlatforms.includes(platformId);
@@ -77,11 +112,23 @@ export class PlatformSelectorComponent {
     return tooltip;
   }
 
-  onPlatformToggle(platformId: PlatformId): void {
+  getPlatformHomeUrl(platformId: PlatformId): string {
+    return PLATFORM_CONFIGS[platformId].homeUrl;
+  }
+
+  onPlatformToggle(platformId: PlatformId, event: MouseEvent): void {
+    if (event.ctrlKey || event.metaKey) {
+      window.open(this.getPlatformHomeUrl(platformId), '_blank');
+      return;
+    }
     this.platformToggle.emit(platformId);
   }
 
-  onPlatformClick(platformId: PlatformId, event: Event): void {
+  onPlatformClick(platformId: PlatformId, event: MouseEvent): void {
+    if (event.ctrlKey || event.metaKey) {
+      window.open(this.getPlatformHomeUrl(platformId), '_blank');
+      return;
+    }
     if (this.isPlatformSelected(platformId)) {
       event.stopPropagation();
       this.platformClick.emit(platformId);

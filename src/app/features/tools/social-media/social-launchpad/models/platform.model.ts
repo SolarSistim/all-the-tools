@@ -8,6 +8,7 @@ export interface PlatformConfig {
   imageSize: string;
   icon: string;
   color: string;
+  homeUrl: string;
 }
 
 export type PlatformId =
@@ -96,7 +97,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×675 (16:9)',
     icon: 'close',
-    color: '#000000'
+    color: '#000000',
+    homeUrl: 'https://x.com'
   },
   facebook: {
     id: 'facebook',
@@ -107,7 +109,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×630 (1.91:1)',
     icon: 'facebook',
-    color: '#1877F2'
+    color: '#1877F2',
+    homeUrl: 'https://facebook.com'
   },
   threads: {
     id: 'threads',
@@ -118,7 +121,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1080×1080 (1:1)',
     icon: 'alternate_email',
-    color: '#000000'
+    color: '#000000',
+    homeUrl: 'https://threads.net'
   },
   linkedin: {
     id: 'linkedin',
@@ -129,7 +133,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'professional',
     imageSize: '1200×627 (1.91:1)',
     icon: 'work',
-    color: '#0A66C2'
+    color: '#0A66C2',
+    homeUrl: 'https://linkedin.com'
   },
   tumblr: {
     id: 'tumblr',
@@ -140,7 +145,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1280×1920',
     icon: 'auto_stories',
-    color: '#35465C'
+    color: '#35465C',
+    homeUrl: 'https://tumblr.com'
   },
   mastodon: {
     id: 'mastodon',
@@ -151,7 +157,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×675',
     icon: 'public',
-    color: '#6364FF'
+    color: '#6364FF',
+    homeUrl: 'https://mastodon.social'
   },
   bluesky: {
     id: 'bluesky',
@@ -162,7 +169,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×675',
     icon: 'cloud',
-    color: '#0085FF'
+    color: '#0085FF',
+    homeUrl: 'https://bsky.app'
   },
   truthsocial: {
     id: 'truthsocial',
@@ -173,7 +181,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×675',
     icon: 'campaign',
-    color: '#E81B26'
+    color: '#E81B26',
+    homeUrl: 'https://truthsocial.com'
   },
   gab: {
     id: 'gab',
@@ -184,7 +193,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×675',
     icon: 'chat_bubble',
-    color: '#21CF7B'
+    color: '#21CF7B',
+    homeUrl: 'https://gab.com'
   },
   parler: {
     id: 'parler',
@@ -195,7 +205,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×675',
     icon: 'record_voice_over',
-    color: '#892D34'
+    color: '#892D34',
+    homeUrl: 'https://parler.com'
   },
   gettr: {
     id: 'gettr',
@@ -206,7 +217,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×675',
     icon: 'groups',
-    color: '#FC223B'
+    color: '#FC223B',
+    homeUrl: 'https://gettr.com'
   },
   lemmy: {
     id: 'lemmy',
@@ -217,7 +229,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×628',
     icon: 'link',
-    color: '#00BC8C'
+    color: '#00BC8C',
+    homeUrl: 'https://join-lemmy.org'
   },
   digg: {
     id: 'digg',
@@ -228,7 +241,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×628',
     icon: 'trending_up',
-    color: '#005BE2'
+    color: '#005BE2',
+    homeUrl: 'https://digg.com'
   },
   fourchan: {
     id: 'fourchan',
@@ -239,7 +253,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×628',
     icon: 'grid_4x4',
-    color: '#789922'
+    color: '#789922',
+    homeUrl: 'https://4chan.org'
   },
   pinterest: {
     id: 'pinterest',
@@ -250,7 +265,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1000×1500 (2:3)',
     icon: 'push_pin',
-    color: '#E60023'
+    color: '#E60023',
+    homeUrl: 'https://pinterest.com'
   },
   reddit: {
     id: 'reddit',
@@ -261,7 +277,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×628',
     icon: 'forum',
-    color: '#FF4500'
+    color: '#FF4500',
+    homeUrl: 'https://reddit.com'
   },
   medium: {
     id: 'medium',
@@ -272,7 +289,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'professional',
     imageSize: '1400×933',
     icon: 'article',
-    color: '#000000'
+    color: '#000000',
+    homeUrl: 'https://medium.com'
   },
   substack: {
     id: 'substack',
@@ -283,7 +301,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'professional',
     imageSize: '1456×728',
     icon: 'mail',
-    color: '#FF6719'
+    color: '#FF6719',
+    homeUrl: 'https://substack.com'
   },
   blogger: {
     id: 'blogger',
@@ -294,7 +313,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'mixed',
     imageSize: '1200×628',
     icon: 'edit_note',
-    color: '#FF5722'
+    color: '#FF5722',
+    homeUrl: 'https://blogger.com'
   },
   ghost: {
     id: 'ghost',
@@ -305,7 +325,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'professional',
     imageSize: '1200×857',
     icon: 'auto_awesome',
-    color: '#15171A'
+    color: '#15171A',
+    homeUrl: 'https://ghost.org'
   },
   livejournal: {
     id: 'livejournal',
@@ -316,7 +337,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×628',
     icon: 'menu_book',
-    color: '#00B0EA'
+    color: '#00B0EA',
+    homeUrl: 'https://livejournal.com'
   },
   dreamwidth: {
     id: 'dreamwidth',
@@ -327,7 +349,8 @@ export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {
     tone: 'casual',
     imageSize: '1200×628',
     icon: 'cloud_queue',
-    color: '#D95E00'
+    color: '#D95E00',
+    homeUrl: 'https://dreamwidth.org'
   }
 };
 
