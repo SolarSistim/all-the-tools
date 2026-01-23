@@ -11,6 +11,9 @@
       <input matInput [(ngModel)]="url" (ngModelChange)="onUrlChange($event)"
         placeholder="https://example.com/your-content" type="url" />
       <mat-icon matPrefix>link</mat-icon>
+      <button *ngIf="url" matSuffix mat-icon-button (click)="clearUrl()" matTooltip="Clear URL" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
       <mat-hint>The URL you want to share</mat-hint>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="onFetchOG()" [disabled]="!isUrlValid() || ogLoading"

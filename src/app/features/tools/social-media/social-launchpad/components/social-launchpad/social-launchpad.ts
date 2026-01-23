@@ -8,22 +8,21 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
-import { PlatformId, ContentData, OGData, ContentVariation, PlatformStatus, PLATFORM_CONFIGS } from '../../models/platform.model';
+import { PlatformId, ContentData, OGData, PlatformStatus, PLATFORM_CONFIGS } from '../../models/platform.model';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { PlatformFormatterService } from '../../services/platform-formatter.service';
 import { ShareGeneratorService } from '../../services/share-generator.service';
-import { ContentVariationService } from '../../services/content-variation.service';
 import { OGFetcherService } from '../../services/og-fetcher.service';
 
 import { ContentEditorComponent } from '../content-editor/content-editor';
 import { PlatformSelectorComponent } from '../platform-selector/platform-selector';
 import { CharacterCounterComponent } from '../character-counter/character-counter';
 import { EmojiSuggestionsComponent } from '../emoji-suggestions/emoji-suggestions';
-import { ContentVariationsComponent } from '../content-variations/content-variations';
 import { PlatformPreviewComponent, PlatformPreviewData } from '../platform-preview/platform-preview';
 import { DeviceWarningDialogComponent } from '../device-warning-dialog/device-warning-dialog';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog';
 import { InputDialogComponent, InputDialogData } from '../input-dialog/input-dialog';
+import { AdsenseComponent } from '../../../../../blog/components/adsense/adsense.component';
 
 @Component({
   selector: 'app-social-launchpad',
@@ -40,7 +39,7 @@ import { InputDialogComponent, InputDialogData } from '../input-dialog/input-dia
     PlatformSelectorComponent,
     CharacterCounterComponent,
     EmojiSuggestionsComponent,
-    ContentVariationsComponent
+    AdsenseComponent
   ],
   templateUrl: './social-launchpad.html',
   styleUrl: './social-launchpad.scss'
@@ -49,7 +48,6 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   private localStorageService = inject(LocalStorageService);
   private formatterService = inject(PlatformFormatterService);
   private shareService = inject(ShareGeneratorService);
-  private variationService = inject(ContentVariationService);
   private ogFetcherService = inject(OGFetcherService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
@@ -64,7 +62,6 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   ogData = signal<OGData | null>(null);
   ogLoading = signal<boolean>(false);
   ogError = signal<string | null>(null);
-  variations = signal<ContentVariation[]>([]);
   preferences = this.localStorageService.loadPreferences();
   cursorPosition = signal<number>(0);
 
@@ -74,7 +71,6 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadContentFromStorage();
-    this.loadVariations();
     this.checkDeviceAndShowWarning();
   }
 
@@ -125,10 +121,6 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
       lastModified: new Date().toISOString()
     };
     this.localStorageService.saveCurrentContent(content);
-  }
-
-  private loadVariations(): void {
-    this.variations.set(this.variationService.getAllVariations());
   }
 
   // Content Editor handlers
@@ -246,53 +238,6 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
     this.cursorPosition.set(position);
   }
 
-  // Variation handlers
-  onCreateVariation(): void {
-    const dialogData: InputDialogData = {
-      title: 'Create Variation',
-      message: 'Enter a name for this content variation:',
-      placeholder: 'Variation name',
-      defaultValue: `Variation ${this.variations().length + 1}`,
-      confirmText: 'Create',
-      cancelText: 'Cancel',
-      icon: 'save'
-    };
-
-    this.dialog.open(InputDialogComponent, {
-      width: '500px',
-      data: dialogData
-    }).afterClosed().subscribe((name: string | null) => {
-      if (!name) return;
-
-      const variation = this.variationService.createVariation(
-        name,
-        this.description(),
-        [...this.hashtags()]
-      );
-
-      if (variation) {
-        this.loadVariations();
-        this.snackBar.open('Variation created!', 'Close', { duration: 3000 });
-      } else {
-        this.snackBar.open('Maximum 5 variations reached', 'Close', { duration: 3000 });
-      }
-    });
-  }
-
-  onLoadVariation(variation: ContentVariation): void {
-    this.description.set(variation.description);
-    this.hashtags.set([...variation.hashtags]);
-    this.updatePlatformStatuses();
-    this.saveContentToStorage();
-    this.snackBar.open('Variation loaded!', 'Close', { duration: 3000 });
-  }
-
-  onDeleteVariation(id: string): void {
-    this.variationService.deleteVariation(id);
-    this.loadVariations();
-    this.snackBar.open('Variation deleted!', 'Close', { duration: 3000 });
-  }
-
   // Copy formatted content
   async onCopyContent(): Promise<void> {
     if (!this.description() && !this.hashtags().length && !this.url()) {
@@ -359,102 +304,6 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
       this.updatePlatformStatuses();
       this.snackBar.open('All content cleared!', 'Close', { duration: 3000 });
     });
-  }
-
-  // Action handlers
-  async onOpenAllPlatforms(): Promise<void> {
-    if (this.selectedPlatforms().length === 0) {
-      this.snackBar.open('Please select at least one platform', 'Close', { duration: 3000 });
-      return;
-    }
-
-    const formattedTexts = new Map<PlatformId, string>();
-    const platformNames = new Map<PlatformId, string>();
-
-    this.selectedPlatforms().forEach(platformId => {
-      const formatted = this.formatterService.formatForPlatform(
-        this.description(),
-        this.hashtags(),
-        this.url(),
-        platformId
-      );
-      formattedTexts.set(platformId, formatted);
-      platformNames.set(platformId, PLATFORM_CONFIGS[platformId].name);
-    });
-
-    const shareUrls = this.shareService.generateAllShareUrls(
-      this.selectedPlatforms(),
-      formattedTexts,
-      this.url()
-    );
-
-    this.shareService.openAllShareWindows(shareUrls, platformNames);
-    this.snackBar.open(`Opening ${this.selectedPlatforms().length} platforms...`, 'Close', { duration: 3000 });
-  }
-
-  async onCopyAll(): Promise<void> {
-    if (this.selectedPlatforms().length === 0) {
-      this.snackBar.open('Please select at least one platform', 'Close', { duration: 3000 });
-      return;
-    }
-
-    const formattedTexts = new Map<PlatformId, string>();
-    const platformNames = new Map<PlatformId, string>();
-
-    this.selectedPlatforms().forEach(platformId => {
-      const formatted = this.formatterService.formatForPlatform(
-        this.description(),
-        this.hashtags(),
-        this.url(),
-        platformId
-      );
-      formattedTexts.set(platformId, formatted);
-      platformNames.set(platformId, PLATFORM_CONFIGS[platformId].name);
-    });
-
-    const success = await this.shareService.copyAllFormattedTexts(formattedTexts, platformNames);
-
-    if (success) {
-      this.snackBar.open('All posts copied to clipboard!', 'Close', { duration: 3000 });
-    } else {
-      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
-    }
-  }
-
-  async onGetShareLinks(): Promise<void> {
-    if (this.selectedPlatforms().length === 0) {
-      this.snackBar.open('Please select at least one platform', 'Close', { duration: 3000 });
-      return;
-    }
-
-    const formattedTexts = new Map<PlatformId, string>();
-    const platformNames = new Map<PlatformId, string>();
-
-    this.selectedPlatforms().forEach(platformId => {
-      const formatted = this.formatterService.formatForPlatform(
-        this.description(),
-        this.hashtags(),
-        this.url(),
-        platformId
-      );
-      formattedTexts.set(platformId, formatted);
-      platformNames.set(platformId, PLATFORM_CONFIGS[platformId].name);
-    });
-
-    const shareUrls = this.shareService.generateAllShareUrls(
-      this.selectedPlatforms(),
-      formattedTexts,
-      this.url()
-    );
-
-    const text = this.shareService.formatShareLinksAsText(shareUrls, platformNames);
-
-    try {
-      await navigator.clipboard.writeText(text);
-      this.snackBar.open('Share links copied to clipboard!', 'Close', { duration: 3000 });
-    } catch (error) {
-      this.snackBar.open('Failed to copy share links', 'Close', { duration: 3000 });
-    }
   }
 
   // Update platform statuses

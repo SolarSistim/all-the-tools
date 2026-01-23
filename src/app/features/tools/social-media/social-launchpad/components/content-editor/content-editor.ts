@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { OGData, PlatformId } from '../../models/platform.model';
 import { HashtagInputComponent } from '../hashtag-input/hashtag-input';
@@ -21,6 +22,7 @@ import { EmojiSuggestionsComponent } from '../emoji-suggestions/emoji-suggestion
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
     HashtagInputComponent,
     OGPreviewCardComponent,
     EmojiSuggestionsComponent
@@ -112,5 +114,10 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
 
   onEmojiSelect(emoji: string): void {
     this.emojiSelect.emit(emoji);
+  }
+
+  clearUrl(): void {
+    this.url = '';
+    this.urlChange.emit('');
   }
 }

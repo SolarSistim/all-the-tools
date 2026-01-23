@@ -14,6 +14,19 @@
       </div>
     </section>
 
+    <!-- The Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2 class="bottom-line-title">
+        <mat-icon>summarize</mat-icon>
+        The Bottom Line
+      </h2>
+      <p class="bottom-line-content">
+        This social media launchpad helps you craft optimized content for multiple platforms simultaneously. See real-time character counts with platform-specific limits, get hashtag recommendations tailored to each network, and preview how your post appears across X (Twitter), Facebook, LinkedIn, Threads, Tumblr, Mastodon, Bluesky, and Truth Social. Fetch Open Graph metadata from any URL to enhance your posts with rich previews. Add emojis from an extensive categorized library with search filtering. Track character usage across all selected platforms at once, with warnings when you exceed limits or use too many hashtags. Completely privacy-focused—all formatting happens in your browser with no server uploads.
+      </p>
+    </section>
+
+    <app-adsense></app-adsense>
+
     <!-- Main Content Grid -->
     <mat-card class="combined-editor-card">
       <div class="combined-content">
@@ -56,36 +69,59 @@
       </div>
     </mat-card>
 
-    <!-- Action Buttons -->
-    <mat-card class="actions-card">
-      <h3 class="actions-title">
-        <mat-icon>send</mat-icon>
-        Launch Actions
-      </h3>
-      <div class="action-buttons">
-        <button mat-raised-button color="primary" (click)="onOpenAllPlatforms()"
-          [disabled]="selectedPlatforms().length === 0" class="action-button primary-action">
-          <mat-icon>launch</mat-icon>
-          Open All Selected
-        </button>
-        <button mat-raised-button (click)="onCopyAll()" [disabled]="selectedPlatforms().length === 0"
-          class="action-button">
-          <mat-icon>content_copy</mat-icon>
-          Copy All
-        </button>
-        <button mat-raised-button (click)="onGetShareLinks()" [disabled]="selectedPlatforms().length === 0"
-          class="action-button">
-          <mat-icon>link</mat-icon>
-          Get Share Links
-        </button>
+    <app-adsense></app-adsense>
+
+    <!-- Social Media Launchpad Guide -->
+    <mat-card class="guide-card">
+      <div class="card-header">
+        <h2>
+          <mat-icon>info</mat-icon>
+          Social Media Launchpad Guide
+        </h2>
+      </div>
+
+      <div class="guide-content">
+        <div class="guide-section">
+          <h3>Supported Platforms</h3>
+          <ul class="platform-list">
+            <li><strong>X (Twitter):</strong> 280 character limit, 1-3 hashtags recommended</li>
+            <li><strong>Facebook:</strong> 63,206 character limit, hashtags less effective</li>
+            <li><strong>LinkedIn:</strong> 3,000 character limit, 3-5 hashtags recommended</li>
+            <li><strong>Threads:</strong> 500 character limit, 1-3 hashtags recommended</li>
+            <li><strong>Tumblr:</strong> No character limit, casual tone encouraged</li>
+            <li><strong>Mastodon:</strong> 500 character limit, 3-5 hashtags recommended</li>
+            <li><strong>Bluesky:</strong> 300 character limit, hashtags not used</li>
+            <li><strong>Truth Social:</strong> 500 character limit, 1-5 hashtags recommended</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>How to Use</h3>
+          <ul class="tips-list">
+            <li><strong>Select platforms</strong> - Click platform buttons on the right to select which social networks you want to post to</li>
+            <li><strong>Add your URL</strong> - Paste the link you want to share and click "Fetch OG Data" to automatically pull title, description, and preview image</li>
+            <li><strong>Write your description</strong> - Craft your post content in the description field. It auto-saves as you type</li>
+            <li><strong>Add hashtags</strong> - Type hashtags and press Enter, Space, or Comma to add them. Remove with the X button</li>
+            <li><strong>Insert emojis</strong> - Click "Add Emoji" to browse categorized emojis or search for specific ones</li>
+            <li><strong>Monitor character counts</strong> - Watch the character counter at the top to ensure you're within limits for each platform</li>
+            <li><strong>Preview posts</strong> - Click any selected platform to see how your post will appear</li>
+            <li><strong>Copy content</strong> - Use the Copy button to copy your formatted post to clipboard</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>Best Practices</h3>
+          <ul class="tips-list">
+            <li><strong>Start with the most restrictive platform</strong> - Write for the platform with the lowest character limit first, then expand for others if needed</li>
+            <li><strong>Use hashtags strategically</strong> - Different platforms favor different hashtag counts. Follow the recommendations shown in warnings</li>
+            <li><strong>Check character counts</strong> - The most restrictive platform is marked with a warning icon. Stay under that limit for maximum reach</li>
+            <li><strong>Fetch Open Graph data</strong> - Rich previews increase engagement. Always fetch OG data when sharing links</li>
+            <li><strong>Test with emojis</strong> - Emojis can increase engagement but count as characters. Use them thoughtfully</li>
+            <li><strong>Keep URLs at the end</strong> - Most platforms auto-shorten URLs and show previews, so place them after your main content</li>
+          </ul>
+        </div>
       </div>
     </mat-card>
 
-    <!-- Variations Section -->
-    <mat-card class="variations-card">
-      <app-content-variations [variations]="variations()" [currentDescription]="description()"
-        [currentHashtags]="hashtags()" (variationCreate)="onCreateVariation()" (variationLoad)="onLoadVariation($event)"
-        (variationDelete)="onDeleteVariation($event)"></app-content-variations>
-    </mat-card>
   </div>
 </div>
