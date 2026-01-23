@@ -13,6 +13,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { PlatformFormatterService } from '../../services/platform-formatter.service';
 import { ShareGeneratorService } from '../../services/share-generator.service';
 import { OGFetcherService } from '../../services/og-fetcher.service';
+import { MetaService } from '../../../../../../core/services/meta.service';
 
 import { ContentEditorComponent } from '../content-editor/content-editor';
 import { PlatformSelectorComponent } from '../platform-selector/platform-selector';
@@ -49,6 +50,7 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   private formatterService = inject(PlatformFormatterService);
   private shareService = inject(ShareGeneratorService);
   private ogFetcherService = inject(OGFetcherService);
+  private metaService = inject(MetaService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
 
@@ -70,6 +72,20 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   platformStatusMap = signal<Map<PlatformId, PlatformStatus>>(new Map());
 
   ngOnInit(): void {
+    this.metaService.updateTags({
+      title: 'Social Media Launchpad - Multi-Platform Post Composer',
+      description: 'Craft optimized content for multiple social platforms simultaneously. Real-time character counts, hashtag recommendations, OG preview, and emoji picker for X (Twitter), Facebook, LinkedIn, Threads, and more.',
+      keywords: ['social media tool', 'multi-platform posting', 'character counter', 'hashtag tool', 'twitter character count', 'facebook post', 'linkedin post', 'social media composer'],
+      image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer.jpg',
+      url: 'https://www.allthethings.dev/tools/social-media-launchpad',
+      jsonLd: this.metaService.buildToolJsonLd({
+        name: 'Social Media Launchpad - Multi-Platform Post Composer',
+        description: 'Craft optimized content for multiple social platforms simultaneously. Real-time character counts, hashtag recommendations, OG preview, and emoji picker for X (Twitter), Facebook, LinkedIn, Threads, and more.',
+        url: 'https://www.allthethings.dev/tools/social-media-launchpad',
+        image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer.jpg'
+      })
+    });
+
     this.loadContentFromStorage();
     this.checkDeviceAndShowWarning();
   }
