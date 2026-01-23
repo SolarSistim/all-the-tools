@@ -6,14 +6,21 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class VisitLoggerService {
   private platformId = inject(PLATFORM_ID);
-  private sessionId: string = '';
+  private _sessionId: string = '';
   private hasLogged: boolean = false;
 
   constructor() {
     // Only run in browser
     if (isPlatformBrowser(this.platformId)) {
-      this.sessionId = this.getOrCreateSessionId();
+      this._sessionId = this.getOrCreateSessionId();
     }
+  }
+
+  /**
+   * Get the session ID
+   */
+  public get sessionId(): string {
+    return this._sessionId;
   }
 
   /**
@@ -87,15 +94,15 @@ export class VisitLoggerService {
    */
   private getOrCreateSessionId(): string {
     const storageKey = 'visitor_session_id';
-    
+
     try {
       let sessionId = sessionStorage.getItem(storageKey);
-      
+
       if (!sessionId) {
         sessionId = this.generateSessionId();
         sessionStorage.setItem(storageKey, sessionId);
       }
-      
+
       return sessionId;
     } catch (error) {
       // If sessionStorage is not available, generate a temporary ID
@@ -113,7 +120,7 @@ export class VisitLoggerService {
   /**
    * Detect device type
    */
-  private getDeviceType(): string {
+  public getDeviceType(): string {
     const ua = navigator.userAgent;
 
     if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {

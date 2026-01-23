@@ -4,6 +4,7 @@ import { Observable, of, throwError, TimeoutError } from 'rxjs';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { OGFetchResponse } from '../models/platform.model';
 import { environment } from '../../../../../../environments/environment';
+import { VisitLoggerService } from '../../../../../../core/services/visit-logger.service';
 
 interface UserRateLimitData {
   requestTimestamps: number[];
@@ -20,7 +21,10 @@ export class OGFetcherService {
   private readonly USER_LIMIT_PER_MIN = environment.ogFetchUserLimitPerMin;
   private readonly LOCKOUT_MINUTES = environment.ogFetchUserLockoutMinutes;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private visitLogger: VisitLoggerService
+  ) { }
 
   /**
    * Fetches OG data from a URL via the Netlify function
@@ -47,7 +51,25 @@ export class OGFetcherService {
     this.recordUserRequest();
 
     const encodedUrl = encodeURIComponent(url);
-    const fetchUrl = `${this.NETLIFY_FUNCTION_URL}?url=${encodedUrl}`;
+
+    // Collect logging metadata
+    const metadata = {
+      url: encodedUrl,
+      sessionId: this.visitLogger.sessionId,
+      deviceType: this.visitLogger.getDeviceType(),
+      userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
+      screenResolution: typeof window !== 'undefined' ? `${window.screen.width}x${window.screen.height}` : 'Unknown',
+      language: typeof navigator !== 'undefined' ? navigator.language : 'Unknown',
+      referrer: typeof document !== 'undefined' ? document.referrer : 'Direct'
+    };
+
+    const fetchUrl = `${this.NETLIFY_FUNCTION_URL}?url=${metadata.url}` +
+      `&sessionId=${encodeURIComponent(metadata.sessionId)}` +
+      `&deviceType=${encodeURIComponent(metadata.deviceType)}` +
+      `&userAgent=${encodeURIComponent(metadata.userAgent)}` +
+      `&screenResolution=${encodeURIComponent(metadata.screenResolution)}` +
+      `&language=${encodeURIComponent(metadata.language)}` +
+      `&referrer=${encodeURIComponent(metadata.referrer)}`;
 
     return this.http.get<OGFetchResponse>(fetchUrl).pipe(
       timeout(this.TIMEOUT_MS),

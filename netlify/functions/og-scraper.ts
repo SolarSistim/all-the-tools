@@ -1,5 +1,6 @@
 import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
 import * as cheerio from 'cheerio';
+const { google } = require('googleapis');
 
 interface OGData {
   title: string;
@@ -116,6 +117,101 @@ function extractOGData(html: string, url: string): OGData {
   return ogData;
 }
 
+/**
+ * Log the fetch event to Google Sheets
+ */
+async function logFetchEvent(event: HandlerEvent, url: string) {
+  try {
+    // Decode Netlify geo data from x-nf-geo header (base64 encoded JSON)
+    let geoData: any = null;
+    if (event.headers['x-nf-geo']) {
+      try {
+        const decoded = Buffer.from(event.headers['x-nf-geo'], 'base64').toString('utf-8');
+        geoData = JSON.parse(decoded);
+      } catch (error) {
+        console.error('Error decoding geo data:', error);
+      }
+    }
+
+    const params = event.queryStringParameters || {};
+
+    // Extract metadata from headers and query parameters
+    const logInfo = {
+      humanReadableDate: new Date().toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      }),
+      referrer: params.referrer || 'Direct',
+      urlPath: url,
+      ip: event.headers['cf-connecting-ip'] ||
+        event.headers['x-nf-client-connection-ip'] ||
+        event.headers['client-ip'] ||
+        'Unknown',
+      country: geoData?.country?.code || event.headers['x-country'] || 'Unknown',
+      city: geoData?.city || 'Unknown',
+      region: geoData?.subdivision?.code || 'Unknown',
+      coordinates: geoData ? `${geoData.latitude}, ${geoData.longitude}` : 'Unknown',
+      sessionId: params.sessionId || '',
+      deviceType: params.deviceType || 'Unknown',
+      userAgent: params.userAgent || event.headers['user-agent'] || 'Unknown',
+      screenResolution: params.screenResolution || 'Unknown',
+      language: params.language || 'Unknown',
+    };
+
+    // Initialize Google Sheets API
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    const spreadsheetId = '1NDJC3E6n9rGkILd0IKI58vksBSW9eAJQ9gDTzBzoWbs';
+    const sheetName = 'meta_fetch_function';
+    const range = `${sheetName}!A:M`;
+
+    // Prepare the row data matching the headers:
+    // Date, Referrer URL, URL Path, IP Address, Country, City, Region, Coordinates, Session ID, Device Type, User Agent, Screen Resolution, Language
+    const values = [[
+      logInfo.humanReadableDate,
+      logInfo.referrer,
+      logInfo.urlPath,
+      logInfo.ip,
+      logInfo.country,
+      logInfo.city,
+      logInfo.region,
+      logInfo.coordinates,
+      logInfo.sessionId,
+      logInfo.deviceType,
+      logInfo.userAgent,
+      logInfo.screenResolution,
+      logInfo.language,
+    ]];
+
+    // Append the data to the sheet
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range,
+      valueInputOption: 'RAW',
+      requestBody: {
+        values,
+      },
+    });
+
+    console.log('Fetch event logged to Google Sheets');
+  } catch (error) {
+    console.error('Error logging fetch event:', error);
+  }
+}
+
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   // CORS headers
   const headers = {
@@ -177,6 +273,10 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       body: JSON.stringify({ success: false, error: 'Invalid URL format' })
     };
   }
+
+  // Log the fetch event (fire and forget - but we await it for simplicity in this serverless environment)
+  // We do this before fetching to capture the attempt
+  await logFetchEvent(event, url);
 
   try {
     // Fetch the URL
