@@ -43,7 +43,10 @@ import { AdsenseComponent } from '../../../../../blog/components/adsense/adsense
     AdsenseComponent
   ],
   templateUrl: './social-launchpad.html',
-  styleUrl: './social-launchpad.scss'
+  styleUrl: './social-launchpad.scss',
+  host: {
+    'ngSkipHydration': 'true'
+  }
 })
 export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   private localStorageService = inject(LocalStorageService);
@@ -351,7 +354,7 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
       this.hashtags.set([]);
       this.ogData.set(null);
       this.ogError.set(null);
-      this.selectedPlatforms.set(this.preferences.defaultPlatforms);
+      this.selectedPlatforms.set([]);
       this.cursorPosition.set(0);
 
       this.localStorageService.clearCurrentContent();
