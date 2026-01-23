@@ -20,7 +20,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       alt: 'How to Use Social Media Launchpad: Copy, Paste, Launch Your Social Media Posts',
     },
     tags: ['Social Media', 'Tools', 'Productivity', 'Privacy', 'Tutorial', 'Web Tools'],
-    category: 'Tools',
+    category: 'Tutorials',
     metaDescription: 'Learn how to use the Social Media Launchpad tool on All The Tools. Compose once, post everywhere with privacy-first design, character counters, hashtag recommendations, and quick copy actions.',
     metaKeywords: [
       'Social media launchpad',
@@ -134,7 +134,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: [],
-      readTime: 1,
+    readTime: 1,
   },
   {
     id: '102',
@@ -155,7 +155,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: [],
-      readTime: 15,
+    readTime: 15,
   },
   {
     id: '101',
@@ -176,7 +176,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: [],
-      readTime: 8,
+    readTime: 8,
   },
   {
     id: '100',
@@ -197,7 +197,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: false,
     relatedArticles: [],
-      readTime: 3,
+    readTime: 3,
   },
   {
     id: '27',
@@ -233,7 +233,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: [],
-      readTime: 6,
+    readTime: 6,
   },
   {
     id: '26',
@@ -267,7 +267,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['25', '18', '19'],
-      readTime: 5,
+    readTime: 5,
   },
   {
     id: '25',
@@ -301,7 +301,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['18', '19', '1'],
-      readTime: 4,
+    readTime: 4,
   },
   {
     id: '24',
@@ -316,7 +316,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       alt: 'How to Use the Barcode Scanner Tool: Complete Guide',
     },
     tags: ['Barcode Scanner', 'Tools', 'How-To', 'Tutorial', 'UPC', 'EAN', 'Productivity'],
-    category: 'Technology',
+    category: 'Tutorials',
     metaDescription:
       'Complete guide to using the free barcode scanner tool. Learn how to scan UPC, EAN, Code 128, and QR codes with your device camera, manage scanned codes, and troubleshoot common issues.',
     metaKeywords: [
@@ -336,7 +336,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['21', '8', '3'],
-      readTime: 6,
+    readTime: 6,
   },
   {
     id: '23',
@@ -368,7 +368,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['12', '17', '6'],
-      readTime: 5,
+    readTime: 5,
   },
   {
     id: '22',
@@ -404,7 +404,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['3', '21', '1'],
-      readTime: 2,
+    readTime: 2,
   },
   {
     id: '21',
@@ -419,7 +419,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
       alt: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
     },
     tags: ['On! Rewards', 'OCR', 'Tools', 'Productivity', 'Mobile', 'Privacy'],
-    category: 'Technology',
+    category: 'Tutorials',
     metaDescription:
       'Tired of typing in tiny alphanumeric codes from On! brand nicotine boxes? Use our free scanning tool to instantly capture reward codes using your camera.',
     metaKeywords: [
@@ -440,7 +440,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['8', '3', '10'],
-      readTime: 4,
+    readTime: 4,
   },
   {
     id: '20',
@@ -476,7 +476,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['17', '15', '12'],
-      readTime: 9,
+    readTime: 9,
   },
   {
     id: '19',
@@ -510,7 +510,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: true,
     display: true,
     relatedArticles: ['18', '13', '1'],
-      readTime: 8,
+    readTime: 8,
   },
   {
     id: '18',
@@ -544,7 +544,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: true,
     display: true,
     relatedArticles: ['13', '9', '1'],
-      readTime: 8,
+    readTime: 8,
   },
   {
     id: '17',
@@ -578,7 +578,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: true,
     display: true,
     relatedArticles: ['15', '6', '12'],
-      readTime: 5,
+    readTime: 5,
   },
   {
     id: '16',
@@ -612,7 +612,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: true,
     display: true,
     relatedArticles: ['1', '4', '9'],
-      readTime: 3,
+    readTime: 3,
   },
   {
     id: '15',
@@ -645,7 +645,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: true,
     display: true,
     relatedArticles: [],
-      readTime: 4,
+    readTime: 4,
   },
   {
     id: '14',
@@ -677,7 +677,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     featured: true,
     display: true,
     relatedArticles: ['12', '7', '6'],
-      readTime: 10,
+    readTime: 10,
   },
   {
     id: '13',
@@ -710,7 +710,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     featured: true,
     hasAudio: true,
     relatedArticles: ['10', '3', '8'],
-      readTime: 5,
+    readTime: 5,
   },
   {
     id: '12',
@@ -741,7 +741,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     featured: true,
     hasAudio: true,
     relatedArticles: ['7', '6', '1'],
-      readTime: 8,
+    readTime: 8,
   },
   {
     id: '11',
@@ -772,7 +772,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     featured: true,
     hasAudio: true,
     relatedArticles: ['10', '3', '6'],
-      readTime: 2,
+    readTime: 2,
   },
   {
     id: '10',
@@ -802,7 +802,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['3', '2', '5'],
-      readTime: 4,
+    readTime: 4,
   },
   {
     id: '9',
@@ -831,7 +831,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['1', '4', '2'],
-      readTime: 11,
+    readTime: 11,
   },
   {
     id: '8',
@@ -861,7 +861,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['3', '5', '1'],
-      readTime: 4,
+    readTime: 4,
   },
   {
     id: '7',
@@ -890,7 +890,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['6', '1', '2'],
-      readTime: 3,
+    readTime: 3,
   },
   {
     id: '6',
@@ -919,7 +919,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['4', '1', '2'],
-      readTime: 20,
+    readTime: 20,
   },
   {
     id: '5',
@@ -947,7 +947,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['3', '2', '4'],
-      readTime: 2,
+    readTime: 2,
   },
   {
     id: '4',
@@ -975,7 +975,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['1', '6', '2'],
-      readTime: 5,
+    readTime: 5,
   },
   {
     id: '3',
@@ -1003,7 +1003,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['2', '5', '1'],
-      readTime: 8,
+    readTime: 8,
   },
   {
     id: '2',
@@ -1030,7 +1030,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['3', '5', '6'],
-      readTime: 5,
+    readTime: 5,
   },
   {
     id: '1',
@@ -1055,6 +1055,6 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     relatedArticles: ['4', '2', '3'],
-      readTime: 8,
+    readTime: 8,
   },
 ];
