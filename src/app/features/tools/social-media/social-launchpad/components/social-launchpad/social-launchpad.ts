@@ -254,7 +254,7 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
     this.cursorPosition.set(position);
   }
 
-  // Copy formatted content
+  // Copy all content
   async onCopyContent(): Promise<void> {
     if (!this.description() && !this.hashtags().length && !this.url()) {
       this.snackBar.open('Nothing to copy. Add content first.', 'Close', { duration: 3000 });
@@ -286,7 +286,39 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
 
     try {
       await navigator.clipboard.writeText(formattedContent);
-      this.snackBar.open('Content copied to clipboard!', 'Close', { duration: 3000 });
+      this.snackBar.open('All content copied to clipboard!', 'Close', { duration: 3000 });
+    } catch (error) {
+      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
+    }
+  }
+
+  // Copy description only
+  async onCopyDescription(): Promise<void> {
+    if (!this.description()) {
+      this.snackBar.open('No description to copy. Add content first.', 'Close', { duration: 3000 });
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(this.description());
+      this.snackBar.open('Description copied to clipboard!', 'Close', { duration: 3000 });
+    } catch (error) {
+      this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
+    }
+  }
+
+  // Copy hashtags only
+  async onCopyHashtags(): Promise<void> {
+    if (this.hashtags().length === 0) {
+      this.snackBar.open('No hashtags to copy. Add hashtags first.', 'Close', { duration: 3000 });
+      return;
+    }
+
+    const formattedHashtags = this.hashtags().join(' ');
+
+    try {
+      await navigator.clipboard.writeText(formattedHashtags);
+      this.snackBar.open('Hashtags copied to clipboard!', 'Close', { duration: 3000 });
     } catch (error) {
       this.snackBar.open('Failed to copy to clipboard', 'Close', { duration: 3000 });
     }

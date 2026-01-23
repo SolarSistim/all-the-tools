@@ -25,6 +25,12 @@
   }
 }
 
+.url-editor-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .url-input-section {
   display: flex;
   gap: $spacing-md;
@@ -71,6 +77,21 @@
   width: 100%;
 }
 
+.url-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 12px;
+
+  .copy-url-button {
+    border-color: var(--neon-cyan) !important;
+    color: var(--neon-cyan) !important;
+
+    &:hover {
+      background: rgba(0, 255, 255, 0.05) !important;
+    }
+  }
+}
+
 .section-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.875rem;
@@ -91,9 +112,86 @@
   }
 }
 
-.description-input-field,
+.description-section,
 .hashtag-section {
   width: 100%;
+}
+
+.hashtag-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-md;
+
+  .copy-hashtags-button {
+    border-color: var(--neon-cyan) !important;
+    color: var(--neon-cyan) !important;
+
+    &:hover {
+      background: rgba(0, 255, 255, 0.05) !important;
+    }
+  }
+}
+
+.description-input-field {
+  width: 100%;
+}
+
+.description-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: $spacing-md;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+
+  .left-actions,
+  .right-actions {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    .left-actions,
+    .right-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  button {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  .copy-all-button {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px var(--neon-cyan-glow) !important;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--neon-cyan-glow), 0 0 30px var(--neon-pink-glow) !important;
+    }
+  }
+
+  .copy-description-button {
+    border-color: var(--neon-cyan) !important;
+    color: var(--neon-cyan) !important;
+
+    &:hover {
+      background: rgba(0, 255, 255, 0.05) !important;
+    }
+  }
+
+  .clear-all-button {
+    &:hover {
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.2) !important;
+    }
+  }
 }
 
 .emoji-wrapper {

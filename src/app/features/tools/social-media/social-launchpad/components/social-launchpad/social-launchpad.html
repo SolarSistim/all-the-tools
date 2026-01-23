@@ -21,7 +21,13 @@
         The Bottom Line
       </h2>
       <p class="bottom-line-content">
-        This social media launchpad helps you craft optimized content for multiple platforms simultaneously. See real-time character counts with platform-specific limits, get hashtag recommendations tailored to each network, and preview how your post appears across X (Twitter), Facebook, LinkedIn, Threads, Tumblr, Mastodon, Bluesky, and Truth Social. Fetch Open Graph metadata from any URL to enhance your posts with rich previews. Add emojis from an extensive categorized library with search filtering. Track character usage across all selected platforms at once, with warnings when you exceed limits or use too many hashtags. Completely privacy-focused—all formatting happens in your browser with no server uploads.
+        This social media launchpad helps you craft optimized content for multiple platforms simultaneously. See
+        real-time character counts with platform-specific limits, get hashtag recommendations tailored to each network,
+        and preview how your post appears across X (Twitter), Facebook, LinkedIn, Threads, Tumblr, Mastodon, Bluesky,
+        and Truth Social. Fetch Open Graph metadata from any URL to enhance your posts with rich previews. Add emojis
+        from an extensive categorized library with search filtering. Track character usage across all selected platforms
+        at once, with warnings when you exceed limits or use too many hashtags. Completely privacy-focused—all
+        formatting happens in your browser with no server uploads.
       </p>
     </section>
 
@@ -45,18 +51,9 @@
               [selectedPlatforms]="selectedPlatforms()" (urlChange)="onUrlChange($event)"
               (descriptionChange)="onDescriptionChange($event)" (hashtagsChange)="onHashtagsChange($event)"
               (fetchOG)="onFetchOG()" (retryOG)="onRetryOG()" (cursorPositionChange)="onCursorPositionChange($event)"
-              (emojiSelect)="onEmojiSelect($event)"></app-content-editor>
-
-            <div class="editor-actions">
-              <button mat-raised-button color="primary" (click)="onCopyContent()" class="copy-content-button">
-                <mat-icon>content_copy</mat-icon>
-                Copy
-              </button>
-              <button mat-stroked-button color="warn" (click)="onClearAll()" class="clear-button">
-                <mat-icon>clear_all</mat-icon>
-                Clear All
-              </button>
-            </div>
+              (emojiSelect)="onEmojiSelect($event)" (copyDescription)="onCopyDescription()"
+              (copyHashtags)="onCopyHashtags()" (clearAll)="onClearAll()"
+              (copyAll)="onCopyContent()"></app-content-editor>
           </div>
 
           <!-- Right: Platform Selector -->
@@ -98,12 +95,18 @@
         <div class="guide-section">
           <h3>How to Use</h3>
           <ul class="tips-list">
-            <li><strong>Select platforms</strong> - Click platform buttons on the right to select which social networks you want to post to</li>
-            <li><strong>Add your URL</strong> - Paste the link you want to share and click "Fetch OG Data" to automatically pull title, description, and preview image</li>
-            <li><strong>Write your description</strong> - Craft your post content in the description field. It auto-saves as you type</li>
-            <li><strong>Add hashtags</strong> - Type hashtags and press Enter, Space, or Comma to add them. Remove with the X button</li>
-            <li><strong>Insert emojis</strong> - Click "Add Emoji" to browse categorized emojis or search for specific ones</li>
-            <li><strong>Monitor character counts</strong> - Watch the character counter at the top to ensure you're within limits for each platform</li>
+            <li><strong>Select platforms</strong> - Click platform buttons on the right to select which social networks
+              you want to post to</li>
+            <li><strong>Add your URL</strong> - Paste the link you want to share and click "Fetch OG Data" to
+              automatically pull title, description, and preview image</li>
+            <li><strong>Write your description</strong> - Craft your post content in the description field. It
+              auto-saves as you type</li>
+            <li><strong>Add hashtags</strong> - Type hashtags and press Enter, Space, or Comma to add them. Remove with
+              the X button</li>
+            <li><strong>Insert emojis</strong> - Click "Add Emoji" to browse categorized emojis or search for specific
+              ones</li>
+            <li><strong>Monitor character counts</strong> - Watch the character counter at the top to ensure you're
+              within limits for each platform</li>
             <li><strong>Preview posts</strong> - Click any selected platform to see how your post will appear</li>
             <li><strong>Copy content</strong> - Use the Copy button to copy your formatted post to clipboard</li>
           </ul>
@@ -112,12 +115,18 @@
         <div class="guide-section">
           <h3>Best Practices</h3>
           <ul class="tips-list">
-            <li><strong>Start with the most restrictive platform</strong> - Write for the platform with the lowest character limit first, then expand for others if needed</li>
-            <li><strong>Use hashtags strategically</strong> - Different platforms favor different hashtag counts. Follow the recommendations shown in warnings</li>
-            <li><strong>Check character counts</strong> - The most restrictive platform is marked with a warning icon. Stay under that limit for maximum reach</li>
-            <li><strong>Fetch Open Graph data</strong> - Rich previews increase engagement. Always fetch OG data when sharing links</li>
-            <li><strong>Test with emojis</strong> - Emojis can increase engagement but count as characters. Use them thoughtfully</li>
-            <li><strong>Keep URLs at the end</strong> - Most platforms auto-shorten URLs and show previews, so place them after your main content</li>
+            <li><strong>Start with the most restrictive platform</strong> - Write for the platform with the lowest
+              character limit first, then expand for others if needed</li>
+            <li><strong>Use hashtags strategically</strong> - Different platforms favor different hashtag counts. Follow
+              the recommendations shown in warnings</li>
+            <li><strong>Check character counts</strong> - The most restrictive platform is marked with a warning icon.
+              Stay under that limit for maximum reach</li>
+            <li><strong>Fetch Open Graph data</strong> - Rich previews increase engagement. Always fetch OG data when
+              sharing links</li>
+            <li><strong>Test with emojis</strong> - Emojis can increase engagement but count as characters. Use them
+              thoughtfully</li>
+            <li><strong>Keep URLs at the end</strong> - Most platforms auto-shorten URLs and show previews, so place
+              them after your main content</li>
           </ul>
         </div>
       </div>

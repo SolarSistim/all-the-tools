@@ -4,23 +4,31 @@
     Content Editor
   </h3>
 
-  <!-- URL Input -->
-  <div class="url-input-section">
-    <mat-form-field appearance="fill" class="url-input-field">
-      <mat-label>URL</mat-label>
-      <input matInput [(ngModel)]="url" (ngModelChange)="onUrlChange($event)"
-        placeholder="https://example.com/your-content" type="url" />
-      <mat-icon matPrefix>link</mat-icon>
-      <button *ngIf="url" matSuffix mat-icon-button (click)="clearUrl()" matTooltip="Clear URL" type="button">
-        <mat-icon>close</mat-icon>
+  <!-- URL Section -->
+  <div class="url-editor-group">
+    <div class="url-input-section">
+      <mat-form-field appearance="fill" class="url-input-field">
+        <mat-label>URL</mat-label>
+        <input matInput [(ngModel)]="url" (ngModelChange)="onUrlChange($event)"
+          placeholder="https://example.com/your-content" type="url" />
+        <mat-icon matPrefix>link</mat-icon>
+        <button *ngIf="url" matSuffix mat-icon-button (click)="clearUrl()" matTooltip="Clear URL" type="button">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint>The URL you want to share</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="onFetchOG()" [disabled]="!isUrlValid() || ogLoading"
+        class="fetch-og-button">
+        <mat-icon>refresh</mat-icon>
+        Fetch OG Data
       </button>
-      <mat-hint>The URL you want to share</mat-hint>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onFetchOG()" [disabled]="!isUrlValid() || ogLoading"
-      class="fetch-og-button">
-      <mat-icon>refresh</mat-icon>
-      Fetch OG Data
-    </button>
+    </div>
+    <div class="url-actions">
+      <button mat-stroked-button (click)="onCopyUrl()" [disabled]="!url" class="copy-url-button">
+        <mat-icon>content_copy</mat-icon>
+        Copy URL
+      </button>
+    </div>
   </div>
 
   <!-- OG Preview -->
@@ -37,21 +45,49 @@
   <div class="hashtag-section">
     <app-hashtag-input [hashtags]="hashtags" [lowercase]="lowercase"
       (hashtagsChange)="onHashtagsChange($event)"></app-hashtag-input>
+    <div class="hashtag-actions">
+      <button mat-stroked-button (click)="onCopyHashtags()" [disabled]="hashtags.length === 0"
+        class="copy-hashtags-button">
+        <mat-icon>tag</mat-icon>
+        Copy Hashtags
+      </button>
+    </div>
   </div>
 
   <!-- Description Input -->
-  <mat-form-field appearance="fill" class="description-input-field">
-    <mat-label>Description</mat-label>
-    <textarea #descriptionTextarea matInput [(ngModel)]="description" (input)="onDescriptionInput(description)"
-      (click)="onDescriptionClick()" (keyup)="onDescriptionKeyUp()" placeholder="Write your post description here..."
-      rows="6" cdkTextareaAutosize cdkAutosizeMinRows="6" cdkAutosizeMaxRows="15"></textarea>
-    <mat-icon matPrefix>description</mat-icon>
-    <mat-hint>Your post content (auto-saves)</mat-hint>
-  </mat-form-field>
+  <div class="description-section">
+    <mat-form-field appearance="fill" class="description-input-field">
+      <mat-label>Description</mat-label>
+      <textarea #descriptionTextarea matInput [(ngModel)]="description" (input)="onDescriptionInput(description)"
+        (click)="onDescriptionClick()" (keyup)="onDescriptionKeyUp()" placeholder="Write your post description here..."
+        rows="6" cdkTextareaAutosize cdkAutosizeMinRows="6" cdkAutosizeMaxRows="15"></textarea>
+      <mat-icon matPrefix>description</mat-icon>
+      <mat-hint>Your post content (auto-saves)</mat-hint>
+    </mat-form-field>
 
-  <div class="emoji-wrapper">
-    <app-emoji-suggestions [selectedPlatforms]="selectedPlatforms"
-      (emojiSelect)="onEmojiSelect($event)"></app-emoji-suggestions>
+    <div class="emoji-wrapper">
+      <app-emoji-suggestions [selectedPlatforms]="selectedPlatforms"
+        (emojiSelect)="onEmojiSelect($event)"></app-emoji-suggestions>
+    </div>
+
+    <div class="description-actions">
+      <div class="left-actions">
+        <button mat-raised-button color="primary" (click)="onCopyAll()" class="copy-all-button">
+          <mat-icon>content_copy</mat-icon>
+          Copy All
+        </button>
+      </div>
+      <div class="right-actions">
+        <button mat-stroked-button color="warn" (click)="onClearAll()" class="clear-all-button">
+          <mat-icon>clear_all</mat-icon>
+          Clear All
+        </button>
+        <button mat-stroked-button (click)="onCopyDescription()" class="copy-description-button">
+          <mat-icon>description</mat-icon>
+          Copy Description
+        </button>
+      </div>
+    </div>
   </div>
 
 

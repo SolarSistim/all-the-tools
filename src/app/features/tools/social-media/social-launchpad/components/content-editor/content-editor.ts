@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
 import { OGData, PlatformId } from '../../models/platform.model';
 import { HashtagInputComponent } from '../hashtag-input/hashtag-input';
@@ -47,11 +48,16 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
   @Output() retryOG = new EventEmitter<void>();
   @Output() cursorPositionChange = new EventEmitter<number>();
   @Output() emojiSelect = new EventEmitter<string>();
+  @Output() copyDescription = new EventEmitter<void>();
+  @Output() copyHashtags = new EventEmitter<void>();
+  @Output() clearAll = new EventEmitter<void>();
+  @Output() copyAll = new EventEmitter<void>();
 
   @ViewChild('descriptionTextarea') descriptionTextarea?: ElementRef<HTMLTextAreaElement>;
 
   private destroy$ = new Subject<void>();
   private descriptionChange$ = new Subject<string>();
+  private snackBar = inject(MatSnackBar);
   cursorPosition: number = 0;
 
   ngOnInit(): void {
@@ -104,12 +110,39 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
   }
 
   isUrlValid(): boolean {
+    if (!this.url) return false;
     try {
       new URL(this.url);
       return true;
     } catch {
       return false;
     }
+  }
+
+  async onCopyUrl(): Promise<void> {
+    if (!this.url) return;
+    try {
+      await navigator.clipboard.writeText(this.url);
+      this.snackBar.open('URL copied to clipboard!', 'Close', { duration: 3000 });
+    } catch (error) {
+      this.snackBar.open('Failed to copy URL', 'Close', { duration: 3000 });
+    }
+  }
+
+  onCopyDescription(): void {
+    this.copyDescription.emit();
+  }
+
+  onCopyHashtags(): void {
+    this.copyHashtags.emit();
+  }
+
+  onClearAll(): void {
+    this.clearAll.emit();
+  }
+
+  onCopyAll(): void {
+    this.copyAll.emit();
   }
 
   onEmojiSelect(emoji: string): void {
