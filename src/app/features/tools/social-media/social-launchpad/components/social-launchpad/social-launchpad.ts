@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
+import { environment } from '../../../../../../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
@@ -53,6 +54,8 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   private metaService = inject(MetaService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+
+  public readonly ogFetchLimitPerMin = environment.ogFetchLimitPerMin;
 
   private destroy$ = new Subject<void>();
 
@@ -173,7 +176,11 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
             this.saveContentToStorage();
             this.snackBar.open('OG data fetched successfully!', 'Close', { duration: 3000 });
           } else {
-            this.ogError.set(response.error || 'Failed to fetch OG data');
+            if (response.queuePosition) {
+              this.ogError.set(`Only 10 fetches are allowed per minute. You are ${response.queuePosition} in line. Please try again shortly.`);
+            } else {
+              this.ogError.set(response.error || 'Failed to fetch OG data');
+            }
           }
         },
         error: (error) => {

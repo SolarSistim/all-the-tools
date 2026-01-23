@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  adsEnabled: false
+  adsEnabled: false,
+  ogFetchLimitPerMin: 10
 };

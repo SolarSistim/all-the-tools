@@ -48,11 +48,11 @@
           <div class="editor-section">
             <app-content-editor [url]="url()" [description]="description()" [hashtags]="hashtags()" [ogData]="ogData()"
               [ogLoading]="ogLoading()" [ogError]="ogError()" [lowercase]="preferences.lowercaseHashtags"
-              [selectedPlatforms]="selectedPlatforms()" (urlChange)="onUrlChange($event)"
-              (descriptionChange)="onDescriptionChange($event)" (hashtagsChange)="onHashtagsChange($event)"
-              (fetchOG)="onFetchOG()" (retryOG)="onRetryOG()" (cursorPositionChange)="onCursorPositionChange($event)"
-              (emojiSelect)="onEmojiSelect($event)" (copyDescription)="onCopyDescription()"
-              (copyHashtags)="onCopyHashtags()" (clearAll)="onClearAll()"
+              [selectedPlatforms]="selectedPlatforms()" [fetchLimitPerMin]="ogFetchLimitPerMin"
+              (urlChange)="onUrlChange($event)" (descriptionChange)="onDescriptionChange($event)"
+              (hashtagsChange)="onHashtagsChange($event)" (fetchOG)="onFetchOG()" (retryOG)="onRetryOG()"
+              (cursorPositionChange)="onCursorPositionChange($event)" (emojiSelect)="onEmojiSelect($event)"
+              (copyDescription)="onCopyDescription()" (copyHashtags)="onCopyHashtags()" (clearAll)="onClearAll()"
               (copyAll)="onCopyContent()"></app-content-editor>
           </div>
 
@@ -98,7 +98,8 @@
             <li><strong>Select platforms</strong> - Click platform buttons on the right to select which social networks
               you want to post to</li>
             <li><strong>Add your URL</strong> - Paste the link you want to share and click "Fetch OG Data" to
-              automatically pull title, description, and preview image</li>
+              automatically pull title, description, and preview image (Limited to {{ ogFetchLimitPerMin }} fetches per
+              minute)</li>
             <li><strong>Write your description</strong> - Craft your post content in the description field. It
               auto-saves as you type</li>
             <li><strong>Add hashtags</strong> - Type hashtags and press Enter, Space, or Comma to add them. Remove with

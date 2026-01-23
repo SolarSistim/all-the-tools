@@ -11,7 +11,7 @@ export class OGFetcherService {
   private readonly NETLIFY_FUNCTION_URL = '/.netlify/functions/og-scraper';
   private readonly TIMEOUT_MS = 10000;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Fetches OG data from a URL via the Netlify function
@@ -55,7 +55,8 @@ export class OGFetcherService {
             return of({
               success: false,
               error: 'Rate limit exceeded. Please try again later.',
-              retryAfter: error.error?.retryAfter || 60
+              retryAfter: error.error?.retryAfter || 60,
+              queuePosition: error.error?.queuePosition
             });
           }
 

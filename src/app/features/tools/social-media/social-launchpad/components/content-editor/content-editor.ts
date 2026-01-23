@@ -40,6 +40,7 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
   @Input() ogError: string | null = null;
   @Input() lowercase: boolean = false;
   @Input() selectedPlatforms: PlatformId[] = [];
+  @Input() fetchLimitPerMin: number = 10;
 
   @Output() urlChange = new EventEmitter<string>();
   @Output() descriptionChange = new EventEmitter<string>();

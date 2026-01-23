@@ -22,6 +22,8 @@
         <mat-icon>refresh</mat-icon>
         Fetch OG Data
       </button>
+      <span class="fetch-limit-info" [title]="'Only ' + fetchLimitPerMin + ' fetches allowed per minute'">({{
+        fetchLimitPerMin }} per min)</span>
     </div>
     <div class="url-actions">
       <button mat-stroked-button (click)="onCopyUrl()" [disabled]="!url" class="copy-url-button">

@@ -14,19 +14,21 @@ interface OGData {
 interface RateLimitState {
   count: number;
   windowStart: number;
+  throttledCount: number;
 }
 
 // In-memory rate limiter (resets on cold start)
 let rateLimitState: RateLimitState = {
   count: 0,
-  windowStart: Date.now()
+  windowStart: Date.now(),
+  throttledCount: 0
 };
 
-const RATE_LIMIT = parseInt(process.env.OG_SCRAPE_RATE_LIMIT || '30', 10);
+const RATE_LIMIT = 10;
 const TIMEOUT_MS = parseInt(process.env.OG_SCRAPE_TIMEOUT_MS || '5000', 10);
 const WINDOW_MS = 60000; // 60 seconds
 
-function checkRateLimit(): { allowed: boolean; remaining: number; resetTime: number } {
+function checkRateLimit(): { allowed: boolean; remaining: number; resetTime: number; queuePosition: number } {
   const now = Date.now();
   const windowElapsed = now - rateLimitState.windowStart;
 
@@ -34,7 +36,8 @@ function checkRateLimit(): { allowed: boolean; remaining: number; resetTime: num
   if (windowElapsed >= WINDOW_MS) {
     rateLimitState = {
       count: 0,
-      windowStart: now
+      windowStart: now,
+      throttledCount: 0
     };
   }
 
@@ -44,9 +47,11 @@ function checkRateLimit(): { allowed: boolean; remaining: number; resetTime: num
 
   if (allowed) {
     rateLimitState.count++;
+  } else {
+    rateLimitState.throttledCount++;
   }
 
-  return { allowed, remaining, resetTime };
+  return { allowed, remaining, resetTime, queuePosition: rateLimitState.throttledCount };
 }
 
 function isValidUrl(urlString: string): boolean {
@@ -147,7 +152,8 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       body: JSON.stringify({
         success: false,
         error: 'Rate limit exceeded. Please try again later.',
-        retryAfter: rateLimit.resetTime
+        retryAfter: rateLimit.resetTime,
+        queuePosition: rateLimit.queuePosition
       })
     };
   }
