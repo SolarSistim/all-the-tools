@@ -1,19 +1,22 @@
 @import '../../../../../../../styles/utilities';
 
 .emoji-trigger-link {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
   cursor: pointer;
-  display: flex;
+  display: inline-flex !important;
   align-items: center;
   gap: $spacing-xs;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  color: var(--neon-cyan);
+  color: var(--neon-cyan) !important;
   transition: all 0.2s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  box-shadow: none !important;
 
   mat-icon {
     font-size: 18px;
@@ -22,9 +25,16 @@
   }
 
   &:hover {
-    color: var(--neon-pink);
-    border-color: transparent;
-    /* Override default button border if any */
+    color: var(--neon-pink) !important;
+    text-decoration: underline;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  &:active,
+  &:focus {
+    background: none !important;
+    box-shadow: none !important;
   }
 }
 

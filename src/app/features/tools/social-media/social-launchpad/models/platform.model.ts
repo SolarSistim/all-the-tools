@@ -86,6 +86,7 @@ export interface OGFetchResponse {
   };
   retryAfter?: number;
   queuePosition?: number;
+  lockedUntil?: number;
 }
 
 export const PLATFORM_CONFIGS: Record<PlatformId, PlatformConfig> = {

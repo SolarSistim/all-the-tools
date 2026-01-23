@@ -245,10 +245,6 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
-  },
-  {
     type: 'component',
     data: {
       componentName: 'email-cta',

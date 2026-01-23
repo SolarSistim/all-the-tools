@@ -3,6 +3,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError, TimeoutError } from 'rxjs';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { OGFetchResponse } from '../models/platform.model';
+import { environment } from '../../../../../../environments/environment';
+
+interface UserRateLimitData {
+  requestTimestamps: number[];
+  lockedUntil?: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +16,9 @@ import { OGFetchResponse } from '../models/platform.model';
 export class OGFetcherService {
   private readonly NETLIFY_FUNCTION_URL = '/.netlify/functions/og-scraper';
   private readonly TIMEOUT_MS = 10000;
+  private readonly RATE_LIMIT_STORAGE_KEY = 'og-fetch-user-rate-limit';
+  private readonly USER_LIMIT_PER_MIN = environment.ogFetchUserLimitPerMin;
+  private readonly LOCKOUT_MINUTES = environment.ogFetchUserLockoutMinutes;
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +32,19 @@ export class OGFetcherService {
         error: 'Invalid URL format'
       });
     }
+
+    // Check user rate limit
+    const rateLimitCheck = this.checkUserRateLimit();
+    if (!rateLimitCheck.allowed) {
+      return of({
+        success: false,
+        error: rateLimitCheck.error,
+        lockedUntil: rateLimitCheck.lockedUntil
+      });
+    }
+
+    // Record this request
+    this.recordUserRequest();
 
     const encodedUrl = encodeURIComponent(url);
     const fetchUrl = `${this.NETLIFY_FUNCTION_URL}?url=${encodedUrl}`;
@@ -75,6 +97,92 @@ export class OGFetcherService {
   }
 
   /**
+   * Gets user rate limit data from localStorage
+   */
+  private getUserRateLimitData(): UserRateLimitData {
+    try {
+      const data = localStorage.getItem(this.RATE_LIMIT_STORAGE_KEY);
+      if (data) {
+        return JSON.parse(data);
+      }
+    } catch (error) {
+      console.error('Error reading rate limit data:', error);
+    }
+    return { requestTimestamps: [] };
+  }
+
+  /**
+   * Saves user rate limit data to localStorage
+   */
+  private saveUserRateLimitData(data: UserRateLimitData): void {
+    try {
+      localStorage.setItem(this.RATE_LIMIT_STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      console.error('Error saving rate limit data:', error);
+    }
+  }
+
+  /**
+   * Checks if user is within rate limits
+   */
+  private checkUserRateLimit(): { allowed: boolean; error?: string; lockedUntil?: number } {
+    const now = Date.now();
+    const data = this.getUserRateLimitData();
+
+    // Check if user is locked out
+    if (data.lockedUntil && now < data.lockedUntil) {
+      const remainingMinutes = Math.ceil((data.lockedUntil - now) / (1000 * 60));
+      return {
+        allowed: false,
+        error: `You have been temporarily locked out for exceeding the request limit. Please try again in ${remainingMinutes} minute(s).`,
+        lockedUntil: data.lockedUntil
+      };
+    }
+
+    // Clear lockout if expired
+    if (data.lockedUntil && now >= data.lockedUntil) {
+      data.lockedUntil = undefined;
+      data.requestTimestamps = [];
+      this.saveUserRateLimitData(data);
+    }
+
+    // Remove timestamps older than 1 minute
+    const oneMinuteAgo = now - (60 * 1000);
+    data.requestTimestamps = data.requestTimestamps.filter(ts => ts > oneMinuteAgo);
+
+    // Check if user has exceeded limit
+    if (data.requestTimestamps.length >= this.USER_LIMIT_PER_MIN) {
+      // Lock user out for specified minutes
+      data.lockedUntil = now + (this.LOCKOUT_MINUTES * 60 * 1000);
+      this.saveUserRateLimitData(data);
+
+      return {
+        allowed: false,
+        error: `You have exceeded the limit of ${this.USER_LIMIT_PER_MIN} requests per minute. You have been locked out for ${this.LOCKOUT_MINUTES} minutes.`,
+        lockedUntil: data.lockedUntil
+      };
+    }
+
+    return { allowed: true };
+  }
+
+  /**
+   * Records a user request timestamp
+   */
+  private recordUserRequest(): void {
+    const now = Date.now();
+    const data = this.getUserRateLimitData();
+
+    // Remove timestamps older than 1 minute
+    const oneMinuteAgo = now - (60 * 1000);
+    data.requestTimestamps = data.requestTimestamps.filter(ts => ts > oneMinuteAgo);
+
+    // Add current timestamp
+    data.requestTimestamps.push(now);
+    this.saveUserRateLimitData(data);
+  }
+
+  /**
    * Validates URL format
    */
   private isValidUrl(url: string): boolean {
@@ -123,5 +231,28 @@ export class OGFetcherService {
         url: url
       }
     };
+  }
+
+  /**
+   * Clears the user rate limit data (for testing or admin purposes)
+   */
+  clearUserRateLimit(): void {
+    try {
+      localStorage.removeItem(this.RATE_LIMIT_STORAGE_KEY);
+    } catch (error) {
+      console.error('Error clearing rate limit data:', error);
+    }
+  }
+
+  /**
+   * Gets the remaining lockout time in milliseconds (0 if not locked)
+   */
+  getRemainingLockoutTime(): number {
+    const data = this.getUserRateLimitData();
+    if (data.lockedUntil) {
+      const remaining = data.lockedUntil - Date.now();
+      return remaining > 0 ? remaining : 0;
+    }
+    return 0;
   }
 }

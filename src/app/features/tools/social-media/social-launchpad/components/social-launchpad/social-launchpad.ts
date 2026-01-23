@@ -188,7 +188,11 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
             this.saveContentToStorage();
             this.snackBar.open('OG data fetched successfully!', 'Close', { duration: 3000 });
           } else {
-            if (response.queuePosition) {
+            // Check for user lockout
+            if (response.lockedUntil) {
+              const remainingMinutes = Math.ceil((response.lockedUntil - Date.now()) / (1000 * 60));
+              this.ogError.set(response.error || `You have been locked out. Please try again in ${remainingMinutes} minute(s).`);
+            } else if (response.queuePosition) {
               this.ogError.set(`Only 10 fetches are allowed per minute. You are ${response.queuePosition} in line. Please try again shortly.`);
             } else {
               this.ogError.set(response.error || 'Failed to fetch OG data');
