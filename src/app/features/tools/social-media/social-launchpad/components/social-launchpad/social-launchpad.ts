@@ -25,6 +25,7 @@ import { DeviceWarningDialogComponent } from '../device-warning-dialog/device-wa
 import { ConfirmDialogComponent, ConfirmDialogData } from '../confirm-dialog/confirm-dialog';
 import { InputDialogComponent, InputDialogData } from '../input-dialog/input-dialog';
 import { AdsenseComponent } from '../../../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-social-launchpad',
@@ -40,7 +41,8 @@ import { AdsenseComponent } from '../../../../../blog/components/adsense/adsense
     ContentEditorComponent,
     PlatformSelectorComponent,
     CharacterCounterComponent,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './social-launchpad.html',
   styleUrl: './social-launchpad.scss',
@@ -75,6 +77,14 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   // Computed values
   platformStatuses = signal<PlatformStatus[]>([]);
   platformStatusMap = signal<Map<PlatformId, PlatformStatus>>(new Map());
+
+  // Related blog posts
+  relatedBlogPosts = [
+    {
+      title: 'How to Use Social Media Launchpad: Copy, Paste, Launch Your Social Media Posts',
+      slug: 'how-to-use-social-media-launchpad-copy-paste-launch'
+    }
+  ];
 
   ngOnInit(): void {
     this.metaService.updateTags({

@@ -49,6 +49,17 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'January 23, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Social Media Launchpad',
+          route: '/tools/social-media-launchpad'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'January 12, 2026',
       changes: [
         {

@@ -7,14 +7,14 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Posting the same update across multiple social networks is a pain. You\'re switching tabs, reformatting text, counting characters, wondering if you used too many hashtags for LinkedIn but not enough for Instagram. It\'s tedious.',
+      text: 'Posting the same update across multiple social networks is a pain. Switching tabs, reformatting text, counting characters, wondering if you used too many hashtags for LinkedIn but not enough for Instagram. It\'s tedious.',
       className: 'lead',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'The Social Media Launchpad cuts through that. Compose once, copy what you need, paste wherever. Everything runs locally in your browser—no accounts, no servers storing your drafts, no tracking pixels watching what you type. The only thing that touches a server is the optional OG data fetch (when you want to pull a link preview), and even that\'s rate-limited to 10 per minute so nobody can abuse it.',
+      text: 'The Social Media Launchpad cuts through that. Compose once, copy what you need, paste wherever. Everything runs locally in your browser - no accounts, no servers storing your drafts, no tracking pixels watching what you type. The only thing that touches a server is the optional OG data fetch (when you want to pull a link preview), which is rate-limited to 10 per minute to prevent abuse.',
     },
   },
   {
@@ -48,7 +48,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'On the right side, you\'ll see platform buttons organized by hashtag tolerance. Reddit and 4chan sit in the "No Hashtags" group—use tags there and you\'re asking for ridicule. Pinterest and Tumblr expect them. Instagram lives somewhere in the middle.',
+      text: 'On the right side, you\'ll see platform buttons organized by hashtag tolerance. Reddit and 4chan sit in the "No Hashtags" group - use tags there and you\'re asking for ridicule. Pinterest and Tumblr expect them. Instagram lives somewhere in the middle.',
     },
   },
   {
@@ -128,7 +128,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Type your message in the description box. Watch the character bars at the top. LinkedIn gives you breathing room—3,000 characters. X (formerly Twitter) cuts you off at 280. If you go over, the counter turns red. Real subtle.',
+      text: 'Type your message in the description box. Watch the character bars at the top. LinkedIn gives you breathing room - 3,000 characters. X (formerly Twitter) cuts you off at 280. If you go over, the counter turns red.',
     },
   },
   {
@@ -159,7 +159,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Below the editor is the hashtag field. Type them in, hit enter. The counter tracks how many you\'ve added—handy when you\'re trying to remember if three tags or thirty is the sweet spot for your chosen platforms.',
+      text: 'Below the editor is the hashtag field. Type a hastag, hit enter. The counter tracks how many you\'ve added - useful when you\'re trying to remember if three tags or ten is the sweet spot for your chosen platforms.',
     },
   },
   {
@@ -206,13 +206,13 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Why the separate buttons? Some platforms don\'t play nice when you paste everything at once. Reddit doesn\'t want your hashtag spam. LinkedIn might choke on the formatting. With individual copy options, you can grab exactly what each platform needs—paste the URL and description on Facebook, hashtags only on Instagram, whatever works.',
+      text: 'Why the separate buttons? Some platforms don\'t play nice when you paste everything at once. Reddit doesn\'t want your hashtag spam. LinkedIn might choke on the formatting. With individual copy options, you can grab exactly what each platform needs - paste the URL and description on Facebook, hashtags only on Instagram, whatever works.',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'I usually hit Copy All, Ctrl+Click to open X or Threads, paste. Done. Two seconds. Compare that to manually retyping everything with minor tweaks per platform.',
+      text: 'I usually hit Copy All, Ctrl+Click to open X or Threads, paste, done. Compare that to manually retyping everything with minor tweaks per platform.',
     },
   },
   {
@@ -236,7 +236,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Speed, mostly. You compose once instead of five times. The character counters keep you honest—no more discovering you\'re 40 characters over after you\'ve already pasted into Twitter. And the privacy angle is legitimately refreshing; everything stays on your machine unless you explicitly fetch OG data.',
+      text: 'Speed, mostly. You compose once instead of five times. The character counters keep you honest - no more discovering you\'re 40 characters over after you\'ve already pasted into Twitter. And the privacy angle is legit; everything stays on your machine unless you explicitly fetch OG data.',
     },
   },
   {
