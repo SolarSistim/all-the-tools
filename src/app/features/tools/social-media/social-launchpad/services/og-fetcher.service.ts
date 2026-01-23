@@ -158,7 +158,7 @@ export class OGFetcherService {
 
       return {
         allowed: false,
-        error: `You have exceeded the limit of ${this.USER_LIMIT_PER_MIN} requests per minute. You have been locked out for ${this.LOCKOUT_MINUTES} minutes.`,
+        error: `You have exceeded the limit of ${this.USER_LIMIT_PER_MIN} requests per minute. Please try again in a few minutes.`,
         lockedUntil: data.lockedUntil
       };
     }
