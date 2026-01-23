@@ -14,7 +14,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The Social Media Launchpad cuts through that. Compose once, copy what you need, paste wherever. Everything runs locally in your browser - no accounts, no servers storing your drafts, no tracking pixels watching what you type. The only thing that touches a server is the optional OG data fetch (when you want to pull a link preview), which is rate-limited to 10 per minute to prevent abuse.',
+      text: 'The <a href="/tools/social-media-launchpad">Social Media Launchpad</a> cuts through that. Compose once, copy what you need, paste wherever. Everything runs locally in your browser - no accounts, no servers storing your drafts, no tracking pixels watching what you type. The only thing that touches a server is the optional OG data fetch (when you want to pull a link preview), which is rate-limited to 10 per minute to prevent abuse.',
     },
   },
   {
@@ -32,13 +32,6 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'component',
-    data: {
-      componentName: 'email-cta',
-      darkThemeBg: 'primary',
-    },
-  },
-  {
     type: 'heading',
     data: {
       level: 2,
@@ -48,7 +41,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'On the right side, you\'ll see platform buttons organized by hashtag tolerance. Reddit and 4chan sit in the "No Hashtags" group - use tags there and you\'re asking for ridicule. Pinterest and Tumblr expect them. Instagram lives somewhere in the middle.',
+      text: 'On the right side of the <a href="/tools/social-media-launchpad">Social Media Launchpad</a>, you\'ll see platform buttons organized by hashtag tolerance. Reddit and 4chan sit in the "No Hashtags" group - use tags there and you\'re asking for ridicule. Pinterest and Tumblr expect them. Instagram lives somewhere in the middle.',
     },
   },
   {
@@ -57,6 +50,14 @@ export const content: ContentBlock[] = [
       src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-02.jpg?updatedAt=1769194628110',
       alt: 'Screenshot of the Platform Selector with grouped categories like Regular Use and High Hashtags',
       caption: 'Platform Selector grouped by hashtag usage',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'alert-primary',
+      content: 'Pro tip: Hold Ctrl (or Cmd on Mac) while clicking a platform button to open that social network in a new tab. Your cursor will change to a link pointer!',
+      icon: 'lightbulb',
     },
   },
   {
@@ -69,14 +70,6 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Want to jump straight to a platform to paste your post? Hold Ctrl (Cmd on Mac) and click. Opens in a new tab. Small detail, huge time saver.',
-    },
-  },
-  {
-    type: 'component',
-    data: {
-      componentName: 'alert-primary',
-      content: 'Pro tip: Hold Ctrl (or Cmd on Mac) while clicking a platform button to open that social network in a new tab. Your cursor will change to a link pointer!',
-      icon: 'lightbulb',
     },
   },
   {
@@ -107,7 +100,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The fetch limit is 10 per minute. Hit that ceiling and you\'ll see a queue number. Annoying if you\'re in a rush, but it keeps the service from getting hammered into dust.',
+      text: 'The fetch limit is 10 per minute. Hit that ceiling and you\'ll see a queue number. Annoying if you\'re in a rush, but it keeps the service from getting hammered into dust. I\'ll increase this limit if I have justification to do so.',
     },
   },
   {
@@ -206,20 +199,13 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Why the separate buttons? Some platforms don\'t play nice when you paste everything at once. Reddit doesn\'t want your hashtag spam. LinkedIn might choke on the formatting. With individual copy options, you can grab exactly what each platform needs - paste the URL and description on Facebook, hashtags only on Instagram, whatever works.',
+      text: 'Why the separate buttons? Some platforms don\'t play nice when you paste everything at once. Reddit doesn\'t want your hashtag spam. LinkedIn might choke on the formatting. With individual copy options in the <a href="/tools/social-media-launchpad">Social Media Launchpad</a>, you can grab exactly what each platform needs - paste the URL and description on Facebook, hashtags only on Instagram, whatever works.',
     },
   },
   {
     type: 'paragraph',
     data: {
       text: 'I usually hit Copy All, Ctrl+Click to open X or Threads, paste, done. Compare that to manually retyping everything with minor tweaks per platform.',
-    },
-  },
-  {
-    type: 'component',
-    data: {
-      componentName: 'email-cta',
-      darkThemeBg: 'primary',
     },
   },
   {
@@ -255,8 +241,12 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'If you\'re tired of the tab-juggling dance every time you need to post an update, <a href="/tools/social-launchpad">give the Social Media Launchpad a shot</a>. No account required. No tracking. Just write, copy, paste.',
+      text: 'If you\'re tired of the tab-juggling dance every time you need to post an update, <a href="/tools/social-media-launchpad">give the Social Media Launchpad a shot</a>. No account required. No tracking. Just write, copy, paste.',
     },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'component',
@@ -264,9 +254,5 @@ export const content: ContentBlock[] = [
       componentName: 'email-cta',
       darkThemeBg: 'primary',
     },
-  },
-  {
-    type: 'adsense',
-    data: {},
   },
 ];
