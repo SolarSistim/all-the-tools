@@ -40,7 +40,6 @@ import { AdsenseComponent } from '../../../../../blog/components/adsense/adsense
     ContentEditorComponent,
     PlatformSelectorComponent,
     CharacterCounterComponent,
-    EmojiSuggestionsComponent,
     AdsenseComponent
   ],
   templateUrl: './social-launchpad.html',
