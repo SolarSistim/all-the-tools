@@ -351,7 +351,7 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
       this.hashtags.set([]);
       this.ogData.set(null);
       this.ogError.set(null);
-      this.selectedPlatforms.set(this.preferences.defaultPlatforms);
+      this.selectedPlatforms.set([]);
       this.cursorPosition.set(0);
 
       this.localStorageService.clearCurrentContent();
