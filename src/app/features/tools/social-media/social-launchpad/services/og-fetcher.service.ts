@@ -4,7 +4,7 @@ import { Observable, of, throwError, TimeoutError } from 'rxjs';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { OGFetchResponse } from '../models/platform.model';
 import { environment } from '../../../../../../environments/environment';
-import { VisitLoggerService } from '../../../../../../core/services/visit-logger.service';
+import { VisitLoggerService } from '../../../../../core/services/visit-logger.service';
 
 interface UserRateLimitData {
   requestTimestamps: number[];
