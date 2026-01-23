@@ -81,13 +81,13 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
       title: 'Social Media Launchpad - Multi-Platform Post Composer',
       description: 'Craft optimized content for multiple social platforms simultaneously. Real-time character counts, hashtag recommendations, OG preview, and emoji picker for X (Twitter), Facebook, LinkedIn, Threads, and more.',
       keywords: ['social media tool', 'multi-platform posting', 'character counter', 'hashtag tool', 'twitter character count', 'facebook post', 'linkedin post', 'social media composer'],
-      image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer.jpg',
+      image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer-tool.jpg',
       url: 'https://www.allthethings.dev/tools/social-media-launchpad',
       jsonLd: this.metaService.buildToolJsonLd({
         name: 'Social Media Launchpad - Multi-Platform Post Composer',
         description: 'Craft optimized content for multiple social platforms simultaneously. Real-time character counts, hashtag recommendations, OG preview, and emoji picker for X (Twitter), Facebook, LinkedIn, Threads, and more.',
         url: 'https://www.allthethings.dev/tools/social-media-launchpad',
-        image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer.jpg'
+        image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer-tool.jpg'
       })
     });
 

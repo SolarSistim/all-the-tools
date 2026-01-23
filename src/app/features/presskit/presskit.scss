@@ -4633,17 +4633,119 @@
   }
 }
 
-// Gaudy Palace Blog Post Hero Section
+// Gaudy Palace Blog Post Hero Section - Social Media Launchpad
 .hero-gaudy-palace {
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 968px) {
+      display: none;
+    }
+  }
+
   .gaudy-palace-visual {
     width: 100%;
-    height: 400px;
+    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 
-    // Empty placeholder for Photoshop image
+    .rocket-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .rocket-icon {
+        font-size: 280px;
+        width: 280px;
+        height: 280px;
+        background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 40px var(--neon-cyan-glow)) drop-shadow(0 0 60px var(--neon-pink-glow));
+        animation: rocket-launch 4s ease-in-out infinite;
+        z-index: 3;
+        position: relative;
+      }
+
+      .rocket-trails {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 200px;
+        z-index: 1;
+
+        .trail {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 40px;
+          height: 150px;
+          border-radius: 50% 50% 0 0;
+          opacity: 0.6;
+          filter: blur(8px);
+          animation: trail-flicker 1.5s ease-in-out infinite;
+
+          &.trail-1 {
+            background: linear-gradient(to bottom, var(--neon-pink) 0%, transparent 100%);
+            animation-delay: 0s;
+            height: 120px;
+          }
+
+          &.trail-2 {
+            background: linear-gradient(to bottom, var(--neon-cyan) 0%, transparent 100%);
+            animation-delay: 0.3s;
+            left: 35%;
+            height: 100px;
+          }
+
+          &.trail-3 {
+            background: linear-gradient(to bottom, rgba(255, 140, 176, 0.8) 0%, transparent 100%);
+            animation-delay: 0.6s;
+            left: 65%;
+            height: 110px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes rocket-launch {
+  0%, 100% {
+    transform: translateY(0) rotate(-45deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(-45deg);
+  }
+}
+
+@keyframes trail-flicker {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translateX(-50%) scaleY(1);
+  }
+  25% {
+    opacity: 0.8;
+    transform: translateX(-50%) scaleY(1.1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateX(-50%) scaleY(0.9);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateX(-50%) scaleY(1.05);
   }
 }
 

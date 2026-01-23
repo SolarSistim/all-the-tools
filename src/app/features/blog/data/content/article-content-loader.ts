@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'how-to-use-social-media-launchpad-copy-paste-launch':
+        const socialLaunchpadModule = await import('./how-to-use-social-media-launchpad-copy-paste-launch.content');
+        return socialLaunchpadModule.content;
+
       case 'exploding-trees-in-winter-what-causes-the-loud-cracks':
         const explodingTreesModule = await import('./exploding-trees-in-winter-what-causes-the-loud-cracks.content');
         return explodingTreesModule.content;
