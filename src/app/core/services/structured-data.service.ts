@@ -144,6 +144,27 @@ export class StructuredDataService {
   }
 
   /**
+   * Add WebSite schema with SearchAction for homepage
+   */
+  addWebSite(): void {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'All The Things',
+      url: 'https://www.allthethings.dev',
+      description: 'A one-stop online toolbox of free web utilities for developers, marketers, and creators',
+      inLanguage: 'en-US',
+      publisher: {
+        '@type': 'Organization',
+        name: 'All The Things',
+        url: 'https://www.allthethings.dev'
+      }
+    };
+
+    this.insertStructuredData(schema);
+  }
+
+  /**
    * Add BreadcrumbList schema
    * @param breadcrumbs Array of breadcrumb items
    */

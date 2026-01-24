@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   categories: ToolCategoryMeta[] = [];
   recentArticles: ArticlePreview[] = [];
   recentResources: ResourcePreview[] = [];
+  popularTools: Tool[] = [];
 
   // Icon pool for hero visual grid
   private iconPool = [
@@ -75,19 +76,22 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaService.updateTags({
-      title: 'All The Things - Your Swiss Army Knife of Web Utilities',
-      description: 'Free online tools for text, images, developers, and more. Word counter, case converter, percentage calculator, QR code generator, and 20+ other utilities. Fast, private, and always free.',
-      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters', 'generators', 'developer tools'],
+      title: 'All The Things — Online Toolbox of Free Web Tools',
+      description: 'A one-stop online toolbox of free web utilities for developers, marketers, and creators. Convert, calculate, generate, and format instantly in your browser.',
+      keywords: ['online tools', 'web utilities', 'free tools', 'text tools', 'calculators', 'converters', 'generators', 'developer tools', 'online toolbox'],
       image: 'https://www.allthethings.dev/meta-images/og-home.png',
       url: 'https://www.allthethings.dev/'
     });
 
     // Add structured data for homepage
-    this.structuredData.addOrganization();
+    this.structuredData.addWebSite();
 
     // Get 6 random featured tools
     const allFeaturedTools = this.toolsService.getFeaturedTools();
     this.featuredTools = this.getRandomItems(allFeaturedTools, 6);
+
+    // Set popular tools for internal linking
+    this.setPopularTools();
 
     // Get 4 random categories (only those with tools)
     const allCategories = this.toolsService.getAllCategories();
@@ -141,6 +145,27 @@ export class HomeComponent implements OnInit {
       default:
         return '#757575';
     }
+  }
+
+  private setPopularTools(): void {
+    // Select popular/high-value tools for internal linking
+    const popularToolIds = [
+      'password-generator',
+      'qr-code-generator',
+      'uuid-generator',
+      'gradient-generator',
+      'base-number-converter',
+      'time-zone-converter',
+      'word-counter',
+      'case-converter',
+      'timestamp-converter',
+      'unit-converter'
+    ];
+
+    const allTools = this.toolsService.getAvailableTools();
+    this.popularTools = popularToolIds
+      .map(id => allTools.find(tool => tool.id === id))
+      .filter((tool): tool is Tool => tool !== undefined);
   }
 
   /**
