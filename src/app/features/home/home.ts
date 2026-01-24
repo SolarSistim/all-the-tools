@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ToolsService } from '../../core/services/tools.service';
 import { MetaService } from '../../core/services/meta.service';
 import { StructuredDataService } from '../../core/services/structured-data.service';
@@ -98,8 +100,42 @@ export class HomeComponent implements OnInit {
     const categoriesWithTools = allCategories.filter(cat => this.getToolCountForCategory(cat.id) > 0);
     this.categories = this.getRandomItems(categoriesWithTools, 4);
 
-    // Load recent blog articles
-    this.blogService.getRecentArticles(3).subscribe({
+    // Load specific featured tutorial articles
+    const tutorialSlugs = [
+      'how-to-use-social-media-launchpad-copy-paste-launch',
+      'base-number-converter-tutorial',
+      'stop-typing-in-those-tiny-on-reward-codes-by-hand'
+    ];
+
+    forkJoin(
+      tutorialSlugs.map(slug => this.blogService.getArticleBySlug(slug))
+    ).pipe(
+      map(articles =>
+        articles
+          .filter(a => a !== null)
+          .map(article => {
+            if (!article) return null;
+            // Convert Article to ArticlePreview
+            const preview: ArticlePreview = {
+              id: article.id,
+              slug: article.slug,
+              title: article.title,
+              description: article.description,
+              author: article.author,
+              publishedDate: article.publishedDate,
+              heroImage: article.heroImage,
+              tags: article.tags,
+              category: article.category,
+              readingTime: article.readTime || this.blogService.calculateReadingTime(article),
+              featured: article.featured,
+              display: article.display,
+              hasAudio: article.hasAudio
+            };
+            return preview;
+          })
+          .filter(p => p !== null) as ArticlePreview[]
+      )
+    ).subscribe({
       next: (articles) => {
         this.recentArticles = articles;
       }

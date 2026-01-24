@@ -2,20 +2,27 @@
   <div class="container">
     <!-- Hero Section -->
     <section class="blog-hero">
-      <h1 class="blog-title">All The Things</h1>
-      <!-- <p class="blog-subtitle">
-        Web dev guides, amateur detective work, and thoughts I needed to put somewhere.
-      </p> -->
+      <h1 class="blog-title">All The Things Blog — Web Development, Tools, and Tutorials</h1>
+      <p class="blog-intro">
+        The All The Things blog covers practical guides, tutorials, and insights on web development, browser tools, productivity utilities, and how-tos for developers and creators. Browse posts to learn, explore tools in depth, and solve real problems with code and workflows.
+      </p>
     </section>
 
-    <!-- Blog Description -->
-    <section class="blog-description">
-      <p>
-        Welcome to a collection of articles covering web development, technology insights, and in-depth explorations of topics that spark curiosity. Here you'll find practical guides for developers, detailed analysis of technical concepts, and occasional deep dives into subjects that deserve a closer look.
-      </p>
-      <!-- <p>
-        Whether you're looking for tutorials on modern frameworks, insights into development best practices, or thoughtful examinations of interesting topics, this space offers content designed to inform, educate, and occasionally entertain. Browse by category, search for specific topics, or explore the latest additions to the collection.
-      </p> -->
+    <!-- Start Here Section -->
+    <section class="start-here-section">
+      <h2 class="start-here-title">Start Here</h2>
+      <div class="start-here-links">
+        <a routerLink="/tools" class="start-here-link">
+          <mat-icon>apps</mat-icon>
+          <span>Browse the Online Toolbox</span>
+        </a>
+        @for (tutorial of featuredTutorials; track tutorial.slug) {
+          <a [routerLink]="['/blog', tutorial.slug]" class="start-here-link">
+            <mat-icon>article</mat-icon>
+            <span>{{ tutorial.title }}</span>
+          </a>
+        }
+      </div>
     </section>
 
     <!-- Search Bar -->
@@ -169,8 +176,12 @@
 
     <hr class="pagination-divider top-divider-lower" *ngIf="!loading && articles.length > 0">
 
-    <!-- Articles Tile View -->
-    <div class="articles-grid" *ngIf="!loading && articles.length > 0 && viewMode === 'tile'">
+    <!-- Articles Section -->
+    <section class="articles-section" *ngIf="!loading && articles.length > 0">
+      <h2 class="section-title">Latest Posts</h2>
+
+      <!-- Articles Tile View -->
+      <div class="articles-grid" *ngIf="viewMode === 'tile'">
       <article *ngFor="let article of articles" class="article-card">
         <a [routerLink]="['/blog', article.slug]" class="article-link">
           <div class="article-image-wrapper">
@@ -192,7 +203,7 @@
               }
             </div>
 
-            <h2 class="article-title">{{ article.title }}</h2>
+            <h3 class="article-title">{{ article.title }}</h3>
 
             <p class="article-description">{{ article.description }}</p>
 
@@ -223,38 +234,39 @@
       </article>
     </div>
 
-    <!-- Articles List View -->
-    <div class="articles-list" *ngIf="!loading && articles.length > 0 && viewMode === 'list'">
-      <article *ngFor="let article of articles" class="article-list-item">
-        <a [routerLink]="['/blog', article.slug]" class="article-list-link">
-          <div class="article-list-image-wrapper">
-            <img
-              [src]="article.heroImage.src"
-              [alt]="article.heroImage.alt"
-              class="article-list-image"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="article-list-content">
-            <div class="article-list-header">
-              <span class="article-list-category">{{ article.category }}</span>
-              <div class="article-list-meta">
-                <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
-                <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
-                @if (article.hasAudio) {
-                  <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
-                }
-              </div>
+      <!-- Articles List View -->
+      <div class="articles-list" *ngIf="viewMode === 'list'">
+        <article *ngFor="let article of articles" class="article-list-item">
+          <a [routerLink]="['/blog', article.slug]" class="article-list-link">
+            <div class="article-list-image-wrapper">
+              <img
+                [src]="article.heroImage.src"
+                [alt]="article.heroImage.alt"
+                class="article-list-image"
+                loading="lazy"
+              />
             </div>
 
-            <h2 class="article-list-title">{{ article.title }}</h2>
+            <div class="article-list-content">
+              <div class="article-list-header">
+                <span class="article-list-category">{{ article.category }}</span>
+                <div class="article-list-meta">
+                  <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
+                  <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
+                  @if (article.hasAudio) {
+                    <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
+                  }
+                </div>
+              </div>
 
-            <p class="article-list-description">{{ article.description }}</p>
-          </div>
-        </a>
-      </article>
-    </div>
+              <h3 class="article-list-title">{{ article.title }}</h3>
+
+              <p class="article-list-description">{{ article.description }}</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
 
     <!-- Empty State -->
     <div class="empty-state" *ngIf="!loading && articles.length === 0">

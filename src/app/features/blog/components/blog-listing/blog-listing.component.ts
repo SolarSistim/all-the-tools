@@ -66,6 +66,13 @@ export class BlogListingComponent implements OnInit {
   viewMode: 'tile' | 'list' = 'tile';
   categories: string[] = [];
 
+  // Featured tutorials for internal linking
+  featuredTutorials = [
+    { slug: 'how-to-use-social-media-launchpad-copy-paste-launch', title: 'How to Use the Social Media Launchpad' },
+    { slug: 'base-number-converter-tutorial', title: 'Base Number Converter Tutorial' },
+    { slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand', title: 'Automate On! Reward Code Scanning' }
+  ];
+
   ngOnInit(): void {
     // Load view mode from localStorage (only in browser)
     if (isPlatformBrowser(this.platformId)) {
@@ -109,6 +116,8 @@ export class BlogListingComponent implements OnInit {
           this.totalPages = response.totalPages;
           this.totalItems = response.totalItems;
           this.loading = false;
+          // Update structured data with new article list
+          this.addStructuredData();
           if (shouldScrollToTop) {
             this.scrollToTop();
           }
@@ -121,22 +130,25 @@ export class BlogListingComponent implements OnInit {
 
   private updateMetaTags(): void {
     const config = {
-      title: 'Blog | All The Things',
+      title: 'Web Dev Guides & Tutorials — All The Things Blog',
       description:
-        'Read articles, tutorials, and guides about web development, productivity tools, and more.',
+        'Explore blog posts on web development, coding tips, tool tutorials, and practical guides for developers and creators. Stay up to date with in-depth content and how-tos.',
       keywords: [
         'blog',
         'web development',
         'tutorials',
         'guides',
-        'productivity',
+        'coding tips',
+        'developer guides',
+        'tool tutorials',
       ],
       image: this.blogService.getConfig().defaultOgImage,
-      url: this.blogService.getListingUrl(this.currentPage),
+      url: 'https://www.allthethings.dev/blog',
       type: 'website',
     };
 
     this.metaService.updateTags(config);
+    this.addStructuredData();
   }
 
   onPageChange(page: number): void {
@@ -226,5 +238,57 @@ export class BlogListingComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('blog-view-mode', mode);
     }
+  }
+
+  private addStructuredData(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Remove existing structured data script if present
+    const existingScript = document.getElementById('blog-structured-data');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    // Create Blog + ItemList structured data
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Blog',
+          '@id': 'https://www.allthethings.dev/blog',
+          'url': 'https://www.allthethings.dev/blog',
+          'name': 'All The Things Blog — Web Development, Tools, and Tutorials',
+          'headline': 'All The Things Blog — Web Development, Tools, and Tutorials',
+          'description': 'Explore blog posts on web development, coding tips, tool tutorials, and practical guides for developers and creators.',
+          'inLanguage': 'en-US',
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'All The Things',
+            'url': 'https://www.allthethings.dev'
+          }
+        },
+        {
+          '@type': 'ItemList',
+          'name': 'Blog Posts',
+          'description': 'Latest blog articles and tutorials',
+          'numberOfItems': this.articles.length,
+          'itemListElement': this.articles.map((article, index) => ({
+            '@type': 'ListItem',
+            'position': index + 1,
+            'url': `https://www.allthethings.dev/blog/${article.slug}`,
+            'name': article.title,
+            'datePublished': new Date(article.publishedDate).toISOString()
+          }))
+        }
+      ]
+    };
+
+    const script = document.createElement('script');
+    script.id = 'blog-structured-data';
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
   }
 }

@@ -35,20 +35,93 @@
   line-height: 1.6;
 }
 
-.blog-description {
+.blog-intro {
   text-align: center;
   max-width: 800px;
-  margin: 1rem auto 3rem;
+  margin: 1rem auto 0;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
 
-  p {
-    margin: 0 0 1rem 0;
+// Start Here Section
+.start-here-section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--neon-cyan);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0 3rem;
+
+  .start-here-title {
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.25rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
+  .start-here-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
     }
+
+    .start-here-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        color: var(--text-secondary);
+        transition: color 0.2s ease;
+      }
+
+      &:hover {
+        color: var(--neon-cyan);
+        border-color: var(--neon-cyan);
+        background: var(--bg-elevated);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+        mat-icon {
+          color: var(--neon-cyan);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// Articles Section
+.articles-section {
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--neon-cyan);
   }
 }
 
