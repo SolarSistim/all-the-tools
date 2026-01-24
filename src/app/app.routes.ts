@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: 'tools',
     loadComponent: () => import('./features/tools/tools').then(m => m.ToolsComponent),
-    title: 'All Tools - Browse Our Collection'
+    title: 'Online Toolbox of Free Web Utilities — All The Tools'
   },
   {
     path: 'about',

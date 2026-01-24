@@ -41,7 +41,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['27', '100', '3'],
-    readTime: 5,
+    readTime: 3,
   },
   {
     id: '105',
@@ -75,7 +75,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['25', '26', '4'],
-    readTime: 6,
+    readTime: 4,
   },
   {
     id: '104',
@@ -113,7 +113,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['12', '14', '23'],
-    readTime: 5,
+    readTime: 4,
   },
   {
     id: '103',
@@ -134,7 +134,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: [],
-    readTime: 1,
+    readTime: 3,
   },
   {
     id: '102',

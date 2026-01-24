@@ -1,11 +1,40 @@
 <div class="tools-page">
   <div class="container">
-    <!-- Page Header -->
-    <app-page-header
-      title="All Tools"
-      subtitle="Browse our complete collection of powerful web utilities"
-      icon="apps"
-    ></app-page-header>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon-wrapper">
+          <mat-icon class="hero-icon">apps</mat-icon>
+        </div>
+        <h1 class="hero-title">Online Toolbox of Free Web Tools for Developers, Marketers, and Creators</h1>
+        <p class="hero-subtitle">
+          All The Tools is a one-stop online toolbox packed with fast, free web utilities for developers, marketers, and everyday creators. From password generators and converters to social media helpers and design tools, everything here runs directly in your browser — no sign-ups, no tracking, and no installs.
+        </p>
+        <p class="hero-description">
+          Use this toolbox to solve quick problems, prototype ideas, or get real work done without jumping between dozens of different sites.
+        </p>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="how-to-use-section">
+      <h2>Find the Right Tool in Seconds</h2>
+      <p>
+        Browse the full collection below or use the filters to narrow tools by category, such as generators, converters, calculators, text utilities, and developer tools. Each tool is focused on doing one thing well — fast, private, and distraction-free.
+      </p>
+    </section>
+
+    <!-- Jump To Navigation -->
+    <nav class="jump-to-nav" aria-label="Jump to category">
+      <h3 class="jump-to-title">Jump to:</h3>
+      <ul class="jump-to-list">
+        @for (section of seoCategorySections; track section.id) {
+          <li>
+            <a (click)="scrollToSection(section.id)" role="button" tabindex="0">{{ section.name }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
 
     <!-- Search and Filters -->
     <div class="filters-section">
@@ -61,23 +90,51 @@
       </p>
     </div>
 
-    <!-- Tools Grid -->
-    @if (filteredTools.length > 0) {
-      <div class="tools-grid">
-        @for (tool of filteredTools; track tool.id) {
-          <app-tool-card [tool]="tool"></app-tool-card>
-        }
-      </div>
+    <!-- When filters are active, show filtered tools -->
+    @if (searchQuery() || selectedCategory()) {
+      @if (filteredTools.length > 0) {
+        <div class="tools-grid">
+          @for (tool of filteredTools; track tool.id) {
+            <app-tool-card [tool]="tool"></app-tool-card>
+          }
+        </div>
+      } @else {
+        <div class="no-results">
+          <mat-icon>search_off</mat-icon>
+          <h3>No tools found</h3>
+          <p>Try adjusting your search or filters</p>
+          <button class="btn-outline" (click)="clearFilters()">
+            <mat-icon>refresh</mat-icon>
+            Clear Filters
+          </button>
+        </div>
+      }
     } @else {
-      <div class="no-results">
-        <mat-icon>search_off</mat-icon>
-        <h3>No tools found</h3>
-        <p>Try adjusting your search or filters</p>
-        <button class="btn-outline" (click)="clearFilters()">
-          <mat-icon>refresh</mat-icon>
-          Clear Filters
-        </button>
-      </div>
+      <!-- When no filters are active, show category sections -->
+      @for (section of seoCategorySections; track section.id) {
+        @if (section.tools && section.tools.length > 0) {
+          <section [id]="section.id" class="category-section">
+            <h2 class="category-title">{{ section.name }}</h2>
+            <p class="category-description">{{ section.description }}</p>
+            <div class="tools-grid">
+              @for (tool of section.tools; track tool.id) {
+                <app-tool-card [tool]="tool"></app-tool-card>
+              }
+            </div>
+          </section>
+        }
+      }
     }
+
+    <!-- Bottom Section -->
+    <section class="bottom-section">
+      <h2>A Practical Online Toolbox — Not a SaaS Trap</h2>
+      <p>
+        This online toolbox is built to stay lightweight and respectful of your time. Tools load fast, work offline when possible, and avoid unnecessary tracking. There are no accounts to create and no features hidden behind paywalls — just useful tools that do their job and get out of the way.
+      </p>
+      <p>
+        Looking for deeper guides or examples? Many tools include step-by-step tutorials and walkthroughs in the blog, with direct links between the tool and its documentation to help you get the most out of each utility.
+      </p>
+    </section>
   </div>
 </div>
