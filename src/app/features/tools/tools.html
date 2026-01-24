@@ -24,8 +24,28 @@
       </p>
     </section>
 
+    <!-- Popular Tools Section -->
+    @if (popularTools.length > 0) {
+      <section class="popular-tools-section">
+        <h2>Start Here — Popular Tools</h2>
+        <p class="popular-tools-intro">
+          Jump straight to the most-used utilities in the toolbox, perfect for quick tasks and everyday problems.
+        </p>
+        <ul class="popular-tools-list">
+          @for (tool of popularTools; track tool.id) {
+            <li>
+              <a [routerLink]="['/tools', tool.route]" class="popular-tool-link">
+                <mat-icon>{{ tool.icon }}</mat-icon>
+                <span>{{ tool.name }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
     <!-- Jump To Navigation -->
-    <nav class="jump-to-nav" aria-label="Jump to category">
+    <nav class="jump-to-nav" aria-label="Jump to tool categories">
       <h3 class="jump-to-title">Jump to:</h3>
       <ul class="jump-to-list">
         @for (section of seoCategorySections; track section.id) {

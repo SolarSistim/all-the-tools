@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +25,7 @@ interface SeoCategorySection {
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -48,39 +49,11 @@ export class ToolsComponent implements OnInit {
   searchQuery = signal('');
   selectedCategory = signal<string | null>(null);
 
-  // SEO Category Sections
-  seoCategorySections: SeoCategorySection[] = [
-    {
-      id: 'developer-tools',
-      name: 'Developer Tools',
-      description: 'Tools built for developers and technical users, including generators, converters, and utilities for working with data, code, colors, identifiers, and formats commonly used in modern web development.',
-      categoryIds: ['generator', 'color', 'time', 'hardware']
-    },
-    {
-      id: 'marketing-tools',
-      name: 'Marketing Tools',
-      description: 'Online tools for marketers and content creators, designed to help with copy preparation, social media posting, formatting, and quick calculations without bloated dashboards or subscriptions.',
-      categoryIds: ['social']
-    },
-    {
-      id: 'text-writing-tools',
-      name: 'Text & Writing Tools',
-      description: 'Simple text utilities for counting words, transforming case, generating placeholder content, and preparing text for publishing, coding, or sharing.',
-      categoryIds: ['text']
-    },
-    {
-      id: 'converters-calculators',
-      name: 'Converters & Calculators',
-      description: 'Quick converters and calculators for percentages, units, currencies, time zones, timestamps, and everyday math — perfect for fast answers without spreadsheets.',
-      categoryIds: ['math', 'converter']
-    },
-    {
-      id: 'design-media-tools',
-      name: 'Design & Media Tools',
-      description: 'Creative utilities for working with images, icons, gradients, colors, and visual assets directly in the browser, with instant preview and export options.',
-      categoryIds: ['image', 'ocr', 'music']
-    }
-  ];
+  // Popular tools for internal linking (SEO boost)
+  popularTools: Tool[] = [];
+
+  // SEO Category Sections - aligned with actual tool categories
+  seoCategorySections: SeoCategorySection[] = [];
 
   ngOnInit(): void {
     // Update meta tags for SEO
@@ -96,12 +69,11 @@ export class ToolsComponent implements OnInit {
     this.filteredTools = this.allTools;
     this.categories = this.toolsService.getAllCategories();
 
-    // Populate tools for each SEO category section
-    this.seoCategorySections.forEach(section => {
-      section.tools = this.allTools.filter(tool =>
-        section.categoryIds.includes(tool.category)
-      );
-    });
+    // Build SEO category sections from actual categories
+    this.buildSeoCategorySections();
+
+    // Set popular tools for internal linking
+    this.setPopularTools();
 
     // Add structured data
     this.addStructuredData();
@@ -155,6 +127,57 @@ export class ToolsComponent implements OnInit {
     return this.categories.find(c => c.id === categoryId)?.name || categoryId;
   }
 
+  private buildSeoCategorySections(): void {
+    // Map categories with custom descriptions for SEO
+    const categoryDescriptions: Record<string, string> = {
+      'generator': 'Generate passwords, UUIDs, QR codes, and placeholder text for development and content creation.',
+      'math': 'Calculate percentages, tips, BMI, and convert between number systems including binary, hex, and Roman numerals.',
+      'converter': 'Convert units of measurement, currencies, and more with real-time exchange rates.',
+      'text': 'Count words, change text case, and analyze content for writing and publishing.',
+      'color': 'Pick colors, generate gradients, and get HEX, RGB, and HSL values for design work.',
+      'time': 'Convert timestamps, time zones, and work with dates across different formats.',
+      'image': 'Edit photos, generate icons, and manipulate images with filters and adjustments.',
+      'social': 'Tools for social media marketers to format posts, manage content, and optimize engagement.',
+      'ocr': 'Scan barcodes and extract text from images using optical character recognition.',
+      'music': 'Convert Morse code, export playlists, and work with audio formats.',
+      'hardware': 'Check device compatibility and specifications for streaming hardware.'
+    };
+
+    // Build sections from categories that have tools
+    this.seoCategorySections = this.categories
+      .filter(cat => {
+        const tools = this.allTools.filter(tool => tool.category === cat.id);
+        return tools.length > 0;
+      })
+      .map(cat => ({
+        id: cat.id,
+        name: cat.name,
+        description: categoryDescriptions[cat.id] || cat.description,
+        categoryIds: [cat.id],
+        tools: this.allTools.filter(tool => tool.category === cat.id)
+      }));
+  }
+
+  private setPopularTools(): void {
+    // Select popular/featured tools for internal linking
+    const popularToolIds = [
+      'password-generator',
+      'qr-code-generator',
+      'uuid-generator',
+      'base-number-converter',
+      'word-counter',
+      'gradient-generator',
+      'percentage-calculator',
+      'color-picker',
+      'barcode-reader',
+      'social-media-launchpad'
+    ];
+
+    this.popularTools = popularToolIds
+      .map(id => this.allTools.find(tool => tool.id === id))
+      .filter((tool): tool is Tool => tool !== undefined);
+  }
+
   scrollToSection(sectionId: string): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
@@ -198,7 +221,7 @@ export class ToolsComponent implements OnInit {
       existingScript.remove();
     }
 
-    // Create WebPage + ItemList structured data
+    // Create WebPage + ItemList structured data with Organization
     const structuredData = {
       '@context': 'https://schema.org',
       '@graph': [
@@ -207,18 +230,25 @@ export class ToolsComponent implements OnInit {
           '@id': 'https://www.allthethings.dev/tools',
           'url': 'https://www.allthethings.dev/tools',
           'name': 'Online Toolbox of Free Web Tools for Developers, Marketers, and Creators',
+          'headline': 'Online Toolbox of Free Web Tools for Developers, Marketers, and Creators',
           'description': 'All The Tools is a one-stop online toolbox packed with fast, free web utilities for developers, marketers, and everyday creators.',
           'inLanguage': 'en-US',
           'isPartOf': {
             '@type': 'WebSite',
             'url': 'https://www.allthethings.dev',
             'name': 'All The Tools'
+          },
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'All The Tools',
+            'url': 'https://www.allthethings.dev'
           }
         },
         {
           '@type': 'ItemList',
           'name': 'Free Online Tools',
-          'description': 'A comprehensive collection of free web utilities',
+          'description': 'A comprehensive collection of free web utilities for developers, marketers, and creators',
+          'numberOfItems': this.allTools.length,
           'itemListElement': this.allTools.map((tool, index) => ({
             '@type': 'ListItem',
             'position': index + 1,
