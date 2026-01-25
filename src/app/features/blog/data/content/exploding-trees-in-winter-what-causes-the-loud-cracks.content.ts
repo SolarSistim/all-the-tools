@@ -205,16 +205,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'paragraph',
-    data: {
-      text: 'If you\'re out in the forest during extreme cold and hear what sounds like gunshots, don\'t panic. It\'s likely just exploding trees in winter doing what they\'ve been doing for thousands of years - adapting, surviving, and occasionally making a scene.',
-    },
-  },
-  {
     type: 'component',
     data: {
       componentName: 'email-cta',
       darkThemeBg: 'primary',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'If you\'re out in the forest during extreme cold and hear what sounds like gunshots, don\'t panic. It\'s likely just exploding trees in winter doing what they\'ve been doing for thousands of years - adapting, surviving, and occasionally making a scene.',
     },
   },
   {

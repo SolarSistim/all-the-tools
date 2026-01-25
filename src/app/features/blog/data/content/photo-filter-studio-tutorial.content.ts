@@ -175,6 +175,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Every slider updates the preview in real-time. Drag the brightness slider and watch your photo respond instantly. No apply button. No render time. Just smooth, responsive editing.',

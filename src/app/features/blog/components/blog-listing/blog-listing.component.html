@@ -14,6 +14,14 @@
           <mat-icon>apps</mat-icon>
           <span>Browse the Online Toolbox</span>
         </a>
+        <a routerLink="/tools/gradient-generator" class="start-here-link">
+          <mat-icon>gradient</mat-icon>
+          <span>Gradient Generator</span>
+        </a>
+        <a routerLink="/tools/photo-filter-studio" class="start-here-link">
+          <mat-icon>image_edit</mat-icon>
+          <span>Photo Filter Studio</span>
+        </a>
         @for (tutorial of featuredTutorials; track tutorial.slug) {
           <a [routerLink]="['/blog', tutorial.slug]" class="start-here-link">
             <mat-icon>article</mat-icon>
