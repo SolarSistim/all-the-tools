@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'birthday-freebies-guide-100-deals':
+        const birthdayFreebiesModule = await import('./birthday-freebies-are-the-last-bribe-society-offers-you');
+        return birthdayFreebiesModule.content;
+
       case 'photo-filter-studio-tutorial':
         const photoFilterStudioModule = await import('./photo-filter-studio-tutorial.content');
         return photoFilterStudioModule.content;
