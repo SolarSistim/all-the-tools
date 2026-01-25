@@ -1,7 +1,7 @@
 import { ContentBlock } from '../../models/blog.models';
 
 /**
- * Article Content: The Golden Palace on Scenic Highway
+ * Article Content: The Taj Mahal House - The Golden Palace on Scenic Highway
  */
 export const content: ContentBlock[] = [
   {
@@ -20,7 +20,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Locals call it everything from "the Taj Mahal" to "the Kremlin" to "Garbaj Mahal." Pool service guys use it as a landmark. The internet has <em>opinions</em>.',
+      text: 'Locals call it everything from "the Taj Mahal House" to "the Kremlin" to "Garbaj Mahal." Pool service guys use it as a landmark. The internet has <em>opinions</em> about the Taj Mahal House Pensacola.',
     },
   },
   {
@@ -46,8 +46,8 @@ export const content: ContentBlock[] = [
     type: 'image',
     data: {
       src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpg',
-      alt: 'The Golden Palace on Scenic Highway',
-      caption: 'The golden palace sits prominently on Escambia Bay - impossible to miss',
+      alt: 'The Taj Mahal House on Scenic Highway in Pensacola',
+      caption: 'The Taj Mahal House sits prominently on Escambia Bay - impossible to miss',
     },
   },
   {
