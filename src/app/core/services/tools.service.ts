@@ -255,7 +255,8 @@ export class ToolsService {
       route: 'photo-filter-studio',
       featured: true,
       tags: ['image', 'photo', 'editor', 'filters', 'adjustments', 'editing'],
-      available: true
+      available: true,
+      hasTutorial: true
     },
 
     // ========================================

@@ -12,6 +12,10 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'The <a href="/tools/gradient-generator">Gradient Generator</a> fixes that. Pick your colors, adjust the angle, see the result instantly. Everything runs locally in your browser - no accounts, no uploads, no tracking. When you\'re happy with what you see, copy the CSS and move on with your life.',

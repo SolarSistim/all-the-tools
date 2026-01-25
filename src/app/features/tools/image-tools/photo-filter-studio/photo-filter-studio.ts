@@ -39,7 +39,10 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     AdsenseComponent
   ],
   templateUrl: './photo-filter-studio.html',
-  styleUrl: './photo-filter-studio.scss'
+  styleUrl: './photo-filter-studio.scss',
+  host: {
+    ngSkipHydration: 'true'
+  }
 })
 export class PhotoFilterStudio implements OnInit {
   private filterService = inject(PhotoFilterStudioService);

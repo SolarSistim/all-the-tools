@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'photo-filter-studio-tutorial':
+        const photoFilterStudioModule = await import('./photo-filter-studio-tutorial.content');
+        return photoFilterStudioModule.content;
+
       case 'gradient-generator-tutorial-css-gradients':
         const gradientGeneratorModule = await import('./how-to-use-gradient-generator-css-gradients.content');
         return gradientGeneratorModule.content;
