@@ -116,6 +116,12 @@
                       class="tool-menu-item"
                     >
                       <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span
+                        class="tutorial-indicator"
+                        [class.has-tutorial]="tool.hasTutorial"
+                        [matTooltip]="tool.hasTutorial ? 'Tutorial Available' : 'No Tutorial Yet'"
+                        matTooltipPosition="above"
+                      ></span>
                       <span>{{ tool.name }}</span>
                     </a>
                   }
@@ -131,6 +137,12 @@
                       class="tool-menu-item"
                     >
                       <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span
+                        class="tutorial-indicator"
+                        [class.has-tutorial]="tool.hasTutorial"
+                        [matTooltip]="tool.hasTutorial ? 'Tutorial Available' : 'No Tutorial Yet'"
+                        matTooltipPosition="above"
+                      ></span>
                       <span>{{ tool.name }}</span>
                     </a>
                   }
@@ -146,6 +158,12 @@
                       class="tool-menu-item"
                     >
                       <mat-icon>{{ tool.icon }}</mat-icon>
+                      <span
+                        class="tutorial-indicator"
+                        [class.has-tutorial]="tool.hasTutorial"
+                        [matTooltip]="tool.hasTutorial ? 'Tutorial Available' : 'No Tutorial Yet'"
+                        matTooltipPosition="above"
+                      ></span>
                       <span>{{ tool.name }}</span>
                     </a>
                   }

@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'gradient-generator-tutorial-css-gradients':
+        const gradientGeneratorModule = await import('./how-to-use-gradient-generator-css-gradients.content');
+        return gradientGeneratorModule.content;
+
       case 'how-to-use-social-media-launchpad-copy-paste-launch':
         const socialLaunchpadModule = await import('./how-to-use-social-media-launchpad-copy-paste-launch.content');
         return socialLaunchpadModule.content;

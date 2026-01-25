@@ -35,6 +35,9 @@ export interface Tool {
 
   /** Whether the tool is currently available/implemented */
   available?: boolean;
+
+  /** Whether this tool has a tutorial available on the blog */
+  hasTutorial?: boolean;
 }
 
 /**

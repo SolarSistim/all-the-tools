@@ -54,7 +54,10 @@ interface GradientPreset {
     AdsenseComponent
   ],
   templateUrl: './gradient-generator.html',
-  styleUrl: './gradient-generator.scss'
+  styleUrl: './gradient-generator.scss',
+  host: {
+    ngSkipHydration: 'true'
+  }
 })
 export class GradientGenerator implements OnInit {
   private snackbar = inject(CustomSnackbarService);

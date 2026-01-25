@@ -111,7 +111,8 @@ export class ToolsService {
       route: 'base-number-converter',
       featured: true,
       tags: ['math', 'converter', 'base', 'binary', 'hex', 'decimal', 'number'],
-      available: true
+      available: true,
+      hasTutorial: true
     },
 
     // ========================================
@@ -163,7 +164,8 @@ export class ToolsService {
       route: 'gradient-generator',
       featured: false,
       tags: ['color', 'css', 'generator'],
-      available: true
+      available: true,
+      hasTutorial: true
     },
 
     // ========================================
@@ -285,7 +287,8 @@ export class ToolsService {
       route: 'barcode-reader',
       featured: true,
       tags: ['barcode', 'scanner', 'ocr', 'camera', 'inventory'],
-      available: true
+      available: true,
+      hasTutorial: true
     },
     {
       id: 'on-reward-scanner',
@@ -297,7 +300,8 @@ export class ToolsService {
       route: 'on-reward-scanner',
       featured: true,
       tags: ['ocr', 'scanner', 'camera', 'nicotine', 'rewards'],
-      available: true
+      available: true,
+      hasTutorial: true
     },
 
     // ========================================
@@ -341,7 +345,8 @@ export class ToolsService {
       route: 'social-media-launchpad',
       featured: true,
       tags: ['social', 'media', 'launchpad', 'marketing'],
-      available: true
+      available: true,
+      hasTutorial: true
     },
   ];
 

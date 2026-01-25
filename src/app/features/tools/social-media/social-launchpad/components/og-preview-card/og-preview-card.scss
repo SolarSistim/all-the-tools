@@ -130,6 +130,43 @@
   }
 }
 
+.og-image-placeholder {
+  width: 100%;
+  aspect-ratio: 1.91 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(109, 212, 255, 0.05), rgba(255, 107, 232, 0.05));
+  border-bottom: 1px dashed var(--border-color);
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  text-align: center;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--text-tertiary);
+    opacity: 0.5;
+  }
+
+  p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .placeholder-hint {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    margin-top: $spacing-xs;
+  }
+}
+
 .og-content {
   padding: $spacing-lg;
   width: 100%;

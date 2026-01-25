@@ -24,6 +24,11 @@
         <span>{{ imageDimensions }}</span>
       </div>
     </div>
+    <div class="og-image-placeholder" *ngIf="!ogData!.image">
+      <mat-icon>hide_image</mat-icon>
+      <p>No Open Graph image available</p>
+      <span class="placeholder-hint">This URL does not have a preview image</span>
+    </div>
     <div class="og-content">
       <h3 class="og-title">{{ ogData!.title }}</h3>
       <p class="og-description">{{ ogData!.description }}</p>
