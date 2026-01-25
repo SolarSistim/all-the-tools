@@ -17,6 +17,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { StructuredDataService } from '../../../../core/services/structured-data.service';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
+import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 
 /**
  * Blog Listing Component
@@ -39,6 +40,7 @@ import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
     FormsModule,
     PaginationComponent,
     ReadingTimePipe,
+    PageHeaderComponent,
   ],
   templateUrl: './blog-listing.component.html',
   styleUrls: ['./blog-listing.component.scss'],
@@ -142,7 +144,7 @@ export class BlogListingComponent implements OnInit {
         'developer guides',
         'tool tutorials',
       ],
-      image: this.blogService.getConfig().defaultOgImage,
+      image: 'https://ik.imagekit.io/allthethingsdev/Blog%20OG%20Header%20Image/allthethings-tutorials-and-blog.jpg',
       url: 'https://www.allthethings.dev/blog',
       type: 'website',
     };
