@@ -156,6 +156,9 @@ export class UnitConverter implements OnInit, OnDestroy {
   private getOgImageUrl(fromSlug?: string, toSlug?: string): string {
     // If we have both slugs, use pair-specific image from ImageKit
     if (fromSlug && toSlug) {
+      if (fromSlug === 'kilogram' && toSlug === 'gram') {
+        return 'https://ik.imagekit.io/allthethingsdev/unit%20converter/og-kilogram-to-gram-converter.jpg';
+      }
       return `https://ik.imagekit.io/allthethingsdev/unit%20converter/og-${fromSlug}-to-${toSlug}.jpg`;
     }
 
