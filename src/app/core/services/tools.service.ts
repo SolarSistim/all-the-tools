@@ -464,6 +464,7 @@ export class ToolsService {
     // Weight & Mass
     { from: 'kg', to: 'lbs', fromSlug: 'kilogram', toSlug: 'pound', category: 'weight', description: 'Kilograms to pounds conversion for fitness goals, gym weights, and luggage.', featured: true },
     { from: 'lbs', to: 'kg', fromSlug: 'pound', toSlug: 'kilogram', category: 'weight', description: 'Convert pounds to kilograms for medical forms, shipping, and travel.', featured: true },
+    { from: 'Kilograms', to: 'Grams', fromSlug: 'kilogram', toSlug: 'gram', category: 'weight', description: 'Convert kilograms to grams for recipes, lab work, and packaging.' },
     { from: 'Grams', to: 'Ounces', fromSlug: 'gram', toSlug: 'ounce', category: 'weight', description: 'High-precision grams to ounces conversion for cooking, jewelry, and postage.' },
     { from: 'Ounces', to: 'Grams', fromSlug: 'ounce', toSlug: 'gram', category: 'weight', description: 'Convert oz to grams for recipes and laboratory measurements.' },
 

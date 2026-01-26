@@ -131,6 +131,17 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Canonicalize unit converter pair URLs (camelCase -> kebab-case)
+[[redirects]]
+  from = "/tools/unit-converter/squareMeter-to-squareFoot"
+  to = "/tools/unit-converter/square-meter-to-square-foot"
+  status = 301
+
+[[redirects]]
+  from = "/tools/unit-converter/kilometerPerHour-to-milePerHour"
+  to = "/tools/unit-converter/kilometer-per-hour-to-mile-per-hour"
+  status = 301
+
 # SPA fallback - redirect all routes to index.html
 # force = false means it won't redirect if a static file exists
 [[redirects]]

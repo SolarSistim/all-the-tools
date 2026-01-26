@@ -35,6 +35,7 @@ export const serverRoutes: ServerRoute[] = [
         // Weight conversions
         { pair: 'kilogram-to-pound' },
         { pair: 'pound-to-kilogram' },
+        { pair: 'kilogram-to-gram' },
         { pair: 'gram-to-ounce' },
         { pair: 'ounce-to-gram' },
         // Temperature conversions
