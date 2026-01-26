@@ -36,6 +36,19 @@ export class ToolCardComponent {
     other: { name: 'Other', icon: 'more_horiz' }
   };
 
+  /**
+   * Get router link array for the tool
+   * Handles multi-segment routes by splitting on '/'
+   */
+  get routerLinkArray(): string[] {
+    if (this.tool.route.includes('/')) {
+      // Split multi-segment routes (e.g., 'unit-converter/cm-to-inches')
+      return ['/tools', ...this.tool.route.split('/')];
+    }
+    // Single segment route
+    return ['/tools', this.tool.route];
+  }
+
   onCardClick(): void {
     this.cardClick.emit(this.tool);
   }

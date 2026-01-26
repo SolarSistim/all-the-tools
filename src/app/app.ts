@@ -135,17 +135,30 @@ export class App implements AfterViewInit, OnInit {
   }
 
   /**
-   * Get count of tools in a category
+   * Get count of tools in a category (for sidenav - excludes conversion pairs)
    */
   getToolCount(categoryId: string): number {
-    return this.toolsService.getToolCountByCategory(categoryId as any);
+    return this.toolsService.getToolCountByCategoryForNav(categoryId as any);
   }
 
   /**
-   * Get tools by category
+   * Get tools by category (for sidenav - excludes conversion pairs)
    */
   getToolsByCategory(categoryId: string): Tool[] {
-    return this.toolsService.getToolsByCategory(categoryId as any);
+    return this.toolsService.getToolsByCategoryForNav(categoryId as any);
+  }
+
+  /**
+   * Get router link array for a tool
+   * Handles multi-segment routes by splitting on '/'
+   */
+  getToolRouterLink(toolRoute: string): string[] {
+    if (toolRoute.includes('/')) {
+      // Split multi-segment routes (e.g., 'unit-converter/cm-to-inches')
+      return ['/tools', ...toolRoute.split('/')];
+    }
+    // Single segment route
+    return ['/tools', toolRoute];
   }
 
   /**

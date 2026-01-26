@@ -1,15 +1,14 @@
 <div class="unit-converter-page">
   <div class="container">
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" [class.hero-generic]="!activePair()" [class.hero-specific]="activePair()">
       <div class="hero-content">
         <div class="hero-icon-wrapper">
-          <mat-icon class="hero-icon">swap_horiz</mat-icon>
+          <mat-icon class="hero-icon">{{ getHeroCategory().icon }}</mat-icon>
         </div>
-        <h1 class="hero-title">Unit Converter</h1>
+        <h1 class="hero-title">{{ getPageTitle() }}</h1>
         <p class="hero-subtitle">
-          Convert between units of measurement instantly with precision. From length and weight to temperature
-          and speed, get accurate conversions for any unit system. Perfect for engineering, cooking, travel, and everyday use.
+          {{ getHeroDescription() }}
         </p>
         <!-- <div class="hero-features">
           <div class="feature-badge">
@@ -62,7 +61,7 @@
         The Bottom Line
       </h2>
       <p class="bottom-line-content">
-        This unit converter provides instant, precise conversions across six essential measurement categories: length (meter, kilometer, mile, yard, foot, inch, centimeter, millimeter), weight/mass (kilogram, gram, pound, ounce, ton, milligram), temperature (Celsius, Fahrenheit, Kelvin), volume (liter, gallon, quart, pint, cup, fluid ounce, milliliter), area (square meter, acre, hectare, square foot, square mile, square kilometer), and speed (meter per second, kilometer per hour, mile per hour, knot, foot per second). Select measurement category via visual category buttons, enter value to convert, choose from and to units from dropdown lists, and view results with up to 6 decimal places for precision. Bidirectional swap button reverses conversion direction instantly without re-entering values. Real-time calculation updates automatically as you modify input values or change units. Perfect for cooking recipe conversions, international travel planning, engineering calculations, construction measurements, fitness tracking, scientific computations, vehicle specifications, real estate comparisons, or any scenario requiring accurate unit transformations between metric, imperial, and specialized measurement systems. Category-based organization groups related units together—length units stay separate from weight units, temperature conversions isolated from volume calculations. Supports common conversions like kilometers to miles for road trips, Celsius to Fahrenheit for weather, liters to gallons for fuel consumption, kilograms to pounds for luggage weight, square meters to square feet for floor plans, and kilometers per hour to miles per hour for speedometers. All conversions use precise mathematical formulas and happen locally in your browser with complete privacy—no measurement values ever get transmitted to servers, ensuring confidential engineering specifications, proprietary calculations, or personal data stays on your device.
+        {{ getBottomLineContent() }}
       </p>
     </section>
 
@@ -111,7 +110,7 @@
 
             <mat-form-field appearance="fill" class="unit-select">
               <mat-label>Unit</mat-label>
-              <mat-select [(ngModel)]="fromUnit" (ngModelChange)="convert()">
+              <mat-select [(ngModel)]="fromUnit" (ngModelChange)="onFromUnitChange()">
                 @for (unit of getUnitList(); track unit) {
                   <mat-option [value]="unit">{{ getUnitName(unit) }}</mat-option>
                 }
@@ -144,7 +143,7 @@
 
             <mat-form-field appearance="fill" class="unit-select">
               <mat-label>Unit</mat-label>
-              <mat-select [(ngModel)]="toUnit" (ngModelChange)="convert()">
+              <mat-select [(ngModel)]="toUnit" (ngModelChange)="onToUnitChange()">
                 @for (unit of getUnitList(); track unit) {
                   <mat-option [value]="unit">{{ getUnitName(unit) }}</mat-option>
                 }

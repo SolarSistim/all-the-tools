@@ -155,10 +155,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get tools by category
+   * Get tools by category (for navigation - excludes conversion pairs)
    */
   getToolsByCategory(categoryId: string): Tool[] {
-    return this.toolsService.getToolsByCategory(categoryId as any);
+    return this.toolsService.getToolsByCategoryForNav(categoryId as any);
   }
 
   /**
@@ -169,18 +169,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get all available tools sorted alphabetically by name
+   * Get all available tools sorted alphabetically by name (for navigation - excludes conversion pairs)
    */
   get sortedTools(): Tool[] {
-    return [...this.toolsService.getAvailableTools()].sort((a, b) => a.name.localeCompare(b.name));
+    return [...this.toolsService.getAvailableToolsForNav()].sort((a, b) => a.name.localeCompare(b.name));
   }
 
   /**
-   * Get non-featured available tools for the mega menu
+   * Get non-featured available tools for the mega menu (excludes conversion pairs)
    */
   get nonFeaturedTools(): Tool[] {
     const featured = this.featuredTools;
-    return this.toolsService.getAvailableTools().filter(tool => !featured.some(ft => ft.id === tool.id));
+    return this.toolsService.getAvailableToolsForNav().filter(tool => !featured.some(ft => ft.id === tool.id));
   }
 
   /**
@@ -241,10 +241,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Get count of tools in a category
+   * Get count of tools in a category (for navigation - excludes conversion pairs)
    */
   getToolCount(categoryId: string): number {
-    return this.toolsService.getToolCountByCategory(categoryId as any);
+    return this.toolsService.getToolCountByCategoryForNav(categoryId as any);
   }
 
   /**
@@ -289,5 +289,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
   shouldShowCategoryColumn(columnIndex: number): boolean {
     return columnIndex < Math.min(3, Math.ceil(this.categoriesWithTools.length / 3));
+  }
+
+  /**
+   * Get router link array for a tool
+   * Handles multi-segment routes by splitting on '/'
+   */
+  getToolRouterLink(toolRoute: string): string[] {
+    if (toolRoute.includes('/')) {
+      // Split multi-segment routes (e.g., 'unit-converter/cm-to-inches')
+      return ['/tools', ...toolRoute.split('/')];
+    }
+    // Single segment route
+    return ['/tools', toolRoute];
   }
 }

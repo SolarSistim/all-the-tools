@@ -93,7 +93,7 @@
             <div class="tools-list">
               @for (tool of getToolsByCategory(category.id); track tool.id) {
                 <a
-                  [routerLink]="['/tools', tool.route]"
+                  [routerLink]="getToolRouterLink(tool.route)"
                   (click)="closeToolsSidenav()"
                   class="tool-item"
                 >

@@ -207,6 +207,23 @@ export class BlogListingComponent implements OnInit {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  scrollToSearch(): void {
+    // Scroll the mat-sidenav-content element to the search section
+    const sidenavContent = document.querySelector('mat-sidenav-content');
+    const searchSection = document.querySelector('.search-section');
+
+    if (sidenavContent && searchSection) {
+      const searchPosition = (searchSection as HTMLElement).offsetTop;
+      sidenavContent.scrollTo({ top: searchPosition - 20, behavior: 'smooth' });
+    }
+
+    // Also scroll window as fallback
+    const searchElement = document.querySelector('.search-section');
+    if (searchElement) {
+      searchElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   onSearchInput(value: string): void {
     this.searchQuery.set(value);
 

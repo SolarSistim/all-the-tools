@@ -83,6 +83,11 @@ export const routes: Routes = [
     title: 'Unit Converter - All The Things'
   },
   {
+    path: 'tools/unit-converter/:pair',
+    loadComponent: () => import('./features/tools/converters/unit-converter/unit-converter').then(m => m.UnitConverter),
+    title: 'Unit Converter - All The Things'
+  },
+  {
     path: 'tools/word-counter',
     loadComponent: () => import('./features/tools/text-tools/word-counter/word-counter').then(m => m.WordCounter),
     title: 'Word Counter - All The Things'

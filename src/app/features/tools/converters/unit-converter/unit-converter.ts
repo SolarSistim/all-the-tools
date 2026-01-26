@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { MetaService } from '../../../../core/services/meta.service';
@@ -51,31 +53,194 @@ interface UnitCategory {
   templateUrl: './unit-converter.html',
   styleUrl: './unit-converter.scss'
 })
-export class UnitConverter implements OnInit {
+export class UnitConverter implements OnInit, OnDestroy {
 
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];
 
+  // Track if we're on a specific pair page for dynamic content
+  activePair = signal<{ from: string; to: string; category: string } | null>(null);
+
+  // Subject for managing subscriptions
+  private destroy$ = new Subject<void>();
+
   ngOnInit(): void {
-    this.metaService.updateTags({
-      title: 'Unit Converter - Length, Weight, Temp, Volume, Area & Speed',
-      description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
-      keywords: ['unit converter', 'measurement converter', 'metric converter', 'imperial converter'],
-      image: 'https://www.allthethings.dev/meta-images/og-unit-converter.png',
-      url: 'https://www.allthethings.dev/tools/unit-converter',
-      jsonLd: this.metaService.buildToolJsonLd({
-        name: 'Unit Converter - Length, Weight, Temp, Volume, Area & Speed',
-        description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
-        url: 'https://www.allthethings.dev/tools/unit-converter',
-        image: 'https://www.allthethings.dev/meta-images/og-unit-converter.png'
-      })
+    // Subscribe to route parameter changes to update meta tags when navigating between conversion pairs
+    this.route.paramMap.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
+      const pairParam = params.get('pair');
+
+      if (pairParam) {
+        this.handlePairRoute(pairParam);
+      } else {
+        // Default to length, meter to kilometer
+        this.selectedCategory.set('length');
+        this.fromUnit.set('meter');
+        this.toUnit.set('kilometer');
+        this.activePair.set(null);
+        this.updateMetaTags();
+      }
     });
 
     this.featuredTools = this.toolsService.getFeaturedTools();
     this.categories = this.toolsService.getAllCategories();
+  }
+
+  ngOnDestroy(): void {
+    // Clean up subscriptions
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private handlePairRoute(pairParam: string): void {
+    // Split by '-to-'
+    const parts = pairParam.split('-to-');
+    if (parts.length !== 2) {
+      // Invalid format, use defaults
+      this.setDefaults();
+      return;
+    }
+
+    const fromSlug = parts[0];
+    const toSlug = parts[1];
+
+    // Convert slugs to unit keys
+    const fromKey = this.slugToUnitKey(fromSlug);
+    const toKey = this.slugToUnitKey(toSlug);
+
+    // Find which category contains these units
+    let foundCategory: string | null = null;
+    for (const [categoryId, category] of Object.entries(this.unitCategories)) {
+      if (category.units[fromKey] && category.units[toKey]) {
+        foundCategory = categoryId;
+        break;
+      }
+    }
+
+    if (foundCategory) {
+      // Valid pair found
+      this.selectedCategory.set(foundCategory);
+      this.fromUnit.set(fromKey);
+      this.toUnit.set(toKey);
+      this.inputValue.set(1); // Pre-fill with 1 for immediate result
+      this.activePair.set({
+        from: fromKey,
+        to: toKey,
+        category: foundCategory
+      });
+      this.convert();
+      this.updateMetaTags();
+    } else {
+      // Invalid pair, use defaults
+      this.setDefaults();
+    }
+  }
+
+  private setDefaults(): void {
+    this.selectedCategory.set('length');
+    this.fromUnit.set('meter');
+    this.toUnit.set('kilometer');
+    this.activePair.set(null);
+    this.updateMetaTags();
+  }
+
+  /**
+   * Get OG image URL for specific conversion pair
+   */
+  private getOgImageUrl(fromSlug?: string, toSlug?: string): string {
+    // If we have both slugs, use pair-specific image from ImageKit
+    if (fromSlug && toSlug) {
+      return `https://ik.imagekit.io/allthethingsdev/unit%20converter/og-${fromSlug}-to-${toSlug}.jpg`;
+    }
+
+    // Fallback to generic unit converter image
+    return 'https://www.allthethings.dev/meta-images/og-unit-converter.png';
+  }
+
+  private updateMetaTags(): void {
+    const pair = this.activePair();
+
+    if (pair) {
+      // Dynamic SEO for specific pair
+      const category = this.unitCategories[pair.category];
+      const fromUnit = category.units[pair.from];
+      const toUnit = category.units[pair.to];
+      const fromName = fromUnit.name;
+      const toName = toUnit.name;
+      const categoryName = category.name.toLowerCase();
+
+      const fromSlug = this.unitKeyToSlug(pair.from);
+      const toSlug = this.unitKeyToSlug(pair.to);
+
+      const title = `${fromName} to ${toName} Converter | Fast & Private | AllTheThings`;
+      const description = `Convert ${fromName} to ${toName} instantly. Accurate ${categoryName} conversion for engineering, cooking, and travel.`;
+      const url = `https://www.allthethings.dev/tools/unit-converter/${fromSlug}-to-${toSlug}`;
+      const ogImage = this.getOgImageUrl(fromSlug, toSlug);
+
+      this.metaService.updateTags({
+        title,
+        description,
+        keywords: [
+          `${fromName.toLowerCase()} to ${toName.toLowerCase()}`,
+          `${fromName.toLowerCase()} ${toName.toLowerCase()} converter`,
+          `convert ${fromName.toLowerCase()} to ${toName.toLowerCase()}`,
+          `${categoryName} converter`
+        ],
+        image: ogImage,
+        url,
+        jsonLd: this.metaService.buildToolJsonLd({
+          name: title,
+          description,
+          url,
+          image: ogImage
+        })
+      });
+    } else {
+      // Generic SEO
+      const ogImage = this.getOgImageUrl();
+      this.metaService.updateTags({
+        title: 'Unit Converter - Length, Weight, Temp, Volume, Area & Speed',
+        description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
+        keywords: ['unit converter', 'measurement converter', 'metric converter', 'imperial converter'],
+        image: ogImage,
+        url: 'https://www.allthethings.dev/tools/unit-converter',
+        jsonLd: this.metaService.buildToolJsonLd({
+          name: 'Unit Converter - Length, Weight, Temp, Volume, Area & Speed',
+          description: 'Convert between length, weight, temperature, volume, area, and speed units. Support for metric and imperial systems.',
+          url: 'https://www.allthethings.dev/tools/unit-converter',
+          image: ogImage
+        })
+      });
+    }
+  }
+
+  // Helper: Convert unit key to URL slug (camelCase to kebab-case)
+  private unitKeyToSlug(unitKey: string): string {
+    return unitKey
+      .replace(/([A-Z])/g, '-$1')
+      .toLowerCase()
+      .replace(/^-/, '');
+  }
+
+  // Helper: Convert URL slug to unit key (kebab-case to camelCase)
+  private slugToUnitKey(slug: string): string {
+    return slug.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+  }
+
+  // Update URL without page reload
+  private updateUrl(): void {
+    const fromSlug = this.unitKeyToSlug(this.fromUnit());
+    const toSlug = this.unitKeyToSlug(this.toUnit());
+    const newUrl = `/tools/unit-converter/${fromSlug}-to-${toSlug}`;
+
+    // Navigate to new URL - the route param subscription will handle updating meta tags
+    this.router.navigate([newUrl], { replaceUrl: true });
   }
 
   // Category and unit selection
@@ -352,6 +517,17 @@ export class UnitConverter implements OnInit {
     const units = this.getUnitList();
     this.fromUnit.set(units[0]);
     this.toUnit.set(units[1] || units[0]);
+    this.updateUrl();
+    this.convert();
+  }
+
+  onFromUnitChange(): void {
+    this.updateUrl();
+    this.convert();
+  }
+
+  onToUnitChange(): void {
+    this.updateUrl();
     this.convert();
   }
 
@@ -389,10 +565,65 @@ export class UnitConverter implements OnInit {
     this.inputValue.set(this.resultValue());
     this.resultValue.set(tempValue);
 
+    // Update URL to reflect new direction
+    this.updateUrl();
     this.convert();
   }
 
-    scrollToUnitConverter(): void {
+  // Get dynamic h1 title
+  getPageTitle(): string {
+    const pair = this.activePair();
+    if (pair) {
+      const category = this.unitCategories[pair.category];
+      const fromName = category.units[pair.from].name;
+      const toName = category.units[pair.to].name;
+      return `${fromName} to ${toName} Converter`;
+    }
+    return 'Unit Converter';
+  }
+
+  // Get hero category info (for icon display)
+  getHeroCategory(): { name: string; icon: string } {
+    const pair = this.activePair();
+    if (pair) {
+      const category = this.unitCategories[pair.category];
+      return { name: category.name, icon: category.icon };
+    }
+    // Default to swap_horiz for generic converter
+    return { name: 'Unit Converter', icon: 'swap_horiz' };
+  }
+
+  // Get dynamic hero description
+  getHeroDescription(): string {
+    const pair = this.activePair();
+    if (pair) {
+      const category = this.unitCategories[pair.category];
+      const fromName = category.units[pair.from].name;
+      const toName = category.units[pair.to].name;
+      const categoryName = category.name.toLowerCase();
+
+      return `Convert ${fromName} to ${toName} instantly with precision. Fast, accurate ${categoryName} conversion for engineering, cooking, travel, and everyday use.`;
+    }
+
+    return 'Convert between units of measurement instantly with precision. From length and weight to temperature and speed, get accurate conversions for any unit system. Perfect for engineering, cooking, travel, and everyday use.';
+  }
+
+  // Get dynamic bottom line content
+  getBottomLineContent(): string {
+    const pair = this.activePair();
+    if (pair) {
+      const category = this.unitCategories[pair.category];
+      const fromName = category.units[pair.from].name;
+      const toName = category.units[pair.to].name;
+      const categoryName = category.name.toLowerCase();
+
+      return `Our ${fromName} to ${toName} tool is a specialized part of our toolbox designed for high-precision ${categoryName} transformations. Whether you are converting ${fromName} for a technical drawing or ${toName} for a recipe, our browser-based calculator ensures accuracy to 6 decimal places. All conversions happen locally in your browser with complete privacy—no ${categoryName} values ever get transmitted to servers, ensuring confidential measurements stay on your device.`;
+    }
+
+    return 'This unit converter provides instant, precise conversions across six essential measurement categories: length (meter, kilometer, mile, yard, foot, inch, centimeter, millimeter), weight/mass (kilogram, gram, pound, ounce, ton, milligram), temperature (Celsius, Fahrenheit, Kelvin), volume (liter, gallon, quart, pint, cup, fluid ounce, milliliter), area (square meter, acre, hectare, square foot, square mile, square kilometer), and speed (meter per second, kilometer per hour, mile per hour, knot, foot per second). Select measurement category via visual category buttons, enter value to convert, choose from and to units from dropdown lists, and view results with up to 6 decimal places for precision. Bidirectional swap button reverses conversion direction instantly without re-entering values. Real-time calculation updates automatically as you modify input values or change units. Perfect for cooking recipe conversions, international travel planning, engineering calculations, construction measurements, fitness tracking, scientific computations, vehicle specifications, real estate comparisons, or any scenario requiring accurate unit transformations between metric, imperial, and specialized measurement systems. Category-based organization groups related units together—length units stay separate from weight units, temperature conversions isolated from volume calculations. Supports common conversions like kilometers to miles for road trips, Celsius to Fahrenheit for weather, liters to gallons for fuel consumption, kilograms to pounds for luggage weight, square meters to square feet for floor plans, and kilometers per hour to miles per hour for speedometers. All conversions use precise mathematical formulas and happen locally in your browser with complete privacy—no measurement values ever get transmitted to servers, ensuring confidential engineering specifications, proprietary calculations, or personal data stays on your device.';
+  }
+
+  scrollToUnitConverter(): void {
     const element = document.querySelector('.category-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });

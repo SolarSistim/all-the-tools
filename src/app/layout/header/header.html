@@ -111,7 +111,7 @@
                   @for (tool of getToolsForColumn(0); track tool.id) {
                     <a
                       mat-menu-item
-                      [routerLink]="['/tools', tool.route]"
+                      [routerLink]="getToolRouterLink(tool.route)"
                       (click)="closeMegaMenu()"
                       class="tool-menu-item"
                     >
@@ -132,7 +132,7 @@
                   @for (tool of getToolsForColumn(1); track tool.id) {
                     <a
                       mat-menu-item
-                      [routerLink]="['/tools', tool.route]"
+                      [routerLink]="getToolRouterLink(tool.route)"
                       (click)="closeMegaMenu()"
                       class="tool-menu-item"
                     >
@@ -153,7 +153,7 @@
                   @for (tool of getToolsForColumn(2); track tool.id) {
                     <a
                       mat-menu-item
-                      [routerLink]="['/tools', tool.route]"
+                      [routerLink]="getToolRouterLink(tool.route)"
                       (click)="closeMegaMenu()"
                       class="tool-menu-item"
                     >

@@ -441,7 +441,81 @@ export class ToolsService {
     }
   ];
 
-  constructor() { }
+  /**
+   * High-intent unit conversion pairs for programmatic SEO
+   */
+  private conversionPairs: Array<{
+    from: string;
+    to: string;
+    fromSlug: string;
+    toSlug: string;
+    category: string;
+    description: string;
+    featured?: boolean;
+  }> = [
+    // Length (Heavy Hitters)
+    { from: 'Centimeter', to: 'Inches', fromSlug: 'centimeter', toSlug: 'inch', category: 'length', description: 'Convert centimeters to inches accurately for height, crafts, or screen sizes.', featured: true },
+    { from: 'Inches', to: 'cm', fromSlug: 'inch', toSlug: 'centimeter', category: 'length', description: 'Fast inch to centimeter conversion. Perfect for international shipping and sizing.', featured: true },
+    { from: 'Miles', to: 'km', fromSlug: 'mile', toSlug: 'kilometer', category: 'length', description: 'Convert miles to kilometers for travel, racing, or road trip planning.', featured: true },
+    { from: 'km', to: 'Miles', fromSlug: 'kilometer', toSlug: 'mile', category: 'length', description: 'Switch kilometers to miles instantly. Ideal for marathons and driving abroad.', featured: true },
+    { from: 'Feet', to: 'Meters', fromSlug: 'foot', toSlug: 'meter', category: 'length', description: 'Accurate feet to meters conversion for architecture, height, and construction.', featured: true },
+    { from: 'Meters', to: 'Feet', fromSlug: 'meter', toSlug: 'foot', category: 'length', description: 'Convert meters to feet and inches for global height and distance standards.', featured: true },
+
+    // Weight & Mass
+    { from: 'kg', to: 'lbs', fromSlug: 'kilogram', toSlug: 'pound', category: 'weight', description: 'Kilograms to pounds conversion for fitness goals, gym weights, and luggage.', featured: true },
+    { from: 'lbs', to: 'kg', fromSlug: 'pound', toSlug: 'kilogram', category: 'weight', description: 'Convert pounds to kilograms for medical forms, shipping, and travel.', featured: true },
+    { from: 'Grams', to: 'Ounces', fromSlug: 'gram', toSlug: 'ounce', category: 'weight', description: 'High-precision grams to ounces conversion for cooking, jewelry, and postage.' },
+    { from: 'Ounces', to: 'Grams', fromSlug: 'ounce', toSlug: 'gram', category: 'weight', description: 'Convert oz to grams for recipes and laboratory measurements.' },
+
+    // Temperature
+    { from: 'Celsius', to: 'Fahrenheit', fromSlug: 'celsius', toSlug: 'fahrenheit', category: 'temperature', description: 'Convert °C to °F for weather, baking, and travel. Quick and accurate.', featured: true },
+    { from: 'Fahrenheit', to: 'Celsius', fromSlug: 'fahrenheit', toSlug: 'celsius', category: 'temperature', description: 'Convert °F to °C for science, cooking temperatures, and climate tracking.', featured: true },
+
+    // Volume
+    { from: 'Liters', to: 'Gallons', fromSlug: 'liter', toSlug: 'gallon', category: 'volume', description: 'Convert liters to US gallons for fuel, water tanks, and large-scale liquids.' },
+    { from: 'ml', to: 'oz', fromSlug: 'milliliter', toSlug: 'fluidOunce', category: 'volume', description: 'Milliliters to fluid ounces conversion for drinks, medicine, and beauty products.' },
+    { from: 'Cups', to: 'ml', fromSlug: 'cup', toSlug: 'milliliter', category: 'volume', description: 'Convert cooking cups to milliliters for international baking and recipes.' },
+
+    // Area
+    { from: 'Square Meters', to: 'Square Feet', fromSlug: 'squareMeter', toSlug: 'squareFoot', category: 'area', description: 'Convert m² to ft² for real estate listings and apartment sizing.' },
+
+    // Speed
+    { from: 'km/h', to: 'mph', fromSlug: 'kilometerPerHour', toSlug: 'milePerHour', category: 'speed', description: 'Convert kilometers per hour to miles per hour for car speeds and racing.' },
+    { from: 'Knots', to: 'mph', fromSlug: 'knot', toSlug: 'milePerHour', category: 'speed', description: 'Convert maritime/aviation knots to miles per hour for sailing and flight.' },
+  ];
+
+  constructor() {
+    // Generate conversion pair tools and add them to the main tools array
+    this.generateConversionPairTools();
+  }
+
+  /**
+   * Generate Tool objects for each conversion pair
+   */
+  private generateConversionPairTools(): void {
+    const conversionTools: Tool[] = this.conversionPairs.map(pair => ({
+      id: `unit-converter-${pair.fromSlug}-to-${pair.toSlug}`,
+      name: `${pair.from} to ${pair.to} Converter`,
+      description: pair.description,
+      category: 'converter' as ToolCategory,
+      icon: 'swap_horiz',
+      route: `unit-converter/${pair.fromSlug}-to-${pair.toSlug}`,
+      featured: pair.featured || false,
+      tags: [
+        'converter',
+        'units',
+        'measurement',
+        pair.category,
+        pair.fromSlug.toLowerCase(),
+        pair.toSlug.toLowerCase(),
+        `${pair.fromSlug} to ${pair.toSlug}`.toLowerCase()
+      ],
+      available: true
+    }));
+
+    // Add conversion tools to the main tools array
+    this.tools.push(...conversionTools);
+  }
 
   /**
    * Get all tools
@@ -458,6 +532,22 @@ export class ToolsService {
   }
 
   /**
+   * Get available tools excluding conversion pairs (for navigation menus)
+   */
+  getAvailableToolsForNav(): Tool[] {
+    return this.tools.filter(tool =>
+      tool.available !== false && !this.isConversionPair(tool)
+    );
+  }
+
+  /**
+   * Check if a tool is a conversion pair
+   */
+  private isConversionPair(tool: Tool): boolean {
+    return tool.id.startsWith('unit-converter-');
+  }
+
+  /**
    * Get featured tools for home page
    */
   getFeaturedTools(): Tool[] {
@@ -469,6 +559,17 @@ export class ToolsService {
    */
   getToolsByCategory(category: ToolCategory): Tool[] {
     return this.tools.filter(tool => tool.category === category && tool.available !== false);
+  }
+
+  /**
+   * Get tools by category excluding conversion pairs (for navigation menus)
+   */
+  getToolsByCategoryForNav(category: ToolCategory): Tool[] {
+    return this.tools.filter(tool =>
+      tool.category === category &&
+      tool.available !== false &&
+      !this.isConversionPair(tool)
+    );
   }
 
   /**
@@ -526,5 +627,12 @@ export class ToolsService {
    */
   getToolCountByCategory(category: ToolCategory): number {
     return this.getToolsByCategory(category).length;
+  }
+
+  /**
+   * Get count of tools in a category excluding conversion pairs (for navigation)
+   */
+  getToolCountByCategoryForNav(category: ToolCategory): number {
+    return this.getToolsByCategoryForNav(category).length;
   }
 }
