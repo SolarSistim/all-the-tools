@@ -490,28 +490,44 @@ export class ToolsService {
   }
 
   /**
+   * Convert camelCase to kebab-case
+   */
+  private toKebabCase(str: string): string {
+    return str
+      .replace(/([A-Z])/g, '-$1')
+      .toLowerCase()
+      .replace(/^-/, '');
+  }
+
+  /**
    * Generate Tool objects for each conversion pair
    */
   private generateConversionPairTools(): void {
-    const conversionTools: Tool[] = this.conversionPairs.map(pair => ({
-      id: `unit-converter-${pair.fromSlug}-to-${pair.toSlug}`,
-      name: `${pair.from} to ${pair.to} Converter`,
-      description: pair.description,
-      category: 'converter' as ToolCategory,
-      icon: 'swap_horiz',
-      route: `unit-converter/${pair.fromSlug}-to-${pair.toSlug}`,
-      featured: pair.featured || false,
-      tags: [
-        'converter',
-        'units',
-        'measurement',
-        pair.category,
-        pair.fromSlug.toLowerCase(),
-        pair.toSlug.toLowerCase(),
-        `${pair.fromSlug} to ${pair.toSlug}`.toLowerCase()
-      ],
-      available: true
-    }));
+    const conversionTools: Tool[] = this.conversionPairs.map(pair => {
+      // Convert slugs to kebab-case for URLs
+      const fromSlugKebab = this.toKebabCase(pair.fromSlug);
+      const toSlugKebab = this.toKebabCase(pair.toSlug);
+
+      return {
+        id: `unit-converter-${fromSlugKebab}-to-${toSlugKebab}`,
+        name: `${pair.from} to ${pair.to} Converter`,
+        description: pair.description,
+        category: 'converter' as ToolCategory,
+        icon: 'swap_horiz',
+        route: `unit-converter/${fromSlugKebab}-to-${toSlugKebab}`,
+        featured: pair.featured || false,
+        tags: [
+          'converter',
+          'units',
+          'measurement',
+          pair.category,
+          fromSlugKebab,
+          toSlugKebab,
+          `${fromSlugKebab} to ${toSlugKebab}`
+        ],
+        available: true
+      };
+    });
 
     // Add conversion tools to the main tools array
     this.tools.push(...conversionTools);
