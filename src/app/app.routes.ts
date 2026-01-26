@@ -85,8 +85,37 @@ export const routes: Routes = [
   {
     path: 'tools/unit-converter/:pair',
     loadComponent: () => import('./features/tools/converters/unit-converter/unit-converter').then(m => m.UnitConverter),
-    title: 'Unit Converter - All The Things'
-  },
+    title: 'Unit Converter - All The Things',
+    getPrerenderParams: async () => {
+      // Return all conversion pair slugs for prerendering
+      return [
+        // Length conversions
+        { pair: 'centimeter-to-inch' },
+        { pair: 'inch-to-centimeter' },
+        { pair: 'mile-to-kilometer' },
+        { pair: 'kilometer-to-mile' },
+        { pair: 'foot-to-meter' },
+        { pair: 'meter-to-foot' },
+        // Weight conversions
+        { pair: 'kilogram-to-pound' },
+        { pair: 'pound-to-kilogram' },
+        { pair: 'gram-to-ounce' },
+        { pair: 'ounce-to-gram' },
+        // Temperature conversions
+        { pair: 'celsius-to-fahrenheit' },
+        { pair: 'fahrenheit-to-celsius' },
+        // Volume conversions
+        { pair: 'liter-to-gallon' },
+        { pair: 'milliliter-to-fluid-ounce' },
+        { pair: 'cup-to-milliliter' },
+        // Area conversions
+        { pair: 'square-meter-to-square-foot' },
+        // Speed conversions
+        { pair: 'kilometer-per-hour-to-mile-per-hour' },
+        { pair: 'knot-to-mile-per-hour' },
+      ];
+    }
+  } as any,
   {
     path: 'tools/word-counter',
     loadComponent: () => import('./features/tools/text-tools/word-counter/word-counter').then(m => m.WordCounter),
