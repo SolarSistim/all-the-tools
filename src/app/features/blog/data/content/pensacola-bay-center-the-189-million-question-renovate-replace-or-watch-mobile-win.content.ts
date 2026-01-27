@@ -5,6 +5,14 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_07.jpg',
+      alt: 'Pensacola Bay Center Ice rink and hotel concept.',
+      caption: 'Pensacola Bay Center Ice rink and hotel concept.',
+    },
+  },
+  {
     type: 'audio',
     data: {
       src: 'https://5l50ubfz3u.ucarecd.net/42685947-b1ec-4bf0-9ec1-f4a1faa522fa/the_189_million_dollar_question_renovate_replace_or_watch_mobile_win_2.mp3',
@@ -47,6 +55,14 @@ export const content: ContentBlock[] = [
         '<strong>Community Divide:</strong> North Escambia residents question downtown investment while their roads crumble, though TDT funds cannot legally be redirected to infrastructure',
         '<strong>Historic Context:</strong> The Bay Center has operated at a loss for nearly its entire 40-year existence and faces chronic deferred maintenance issues, including smell complaints and failing air conditioning'
       ],
+    },
+  },
+  {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_04.jpg',
+      alt: 'Pensacola Bay Center new club area concept.',
+      caption: 'Pensacola Bay Center new club area concept.',
     },
   },
   {
@@ -129,9 +145,9 @@ export const content: ContentBlock[] = [
   {
     type: 'image',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/Allthethings.dev_Pensacola_Bay_Center_Feasibility_Study_Isometric.jpg',
-      alt: 'Pensacola Bay Center economic impact projections from feasibility study',
-      caption: 'Economic impact projections for the proposed Bay Center renovation and expansion',
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_02.jpg',
+      alt: 'Pensacola Bay Center club space concept.',
+      caption: 'Pensacola Bay Center club space concept.',
     },
   },
   {
@@ -204,6 +220,14 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_07.jpg',
+      alt: 'Pensacola Bay Center Ice rink and hotel concept.',
+      caption: 'Pensacola Bay Center Ice rink and hotel concept.',
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -265,6 +289,14 @@ export const content: ContentBlock[] = [
     data: {
       level: 2,
       text: 'The Mobile Threat: Fear as a Motivator',
+    },
+  },
+  {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_03.jpg',
+      alt: 'Pensacola Bay Center new arena stage concept.',
+      caption: 'Pensacola Bay Center new arena stage concept.',
     },
   },
   {
@@ -369,6 +401,14 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/Allthethings.dev_Pensacola_Bay_Center_Feasibility_Study_Isometric.jpg?updatedAt=1769486267086',
+      alt: 'Pensacola Bay Center site concept.',
+      caption: 'Pensacola Bay Center site concept.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'This phased strategy comes with tradeoffs, naturally. Spreading construction across multiple years almost certainly increases overall costs compared to doing everything at once, since you\'re mobilizing contractors multiple times, potentially dealing with material price fluctuations between phases, and extending the period during which you\'re paying interest on construction loans. But the alternative - shutting down the Bay Center entirely for an extended renovation period - creates its own problems, from displacing the Ice Flyers and other regular tenants to eliminating the venue as an option for events like Pensacon during the construction window.',
@@ -445,6 +485,14 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_05.jpg',
+      alt: 'Arena exterior and event center connection.',
+      caption: 'Arena exterior and event center connection.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: '<a target="_blank" href="https://myescambia.com/open-government/districts/district-3" title="Escambia County District 3 - Commissioner Lumon May">Commissioner Lumon May</a> raised an <a target="_blank" href="https://ricksblog.biz/pensacola-bay-center-renovation-plans-gain-momentum/" title="Rick\'s Blog - Bay Center Renovation Plans Gain Momentum">important concern</a> when he noted that "most studies have resulted in a displacement of the people from this geographical area, unfortunately," which is a warning worth heeding as plans progress and one that speaks to a broader pattern in municipal development where promised community benefits somehow fail to materialize for the communities that were supposed to benefit.',
@@ -487,6 +535,14 @@ export const content: ContentBlock[] = [
     data: {
       level: 2,
       text: 'The Clock Grinds Inexorably Forward',
+    },
+  },
+  {
+    type: 'image',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_06.jpg',
+      alt: 'Pensacola Bay Center new event center concept.',
+      caption: 'Pensacola Bay Center new event center concept.',
     },
   },
   {
