@@ -12,14 +12,6 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/42685947-b1ec-4bf0-9ec1-f4a1faa522fa/the_189_million_dollar_question_renovate_replace_or_watch_mobile_win_2.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'component',
     data: {
       componentName: 'youtube-player',
