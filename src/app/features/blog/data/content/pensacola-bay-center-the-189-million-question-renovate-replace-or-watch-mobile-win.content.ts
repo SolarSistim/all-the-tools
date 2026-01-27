@@ -21,6 +21,15 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'youtube-player',
+      videoId: 'HxkslyU9_2E',
+      title: 'Watch this article on Youtube',
+      description: 'Prefer to watch? Check out the video version on YouTube.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I\'ve been staring at these architectural renderings for half an hour now, foolishly confident in my ability to decrypt them, and I keep coming back to the same question I predict you\'re asking too: are we about to watch our elected officials dump nearly two hundred million dollars into what some residents have already dubbed "lipstick on a pig"?',

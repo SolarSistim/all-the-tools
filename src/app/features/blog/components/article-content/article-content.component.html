@@ -141,6 +141,15 @@
     ></app-audio-player>
 
     <!-- Custom Component -->
+    <!-- YouTube Player Component -->
+    <app-youtube-player
+      *ngIf="block.type === 'component' && block.data.componentName === 'youtube-player'"
+      [videoId]="block.data.videoId"
+      [title]="block.data.title"
+      [description]="block.data.description"
+    ></app-youtube-player>
+
+    <!-- Custom Component -->
     <app-roku-programmatic-compatibility-checker
       *ngIf="block.type === 'component' && block.data.componentName === 'roku-checker'"
     ></app-roku-programmatic-compatibility-checker>
