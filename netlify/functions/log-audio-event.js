@@ -85,12 +85,12 @@ exports.handler = async (event, context) => {
     const range = `${sheetName}!A:K`;
 
     // Prepare the row data matching the headers:
-    // Date, Action, URL Path, Media Type, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
+    // Date, Media Type, Action, URL Path, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
     const values = [[
       mediaEventInfo.humanReadableDate,
+      mediaEventInfo.mediaType,
       mediaEventInfo.action,
       mediaEventInfo.urlPath,
-      mediaEventInfo.mediaType,
       mediaEventInfo.country,
       mediaEventInfo.city,
       mediaEventInfo.region,
