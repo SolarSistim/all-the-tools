@@ -176,6 +176,7 @@ export class VisitLoggerService {
       const audioEventData = {
         action: action,
         urlPath: urlPath,
+        mediaType: 'audio',
         sessionId: this.sessionId,
         deviceType: this.getDeviceType(),
         userAgent: navigator.userAgent,
@@ -210,14 +211,15 @@ export class VisitLoggerService {
         action: action,
         urlPath: urlPath,
         videoId: videoId,
+        mediaType: 'video',
         sessionId: this.sessionId,
         deviceType: this.getDeviceType(),
         userAgent: navigator.userAgent,
         screenResolution: `${window.screen.width}x${window.screen.height}`,
       };
 
-      // Send to Netlify function (fire and forget)
-      fetch('/.netlify/functions/log-video-event', {
+      // Send to Netlify function (fire and forget) - reuses log-audio-event for media_plays sheet
+      fetch('/.netlify/functions/log-audio-event', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

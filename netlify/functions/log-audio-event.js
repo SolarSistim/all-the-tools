@@ -1,5 +1,5 @@
 // Netlify Function: log-audio-event
-// This function logs audio player events (play/pause) to Google Sheets
+// This function logs media player events (audio/video play/pause) to Google Sheets
 
 const { google } = require('googleapis');
 
@@ -44,8 +44,8 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Extract audio event information
-    const audioEventInfo = {
+    // Extract media event information
+    const mediaEventInfo = {
       humanReadableDate: new Date().toLocaleString('en-US', {
         timeZone: 'America/Chicago',
         year: 'numeric',
@@ -58,6 +58,7 @@ exports.handler = async (event, context) => {
       }),
       action: data.action || 'Unknown', // 'play' or 'pause'
       urlPath: data.urlPath || '/',
+      mediaType: data.mediaType || 'audio', // 'audio' or 'video'
       country: geoData?.country?.code || event.headers['x-country'] || 'Unknown',
       city: geoData?.city || 'Unknown',
       region: geoData?.subdivision?.code || 'Unknown',
@@ -79,23 +80,24 @@ exports.handler = async (event, context) => {
     const sheets = google.sheets({ version: 'v4', auth });
     const spreadsheetId = '1NDJC3E6n9rGkILd0IKI58vksBSW9eAJQ9gDTzBzoWbs';
 
-    // Use the audio_player sheet
-    const sheetName = 'audio_player';
-    const range = `${sheetName}!A:J`;
+    // Use the media_plays sheet
+    const sheetName = 'media_plays';
+    const range = `${sheetName}!A:K`;
 
     // Prepare the row data matching the headers:
-    // Date, Action, URL Path, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
+    // Date, Action, URL Path, Media Type, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
     const values = [[
-      audioEventInfo.humanReadableDate,
-      audioEventInfo.action,
-      audioEventInfo.urlPath,
-      audioEventInfo.country,
-      audioEventInfo.city,
-      audioEventInfo.region,
-      audioEventInfo.sessionId,
-      audioEventInfo.deviceType,
-      audioEventInfo.userAgent,
-      audioEventInfo.screenResolution,
+      mediaEventInfo.humanReadableDate,
+      mediaEventInfo.action,
+      mediaEventInfo.urlPath,
+      mediaEventInfo.mediaType,
+      mediaEventInfo.country,
+      mediaEventInfo.city,
+      mediaEventInfo.region,
+      mediaEventInfo.sessionId,
+      mediaEventInfo.deviceType,
+      mediaEventInfo.userAgent,
+      mediaEventInfo.screenResolution,
     ]];
 
     // Append the data to the sheet
@@ -113,18 +115,18 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         success: true,
-        message: 'Audio event logged successfully'
+        message: 'Media event logged successfully'
       }),
     };
 
   } catch (error) {
-    console.error('Error logging audio event:', error);
+    console.error('Error logging media event:', error);
 
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
-        error: 'Failed to log audio event',
+        error: 'Failed to log media event',
         message: error.message
       }),
     };
