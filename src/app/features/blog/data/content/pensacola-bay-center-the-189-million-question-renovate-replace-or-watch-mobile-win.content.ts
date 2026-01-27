@@ -16,8 +16,8 @@ export const content: ContentBlock[] = [
     data: {
       componentName: 'youtube-player',
       videoId: 'HxkslyU9_2E',
-      title: 'Watch this article on Youtube',
-      description: 'Prefer to watch? Check out the video version of this article.',
+      title: '▶ Watch or Listen to this Article',
+      description: 'Prefer to watch or listen? Click play to check out the video version of this article.',
     },
   },
   {
