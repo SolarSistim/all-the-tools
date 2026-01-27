@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'pensacola-bay-center-the-189-million-question-renovate-replace-or-watch-mobile-win':
+        const bayCenterModule = await import('./pensacola-bay-center-the-189-million-question-renovate-replace-or-watch-mobile-win.content');
+        return bayCenterModule.content;
+
       case 'birthday-freebies-guide-100-deals':
         const birthdayFreebiesModule = await import('./birthday-freebies-are-the-last-bribe-society-offers-you');
         return birthdayFreebiesModule.content;
