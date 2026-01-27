@@ -524,6 +524,15 @@
   cursor: default;
 }
 
+.video-indicator {
+  font-size: 1.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: rgb(239, 68, 68); // Lighter red
+  cursor: default;
+  margin-left: -0.5rem; // Reduce spacing from audio icon by 50%
+}
+
 .article-title {
   margin: 0;
   font-size: 1.23rem;

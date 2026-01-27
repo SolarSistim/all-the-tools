@@ -41,6 +41,7 @@ export interface Article {
   display?: boolean; // Controls visibility on blog listing (defaults to true)
   relatedArticles?: string[]; // Article IDs
   hasAudio?: boolean; // Indicates if article has audio version
+  hasVideo?: boolean; // Indicates if article has video version
   readTime?: number; // Estimated read time in minutes
 }
 
@@ -61,6 +62,7 @@ export interface ArticlePreview {
   featured?: boolean;
   display?: boolean; // Controls visibility on blog listing (defaults to true)
   hasAudio?: boolean; // Indicates if article has audio version
+  hasVideo?: boolean; // Indicates if article has video version
 }
 
 /**

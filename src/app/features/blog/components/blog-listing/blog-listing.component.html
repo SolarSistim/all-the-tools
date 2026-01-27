@@ -220,6 +220,9 @@
               @if (article.hasAudio) {
                 <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
               }
+              @if (article.hasVideo) {
+                <mat-icon class="video-indicator" matTooltip="Watch this article on video">play_circle</mat-icon>
+              }
             </div>
 
             <h3 class="article-title">{{ article.title }}</h3>
@@ -274,6 +277,9 @@
                   <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
                   @if (article.hasAudio) {
                     <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
+                  }
+                  @if (article.hasVideo) {
+                    <mat-icon class="video-indicator" matTooltip="Watch this article on video">play_circle</mat-icon>
                   }
                 </div>
               </div>
