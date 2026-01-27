@@ -17,7 +17,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-26-2026',
     heroImage: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/og-bay-center-189-million-question.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/og-bay-center-189-million-question-02.jpg',
       alt: 'The $189 Million Question: Renovate, Replace, or Watch Mobile Win',
     },
     tags: [
