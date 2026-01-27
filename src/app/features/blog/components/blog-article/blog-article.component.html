@@ -9,7 +9,7 @@
     </nav>
 
     <!-- Article Header -->
-    <header class="article-header">
+    <header class="article-header" [ngClass]="'font-size-' + fontSize">
       <div class="article-meta-top">
         <span class="article-category">{{ article.category }}</span>
         <span class="article-date">{{ formatDate(article.publishedDate) }}</span>
@@ -80,6 +80,22 @@
         [class.active]="fontSize === 'large'"
         class="font-size-btn font-size-large"
         aria-label="Large font size"
+      >
+        A
+      </button>
+      <button
+        (click)="setFontSize('x-large')"
+        [class.active]="fontSize === 'x-large'"
+        class="font-size-btn font-size-x-large"
+        aria-label="X-Large font size"
+      >
+        A
+      </button>
+      <button
+        (click)="setFontSize('xxl')"
+        [class.active]="fontSize === 'xxl'"
+        class="font-size-btn font-size-xxl"
+        aria-label="XXL font size"
       >
         A
       </button>

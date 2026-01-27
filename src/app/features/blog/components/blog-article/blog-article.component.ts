@@ -53,7 +53,7 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   relatedArticles: ArticlePreview[] = [];
   readingTime: number = 0;
   articleUrl: string = '';
-  fontSize: 'small' | 'medium' | 'large' = 'small';
+  fontSize: 'small' | 'medium' | 'large' | 'x-large' | 'xxl' = 'large';
 
   private readonly FONT_SIZE_STORAGE_KEY = 'blog-article-font-size';
 
@@ -173,7 +173,7 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
     });
   }
 
-  setFontSize(size: 'small' | 'medium' | 'large'): void {
+  setFontSize(size: 'small' | 'medium' | 'large' | 'x-large' | 'xxl'): void {
     this.fontSize = size;
     this.saveFontSizePreference(size);
   }
@@ -186,8 +186,8 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
 
     try {
       const savedSize = localStorage.getItem(this.FONT_SIZE_STORAGE_KEY);
-      if (savedSize && (savedSize === 'small' || savedSize === 'medium' || savedSize === 'large')) {
-        this.fontSize = savedSize;
+      if (savedSize && (savedSize === 'small' || savedSize === 'medium' || savedSize === 'large' || savedSize === 'x-large' || savedSize === 'xxl')) {
+        this.fontSize = savedSize as 'small' | 'medium' | 'large' | 'x-large' | 'xxl';
       }
     } catch (error) {
       // LocalStorage might not be available (e.g., private browsing mode)
@@ -195,7 +195,7 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
     }
   }
 
-  private saveFontSizePreference(size: 'small' | 'medium' | 'large'): void {
+  private saveFontSizePreference(size: 'small' | 'medium' | 'large' | 'x-large' | 'xxl'): void {
     // Only access localStorage in browser
     if (!isPlatformBrowser(this.platformId)) {
       return;

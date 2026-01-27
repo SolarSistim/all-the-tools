@@ -181,6 +181,71 @@
   font-size: 1.5rem;
 }
 
+.font-size-x-large {
+  font-size: 1.75rem;
+}
+
+.font-size-xxl {
+  font-size: 2rem;
+}
+
+.article-header {
+  // Small font size
+  &.font-size-small {
+    .article-description {
+      font-size: 1.125rem;
+    }
+
+    .article-tags mat-chip {
+      font-size: 0.875rem !important;
+    }
+  }
+
+  // Medium font size
+  &.font-size-medium {
+    .article-description {
+      font-size: 1.3rem;
+    }
+
+    .article-tags mat-chip {
+      font-size: 0.875rem !important;
+    }
+  }
+
+  // Large font size
+  &.font-size-large {
+    .article-description {
+      font-size: 1.5rem;
+    }
+
+    .article-tags mat-chip {
+      font-size: 0.875rem !important;
+    }
+  }
+
+  // X-Large font size
+  &.font-size-x-large {
+    .article-description {
+      font-size: 1.7rem;
+    }
+
+    .article-tags mat-chip {
+      font-size: 0.875rem !important;
+    }
+  }
+
+  // XXL font size
+  &.font-size-xxl {
+    .article-description {
+      font-size: 1.9rem;
+    }
+
+    .article-tags mat-chip {
+      font-size: 0.875rem !important;
+    }
+  }
+}
+
 .article-body {
   margin: 3rem 0;
 
@@ -337,6 +402,110 @@
 
     ::ng-deep .quote-footer {
       font-size: 1.2rem;
+    }
+  }
+
+  // X-Large font size (fourth button)
+  &.font-size-x-large {
+    ::ng-deep .article-content {
+      font-size: 1.7rem;
+    }
+
+    ::ng-deep .content-paragraph {
+      font-size: 1.7rem;
+
+      &.lead {
+        font-size: 1.85rem;
+      }
+    }
+
+    ::ng-deep h2.content-heading {
+      font-size: 2.75rem;
+    }
+
+    ::ng-deep h3.content-heading {
+      font-size: 2.25rem;
+    }
+
+    ::ng-deep h4.content-heading {
+      font-size: 2rem;
+    }
+
+    ::ng-deep h5.content-heading,
+    ::ng-deep h6.content-heading {
+      font-size: 1.7rem;
+    }
+
+    ::ng-deep .cta-title {
+      font-size: 2.5rem;
+    }
+
+    ::ng-deep .cta-description {
+      font-size: 1.7rem;
+    }
+
+    ::ng-deep .code-content {
+      font-size: 1.25rem;
+    }
+
+    ::ng-deep .quote-text {
+      font-size: 1.7rem;
+    }
+
+    ::ng-deep .quote-footer {
+      font-size: 1.35rem;
+    }
+  }
+
+  // XXL font size (fifth button)
+  &.font-size-xxl {
+    ::ng-deep .article-content {
+      font-size: 1.9rem;
+    }
+
+    ::ng-deep .content-paragraph {
+      font-size: 1.9rem;
+
+      &.lead {
+        font-size: 2.05rem;
+      }
+    }
+
+    ::ng-deep h2.content-heading {
+      font-size: 3rem;
+    }
+
+    ::ng-deep h3.content-heading {
+      font-size: 2.5rem;
+    }
+
+    ::ng-deep h4.content-heading {
+      font-size: 2.25rem;
+    }
+
+    ::ng-deep h5.content-heading,
+    ::ng-deep h6.content-heading {
+      font-size: 1.9rem;
+    }
+
+    ::ng-deep .cta-title {
+      font-size: 2.75rem;
+    }
+
+    ::ng-deep .cta-description {
+      font-size: 1.9rem;
+    }
+
+    ::ng-deep .code-content {
+      font-size: 1.4rem;
+    }
+
+    ::ng-deep .quote-text {
+      font-size: 1.9rem;
+    }
+
+    ::ng-deep .quote-footer {
+      font-size: 1.5rem;
     }
   }
 }
