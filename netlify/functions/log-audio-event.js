@@ -71,7 +71,6 @@ exports.handler = async (event, context) => {
       action: data.action || 'Unknown', // 'expand-play', 'closed-player', 'opened-in-youtube'
       urlPath: data.urlPath || '/',
       mediaType: 'video',
-      videoId: data.videoId || 'Unknown',
       country: geoData?.country?.code || event.headers['x-country'] || 'Unknown',
       city: geoData?.city || 'Unknown',
       region: geoData?.subdivision?.code || 'Unknown',
@@ -95,16 +94,15 @@ exports.handler = async (event, context) => {
 
     // Use the media_plays sheet
     const sheetName = 'media_plays';
-    const range = `${sheetName}!A:L`;
+    const range = `${sheetName}!A:K`;
 
     // Prepare the row data matching the headers:
-    // Date, Media Type, Action, URL Path, Video ID, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
+    // Date, Media Type, Action, URL Path, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
     const values = [[
       videoEventInfo.humanReadableDate,
       videoEventInfo.mediaType,
       videoEventInfo.action,
       videoEventInfo.urlPath,
-      videoEventInfo.videoId,
       videoEventInfo.country,
       videoEventInfo.city,
       videoEventInfo.region,
