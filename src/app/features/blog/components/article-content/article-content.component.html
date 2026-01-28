@@ -136,6 +136,7 @@
     <app-audio-player
       *ngIf="block.type === 'audio'"
       [src]="block.data.src"
+      [embedUrl]="block.data.embedUrl"
       [title]="block.data.title"
       [description]="block.data.description"
     ></app-audio-player>

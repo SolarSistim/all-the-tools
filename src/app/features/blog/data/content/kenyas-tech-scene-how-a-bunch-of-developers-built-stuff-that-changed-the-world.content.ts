@@ -5,14 +5,6 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/c67a9cd3-a1cb-471e-98cb-bd0eaba5664e/kenyastechscenehowabunchofdevelopersbuiltstuffthatchangedtheworld.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'paragraph',
     data: {
       text: 'Look, I\'ll be honest—when most people think "global tech hubs," their minds jump straight to San Francisco or maybe Singapore. Kenya? Not so much. But here\'s the thing: some of the most consequential digital tools of the last two decades came out of Nairobi. And nobody really talks about it.',

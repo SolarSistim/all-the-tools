@@ -74,14 +74,14 @@ export class YoutubePlayerComponent implements OnInit {
 
   expandPlayer(): void {
     this.isExpanded = true;
-    // Log expand event
-    this.visitLogger.logVideoEvent('expand', this.location.path(), this.videoId);
+    // Log play event (video auto-plays when expanded)
+    this.visitLogger.logVideoEvent('play', this.location.path(), this.videoId);
   }
 
   collapsePlayer(): void {
     this.isExpanded = false;
-    // Log collapse event
-    this.visitLogger.logVideoEvent('collapse', this.location.path(), this.videoId);
+    // Log pause event (closing player stops video)
+    this.visitLogger.logVideoEvent('pause', this.location.path(), this.videoId);
   }
 
   openInYouTube(): void {

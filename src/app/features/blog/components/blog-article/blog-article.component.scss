@@ -144,6 +144,10 @@
   font-weight: 600;
   color: var(--text-secondary);
   margin-right: 0.5rem;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 }
 
 .font-size-btn {

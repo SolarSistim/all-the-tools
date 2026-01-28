@@ -299,12 +299,13 @@ export interface VideoBlock extends ContentBlock {
 }
 
 /**
- * Audio block (MP3 player)
+ * Audio block (MP3 player or embed)
  */
 export interface AudioBlock extends ContentBlock {
   type: 'audio';
   data: {
-    src: string;
+    src?: string;
+    embedUrl?: string;
     title?: string;
     description?: string;
   };

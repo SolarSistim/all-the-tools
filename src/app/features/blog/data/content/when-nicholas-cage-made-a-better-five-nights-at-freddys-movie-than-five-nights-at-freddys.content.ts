@@ -5,14 +5,6 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/d48acd8a-41a1-4568-89b0-6e29cada92da/nicholascagewillyswonderland.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'paragraph',
     data: {
       text: 'Here\'s the deal - Willy\'s Wonderland shouldn\'t work. A mute Nicolas Cage fighting possessed Chuck E. Cheese knockoffs in a single location over one night, armed primarily with duct tape and unshakeable commitment to his custodial contract? That premise screams "direct-to-DVD garbage fire." And yet somehow, against all odds and good taste, it delivers.',

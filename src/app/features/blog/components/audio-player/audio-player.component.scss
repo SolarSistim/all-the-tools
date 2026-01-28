@@ -55,6 +55,55 @@
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
+.audiomack-embed-container {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+
+  iframe {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+}
+
+.close-btn-embed {
+  width: 100%;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(239, 68, 68);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .close-text {
+    display: inline;
+  }
+}
+
 .preview-container {
   width: 100%;
   margin-bottom: 1rem;

@@ -5,14 +5,6 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/04ab562a-acbe-4708-a8ab-ae219609ba78/goodfaithtimberbuyers.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'heading',
     data: {
       level: 2,

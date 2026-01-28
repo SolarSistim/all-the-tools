@@ -5,14 +5,6 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/f4b81f9d-e959-44a9-a520-cde07f00da68/pensaconrespondsinsidetheuphillbattletosavepensacolasbiggestconvention.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'paragraph',
     data: {
       text: 'Something unexpected happened after that critical article about Pensacon.',

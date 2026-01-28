@@ -5,18 +5,19 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/e33b2d36-9d76-4fbb-9d22-baa0413621b3/whypensaconhasgonedownhill.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'paragraph',
     data: {
       text: '<strong>Editor\'s Note:</strong> Following the publication of this article, Pensacon\'s media director Julio Diaz engaged in an extensive Reddit AMA addressing these concerns. <a href="/blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention">Read the follow-up: Pensacon Responds: Inside the Uphill Battle to Save Pensacola\'s Biggest Convention</a>',
       className: 'lead',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'youtube-player',
+      videoId: 'tKVlbvXfL4c',
+      title: '▶ Watch or Listen to this Article',
+      description: 'Prefer to watch or listen? Click play to check out the video version of this article.',
     },
   },
   {

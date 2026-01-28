@@ -5,14 +5,6 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
-    type: 'audio',
-    data: {
-      src: 'https://5l50ubfz3u.ucarecd.net/62fd4f18-df9e-4cc3-8b11-286be25eb208/whyyourchildhoodtvhabitsmightbeomceaprofessionalcredential.mp3',
-      title: 'Listen to this article',
-      description: 'Prefer to listen? Play the audio version of this article.',
-    },
-  },
-  {
     type: 'paragraph',
     data: {
       text: 'Here\'s something nobody\'s talking about yet.',

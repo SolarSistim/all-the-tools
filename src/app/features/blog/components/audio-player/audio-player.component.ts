@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { VisitLoggerService } from '../../../../core/services/visit-logger.service';
 
 /**
  * Audio Player Component
- * Displays an audio player with waveform visualization for MP3 files
+ * Displays an audio player with waveform visualization for MP3 files or Audiomack embed
  */
 @Component({
   selector: 'app-audio-player',
@@ -15,6 +16,7 @@ import { VisitLoggerService } from '../../../../core/services/visit-logger.servi
 })
 export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() src: string = '';
+  @Input() embedUrl?: string;
   @Input() title?: string;
   @Input() description?: string;
 
@@ -24,10 +26,12 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private visitLogger = inject(VisitLoggerService);
   private location = inject(Location);
+  private sanitizer = inject(DomSanitizer);
 
   isPlaying = false;
   currentTime = 0;
   duration = 0;
+  safeEmbedUrl: SafeResourceUrl | null = null;
   isLoading = true;
   error = false;
   isLoadingWaveform = true;
@@ -43,7 +47,14 @@ export class AudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
   private isInitialized = false;
 
   ngOnInit(): void {
-    // Validate src input
+    // If embedUrl is provided, sanitize it
+    if (this.embedUrl) {
+      this.safeEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.embedUrl);
+      this.isLoading = false;
+      return;
+    }
+
+    // Validate src input for custom player
     if (!this.src) {
       this.error = true;
       this.isLoading = false;
