@@ -151,9 +151,9 @@ export class VisitLoggerService {
   }
 
   /**
-   * Log a video player event (play/pause/open_youtube)
+   * Log a video player event (expand-play/closed-player/opened-in-youtube)
    */
-  logVideoEvent(action: 'play' | 'pause' | 'open_youtube', urlPath: string, videoId: string): void {
+  logVideoEvent(action: 'expand-play' | 'closed-player' | 'opened-in-youtube', urlPath: string, videoId: string): void {
     // Only run in browser
     if (!isPlatformBrowser(this.platformId)) {
       return;
@@ -205,7 +205,7 @@ export class VisitLoggerService {
   /**
    * Send video event data to the Netlify function
    */
-  private async sendVideoEventLog(action: 'play' | 'pause' | 'open_youtube', urlPath: string, videoId: string): Promise<void> {
+  private async sendVideoEventLog(action: 'expand-play' | 'closed-player' | 'opened-in-youtube', urlPath: string, videoId: string): Promise<void> {
     try {
       const videoEventData = {
         action: action,

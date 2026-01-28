@@ -1,5 +1,5 @@
 // Netlify Function: log-audio-event
-// This function logs media player events (audio/video play/pause) to Google Sheets
+// This function logs video player events to Google Sheets
 
 const { google } = require('googleapis');
 
@@ -44,8 +44,20 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Extract media event information
-    const mediaEventInfo = {
+    // Only accept video events
+    if (data.mediaType !== 'video') {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({
+          error: 'Only video events are logged',
+          message: 'This function only accepts video player events'
+        }),
+      };
+    }
+
+    // Extract video event information
+    const videoEventInfo = {
       humanReadableDate: new Date().toLocaleString('en-US', {
         timeZone: 'America/Chicago',
         year: 'numeric',
@@ -56,9 +68,10 @@ exports.handler = async (event, context) => {
         second: '2-digit',
         hour12: true
       }),
-      action: data.action || 'Unknown', // 'play' or 'pause'
+      action: data.action || 'Unknown', // 'expand-play', 'closed-player', 'opened-in-youtube'
       urlPath: data.urlPath || '/',
-      mediaType: data.mediaType || 'audio', // 'audio' or 'video'
+      mediaType: 'video',
+      videoId: data.videoId || 'Unknown',
       country: geoData?.country?.code || event.headers['x-country'] || 'Unknown',
       city: geoData?.city || 'Unknown',
       region: geoData?.subdivision?.code || 'Unknown',
@@ -82,22 +95,23 @@ exports.handler = async (event, context) => {
 
     // Use the media_plays sheet
     const sheetName = 'media_plays';
-    const range = `${sheetName}!A:K`;
+    const range = `${sheetName}!A:L`;
 
     // Prepare the row data matching the headers:
-    // Date, Media Type, Action, URL Path, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
+    // Date, Media Type, Action, URL Path, Video ID, Country, City, Region, Session ID, Device Type, User Agent, Screen Resolution
     const values = [[
-      mediaEventInfo.humanReadableDate,
-      mediaEventInfo.mediaType,
-      mediaEventInfo.action,
-      mediaEventInfo.urlPath,
-      mediaEventInfo.country,
-      mediaEventInfo.city,
-      mediaEventInfo.region,
-      mediaEventInfo.sessionId,
-      mediaEventInfo.deviceType,
-      mediaEventInfo.userAgent,
-      mediaEventInfo.screenResolution,
+      videoEventInfo.humanReadableDate,
+      videoEventInfo.mediaType,
+      videoEventInfo.action,
+      videoEventInfo.urlPath,
+      videoEventInfo.videoId,
+      videoEventInfo.country,
+      videoEventInfo.city,
+      videoEventInfo.region,
+      videoEventInfo.sessionId,
+      videoEventInfo.deviceType,
+      videoEventInfo.userAgent,
+      videoEventInfo.screenResolution,
     ]];
 
     // Append the data to the sheet
@@ -115,18 +129,18 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         success: true,
-        message: 'Media event logged successfully'
+        message: 'Video event logged successfully'
       }),
     };
 
   } catch (error) {
-    console.error('Error logging media event:', error);
+    console.error('Error logging video event:', error);
 
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({
-        error: 'Failed to log media event',
+        error: 'Failed to log video event',
         message: error.message
       }),
     };
