@@ -66,7 +66,8 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
 
     if (article) {
       this.article = article;
-      this.readingTime = this.blogService.calculateReadingTime(article);
+      // Use pre-calculated readTime from build script if available, otherwise calculate
+      this.readingTime = article.readTime || this.blogService.calculateReadingTime(article);
       this.articleUrl = this.blogService.getArticleUrl(article.slug);
       this.updateMetaTags();
       this.updateStructuredData();
@@ -91,7 +92,8 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
 
         if (newArticle.id !== this.article?.id) {
           this.article = newArticle;
-          this.readingTime = this.blogService.calculateReadingTime(newArticle);
+          // Use pre-calculated readTime from build script if available, otherwise calculate
+          this.readingTime = newArticle.readTime || this.blogService.calculateReadingTime(newArticle);
           this.articleUrl = this.blogService.getArticleUrl(newArticle.slug);
           this.updateMetaTags();
           this.updateStructuredData();

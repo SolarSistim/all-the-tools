@@ -63,6 +63,7 @@
   border-radius: 8px;
   overflow: hidden;
   background-color: #000;
+  border: 1px solid var(--border-color);
 
   iframe {
     position: absolute;

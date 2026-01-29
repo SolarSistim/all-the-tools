@@ -37,16 +37,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'paragraph',
-    data: {
-      text: 'According to the National Weather Service, there have been more than 80 documented snowfall instances in Florida since 1886, but the vast majority were trace amounts that melted on contact. Record-shattering accumulation two years running? That\'s uncharted territory.',
-    },
-  },
-  {
     type: 'component',
     data: {
       componentName: 'email-cta',
       darkThemeBg: 'primary',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'According to the National Weather Service, there have been more than 80 documented snowfall instances in Florida since 1886, but the vast majority were trace amounts that melted on contact. Record-shattering accumulation two years running? That\'s uncharted territory.',
     },
   },
   {
@@ -113,16 +113,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'paragraph',
-    data: {
-      text: 'The infrastructure reality hit hard too. A Reddit user put it plainly: "It\'s serious for southern states when they get snow like this. They have no equip to remove it. The interstate will be ruts that keep your wheels locked into them."',
-    },
-  },
-  {
     type: 'component',
     data: {
       componentName: 'email-cta',
       darkThemeBg: 'primary',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The infrastructure reality hit hard too. A Reddit user put it plainly: "It\'s serious for southern states when they get snow like this. They have no equip to remove it. The interstate will be ruts that keep your wheels locked into them."',
     },
   },
   {
