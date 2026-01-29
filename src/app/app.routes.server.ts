@@ -54,6 +54,64 @@ export const serverRoutes: ServerRoute[] = [
     }
   },
   {
+    path: 'tools/base-number-converter/:pair',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      // Return all base number conversion pair slugs for prerendering
+      return [
+        // Binary conversions (most popular)
+        { pair: 'binary-to-decimal' },
+        { pair: 'decimal-to-binary' },
+        { pair: 'binary-to-hexadecimal' },
+        { pair: 'hexadecimal-to-binary' },
+        { pair: 'binary-to-octal' },
+        { pair: 'octal-to-binary' },
+        // Hexadecimal conversions
+        { pair: 'decimal-to-hexadecimal' },
+        { pair: 'hexadecimal-to-decimal' },
+        { pair: 'octal-to-hexadecimal' },
+        { pair: 'hexadecimal-to-octal' },
+        // Octal conversions
+        { pair: 'decimal-to-octal' },
+        { pair: 'octal-to-decimal' },
+        // Duodecimal conversions
+        { pair: 'decimal-to-duodecimal' },
+        { pair: 'duodecimal-to-decimal' },
+        { pair: 'binary-to-duodecimal' },
+        { pair: 'duodecimal-to-binary' },
+        { pair: 'octal-to-duodecimal' },
+        { pair: 'duodecimal-to-octal' },
+        { pair: 'hexadecimal-to-duodecimal' },
+        { pair: 'duodecimal-to-hexadecimal' },
+        // Base-36 conversions
+        { pair: 'decimal-to-base36' },
+        { pair: 'base36-to-decimal' },
+        { pair: 'binary-to-base36' },
+        { pair: 'base36-to-binary' },
+        { pair: 'octal-to-base36' },
+        { pair: 'base36-to-octal' },
+        { pair: 'hexadecimal-to-base36' },
+        { pair: 'base36-to-hexadecimal' },
+        { pair: 'duodecimal-to-base36' },
+        { pair: 'base36-to-duodecimal' },
+      ];
+    }
+  },
+  {
+    path: 'tools/percentage-calculator/:variant',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      // Return all percentage calculator variant slugs for prerendering
+      return [
+        { variant: 'percentage-increase-decrease' },
+        { variant: 'discount-calculator' },
+        { variant: 'tax-calculator' },
+        { variant: 'profit-margin' },
+        { variant: 'markup-calculator' },
+      ];
+    }
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender
   }

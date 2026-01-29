@@ -1,6 +1,8 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,10 +39,13 @@ import { RelatedBlogPosts } from '../../../reusable-components/related-blog-post
   templateUrl: './base-number-converter.html',
   styleUrl: './base-number-converter.scss'
 })
-export class BaseNumberConverterComponent implements OnInit {
+export class BaseNumberConverterComponent implements OnInit, OnDestroy {
   private baseService = inject(BaseNumberService);
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private destroy$ = new Subject<void>();
 
   input = signal<string>('');
   fromBase = signal<number>(10);
@@ -54,6 +59,36 @@ export class BaseNumberConverterComponent implements OnInit {
   extraBases = this.baseService.getExtraBases();
   allBasesArray = computed(() => this.baseService.getSupportedBases());
 
+  // Mapping between URL slugs and base numbers
+  private readonly baseSlugMap: Record<string, number> = {
+    'binary': 2,
+    'octal': 8,
+    'decimal': 10,
+    'duodecimal': 12,
+    'hexadecimal': 16,
+    'base36': 36
+  };
+
+  // Reverse mapping for generating URLs
+  private readonly baseNumberMap: Record<number, string> = {
+    2: 'binary',
+    8: 'octal',
+    10: 'decimal',
+    12: 'duodecimal',
+    16: 'hexadecimal',
+    36: 'base36'
+  };
+
+  // Example values for each base (for variant pages)
+  private readonly exampleValues: Record<number, string> = {
+    2: '11010110',      // Binary: 214 in decimal
+    8: '326',           // Octal: 214 in decimal
+    10: '214',          // Decimal: 214
+    12: '15A',          // Duodecimal: 214 in decimal
+    16: 'D6',           // Hexadecimal: 214 in decimal
+    36: '5Y'            // Base-36: 214 in decimal
+  };
+
   relatedBlogPosts = [
     {
       title: 'Base Number Converter Tutorial: How to Convert Between Binary, Octal, Decimal, and Hex',
@@ -62,23 +97,134 @@ export class BaseNumberConverterComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.updateMetaTags();
+    // Handle route parameter changes
+    this.route.paramMap.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
+      const pairParam = params.get('pair');
+      if (pairParam) {
+        this.handlePairRoute(pairParam);
+      } else {
+        // Default: decimal to binary
+        this.setDefaults();
+      }
+      this.updateMetaTags();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  /**
+   * Set default values (base page, no pair parameter)
+   */
+  private setDefaults(): void {
+    this.fromBase.set(10);
+    this.toBase.set(2);
+  }
+
+  /**
+   * Parse route parameter and set bases accordingly
+   * Example: "binary-to-decimal" -> fromBase: 2, toBase: 10
+   * Also sets an example input value for variant pages
+   */
+  private handlePairRoute(pair: string): void {
+    const parts = pair.split('-to-');
+    if (parts.length !== 2) {
+      this.setDefaults();
+      return;
+    }
+
+    const [fromSlug, toSlug] = parts;
+    const fromBaseNum = this.baseSlugMap[fromSlug];
+    const toBaseNum = this.baseSlugMap[toSlug];
+
+    if (fromBaseNum && toBaseNum) {
+      this.fromBase.set(fromBaseNum);
+      this.toBase.set(toBaseNum);
+
+      // Set example input value for this base and trigger conversion
+      const exampleValue = this.exampleValues[fromBaseNum];
+      if (exampleValue) {
+        this.input.set(exampleValue);
+        // Trigger conversion after a short delay to ensure component is ready
+        setTimeout(() => this.onInputChange(), 0);
+      }
+    } else {
+      this.setDefaults();
+    }
   }
 
   private updateMetaTags(): void {
+    const fromBaseName = this.getBaseLabel(this.fromBase());
+    const toBaseName = this.getBaseLabel(this.toBase());
+    const fromSlug = this.baseNumberMap[this.fromBase()];
+    const toSlug = this.baseNumberMap[this.toBase()];
+
+    // Check if this is a variant page (has specific pair)
+    const pairParam = this.route.snapshot.paramMap.get('pair');
+    const isVariant = !!pairParam;
+
+    let title: string;
+    let description: string;
+    let url: string;
+    let image: string;
+
+    if (isVariant && fromSlug && toSlug) {
+      // Dynamic meta for variant pages
+      title = `${fromBaseName} to ${toBaseName} Converter | Fast & Private | AllTheThings`;
+      description = `Convert ${fromBaseName.toLowerCase()} (base-${this.fromBase()}) to ${toBaseName.toLowerCase()} (base-${this.toBase()}) instantly. Free, fast, and private number system converter.`;
+      url = `https://www.allthethings.dev/tools/base-number-converter/${fromSlug}-to-${toSlug}`;
+      image = `https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/og-${fromSlug}-to-${toSlug}.jpg`;
+    } else {
+      // Default meta for base page
+      title = 'Base Number Converter - Convert Between Number Systems';
+      description = 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36. Supports large integers and live conversion.';
+      url = 'https://www.allthethings.dev/tools/base-number-converter';
+      image = 'https://www.allthethings.dev/meta-images/og-base-number-converter.png';
+    }
+
     this.metaService.updateTags({
-      title: 'Base Number Converter - Convert Between Number Systems',
-      description: 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36. Supports large integers and live conversion.',
-      keywords: ['base converter', 'number system converter', 'binary', 'hex', 'decimal', 'octal', 'base conversion'],
-      image: 'https://www.allthethings.dev/meta-images/og-base-number-converter.png',
-      url: 'https://www.allthethings.dev/tools/base-number-converter',
+      title,
+      description,
+      keywords: ['base converter', 'number system converter', 'binary', 'hex', 'decimal', 'octal', 'base conversion', fromBaseName.toLowerCase(), toBaseName.toLowerCase()],
+      image,
+      url,
       jsonLd: this.metaService.buildToolJsonLd({
-        name: 'Base Number Converter - Convert Between Number Systems',
-        description: 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36. Supports large integers and live conversion.',
-        url: 'https://www.allthethings.dev/tools/base-number-converter',
-        image: 'https://www.allthethings.dev/meta-images/og-base-number-converter.png'
+        name: title,
+        description,
+        url,
+        image
       })
     });
+  }
+
+  /**
+   * Get page title for display
+   */
+  getPageTitle(): string {
+    const pairParam = this.route.snapshot.paramMap.get('pair');
+    if (pairParam) {
+      const fromBaseName = this.getBaseLabel(this.fromBase());
+      const toBaseName = this.getBaseLabel(this.toBase());
+      return `${fromBaseName} to ${toBaseName} Converter`;
+    }
+    return 'Base Number Converter';
+  }
+
+  /**
+   * Get page description for display
+   */
+  getPageDescription(): string {
+    const pairParam = this.route.snapshot.paramMap.get('pair');
+    if (pairParam) {
+      const fromBaseName = this.getBaseLabel(this.fromBase());
+      const toBaseName = this.getBaseLabel(this.toBase());
+      return `Convert ${fromBaseName.toLowerCase()} (base-${this.fromBase()}) to ${toBaseName.toLowerCase()} (base-${this.toBase()}) instantly.`;
+    }
+    return 'Convert numbers between binary, octal, decimal, duodecimal, hexadecimal, and base 36. Supports large integers and live conversion.';
   }
 
   onInputChange(): void {
@@ -111,11 +257,26 @@ export class BaseNumberConverterComponent implements OnInit {
   }
 
   onFromBaseChange(): void {
+    this.updateRouteForBases();
     this.onInputChange();
   }
 
   onToBaseChange(): void {
+    this.updateRouteForBases();
     this.onInputChange();
+  }
+
+  /**
+   * Update the URL when bases change (if both bases have valid slugs)
+   */
+  private updateRouteForBases(): void {
+    const fromSlug = this.baseNumberMap[this.fromBase()];
+    const toSlug = this.baseNumberMap[this.toBase()];
+
+    if (fromSlug && toSlug) {
+      const newUrl = `/tools/base-number-converter/${fromSlug}-to-${toSlug}`;
+      this.router.navigate([newUrl], { replaceUrl: true });
+    }
   }
 
   swapBases(): void {

@@ -485,9 +485,106 @@ export class ToolsService {
     { from: 'Knots', to: 'mph', fromSlug: 'knot', toSlug: 'milePerHour', category: 'speed', description: 'Convert maritime/aviation knots to miles per hour for sailing and flight.' },
   ];
 
+  /**
+   * Base number conversion pairs for programmatic SEO
+   */
+  private baseNumberPairs: Array<{
+    from: string;
+    to: string;
+    fromBase: number;
+    toBase: number;
+    fromSlug: string;
+    toSlug: string;
+    description: string;
+    featured?: boolean;
+  }> = [
+    // Binary conversions (most popular)
+    { from: 'Binary', to: 'Decimal', fromBase: 2, toBase: 10, fromSlug: 'binary', toSlug: 'decimal', description: 'Convert binary (base-2) numbers to decimal (base-10). Essential for programmers and computer science students.', featured: true },
+    { from: 'Decimal', to: 'Binary', fromBase: 10, toBase: 2, fromSlug: 'decimal', toSlug: 'binary', description: 'Convert decimal numbers to binary. Perfect for learning computer science and digital electronics.', featured: true },
+    { from: 'Binary', to: 'Hexadecimal', fromBase: 2, toBase: 16, fromSlug: 'binary', toSlug: 'hexadecimal', description: 'Convert binary to hex (base-16) for compact representation. Used in programming and color codes.', featured: true },
+    { from: 'Hexadecimal', to: 'Binary', fromBase: 16, toBase: 2, fromSlug: 'hexadecimal', toSlug: 'binary', description: 'Convert hexadecimal to binary. Essential for low-level programming and debugging.', featured: true },
+    { from: 'Binary', to: 'Octal', fromBase: 2, toBase: 8, fromSlug: 'binary', toSlug: 'octal', description: 'Convert binary to octal (base-8). Useful for Unix permissions and legacy systems.', featured: true },
+    { from: 'Octal', to: 'Binary', fromBase: 8, toBase: 2, fromSlug: 'octal', toSlug: 'binary', description: 'Convert octal to binary. Common in file permissions and system programming.', featured: true },
+
+    // Hexadecimal conversions (very popular)
+    { from: 'Decimal', to: 'Hexadecimal', fromBase: 10, toBase: 16, fromSlug: 'decimal', toSlug: 'hexadecimal', description: 'Convert decimal to hex. Essential for color codes, memory addresses, and programming.', featured: true },
+    { from: 'Hexadecimal', to: 'Decimal', fromBase: 16, toBase: 10, fromSlug: 'hexadecimal', toSlug: 'decimal', description: 'Convert hex to decimal. Used in web development, debugging, and data analysis.', featured: true },
+    { from: 'Octal', to: 'Hexadecimal', fromBase: 8, toBase: 16, fromSlug: 'octal', toSlug: 'hexadecimal', description: 'Convert octal to hexadecimal for more compact number representation.', featured: true },
+    { from: 'Hexadecimal', to: 'Octal', fromBase: 16, toBase: 8, fromSlug: 'hexadecimal', toSlug: 'octal', description: 'Convert hex to octal. Useful for Unix file permissions and system programming.', featured: true },
+
+    // Octal conversions
+    { from: 'Decimal', to: 'Octal', fromBase: 10, toBase: 8, fromSlug: 'decimal', toSlug: 'octal', description: 'Convert decimal to octal (base-8). Used in Unix/Linux file permissions.', featured: true },
+    { from: 'Octal', to: 'Decimal', fromBase: 8, toBase: 10, fromSlug: 'octal', toSlug: 'decimal', description: 'Convert octal to decimal. Decode Unix permissions and legacy system values.', featured: true },
+
+    // Duodecimal conversions (less common but useful)
+    { from: 'Decimal', to: 'Duodecimal', fromBase: 10, toBase: 12, fromSlug: 'decimal', toSlug: 'duodecimal', description: 'Convert decimal to duodecimal (base-12). Used in measurements and alternative math systems.' },
+    { from: 'Duodecimal', to: 'Decimal', fromBase: 12, toBase: 10, fromSlug: 'duodecimal', toSlug: 'decimal', description: 'Convert duodecimal (base-12) to decimal. Decode dozenal number representations.' },
+    { from: 'Binary', to: 'Duodecimal', fromBase: 2, toBase: 12, fromSlug: 'binary', toSlug: 'duodecimal', description: 'Convert binary to duodecimal (base-12) for alternative number system exploration.' },
+    { from: 'Duodecimal', to: 'Binary', fromBase: 12, toBase: 2, fromSlug: 'duodecimal', toSlug: 'binary', description: 'Convert duodecimal to binary representation.' },
+    { from: 'Octal', to: 'Duodecimal', fromBase: 8, toBase: 12, fromSlug: 'octal', toSlug: 'duodecimal', description: 'Convert octal to duodecimal (base-12) numbers.' },
+    { from: 'Duodecimal', to: 'Octal', fromBase: 12, toBase: 8, fromSlug: 'duodecimal', toSlug: 'octal', description: 'Convert duodecimal to octal representation.' },
+    { from: 'Hexadecimal', to: 'Duodecimal', fromBase: 16, toBase: 12, fromSlug: 'hexadecimal', toSlug: 'duodecimal', description: 'Convert hexadecimal to duodecimal (base-12).' },
+    { from: 'Duodecimal', to: 'Hexadecimal', fromBase: 12, toBase: 16, fromSlug: 'duodecimal', toSlug: 'hexadecimal', description: 'Convert duodecimal to hexadecimal representation.' },
+
+    // Base-36 conversions (alphanumeric encoding)
+    { from: 'Decimal', to: 'Base-36', fromBase: 10, toBase: 36, fromSlug: 'decimal', toSlug: 'base36', description: 'Convert decimal to base-36 (alphanumeric). Used in URL shortening and compact IDs.' },
+    { from: 'Base-36', to: 'Decimal', fromBase: 36, toBase: 10, fromSlug: 'base36', toSlug: 'decimal', description: 'Convert base-36 to decimal. Decode short URLs and alphanumeric identifiers.' },
+    { from: 'Binary', to: 'Base-36', fromBase: 2, toBase: 36, fromSlug: 'binary', toSlug: 'base36', description: 'Convert binary to base-36 for compact alphanumeric encoding.' },
+    { from: 'Base-36', to: 'Binary', fromBase: 36, toBase: 2, fromSlug: 'base36', toSlug: 'binary', description: 'Convert base-36 to binary representation.' },
+    { from: 'Octal', to: 'Base-36', fromBase: 8, toBase: 36, fromSlug: 'octal', toSlug: 'base36', description: 'Convert octal to base-36 alphanumeric encoding.' },
+    { from: 'Base-36', to: 'Octal', fromBase: 36, toBase: 8, fromSlug: 'base36', toSlug: 'octal', description: 'Convert base-36 to octal representation.' },
+    { from: 'Hexadecimal', to: 'Base-36', fromBase: 16, toBase: 36, fromSlug: 'hexadecimal', toSlug: 'base36', description: 'Convert hex to base-36. Useful for compact alphanumeric encoding.' },
+    { from: 'Base-36', to: 'Hexadecimal', fromBase: 36, toBase: 16, fromSlug: 'base36', toSlug: 'hexadecimal', description: 'Convert base-36 to hexadecimal representation.' },
+    { from: 'Duodecimal', to: 'Base-36', fromBase: 12, toBase: 36, fromSlug: 'duodecimal', toSlug: 'base36', description: 'Convert duodecimal to base-36 encoding.' },
+    { from: 'Base-36', to: 'Duodecimal', fromBase: 36, toBase: 12, fromSlug: 'base36', toSlug: 'duodecimal', description: 'Convert base-36 to duodecimal representation.' },
+  ];
+
+  /**
+   * Percentage calculator variants for programmatic SEO
+   */
+  private percentageCalculatorVariants: Array<{
+    slug: string;
+    name: string;
+    description: string;
+    featured?: boolean;
+  }> = [
+    {
+      slug: 'percentage-increase-decrease',
+      name: 'Percentage Increase/Decrease Calculator',
+      description: 'Calculate percentage increase or decrease between two values. Perfect for measuring growth rates, price changes, and comparing values over time.',
+      featured: true
+    },
+    {
+      slug: 'discount-calculator',
+      name: 'Discount Calculator',
+      description: 'Calculate final price after discount. Find out how much you save with percentage discounts on any purchase.',
+      featured: true
+    },
+    {
+      slug: 'tax-calculator',
+      name: 'Sales Tax Calculator',
+      description: 'Calculate sales tax amount and total price. Add tax percentage to any purchase to find the final cost.',
+      featured: true
+    },
+    {
+      slug: 'profit-margin',
+      name: 'Profit Margin Calculator',
+      description: 'Calculate profit margin percentage from cost and revenue. Essential for business pricing and profitability analysis.',
+      featured: true
+    },
+    {
+      slug: 'markup-calculator',
+      name: 'Markup Calculator',
+      description: 'Calculate selling price from cost and markup percentage. Determine the right pricing for products and services.',
+      featured: true
+    }
+  ];
+
   constructor() {
     // Generate conversion pair tools and add them to the main tools array
     this.generateConversionPairTools();
+    this.generateBaseNumberPairTools();
+    this.generatePercentageCalculatorVariantTools();
   }
 
   /**
@@ -535,6 +632,72 @@ export class ToolsService {
   }
 
   /**
+   * Generate Tool objects for each base number conversion pair
+   */
+  private generateBaseNumberPairTools(): void {
+    const baseNumberTools: Tool[] = this.baseNumberPairs.map(pair => {
+      // Convert slugs to kebab-case for URLs
+      const fromSlugKebab = this.toKebabCase(pair.fromSlug);
+      const toSlugKebab = this.toKebabCase(pair.toSlug);
+
+      return {
+        id: `base-number-converter-${fromSlugKebab}-to-${toSlugKebab}`,
+        name: `${pair.from} to ${pair.to} Converter`,
+        description: pair.description,
+        category: 'math' as ToolCategory,
+        icon: 'calculate',
+        route: `base-number-converter/${fromSlugKebab}-to-${toSlugKebab}`,
+        featured: pair.featured || false,
+        tags: [
+          'converter',
+          'base',
+          'number',
+          'math',
+          'programming',
+          fromSlugKebab,
+          toSlugKebab,
+          `${fromSlugKebab} to ${toSlugKebab}`,
+          `base ${pair.fromBase}`,
+          `base ${pair.toBase}`
+        ],
+        available: true
+      };
+    });
+
+    // Add base number conversion tools to the main tools array
+    this.tools.push(...baseNumberTools);
+  }
+
+  /**
+   * Generate Tool objects for each percentage calculator variant
+   */
+  private generatePercentageCalculatorVariantTools(): void {
+    const percentageTools: Tool[] = this.percentageCalculatorVariants.map(variant => {
+      return {
+        id: `percentage-calculator-${variant.slug}`,
+        name: variant.name,
+        description: variant.description,
+        category: 'math' as ToolCategory,
+        icon: 'percent',
+        route: `percentage-calculator/${variant.slug}`,
+        featured: variant.featured || false,
+        tags: [
+          'calculator',
+          'percentage',
+          'math',
+          'finance',
+          variant.slug,
+          ...variant.slug.split('-')
+        ],
+        available: true
+      };
+    });
+
+    // Add percentage calculator tools to the main tools array
+    this.tools.push(...percentageTools);
+  }
+
+  /**
    * Get all tools
    */
   getAllTools(): Tool[] {
@@ -558,10 +721,12 @@ export class ToolsService {
   }
 
   /**
-   * Check if a tool is a conversion pair
+   * Check if a tool is a variant (unit converter, base number converter, or percentage calculator)
    */
   private isConversionPair(tool: Tool): boolean {
-    return tool.id.startsWith('unit-converter-');
+    return tool.id.startsWith('unit-converter-') ||
+           tool.id.startsWith('base-number-converter-') ||
+           tool.id.startsWith('percentage-calculator-');
   }
 
   /**

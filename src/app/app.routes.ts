@@ -53,6 +53,11 @@ export const routes: Routes = [
     title: 'Percentage Calculator - All The Things'
   },
   {
+    path: 'tools/percentage-calculator/:variant',
+    loadComponent: () => import('./features/tools/math-and-calculators/percentage-calculator/percentage-calculator').then(m => m.PercentageCalculatorComponent),
+    title: 'Percentage Calculator - All The Things'
+  },
+  {
     path: 'presskit',
     loadComponent: () => import('./features/presskit/presskit').then(m => m.Presskit),
     title: 'All The Tools - Presskit'
@@ -74,6 +79,11 @@ export const routes: Routes = [
   },
   {
     path: 'tools/base-number-converter',
+    loadComponent: () => import('./features/tools/math-and-calculators/base-number-converter/base-number-converter').then(m => m.BaseNumberConverterComponent),
+    title: 'Base Number Converter - All The Things'
+  },
+  {
+    path: 'tools/base-number-converter/:pair',
     loadComponent: () => import('./features/tools/math-and-calculators/base-number-converter/base-number-converter').then(m => m.BaseNumberConverterComponent),
     title: 'Base Number Converter - All The Things'
   },

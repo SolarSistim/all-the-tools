@@ -6,25 +6,10 @@
         <div class="hero-icon-wrapper">
           <mat-icon class="hero-icon">percent</mat-icon>
         </div>
-        <h1 class="hero-title">Percentage Calculator</h1>
+        <h1 class="hero-title">{{ getPageTitle() }}</h1>
         <p class="hero-subtitle">
-          Calculate percentages instantly with precision and ease. Perfect for discounts,
-          tips, taxes, grades, and financial calculations. Get accurate results in real-time.
+          {{ getPageDescription() }}
         </p>
-        <!-- <div class="hero-features">
-          <div class="feature-badge">
-            <mat-icon>speed</mat-icon>
-            <span>Instant Results</span>
-          </div>
-          <div class="feature-badge">
-            <mat-icon>functions</mat-icon>
-            <span>Multiple Calculators</span>
-          </div>
-          <div class="feature-badge">
-            <mat-icon>trending_up</mat-icon>
-            <span>Increase/Decrease</span>
-          </div>
-        </div> -->
         <div class="hero-cta">
           <button
             mat-raised-button
@@ -33,7 +18,7 @@
             class="cta-button"
           >
             <mat-icon>auto_awesome</mat-icon>
-            Calculate Percentage Now
+            Calculate Now
           </button>
         </div>
       </div>
@@ -62,122 +47,484 @@
         The Bottom Line
       </h2>
       <p class="bottom-line-content">
-        This percentage calculator instantly computes two fundamental percentage operations with real-time precision. Calculate "what is X% of Y" to find percentage amounts (like 20% of $100 = $20), or calculate "what percent is Y of X" to find percentage ratios (like 25 is what percent of 100 = 25%). Perfect for shopping discounts, financial calculations, tip amounts, tax computations, grade percentages, business metrics, growth rates, and statistical analysis. Enter values into intuitive input fields and see live results with explanatory text showing your calculation. Each calculator provides visual feedback with highlighted results and clear mathematical expressions. Common use cases include calculating sale prices with discounts, determining restaurant tips, computing sales tax, converting test scores to percentages, measuring business growth rates, and analyzing data proportions. All calculations happen instantly in your browser without page reloads or server requests.
+        @if (calculatorType() === 'base') {
+          This percentage calculator instantly computes two fundamental percentage operations with real-time precision. Calculate "what is X% of Y" to find percentage amounts (like 20% of $100 = $20), or calculate "what percent is Y of X" to find percentage ratios (like 25 is what percent of 100 = 25%). Perfect for shopping discounts, financial calculations, tip amounts, tax computations, grade percentages, business metrics, growth rates, and statistical analysis.
+        } @else if (calculatorType() === 'percentage-increase-decrease') {
+          Calculate percentage increase or decrease between two values instantly. Essential for measuring growth rates, price changes, stock performance, salary increases, business metrics, and comparing values over time. Shows whether the change is an increase or decrease with the exact percentage.
+        } @else if (calculatorType() === 'discount-calculator') {
+          Calculate final prices after discounts instantly. Perfect for shopping, comparing deals, calculating sale prices, and determining savings. Enter the original price and discount percentage to see the discount amount and final price you'll pay.
+        } @else if (calculatorType() === 'tax-calculator') {
+          Calculate sales tax amounts and total prices instantly. Essential for budgeting purchases, understanding final costs, and financial planning. Enter any base amount and tax rate to see the tax amount and total with tax included.
+        } @else if (calculatorType() === 'profit-margin') {
+          Calculate profit margin percentage from revenue and cost. Critical for business pricing, profitability analysis, and financial planning. Shows both the profit amount and margin percentage to understand your business performance.
+        } @else if (calculatorType() === 'markup-calculator') {
+          Calculate selling price from cost and markup percentage. Essential for product pricing, retail business, and service pricing. Shows the markup amount and final selling price to ensure profitable pricing strategies.
+        }
       </p>
     </section>
 
     <!-- AdSense Ad -->
     <app-adsense></app-adsense>
 
+    <!-- Calculator Grid -->
     <div class="calculator-grid">
-      <!-- Calculator 1: X% of Y -->
-      <mat-card class="calculator-card">
-        <div class="card-header">
-          <mat-icon class="card-icon">calculate</mat-icon>
-          <h2>What is X% of Y?</h2>
-        </div>
-
-        <div class="calculator-content">
-          <div class="input-row">
-            <mat-form-field appearance="fill" class="input-field">
-              <mat-label>Percentage (%)</mat-label>
-              <input
-                matInput
-                type="number"
-                [(ngModel)]="percentage1"
-                (ngModelChange)="calculatePercentageOf()"
-                placeholder="e.g., 20"
-              />
-              <mat-icon matSuffix>percent</mat-icon>
-            </mat-form-field>
-
-            <span class="operator">of</span>
-
-            <mat-form-field appearance="fill" class="input-field">
-              <mat-label>Number</mat-label>
-              <input
-                matInput
-                type="number"
-                [(ngModel)]="number1"
-                (ngModelChange)="calculatePercentageOf()"
-                placeholder="e.g., 100"
-              />
-            </mat-form-field>
+      <!-- BASE CALCULATORS -->
+      @if (calculatorType() === 'base') {
+        <!-- Calculator 1: X% of Y -->
+        <mat-card class="calculator-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">calculate</mat-icon>
+            <h2>What is X% of Y?</h2>
           </div>
 
-          <mat-divider></mat-divider>
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Percentage (%)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="percentage1"
+                  (ngModelChange)="calculatePercentageOf()"
+                  placeholder="e.g., 20"
+                />
+                <mat-icon matSuffix>percent</mat-icon>
+              </mat-form-field>
 
-          <div class="result-section">
-            <div class="result-label">Result</div>
-            <div class="result-value">
-              @if (result1() !== null) {
-                <span class="value">{{ result1() | number:'1.0-2' }}</span>
-              } @else {
-                <span class="placeholder">Enter values above</span>
+              <span class="operator">of</span>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Number</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="number1"
+                  (ngModelChange)="calculatePercentageOf()"
+                  placeholder="e.g., 100"
+                />
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-label">Result</div>
+              <div class="result-value">
+                @if (result1() !== null) {
+                  <span class="value">{{ result1() | number:'1.0-2' }}</span>
+                } @else {
+                  <span class="placeholder">Enter values above</span>
+                }
+              </div>
+              @if (result1() !== null && percentage1() !== null && number1() !== null) {
+                <div class="result-explanation">
+                  {{ percentage1() }}% of {{ number1() }} = {{ result1() | number:'1.0-2' }}
+                </div>
               }
             </div>
-            @if (result1() !== null && percentage1() !== null && number1() !== null) {
-              <div class="result-explanation">
-                {{ percentage1() }}% of {{ number1() }} = {{ result1() | number:'1.0-2' }}
+          </div>
+        </mat-card>
+
+        <!-- Calculator 2: What percent is Y of X -->
+        <mat-card class="calculator-card">
+          <div class="card-header">
+            <mat-icon class="card-icon">functions</mat-icon>
+            <h2>What percent is Y of X?</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Part (Y)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="part"
+                  (ngModelChange)="calculateWhatPercent()"
+                  placeholder="e.g., 25"
+                />
+              </mat-form-field>
+
+              <span class="operator">of</span>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Whole (X)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="whole"
+                  (ngModelChange)="calculateWhatPercent()"
+                  placeholder="e.g., 100"
+                />
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-label">Result</div>
+              <div class="result-value">
+                @if (result2() !== null) {
+                  <span class="value">{{ result2() | number:'1.0-2' }}%</span>
+                } @else {
+                  <span class="placeholder">Enter values above</span>
+                }
               </div>
-            }
-          </div>
-        </div>
-      </mat-card>
-
-      <!-- Calculator 2: What percent is Y of X -->
-      <mat-card class="calculator-card">
-        <div class="card-header">
-          <mat-icon class="card-icon">functions</mat-icon>
-          <h2>What percent is Y of X?</h2>
-        </div>
-
-        <div class="calculator-content">
-          <div class="input-row">
-            <mat-form-field appearance="fill" class="input-field">
-              <mat-label>Part (Y)</mat-label>
-              <input
-                matInput
-                type="number"
-                [(ngModel)]="part"
-                (ngModelChange)="calculateWhatPercent()"
-                placeholder="e.g., 25"
-              />
-            </mat-form-field>
-
-            <span class="operator">of</span>
-
-            <mat-form-field appearance="fill" class="input-field">
-              <mat-label>Whole (X)</mat-label>
-              <input
-                matInput
-                type="number"
-                [(ngModel)]="whole"
-                (ngModelChange)="calculateWhatPercent()"
-                placeholder="e.g., 100"
-              />
-            </mat-form-field>
-          </div>
-
-          <mat-divider></mat-divider>
-
-          <div class="result-section">
-            <div class="result-label">Result</div>
-            <div class="result-value">
-              @if (result2() !== null) {
-                <span class="value">{{ result2() | number:'1.0-2' }}%</span>
-              } @else {
-                <span class="placeholder">Enter values above</span>
+              @if (result2() !== null && part() !== null && whole() !== null) {
+                <div class="result-explanation">
+                  {{ part() }} is {{ result2() | number:'1.0-2' }}% of {{ whole() }}
+                </div>
               }
             </div>
-            @if (result2() !== null && part() !== null && whole() !== null) {
-              <div class="result-explanation">
-                {{ part() }} is {{ result2() | number:'1.0-2' }}% of {{ whole() }}
-              </div>
-            }
           </div>
-        </div>
-      </mat-card>
+        </mat-card>
+      }
+
+      <!-- PERCENTAGE INCREASE/DECREASE -->
+      @if (calculatorType() === 'percentage-increase-decrease') {
+        <mat-card class="calculator-card single-calculator">
+          <div class="card-header">
+            <mat-icon class="card-icon">trending_up</mat-icon>
+            <h2>Percentage Increase/Decrease</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Old Value</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="oldValue"
+                  (ngModelChange)="calculatePercentChange()"
+                  placeholder="e.g., 100"
+                />
+              </mat-form-field>
+
+              <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>New Value</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="newValue"
+                  (ngModelChange)="calculatePercentChange()"
+                  placeholder="e.g., 125"
+                />
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-label">Percentage Change</div>
+              <div class="result-value">
+                @if (percentChange() !== null) {
+                  <span class="value" [class.positive]="isIncrease()" [class.negative]="isDecrease()">
+                    {{ percentChange() | number:'1.0-2' }}%
+                  </span>
+                } @else {
+                  <span class="placeholder">Enter values above</span>
+                }
+              </div>
+              @if (percentChange() !== null && oldValue() !== null && newValue() !== null) {
+                <div class="result-explanation">
+                  @if (isIncrease()) {
+                    <mat-icon class="change-icon increase">trending_up</mat-icon>
+                    Increase of {{ percentChange() | number:'1.0-2' }}%
+                  } @else if (isDecrease()) {
+                    <mat-icon class="change-icon decrease">trending_down</mat-icon>
+                    Decrease of {{ Math.abs(percentChange()!) | number:'1.0-2' }}%
+                  } @else {
+                    No change (0%)
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
+
+      <!-- DISCOUNT CALCULATOR -->
+      @if (calculatorType() === 'discount-calculator') {
+        <mat-card class="calculator-card single-calculator">
+          <div class="card-header">
+            <mat-icon class="card-icon">local_offer</mat-icon>
+            <h2>Discount Calculator</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Original Price</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="originalPrice"
+                  (ngModelChange)="calculateDiscount()"
+                  placeholder="e.g., 100"
+                />
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Discount (%)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="discountPercent"
+                  (ngModelChange)="calculateDiscount()"
+                  placeholder="e.g., 20"
+                />
+                <mat-icon matSuffix>percent</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-row">
+                <div class="result-label">Discount Amount</div>
+                <div class="result-value">
+                  @if (discountAmount() !== null) {
+                    <span class="value savings">-${{ discountAmount() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">-</span>
+                  }
+                </div>
+              </div>
+
+              <div class="result-row final">
+                <div class="result-label">Final Price</div>
+                <div class="result-value">
+                  @if (finalPrice() !== null) {
+                    <span class="value">${{ finalPrice() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">Enter values above</span>
+                  }
+                </div>
+              </div>
+
+              @if (finalPrice() !== null && originalPrice() !== null && discountPercent() !== null) {
+                <div class="result-explanation">
+                  You save ${{ discountAmount() | number:'1.0-2' }} ({{ discountPercent() }}% off)
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
+
+      <!-- TAX CALCULATOR -->
+      @if (calculatorType() === 'tax-calculator') {
+        <mat-card class="calculator-card single-calculator">
+          <div class="card-header">
+            <mat-icon class="card-icon">receipt</mat-icon>
+            <h2>Sales Tax Calculator</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Base Amount</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="baseAmount"
+                  (ngModelChange)="calculateTax()"
+                  placeholder="e.g., 100"
+                />
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Tax Rate (%)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="taxRate"
+                  (ngModelChange)="calculateTax()"
+                  placeholder="e.g., 8.5"
+                />
+                <mat-icon matSuffix>percent</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-row">
+                <div class="result-label">Tax Amount</div>
+                <div class="result-value">
+                  @if (taxAmount() !== null) {
+                    <span class="value">+${{ taxAmount() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">-</span>
+                  }
+                </div>
+              </div>
+
+              <div class="result-row final">
+                <div class="result-label">Total with Tax</div>
+                <div class="result-value">
+                  @if (totalWithTax() !== null) {
+                    <span class="value">${{ totalWithTax() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">Enter values above</span>
+                  }
+                </div>
+              </div>
+
+              @if (totalWithTax() !== null && baseAmount() !== null && taxRate() !== null) {
+                <div class="result-explanation">
+                  ${{ baseAmount() | number:'1.0-2' }} + ${{ taxAmount() | number:'1.0-2' }} tax ({{ taxRate() }}%)
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
+
+      <!-- PROFIT MARGIN CALCULATOR -->
+      @if (calculatorType() === 'profit-margin') {
+        <mat-card class="calculator-card single-calculator">
+          <div class="card-header">
+            <mat-icon class="card-icon">attach_money</mat-icon>
+            <h2>Profit Margin Calculator</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Revenue</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="revenue"
+                  (ngModelChange)="calculateProfitMargin()"
+                  placeholder="e.g., 150"
+                />
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Cost</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="cost"
+                  (ngModelChange)="calculateProfitMargin()"
+                  placeholder="e.g., 100"
+                />
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-row">
+                <div class="result-label">Profit Amount</div>
+                <div class="result-value">
+                  @if (profitAmount() !== null) {
+                    <span class="value">${{ profitAmount() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">-</span>
+                  }
+                </div>
+              </div>
+
+              <div class="result-row final">
+                <div class="result-label">Profit Margin</div>
+                <div class="result-value">
+                  @if (profitMargin() !== null) {
+                    <span class="value">{{ profitMargin() | number:'1.0-2' }}%</span>
+                  } @else {
+                    <span class="placeholder">Enter values above</span>
+                  }
+                </div>
+              </div>
+
+              @if (profitMargin() !== null && revenue() !== null && cost() !== null) {
+                <div class="result-explanation">
+                  Profit: ${{ profitAmount() | number:'1.0-2' }} from ${{ revenue() | number:'1.0-2' }} revenue
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
+
+      <!-- MARKUP CALCULATOR -->
+      @if (calculatorType() === 'markup-calculator') {
+        <mat-card class="calculator-card single-calculator">
+          <div class="card-header">
+            <mat-icon class="card-icon">trending_up</mat-icon>
+            <h2>Markup Calculator</h2>
+          </div>
+
+          <div class="calculator-content">
+            <div class="input-row">
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Cost Price</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="costPrice"
+                  (ngModelChange)="calculateMarkup()"
+                  placeholder="e.g., 100"
+                />
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="input-field">
+                <mat-label>Markup (%)</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="markupPercent"
+                  (ngModelChange)="calculateMarkup()"
+                  placeholder="e.g., 50"
+                />
+                <mat-icon matSuffix>percent</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="result-section">
+              <div class="result-row">
+                <div class="result-label">Markup Amount</div>
+                <div class="result-value">
+                  @if (markupAmount() !== null) {
+                    <span class="value">+${{ markupAmount() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">-</span>
+                  }
+                </div>
+              </div>
+
+              <div class="result-row final">
+                <div class="result-label">Selling Price</div>
+                <div class="result-value">
+                  @if (sellingPrice() !== null) {
+                    <span class="value">${{ sellingPrice() | number:'1.0-2' }}</span>
+                  } @else {
+                    <span class="placeholder">Enter values above</span>
+                  }
+                </div>
+              </div>
+
+              @if (sellingPrice() !== null && costPrice() !== null && markupPercent() !== null) {
+                <div class="result-explanation">
+                  ${{ costPrice() | number:'1.0-2' }} cost + ${{ markupAmount() | number:'1.0-2' }} markup ({{ markupPercent() }}%)
+                </div>
+              }
+            </div>
+          </div>
+        </mat-card>
+      }
     </div>
 
     <!-- AdSense Ad -->
@@ -210,26 +557,6 @@
           <h4>Grades</h4>
           <p>Convert test scores to percentages</p>
         </div>
-      </div>
-
-      <!-- Problems This Tool Solves -->
-      <div class="problems-solved-section">
-        <h4>
-          <mat-icon>check_circle</mat-icon>
-          Problems This Percentage Calculator Solves
-        </h4>
-        <ul class="problems-list">
-          <li><strong>Eliminates mental math errors in percentage calculations</strong> - Stop second-guessing whether 15% of $84.50 is correct or miscalculating tips at restaurants. Get instant, accurate results without paper, calculators, or error-prone mental arithmetic.</li>
-          <li><strong>Removes confusion between percentage types</strong> - Forget wondering "do I multiply or divide?" when calculating percentages. Two dedicated calculators show exactly which formula applies—finding percentage amounts versus finding percentage ratios.</li>
-          <li><strong>Saves time during shopping and sales</strong> - Avoid standing in store aisles trying to figure out final prices after discounts. Calculate 30% off $79.99 instantly to compare deals and make informed purchase decisions on the spot.</li>
-          <li><strong>Prevents tip calculation awkwardness</strong> - Stop fumbling with phone calculators at restaurant tables or undertipping/overtipping servers. Calculate exact 15%, 18%, or 20% tips instantly for any bill amount with precision.</li>
-          <li><strong>Eliminates grade calculation guesswork</strong> - Forget manually converting test scores like "42 out of 50" into percentages. Instantly calculate what percent you scored to understand academic performance without spreadsheets.</li>
-          <li><strong>Removes tax computation uncertainty</strong> - Avoid estimating sales tax amounts when budgeting purchases. Calculate exact tax on any purchase price instantly to know true costs before checkout or when planning expenses.</li>
-          <li><strong>Streamlines business metric analysis</strong> - Stop wasting time with spreadsheet formulas for simple percentage calculations. Analyze conversion rates, growth percentages, margin changes, and KPIs instantly without Excel.</li>
-          <li><strong>Prevents investment return confusion</strong> - Forget manually calculating if $10,500 from a $10,000 investment represents the growth rate you expected. Instantly compute percentage returns to evaluate investment performance accurately.</li>
-          <li><strong>Eliminates budget percentage allocation errors</strong> - Avoid miscalculating how much of your $3,000 budget to allocate when rules specify percentages. Calculate exact amounts for 30% savings, 50% expenses, 20% discretionary instantly.</li>
-          <li><strong>Ensures complete privacy for financial calculations</strong> - Stop using percentage calculators that might track shopping habits or financial data. All calculations happen locally in your browser—no numbers ever leave your device.</li>
-        </ul>
       </div>
     </div>
   </div>
