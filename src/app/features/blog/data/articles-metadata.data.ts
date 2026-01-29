@@ -55,7 +55,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasVideo: true,
     display: true,
     relatedArticles: ['19', '18', '25'],
-    readTime: 12,
+    readTime: 14,
   },
   {
   id: '109',
@@ -138,7 +138,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['107', '106', '101'],
-    readTime: 5,
+    readTime: 4,
   },
   {
     id: '107',
@@ -745,7 +745,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasAudio: false,
     display: true,
     relatedArticles: ['15', '6', '12'],
-    readTime: 5,
+    readTime: 4,
   },
   {
     id: '16',

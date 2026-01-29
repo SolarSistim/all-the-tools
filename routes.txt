@@ -4,9 +4,11 @@
 /accessibility
 /blog
 /blog/base-number-converter-tutorial
+/blog/birthday-freebies-guide-100-deals
 /blog/blog-components-showcase
 /blog/c-beams-the-top-down-space-action-rpg-that-gets-it
 /blog/exploding-trees-in-winter-what-causes-the-loud-cracks
+/blog/gradient-generator-tutorial-css-gradients
 /blog/how-to-calculate-percentages-in-your-head
 /blog/how-to-sell-your-timber-for-top-dollar-in-ohio
 /blog/how-to-use-social-media-launchpad-copy-paste-launch
@@ -18,8 +20,10 @@
 /blog/masters-of-the-universe-2026-he-man-returns-to-the-big-screen
 /blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
 /blog/one-man-one-pc-cinema-quality-starships-howard-day
+/blog/pensacola-bay-center-the-189-million-question-renovate-replace-or-watch-mobile-win
 /blog/pensacola-snow-second-year
 /blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention
+/blog/photo-filter-studio-tutorial
 /blog/snow-globe-shake-demo
 /blog/stop-typing-in-those-tiny-on-reward-codes-by-hand
 /blog/the-16-wealthiest-criminals-of-the-last-100-years
@@ -56,6 +60,7 @@
 /tools
 /tools/barcode-reader
 /tools/base-number-converter
+/tools/base-number-converter/:pair
 /tools/bmi-calculator
 /tools/case-converter
 /tools/color-picker
@@ -67,6 +72,7 @@
 /tools/on-reward-scanner
 /tools/password-generator
 /tools/percentage-calculator
+/tools/percentage-calculator/:variant
 /tools/photo-filter-studio
 /tools/qr-code-generator
 /tools/roku-compatibility
@@ -78,5 +84,6 @@
 /tools/timestamp-converter
 /tools/tip-calculator
 /tools/unit-converter
+/tools/unit-converter/:pair
 /tools/uuid-generator
 /tools/word-counter
