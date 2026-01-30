@@ -61,10 +61,7 @@ export const content: ContentBlock[] = [
         {
           source: 'Yelp',
           rating: 3.0,
-        },
-        {
-          source: 'Facebook',
-          rating: 5.0,
+          reviewCount: 2,
         },
       ],
     },
@@ -150,10 +147,12 @@ export const content: ContentBlock[] = [
         {
           source: 'Yelp',
           rating: 3.9,
+          reviewCount: 31,
         },
         {
           source: 'Facebook',
           rating: 4.7,
+          reviewCount: 104,
         },
       ],
     },
@@ -237,13 +236,14 @@ export const content: ContentBlock[] = [
     data: {
       ratings: [
         {
-          source: 'Google',
-          rating: 4.8,
-          reviewCount: 92,
-        },
-        {
           source: 'Yelp',
           rating: 5.0,
+          reviewCount: 11,
+        },
+        {
+          source: 'Google',
+          rating: 4.8,
+          reviewCount: 248,
         },
       ],
     },
@@ -335,10 +335,7 @@ export const content: ContentBlock[] = [
         {
           source: 'Yelp',
           rating: 5.0,
-        },
-        {
-          source: 'Google',
-          rating: 4.5
+          reviewCount: 2,
         },
       ],
     },
