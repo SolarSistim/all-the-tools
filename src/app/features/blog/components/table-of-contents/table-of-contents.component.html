@@ -3,12 +3,13 @@
   <button
     class="toc-toggle"
     [class.toc-hidden]="!isVisible"
+    [class.toc-visible]="isVisible"
     (click)="toggleVisibility()"
     mat-fab
     [attr.aria-label]="isVisible ? 'Hide navigator' : 'Show navigator'"
     [attr.aria-expanded]="isVisible"
   >
-    <mat-icon>{{ isVisible ? 'close' : 'explore' }}</mat-icon>
+    <mat-icon>{{ isVisible ? 'close' : 'list' }}</mat-icon>
   </button>
 
   <!-- Table of Contents Panel -->
@@ -43,7 +44,9 @@
             [attr.href]="'#' + item.id"
             (click)="$event.preventDefault()"
           >
-            {{ item.text }}
+            <span *ngIf="item.number" class="toc-number"><strong>{{ item.number }}.</strong></span>
+            <span *ngIf="item.level > 2" class="toc-bullet">•</span>
+            {{ item.title || item.text }}
           </a>
         </li>
       </ul>

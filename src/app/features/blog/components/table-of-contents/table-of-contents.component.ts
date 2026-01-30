@@ -8,6 +8,8 @@ interface TocItem {
   id: string;
   text: string;
   level: number;
+  number?: string;
+  title?: string;
 }
 
 /**
@@ -63,11 +65,21 @@ export class TableOfContentsComponent implements OnInit, OnDestroy {
   private extractHeadings(): void {
     this.tocItems = this.blocks
       .filter((block): block is HeadingBlock => block.type === 'heading')
-      .map((block) => ({
-        id: block.data.id || this.generateId(block.data.text),
-        text: block.data.text,
-        level: block.data.level,
-      }));
+      .map((block) => {
+        const text = block.data.text;
+        // Parse number from text (e.g., "1. Bernie" -> number: "1", title: "Bernie")
+        const numberMatch = text.match(/^(\d+)\.\s+(.*)$/);
+        const number = numberMatch ? numberMatch[1] : undefined;
+        const title = numberMatch ? numberMatch[2] : text;
+
+        return {
+          id: block.data.id || this.generateId(text),
+          text: text,
+          level: block.data.level,
+          number: number,
+          title: title,
+        };
+      });
   }
 
   private generateId(text: string): string {
