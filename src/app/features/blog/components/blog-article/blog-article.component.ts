@@ -16,6 +16,7 @@ import { AuthorSignatureComponent } from '../author-signature/author-signature.c
 import { SocialShareButtonsComponent } from '../social-share-buttons/social-share-buttons.component';
 import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { TableOfContentsComponent } from '../table-of-contents/table-of-contents.component';
 
 /**
  * Blog Article Component
@@ -36,6 +37,7 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     SocialShareButtonsComponent,
     ReadingTimePipe,
     CtaEmailList,
+    TableOfContentsComponent,
   ],
   templateUrl: './blog-article.component.html',
   styleUrls: ['./blog-article.component.scss'],

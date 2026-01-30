@@ -1,0 +1,52 @@
+<div class="toc-container" *ngIf="tocItems.length > 0">
+  <!-- Hamburger Toggle Button -->
+  <button
+    class="toc-toggle"
+    [class.toc-hidden]="!isVisible"
+    (click)="toggleVisibility()"
+    mat-fab
+    [attr.aria-label]="isVisible ? 'Hide navigator' : 'Show navigator'"
+    [attr.aria-expanded]="isVisible"
+  >
+    <mat-icon>{{ isVisible ? 'close' : 'menu' }}</mat-icon>
+  </button>
+
+  <!-- Table of Contents Panel -->
+  <div class="toc-panel" [class.visible]="isVisible" [class.hidden]="!isVisible">
+    <div class="toc-header">
+      <h3 class="toc-title">Navigator</h3>
+      <button
+        class="toc-close-btn"
+        (click)="toggleVisibility()"
+        mat-icon-button
+        aria-label="Close table of contents"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <nav class="toc-nav" aria-label="Table of contents">
+      <ul class="toc-list">
+        <li
+          *ngFor="let item of tocItems"
+          class="toc-item"
+          [class.toc-level-2]="item.level === 2"
+          [class.toc-level-3]="item.level === 3"
+          [class.toc-level-4]="item.level === 4"
+          [class.toc-level-5]="item.level === 5"
+          [class.toc-level-6]="item.level === 6"
+          [class.active]="activeId === item.id"
+        >
+          <a
+            class="toc-link"
+            (click)="scrollToSection(item.id)"
+            [attr.href]="'#' + item.id"
+            (click)="$event.preventDefault()"
+          >
+            {{ item.text }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

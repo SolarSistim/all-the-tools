@@ -1,0 +1,132 @@
+.business-ratings {
+  margin: 2rem 0;
+  padding: 4px;
+  background: var(--surface-variant);
+  border-radius: 12px;
+  border: 1px solid var(--outline-variant);
+  width: 100%;
+
+  .ratings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &.single-rating {
+      justify-content: flex-start;
+
+      .rating-item {
+        max-width: none;
+      }
+    }
+  }
+
+  .rating-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+
+    .platform-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .platform-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--on-surface);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .stars-display {
+      display: flex;
+      gap: 2px;
+      flex-shrink: 0;
+
+      .star-wrapper {
+        position: relative;
+        width: 20px;
+        height: 20px;
+
+        .star {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .star-empty {
+          color: var(--outline);
+        }
+
+        .star-fill {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          overflow: hidden;
+
+          .star-filled {
+            color: #fbbf24; // Golden yellow for stars
+          }
+        }
+      }
+    }
+
+    .rating-value {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--on-surface);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .review-count {
+      color: var(--on-surface-variant);
+      font-size: 0.875rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    // Platform-specific accent colors
+    &.platform-google {
+      .platform-icon {
+        color: #4285f4;
+      }
+    }
+
+    &.platform-yelp {
+      .platform-icon {
+        color: #d32323;
+      }
+    }
+
+    &.platform-facebook {
+      .platform-icon {
+        color: #1877f2;
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+@media (prefers-color-scheme: dark) {
+  .business-ratings {
+    background: var(--surface-variant);
+    border-color: var(--outline-variant);
+  }
+}

@@ -1,0 +1,290 @@
+.toc-container {
+  position: relative;
+}
+
+// Hamburger Toggle Button
+.toc-toggle {
+  position: fixed;
+  z-index: 9999;
+  background-color: var(--neon-cyan) !important;
+  color: var(--bg-primary) !important;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+
+  // Desktop and Tablet positioning - 30% smaller
+  @media (min-width: 769px) {
+    top: 100px;
+    right: 2rem;
+    width: 39px !important;
+    height: 39px !important;
+    min-width: 39px !important;
+    min-height: 39px !important;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Mobile positioning - square button, behind toolbar
+  @media (max-width: 768px) {
+    top: 61px;
+    right: -3px;
+    z-index: 100;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    min-height: 26px !important;
+    padding: 0 !important;
+    border-radius: 4px !important;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+    }
+  }
+
+  &:hover {
+    background-color: var(--neon-cyan-bright) !important;
+  }
+
+  // When TOC is visible, hide the button
+  &:not(.toc-hidden) {
+    @media (min-width: 769px) {
+      display: none;
+    }
+
+    // On mobile when Navigator is open, hide the button completely
+    @media (max-width: 768px) {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+}
+
+// Table of Contents Panel
+.toc-panel {
+  position: fixed;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // Desktop and Tablet: Floating panel on the right
+  @media (min-width: 769px) {
+    top: calc(15% - 20px);
+    right: 20px;
+    width: 280px;
+    max-height: 70vh;
+
+    &.visible {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    &.hidden {
+      opacity: 0;
+      transform: translateX(100%);
+      pointer-events: none;
+    }
+  }
+
+  // Mobile: Slide-in panel from right (20% shorter height)
+  @media (max-width: 768px) {
+    top: 100px;
+    right: 0;
+    width: 85%;
+    max-width: 400px;
+    height: calc(80vh - 64px);
+    border-radius: 12px 0 0 12px;
+
+    &.visible {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    &.hidden {
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}
+
+.toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  flex-shrink: 0;
+}
+
+.toc-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--neon-cyan-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.toc-close-btn {
+  background-color: var(--neon-cyan) !important;
+  color: var(--bg-primary) !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 4px !important;
+  padding: 0 !important;
+
+  &:hover {
+    background-color: var(--neon-cyan-bright) !important;
+  }
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.toc-nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  padding: 0.5rem 0;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+
+    &:hover {
+      background: var(--neon-cyan);
+    }
+  }
+}
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-item {
+  position: relative;
+
+  // Indentation based on heading level
+  &.toc-level-2 {
+    padding-left: 1.25rem;
+  }
+
+  &.toc-level-3 {
+    padding-left: 2rem;
+  }
+
+  &.toc-level-4 {
+    padding-left: 2.75rem;
+  }
+
+  &.toc-level-5 {
+    padding-left: 3.5rem;
+  }
+
+  &.toc-level-6 {
+    padding-left: 4.25rem;
+  }
+
+  // Active item indicator
+  &.active {
+    .toc-link {
+      color: var(--neon-cyan-bright);
+      font-weight: 600;
+      border-left-color: var(--neon-cyan);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 80%;
+      background-color: var(--neon-cyan);
+      border-radius: 0 2px 2px 0;
+    }
+  }
+}
+
+.toc-link {
+  display: block;
+  padding: 0.5rem 1.25rem 0.5rem 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  word-wrap: break-word;
+
+  &:hover {
+    color: var(--neon-cyan);
+    background-color: var(--neon-cyan-glow);
+    border-left-color: var(--neon-cyan);
+  }
+}
+
+// Overlay for mobile when TOC is open
+@media (max-width: 768px) {
+  .toc-panel.visible::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    animation: fadeIn 0.3s ease;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Print styles - hide TOC when printing
+@media print {
+  .toc-container {
+    display: none !important;
+  }
+}

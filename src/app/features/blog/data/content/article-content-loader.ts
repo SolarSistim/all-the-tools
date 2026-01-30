@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'pensacola-food-trucks-complete-guide':
+        const foodTrucksModule = await import('./pensacola-food-trucks-complete-guide.content');
+        return foodTrucksModule.content;
+
       case 'pensacola-bay-center-the-189-million-question-renovate-replace-or-watch-mobile-win':
         const bayCenterModule = await import('./pensacola-bay-center-the-189-million-question-renovate-replace-or-watch-mobile-win.content');
         return bayCenterModule.content;

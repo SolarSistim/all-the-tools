@@ -10,6 +10,7 @@ import { AffiliateLinkComponent } from '../affiliate-link/affiliate-link.compone
 import { AdsenseComponent } from '../adsense/adsense.component';
 import { MoviePoster } from '../movie-poster/movie-poster';
 import { MovieRatings } from '../movie-ratings/movie-ratings';
+import { BusinessRatings } from '../business-ratings/business-ratings';
 import { VideoEmbedComponent } from '../video-embed/video-embed.component';
 import { AudioPlayerComponent } from '../audio-player/audio-player.component';
 import { YoutubePlayerComponent } from '../youtube-player/youtube-player.component';
@@ -40,6 +41,7 @@ import { SnowGlobeShake } from '../../../art/snow-globe-shake/snow-globe-shake';
     AdsenseComponent,
     MoviePoster,
     MovieRatings,
+    BusinessRatings,
     VideoEmbedComponent,
     AudioPlayerComponent,
     YoutubePlayerComponent,

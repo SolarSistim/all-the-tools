@@ -5,6 +5,16 @@
   z-index: 9999;
   background-color: var(--neon-cyan) !important;
   color: var(--bg-primary) !important;
+  width: 39px !important;
+  height: 39px !important;
+  min-width: 39px !important;
+  min-height: 39px !important;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
 
   &:hover {
     background-color: var(--neon-cyan-bright) !important;

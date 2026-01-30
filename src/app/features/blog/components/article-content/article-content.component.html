@@ -67,6 +67,12 @@
       [data]="block.data"
     ></app-movie-ratings>
 
+    <!-- Business Ratings -->
+    <app-business-ratings
+      *ngIf="block.type === 'businessRatings'"
+      [data]="block.data"
+    ></app-business-ratings>
+
     <!-- Gallery -->
     <app-image-gallery
       *ngIf="block.type === 'gallery'"

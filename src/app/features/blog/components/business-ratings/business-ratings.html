@@ -1,0 +1,29 @@
+<div class="business-ratings">
+  <div class="ratings-container" [class.single-rating]="data.ratings.length === 1">
+    <div
+      *ngFor="let ratingData of data.ratings"
+      class="rating-item"
+      [ngClass]="getPlatformClass(ratingData.source)"
+    >
+      <mat-icon class="platform-icon">{{ getPlatformIcon(ratingData.source) }}</mat-icon>
+      <span class="platform-name">{{ ratingData.source }}</span>
+
+      <div class="stars-display">
+        <div *ngFor="let star of getStars(ratingData.rating)" class="star-wrapper">
+          <!-- Empty star background -->
+          <mat-icon class="star star-empty">star_outline</mat-icon>
+
+          <!-- Filled star (full or partial) -->
+          <div class="star-fill" [style.width.%]="star.filled ? 100 : (star.partial * 100)">
+            <mat-icon class="star star-filled">star</mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <span class="rating-value">{{ ratingData.rating.toFixed(1) }}</span>
+      <span *ngIf="ratingData.reviewCount" class="review-count">
+        ({{ formatReviewCount(ratingData.reviewCount) }} reviews)
+      </span>
+    </div>
+  </div>
+</div>

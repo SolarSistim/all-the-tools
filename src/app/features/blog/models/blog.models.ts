@@ -93,6 +93,7 @@ export type ContentBlockType =
   | 'component'
   | 'moviePoster'
   | 'movieRatings'
+  | 'businessRatings'
   | 'video'
   | 'audio';
 
@@ -176,6 +177,21 @@ export interface MovieRatingsBlock extends ContentBlock {
       maxScore: number;
     }>;
     ratingsDate: string; // Date when ratings were captured
+  };
+}
+
+/**
+ * Business Ratings block
+ * Displays star ratings from Google, Yelp, and Facebook
+ */
+export interface BusinessRatingsBlock extends ContentBlock {
+  type: 'businessRatings';
+  data: {
+    ratings: Array<{
+      source: 'Google' | 'Yelp' | 'Facebook';
+      rating: number; // 0-5 star rating
+      reviewCount?: number; // Optional review count
+    }>;
   };
 }
 
