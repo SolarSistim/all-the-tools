@@ -21,11 +21,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_07.jpg',
-      alt: 'Pensacola Bay Center Ice rink and hotel concept.',
-      caption: 'Pensacola Bay Center Ice rink and hotel concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_07.jpg',
+          alt: 'Pensacola Bay Center Ice rink and hotel concept.',
+          caption: 'Pensacola Bay Center Ice rink and hotel concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -59,11 +64,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_04.jpg',
-      alt: 'Pensacola Bay Center new club area concept.',
-      caption: 'Pensacola Bay Center new club area concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_04.jpg',
+          alt: 'Pensacola Bay Center new club area concept.',
+          caption: 'Pensacola Bay Center new club area concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -144,11 +154,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_02.jpg',
-      alt: 'Pensacola Bay Center club space concept.',
-      caption: 'Pensacola Bay Center club space concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_02.jpg',
+          alt: 'Pensacola Bay Center club space concept.',
+          caption: 'Pensacola Bay Center club space concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -221,11 +236,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_07.jpg',
-      alt: 'Pensacola Bay Center Ice rink and hotel concept.',
-      caption: 'Pensacola Bay Center Ice rink and hotel concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_07.jpg',
+          alt: 'Pensacola Bay Center Ice rink and hotel concept.',
+          caption: 'Pensacola Bay Center Ice rink and hotel concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -293,11 +313,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_03.jpg',
-      alt: 'Pensacola Bay Center new arena stage concept.',
-      caption: 'Pensacola Bay Center new arena stage concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_03.jpg',
+          alt: 'Pensacola Bay Center new arena stage concept.',
+          caption: 'Pensacola Bay Center new arena stage concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -402,11 +427,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/Allthethings.dev_Pensacola_Bay_Center_Feasibility_Study_Isometric.jpg?updatedAt=1769486267086',
-      alt: 'Pensacola Bay Center site concept.',
-      caption: 'Pensacola Bay Center site concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/Allthethings.dev_Pensacola_Bay_Center_Feasibility_Study_Isometric.jpg?updatedAt=1769486267086',
+          alt: 'Pensacola Bay Center site concept.',
+          caption: 'Pensacola Bay Center site concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -486,11 +516,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_05.jpg',
-      alt: 'Arena exterior and event center connection.',
-      caption: 'Arena exterior and event center connection.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_05.jpg',
+          alt: 'Arena exterior and event center connection.',
+          caption: 'Arena exterior and event center connection.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -539,11 +574,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_06.jpg',
-      alt: 'Pensacola Bay Center new event center concept.',
-      caption: 'Pensacola Bay Center new event center concept.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Pensacola%20Bay%20Center%20$180%20million%20question/AllthethingsDev_Pensacola_Bay_Center_Feasibility_Study_06.jpg',
+          alt: 'Pensacola Bay Center new event center concept.',
+          caption: 'Pensacola Bay Center new event center concept.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

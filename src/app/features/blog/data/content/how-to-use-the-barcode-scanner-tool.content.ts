@@ -56,11 +56,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-01.jpg',
-      alt: 'Barcode scanner landing page with hero section and Scan Barcode button',
-      caption: 'The barcode scanner tool landing page with the main "Scan Barcode" button',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-01.jpg',
+          alt: 'Barcode scanner landing page with hero section and Scan Barcode button',
+          caption: 'The barcode scanner tool landing page with the main "Scan Barcode" button',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -83,11 +88,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-02.jpg',
-      alt: 'Scanner interface in idle state ready to scan barcodes',
-      caption: 'Scanner ready state showing supported barcode formats and the Scan Barcode button',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-02.jpg',
+          alt: 'Scanner interface in idle state ready to scan barcodes',
+          caption: 'Scanner ready state showing supported barcode formats and the Scan Barcode button',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -115,11 +125,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-03.jpg',
-      alt: 'Scan result screen with detected barcode and approval options',
-      caption: 'Barcode detected! Review the scanned code and choose to approve and save or retry',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-03.jpg',
+          alt: 'Scan result screen with detected barcode and approval options',
+          caption: 'Barcode detected! Review the scanned code and choose to approve and save or retry',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -161,11 +176,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-04.jpg',
-      alt: 'Manual entry interface for typing barcode numbers',
-      caption: 'Manual Entry option for when scanning doesn\'t work - just type the barcode and click Add',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-04.jpg',
+          alt: 'Manual entry interface for typing barcode numbers',
+          caption: 'Manual Entry option for when scanning doesn\'t work - just type the barcode and click Add',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -182,11 +202,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-05.jpg',
-      alt: 'Scanned barcodes table with codes, formats, and timestamps',
-      caption: 'All your scanned barcodes in one organized table with copy, download, and delete options',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Use%20the%20Barcode%20Scanner%20Tool/barcode-scanner-05.jpg',
+          alt: 'Scanned barcodes table with codes, formats, and timestamps',
+          caption: 'All your scanned barcodes in one organized table with copy, download, and delete options',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

@@ -88,11 +88,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/base-number-converter-landing-page.jpg',
-      alt: 'Base number converter tool landing page showing conversion input fields',
-      caption: 'The base number converter landing page with input fields for each number system',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/base-number-converter-landing-page.jpg',
+          alt: 'Base number converter tool landing page showing conversion input fields',
+          caption: 'The base number converter landing page with input fields for each number system',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -121,11 +126,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/entering-a-decimal-number.jpg',
-      alt: 'User entering the decimal number 255 into the converter',
-      caption: 'Type your number into any field—we\'ll use decimal 255 as an example',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/entering-a-decimal-number.jpg',
+          alt: 'User entering the decimal number 255 into the converter',
+          caption: 'Type your number into any field—we\'ll use decimal 255 as an example',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -135,11 +145,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/automatic-conversion-results.jpg',
-      alt: 'Converter showing 255 in decimal automatically converted to binary, octal, and hex',
-      caption: 'The moment you type, all conversions appear: Binary (11111111), Octal (377), Hexadecimal (FF)',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/automatic-conversion-results.jpg',
+          alt: 'Converter showing 255 in decimal automatically converted to binary, octal, and hex',
+          caption: 'The moment you type, all conversions appear: Binary (11111111), Octal (377), Hexadecimal (FF)',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -162,11 +177,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/copy-button-feature.jpg',
-      alt: 'Copy buttons next to each converted number for easy clipboard copying',
-      caption: 'Click any copy button to grab that converted value instantly—no selecting, no right-clicking',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Base%20Number%20Converter%20Tutorial/copy-button-feature.jpg',
+          alt: 'Copy buttons next to each converted number for easy clipboard copying',
+          caption: 'Click any copy button to grab that converted value instantly—no selecting, no right-clicking',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

@@ -87,13 +87,18 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/The%20Debeb%20paradox/earthsky-dot-org-Summer-Triangle-Northeast-Mid-Evening-525-1.jpg',
-      alt: 'Deneb star location in relation to Earth',
-      caption: 'The location of Deneb in the night sky',
-      credit: 'Deborah Byrd',
-      creditUrl: 'https://earthsky.org/tonight/deneb-how-do-astronomers-know-distances-to-stars/',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/The%20Debeb%20paradox/earthsky-dot-org-Summer-Triangle-Northeast-Mid-Evening-525-1.jpg',
+          alt: 'Deneb star location in relation to Earth',
+          caption: 'The location of Deneb in the night sky',
+          credit: 'Deborah Byrd',
+          creditUrl: 'https://earthsky.org/tonight/deneb-how-do-astronomers-know-distances-to-stars/',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -127,11 +132,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/The%20Debeb%20paradox/pluribus-carols-dry-erase-board.jpg',
-      alt: 'Carol\'s dry erase board with notes about the Deneb aliens',
-      caption: 'Carol\'s notes about the Deneb aliens reveal their unsettling honesty',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/The%20Debeb%20paradox/pluribus-carols-dry-erase-board.jpg',
+          alt: 'Carol\'s dry erase board with notes about the Deneb aliens',
+          caption: 'Carol\'s notes about the Deneb aliens reveal their unsettling honesty',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

@@ -18,11 +18,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-1.jpg',
-      alt: 'Hero section of the Photo Filter Studio showing the image editor icon and title',
-      caption: 'The Photo Filter Studio on All The Tools',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-1.jpg',
+          alt: 'Hero section of the Photo Filter Studio showing the image editor icon and title',
+          caption: 'The Photo Filter Studio on All The Tools',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -45,11 +50,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-2.jpg',
-      alt: 'Screenshot showing the upload interface with drag and drop zone',
-      caption: 'Upload interface with drag and drop support',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-2.jpg',
+          alt: 'Screenshot showing the upload interface with drag and drop zone',
+          caption: 'Upload interface with drag and drop support',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -84,11 +94,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-3.jpg',
-      alt: 'The preset filter buttons showing Clean, Vivid, Warm Glow, Cool Fade, Matte, Classic, Punch, and Noir',
-      caption: 'Eight professional preset filters',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-3.jpg',
+          alt: 'The preset filter buttons showing Clean, Vivid, Warm Glow, Cool Fade, Matte, Classic, Punch, and Noir',
+          caption: 'Eight professional preset filters',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -145,11 +160,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-4.jpg',
-      alt: 'The adjustment sliders panel showing brightness, contrast, saturation, and other controls',
-      caption: 'Fine-tune your photo with eight adjustment sliders',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-4.jpg',
+          alt: 'The adjustment sliders panel showing brightness, contrast, saturation, and other controls',
+          caption: 'Fine-tune your photo with eight adjustment sliders',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -205,11 +225,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-5.jpg',
-      alt: 'Large canvas preview showing the edited photo with filters and adjustments applied',
-      caption: 'Full-size canvas preview shows real-time changes',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-5.jpg',
+          alt: 'Large canvas preview showing the edited photo with filters and adjustments applied',
+          caption: 'Full-size canvas preview shows real-time changes',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -240,11 +265,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-6.jpg',
-      alt: 'Download dialog showing format options and quality settings',
-      caption: 'Choose your export format and quality settings',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Photo-filter-studio-tutorial/photo-filter-studio-tutorial-6.jpg',
+          alt: 'Download dialog showing format options and quality settings',
+          caption: 'Choose your export format and quality settings',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

@@ -22,11 +22,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-01.jpg',
-      alt: 'Hero section of the Gradient Generator showing the gradient icon and title',
-      caption: 'The Gradient Generator on All The Tools',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-01.jpg',
+          alt: 'Hero section of the Gradient Generator showing the gradient icon and title',
+          caption: 'The Gradient Generator on All The Tools',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -49,11 +54,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-02.jpg',
-      alt: 'Screenshot showing the three gradient type buttons: Linear, Radial, and Conic',
-      caption: 'Gradient type selector with three options',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-02.jpg',
+          alt: 'Screenshot showing the three gradient type buttons: Linear, Radial, and Conic',
+          caption: 'Gradient type selector with three options',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -88,11 +98,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-03.jpg',
-      alt: 'The color stops interface showing two default color stops with position sliders',
-      caption: 'Color stops with position controls',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-03.jpg',
+          alt: 'The color stops interface showing two default color stops with position sliders',
+          caption: 'Color stops with position controls',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -133,11 +148,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-04.jpg',
-      alt: 'The angle control slider showing degrees with a visual representation',
-      caption: 'Angle control for linear gradients',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-04.jpg',
+          alt: 'The angle control slider showing degrees with a visual representation',
+          caption: 'Angle control for linear gradients',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -160,11 +180,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-05.jpg',
-      alt: 'Large preview panel showing the live gradient result',
-      caption: 'Live gradient preview updates as you make changes',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-05.jpg',
+          alt: 'Large preview panel showing the live gradient result',
+          caption: 'Live gradient preview updates as you make changes',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -191,11 +216,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-06.jpg',
-      alt: 'CSS output box showing the generated gradient code with a Copy button',
-      caption: 'Generated CSS code ready to copy',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Gradient%20Generator%20Tutorial/gradient-generator-06.jpg',
+          alt: 'CSS output box showing the generated gradient code with a Copy button',
+          caption: 'Generated CSS code ready to copy',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

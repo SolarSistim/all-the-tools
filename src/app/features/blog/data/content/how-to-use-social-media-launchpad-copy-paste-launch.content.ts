@@ -18,11 +18,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-01.jpg?updatedAt=1769194628239',
-      alt: 'Hero section of the Social Media Launchpad showing the rocket icon and title',
-      caption: 'The Social Media Launchpad on All The Tools',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-01.jpg?updatedAt=1769194628239',
+          alt: 'Hero section of the Social Media Launchpad showing the rocket icon and title',
+          caption: 'The Social Media Launchpad on All The Tools',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -45,11 +50,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-02.jpg?updatedAt=1769194628110',
-      alt: 'Screenshot of the Platform Selector with grouped categories like Regular Use and High Hashtags',
-      caption: 'Platform Selector grouped by hashtag usage',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-02.jpg?updatedAt=1769194628110',
+          alt: 'Screenshot of the Platform Selector with grouped categories like Regular Use and High Hashtags',
+          caption: 'Platform Selector grouped by hashtag usage',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -90,11 +100,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-03.jpg?updatedAt=1769194628240',
-      alt: 'The URL input section with the Fetch OG Data button and the (10 per min) hint visible',
-      caption: 'URL input with OG Data fetch functionality',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-03.jpg?updatedAt=1769194628240',
+          alt: 'The URL input section with the Fetch OG Data button and the (10 per min) hint visible',
+          caption: 'URL input with OG Data fetch functionality',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -125,11 +140,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-04.jpg?updatedAt=1769194628263',
-      alt: 'The Content Editor section showing a description being typed and the character counters reacting',
-      caption: 'Content Editor with live character count tracking',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-04.jpg?updatedAt=1769194628263',
+          alt: 'The Content Editor section showing a description being typed and the character counters reacting',
+          caption: 'Content Editor with live character count tracking',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -156,11 +176,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-05.jpg?updatedAt=1769194628209',
-      alt: 'The Hashtag Input area with a few tags added and a Copy Hashtags button below',
-      caption: 'Hashtag input with quick copy action',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-05.jpg?updatedAt=1769194628209',
+          alt: 'The Hashtag Input area with a few tags added and a Copy Hashtags button below',
+          caption: 'Hashtag input with quick copy action',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -189,11 +214,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-06.jpg?updatedAt=1769194628179',
-      alt: 'The three-button layout under the description showing Copy All, Clear All, and Copy Description',
-      caption: 'Quick copy actions for your content',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/social-media-launchpad-06.jpg?updatedAt=1769194628179',
+          alt: 'The three-button layout under the description showing Copy All, Clear All, and Copy Description',
+          caption: 'Quick copy actions for your content',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

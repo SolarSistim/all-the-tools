@@ -45,12 +45,6 @@
       {{ block.data.text }}
     </h6>
 
-    <!-- Image -->
-    <app-article-image
-      *ngIf="block.type === 'image'"
-      [data]="block.data"
-    ></app-article-image>
-
     <!-- Movie Poster -->
     <app-movie-poster
       *ngIf="block.type === 'moviePoster'"

@@ -120,11 +120,16 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
       },
     },
     {
-      type: 'image',
+      type: 'gallery',
       data: {
-        src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-01.jpg?updatedAt=1768758216429',
-        alt: 'Example image',
-        caption: 'This is an example image with a caption',
+        images: [
+          {
+            src: 'https://ik.imagekit.io/allthethingsdev/The%20Remarkable%20Work%20of%20Howard%20Day/USS-Niimiipuu-01.jpg?updatedAt=1768758216429',
+            alt: 'Example image',
+            caption: 'This is an example image with a caption',
+          },
+        ],
+        layout: 'grid',
       },
     },
     {

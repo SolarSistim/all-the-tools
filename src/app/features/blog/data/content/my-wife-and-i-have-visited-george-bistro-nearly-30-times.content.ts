@@ -169,11 +169,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-bone-marrow.jpg',
-      alt: 'Georges bone marrow',
-      caption: 'George\'s bone marrow',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-bone-marrow.jpg',
+          alt: 'Georges bone marrow',
+          caption: 'George\'s bone marrow',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -271,11 +276,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-sweet-potato-bisque-2.jpg',
-      alt: 'Georges sweet potato bisque 2',
-      caption: 'George\'s sweet potato bisque',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-sweet-potato-bisque-2.jpg',
+          alt: 'Georges sweet potato bisque 2',
+          caption: 'George\'s sweet potato bisque',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -410,11 +420,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-short-ribs-mac-and-cheese.jpg',
-      alt: 'Georges short ribs mac and cheese',
-      caption: 'George\'s short ribs mac and cheese',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-short-ribs-mac-and-cheese.jpg',
+          alt: 'Georges short ribs mac and cheese',
+          caption: 'George\'s short ribs mac and cheese',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -468,11 +483,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-ribeye-and-truffle-fries.jpg',
-      alt: 'Georges ribeye and truffle fries',
-      caption: 'George\'s ribeye and truffle fries',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-ribeye-and-truffle-fries.jpg',
+          alt: 'Georges ribeye and truffle fries',
+          caption: 'George\'s ribeye and truffle fries',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -580,11 +600,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-alfredo-papardelle.jpg',
-      alt: 'Georges alfredo papardelle',
-      caption: 'George\'s alfredo pappardelle',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-alfredo-papardelle.jpg',
+          alt: 'Georges alfredo papardelle',
+          caption: 'George\'s alfredo pappardelle',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -782,11 +807,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-bistro-creme-brulee.jpg',
-      alt: 'Georges bistro creme brulee',
-      caption: 'George Bistro creme brulee',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/I%20have%20visited%20George%20bistro%20nearly%2030%20times/allthethings-georges-bistro-creme-brulee.jpg',
+          alt: 'Georges bistro creme brulee',
+          caption: 'George Bistro creme brulee',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

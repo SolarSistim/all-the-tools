@@ -17,7 +17,6 @@ export { BlogListingComponent } from './components/blog-listing/blog-listing.com
 export { BlogArticleComponent } from './components/blog-article/blog-article.component';
 export { ArticleContentComponent } from './components/article-content/article-content.component';
 export { HeroImageComponent } from './components/hero-image/hero-image.component';
-export { ArticleImageComponent } from './components/article-image/article-image.component';
 export { ImageGalleryComponent } from './components/image-gallery/image-gallery.component';
 export { BlockquoteComponent } from './components/blockquote/blockquote.component';
 export { CodeBlockComponent } from './components/code-block/code-block.component';

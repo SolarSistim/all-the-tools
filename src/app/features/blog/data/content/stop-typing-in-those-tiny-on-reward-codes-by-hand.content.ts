@@ -94,11 +94,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/navigate-to-reward-code-scanner.jpg',
-      alt: 'Navigate to the On! Reward Code Scanner tool',
-      caption: 'Navigate to the On! Nicotine Rewards Scanner on AllTheThings.dev',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/navigate-to-reward-code-scanner.jpg',
+          alt: 'Navigate to the On! Reward Code Scanner tool',
+          caption: 'Navigate to the On! Nicotine Rewards Scanner on AllTheThings.dev',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -115,11 +120,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/click-the-scan-reward-code-button.jpg',
-      alt: 'Select the Scan Reward Code button.',
-      caption: 'Select the Scan Reward Code button.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/click-the-scan-reward-code-button.jpg',
+          alt: 'Select the Scan Reward Code button.',
+          caption: 'Select the Scan Reward Code button.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -149,11 +159,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/take-picture-of-nicotine-pouch.jpg',
-      alt: 'Take a picture of the nicotine pouch.',
-      caption: 'Take a picture of the nicotine pouch.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/take-picture-of-nicotine-pouch.jpg',
+          alt: 'Take a picture of the nicotine pouch.',
+          caption: 'Take a picture of the nicotine pouch.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -180,11 +195,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/position-crop-box.jpg',
-      alt: 'Size and position the crop box over the reward code.',
-      caption: 'Size and position the crop box over the reward code.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/position-crop-box.jpg',
+          alt: 'Size and position the crop box over the reward code.',
+          caption: 'Size and position the crop box over the reward code.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -240,11 +260,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/review-and-approve-scan.jpg',
-      alt: 'Review and approved reward code scan.',
-      caption: 'Review and approved reward code scan.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/review-and-approve-scan.jpg',
+          alt: 'Review and approved reward code scan.',
+          caption: 'Review and approved reward code scan.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -308,11 +333,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/managing-your-codes.jpg',
-      alt: 'Managing your reward codes.',
-      caption: 'Managing your reward codes.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/How%20to%20Scan%20Reward%20Codes:%20Stop%20Typing%20Tiny%20Codes%20by%20Hand/managing-your-codes.jpg',
+          alt: 'Managing your reward codes.',
+          caption: 'Managing your reward codes.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

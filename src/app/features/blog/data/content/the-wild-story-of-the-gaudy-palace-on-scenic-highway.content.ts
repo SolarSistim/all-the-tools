@@ -43,11 +43,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpg',
-      alt: 'The Taj Mahal House on Scenic Highway in Pensacola',
-      caption: 'The Taj Mahal House sits prominently on Escambia Bay - impossible to miss',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/The%20wild%20story%20of%20the%20gaudy%20palace%20on%20scenic%20highway/the-wild-story-of-the-gaudy-palace-pensacola-taj-mahal-in-its-heyday.jpg',
+          alt: 'The Taj Mahal House on Scenic Highway in Pensacola',
+          caption: 'The Taj Mahal House sits prominently on Escambia Bay - impossible to miss',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

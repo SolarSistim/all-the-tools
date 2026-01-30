@@ -259,20 +259,12 @@ export const content: ContentBlock[] = [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/zandoarts-03.jpg',
           alt: 'Lighthugger - Revelation Space by Zandoarts',
-          caption: '"A shuttle rendezvous with the lighthugger Zodiacal Light over the artificial moon Cerberus in Alastair Reynold’s Revelation Space series." - ZandoArts',
+          caption: '"A shuttle rendezvous with the lighthugger Zodiacal Light over the artificial moon Cerberus in Alastair Reynold\'s Revelation Space series." - ZandoArts',
         },
-      ],
-      layout: 'grid',
-    },
-  },
-  {
-    type: 'gallery',
-    data: {
-      images: [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/zandoarts-04.jpg',
           alt: 'Nostalgia for Infinity by Zandoarts',
-          caption: '"A shuttle rendezvous with the lighthugger Zodiacal Light over the artificial moon Cerberus in Alastair Reynold’s Revelation Space series." - ZandoArts',
+          caption: '"A shuttle rendezvous with the lighthugger Zodiacal Light over the artificial moon Cerberus in Alastair Reynold\'s Revelation Space series." - ZandoArts',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/zandoarts-05.jpg',
@@ -282,7 +274,7 @@ export const content: ContentBlock[] = [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/zandoarts-06.jpg',
           alt: 'Zodiacal Light by Zandoarts',
-          caption: '"A shuttle rendezvous with the lighthugger Zodiacal Light over the artificial moon Cerberus in Alastair Reynold’s Revelation Space series. " - ZandoArts',
+          caption: '"A shuttle rendezvous with the lighthugger Zodiacal Light over the artificial moon Cerberus in Alastair Reynold\'s Revelation Space series. " - ZandoArts',
         },
       ],
       layout: 'grid',
@@ -315,11 +307,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/VictorTomioka-02.jpg',
-      alt: 'Lighthugger concept art by Victor Tomioka',
-      caption: '"My design and 3D model of the Lighthugger "Nostalgia for Infinity" from the Revelation Space novel series by Alastair Reynolds." - Victor Tomioka',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/VictorTomioka-02.jpg',
+          alt: 'Lighthugger concept art by Victor Tomioka',
+          caption: '"My design and 3D model of the Lighthugger "Nostalgia for Infinity" from the Revelation Space novel series by Alastair Reynolds." - Victor Tomioka',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -341,14 +338,6 @@ export const content: ContentBlock[] = [
           alt: 'Lighthugger concept art by Victor Tomioka',
           caption: 'Additional angles for Victor Tomioka\'s lighthugger.',
         },
-      ],
-      layout: 'grid',
-    },
-  },
-  {
-    type: 'gallery',
-    data: {
-      images: [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/VictorTomioka-04.jpg',
           alt: 'Lighthugger concept art by Victor Tomioka',
@@ -388,11 +377,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/VictorTomioka-06.jpg',
-      alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/VictorTomioka-06.jpg',
+          alt: 'Lighthugger artwork by Yann S',
+          caption: 'Lighthugger artwork by Yann S.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -402,63 +396,47 @@ export const content: ContentBlock[] = [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-10.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-02.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-03.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
-      ],
-      layout: 'grid',
-    },
-  },
-  {
-    type: 'gallery',
-    data: {
-      images: [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-04.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-05.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-06.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
-      ],
-      layout: 'grid',
-    },
-  },
-  {
-    type: 'gallery',
-    data: {
-      images: [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-07.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-08.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/YannS-09.jpg',
           alt: 'Lighthugger artwork by Yann S',
-      caption: 'Lighthugger artwork by Yann S.',
+          caption: 'Lighthugger artwork by Yann S.',
         },
       ],
       layout: 'grid',
@@ -485,11 +463,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/beltminer-01.jpg',
-      alt: 'Lighthugger Nightshade by Beltminer',
-      caption: 'This is the "Nightshade" from Alistair Reynolds "Redemption Ark" The book includes some of the greatest science fiction imagery I\'ve ever read. Rocking good fun. Made a mistake on the title of this image, now corrected.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/beltminer-01.jpg',
+          alt: 'Lighthugger Nightshade by Beltminer',
+          caption: 'This is the "Nightshade" from Alistair Reynolds "Redemption Ark" The book includes some of the greatest science fiction imagery I\'ve ever read. Rocking good fun. Made a mistake on the title of this image, now corrected.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -506,11 +489,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/argonos-01.jpg',
-      alt: 'Lighthugger Scene (WIP) by Argonos',
-      caption: 'Lighthugger Scene (WIP) - The sense of a ship existing in the vast emptiness of space, alone and ancient and enduring.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/argonos-01.jpg',
+          alt: 'Lighthugger Scene (WIP) by Argonos',
+          caption: 'Lighthugger Scene (WIP) - The sense of a ship existing in the vast emptiness of space, alone and ancient and enduring.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -558,11 +546,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/dansylveste-01.jpg',
-      alt: 'Everlasting Lights by Dansylveste',
-      caption: 'The lighthugger "The Nostalgia for Infinity" took off after almost 30 years of standing in Ararat\'s Pattern Juggler oceans." - DanSylveste',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/dansylveste-01.jpg',
+          alt: 'Everlasting Lights by Dansylveste',
+          caption: 'The lighthugger "The Nostalgia for Infinity" took off after almost 30 years of standing in Ararat\'s Pattern Juggler oceans." - DanSylveste',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -579,11 +572,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/quinnthomson-01.jpg',
-      alt: 'Nostalgia for Infinity by Quinnthomson',
-      caption: '"Some fanart of the good ship “Nostalgia for Infinity” from Alastair Reynolds’ Revelation Space, which I’d definitely recommend if you love weird scifi stuff!" - Quinnthomson on Deviant Art',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/quinnthomson-01.jpg',
+          alt: 'Nostalgia for Infinity by Quinnthomson',
+          caption: '"Some fanart of the good ship "Nostalgia for Infinity" from Alastair Reynolds\' Revelation Space, which I\'d definitely recommend if you love weird scifi stuff!" - Quinnthomson on Deviant Art',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -600,11 +598,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/cosm0synthes1s-01.jpg',
-      alt: 'Nostalgia For Infinity by Cosm0synthes1s',
-      caption: '"The Ultranaut vessel “Nostalgia for Infinity” rests in a parking orbit around the planet Resurgam in the Delta Pavonis system. Roughly four kilometers long, it is a fairly standard example of the class of spacecraft known as “lighthuggers”, so named because they regularly approach the speed of light while traveling between star systems." - Cosm0synthes1s on Deviant Art ',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/cosm0synthes1s-01.jpg',
+          alt: 'Nostalgia For Infinity by Cosm0synthes1s',
+          caption: '"The Ultranaut vessel "Nostalgia for Infinity" rests in a parking orbit around the planet Resurgam in the Delta Pavonis system. Roughly four kilometers long, it is a fairly standard example of the class of spacecraft known as "lighthuggers", so named because they regularly approach the speed of light while traveling between star systems." - Cosm0synthes1s on Deviant Art ',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -621,11 +624,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/IsaacHannaford-01.jpg',
-      alt: 'Light Hugger "Void Transcendent" by Isaac Hannaford',
-      caption: '"Light Hugger "Void Transcendent" from Alastair Reynolds "Revelation Space", by Isaac Hannaford" - Isaac Hannaford, posted by Xeelee1123 on Redit',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/IsaacHannaford-01.jpg',
+          alt: 'Light Hugger "Void Transcendent" by Isaac Hannaford',
+          caption: '"Light Hugger "Void Transcendent" from Alastair Reynolds "Revelation Space", by Isaac Hannaford" - Isaac Hannaford, posted by Xeelee1123 on Redit',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -642,11 +650,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/smiling-demon-01.jpg',
-      alt: 'Lighthugger by Alastair Temple',
-      caption: '"Lighthugger" - By Alastair Temple, posted by One_Giant_Nostril on Reddit',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/smiling-demon-01.jpg',
+          alt: 'Lighthugger by Alastair Temple',
+          caption: '"Lighthugger" - By Alastair Temple, posted by One_Giant_Nostril on Reddit',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {
@@ -657,11 +670,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'image',
+    type: 'gallery',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/AlastairReynoldsConcept-01.jpg',
-      alt: 'Lighthugger concept art by Alastair Reynolds',
-      caption: 'Alastair Reynolds\'s own concept art for a lighthugger. It\'s always fascinating to see how an author visualizes their own creations - and how close (or not) various fan interpretations come to that original vision.',
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Fan%20Art%20Captures%20Alastair%20Reynolds%20Revelation%20Space/AlastairReynoldsConcept-01.jpg',
+          alt: 'Lighthugger concept art by Alastair Reynolds',
+          caption: 'Alastair Reynolds\'s own concept art for a lighthugger. It\'s always fascinating to see how an author visualizes their own creations - and how close (or not) various fan interpretations come to that original vision.',
+        },
+      ],
+      layout: 'grid',
     },
   },
   {

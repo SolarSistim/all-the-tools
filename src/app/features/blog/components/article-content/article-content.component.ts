@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ContentBlock } from '../../models/blog.models';
-import { ArticleImageComponent } from '../article-image/article-image.component';
 import { ImageGalleryComponent } from '../image-gallery/image-gallery.component';
 import { BlockquoteComponent } from '../blockquote/blockquote.component';
 import { CodeBlockComponent } from '../code-block/code-block.component';
@@ -33,7 +32,6 @@ import { SnowGlobeShake } from '../../../art/snow-globe-shake/snow-globe-shake';
   imports: [
     CommonModule,
     MatButtonModule,
-    ArticleImageComponent,
     ImageGalleryComponent,
     BlockquoteComponent,
     CodeBlockComponent,
