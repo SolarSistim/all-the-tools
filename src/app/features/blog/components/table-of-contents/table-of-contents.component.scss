@@ -18,6 +18,7 @@
     height: 39px !important;
     min-width: 39px !important;
     min-height: 39px !important;
+    border-radius: 8px !important;
 
     mat-icon {
       font-size: 20px;
@@ -36,7 +37,7 @@
     min-width: 26px !important;
     min-height: 26px !important;
     padding: 0 !important;
-    border-radius: 4px !important;
+    border-radius: 8px !important;
 
     mat-icon {
       font-size: 18px;
@@ -99,13 +100,13 @@
     }
   }
 
-  // Mobile: Slide-in panel from right (20% shorter height)
+  // Mobile: Slide-in panel from right (10% shorter than before)
   @media (max-width: 768px) {
     top: 100px;
     right: 0;
     width: 85%;
     max-width: 400px;
-    height: calc(80vh - 64px);
+    height: calc(72vh - 58px);
     border-radius: 12px 0 0 12px;
 
     &.visible {
@@ -148,7 +149,7 @@
   height: 32px !important;
   min-width: 32px !important;
   min-height: 32px !important;
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   padding: 0 !important;
 
   &:hover {

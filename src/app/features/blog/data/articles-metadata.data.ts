@@ -79,7 +79,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     featured: true,
     hasAudio: false,
     hasVideo: false,
-    display: true,
+    display: false,
     relatedArticles: ['9', '1', '110'],
     readTime: 10,
   },
