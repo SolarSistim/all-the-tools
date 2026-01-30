@@ -1,39 +1,39 @@
 import { ContentBlock } from '../../models/blog.models';
 
 /**
- * Article Content: The Complete Guide to Food Trucks in Pensacola, FL
+ * Article Content: The Complete Guide to Mexican Food Trucks in Pensacola, FL
  */
 export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Finding food near me shouldn\'t feel like a scavenger hunt. But here\'s the thing about Pensacola\'s food truck scene — it\'s scattered, inconsistent, and criminally under-documented. So I spent the better part of a month tracking down every mobile food truck worth your time, from the taco truck tucked behind downtown buildings to the Mexican food truck that locals guard like a state secret.',
+      text: 'Pensacola\'s Mexican food truck scene is where the real action is. These aren\'t just quick bites — they\'re authentic operations run by people who know their craft. ',
       className: 'lead',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Whether you\'re searching for "truck food near me" at 2 AM or planning food truck catering for an event, this is the authoritative list. No fluff. Just the trucks that show up, serve quality food, and have earned their spot in Pensacola\'s surprisingly competitive mobile food scene.',
+      text: 'This guide covers the Mexican food trucks currently operating in the Pensacola area. Future guides will explore other types of food trucks — pizza, BBQ, fusion, and more. Whether you\'re searching for authentic street tacos, birria, or regional specialties, this is the definitive list of Mexican food trucks that show up consistently and deliver quality.',
     },
   },
   {
     type: 'heading',
     data: {
       level: 2,
-      text: 'Why Pensacola\'s Food Truck Scene Deserves Your Attention',
+      text: 'Why Mexican Food Trucks Matter in Pensacola',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'The food truck industry isn\'t what it was ten years ago. What started as a novelty — quirky food truck names, experimental menus, converted vans with big dreams — has matured into something more substantial. The best food trucks now rival brick-and-mortar restaurants in quality while maintaining the flexibility and personality that make them special.',
+      text: 'Mexican food trucks represent some of the most authentic and accessible cuisine in Pensacola. These aren\'t experimental fusion concepts — they\'re rooted in real Mexican recipes, often passed down through families. What started as necessity for many operators has evolved into a thriving community of mobile Mexican restaurants that compete on quality, authenticity, and consistency.',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Pensacola\'s mobile food scene reflects this evolution. You won\'t find a sprawling food truck park like Austin or Portland (though God knows we could use one), but what we <em>do</em> have is a collection of fiercely independent operators who\'ve figured out how to thrive in a market that doesn\'t always make it easy.',
+      text: 'Pensacola\'s Mexican food truck scene has developed its own character. You won\'t find them all in one organized food truck park, but scattered across the city in strategic locations, each building loyal followings through word-of-mouth and social media.',
     },
   },
   {
@@ -51,93 +51,7 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
-      text: 'Taco Trolley: The 30-Foot Icon of Downtown',
-    },
-  },
-  {
-    type: 'businessRatings',
-    data: {
-      ratings: [
-        {
-          source: 'Yelp',
-          rating: 3.0,
-          reviewCount: 2,
-        },
-      ],
-    },
-  },
-  {
-    type: 'moviePoster',
-    data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taco-trolley-truck.jpg',
-      alt: 'Taco Trolley - Downtown Pensacola Food Truck',
-      caption: 'Taco Trolley\'s converted 30-foot trolley has become a downtown landmark',
-      width: 70,
-      height: 90,
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: '<strong>Taco Trolley</strong><br>501 N G Street, Pensacola, FL 32501<br>Phone: (850) 525-8016<br><a href="https://www.facebook.com/Tacotrolley1/" target="_blank" rel="noopener">Facebook</a> | <a href="https://www.yelp.com/biz/taco-trolley-pensacola" target="_blank" rel="noopener">Yelp</a> | <a href="https://www.google.com/maps/search/?api=1&query=Taco%20Trolley%20Pensacola%20FL" target="_blank" rel="noopener">Directions</a>',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'You can\'t miss the 30-foot converted trolley parked at 501 N G Street in downtown Pensacola. The setup looks permanent enough that locals clearly know where to find it when they\'re craving tacos.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Mexican street tacos with Southern influences',
-        '<strong>Location:</strong> Downtown Pensacola (semi-permanent)',
-        '<strong>Price Range:</strong> $$ (Tacos $3-5, full meals $10-15)',
-        '<strong>Best For:</strong> Quick lunch downtown, late-night food',
-        '<strong>Can\'t Miss:</strong> Carnitas tacos, shrimp tacos',
-      ],
-    },
-  },
-  {
-    type: 'gallery',
-    data: {
-      images: [
-        {
-          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taco-trolley-01.jpg',
-          alt: 'Taco Trolley tacos and menu items',
-          caption: 'Fresh tacos with authentic Mexican flavors',
-        },
-        {
-          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taco-trolley-02.jpg',
-          alt: 'Taco Trolley food spread',
-          caption: 'From classic street tacos to Southern-influenced specials',
-        },
-        {
-          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taco-trolley-03.jpg',
-          alt: 'Taco Trolley exterior and service window',
-          caption: 'The iconic trolley has become a downtown fixture',
-        },
-      ],
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'Looking at the menu board, I can see they\'re going for that sweet spot between authentic Mexican street food and Gulf Coast influence. The shrimp tacos caught my eye — there\'s something appealing about watching a taco truck lean into local seafood instead of playing it safe with the usual suspects.',
-    },
-  },
-  {
-    type: 'adsense',
-    data: {},
-  },
-  {
-    type: 'heading',
-    data: {
-      level: 2,
-      text: 'The Happy Taco: Cantonment\'s Hidden Gem',
+      text: 'The Happy Taco',
     },
   },
   {
@@ -162,7 +76,7 @@ export const content: ContentBlock[] = [
     data: {
       src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/the-happy-taco-truck.jpg',
       alt: 'The Happy Taco - Cantonment Food Truck',
-      caption: 'The Happy Taco serves authentic Mexican food from Cantonment',
+      caption: 'The Happy Taco food truck in Cantonment',
       width: 70,
       height: 90,
     },
@@ -170,13 +84,19 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '<strong>The Happy Taco</strong><br>1803 S. Highway 95A, Cantonment, FL 32533<br>Phone: (850) 860-2812<br><a href="https://www.facebook.com/happytacopensacola/" target="_blank" rel="noopener">Facebook</a> | <a href="https://www.yelp.com/biz/happy-taco-cantonment" target="_blank" rel="noopener">Yelp</a> | <a href="https://www.doordash.com/store/the-happy-taco-cantonment-1528059/2434777/" target="_blank" rel="noopener">DoorDash</a> | <a href="https://www.google.com/maps/search/?api=1&query=The%20Happy%20Taco%20Pensacola%20FL" target="_blank" rel="noopener">Directions</a>',
+      text: '<strong>The Happy Taco</strong><br>1803 S. Highway 95A, Cantonment, FL 32533<br>Phone: (850) 860-2812<br><a href="https://www.facebook.com/happytacopensacola/" target="_blank" rel="noopener">Facebook</a> | <a href="https://www.yelp.com/biz/happy-taco-cantonment" target="_blank" rel="noopener">Yelp</a> | <a href="https://www.doordash.com/store/the-happy-taco-cantonment-1528059/2434777/" target="_blank" rel="noopener">DoorDash</a>',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Out in Cantonment at 1803 S. Highway 95A, The Happy Taco sits as one of those spots that feels more built for takeout than lingering. They\'ve got DoorDash if you don\'t want to make the drive.',
+      text: 'The Happy Taco is a local favorite in the Cantonment and Pensacola area, known for its massive portions and unique "puffy" taco shells. While it originally gained fame as a food truck, its primary location is now a physical storefront on Highway 29.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'People describe the atmosphere as casual and laid-back, with a small, hardworking crew. It\'s built a loyal following for those seeking a "home-cooked" Tex-Mex feel rather than a formal restaurant experience. People rave about the "Mega Burrito" (a 14-inch monster) and the "Colossal Nachos" as standout values for the price.',
     },
   },
   {
@@ -184,10 +104,10 @@ export const content: ContentBlock[] = [
     data: {
       style: 'unordered',
       items: [
-        '<strong>Specialty:</strong> Authentic Mexican taquerias fare',
+        '<strong>Specialty:</strong> Puffy tacos "Supreme style," Mega Burrito, Colossal Nachos',
         '<strong>Location:</strong> Cantonment (1803 S. Highway 95A)',
-        '<strong>Price Range:</strong> $$ (Tacos $3-4, platters $12-18)',
-        '<strong>Best For:</strong> Authentic Mexican food, family meals',
+        '<strong>Price Range:</strong> Tacos $3-4, platters $12-18',
+        '<strong>Unique Features:</strong> Loaded Queso Fries, Mind-Blowing Fajitas, Fiesta Sauce',
         '<strong>Delivery:</strong> Available via DoorDash',
       ],
     },
@@ -199,25 +119,19 @@ export const content: ContentBlock[] = [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/the-happy-taco-01.jpg',
           alt: 'The Happy Taco authentic Mexican dishes',
-          caption: 'Generous portions of authentic Mexican cuisine',
+          caption: 'The Happy Taco menu items',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/the-happy-taco-02.jpg',
           alt: 'The Happy Taco menu items and tacos',
-          caption: 'Fresh ingredients and traditional preparation methods',
+          caption: 'The Happy Taco tacos',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/the-happy-taco-03.jpg',
           alt: 'The Happy Taco food truck exterior',
-          caption: 'Find them at 1803 S. Highway 95A in Cantonment',
+          caption: 'The Happy Taco exterior',
         },
       ],
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'From what I can see on the menu, they\'re sticking to traditional Mexican taquerias fare without watering things down for a broader audience. The photos show the kind of authentic presentation you\'d expect from a place that isn\'t trying to be everything to everyone.',
     },
   },
   {
@@ -228,7 +142,7 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
-      text: 'Frontera\'s Tacos: Smoked Meats at the Convenience Store',
+      text: 'Frontera\'s Tacos',
     },
   },
   {
@@ -253,7 +167,7 @@ export const content: ContentBlock[] = [
     data: {
       src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/fronteras-tacos-pensacola-truck.jpg',
       alt: 'Frontera\'s Tacos - Pensacola Food Truck',
-      caption: 'Frontera\'s Tacos serves smoked meats and quesabirria from their spot at a convenience store',
+      caption: 'Frontera\'s Tacos food truck',
       width: 70,
       height: 90,
     },
@@ -261,13 +175,19 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '<strong>Frontera\'s Tacos</strong><br>2118 W 9 Mile Rd, Pensacola, FL 32534<br>Phone: (850) 200-7624<br>Hours: Monday-Saturday, 10am-8:30pm<br><a href="https://www.google.com/maps/search/?api=1&query=Fronteras%20Tacos%20Pensacola%20FL" target="_blank" rel="noopener">Directions</a>',
+      text: '<strong>Frontera\'s Tacos</strong><br>2118 W 9 Mile Rd, Pensacola, FL 32534<br>Phone: (850) 200-7624<br>Hours: Monday-Saturday, 10am-8:30pm',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Frontera\'s Tacos has set up shop attached to a convenience store at 2118 W 9 Mile Rd. The smell of smoked meat apparently hits you before you even reach the ordering window — they\'re smoking meat on-site, which you can see in the photos where the smoker sits prominently next to the truck.',
+      text: 'Located on 9 Mile Road and attached to a convenience store, Frontera\'s Tacos has built a massive reputation for its on-site smoked meats and authentic Mexican street food. While the setting is casual, people rave that the flavors rival high-end establishments, saying that the scent of the wood smoker is a calling card for the business from the road.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The setup includes a covered outdoor seating area with canopies, providing a shaded spot to eat on-site. Their quesabirria tacos are a standout, served with a rich, house-made consommé that people say is essential for dipping.',
     },
   },
   {
@@ -275,18 +195,12 @@ export const content: ContentBlock[] = [
     data: {
       style: 'unordered',
       items: [
-        '<strong>Specialty:</strong> Quesabirria tacos and smoked meats',
+        '<strong>Specialty:</strong> Smoked brisket burritos, rib platters, quesabirria tacos',
         '<strong>Location:</strong> 2118 W 9 Mile Rd (at convenience store)',
-        '<strong>Price Range:</strong> $$ (Tacos $10-20, Tuesday/Saturday special: 4 tacos for $12)',
-        '<strong>Best For:</strong> Birria enthusiasts, smoked meat lovers',
-        '<strong>Can\'t Miss:</strong> Quesabirria tacos, smoked brisket burritos',
+        '<strong>Price Range:</strong> Tacos $10-20, Tuesday/Saturday special: 4 tacos for $12',
+        '<strong>Signature Style:</strong> BBQ-Mexican fusion with on-site smoked meats',
+        '<strong>Seating:</strong> Covered outdoor area with canopies',
       ],
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'Looking at the menu, the quesabirria tacos seem to be the main draw, but those smoked meat burritos keep showing up in customer photos looking absurdly overstuffed. People mention getting massive portions for reasonable prices, and the Tuesday/Saturday special — four tacos for $12 — appears to bring in a steady crowd based on the timing of positive reviews clustering around those days.',
     },
   },
   {
@@ -296,25 +210,19 @@ export const content: ContentBlock[] = [
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/fronteras-tacos-pensacola-03.jpg',
           alt: 'Frontera\'s Tacos quesabirria and smoked meat dishes',
-          caption: 'Quesabirria tacos with consommé and generous portions',
+          caption: 'Frontera\'s Tacos quesabirria',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/fronteras-tacos-pensacola-02.jpg',
           alt: 'Frontera\'s Tacos menu items and burritos',
-          caption: 'Smoked meat burritos packed with fresh ingredients',
+          caption: 'Frontera\'s Tacos burritos',
         },
         {
           src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/fronteras-tacos-pensacola-01.jpg',
           alt: 'Frontera\'s Tacos food spread',
-          caption: 'Fresh, authentic Mexican food with smoked meat specialty',
+          caption: 'Frontera\'s Tacos menu items',
         },
       ],
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'The outdoor seating under a canopy setup looks functional rather than Instagram-worthy, which tracks with the overall vibe. From what I can gather scrolling through reviews, people aren\'t coming here for atmosphere — they\'re coming because the 4.8-star Google rating tells them that the food is consistently good. The convenience store location might seem odd, but it apparently works in their favor for easy parking and accessibility.',
     },
   },
   {
@@ -325,7 +233,376 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
-      text: 'Carne Asada Darling: Pensacola\'s Nicaraguan Secret',
+      text: 'Tacos La Mixteca',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Yelp',
+          rating: 4.5,
+          reviewCount: null,
+        },
+        {
+          source: 'Google',
+          rating: 4.8,
+          reviewCount: 50,
+        },
+        {
+          source: 'Facebook',
+          rating: 5.0,
+          reviewCount: null,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-la-mixteca-truck.jpg',
+      alt: 'Tacos La Mixteca - Mobile Highway Food Truck Pensacola',
+      caption: 'Tacos La Mixteca food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Tacos La Mixteca</strong><br>7144 Mobile Hwy, Pensacola, FL 32526<br>Phone: (850) 449-3466<br><a href="https://www.instagram.com/tacoslamixteca/" target="_blank" rel="noopener">Instagram</a> | <a href="https://www.facebook.com/tacoslamixteca/" target="_blank" rel="noopener">Facebook</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Located on Mobile Highway, Tacos La Mixteca\'s become a staple for folks seeking traditional, street-style Mexican food in a casual outdoor setting. People say the truck\'s reputation is built on authentic preparation methods and bold, spicy salsas that provide a genuine "hole-in-the-wall" experience.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Their most celebrated dish is the quesabirria, described as being rich, cheesy, and served with a flavorful consommé for dipping. Beyond birria, they offer a wide range of meats including Al Pastor, steak, and carnitas served on fresh corn tortillas with traditional toppings like radish and lime. The truck features a dedicated, covered outdoor seating area, allowing customers to enjoy their meals immediately while they\'re hot and fresh.',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Quesabirria, Al Pastor, steak, carnitas',
+        '<strong>Location:</strong> Mobile Highway (7144 Mobile Hwy with covered patio)',
+        '<strong>Price Range:</strong> Street tacos $3-5, quesabirria combo $12-18',
+        '<strong>Signature Style:</strong> Traditional preparation with bold salsas',
+        '<strong>Seating:</strong> Covered outdoor area for immediate dining',
+      ],
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-la-mixteca-01.jpg',
+          alt: 'Tacos La Mixteca quesabirria tacos with consommé',
+          caption: 'Tacos La Mixteca quesabirria',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-la-mixteca-02.jpg',
+          alt: 'Tacos La Mixteca street tacos - steak and al pastor',
+          caption: 'Tacos La Mixteca street tacos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-la-mixteca-03.jpg',
+          alt: 'Tacos La Mixteca food truck and patio seating',
+          caption: 'Tacos La Mixteca exterior with patio',
+        },
+      ],
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Tacos El Amigo',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Yelp',
+          rating: 4.9,
+          reviewCount: 89,
+        },
+        {
+          source: 'Google',
+          rating: 4.8,
+          reviewCount: 200,
+        },
+        {
+          source: 'Facebook',
+          rating: 4.6,
+          reviewCount: null,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-el-amigo-tippin-ave-truck.jpg',
+      alt: 'Tacos El Amigo - Tippin Avenue Food Truck Pensacola',
+      caption: 'Tacos El Amigo food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Tacos El Amigo (Tippin Ave)</strong><br>6201 Tippin Ave, Pensacola, FL 32504<br>Phone: (850) 529-2698 or (850) 525-9092<br><a href="https://www.doordash.com/business/tacos-el-amigo-4-11793344/menu" target="_blank" rel="noopener">DoorDash</a> | <a href="https://wnam-cdn.menulist.menu/storage/media/companies_menu_pdf/92956794/tacos-el-amigo-pensacola-menu.pdf" target="_blank" rel="noopener">Menu</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Widely regarded as one of the most authentic Mexican spots in Pensacola, Tacos El Amigo (often identified with its location on Creighton Rd/Tippin Ave) is a no-frills food truck that\'s earned a massive local following. People consistently praise it for providing a genuine street-taco experience that prioritizes flavor and traditional preparation over a fancy atmosphere.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'People highlight the "Tripas" for being perfectly cleaned and fried to be exceptionally crispy, as well as the "Al Pastor" and "Carne Asada" for their traditional seasoning. Every order typically comes with the classic street-style pairings of fresh radish slices, grilled onions, lime wedges, and potent house-made salsas. People often cite it in local polls and rankings—it\'s recently been noted as the highest-rated Mexican restaurant in the Pensacola area by community discovery platforms.',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Perfectly prepared Tripas, Al Pastor, Carne Asada',
+        '<strong>Location:</strong> Tippin Ave/Creighton Rd (6201 Tippin Ave)',
+        '<strong>Price Range:</strong> Street tacos $3-5, platters $12-20',
+        '<strong>Signature Style:</strong> No-frills authentic preparation with house-made salsas',
+        '<strong>Award-Winning:</strong> Highest-rated Mexican restaurant in Pensacola area',
+      ],
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-el-amigo-tippin-ave-01.jpg',
+          alt: 'Tacos El Amigo tripas and authentic street tacos',
+          caption: 'Tacos El Amigo tripas tacos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-el-amigo-tippin-ave-02.jpg',
+          alt: 'Tacos El Amigo al pastor and carne asada',
+          caption: 'Tacos El Amigo al pastor and carne asada',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/tacos-el-amigo-tippin-ave-03.jpg',
+          alt: 'Tacos El Amigo complete taco spread',
+          caption: 'Tacos El Amigo taco selection',
+        },
+      ],
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Taqueria El Güero',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Google',
+          rating: 4.4,
+          reviewCount: 7,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-el-guero-truck.jpg',
+      alt: 'Taqueria El Güero - Avery Street Food Truck Pensacola',
+      caption: 'Taqueria El Güero food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Taqueria El Güero</strong><br>2704 W Avery St, Pensacola, FL 32505',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Located on Avery Street, Taqueria El Güero is a dedicated street food operation known for its straightforward, no-frills approach to authentic Mexican cuisine. It\'s carved out a niche as a true "under-the-radar" spot in Pensacola, favored by those who prioritize traditional flavors and quick service in an unassuming setting.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'People point to the tacos as a highlight, noting they\'re served in the classic street style with fresh cilantro, onions, and lime. While the menu\'s focused, the steak (asada) and pork (al pastor) are standout protein choices for their seasoning and texture. People describe it as a local secret, and they appreciate the efficiency of the service, making it a popular choice for a fast, high-quality lunch on the go.',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Steak tacos (asada), pork tacos (al pastor), traditional street style',
+        '<strong>Location:</strong> Avery Street (2704 W Avery St)',
+        '<strong>Price Range:</strong> Affordable street food',
+        '<strong>Signature Style:</strong> Classic street style with fresh cilantro, onions, and lime',
+        '<strong>Vibe:</strong> Local secret, no-frills, efficient service',
+      ],
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-el-guero-01.jpg',
+          alt: 'Taqueria El Güero authentic street tacos',
+          caption: 'Taqueria El Güero street tacos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-el-guero-02.jpg',
+          alt: 'Taqueria El Güero traditional preparations',
+          caption: 'Taqueria El Güero menu items',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-el-guero-03.jpg',
+          alt: 'Taqueria El Güero fresh ingredients and beverages',
+          caption: 'Taqueria El Güero beverages',
+        },
+      ],
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Taqueria Olgy\'s',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Yelp',
+          rating: 3.5,
+          reviewCount: 103,
+        },
+        {
+          source: 'Google',
+          rating: 4.4,
+          reviewCount: 272,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-olgys-food-truck-truck.jpg',
+      alt: 'Taqueria Olgy\'s Food Truck - Pensacola',
+      caption: 'Taqueria Olgy\'s food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Taqueria Olgy\'s Food Truck</strong><br>5222 North W Street, Pensacola, FL 32505 (Primary)<br>4116 County Rd 297A, Cantonment, FL 32533 (Secondary)<br>Phone: (850) 292-4642 or (850) 341-5166<br><a href="https://www.doordash.com/en/store/taqueria-olgys-food-truck-pensacola-27472450/" target="_blank" rel="noopener">DoorDash</a> | <a href="https://taqueriaolgyspensacola.com/" target="_blank" rel="noopener">Website</a> | <a href="https://taqueriaolgyspensacola.com/menu" target="_blank" rel="noopener">Menu</a> | <a href="https://www.facebook.com/people/Taqueria-Olgys/100063765108343/" target="_blank" rel="noopener">Facebook</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Located in Pensacola with a mobile presence often found in Cantonment, Taqueria Olgy\'s is a family-run business that\'s become a cornerstone of the local food scene. It\'s widely recognized for an extensive menu that successfully blends traditional recipes from Zitacuaro, Michoacán, with creative, modern street food trends.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'This massive, oversized "Anaconda" Burrito is a local legend, often paired with their "Birria Pizza," which people describe as a crowd-pleasing, cheesy centerpiece served with rich dipping consommé. Beyond standard tacos, people frequently recommend their unique birria-filled egg rolls and grilled "puffy" tacos for a different take on traditional flavors. The business prides itself on authentic preparation—people note the high quality of their handmade tortillas and potent house-made salsas.',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Anaconda Burrito, Birria Pizza, Birria Egg Rolls, puffy tacos',
+        '<strong>Locations:</strong> Pensacola (5222 North W Street) and Cantonment (4116 County Rd 297A)',
+        '<strong>Price Range:</strong> Tacos $3-5, specialty items $12-25',
+        '<strong>Signature Style:</strong> Zitacuaro Michoacán recipes with creative modern twists',
+        '<strong>Must-Try:</strong> Handmade tortillas and house-made salsas',
+      ],
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-olgys-food-truck-01.jpg',
+          alt: 'Taqueria Olgy\'s XXL Anaconda Burrito and birria specialties',
+          caption: 'Taqueria Olgy\'s XXL Anaconda Burrito',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-olgys-food-truck-02.jpg',
+          alt: 'Taqueria Olgy\'s Birria Pizza with consommé',
+          caption: 'Taqueria Olgy\'s Birria Pizza',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/taqueria-olgys-food-truck-03.jpg',
+          alt: 'Taqueria Olgy\'s authentic street tacos and birria egg rolls',
+          caption: 'Taqueria Olgy\'s birria egg rolls and tacos',
+        },
+      ],
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Hector\'s Mexican Grill',
     },
   },
   {
@@ -337,15 +614,25 @@ export const content: ContentBlock[] = [
           rating: 5.0,
           reviewCount: 2,
         },
+        {
+          source: 'Google',
+          rating: 4.6,
+          reviewCount: 102,
+        },
+        {
+          source: 'Facebook',
+          rating: 5.0,
+          reviewCount: null,
+        },
       ],
     },
   },
   {
     type: 'moviePoster',
     data: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/carne-asada-darling-truck.jpg',
-      alt: 'Carne Asada Darling - Nicaraguan Food Truck Pensacola',
-      caption: 'Carne Asada Darling brings authentic Nicaraguan cuisine to East Pensacola',
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/hectors-mexican-grill-truck.jpg',
+      alt: 'Hector\'s Mexican Grill Food Truck - Pensacola',
+      caption: 'Hector\'s Mexican Grill food truck',
       width: 70,
       height: 90,
     },
@@ -353,13 +640,19 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '<strong>Carne Asada Darling</strong><br>2600 E Olive Rd, Pensacola, FL 32514<br>Phone: (850) 824-7897<br><a href="mailto:julissavanessamairenachavarria@gmail.com">Email</a> | <a href="https://www.google.com/maps/search/?api=1&query=Carne%20Asada%20Darling%20Pensacola%20FL" target="_blank" rel="noopener">Directions</a>',
+      text: '<strong>Hector\'s Mexican Grill</strong><br>13160 Sorrento Rd, Pensacola, FL 32507<br>Phone: (850) 616-6607<br>Hours: Closes 8:00 PM<br>Price Range: $10–20',
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Carne Asada Darling sits in a patio setup next to a gas station at 2600 E Olive Rd in East Pensacola. The location isn\'t fancy, but the 4.9-star average across 92 Google reviews suggests people aren\'t coming here for ambience.',
+      text: 'Located in Southwest Pensacola near Perdido Key, Hector\'s Mexican Grill is a highly-regarded food truck known for its fresh ingredients and large portions. It\'s cultivated a loyal following among locals who appreciate its authentic flavors and friendly, efficient service in a casual outdoor setting.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Their quesabirria tacos are widely considered a must-try, frequently praised for being rich, cheesy, and served with a deeply flavorful dipping consommé. The menu features standout items like the "Perdido Key Tacos" and the "California Burrito," which is generously stuffed with steak and fries. People note that the meats are perfectly seasoned and the vegetables are exceptionally fresh, contributing to an overall high-quality meal experience. It\'s a popular stop on Sorrento Road for both a quick lunch and for beachgoers heading to or from Perdido Key.',
     },
   },
   {
@@ -367,18 +660,12 @@ export const content: ContentBlock[] = [
     data: {
       style: 'unordered',
       items: [
-        '<strong>Specialty:</strong> Nicaraguan cuisine and birria tacos',
-        '<strong>Location:</strong> East Pensacola (2600 E Olive Rd)',
-        '<strong>Price Range:</strong> $$ (Tacos $10-20, platters $20-30)',
-        '<strong>Best For:</strong> Authentic Nicaraguan food, birria enthusiasts',
-        '<strong>Can\'t Miss:</strong> Birria quesadillas, horchata, empanadas',
+        '<strong>Specialty:</strong> Quesabirria tacos, California Burrito, Perdido Key Tacos',
+        '<strong>Location:</strong> Southwest Pensacola (13160 Sorrento Rd, near Perdido Key)',
+        '<strong>Price Range:</strong> $10–20',
+        '<strong>Signature Style:</strong> Fresh ingredients, perfectly seasoned meats, authentic flavors',
+        '<strong>Best For:</strong> Beach trips, high-quality portions, friendly service',
       ],
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'The birria tacos look legitimately loaded in the photos — the kind where cheese and meat are spilling out the sides and you can see the consommé pooling underneath. People keep using phrases like "the best I\'ve ever had" in their reviews, which is either genuine enthusiasm or coordinated hyperbole. Based on the sheer volume of similar comments about that thicker, smokier consommé, I\'m leaning toward the former.',
     },
   },
   {
@@ -386,33 +673,21 @@ export const content: ContentBlock[] = [
     data: {
       images: [
         {
-          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/carne-asada-darling-01.jpg',
-          alt: 'Carne Asada Darling birria tacos and authentic dishes',
-          caption: 'Loaded birria tacos with rich consommé',
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/hectors-mexican-grill-01.jpg',
+          alt: 'Hector\'s Mexican Grill quesabirria tacos with consommé',
+          caption: 'Hector\'s Mexican Grill quesabirria',
         },
         {
-          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/carne-asada-darling-02.jpg',
-          alt: 'Carne Asada Darling Nicaraguan specialties',
-          caption: 'Authentic Nicaraguan fritanga-style cuisine',
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/hectors-mexican-grill-02.jpg',
+          alt: 'Hector\'s Mexican Grill California Burrito and street tacos',
+          caption: 'Hector\'s Mexican Grill California Burrito',
         },
         {
-          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/carne-asada-darling-03.jpg',
-          alt: 'Carne Asada Darling food spread',
-          caption: 'Fresh, quality ingredients in every dish',
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/hectors-mexican-grill-03.jpg',
+          alt: 'Hector\'s Mexican Grill enchiladas and authentic dishes',
+          caption: 'Hector\'s Mexican Grill enchiladas',
         },
       ],
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'The horchata apparently competes with the birria for "best I\'ve ever had" status in customer reviews. The beef empanadas and al pastor tacos also show up frequently in photos looking exactly how they should. A sweet abuela often works the register, and from what people mention, knowing some Spanish or having a translation app ready might save you from ordering confusion — she\'s lovely but the language barrier is real.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'What strikes me most about scrolling through those 92 reviews is what\'s missing — nobody mentions off days or inconsistent quality. For a food truck operating out of a gas station patio, that\'s harder to pull off than it sounds. The portions look generous in every photo, and multiple people mention getting absurd amounts of food for $10-20, which tracks with what I can see in the images.',
     },
   },
   {
@@ -423,13 +698,99 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
-      text: 'What Makes a Great Food Truck? (And Why Most Fail)',
+      text: 'Mex-N-Go',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Google',
+          rating: 4.8,
+          reviewCount: 14,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/mex-n-go-food-truck-truck.jpg',
+      alt: 'Mex-N-Go Food Truck - Gulf Breeze',
+      caption: 'Mex-N-Go food truck',
+      width: 70,
+      height: 90,
     },
   },
   {
     type: 'paragraph',
     data: {
-      text: 'Let me tell you something that nobody in the food truck industry wants to admit: most mobile food trucks fail within the first year. Not because the food is bad (though that doesn\'t help), but because the business model is brutal.',
+      text: '<strong>Mex-N-Go</strong><br>4454 Gulf Breeze Pkwy, Gulf Breeze, FL 32563<br>Phone: (850) 480-9610',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Located in Gulf Breeze just across the bridge from Pensacola, Mex-N-Go\'s quickly gained a reputation as a high-quality "hidden gem" for those seeking fast, authentic Mexican street food. While it operates out of a stationary truck setup, people cite it for its consistency and fresh preparation.',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Highly recommended are the breakfast burritos, which are often described as some of the best and most substantial in the area. Their tacos are served on traditional fresh corn tortillas with generous portions of cilantro and onions, with the carne asada and al pastor being top-rated protein choices. It\'s said that their salsas have a genuine, spicy kick that sets them apart from more commercialized spots. It\'s known for efficient service and is a popular stop for a quick, affordable lunch or a convenient grab-and-go meal on the way to the beach.',
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Breakfast burritos, carne asada tacos, al pastor tacos',
+        '<strong>Location:</strong> Gulf Breeze (4454 Gulf Breeze Pkwy)',
+        '<strong>Price Range:</strong> Affordable quick service',
+        '<strong>Signature Style:</strong> Fresh corn tortillas, house-made salsas, authentic preparation',
+        '<strong>Best For:</strong> Breakfast burritos, beach trips, quick authentic meals',
+      ],
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/mex-n-go-food-truck-01.jpg',
+          alt: 'Mex-N-Go breakfast burritos and morning specialties',
+          caption: 'Mex-N-Go breakfast burritos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/mex-n-go-food-truck-02.jpg',
+          alt: 'Mex-N-Go street tacos on fresh corn tortillas',
+          caption: 'Mex-N-Go street tacos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/mex-n-go-food-truck-03.jpg',
+          alt: 'Mex-N-Go authentic Mexican dishes',
+          caption: 'Mex-N-Go menu items',
+        },
+      ],
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'What Makes a Great Food Truck?',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Most mobile food trucks fail within the first year. Not because the food is bad (though that doesn\'t help), but because the business model is brutal.',
     },
   },
   {
@@ -458,44 +819,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'The trucks featured here understand this. They\'re not trying to be fusion-forward concept trucks with clever food truck names and Instagram-bait presentation. They\'re serving excellent food consistently, building loyal followings, and making the economics work.',
-    },
-  },
-  {
-    type: 'heading',
-    data: {
-      level: 2,
-      text: 'How to Start a Food Truck in Pensacola (The Honest Version)',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'If you\'re seriously considering how to start a food truck, let\'s talk numbers. A used, food-ready truck will run you $40,000-$70,000. A new build? Easily $100,000+. That\'s before licensing, insurance, initial inventory, or the first month you don\'t make enough to cover gas.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'You\'ll need a mobile food vendor license from the county, a business license from the city, food handler certifications, liability insurance, and permission from every single property where you want to park. Pensacola doesn\'t have a formal food truck park, which means you\'re constantly negotiating with property owners or competing for spots at events.',
-    },
-  },
-  {
-    type: 'blockquote',
-    data: {
-      text: 'The food trucks that make it aren\'t the ones with the cleverest concepts or the most Instagram followers. They\'re the ones that can serve 200 customers in three hours without the quality dropping off.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'That said — and maybe this is optimistic — if you\'ve got a killer concept, solid food truck ideas, and the stamina to work 80-hour weeks for the first year, Pensacola\'s market has room. We don\'t have a lobster food truck (cousins maine lobster food truck has conquered other markets but hasn\'t made it here). There\'s no soul food truck despite the demand. The pizza food truck scene is virtually non-existent.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'The opportunity exists. It just requires more grit than glamour.',
+      text: 'The trucks featured here understand this. They\'re serving excellent food consistently, building loyal followings, and making the economics work.',
     },
   },
   {
@@ -593,13 +917,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'You\'re not going to stumble upon a massive food truck park with thirty vendors serving everything from Maine lobster food truck fare to experimental fusion cuisine. That\'s not our market. What you <em>will</em> find is a handful of dedicated operators serving legitimately excellent food from small food truck setups that punch well above their weight class.',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'The trucks featured here — from Taco Trolley\'s downtown fixture to Carne Asada Darling\'s Nicaraguan specialties — represent the best of what Pensacola\'s mobile food scene has to offer: consistent quality, authentic flavors, and the kind of personality you can only get from independent operators who care deeply about what they\'re serving.',
+      text: 'The trucks featured here — from Taco Trolley\'s downtown fixture to Carne Asada Darling — represent the best of what Pensacola\'s mobile food scene has to offer: consistent quality, authentic flavors, and the kind of personality you can only get from independent operators who care deeply about what they\'re serving.',
     },
   },
   {
