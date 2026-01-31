@@ -17,7 +17,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     author: AUTHORS.joel_hansen,
     publishedDate: '01-29-2026',
     heroImage: {
-      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post/og-pensacola-food-trucks-guide-2.jpg',
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/allthethings-og-image-mexican-food-truck-guide-pensacola.jpg',
       alt: 'The Complete Guide to Mexican Food Trucks in Pensacola, FL',
     },
     tags: [
