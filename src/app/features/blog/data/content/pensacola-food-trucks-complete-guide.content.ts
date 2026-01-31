@@ -31,16 +31,16 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'paragraph',
-    data: {
-      text: 'Pensacola\'s Mexican food truck scene has developed its own character. You won\'t find them all in one organized food truck park, but scattered across the city in strategic locations, each building loyal followings through word-of-mouth and social media.',
-    },
-  },
-  {
     type: 'component',
     data: {
       componentName: 'email-cta',
       darkThemeBg: 'primary',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Pensacola\'s Mexican food truck scene has developed its own character. You won\'t find them all in one organized food truck park, but scattered across the city in strategic locations, each building loyal followings through word-of-mouth and social media.',
     },
   },
   {
@@ -94,22 +94,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'People describe the atmosphere as casual and laid-back, with a small, hardworking crew. It\'s built a loyal following for those seeking a "home-cooked" Tex-Mex feel rather than a formal restaurant experience. People rave about the "Mega Burrito" (a 14-inch monster) and the "Colossal Nachos" as standout values for the price.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Puffy tacos "Supreme style," Mega Burrito, Colossal Nachos',
-        '<strong>Location:</strong> Cantonment (1803 S. Highway 95A)',
-        '<strong>Price Range:</strong> Tacos $3-4, platters $12-18',
-        '<strong>Unique Features:</strong> Loaded Queso Fries, Mind-Blowing Fajitas, Fiesta Sauce',
-        '<strong>Delivery:</strong> Available via DoorDash',
-      ],
     },
   },
   {
@@ -135,8 +126,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Puffy tacos "Supreme style," Mega Burrito, Colossal Nachos',
+        '<strong>Location:</strong> Cantonment (1803 S. Highway 95A)',
+        '<strong>Price Range:</strong> Tacos $3-4, platters $12-18',
+        '<strong>Unique Features:</strong> Loaded Queso Fries, Mind-Blowing Fajitas, Fiesta Sauce',
+        '<strong>Delivery:</strong> Available via DoorDash',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -185,22 +185,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'The setup includes a covered outdoor seating area with canopies, providing a shaded spot to eat on-site. Their quesabirria tacos are a standout, served with a rich, house-made consommé that people say is essential for dipping.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Smoked brisket burritos, rib platters, quesabirria tacos',
-        '<strong>Location:</strong> 2118 W 9 Mile Rd (at convenience store)',
-        '<strong>Price Range:</strong> Tacos $10-20, Tuesday/Saturday special: 4 tacos for $12',
-        '<strong>Signature Style:</strong> BBQ-Mexican fusion with on-site smoked meats',
-        '<strong>Seating:</strong> Covered outdoor area with canopies',
-      ],
     },
   },
   {
@@ -226,8 +217,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Smoked brisket burritos, rib platters, quesabirria tacos',
+        '<strong>Location:</strong> 2118 W 9 Mile Rd (at convenience store)',
+        '<strong>Price Range:</strong> Tacos $10-20, Tuesday/Saturday special: 4 tacos for $12',
+        '<strong>Signature Style:</strong> BBQ-Mexican fusion with on-site smoked meats',
+        '<strong>Seating:</strong> Covered outdoor area with canopies',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -281,22 +281,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Their most celebrated dish is the quesabirria, described as being rich, cheesy, and served with a flavorful consommé for dipping. Beyond birria, they offer a wide range of meats including Al Pastor, steak, and carnitas served on fresh corn tortillas with traditional toppings like radish and lime. The truck features a dedicated, covered outdoor seating area, allowing customers to enjoy their meals immediately while they\'re hot and fresh.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Quesabirria, Al Pastor, steak, carnitas',
-        '<strong>Location:</strong> Mobile Highway (7144 Mobile Hwy with covered patio)',
-        '<strong>Price Range:</strong> Street tacos $3-5, quesabirria combo $12-18',
-        '<strong>Signature Style:</strong> Traditional preparation with bold salsas',
-        '<strong>Seating:</strong> Covered outdoor area for immediate dining',
-      ],
     },
   },
   {
@@ -322,8 +313,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Quesabirria, Al Pastor, steak, carnitas',
+        '<strong>Location:</strong> Mobile Highway (7144 Mobile Hwy with covered patio)',
+        '<strong>Price Range:</strong> Street tacos $3-5, quesabirria combo $12-18',
+        '<strong>Signature Style:</strong> Traditional preparation with bold salsas',
+        '<strong>Seating:</strong> Covered outdoor area for immediate dining',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -377,22 +377,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'People highlight the "Tripas" for being perfectly cleaned and fried to be exceptionally crispy, as well as the "Al Pastor" and "Carne Asada" for their traditional seasoning. Every order typically comes with the classic street-style pairings of fresh radish slices, grilled onions, lime wedges, and potent house-made salsas. People often cite it in local polls and rankings—it\'s recently been noted as the highest-rated Mexican restaurant in the Pensacola area by community discovery platforms.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Perfectly prepared Tripas, Al Pastor, Carne Asada',
-        '<strong>Location:</strong> Tippin Ave/Creighton Rd (6201 Tippin Ave)',
-        '<strong>Price Range:</strong> Street tacos $3-5, platters $12-20',
-        '<strong>Signature Style:</strong> No-frills authentic preparation with house-made salsas',
-        '<strong>Award-Winning:</strong> Highest-rated Mexican restaurant in Pensacola area',
-      ],
     },
   },
   {
@@ -418,8 +409,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Perfectly prepared Tripas, Al Pastor, Carne Asada',
+        '<strong>Location:</strong> Tippin Ave/Creighton Rd (6201 Tippin Ave)',
+        '<strong>Price Range:</strong> Street tacos $3-5, platters $12-20',
+        '<strong>Signature Style:</strong> No-frills authentic preparation with house-made salsas',
+        '<strong>Award-Winning:</strong> Highest-rated Mexican restaurant in Pensacola area',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -463,22 +463,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'People point to the tacos as a highlight, noting they\'re served in the classic street style with fresh cilantro, onions, and lime. While the menu\'s focused, the steak (asada) and pork (al pastor) are standout protein choices for their seasoning and texture. People describe it as a local secret, and they appreciate the efficiency of the service, making it a popular choice for a fast, high-quality lunch on the go.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Steak tacos (asada), pork tacos (al pastor), traditional street style',
-        '<strong>Location:</strong> Avery Street (2704 W Avery St)',
-        '<strong>Price Range:</strong> Affordable street food',
-        '<strong>Signature Style:</strong> Classic street style with fresh cilantro, onions, and lime',
-        '<strong>Vibe:</strong> Local secret, no-frills, efficient service',
-      ],
     },
   },
   {
@@ -504,8 +495,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Steak tacos (asada), pork tacos (al pastor), traditional street style',
+        '<strong>Location:</strong> Avery Street (2704 W Avery St)',
+        '<strong>Price Range:</strong> Affordable street food',
+        '<strong>Signature Style:</strong> Classic street style with fresh cilantro, onions, and lime',
+        '<strong>Vibe:</strong> Local secret, no-frills, efficient service',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -554,22 +554,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'This massive, oversized "Anaconda" Burrito is a local legend, often paired with their "Birria Pizza," which people describe as a crowd-pleasing, cheesy centerpiece served with rich dipping consommé. Beyond standard tacos, people frequently recommend their unique birria-filled egg rolls and grilled "puffy" tacos for a different take on traditional flavors. The business prides itself on authentic preparation—people note the high quality of their handmade tortillas and potent house-made salsas.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Anaconda Burrito, Birria Pizza, Birria Egg Rolls, puffy tacos',
-        '<strong>Locations:</strong> Pensacola (5222 North W Street) and Cantonment (4116 County Rd 297A)',
-        '<strong>Price Range:</strong> Tacos $3-5, specialty items $12-25',
-        '<strong>Signature Style:</strong> Zitacuaro Michoacán recipes with creative modern twists',
-        '<strong>Must-Try:</strong> Handmade tortillas and house-made salsas',
-      ],
     },
   },
   {
@@ -595,8 +586,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Anaconda Burrito, Birria Pizza, Birria Egg Rolls, puffy tacos',
+        '<strong>Locations:</strong> Pensacola (5222 North W Street) and Cantonment (4116 County Rd 297A)',
+        '<strong>Price Range:</strong> Tacos $3-5, specialty items $12-25',
+        '<strong>Signature Style:</strong> Zitacuaro Michoacán recipes with creative modern twists',
+        '<strong>Must-Try:</strong> Handmade tortillas and house-made salsas',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -650,22 +650,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Their quesabirria tacos are widely considered a must-try, frequently praised for being rich, cheesy, and served with a deeply flavorful dipping consommé. The menu features standout items like the "Perdido Key Tacos" and the "California Burrito," which is generously stuffed with steak and fries. People note that the meats are perfectly seasoned and the vegetables are exceptionally fresh, contributing to an overall high-quality meal experience. It\'s a popular stop on Sorrento Road for both a quick lunch and for beachgoers heading to or from Perdido Key.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Quesabirria tacos, California Burrito, Perdido Key Tacos',
-        '<strong>Location:</strong> Southwest Pensacola (13160 Sorrento Rd, near Perdido Key)',
-        '<strong>Price Range:</strong> $10–20',
-        '<strong>Signature Style:</strong> Fresh ingredients, perfectly seasoned meats, authentic flavors',
-        '<strong>Best For:</strong> Beach trips, high-quality portions, friendly service',
-      ],
     },
   },
   {
@@ -691,8 +682,17 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Quesabirria tacos, California Burrito, Perdido Key Tacos',
+        '<strong>Location:</strong> Southwest Pensacola (13160 Sorrento Rd, near Perdido Key)',
+        '<strong>Price Range:</strong> $10–20',
+        '<strong>Signature Style:</strong> Fresh ingredients, perfectly seasoned meats, authentic flavors',
+        '<strong>Best For:</strong> Beach trips, high-quality portions, friendly service',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -736,22 +736,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Highly recommended are the breakfast burritos, which are often described as some of the best and most substantial in the area. Their tacos are served on traditional fresh corn tortillas with generous portions of cilantro and onions, with the carne asada and al pastor being top-rated protein choices. It\'s said that their salsas have a genuine, spicy kick that sets them apart from more commercialized spots. It\'s known for efficient service and is a popular stop for a quick, affordable lunch or a convenient grab-and-go meal on the way to the beach.',
-    },
-  },
-  {
-    type: 'list',
-    data: {
-      style: 'unordered',
-      items: [
-        '<strong>Specialty:</strong> Breakfast burritos, carne asada tacos, al pastor tacos',
-        '<strong>Location:</strong> Gulf Breeze (4454 Gulf Breeze Pkwy)',
-        '<strong>Price Range:</strong> Affordable quick service',
-        '<strong>Signature Style:</strong> Fresh corn tortillas, house-made salsas, authentic preparation',
-        '<strong>Best For:</strong> Breakfast burritos, beach trips, quick authentic meals',
-      ],
     },
   },
   {
@@ -777,8 +768,336 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Breakfast burritos, carne asada tacos, al pastor tacos',
+        '<strong>Location:</strong> Gulf Breeze (4454 Gulf Breeze Pkwy)',
+        '<strong>Price Range:</strong> Affordable quick service',
+        '<strong>Signature Style:</strong> Fresh corn tortillas, house-made salsas, authentic preparation',
+        '<strong>Best For:</strong> Breakfast burritos, beach trips, quick authentic meals',
+      ],
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Taqueria El Asador',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Google',
+          rating: 4.8,
+          reviewCount: 156,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/taqueria-el-asador-truck.jpg?updatedAt=1769877650285',
+      alt: 'Taqueria El Asador - Ferry Pass Food Truck Pensacola',
+      caption: 'Taqueria El Asador food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Taqueria El Asador</strong><br>7955 N Davis Hwy, Pensacola, FL 32514 (Behind Shell Station)<br>Phone: (850) 696-3232<br><a href="mailto:eat@elasadorpensacola.com">Email</a> | <a href="https://www.elasadorpensacola.com/" target="_blank" rel="noopener">Website</a> | <a href="https://www.instagram.com/taqueriaelasador/" target="_blank" rel="noopener">Instagram</a> | <a href="https://www.facebook.com/taqueriaelasador/" target="_blank" rel="noopener">Facebook</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Often called the "crown jewel" of the Pensacola taco scene, Taqueria El Asador is a high-volume, authentic operation tucked behind a Shell gas station on Davis highway. People consistently highlight the "life-changing" quality of their grilled meats, particularly the pollo asado (grilled chicken) and carne asada. The experience is no-frills: you order at the window and eat at picnic tables under a covered patio, often accompanied by the aroma of mesquite smoke.',
+    },
+  },
+  {
     type: 'adsense',
     data: {},
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Despite being a hidden gem, it usually has a line, which locals say is a testament to its consistency and flavor. People say that the portions are larger than typical street tacos and that the spicy green and red salsas are essential to the experience. It is widely considered the most authentic "California-style" street taco experience in Florida.',
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/taqueria-el-asador-01.jpg?updatedAt=1769877650256',
+          alt: 'Taqueria El Asador grilled chicken and carne asada',
+          caption: 'Taqueria El Asador pollo asado',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/taqueria-el-asador-02.jpg?updatedAt=1769877650261',
+          alt: 'Taqueria El Asador street tacos with salsas',
+          caption: 'Taqueria El Asador street tacos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/taqueria-el-asador-03.jpg?updatedAt=1769877650251',
+          alt: 'Taqueria El Asador patio seating',
+          caption: 'Taqueria El Asador patio',
+        },
+      ],
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Pollo asado, carne asada, grilled meats',
+        '<strong>Location:</strong> Ferry Pass (7955 N Davis Hwy, behind Shell Station)',
+        '<strong>Hours:</strong> Mon–Sat: 10:30 AM – 8:30 PM; Sun: Closed',
+        '<strong>Signature Style:</strong> Mesquite-grilled California-style street tacos',
+        '<strong>Must-Try:</strong> Large portions with house-made salsas',
+      ],
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Tacos Mexicanos',
+    },
+  },
+  {
+    type: 'businessRatings',
+    data: {
+      ratings: [
+        {
+          source: 'Google',
+          rating: 4.7,
+          reviewCount: 89,
+        },
+      ],
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/tacos-mexicanos-truck.jpg?updatedAt=1769880195521',
+      alt: 'Tacos Mexicanos - East Hill Food Truck Pensacola',
+      caption: 'Tacos Mexicanos food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Tacos Mexicanos</strong><br>3000 N 12th Ave, Pensacola, FL 32503<br>Phone: (850) 291-7195<br><a href="mailto:tacosmex@outlook.com">Email</a> | <a href="https://www.tacosmexican.com/" target="_blank" rel="noopener">Website</a> | <a href="https://www.instagram.com/tacos_mexicanos_pensacola/" target="_blank" rel="noopener">Instagram</a> | <a href="https://www.facebook.com/tacosmexicanospensacola/" target="_blank" rel="noopener">Facebook</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Located in the heart of East Hill, Tacos Mexicanos is praised for its clean, fresh, and vibrant take on Mexican street food. While many trucks lean into a rugged aesthetic, this one is known for beautiful presentation and high-quality ingredients. The Birria tacos are the standout favorite here—reviewers rave about the tender meat and the rich, flavorful consomé provided for dipping.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Customers love the community atmosphere of the East Hill location, saying that the service is fast and friendly. The Awesome Taco, a signature item, and their homemade horchata are fan favorites. It\'s a favorite for families and foodies alike who want traditional flavors in a trendy, welcoming outdoor setting.',
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/tacos-mexicanos-01.jpg?updatedAt=1769880195471',
+          alt: 'Tacos Mexicanos birria tacos with consommé',
+          caption: 'Tacos Mexicanos birria tacos',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/tacos-mexicanos-02.jpg?updatedAt=1769880195552',
+          alt: 'Tacos Mexicanos Awesome Taco and signature items',
+          caption: 'Tacos Mexicanos signature items',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/tacos-mexicanos-03.jpg?updatedAt=1769880195551',
+          alt: 'Tacos Mexicanos menu presentation',
+          caption: 'Tacos Mexicanos menu items',
+        },
+      ],
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Birria tacos, Awesome Taco, homemade horchata',
+        '<strong>Location:</strong> East Hill (3000 N 12th Ave)',
+        '<strong>Hours:</strong> Mon–Sun: 11:00 AM – 8:00 PM',
+        '<strong>Signature Style:</strong> Clean presentation with high-quality ingredients',
+        '<strong>Best For:</strong> Families and foodies, community atmosphere',
+      ],
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Lupita\'s Mexican Fast Food',
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/lupitas-mexican-fast-food-truck.jpg?updatedAt=1769880566522',
+      alt: 'Lupita\'s Mexican Fast Food - Perdido Key Food Truck',
+      caption: 'Lupita\'s Mexican Fast Food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Lupita\'s Mexican Fast Food</strong><br>17100 Perdido Key Dr, Pensacola, FL 32507 (Behind Circle K)<br>Phone: (850) 542-0091<br><a href="https://www.facebook.com/lupitasmexicanfastfood/" target="_blank" rel="noopener">Facebook</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'This truck is a favorite for those heading toward the beach or Big Lagoon. It is frequently described as a "hidden gem" because it sits behind a gas station, but once found, it offers some of the most authentic flavors in the Perdido area. People point to the tamales and the California burrito as standout items that offer a true taste of West Coast-style Mexican food.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Customers appreciate the massive portions for the price and the friendliness of the owner, Angie. It\'s a popular spot for locals to grab a quick, heavy lunch. The truck also serves snow cones, making it a unique hybrid that\'s perfect for the Florida heat, though the focus remains strictly on traditional Mexican meats and preparations.',
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/lupitas-mexican-fast-food-01.jpg?updatedAt=1769880566615',
+          alt: 'Lupita\'s Mexican Fast Food tamales and California burrito',
+          caption: 'Lupita\'s Mexican Fast Food tamales',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/lupitas-mexican-fast-food-02.jpg?updatedAt=1769880566621',
+          alt: 'Lupita\'s Mexican Fast Food traditional meats',
+          caption: 'Lupita\'s Mexican Fast Food meats',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/lupitas-mexican-fast-food-03.jpg?updatedAt=1769880566600',
+          alt: 'Lupita\'s Mexican Fast Food snow cones',
+          caption: 'Lupita\'s Mexican Fast Food snow cones',
+        },
+      ],
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Tamales, California burrito, traditional Mexican meats',
+        '<strong>Location:</strong> Perdido Key (17100 Perdido Key Dr, behind Circle K)',
+        '<strong>Hours:</strong> Mon–Sat: 10:00 AM – 7:00 PM; Sun: Closed',
+        '<strong>Signature Style:</strong> Authentic flavors with massive portions',
+        '<strong>Unique Feature:</strong> Also serves snow cones',
+      ],
+    },
+  },
+  {
+    type: 'heading',
+    data: {
+      level: 2,
+      text: 'Guadalupe Tex-Mex Kitchen',
+    },
+  },
+  {
+    type: 'moviePoster',
+    data: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/guadalupe-kitchen-truck.jpg?updatedAt=1769881748327',
+      alt: 'Guadalupe Kitchen - Pensacola Food Truck',
+      caption: 'Guadalupe Kitchen food truck',
+      width: 70,
+      height: 90,
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: '<strong>Guadalupe Tex-Mex Kitchen</strong><br>1412 W Fairfield Dr, Pensacola, FL 32501<br>Phone: (850) 470-4763<br>Hours: Mon–Sat: 9:00 AM – 8:00 PM; Sunday: Closed<br><a href="https://www.guadalupekitchen.com/" target="_blank" rel="noopener">Website</a> | <a href="https://www.instagram.com/guadalupekitchen/" target="_blank" rel="noopener">Instagram</a> | <a href="https://www.facebook.com/guadalupekitchenpensacola/" target="_blank" rel="noopener">Facebook</a> | <a href="https://order.online/store/guadalupe-tex-mex-kitchen-pensacola-1075104" target="_blank" rel="noopener">Online Ordering</a> | <a href="https://www.ubereats.com/store/guadalupe-tex-mex-kitchen/Sd6vAn58TFqplzi3CcXv0w" target="_blank" rel="noopener">Uber Eats</a>',
+    },
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'Guadalupe Kitchen is known for its family tradition feel, with many reviewers noting that the food tastes like a home-cooked meal rather than standard commercial fare. While they use the "Tex-Mex" label, their menu is deeply rooted in traditional Mexican techniques, specifically their handmade tamales and slow-cooked barbacoa.',
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
+  },
+  {
+    type: 'paragraph',
+    data: {
+      text: 'The truck is highly rated for its "3 Amigos" taco deal and its Birria Ramen, a fusion dish that has become a local viral hit. People say the "warm hospitality" and the fact that everything—from the salsas to the chips—is made fresh daily. It\'s a top choice for those who want a heartier, more substantial meal with authentic home-cooked flavors.',
+    },
+  },
+  {
+    type: 'gallery',
+    data: {
+      images: [
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/guadalupe-kitchen-01.jpg?updatedAt=1769881748325',
+          alt: 'Guadalupe Kitchen handmade tamales and barbacoa',
+          caption: 'Guadalupe Kitchen tamales',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/guadalupe-kitchen-02.jpg?updatedAt=1769881748343',
+          alt: 'Guadalupe Kitchen Birria Ramen',
+          caption: 'Guadalupe Kitchen Birria Ramen',
+        },
+        {
+          src: 'https://ik.imagekit.io/allthethingsdev/Food%20Truck%20Post%20-%20Mexican/guadalupe-kitchen-03.jpg?updatedAt=1769881748322',
+          alt: 'Guadalupe Kitchen 3 Amigos taco deal',
+          caption: 'Guadalupe Kitchen 3 Amigos tacos',
+        },
+      ],
+    },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        '<strong>Specialty:</strong> Handmade tamales, slow-cooked barbacoa, Birria Ramen, 3 Amigos taco deal',
+        '<strong>Signature Style:</strong> Family tradition with home-cooked feel',
+        '<strong>Unique Feature:</strong> Everything made fresh daily, including salsas and chips',
+        '<strong>Best For:</strong> Hearty meals, authentic home-cooked flavors, warm hospitality',
+      ],
+    },
   },
   {
     type: 'heading',
@@ -792,6 +1111,10 @@ export const content: ContentBlock[] = [
     data: {
       text: 'Most mobile food trucks fail within the first year. Not because the food is bad (though that doesn\'t help), but because the business model is brutal.',
     },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'paragraph',
@@ -823,10 +1146,6 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
-  },
-  {
     type: 'heading',
     data: {
       level: 2,
@@ -844,6 +1163,10 @@ export const content: ContentBlock[] = [
     data: {
       text: 'Part of it is structural. Unlike brick-and-mortar restaurants, mobile food trucks move. The taco food truck that parks downtown on Tuesdays might be at a brewery on Fridays and a private event on Saturday. Unless they\'re actively updating social media (and many aren\'t), there\'s no reliable way to track them.',
     },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'paragraph',
@@ -921,6 +1244,10 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Whether you\'re looking for quick Mexican food near me options, planning food truck catering for an event, or just curious about what the local food trucks are doing, these trucks are where you start. They\'ve earned their spots through years of showing up, serving great food, and treating customers like they matter.',
@@ -931,10 +1258,6 @@ export const content: ContentBlock[] = [
     data: {
       text: 'And if you\'re thinking about how to start a food truck yourself? Study what these operators do right. The flash matters less than the fundamentals. Show up consistently. Execute flawlessly. Build community. The rest is just noise.',
     },
-  },
-  {
-    type: 'adsense',
-    data: {},
   },
   {
     type: 'component',

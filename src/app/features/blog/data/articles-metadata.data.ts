@@ -13,7 +13,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     slug: 'pensacola-mexican-food-trucks-guide',
     title: 'The Complete Guide to Mexican Food Trucks in Pensacola, FL',
     description:
-      'An authoritative guide to the best Mexican food trucks in Pensacola, from Taco Trolley\'s downtown icon to Tacos El Amigo\'s legendary tripas and Carne Asada Darling\'s Nicaraguan specialties. Everything you need to know about finding authentic Mexican food trucks, quesabirria, street tacos, and the local taco truck scene. Future guides will cover other food truck categories.',
+      'An authoritative guide to the best Mexican food trucks in Pensacola, from Taco Trolley\'s downtown icon to Tacos El Amigo\'s legendary tripas. Everything you need to know about finding authentic Mexican food trucks, quesabirria, street tacos, and the local taco truck scene. Future guides will cover other food truck categories.',
     author: AUTHORS.joel_hansen,
     publishedDate: '01-29-2026',
     heroImage: {
