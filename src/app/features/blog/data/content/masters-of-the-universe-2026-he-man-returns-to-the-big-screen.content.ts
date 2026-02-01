@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'heading',
     data: {
       level: 2,
@@ -226,6 +233,20 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<em>Masters of the Universe</em> opens exclusively in theaters on June 5, 2026.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
 ];

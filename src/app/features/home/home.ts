@@ -12,6 +12,7 @@ import { StructuredDataService } from '../../core/services/structured-data.servi
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
+import { SocialMediaLinksComponent } from '../../shared/components/social-media-links/social-media-links.component';
 import { BlogService } from '../blog/services/blog.service';
 import { ArticlePreview } from '../blog/models/blog.models';
 import { ResourcesService } from '../resources/services/resources.service';
@@ -27,7 +28,8 @@ import { ResourcePreview } from '../resources/models/resource.models';
     MatIconModule,
     MatCardModule,
     ToolCardComponent,
-    CtaEmailList
+    CtaEmailList,
+    SocialMediaLinksComponent
 ],
   templateUrl: './home.html',
   styleUrl: './home.scss'

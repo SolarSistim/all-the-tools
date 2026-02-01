@@ -18,6 +18,13 @@ export const SNOW_GLOBE_SHAKE_DEMO: Article = {
   },
   content: [
     {
+      type: 'component',
+      data: {
+        componentName: 'social-media-links',
+        backgroundVariant: 'dark',
+      },
+    },
+    {
       type: 'heading',
       data: {
         level: 2,
@@ -86,6 +93,13 @@ export const SNOW_GLOBE_SHAKE_DEMO: Article = {
       type: 'paragraph',
       data: {
         text: 'There are still quirks I can see, like the flakes occasionally clustering near the center when you stop shaking. I could probably clean up the math, and maybe I should, but there is something honest about the scrappy parts too. This was a stretch project, and I am okay admitting it was beyond my comfort zone.',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'social-media-links',
+        backgroundVariant: 'dark',
       },
     },
     {

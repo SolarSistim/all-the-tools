@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I have a confession: I\'m a doomscroller. Have been for as long as social media has been available. My God, since Myspace.',
@@ -178,6 +185,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Reddit worked for me. It might work for you too.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

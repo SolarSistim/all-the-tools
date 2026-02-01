@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'You\'re cruising down the interstate when the semi ahead of you suddenly veers toward the shoulder. The tires hit those rumble strips, gravel kicks up, and suddenly the truck corrects back into the lane.',
@@ -239,6 +246,20 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Or it might be a driver fighting to stay awake for one more mile.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {

@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'A lot of us regular folk panic when someone asks them to figure out a <a href="/tools/percentage-calculator">percentage</a> on the spot.',
@@ -349,6 +356,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'It\'s not about being a math genius. It\'s about having a handful of shortcuts that work.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

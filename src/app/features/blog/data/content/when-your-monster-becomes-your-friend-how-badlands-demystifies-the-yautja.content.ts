@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: "First off, can we talk about how the Predator isn't scary anymore? It's definitely badass, no doubt about that.",

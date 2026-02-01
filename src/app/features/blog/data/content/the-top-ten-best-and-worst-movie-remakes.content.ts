@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Hollywood loves a remake. Sometimes they get it right and sometimes they get it spectacularly wrong. Here\'s a breakdown of the worst attempts to recapture lightning in a bottle - or in some cases, to completely miss the point of what made the original work in the first place.',
@@ -721,6 +728,20 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<strong>What went wrong:</strong> Remaking <em>Red Dawn</em> in 2012 was already a questionable choice - the Cold War context that made the original work no longer existed. But changing the villain from China to North Korea in post-production exposed the project\'s complete lack of conviction. It\'s a remake made for money, not because anyone had a story to tell, and it shows in every frame.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
 ];

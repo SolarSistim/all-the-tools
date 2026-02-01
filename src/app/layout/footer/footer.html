@@ -11,6 +11,25 @@
         <p class="brand-description">
           Your Swiss Army knife of web utilities. Fast, private, and always free.
         </p>
+
+        <!-- Social Media Links -->
+        <p class="social-title">Visit us on:</p>
+        <div class="social-links">
+          @for (social of socialLinks; track social.name) {
+            <a
+              [href]="social.url"
+              [attr.aria-label]="social.tooltip"
+              [matTooltip]="social.tooltip"
+              matTooltipPosition="above"
+              class="social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img [src]="social.logo" [alt]="social.name" class="social-logo" />
+            </a>
+          }
+        </div>
+
         <a class="rss-link" href="/rss.xml" aria-label="RSS feed">
           <mat-icon>rss_feed</mat-icon>
           RSS Feed

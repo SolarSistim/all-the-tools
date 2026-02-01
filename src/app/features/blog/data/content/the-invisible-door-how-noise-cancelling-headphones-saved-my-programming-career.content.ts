@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I didn\'t buy noise cancelling headphones because I wanted them. I bought them because I was losing my mind. Two kids under five, a "home office" that was really just a desk shoved into the corner of the living room, and a codebase that required actual concentration. Every time I started making progress, something would yank me back out.',
@@ -229,6 +236,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Turns out I was fine at concentrating. I just needed a door.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

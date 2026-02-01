@@ -87,6 +87,7 @@
   gap: $spacing-xs;
   width: fit-content;
   padding: 8px 14px;
+  margin-top: $spacing-md;
   border-radius: 999px;
   border: 1px solid var(--border-color);
   background: var(--bg-elevated);
@@ -115,10 +116,20 @@
 // ============================================
 // SOCIAL LINKS
 // ============================================
+.social-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin: $spacing-md 0 0 0;
+}
+
 .social-links {
   display: flex;
+  flex-wrap: wrap;
   gap: $spacing-sm;
-  margin-top: $spacing-sm;
+  margin-top: $spacing-xs;
 
   .social-link {
     display: flex;
@@ -129,25 +140,26 @@
     border-radius: 8px;
     background: var(--bg-elevated);
     border: 1px solid var(--border-color);
-    color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.3s ease;
+    overflow: hidden;
 
-    mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
+    .social-logo {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      transition: all 0.3s ease;
     }
 
     &:hover {
       background: var(--bg-primary);
       border-color: var(--neon-cyan);
-      color: var(--neon-cyan);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px var(--neon-cyan-glow);
 
-      mat-icon {
-        filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
+      .social-logo {
+        filter: drop-shadow(0 0 4px var(--neon-cyan-glow));
+        transform: scale(1.1);
       }
     }
   }

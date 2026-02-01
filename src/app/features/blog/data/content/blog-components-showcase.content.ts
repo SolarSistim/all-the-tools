@@ -18,6 +18,13 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
   },
   content: [
     {
+      type: 'component',
+      data: {
+        componentName: 'social-media-links',
+        backgroundVariant: 'dark',
+      },
+    },
+    {
       type: 'paragraph',
       data: {
         text: 'This article showcases all available blog components with working examples and the JSON code you need to use them in your own articles.',
@@ -877,6 +884,20 @@ export const BLOG_COMPONENTS_SHOWCASE: Article = {
       type: 'paragraph',
       data: {
         text: 'Copy and paste the JSON examples from this page to quickly add components to your articles. Remember to update the data properties with your actual content.',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'social-media-links',
+        backgroundVariant: 'dark',
+      },
+    },
+    {
+      type: 'component',
+      data: {
+        componentName: 'email-cta',
+        darkThemeBg: 'primary',
       },
     },
   ],

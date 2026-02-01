@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Self-hosting complex applications like Postiz—an open-source social media scheduling tool—behind a reverse proxy (like Caddy) and a CDN (like Cloudflare) adds layers of networking that can lead to the dreaded 502 Bad Gateway.',

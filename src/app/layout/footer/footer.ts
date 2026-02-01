@@ -21,11 +21,44 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class FooterComponent {
   currentYear = new Date().getFullYear();
 
-  // Social links (placeholder for now)
+  // Social links
   socialLinks = [
-    { name: 'GitHub', icon: 'code', url: '#', tooltip: 'View on GitHub' },
-    { name: 'Twitter', icon: 'alternate_email', url: '#', tooltip: 'Follow on Twitter' },
-    { name: 'LinkedIn', icon: 'work', url: '#', tooltip: 'Connect on LinkedIn' }
+    {
+      name: 'X (Twitter)',
+      logo: '/assets/social-logos/x-logo-64x64.png',
+      url: 'https://x.com/AllTheDev',
+      tooltip: 'Follow us on X'
+    },
+    {
+      name: 'Tumblr',
+      logo: '/assets/social-logos/tumblr-logo-64x64.png',
+      url: 'https://www.tumblr.com/blog/allthethingsdotdev',
+      tooltip: 'Follow us on Tumblr'
+    },
+    {
+      name: 'Facebook',
+      logo: '/assets/social-logos/facebook-logo-64x64.png',
+      url: 'https://www.facebook.com/AllTheThingsDotDev',
+      tooltip: 'Like us on Facebook'
+    },
+    {
+      name: 'YouTube',
+      logo: '/assets/social-logos/youtube-logo-64x64.png',
+      url: 'https://www.youtube.com/@AllTheThingsdev',
+      tooltip: 'Subscribe on YouTube'
+    },
+    {
+      name: 'TikTok',
+      logo: '/assets/social-logos/tiktok-logo-64x64.png',
+      url: 'https://www.tiktok.com/@allthethingsdev',
+      tooltip: 'Follow us on TikTok'
+    },
+    {
+      name: 'Bluesky',
+      logo: '/assets/social-logos/bluesky-logo-64x64.png',
+      url: 'https://bsky.app/profile/allthethings-dev.bsky.social',
+      tooltip: 'Follow us on Bluesky'
+    }
   ];
 
   // Quick links

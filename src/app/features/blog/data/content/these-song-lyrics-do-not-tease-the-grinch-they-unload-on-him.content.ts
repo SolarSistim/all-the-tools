@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'This song does not tease the Grinch, <i>it unloads on him</i>.',
@@ -143,6 +150,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: '<strong>If the Grinch can come back from that, maybe no one is actually past saving.</strong>',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

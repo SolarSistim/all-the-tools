@@ -29,6 +29,13 @@ export const IT_HAPPENED_AGAIN_PENSACOLA_WAKES_UP_TO_SNOW_FOR_THE_SECOND_JANUARY
   },
   content: [
     {
+      type: 'component',
+      data: {
+        componentName: 'social-media-links',
+        backgroundVariant: 'dark',
+      },
+    },
+    {
       type: 'paragraph',
       data: {
         text: 'Well, the meteorologists hedged their bets all week, the models couldn\'t agree on anything, and somehow the universe decided to give us snow anyway. If you blinked this morning, though, you might have missed it.',

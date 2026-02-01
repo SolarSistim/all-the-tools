@@ -31,6 +31,13 @@ export const ONE_MAN_ONE_PC_CINEMA_QUALITY_STARSHIPS_HOWARD_DAY: Article = {
   },
   content: [
     {
+      type: 'component',
+      data: {
+        componentName: 'social-media-links',
+        backgroundVariant: 'dark',
+      },
+    },
+    {
       type: 'gallery',
       data: {
         images: [

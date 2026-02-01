@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Pensacola\'s Mexican food truck scene is where the real action is. These aren\'t just quick bites — they\'re authentic operations run by people who know their craft. ',
@@ -1257,6 +1264,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'And if you\'re thinking about how to start a food truck yourself? Study what these operators do right. The flash matters less than the fundamentals. Show up consistently. Execute flawlessly. Build community. The rest is just noise.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

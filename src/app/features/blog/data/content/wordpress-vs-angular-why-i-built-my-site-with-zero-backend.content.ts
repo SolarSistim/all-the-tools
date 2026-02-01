@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'When I started building AllTheTools.dev, I had a decision to make. Go with WordPress like everyone else, or build something different with Angular.',
@@ -386,6 +393,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'If you\'re thinking about building a site and you\'re comfortable with code, consider going front-end only. It\'s not for everyone, but it might be exactly what you need.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

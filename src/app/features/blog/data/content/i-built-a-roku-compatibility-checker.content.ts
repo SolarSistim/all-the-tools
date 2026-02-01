@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'I\'ve been buying mostly used Rokus for a decade. I now have about a dozen Rokus, one in every room of my house and a bunch sitting in drawers.',
@@ -195,6 +202,13 @@ export const content: ContentBlock[] = [
     type: 'paragraph',
     data: {
       text: 'Check it out. Bookmark it. Hopefully it saves you from the same rabbit holes I\'ve been stuck in.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'social-media-links',
+      backgroundVariant: 'dark',
     },
   },
   {

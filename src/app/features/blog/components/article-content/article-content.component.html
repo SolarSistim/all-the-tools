@@ -166,6 +166,12 @@
       [darkThemeBg]="block.data.darkThemeBg || 'secondary'"
     ></app-cta-email-list>
 
+    <!-- Social Media Links Component -->
+    <app-social-media-links
+      *ngIf="block.type === 'component' && block.data.componentName === 'social-media-links'"
+      [backgroundVariant]="block.data.backgroundVariant || 'dark'"
+    ></app-social-media-links>
+
     <!-- Alert Primary Component -->
     <app-alert-primary
       *ngIf="block.type === 'component' && block.data.componentName === 'alert-primary'"

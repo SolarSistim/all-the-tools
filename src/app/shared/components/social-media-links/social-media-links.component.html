@@ -1,0 +1,18 @@
+<div class="social-media-links" [class.bg-light]="backgroundVariant === 'light'" [class.bg-dark]="backgroundVariant === 'dark'">
+  <h2 class="social-title">Visit Us On:</h2>
+  <div class="social-links-container">
+    @for (social of socialLinks; track social.name) {
+      <a
+        [href]="social.url"
+        [attr.aria-label]="social.tooltip"
+        [matTooltip]="social.tooltip"
+        matTooltipPosition="above"
+        class="social-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img [src]="social.logo" [alt]="social.name" class="social-logo" />
+      </a>
+    }
+  </div>
+</div>
