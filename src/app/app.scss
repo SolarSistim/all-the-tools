@@ -1,24 +1,33 @@
 // Main App Component Styles
 
 .sidenav-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 ::ng-deep .mat-drawer-backdrop {
   position: fixed !important;
 }
 
+mat-sidenav-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 64px); // Account for header height
+  min-height: 100vh;
   flex: 1;
   padding-top: 64px; // Add padding for fixed header
+  box-sizing: border-box;
 }
 
 // ============================================
@@ -292,4 +301,12 @@
 
 ::ng-deep .mat-mdc-form-field-subscript-wrapper {
   display: none !important;
+}
+
+// Mobile responsiveness
+@media (max-width: 640px) {
+  ::ng-deep .tools-sidenav {
+    width: 85vw;
+    max-width: 320px;
+  }
 }
