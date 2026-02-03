@@ -5,6 +5,13 @@ import { ContentBlock } from '../../models/blog.models';
  */
 export const content: ContentBlock[] = [
   {
+    type: 'paragraph',
+    data: {
+      text: 'So, picture this: you\'re finally settled in, snacks ready, hype levels high for whatever new season is dropping. You tap the power on your TCL Roku set. The little "bloop" sounds off - business as usual - and you can hear the menu music or the game you left on earlier. But the display? Dead. Just an ink-black void reflecting your frustrated face back at you.',
+      className: 'lead',
+    },
+  },
+  {
     type: 'component',
     data: {
       componentName: 'social-media-links',
@@ -12,28 +19,35 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'paragraph',
+    type: 'heading',
     data: {
-      text: 'So, picture this: you\'re finally settled in, snacks ready, hype levels high for that new season. You click the power on your TCL Roku set. The little "bloop" sounds off—business as usual—and you can hear the menu music or the game you left on earlier. But the display? Dead. Just a flat, ink-black void reflecting your frustrated face back at you.',
-      className: 'lead',
+      level: 2,
+      text: 'The Bottom Line',
     },
+  },
+  {
+    type: 'list',
+    data: {
+      style: 'unordered',
+      items: [
+        'TCL Roku TVs are experiencing widespread "black screen of death" failures where audio works but the display goes black, white, or flickers',
+        'The defect typically occurs 18-24 months after purchase—conveniently right after the standard one-year warranty expires',
+        'Roku forced a Terms of Service update in 2024 that requires users to waive their right to sue or join class action lawsuits through mandatory arbitration',
+        'Law firms are investigating a class action lawsuit against Roku and TCL over the hardware defects and questionable business practices',
+        'If affected, document everything with video evidence, save your receipt, and contact both Roku customer service and TCL support to create a record',
+        'You may be able to opt out of Roku\'s arbitration clause within a limited time window to preserve your legal rights',
+      ],
+    },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'paragraph',
     data: {
       text: 'If that sounds like your typical Tuesday night lately, you\'re definitely not alone in this headache, and honestly, you have every right to be fuming. There\'s a growing surge of annoyed owners currently pushing back against Roku and TCL through a fresh class action investigation, and the details are—well, to put it mildly—a total mess for the regular person just trying to watch some Netflix.',
     },
-  },
-  {
-    type: 'component',
-    data: {
-      componentName: 'email-cta',
-      darkThemeBg: 'primary',
-    },
-  },
-  {
-    type: 'adsense',
-    data: {},
   },
   {
     type: 'heading',
@@ -45,7 +59,14 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'For a while now, reports have been cropping up across forums and support threads about a specific, catastrophic failure in these budget-friendly smart TVs. It\'s been dubbed the black screen defect. Essentially, the backlight or the panel itself just gives up the ghost. You get sound, you get power, but you get zero picture. Sometimes it\'s a white screen or a strobing, flickering mess that feels like a low-budget horror flick.',
+      text: 'For a while now, reports have been cropping up across forums and support threads about a specific, catastrophic failure in these budget-friendly smart TVs. It\'s been dubbed the "black screen" defect. Essentially, the backlight or the panel itself just gives up the ghost. You get sound, you get power, but you get zero picture. Sometimes it\'s a white screen or a strobing, flickering mess that feels like a low-budget horror flick.',
+    },
+  },
+  {
+    type: 'component',
+    data: {
+      componentName: 'email-cta',
+      darkThemeBg: 'primary',
     },
   },
   {
@@ -61,10 +82,6 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
-  },
-  {
     type: 'heading',
     data: {
       level: 2,
@@ -76,6 +93,10 @@ export const content: ContentBlock[] = [
     data: {
       text: 'As if the hardware failing wasn\'t enough of a headache, Roku recently decided to play hardball with their software. Many users found themselves locked out of their own televisions by a mandatory "Terms of Service" update that popped up on-screen.',
     },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'paragraph',
@@ -103,10 +124,6 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'adsense',
-    data: {},
-  },
-  {
     type: 'heading',
     data: {
       level: 2,
@@ -118,6 +135,10 @@ export const content: ContentBlock[] = [
     data: {
       text: 'If your screen has gone dark but the audio is still mocking you from the speakers, don\'t just toss the unit in a dumpster yet.',
     },
+  },
+  {
+    type: 'adsense',
+    data: {},
   },
   {
     type: 'list',
@@ -137,28 +158,14 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'Perhaps it\'s time we stopped letting tech giants treat our living rooms like beta-testing labs. After all, a TV that can\'t show a picture is just a very expensive, very heavy radio.',
     },
-  },
-  {
-    type: 'component',
-    data: {
-      componentName: 'social-media-links',
-      backgroundVariant: 'dark',
-    },
-  },
-  {
-    type: 'component',
-    data: {
-      componentName: 'email-cta',
-      darkThemeBg: 'primary',
-    },
-  },
-  {
-    type: 'adsense',
-    data: {},
   },
   {
     type: 'heading',
@@ -279,15 +286,13 @@ export const content: ContentBlock[] = [
     },
   },
   {
-    type: 'paragraph',
+    type: 'list',
     data: {
-      text: 'Cord Cutters News. (2024). "Roku Faces a Class Action Lawsuit Over Its Roku TVs."',
-    },
-  },
-  {
-    type: 'paragraph',
-    data: {
-      text: 'Top Class Actions. (2024). "Roku TCL Television Defect Class Action Lawsuit Investigation."',
+      style: 'unordered',
+      items: [
+        'Cord Cutters News. (2024). <a href="https://www.cordcuttersnews.com/roku-faces-a-class-action-lawsuit-over-its-roku-tvs/" target="_blank" rel="noopener">"Roku Faces a Class Action Lawsuit Over Its Roku TVs."</a>',
+        'Top Class Actions. (2024). <a href="https://topclassactions.com/lawsuit-settlements/investigations/roku-tcl-television-defect-class-action-lawsuit-investigation/" target="_blank" rel="noopener">"Roku TCL Television Defect Class Action Lawsuit Investigation."</a>',
+      ],
     },
   },
 ];
