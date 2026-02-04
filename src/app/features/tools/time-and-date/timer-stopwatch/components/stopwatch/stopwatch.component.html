@@ -1,0 +1,185 @@
+<div class="stopwatch-container">
+  <!-- Stopwatch Display -->
+  <div class="stopwatch-display" [class.running]="isRunning()">
+    <div class="time-display">
+      <span class="digit hours">{{ displayTime().hours }}</span>
+      <span class="separator">:</span>
+      <span class="digit minutes">{{ displayTime().minutes }}</span>
+      <span class="separator">:</span>
+      <span class="digit seconds">{{ displayTime().seconds }}</span>
+      <span class="separator-small">.</span>
+      <span class="digit centiseconds">{{ displayTime().centiseconds }}</span>
+    </div>
+
+    <!-- Current Lap Time (shown when running with laps) -->
+    @if (isRunning() && hasLaps()) {
+      <div class="current-lap">
+        <span class="lap-label">Lap {{ laps().length + 1 }}</span>
+        <span class="lap-time">
+          {{ currentLapTime().minutes }}:{{ currentLapTime().seconds }}.{{ currentLapTime().centiseconds }}
+        </span>
+      </div>
+    }
+  </div>
+
+  <!-- Control Buttons -->
+  <div class="control-buttons">
+    @if (!isRunning()) {
+      <button
+        mat-fab
+        extended
+        color="primary"
+        (click)="startStopwatch()"
+        class="start-button"
+        aria-label="Start stopwatch"
+      >
+        <mat-icon>play_arrow</mat-icon>
+        {{ isPaused() ? 'Resume' : 'Start' }}
+      </button>
+    } @else {
+      <button
+        mat-fab
+        extended
+        color="warn"
+        (click)="pauseStopwatch()"
+        class="pause-button"
+        aria-label="Pause stopwatch"
+      >
+        <mat-icon>pause</mat-icon>
+        Pause
+      </button>
+    }
+
+    <button
+      mat-fab
+      extended
+      (click)="recordLap()"
+      [disabled]="!isRunning()"
+      class="lap-button"
+      aria-label="Record lap"
+    >
+      <mat-icon>flag</mat-icon>
+      Lap
+    </button>
+
+    <button
+      mat-fab
+      extended
+      (click)="resetStopwatch()"
+      [disabled]="isRunning()"
+      class="reset-button"
+      aria-label="Reset stopwatch"
+    >
+      <mat-icon>replay</mat-icon>
+      Reset
+    </button>
+  </div>
+
+  <!-- Laps Section -->
+  @if (laps().length > 0) {
+    <div class="laps-section">
+      <div class="laps-header">
+        <h3>Recorded Laps</h3>
+        <button
+          mat-button
+          color="warn"
+          (click)="clearAllLaps()"
+          [disabled]="isRunning()"
+          class="clear-btn"
+        >
+          <mat-icon>delete_sweep</mat-icon>
+          <span class="btn-text-mobile">Clear</span>
+          <span class="btn-text-desktop">Clear All</span>
+        </button>
+      </div>
+
+      <!-- Laps Table -->
+      <div class="laps-table-container">
+        <table mat-table [dataSource]="laps()" class="laps-table">
+          <!-- Lap Number Column -->
+          <ng-container matColumnDef="lapNumber">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let lap">{{ lap.lapNumber }}</td>
+          </ng-container>
+
+          <!-- Lap Time Column -->
+          <ng-container matColumnDef="lapTime">
+            <th mat-header-cell *matHeaderCellDef>Lap Time</th>
+            <td mat-cell *matCellDef="let lap" class="time-cell">
+              {{ formatTimeString(lap.lapTime) }}
+            </td>
+          </ng-container>
+
+          <!-- Total Time Column -->
+          <ng-container matColumnDef="totalTime">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let lap" class="time-cell">
+              {{ formatTimeString(lap.totalTime) }}
+            </td>
+          </ng-container>
+
+          <!-- Note Column -->
+          <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef>Note</th>
+            <td mat-cell *matCellDef="let lap" class="note-cell">
+              @if (editingLapId() === lap.id) {
+                <div class="note-edit">
+                  <input
+                    matInput
+                    [value]="editingNote()"
+                    (input)="editingNote.set($any($event.target).value)"
+                    (keyup.enter)="saveNote(lap)"
+                    (keyup.escape)="cancelEditing()"
+                    placeholder="Add a note..."
+                    maxlength="50"
+                    autofocus
+                  />
+                  <button mat-icon-button (click)="saveNote(lap)" matTooltip="Save">
+                    <mat-icon>check</mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="cancelEditing()" matTooltip="Cancel">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              } @else {
+                <span
+                  class="note-text"
+                  [class.empty]="!lap.note"
+                  (click)="startEditingNote(lap)"
+                >
+                  {{ lap.note || 'Add note...' }}
+                </span>
+              }
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let lap" class="actions-cell">
+              <button
+                mat-icon-button
+                (click)="deleteLap(lap)"
+                matTooltip="Delete lap"
+                class="delete-btn"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (laps().length === 0 && !isRunning()) {
+    <div class="empty-state">
+      <mat-icon>timer</mat-icon>
+      <p>Start the stopwatch and press "Lap" to record times</p>
+    </div>
+  }
+</div>

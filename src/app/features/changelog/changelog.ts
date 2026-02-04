@@ -49,6 +49,22 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'February 5, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Online Timer',
+          route: '/tools/timer-stopwatch-clock/timer'
+        },
+        {
+          type: 'added',
+          description: 'Online Stopwatch',
+          route: '/tools/timer-stopwatch-clock/stopwatch'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'February 4, 2026',
       changes: [
         {

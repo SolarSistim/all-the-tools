@@ -36,14 +36,39 @@ export interface ConfirmDialogData {
     </div>
   `,
   styles: [`
+    ::ng-deep .mat-mdc-dialog-container {
+      border: none !important;
+      border-radius: 8px !important;
+    }
+
+    ::ng-deep .mat-mdc-dialog-inner-container,
+    ::ng-deep .mdc-dialog__container {
+      border: none !important;
+      border-radius: 0 !important;
+    }
+
+    ::ng-deep .mat-mdc-dialog-surface,
+    ::ng-deep .mdc-dialog__surface {
+      border: none !important;
+      border-radius: 8px !important;
+    }
+
     .dialog-container {
       padding: 16px;
       background: var(--bg-elevated, #1a1a1a);
       color: var(--text-primary, #ffffff);
       position: relative;
       overflow: hidden;
-      border-radius: 4px;
+      border-radius: 8px;
       min-width: 400px;
+      max-width: calc(100vw - 32px);
+      border: none;
+
+      @media (max-width: 480px) {
+        min-width: unset;
+        width: calc(100vw - 32px);
+        padding: 12px;
+      }
 
       &::before {
         content: '';
@@ -51,9 +76,12 @@ export interface ConfirmDialogData {
         top: 0;
         left: 0;
         right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
-        opacity: 0.7;
+        height: 4px;
+        background: linear-gradient(90deg,
+          var(--neon-cyan) 0%,
+          var(--neon-pink) 50%,
+          var(--amber) 100%
+        );
       }
     }
     .dialog-title {
@@ -62,13 +90,13 @@ export interface ConfirmDialogData {
       gap: 12px;
       font-family: 'Orbitron', sans-serif !important;
       margin-bottom: 16px;
-      color: #ffffff !important;
+      color: var(--text-primary, #ffffff) !important;
 
       mat-icon {
         font-size: 28px;
         width: 28px;
         height: 28px;
-        color: #ffffff !important;
+        color: var(--text-primary, #ffffff) !important;
       }
     }
     .dialog-content {

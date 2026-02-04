@@ -1,0 +1,214 @@
+<div class="timer-container">
+  <!-- Left Pane: Timer -->
+  <div class="timer-pane">
+    <!-- Timer Display -->
+    <div class="timer-display" [class.running]="isRunning()" [class.complete]="isComplete()">
+    <!-- Progress Ring SVG -->
+    <svg class="progress-ring" viewBox="0 0 260 260">
+      <circle
+        class="progress-ring-bg"
+        cx="130"
+        cy="130"
+        r="120"
+        fill="none"
+        stroke-width="8"
+      />
+      <circle
+        class="progress-ring-progress"
+        cx="130"
+        cy="130"
+        r="120"
+        fill="none"
+        stroke-width="8"
+        [style.stroke-dasharray]="circumference"
+        [style.stroke-dashoffset]="circumference * (1 - progressPercent() / 100)"
+        transform="rotate(-90 130 130)"
+      />
+    </svg>
+
+    <!-- Time Display -->
+    <div class="time-display">
+      <span class="digit">{{ displayHours().toString().padStart(2, '0') }}</span>
+      <span class="separator">:</span>
+      <span class="digit">{{ displayMinutes().toString().padStart(2, '0') }}</span>
+      <span class="separator">:</span>
+      <span class="digit">{{ displaySeconds().toString().padStart(2, '0') }}</span>
+    </div>
+  </div>
+
+  <!-- Time Input Section (only visible when not running) -->
+  @if (!isRunning() && !isPaused()) {
+    <div class="time-input-section">
+      <div class="time-input-group">
+        <label>Hours</label>
+        <div class="input-spinner">
+          <button mat-icon-button (click)="incrementHours()" aria-label="Increase hours">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          </button>
+          <input
+            type="number"
+            [value]="hoursInput()"
+            (input)="onHoursChange($any($event.target).value)"
+            min="0"
+            max="99"
+            aria-label="Hours"
+          />
+          <button mat-icon-button (click)="decrementHours()" aria-label="Decrease hours">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <span class="input-separator">:</span>
+
+      <div class="time-input-group">
+        <label>Minutes</label>
+        <div class="input-spinner">
+          <button mat-icon-button (click)="incrementMinutes()" aria-label="Increase minutes">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          </button>
+          <input
+            type="number"
+            [value]="minutesInput()"
+            (input)="onMinutesChange($any($event.target).value)"
+            min="0"
+            max="59"
+            aria-label="Minutes"
+          />
+          <button mat-icon-button (click)="decrementMinutes()" aria-label="Decrease minutes">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <span class="input-separator">:</span>
+
+      <div class="time-input-group">
+        <label>Seconds</label>
+        <div class="input-spinner">
+          <button mat-icon-button (click)="incrementSeconds()" aria-label="Increase seconds">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          </button>
+          <input
+            type="number"
+            [value]="secondsInput()"
+            (input)="onSecondsChange($any($event.target).value)"
+            min="0"
+            max="59"
+            aria-label="Seconds"
+          />
+          <button mat-icon-button (click)="decrementSeconds()" aria-label="Decrease seconds">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Control Buttons -->
+  <div class="control-buttons">
+    @if (!isRunning()) {
+      <button
+        mat-fab
+        extended
+        color="primary"
+        (click)="startTimer()"
+        [disabled]="!canStart()"
+        class="start-button"
+        aria-label="Start timer"
+      >
+        <mat-icon>play_arrow</mat-icon>
+        {{ isPaused() ? 'Resume' : 'Start' }}
+      </button>
+    } @else {
+      <button
+        mat-fab
+        extended
+        color="warn"
+        (click)="pauseTimer()"
+        class="pause-button"
+        aria-label="Pause timer"
+      >
+        <mat-icon>pause</mat-icon>
+        Pause
+      </button>
+    }
+
+    <button
+      mat-fab
+      extended
+      (click)="resetTimer()"
+      class="reset-button"
+      aria-label="Reset timer"
+    >
+      <mat-icon>replay</mat-icon>
+      Reset
+    </button>
+  </div>
+  </div>
+
+  <!-- Right Pane: Presets -->
+  <div class="presets-pane">
+    <div class="presets-section">
+    <div class="presets-header">
+      <h3>Quick Presets</h3>
+      <button
+        mat-button
+        (click)="togglePresetForm()"
+        class="add-preset-btn"
+        [disabled]="isRunning()"
+      >
+        <mat-icon>{{ showPresetForm() ? 'close' : 'add' }}</mat-icon>
+        {{ showPresetForm() ? 'Cancel' : 'Save Current' }}
+      </button>
+    </div>
+
+    <!-- New Preset Form -->
+    @if (showPresetForm()) {
+      <div class="new-preset-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Preset Name</mat-label>
+          <input
+            matInput
+            [value]="newPresetName()"
+            (input)="newPresetName.set($any($event.target).value)"
+            placeholder="e.g., Pomodoro, Tea Time"
+            maxlength="30"
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="saveNewPreset()">
+          <mat-icon>save</mat-icon>
+          Save Preset
+        </button>
+      </div>
+    }
+
+    <!-- Preset Grid -->
+    <div class="presets-grid">
+      @for (preset of presets(); track preset.id) {
+        <button
+          class="preset-card"
+          [class.default]="preset.isDefault"
+          (click)="selectPreset(preset)"
+          [disabled]="isRunning()"
+          [matTooltip]="preset.name"
+        >
+          <span class="preset-time">{{ getPresetDisplayTime(preset) }}</span>
+          <span class="preset-name">{{ preset.name }}</span>
+          @if (!preset.isDefault) {
+            <button
+              mat-icon-button
+              class="delete-btn"
+              (click)="deletePreset(preset, $event)"
+              matTooltip="Delete preset"
+              aria-label="Delete preset"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </button>
+      }
+    </div>
+    </div>
+  </div>
+</div>

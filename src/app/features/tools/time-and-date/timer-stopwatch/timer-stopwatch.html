@@ -1,0 +1,234 @@
+<div class="timer-stopwatch-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="icon-wrapper">
+        <mat-icon class="hero-icon">{{ currentMode() === 'timer' ? 'hourglass_empty' : 'av_timer' }}</mat-icon>
+      </div>
+      <h1 class="hero-title">{{ currentMode() === 'timer' ? 'Online Timer' : 'Online Stopwatch' }}</h1>
+      <p class="hero-subtitle">
+        @if (currentMode() === 'timer') {
+          Professional countdown timer with customizable presets, visual progress tracking, and audio alerts.
+          Perfect for cooking, workouts, study sessions, and more.
+        } @else {
+          High-precision stopwatch with lap recording, note-taking, and automatic data persistence.
+          Ideal for races, workouts, experiments, and time tracking.
+        }
+      </p>
+      <button mat-raised-button color="primary" class="cta-button" (click)="scrollToTool()">
+        <mat-icon>play_circle</mat-icon>
+        Start Timing
+      </button>
+    </div>
+
+    <div class="hero-visual">
+      @if (currentMode() === 'timer') {
+        <div class="example-card slide-in" style="animation-delay: 0.1s;">
+          <div class="example-header">
+            <mat-icon>bookmark</mat-icon>
+            <span>Custom Presets</span>
+          </div>
+          <div class="example-content">00:25:00</div>
+        </div>
+        <div class="example-card slide-in" style="animation-delay: 0.2s;">
+          <div class="example-header">
+            <mat-icon>timeline</mat-icon>
+            <span>Visual Progress</span>
+          </div>
+          <div class="example-content">75% Complete</div>
+        </div>
+        <div class="example-card slide-in" style="animation-delay: 0.3s;">
+          <div class="example-header">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Audio Alerts</span>
+          </div>
+          <div class="example-content">🔔 Enabled</div>
+        </div>
+      } @else {
+        <div class="example-card slide-in" style="animation-delay: 0.1s;">
+          <div class="example-header">
+            <mat-icon>flag</mat-icon>
+            <span>Lap Recording</span>
+          </div>
+          <div class="example-content">00:05:23.45</div>
+        </div>
+        <div class="example-card slide-in" style="animation-delay: 0.2s;">
+          <div class="example-header">
+            <mat-icon>edit_note</mat-icon>
+            <span>Add Notes</span>
+          </div>
+          <div class="example-content">Sprint finish</div>
+        </div>
+        <div class="example-card slide-in" style="animation-delay: 0.3s;">
+          <div class="example-header">
+            <mat-icon>precision_manufacturing</mat-icon>
+            <span>High Precision</span>
+          </div>
+          <div class="example-content">±0.01s</div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- The Bottom Line Section -->
+  <section class="bottom-line-section">
+    <h2>The Bottom Line</h2>
+    <p>
+      @if (currentMode() === 'timer') {
+        This free online countdown timer combines precision timing with customizable presets and audio alerts.
+        Set your desired time using the intuitive hour, minute, and second controls, then start the countdown.
+        Save unlimited custom presets for frequently used timers like Pomodoro sessions (25 minutes), workout intervals, or cooking times.
+        The visual progress ring provides at-a-glance tracking, while the audio notification ensures you never miss when your timer completes.
+        All your presets are automatically saved to local storage, persisting between browser sessions for quick access to your favorite timings.
+      } @else {
+        This precision stopwatch offers centisecond accuracy (±0.01s) for professional-grade time tracking.
+        Record unlimited lap times with individual notes for detailed performance analysis.
+        The lap recording feature captures split times while maintaining total elapsed time, perfect for interval training, race timing, or scientific experiments.
+        Edit lap notes directly in the table to annotate important moments or milestones.
+        All timing data is automatically saved to your browser's local storage, ensuring your lap history persists between sessions.
+        The high-precision timer uses requestAnimationFrame for smooth, accurate updates at up to 100Hz.
+      }
+    </p>
+  </section>
+
+  <!-- Ad Section -->
+  <app-adsense></app-adsense>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-navigation">
+    <div class="tab-links">
+      @for (tab of tabs; track tab.mode; let i = $index) {
+        <a
+          class="tab-link"
+          [class.active]="activeTabIndex() === i"
+          [routerLink]="tab.path"
+        >
+          <mat-icon>{{ tab.icon }}</mat-icon>
+          <span>{{ tab.label }}</span>
+        </a>
+      }
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="tool-card">
+      @if (currentMode() === 'timer') {
+        <app-timer></app-timer>
+      } @else {
+        <app-stopwatch></app-stopwatch>
+      }
+    </div>
+  </main>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2>Features</h2>
+    <div class="features-grid">
+      @if (currentMode() === 'timer') {
+        <div class="feature-card">
+          <mat-icon>tune</mat-icon>
+          <h3>Custom Time Input</h3>
+          <p>Set hours, minutes, and seconds with easy-to-use controls</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>bookmark</mat-icon>
+          <h3>Save Presets</h3>
+          <p>Save unlimited custom presets for quick access to your favorite times</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>notifications_active</mat-icon>
+          <h3>Audio Alerts</h3>
+          <p>Get notified with an audio alarm when your timer completes</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>storage</mat-icon>
+          <h3>Local Storage</h3>
+          <p>Your presets are saved locally and persist between sessions</p>
+        </div>
+      } @else {
+        <div class="feature-card">
+          <mat-icon>flag</mat-icon>
+          <h3>Lap Recording</h3>
+          <p>Record split times and lap durations with a single click</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>edit_note</mat-icon>
+          <h3>Add Notes</h3>
+          <p>Add custom notes to each lap for better tracking</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>precision_manufacturing</mat-icon>
+          <h3>High Precision</h3>
+          <p>Centisecond accuracy for precise timing measurements</p>
+        </div>
+        <div class="feature-card">
+          <mat-icon>storage</mat-icon>
+          <h3>Save Laps</h3>
+          <p>Your lap data is automatically saved to local storage</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="use-cases-section">
+    <h2>Perfect For</h2>
+    <div class="use-cases-grid">
+      @if (currentMode() === 'timer') {
+        <div class="use-case">
+          <mat-icon>restaurant</mat-icon>
+          <span>Cooking & Baking</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>fitness_center</mat-icon>
+          <span>Workout Intervals</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>school</mat-icon>
+          <span>Study Sessions</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>work</mat-icon>
+          <span>Pomodoro Technique</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>games</mat-icon>
+          <span>Board Games</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>self_improvement</mat-icon>
+          <span>Meditation</span>
+        </div>
+      } @else {
+        <div class="use-case">
+          <mat-icon>directions_run</mat-icon>
+          <span>Running & Races</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>pool</mat-icon>
+          <span>Swimming Laps</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>fitness_center</mat-icon>
+          <span>Workout Timing</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>science</mat-icon>
+          <span>Experiments</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>sports_motorsports</mat-icon>
+          <span>Racing Events</span>
+        </div>
+        <div class="use-case">
+          <mat-icon>speed</mat-icon>
+          <span>Speed Tests</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <app-cta-email-list darkThemeBg="primary"></app-cta-email-list>
+</div>

@@ -153,6 +153,21 @@ export const routes: Routes = [
     title: 'Timezone Converter - All The Things'
   },
   {
+    path: 'tools/timer-stopwatch-clock',
+    loadComponent: () => import('./features/tools/time-and-date/timer-stopwatch/timer-stopwatch').then(m => m.TimerStopwatch),
+    title: 'Online Timer & Stopwatch - Free Web Clock Tool | All The Things'
+  },
+  {
+    path: 'tools/timer-stopwatch-clock/timer',
+    loadComponent: () => import('./features/tools/time-and-date/timer-stopwatch/timer-stopwatch').then(m => m.TimerStopwatch),
+    title: 'Online Countdown Timer - Free Timer Tool | All The Things'
+  },
+  {
+    path: 'tools/timer-stopwatch-clock/stopwatch',
+    loadComponent: () => import('./features/tools/time-and-date/timer-stopwatch/timer-stopwatch').then(m => m.TimerStopwatch),
+    title: 'Online Stopwatch with Laps - Free Stopwatch Tool | All The Things'
+  },
+  {
     path: 'tools/icon-generator',
     loadComponent: () => import('./features/tools/image-tools/icon-generator/icon-generator').then(m => m.IconGenerator),
     title: 'Icon Generator - All The Things'

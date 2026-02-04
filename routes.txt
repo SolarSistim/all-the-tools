@@ -21,9 +21,11 @@
 /blog/my-wife-and-i-have-visited-george-bistro-nearly-30-times
 /blog/one-man-one-pc-cinema-quality-starships-howard-day
 /blog/pensacola-bay-center-the-189-million-question-renovate-replace-or-watch-mobile-win
+/blog/pensacola-mexican-food-trucks-guide
 /blog/pensacola-snow-second-year
 /blog/pensacon-responds-inside-the-uphill-battle-to-save-pensacolas-biggest-convention
 /blog/photo-filter-studio-tutorial
+/blog/roku-tv-black-screen-defect-class-action-lawsuit
 /blog/snow-globe-shake-demo
 /blog/stop-typing-in-those-tiny-on-reward-codes-by-hand
 /blog/the-16-wealthiest-criminals-of-the-last-100-years
@@ -49,7 +51,9 @@
 /resources
 /resources/active-noise-cancelling-vs-passive-noise-isolation
 /resources/angular-official-documentation
+/resources/ezgif-gif-creator-editor
 /resources/how-to-convert-video-to-webp-with-ezgif
+/resources/masterselects-browser-video-editor
 /resources/mdn-web-docs
 /resources/money-market-funds-kenya-safety
 /resources/online-help-for-senior-citizens-by-a-senior-citizen
@@ -58,6 +62,7 @@
 /resources/typescript-handbook
 /terms
 /tools
+/tools/ascii-character-reference
 /tools/barcode-reader
 /tools/base-number-converter
 /tools/base-number-converter/:pair
@@ -81,6 +86,9 @@
 /tools/spotify-playlist-export
 /tools/spotify/callback
 /tools/time-zone-converter
+/tools/timer-stopwatch-clock
+/tools/timer-stopwatch-clock/stopwatch
+/tools/timer-stopwatch-clock/timer
 /tools/timestamp-converter
 /tools/tip-calculator
 /tools/unit-converter

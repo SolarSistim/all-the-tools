@@ -241,6 +241,40 @@ export class ToolsService {
       tags: ['time', 'converter', 'timezone'],
       available: true
     },
+    {
+      id: 'timer-stopwatch-clock',
+      name: 'Timer & Stopwatch',
+      description: 'Online countdown timer and stopwatch with lap tracking and custom presets',
+      longDescription: 'Full-featured online timer and stopwatch. Countdown timer with custom presets, save unlimited timer configurations. Stopwatch with lap recording, edit/delete laps, and local storage persistence. Audio and visual notifications when timer completes.',
+      category: 'time',
+      icon: 'timer',
+      route: 'timer-stopwatch-clock',
+      featured: true,
+      tags: ['timer', 'stopwatch', 'countdown', 'clock', 'lap', 'time', 'alarm'],
+      available: true
+    },
+    {
+      id: 'online-timer',
+      name: 'Online Timer',
+      description: 'Free countdown timer with custom presets and audio notifications',
+      category: 'time',
+      icon: 'hourglass_empty',
+      route: 'timer-stopwatch-clock/timer',
+      featured: false,
+      tags: ['timer', 'countdown', 'alarm', 'preset', 'time'],
+      available: true
+    },
+    {
+      id: 'online-stopwatch',
+      name: 'Online Stopwatch',
+      description: 'Free stopwatch with lap tracking and local storage',
+      category: 'time',
+      icon: 'av_timer',
+      route: 'timer-stopwatch-clock/stopwatch',
+      featured: false,
+      tags: ['stopwatch', 'lap', 'timer', 'tracking', 'time'],
+      available: true
+    },
 
     // ========================================
     // IMAGE TOOLS
