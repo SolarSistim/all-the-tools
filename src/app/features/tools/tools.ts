@@ -11,6 +11,7 @@ import { MetaService } from '../../core/services/meta.service';
 import { Tool, ToolCategoryMeta } from '../../core/models/tool.interface';
 import { ToolCardComponent } from '../../shared/components/tool-card/tool-card';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
+import { AlertPrimary } from '../reusable-components/alerts/alert-primary/alert-primary';
 
 interface SeoCategorySection {
   id: string;
@@ -32,7 +33,8 @@ interface SeoCategorySection {
     MatIconModule,
     MatChipsModule,
     ToolCardComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    AlertPrimary
   ],
   templateUrl: './tools.html',
   styleUrl: './tools.scss',

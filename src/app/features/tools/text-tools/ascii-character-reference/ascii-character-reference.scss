@@ -725,43 +725,43 @@
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: $spacing-lg;
 }
 
-.info-card {
+.info-item {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
   background: var(--bg-secondary);
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     border-color: var(--neon-cyan);
-    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
   }
 
-  mat-card-header {
-    mat-icon {
-      color: var(--neon-cyan);
-      margin-right: $spacing-sm;
-      font-size: 24px;
-      width: 24px;
-      height: 24px;
-    }
-
-    mat-card-title {
-      font-size: 1rem;
-      font-weight: 600;
-    }
+  .info-icon {
+    color: var(--neon-cyan);
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
   }
 
-  mat-card-content {
-    p {
-      margin: 0;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      line-height: 1.6;
-    }
+  h4 {
+    margin: 0 0 $spacing-xs;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
   }
 }
 
