@@ -108,6 +108,11 @@ export const routes: Routes = [
     title: 'Case Converter - All The Things'
   },
   {
+    path: 'tools/ascii-character-reference',
+    loadComponent: () => import('./features/tools/text-tools/ascii-character-reference/ascii-character-reference').then(m => m.AsciiCharacterReference),
+    title: 'ASCII Character Reference Table - Complete ASCII Code Chart - All The Things'
+  },
+  {
     path: 'tools/lorem-ipsum',
     loadComponent: () => import('./features/tools/generators/lorem-ipsum/lorem-ipsum').then(m => m.LoremIpsum),
     title: 'Lorem Ipsum Generator - All The Things'

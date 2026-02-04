@@ -279,6 +279,10 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'adsense',
+    data: {},
+  },
+  {
     type: 'heading',
     data: {
       level: 2,

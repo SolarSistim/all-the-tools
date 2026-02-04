@@ -1,0 +1,319 @@
+<div class="ascii-reference-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="icon-wrapper">
+        <mat-icon class="hero-icon">table_chart</mat-icon>
+      </div>
+      <h1 class="hero-title">ASCII Character Reference Table</h1>
+      <p class="hero-subtitle">
+        Complete ASCII code reference with decimal, hexadecimal, and binary values. Search, filter, and copy ASCII characters instantly.
+      </p>
+      <button mat-raised-button color="primary" class="cta-button" (click)="scrollToTable()">
+        <mat-icon>grid_view</mat-icon>
+        Browse ASCII Grid
+      </button>
+    </div>
+
+    <div class="hero-visual">
+      <div class="example-card slide-in">
+        <div class="example-header">
+          <mat-icon>code</mat-icon>
+          <span>Standard ASCII</span>
+        </div>
+        <div class="example-content">A-Z, a-z, 0-9</div>
+      </div>
+      <div class="example-card slide-in" style="animation-delay: 0.1s;">
+        <div class="example-header">
+          <mat-icon>keyboard_alt</mat-icon>
+          <span>Symbols</span>
+        </div>
+        <div class="example-content">! @ # $ % & *</div>
+      </div>
+      <div class="example-card slide-in" style="animation-delay: 0.2s;">
+        <div class="example-header">
+          <mat-icon>extension</mat-icon>
+          <span>Extended ASCII</span>
+        </div>
+        <div class="example-content">128-255</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Line Section -->
+  <section class="bottom-line-section">
+    <h2>The Bottom Line</h2>
+    <p>
+      ASCII (American Standard Code for Information Interchange) is a character encoding standard that assigns numeric codes (0-127) to letters, numbers, symbols, and control characters. This comprehensive ASCII table provides instant access to all 256 ASCII codes including standard (0-127) and extended ASCII (128-255) characters. Use the search and filter features to quickly find specific ASCII characters, view their decimal, hex, and binary representations, and copy them to your clipboard with one click.
+    </p>
+  </section>
+
+  <!-- AdSense -->
+  <app-adsense></app-adsense>
+
+  <!-- Search and Filter Section -->
+  <section class="search-filter-section" id="ascii-table">
+    <h2>Search ASCII Characters</h2>
+
+    <mat-card class="search-card">
+      <mat-form-field class="search-field" appearance="fill">
+        <mat-label>Search by character, name, or code</mat-label>
+        <input matInput
+               type="text"
+               [(ngModel)]="searchQuery"
+               placeholder="Enter character, name, decimal, hex, or binary code"
+               (ngModelChange)="searchQuery.set($event)">
+        <mat-icon matPrefix>search</mat-icon>
+        @if (searchQuery()) {
+          <button mat-icon-button matSuffix (click)="clearSearch()" aria-label="Clear search">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </mat-card>
+
+    <!-- Category Filters -->
+    <div class="category-filters">
+      <h3>Filter by Category</h3>
+      <mat-chip-listbox class="category-chips" [(ngModel)]="selectedCategory">
+        @for (cat of categories; track cat.id) {
+          <mat-chip-option
+            [value]="cat.id"
+            [selected]="selectedCategory() === cat.id"
+            (click)="setCategory(cat.id)">
+            <mat-icon>{{ cat.icon }}</mat-icon>
+            {{ cat.name }}
+          </mat-chip-option>
+        }
+      </mat-chip-listbox>
+    </div>
+
+    <!-- Results Count -->
+    <div class="results-count">
+      <p>Showing <strong>{{ filteredCharacters().length }}</strong> of <strong>256</strong> characters</p>
+    </div>
+  </section>
+
+  <!-- ASCII Character Grid -->
+  <section class="ascii-grid-section">
+    <div class="grid-header">
+      <h2>ASCII Character Grid</h2>
+      <div class="view-toggle-icons">
+        <button
+          mat-icon-button
+          [class.active]="viewMode() === 'grid'"
+          (click)="setViewMode('grid')"
+          matTooltip="Full grid view"
+          aria-label="Full grid view">
+          <mat-icon>view_module</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [class.active]="viewMode() === 'compact'"
+          (click)="setViewMode('compact')"
+          matTooltip="Compact grid view"
+          aria-label="Compact grid view">
+          <mat-icon>view_comfy</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="ascii-grid" [class.compact-grid]="viewMode() === 'compact'">
+      @for (char of filteredCharacters(); track char.decimal) {
+        <div
+          class="ascii-grid-item category-{{ char.category }}"
+          (click)="copyCharacter(char)"
+          [class.disabled]="char.category === 'control'"
+          matTooltip="Click to copy {{ char.name }}"
+          matTooltipPosition="above">
+
+          <div class="char-display">
+            @if (char.category === 'control') {
+              <span class="control-char">{{ char.char }}</span>
+            } @else {
+              <span class="printable-char">{{ char.char }}</span>
+            }
+          </div>
+
+          <div class="char-info">
+            @if (viewMode() === 'grid') {
+              <div class="char-name">{{ char.name }}</div>
+              <div class="char-codes">
+                <span class="code-badge" matTooltip="Decimal">{{ char.decimal }}</span>
+                <span class="code-badge" matTooltip="Hexadecimal">0x{{ char.hex }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="no-results-grid">
+          <mat-icon>search_off</mat-icon>
+          <p>No characters found matching your search.</p>
+          <button mat-stroked-button (click)="clearSearch()">Clear Search</button>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- AdSense -->
+  <app-adsense></app-adsense>
+
+  <!-- What is ASCII Section -->
+  <section class="info-section">
+    <h2>What is ASCII?</h2>
+    <p>
+      <strong>ASCII (American Standard Code for Information Interchange)</strong> is a character encoding standard used to represent text in computers and electronic devices. Developed in the 1960s, ASCII assigns a unique numeric code to each character, making it possible for different computer systems to exchange information.
+    </p>
+
+    <h3>ASCII Code Ranges</h3>
+    <div class="info-grid">
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-icon>settings</mat-icon>
+          <mat-card-title>Control Characters (0-31)</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Non-printable characters used for text formatting and device control, including NULL, TAB, LINE FEED, and CARRIAGE RETURN.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="info-card">
+        <mat-icon>text_fields</mat-icon>
+        <mat-card-title>Printable Characters (32-126)</mat-card-title>
+        <mat-card-content>
+          <p>Letters (A-Z, a-z), numbers (0-9), punctuation marks, and common symbols that can be displayed on screen or printed.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="info-card">
+        <mat-icon>delete</mat-icon>
+        <mat-card-title>DEL Character (127)</mat-card-title>
+        <mat-card-content>
+          <p>The delete control character, originally used to mark characters for deletion on paper tape systems.</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="info-card">
+        <mat-icon>extension</mat-icon>
+        <mat-card-title>Extended ASCII (128-255)</mat-card-title>
+        <mat-card-content>
+          <p>Additional characters including accented letters, currency symbols, and graphical characters for various languages and applications.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2>Problems This ASCII Table Solves</h2>
+    <div class="problems-grid">
+      <div class="problem-item">
+        <mat-icon class="check-icon">check_circle</mat-icon>
+        <div>
+          <h4>Quick Character Lookup</h4>
+          <p>Instantly find ASCII codes for any character without memorization or external references.</p>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <mat-icon class="check-icon">check_circle</mat-icon>
+        <div>
+          <h4>Code Conversion</h4>
+          <p>View decimal, hexadecimal, and binary representations of ASCII characters in one place.</p>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <mat-icon class="check-icon">check_circle</mat-icon>
+        <div>
+          <h4>HTML Entity Reference</h4>
+          <p>Get HTML entity codes for special characters to use in web development.</p>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <mat-icon class="check-icon">check_circle</mat-icon>
+        <div>
+          <h4>Programming Support</h4>
+          <p>Essential reference for developers working with character encoding, text processing, and ASCII art.</p>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <mat-icon class="check-icon">check_circle</mat-icon>
+        <div>
+          <h4>Category Filtering</h4>
+          <p>Quickly filter characters by type: letters, numbers, symbols, or control characters.</p>
+        </div>
+      </div>
+
+      <div class="problem-item">
+        <mat-icon class="check-icon">check_circle</mat-icon>
+        <div>
+          <h4>One-Click Copy</h4>
+          <p>Copy any character or code to your clipboard instantly without manual selection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="use-cases-section">
+    <h2>Common Use Cases for ASCII Reference</h2>
+    <div class="use-cases-grid">
+      <mat-card class="use-case-card">
+        <mat-icon>code</mat-icon>
+        <h3>Programming</h3>
+        <p>Character manipulation, string processing, and text encoding in various programming languages.</p>
+      </mat-card>
+
+      <mat-card class="use-case-card">
+        <mat-icon>brush</mat-icon>
+        <h3>ASCII Art</h3>
+        <p>Creating text-based artwork and designs using ASCII characters and symbols.</p>
+      </mat-card>
+
+      <mat-card class="use-case-card">
+        <mat-icon>web</mat-icon>
+        <h3>Web Development</h3>
+        <p>HTML entity encoding for special characters in web pages and applications.</p>
+      </mat-card>
+
+      <mat-card class="use-case-card">
+        <mat-icon>terminal</mat-icon>
+        <h3>Terminal Commands</h3>
+        <p>Understanding control characters and escape sequences in command-line interfaces.</p>
+      </mat-card>
+
+      <mat-card class="use-case-card">
+        <mat-icon>storage</mat-icon>
+        <h3>Data Processing</h3>
+        <p>Text file parsing, data cleaning, and character encoding conversions.</p>
+      </mat-card>
+
+      <mat-card class="use-case-card">
+        <mat-icon>school</mat-icon>
+        <h3>Learning</h3>
+        <p>Educational reference for students learning about character encoding and computer science fundamentals.</p>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Email CTA -->
+  <app-cta-email-list></app-cta-email-list>
+
+  <!-- AdSense -->
+  <app-adsense></app-adsense>
+
+  <!-- Featured Tools -->
+  <section class="featured-tools-section">
+    <h2>More Text Tools</h2>
+    <div class="featured-tools-grid">
+      @for (tool of featuredTools$; track tool.id) {
+        @if (tool.category === 'text') {
+          <app-tool-card [tool]="tool"></app-tool-card>
+        }
+      }
+    </div>
+  </section>
+</div>

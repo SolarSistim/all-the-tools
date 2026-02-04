@@ -49,6 +49,17 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'February 4, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'ASCII Character Reference',
+          route: '/tools/ascii-character-reference'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'January 23, 2026',
       changes: [
         {

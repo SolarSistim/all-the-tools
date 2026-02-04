@@ -42,6 +42,17 @@ export class ToolsService {
       available: true
     },
     {
+      id: 'ascii-character-reference',
+      name: 'ASCII Character Reference',
+      description: 'Complete ASCII table with searchable characters, codes (decimal, hex, binary), and copy functionality',
+      category: 'text',
+      icon: 'table_chart',
+      route: 'ascii-character-reference',
+      featured: true,
+      tags: ['ascii', 'character', 'encoding', 'reference', 'table', 'codes'],
+      available: true
+    },
+    {
       id: 'lorem-ipsum',
       name: 'Lorem Ipsum Generator',
       description: 'Generate customizable placeholder text with adjustable word count (1-1000 words)',
