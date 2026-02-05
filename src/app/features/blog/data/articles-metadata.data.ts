@@ -934,6 +934,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     hasAudio: false,
+    hasVideo: true,
     display: true,
     relatedArticles: [],
     readTime: 4,
