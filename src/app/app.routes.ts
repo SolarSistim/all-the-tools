@@ -183,6 +183,11 @@ export const routes: Routes = [
     title: 'Currency Converter - All The Things'
   },
   {
+    path: 'tools/currency-converter/:pair',
+    loadComponent: () => import('./features/tools/converters/currency-converter/currency-converter').then(m => m.CurrencyConverter),
+    title: 'Currency Converter - All The Things'
+  },
+  {
     path: 'tools/roku-compatibility',
     loadComponent: () => import('./features/tools/hardware/roku-compatibility-checker/roku-compatibility-checker').then(m => m.RokuCompatibilityChecker),
     title: 'Roku Compatibility - All The Things'

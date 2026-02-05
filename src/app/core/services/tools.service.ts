@@ -625,11 +625,82 @@ export class ToolsService {
     }
   ];
 
+  /**
+   * Currency converter pairs for programmatic SEO (major currencies only)
+   */
+  private currencyConverterPairs: Array<{
+    from: string;
+    to: string;
+    fromCode: string;
+    toCode: string;
+    fromSlug: string;
+    toSlug: string;
+    description: string;
+    featured?: boolean;
+  }> = [
+    // USD conversions (most popular)
+    { from: 'US Dollar', to: 'Euro', fromCode: 'USD', toCode: 'EUR', fromSlug: 'us-dollar', toSlug: 'euro', description: 'Convert US Dollars to Euros. Check USD to EUR exchange rates for travel, shopping, and international transfers.', featured: true },
+    { from: 'US Dollar', to: 'British Pound', fromCode: 'USD', toCode: 'GBP', fromSlug: 'us-dollar', toSlug: 'british-pound', description: 'Convert US Dollars to British Pounds. Get current USD to GBP rates for UK travel and purchases.', featured: true },
+    { from: 'US Dollar', to: 'Japanese Yen', fromCode: 'USD', toCode: 'JPY', fromSlug: 'us-dollar', toSlug: 'japanese-yen', description: 'Convert US Dollars to Japanese Yen. Check USD to JPY exchange rates for Japan travel and business.', featured: true },
+    { from: 'US Dollar', to: 'Canadian Dollar', fromCode: 'USD', toCode: 'CAD', fromSlug: 'us-dollar', toSlug: 'canadian-dollar', description: 'Convert US Dollars to Canadian Dollars. Get current USD to CAD rates for cross-border shopping.' },
+    { from: 'US Dollar', to: 'Australian Dollar', fromCode: 'USD', toCode: 'AUD', fromSlug: 'us-dollar', toSlug: 'australian-dollar', description: 'Convert US Dollars to Australian Dollars. Check USD to AUD exchange rates for travel Down Under.' },
+    { from: 'US Dollar', to: 'Swiss Franc', fromCode: 'USD', toCode: 'CHF', fromSlug: 'us-dollar', toSlug: 'swiss-franc', description: 'Convert US Dollars to Swiss Francs. Get USD to CHF rates for Swiss travel and investments.' },
+
+    // EUR conversions
+    { from: 'Euro', to: 'US Dollar', fromCode: 'EUR', toCode: 'USD', fromSlug: 'euro', toSlug: 'us-dollar', description: 'Convert Euros to US Dollars. Check EUR to USD exchange rates for American travel and shopping.', featured: true },
+    { from: 'Euro', to: 'British Pound', fromCode: 'EUR', toCode: 'GBP', fromSlug: 'euro', toSlug: 'british-pound', description: 'Convert Euros to British Pounds. Get current EUR to GBP rates for UK travel and purchases.', featured: true },
+    { from: 'Euro', to: 'Japanese Yen', fromCode: 'EUR', toCode: 'JPY', fromSlug: 'euro', toSlug: 'japanese-yen', description: 'Convert Euros to Japanese Yen. Check EUR to JPY exchange rates for Japan travel and business.' },
+    { from: 'Euro', to: 'Canadian Dollar', fromCode: 'EUR', toCode: 'CAD', fromSlug: 'euro', toSlug: 'canadian-dollar', description: 'Convert Euros to Canadian Dollars. Get EUR to CAD rates for Canada travel and transfers.' },
+    { from: 'Euro', to: 'Australian Dollar', fromCode: 'EUR', toCode: 'AUD', fromSlug: 'euro', toSlug: 'australian-dollar', description: 'Convert Euros to Australian Dollars. Check EUR to AUD exchange rates for Australian travel.' },
+    { from: 'Euro', to: 'Swiss Franc', fromCode: 'EUR', toCode: 'CHF', fromSlug: 'euro', toSlug: 'swiss-franc', description: 'Convert Euros to Swiss Francs. Get EUR to CHF rates for Switzerland travel and banking.' },
+
+    // GBP conversions
+    { from: 'British Pound', to: 'US Dollar', fromCode: 'GBP', toCode: 'USD', fromSlug: 'british-pound', toSlug: 'us-dollar', description: 'Convert British Pounds to US Dollars. Check GBP to USD exchange rates for American travel.', featured: true },
+    { from: 'British Pound', to: 'Euro', fromCode: 'GBP', toCode: 'EUR', fromSlug: 'british-pound', toSlug: 'euro', description: 'Convert British Pounds to Euros. Get current GBP to EUR rates for European travel and shopping.', featured: true },
+    { from: 'British Pound', to: 'Japanese Yen', fromCode: 'GBP', toCode: 'JPY', fromSlug: 'british-pound', toSlug: 'japanese-yen', description: 'Convert British Pounds to Japanese Yen. Check GBP to JPY exchange rates for Japan travel.' },
+    { from: 'British Pound', to: 'Canadian Dollar', fromCode: 'GBP', toCode: 'CAD', fromSlug: 'british-pound', toSlug: 'canadian-dollar', description: 'Convert British Pounds to Canadian Dollars. Get GBP to CAD rates for Canada travel.' },
+    { from: 'British Pound', to: 'Australian Dollar', fromCode: 'GBP', toCode: 'AUD', fromSlug: 'british-pound', toSlug: 'australian-dollar', description: 'Convert British Pounds to Australian Dollars. Check GBP to AUD exchange rates.' },
+    { from: 'British Pound', to: 'Swiss Franc', fromCode: 'GBP', toCode: 'CHF', fromSlug: 'british-pound', toSlug: 'swiss-franc', description: 'Convert British Pounds to Swiss Francs. Get GBP to CHF rates for Swiss travel.' },
+
+    // JPY conversions
+    { from: 'Japanese Yen', to: 'US Dollar', fromCode: 'JPY', toCode: 'USD', fromSlug: 'japanese-yen', toSlug: 'us-dollar', description: 'Convert Japanese Yen to US Dollars. Check JPY to USD exchange rates for American travel.', featured: true },
+    { from: 'Japanese Yen', to: 'Euro', fromCode: 'JPY', toCode: 'EUR', fromSlug: 'japanese-yen', toSlug: 'euro', description: 'Convert Japanese Yen to Euros. Get current JPY to EUR rates for European travel.' },
+    { from: 'Japanese Yen', to: 'British Pound', fromCode: 'JPY', toCode: 'GBP', fromSlug: 'japanese-yen', toSlug: 'british-pound', description: 'Convert Japanese Yen to British Pounds. Check JPY to GBP exchange rates for UK travel.' },
+    { from: 'Japanese Yen', to: 'Canadian Dollar', fromCode: 'JPY', toCode: 'CAD', fromSlug: 'japanese-yen', toSlug: 'canadian-dollar', description: 'Convert Japanese Yen to Canadian Dollars. Get JPY to CAD rates for Canada travel.' },
+    { from: 'Japanese Yen', to: 'Australian Dollar', fromCode: 'JPY', toCode: 'AUD', fromSlug: 'japanese-yen', toSlug: 'australian-dollar', description: 'Convert Japanese Yen to Australian Dollars. Check JPY to AUD exchange rates.' },
+    { from: 'Japanese Yen', to: 'Swiss Franc', fromCode: 'JPY', toCode: 'CHF', fromSlug: 'japanese-yen', toSlug: 'swiss-franc', description: 'Convert Japanese Yen to Swiss Francs. Get JPY to CHF rates for Swiss travel.' },
+
+    // CAD conversions
+    { from: 'Canadian Dollar', to: 'US Dollar', fromCode: 'CAD', toCode: 'USD', fromSlug: 'canadian-dollar', toSlug: 'us-dollar', description: 'Convert Canadian Dollars to US Dollars. Check CAD to USD exchange rates for cross-border shopping.' },
+    { from: 'Canadian Dollar', to: 'Euro', fromCode: 'CAD', toCode: 'EUR', fromSlug: 'canadian-dollar', toSlug: 'euro', description: 'Convert Canadian Dollars to Euros. Get current CAD to EUR rates for European travel.' },
+    { from: 'Canadian Dollar', to: 'British Pound', fromCode: 'CAD', toCode: 'GBP', fromSlug: 'canadian-dollar', toSlug: 'british-pound', description: 'Convert Canadian Dollars to British Pounds. Check CAD to GBP exchange rates.' },
+    { from: 'Canadian Dollar', to: 'Japanese Yen', fromCode: 'CAD', toCode: 'JPY', fromSlug: 'canadian-dollar', toSlug: 'japanese-yen', description: 'Convert Canadian Dollars to Japanese Yen. Get CAD to JPY rates for Japan travel.' },
+    { from: 'Canadian Dollar', to: 'Australian Dollar', fromCode: 'CAD', toCode: 'AUD', fromSlug: 'canadian-dollar', toSlug: 'australian-dollar', description: 'Convert Canadian Dollars to Australian Dollars. Check CAD to AUD exchange rates.' },
+    { from: 'Canadian Dollar', to: 'Swiss Franc', fromCode: 'CAD', toCode: 'CHF', fromSlug: 'canadian-dollar', toSlug: 'swiss-franc', description: 'Convert Canadian Dollars to Swiss Francs. Get CAD to CHF rates.' },
+
+    // AUD conversions
+    { from: 'Australian Dollar', to: 'US Dollar', fromCode: 'AUD', toCode: 'USD', fromSlug: 'australian-dollar', toSlug: 'us-dollar', description: 'Convert Australian Dollars to US Dollars. Check AUD to USD exchange rates for American travel.' },
+    { from: 'Australian Dollar', to: 'Euro', fromCode: 'AUD', toCode: 'EUR', fromSlug: 'australian-dollar', toSlug: 'euro', description: 'Convert Australian Dollars to Euros. Get current AUD to EUR rates for European travel.' },
+    { from: 'Australian Dollar', to: 'British Pound', fromCode: 'AUD', toCode: 'GBP', fromSlug: 'australian-dollar', toSlug: 'british-pound', description: 'Convert Australian Dollars to British Pounds. Check AUD to GBP exchange rates.' },
+    { from: 'Australian Dollar', to: 'Japanese Yen', fromCode: 'AUD', toCode: 'JPY', fromSlug: 'australian-dollar', toSlug: 'japanese-yen', description: 'Convert Australian Dollars to Japanese Yen. Get AUD to JPY rates for Japan travel.' },
+    { from: 'Australian Dollar', to: 'Canadian Dollar', fromCode: 'AUD', toCode: 'CAD', fromSlug: 'australian-dollar', toSlug: 'canadian-dollar', description: 'Convert Australian Dollars to Canadian Dollars. Check AUD to CAD exchange rates.' },
+    { from: 'Australian Dollar', to: 'Swiss Franc', fromCode: 'AUD', toCode: 'CHF', fromSlug: 'australian-dollar', toSlug: 'swiss-franc', description: 'Convert Australian Dollars to Swiss Francs. Get AUD to CHF rates.' },
+
+    // CHF conversions
+    { from: 'Swiss Franc', to: 'US Dollar', fromCode: 'CHF', toCode: 'USD', fromSlug: 'swiss-franc', toSlug: 'us-dollar', description: 'Convert Swiss Francs to US Dollars. Check CHF to USD exchange rates for American travel.' },
+    { from: 'Swiss Franc', to: 'Euro', fromCode: 'CHF', toCode: 'EUR', fromSlug: 'swiss-franc', toSlug: 'euro', description: 'Convert Swiss Francs to Euros. Get current CHF to EUR rates for Eurozone travel.' },
+    { from: 'Swiss Franc', to: 'British Pound', fromCode: 'CHF', toCode: 'GBP', fromSlug: 'swiss-franc', toSlug: 'british-pound', description: 'Convert Swiss Francs to British Pounds. Check CHF to GBP exchange rates.' },
+    { from: 'Swiss Franc', to: 'Japanese Yen', fromCode: 'CHF', toCode: 'JPY', fromSlug: 'swiss-franc', toSlug: 'japanese-yen', description: 'Convert Swiss Francs to Japanese Yen. Get CHF to JPY rates for Japan travel.' },
+    { from: 'Swiss Franc', to: 'Canadian Dollar', fromCode: 'CHF', toCode: 'CAD', fromSlug: 'swiss-franc', toSlug: 'canadian-dollar', description: 'Convert Swiss Francs to Canadian Dollars. Check CHF to CAD exchange rates.' },
+    { from: 'Swiss Franc', to: 'Australian Dollar', fromCode: 'CHF', toCode: 'AUD', fromSlug: 'swiss-franc', toSlug: 'australian-dollar', description: 'Convert Swiss Francs to Australian Dollars. Get CHF to AUD rates.' },
+  ];
+
   constructor() {
     // Generate conversion pair tools and add them to the main tools array
     this.generateConversionPairTools();
     this.generateBaseNumberPairTools();
     this.generatePercentageCalculatorVariantTools();
+    this.generateCurrencyConverterPairTools();
   }
 
   /**
@@ -743,6 +814,40 @@ export class ToolsService {
   }
 
   /**
+   * Generate Tool objects for each currency converter pair
+   */
+  private generateCurrencyConverterPairTools(): void {
+    const currencyTools: Tool[] = this.currencyConverterPairs.map(pair => {
+      return {
+        id: `currency-converter-${pair.fromSlug}-to-${pair.toSlug}`,
+        name: `${pair.from} to ${pair.to} Converter`,
+        description: pair.description,
+        category: 'converter' as ToolCategory,
+        icon: 'currency_exchange',
+        route: `currency-converter/${pair.fromSlug}-to-${pair.toSlug}`,
+        featured: pair.featured || false,
+        tags: [
+          'converter',
+          'currency',
+          'money',
+          'exchange',
+          'forex',
+          pair.fromCode.toLowerCase(),
+          pair.toCode.toLowerCase(),
+          pair.fromSlug,
+          pair.toSlug,
+          `${pair.fromCode} to ${pair.toCode}`,
+          `${pair.fromSlug} to ${pair.toSlug}`
+        ],
+        available: true
+      };
+    });
+
+    // Add currency converter tools to the main tools array
+    this.tools.push(...currencyTools);
+  }
+
+  /**
    * Get all tools
    */
   getAllTools(): Tool[] {
@@ -766,12 +871,13 @@ export class ToolsService {
   }
 
   /**
-   * Check if a tool is a variant (unit converter, base number converter, or percentage calculator)
+   * Check if a tool is a variant (unit converter, base number converter, percentage calculator, or currency converter)
    */
   private isConversionPair(tool: Tool): boolean {
     return tool.id.startsWith('unit-converter-') ||
            tool.id.startsWith('base-number-converter-') ||
-           tool.id.startsWith('percentage-calculator-');
+           tool.id.startsWith('percentage-calculator-') ||
+           tool.id.startsWith('currency-converter-');
   }
 
   /**
