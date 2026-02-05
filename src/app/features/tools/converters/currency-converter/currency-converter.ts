@@ -202,7 +202,7 @@ export class CurrencyConverter implements OnInit, OnDestroy {
       const title = `${fromName} to ${toName} Converter | Fast & Private | AllTheThings`;
       const description = `Convert ${fromName} (${fromCode}) to ${toName} (${toCode}) instantly. Free currency converter with approximate exchange rates. ${this.getCurrencySymbol(fromCode)}1 ${fromCode} = ${this.getCurrencySymbol(toCode)}${this.currentRate().toFixed(4)} ${toCode}. All calculations happen in your browser for complete privacy.`;
       const url = `https://www.allthethings.dev/tools/currency-converter/${fromSlug}-to-${toSlug}`;
-      const image = 'https://www.allthethings.dev/meta-images/og-currency-converter.png';
+      const image = `https://www.allthethings.dev/meta-images/og-${fromSlug}-to-${toSlug}.jpg`;
 
       this.metaService.updateTags({
         title,
