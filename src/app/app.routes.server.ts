@@ -112,6 +112,64 @@ export const serverRoutes: ServerRoute[] = [
     }
   },
   {
+    path: 'tools/currency-converter/:pair',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      // Return all currency converter pair slugs for prerendering (major currencies)
+      return [
+        // USD conversions
+        { pair: 'us-dollar-to-euro' },
+        { pair: 'us-dollar-to-british-pound' },
+        { pair: 'us-dollar-to-japanese-yen' },
+        { pair: 'us-dollar-to-canadian-dollar' },
+        { pair: 'us-dollar-to-australian-dollar' },
+        { pair: 'us-dollar-to-swiss-franc' },
+        // EUR conversions
+        { pair: 'euro-to-us-dollar' },
+        { pair: 'euro-to-british-pound' },
+        { pair: 'euro-to-japanese-yen' },
+        { pair: 'euro-to-canadian-dollar' },
+        { pair: 'euro-to-australian-dollar' },
+        { pair: 'euro-to-swiss-franc' },
+        // GBP conversions
+        { pair: 'british-pound-to-us-dollar' },
+        { pair: 'british-pound-to-euro' },
+        { pair: 'british-pound-to-japanese-yen' },
+        { pair: 'british-pound-to-canadian-dollar' },
+        { pair: 'british-pound-to-australian-dollar' },
+        { pair: 'british-pound-to-swiss-franc' },
+        // JPY conversions
+        { pair: 'japanese-yen-to-us-dollar' },
+        { pair: 'japanese-yen-to-euro' },
+        { pair: 'japanese-yen-to-british-pound' },
+        { pair: 'japanese-yen-to-canadian-dollar' },
+        { pair: 'japanese-yen-to-australian-dollar' },
+        { pair: 'japanese-yen-to-swiss-franc' },
+        // CAD conversions
+        { pair: 'canadian-dollar-to-us-dollar' },
+        { pair: 'canadian-dollar-to-euro' },
+        { pair: 'canadian-dollar-to-british-pound' },
+        { pair: 'canadian-dollar-to-japanese-yen' },
+        { pair: 'canadian-dollar-to-australian-dollar' },
+        { pair: 'canadian-dollar-to-swiss-franc' },
+        // AUD conversions
+        { pair: 'australian-dollar-to-us-dollar' },
+        { pair: 'australian-dollar-to-euro' },
+        { pair: 'australian-dollar-to-british-pound' },
+        { pair: 'australian-dollar-to-japanese-yen' },
+        { pair: 'australian-dollar-to-canadian-dollar' },
+        { pair: 'australian-dollar-to-swiss-franc' },
+        // CHF conversions
+        { pair: 'swiss-franc-to-us-dollar' },
+        { pair: 'swiss-franc-to-euro' },
+        { pair: 'swiss-franc-to-british-pound' },
+        { pair: 'swiss-franc-to-japanese-yen' },
+        { pair: 'swiss-franc-to-canadian-dollar' },
+        { pair: 'swiss-franc-to-australian-dollar' },
+      ];
+    }
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender
   }

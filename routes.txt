@@ -70,6 +70,7 @@
 /tools/case-converter
 /tools/color-picker
 /tools/currency-converter
+/tools/currency-converter/:pair
 /tools/gradient-generator
 /tools/icon-generator
 /tools/lorem-ipsum
