@@ -15,6 +15,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-roman-numeral-converter',
@@ -32,7 +33,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     MatCheckboxModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './roman-numeral-converter.html',
   styleUrl: './roman-numeral-converter.scss',
@@ -41,6 +43,13 @@ export class RomanNumeralConverter implements OnInit {
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
   private storageService = inject(RomanNumeralStorageService);
+
+  relatedBlogPosts = [
+    {
+      title: 'Base Number Converter Tutorial: Binary, Octal, Decimal, and Hex',
+      slug: 'base-number-converter-tutorial'
+    }
+  ];
 
   // State management
   numberInput = signal<string>('');

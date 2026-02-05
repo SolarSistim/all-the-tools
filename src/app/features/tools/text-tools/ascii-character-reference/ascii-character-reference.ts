@@ -12,6 +12,7 @@ import { PageHeaderComponent } from '../../../../shared/components/page-header/p
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 import { ToolsService } from '../../../../core/services/tools.service';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
@@ -43,7 +44,8 @@ interface AsciiCharacter {
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './ascii-character-reference.html',
   styleUrl: './ascii-character-reference.scss'
@@ -53,6 +55,13 @@ export class AsciiCharacterReference implements OnInit {
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
   private platformId = inject(PLATFORM_ID);
+
+  relatedBlogPosts = [
+    {
+      title: 'Base Number Converter Tutorial: Binary, Octal, Decimal, and Hex',
+      slug: 'base-number-converter-tutorial'
+    }
+  ];
 
   // Signals for reactive state
   searchQuery = signal<string>('');

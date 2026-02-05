@@ -17,6 +17,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-photo-filter-studio',
@@ -36,7 +37,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     MatTabsModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './photo-filter-studio.html',
   styleUrl: './photo-filter-studio.scss',
@@ -49,6 +51,13 @@ export class PhotoFilterStudio implements OnInit {
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
   private cdr = inject(ChangeDetectorRef);
+
+  relatedBlogPosts = [
+    {
+      title: 'Photo Filter Studio Tutorial: Filter Photos Like a Pro',
+      slug: 'photo-filter-studio-tutorial'
+    }
+  ];
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @ViewChild('editorCanvas') editorCanvasRef!: ElementRef<HTMLCanvasElement>;

@@ -12,6 +12,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface TimezoneDisplay {
   id: string;
@@ -42,7 +43,8 @@ interface TimezoneOption {
     MatTooltipModule,
     MatSelectModule,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './timezone-converter.html',
   styleUrl: './timezone-converter.scss',
@@ -52,6 +54,14 @@ export class TimezoneConverter implements OnInit, OnDestroy {
   private snackbar = inject(CustomSnackbarService);
   private platformId = inject(PLATFORM_ID);
   private intervalId?: number;
+
+  // Related tools for cross-linking
+  relatedTools = [
+    {
+      title: 'Timestamp Converter',
+      slug: '/tools/timestamp-converter'
+    }
+  ];
 
   // Current time (updates every second)
   currentTime = signal<Date>(new Date());

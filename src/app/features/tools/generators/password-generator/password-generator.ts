@@ -15,6 +15,7 @@ import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface PasswordStrength {
   score: number;
@@ -38,7 +39,8 @@ interface PasswordStrength {
     MatChipsModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './password-generator.html',
   styleUrl: './password-generator.scss',
@@ -47,6 +49,11 @@ export class PasswordGenerator implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'UUID Generator', slug: '/tools/uuid-generator' }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

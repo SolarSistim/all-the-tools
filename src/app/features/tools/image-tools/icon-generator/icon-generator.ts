@@ -11,6 +11,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface IconSize {
   name: string;
@@ -31,7 +32,8 @@ interface IconSize {
     MatTooltipModule,
     FormsModule,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './icon-generator.html',
   styleUrl: './icon-generator.scss',
@@ -40,6 +42,12 @@ export class IconGenerator implements AfterViewInit {
 
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'Gradient Generator', slug: '/tools/gradient-generator' },
+    { title: 'Photo Filter Studio', slug: '/tools/photo-filter-studio' }
+  ];
   @ViewChild('cropPreviewContainer') cropPreviewContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
 

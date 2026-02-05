@@ -17,6 +17,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import QRCode from 'qrcode';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 type QRCodeType = 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard';
 
@@ -44,7 +45,8 @@ interface QRCodeOptions {
     MatExpansionModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './qr-code-generator.html',
   styleUrl: './qr-code-generator.scss',
@@ -55,6 +57,13 @@ export class QrCodeGenerator implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  relatedBlogPosts = [
+    {
+      title: 'How to Use the Barcode Scanner Tool: Complete Guide',
+      slug: 'how-to-use-the-barcode-scanner-tool'
+    }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

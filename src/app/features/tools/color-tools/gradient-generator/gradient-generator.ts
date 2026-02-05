@@ -14,6 +14,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface ColorStop {
   id: number;
@@ -51,7 +52,8 @@ interface GradientPreset {
     MatTooltipModule,
     MatChipsModule,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './gradient-generator.html',
   styleUrl: './gradient-generator.scss',
@@ -63,6 +65,13 @@ export class GradientGenerator implements OnInit {
   private snackbar = inject(CustomSnackbarService);
   private metaService = inject(MetaService);
   private nextColorStopId = 3;
+
+  relatedBlogPosts = [
+    {
+      title: 'Gradient Generator Tutorial: Create Beautiful CSS Gradients',
+      slug: 'gradient-generator-tutorial-css-gradients'
+    }
+  ];
 
   // Gradient configuration
   gradientConfig = signal<GradientConfig>({

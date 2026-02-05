@@ -41,6 +41,11 @@
       </div>
     </section>
 
+    <!-- Related Currency Converters (only on variant routes) -->
+    @if (isVariantRoute() && getRelatedCurrencyPairs().length > 0) {
+      <app-related-blog-posts [posts]="getRelatedCurrencyPairs()"></app-related-blog-posts>
+    }
+
     <!-- The Bottom Line Section -->
     <section class="bottom-line-section">
       <h2 class="bottom-line-title">
@@ -234,6 +239,11 @@
         </ul>
       </div>
     </div>
+
+      <!-- Related Currency Converters (only on variant routes) -->
+      @if (isVariantRoute() && getRelatedCurrencyPairs().length > 0) {
+        <app-related-blog-posts [posts]="getRelatedCurrencyPairs()"></app-related-blog-posts>
+      }
   </div>
 </div>
 

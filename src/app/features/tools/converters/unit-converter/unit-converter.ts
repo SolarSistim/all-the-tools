@@ -17,6 +17,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface Unit {
   name: string;
@@ -48,7 +49,8 @@ interface UnitCategory {
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './unit-converter.html',
   styleUrl: './unit-converter.scss'
@@ -58,6 +60,18 @@ export class UnitConverter implements OnInit, OnDestroy {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private route = inject(ActivatedRoute);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    {
+      title: 'Currency Converter',
+      slug: '/tools/currency-converter'
+    },
+    {
+      title: 'Percentage Calculator',
+      slug: '/tools/percentage-calculator'
+    }
+  ];
   private router = inject(Router);
 
   featuredTools: Tool[] = [];

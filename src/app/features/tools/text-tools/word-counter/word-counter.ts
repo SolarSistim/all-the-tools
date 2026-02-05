@@ -15,6 +15,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface TextMetrics {
   words: number;
@@ -44,7 +45,8 @@ interface TextMetrics {
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './word-counter.html',
   styleUrl: './word-counter.scss'
@@ -54,6 +56,12 @@ export class WordCounter implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'Case Converter', slug: '/tools/case-converter' },
+    { title: 'Lorem Ipsum Generator', slug: '/tools/lorem-ipsum' }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

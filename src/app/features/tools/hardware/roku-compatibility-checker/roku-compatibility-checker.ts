@@ -8,6 +8,7 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 import { RokuProgrammaticCompatibilityChecker } from './roku-programmatic-compatibility-checker/roku-programmatic-compatibility-checker';
 import { AlertWarning } from '../../../reusable-components/alerts/alert-warning/alert-warning';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-roku-compatibility-checker',
@@ -20,13 +21,25 @@ import { AlertWarning } from '../../../reusable-components/alerts/alert-warning/
     CtaEmailList,
     AdsenseComponent,
     RokuProgrammaticCompatibilityChecker,
-    AlertWarning
+    AlertWarning,
+    RelatedBlogPosts
   ],
   templateUrl: './roku-compatibility-checker.html',
   styleUrl: './roku-compatibility-checker.scss',
 })
 export class RokuCompatibilityChecker implements OnInit {
   private metaService = inject(MetaService);
+
+  relatedBlogPosts = [
+    {
+      title: 'I Built a Roku Compatibility Checker (And Why You Might Need It)',
+      slug: 'i-built-a-roku-compatibility-checker'
+    },
+    {
+      title: 'Roku TV Black Screen of Death: Class Action Investigation',
+      slug: 'roku-tv-black-screen-defect-class-action-lawsuit'
+    }
+  ];
 
   ngOnInit(): void {
     this.metaService.updateTags({

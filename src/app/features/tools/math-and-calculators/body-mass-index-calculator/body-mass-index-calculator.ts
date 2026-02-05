@@ -17,6 +17,7 @@ import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-body-mass-index-calculator',
@@ -35,7 +36,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     ToolCardComponent,
     CtaEmailList,
     AlertDanger,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './body-mass-index-calculator.html',
   styleUrl: './body-mass-index-calculator.scss'
@@ -44,6 +46,13 @@ export class BodyMassIndexCalculator implements OnInit {
 
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
+
+  relatedBlogPosts = [
+    {
+      title: 'How to Calculate Percentages in Your Head',
+      slug: 'how-to-calculate-percentages-in-your-head'
+    }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

@@ -15,6 +15,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-tip-calculator',
@@ -31,7 +32,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './tip-calculator.html',
   styleUrl: './tip-calculator.scss'
@@ -40,6 +42,13 @@ export class TipCalculator implements OnInit {
 
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
+
+  relatedBlogPosts = [
+    {
+      title: 'How to Calculate Percentages in Your Head',
+      slug: 'how-to-calculate-percentages-in-your-head'
+    }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

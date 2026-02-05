@@ -16,6 +16,7 @@ import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-card';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 export type CalculatorType =
   | 'base'
@@ -41,7 +42,8 @@ export type CalculatorType =
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './percentage-calculator.html',
   styleUrl: './percentage-calculator.scss'
@@ -53,6 +55,13 @@ export class PercentageCalculatorComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private destroy$ = new Subject<void>();
+
+  relatedBlogPosts = [
+    {
+      title: 'How to Calculate Percentages in Your Head',
+      slug: 'how-to-calculate-percentages-in-your-head'
+    }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

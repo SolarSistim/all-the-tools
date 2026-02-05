@@ -12,6 +12,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-uuid-generator',
@@ -27,7 +28,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     MatTooltipModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './uuid-generator.html',
   styleUrl: './uuid-generator.scss',
@@ -35,6 +37,11 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
 export class UuidGenerator implements OnInit {
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'Password Generator', slug: '/tools/password-generator' }
+  ];
 
   // Signals for UUID options
   selectedVersion = signal<'v4' | 'v1' | 'nil'>('v4');

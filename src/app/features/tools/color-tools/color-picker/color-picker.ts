@@ -13,6 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 // Color interface
 interface RGB {
@@ -43,7 +44,8 @@ interface HSL {
     MatTooltipModule,
     MatTabsModule,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
 ],
   templateUrl: './color-picker.html',
   styleUrl: './color-picker.scss',
@@ -51,6 +53,13 @@ interface HSL {
 export class ColorPicker implements OnInit {
   private metaService = inject(MetaService);
   private snackBar = inject(MatSnackBar);
+
+  relatedBlogPosts = [
+    {
+      title: 'Gradient Generator Tutorial: Create Beautiful CSS Gradients',
+      slug: 'gradient-generator-tutorial-css-gradients'
+    }
+  ];
 
   // Color picker state
   hue = signal<number>(200);

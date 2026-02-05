@@ -13,6 +13,7 @@ import { ToolsService } from '../../../../core/services/tools.service';
 import { Tool, ToolCategoryMeta } from '../../../../core/models/tool.interface';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
 
@@ -29,7 +30,8 @@ type LoremType = 'nonsensical' | 'cicero-latin' | 'cicero-english';
     MatButtonModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './lorem-ipsum.html',
   styleUrl: './lorem-ipsum.scss',
@@ -38,6 +40,12 @@ export class LoremIpsum implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'Word Counter', slug: '/tools/word-counter' },
+    { title: 'Case Converter', slug: '/tools/case-converter' }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

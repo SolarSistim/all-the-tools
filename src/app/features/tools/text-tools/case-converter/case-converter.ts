@@ -14,6 +14,7 @@ import { ToolCardComponent } from '../../../../shared/components/tool-card/tool-
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface CaseConversion {
   id: string;
@@ -37,7 +38,8 @@ interface CaseConversion {
     PageHeaderComponent,
     ToolCardComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './case-converter.html',
   styleUrl: './case-converter.scss'
@@ -47,6 +49,12 @@ export class CaseConverter implements OnInit {
   toolsService = inject(ToolsService);
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'Word Counter', slug: '/tools/word-counter' },
+    { title: 'Lorem Ipsum Generator', slug: '/tools/lorem-ipsum' }
+  ];
 
   featuredTools: Tool[] = [];
   categories: ToolCategoryMeta[] = [];

@@ -13,6 +13,7 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
 import { MetaService } from '../../../../core/services/meta.service';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts, RelatedBlogPost } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 interface Currency {
   code: string;
@@ -35,7 +36,8 @@ interface Currency {
     MatTooltipModule,
     CtaEmailList,
     AlertDanger,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './currency-converter.html',
   styleUrl: './currency-converter.scss',
@@ -407,6 +409,66 @@ export class CurrencyConverter implements OnInit, OnDestroy {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  /**
+   * Get related currency converter pairs for the current conversion
+   * Returns up to 5 related conversions: inverse, same source, same target
+   */
+  getRelatedCurrencyPairs(): RelatedBlogPost[] {
+    if (!this.isVariantRoute()) {
+      return [];
+    }
+
+    const fromCode = this.fromCurrency();
+    const toCode = this.toCurrency();
+    const related: RelatedBlogPost[] = [];
+
+    // 1. Add inverse conversion (e.g., EUR to USD if current is USD to EUR)
+    if (this.majorCurrencies.includes(toCode) && this.majorCurrencies.includes(fromCode)) {
+      const inverseFromSlug = this.currencyToSlugMap[toCode];
+      const inverseToSlug = this.currencyToSlugMap[fromCode];
+      if (inverseFromSlug && inverseToSlug) {
+        related.push({
+          title: `${this.getCurrencyName(toCode)} to ${this.getCurrencyName(fromCode)}`,
+          slug: `/tools/currency-converter/${inverseFromSlug}-to-${inverseToSlug}`
+        });
+      }
+    }
+
+    // 2. Add other conversions FROM the same source currency
+    for (const targetCode of this.majorCurrencies) {
+      if (targetCode !== fromCode && targetCode !== toCode && related.length < 5) {
+        const fromSlug = this.currencyToSlugMap[fromCode];
+        const targetSlug = this.currencyToSlugMap[targetCode];
+        if (fromSlug && targetSlug) {
+          related.push({
+            title: `${this.getCurrencyName(fromCode)} to ${this.getCurrencyName(targetCode)}`,
+            slug: `/tools/currency-converter/${fromSlug}-to-${targetSlug}`
+          });
+        }
+      }
+    }
+
+    // 3. Add other conversions TO the same target currency (if we still need more)
+    for (const sourceCode of this.majorCurrencies) {
+      if (sourceCode !== fromCode && sourceCode !== toCode && related.length < 5) {
+        const sourceSlug = this.currencyToSlugMap[sourceCode];
+        const toSlug = this.currencyToSlugMap[toCode];
+        if (sourceSlug && toSlug) {
+          // Check if this pair isn't already added
+          const pairSlug = `/tools/currency-converter/${sourceSlug}-to-${toSlug}`;
+          if (!related.some(r => r.slug === pairSlug)) {
+            related.push({
+              title: `${this.getCurrencyName(sourceCode)} to ${this.getCurrencyName(toCode)}`,
+              slug: pairSlug
+            });
+          }
+        }
+      }
+    }
+
+    return related.slice(0, 5);
   }
 
 }

@@ -11,6 +11,7 @@ import { StopwatchComponent } from './components/stopwatch/stopwatch.component';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 @Component({
   selector: 'app-timer-stopwatch',
@@ -24,7 +25,8 @@ import { AdsenseComponent } from '../../../blog/components/adsense/adsense.compo
     TimerComponent,
     StopwatchComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './timer-stopwatch.html',
   styleUrl: './timer-stopwatch.scss'
@@ -34,6 +36,12 @@ export class TimerStopwatch implements OnInit, OnDestroy {
   private router = inject(Router);
   private metaService = inject(MetaService);
   private destroy$ = new Subject<void>();
+
+  // Related tools for cross-linking
+  relatedTools = [
+    { title: 'Timestamp Converter', slug: '/tools/timestamp-converter' },
+    { title: 'Timezone Converter', slug: '/tools/time-zone-converter' }
+  ];
 
   // Current mode based on URL
   currentMode = signal<TimerStopwatchMode>('timer');

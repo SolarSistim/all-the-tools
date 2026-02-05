@@ -15,6 +15,7 @@ import { CustomSnackbarService } from '../../../../core/services/custom-snackbar
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
+import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
 
 type ScannerState = 'idle' | 'selectRegion' | 'processing' | 'scanResult' | 'error';
 
@@ -34,7 +35,8 @@ type ScannerState = 'idle' | 'selectRegion' | 'processing' | 'scanResult' | 'err
     MatDialogModule,
     PageHeaderComponent,
     CtaEmailList,
-    AdsenseComponent
+    AdsenseComponent,
+    RelatedBlogPosts
   ],
   templateUrl: './on-reward-scanner.html',
   styleUrl: './on-reward-scanner.scss',
@@ -53,6 +55,13 @@ private pendingCropInit = false;
   private metaService = inject(MetaService);
   private snackbar = inject(CustomSnackbarService);
   private storageService = inject(OnRewardStorageService);
+
+  relatedBlogPosts = [
+    {
+      title: 'How to Scan Reward Codes: Stop Typing Tiny Codes by Hand',
+      slug: 'stop-typing-in-those-tiny-on-reward-codes-by-hand'
+    }
+  ];
 
   // State management
   state = signal<ScannerState>('idle');
