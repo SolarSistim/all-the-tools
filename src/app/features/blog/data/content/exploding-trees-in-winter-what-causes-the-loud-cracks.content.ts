@@ -37,6 +37,15 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'youtube-player',
+      videoId: 'Q258I2KVGzU',
+      title: '▶ Watch or Listen to this Article',
+      description: 'Prefer to watch or listen? Click play to check out the video version of this article.',
+    },
+  },
+  {
     type: 'adsense',
     data: {
       adClient: 'ca-pub-7077792325295668',
