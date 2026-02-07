@@ -68,7 +68,7 @@ export class ArtistDetailComponent implements OnInit {
     if (!this.artist) return;
 
     const config = {
-      title: `${this.artist.name} | 3D Artists Directory`,
+      title: `${this.artist.name} | 3D Artist Spotlight`,
       description: this.artist.metaDescription || this.artist.shortDescription,
       keywords: this.artist.metaKeywords || this.artist.keywords,
       image: this.artist.ogImage || this.artistsService.getConfig().defaultOgImage,
