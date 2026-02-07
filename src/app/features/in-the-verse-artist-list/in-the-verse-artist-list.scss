@@ -39,12 +39,12 @@
 .page-description {
   margin: 0 auto 2rem;
   max-width: 800px;
-  font-size: 1.125rem;
+  font-size: 1.463rem;
   color: var(--text-secondary);
   line-height: 1.7;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.3rem;
     line-height: 1.6;
   }
 }
@@ -504,5 +504,231 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+// Featured Video Section
+.featured-video-section {
+  margin-top: -110px;
+  position: relative;
+  z-index: 2;
+}
+
+.video-container {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.video-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.video-header-icon {
+  color: var(--neon-cyan);
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.video-header-title {
+  margin: 0;
+  font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; // 16:9 aspect ratio
+  background: #000;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Bottom Line Section
+.bottom-line-section {
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border-left: 4px solid var(--neon-cyan);
+  margin: 3rem 0 2rem;
+
+  h2 {
+    font-family: 'Orbitron', monospace;
+    color: var(--neon-cyan);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0;
+    font-size: 1.12rem;
+  }
+}
+
+// SEO Content Sections (panel style)
+.seo-content-section {
+  margin: 3rem 0;
+  background: var(--bg-elevated);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.seo-block {
+  padding: 2rem 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  h2, h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    mat-icon {
+      color: var(--neon-cyan);
+    }
+  }
+
+  // When seo-block only contains a heading (no p), remove bottom margin
+  h2:last-child, h3:last-child {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.seo-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.seo-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+
+  &:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.25rem 1.5rem;
+    border-right: none;
+
+    &:nth-last-child(-n+2) {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  > mat-icon {
+    color: var(--neon-cyan);
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+}
+
+// Email CTA spacing
+::ng-deep app-cta-email-list {
+  display: block;
+  padding-bottom: 4rem;
+  background: var(--bg-primary);
+}
+
+// Responsive adjustments for new sections
+@media (max-width: 768px) {
+  .featured-video-section {
+    margin-top: -70px;
+  }
+
+  .video-header-title {
+    font-size: 1rem;
+  }
+
+  .bottom-line-section {
+    padding: 1.5rem;
+    margin: 2rem 0 1.5rem;
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .seo-content-section {
+    margin: 2rem 0;
   }
 }

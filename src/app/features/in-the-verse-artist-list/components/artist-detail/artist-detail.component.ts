@@ -12,6 +12,7 @@ import { ArtistsService } from '../../services/artists.service';
 import { MetaService } from '../../../../core/services/meta.service';
 import { StructuredDataService } from '../../../../core/services/structured-data.service';
 import { VideoDialogComponent } from '../video-dialog/video-dialog.component';
+import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 /**
  * Artist Detail Component
@@ -26,6 +27,7 @@ import { VideoDialogComponent } from '../video-dialog/video-dialog.component';
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
+    CtaEmailList,
   ],
   templateUrl: './artist-detail.component.html',
   styleUrls: ['./artist-detail.component.scss'],

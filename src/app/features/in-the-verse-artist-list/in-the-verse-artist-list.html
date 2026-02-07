@@ -4,6 +4,27 @@
 <div class="artists-listing-container">
   <div class="container">
 
+    <!-- Featured Video -->
+    <section class="featured-video-section">
+      <div class="video-container">
+        <div class="video-header">
+          <div class="video-header-info">
+            <mat-icon class="video-header-icon">play_circle</mat-icon>
+            <h2 class="video-header-title">3D Artist Spotlight: Howard Day</h2>
+          </div>
+        </div>
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/urt0vFVeX8I?autoplay=1&mute=1&loop=1&playlist=urt0vFVeX8I&start=2"
+            title="3D Artist Spotlight - Featured Video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Page Info Section -->
     <section class="page-info-section">
       <p class="page-description">
@@ -25,6 +46,14 @@
           <span class="stat-label">Focus</span>
         </div>
       </div>
+    </section>
+
+    <!-- Bottom Line Section -->
+    <section class="bottom-line-section">
+      <h2>The Bottom Line</h2>
+      <p>
+        In The Verse is a curated directory of talented 3D modeling artists creating breathtaking digital art. While most artists featured here use Blender 3D software as their primary tool, others choose 3ds Max, Cinema 4D, or other professional 3D creation software. Whether you're looking for inspiration, exploring 3D modeling programs, or searching for your next favorite Blender tutorial, this directory showcases the best creators in the sci-fi, mecha, and spacecraft 3D art community.
+      </p>
     </section>
 
     <!-- Search Bar -->
@@ -162,5 +191,268 @@
       [totalPages]="totalPages"
       (pageChange)="onPageChange($event)"
     ></app-pagination>
+
+    <!-- Related Blog Posts -->
+    <app-related-blog-posts [posts]="relatedBlogPosts"></app-related-blog-posts>
+
+    <!-- What is Blender Section -->
+    <section class="seo-content-section">
+      <div class="seo-block">
+        <h2>
+          <mat-icon>view_in_ar</mat-icon>
+          What is Blender 3D Software?
+        </h2>
+        <p>
+          Blender is the world's leading free and open-source 3D modeling software. This powerful 3D creation software supports the entire 3D pipeline including modeling, rigging, animation, simulation, rendering, compositing, and motion tracking. As a complete 3D editing program, Blender has become the tool of choice for independent artists, studios, and hobbyists creating everything from feature films to video game assets. Many professionals consider Blender the best free alternative to expensive CAD software and commercial 3D design software suites.
+        </p>
+      </div>
+      <div class="seo-info-grid">
+        <div class="seo-info-item">
+          <mat-icon>view_in_ar</mat-icon>
+          <div>
+            <h4>3D Modeling</h4>
+            <p>Full-featured polygonal 3D modeling tools with sculpting, retopology, and procedural generation. Blender's modeling capabilities rival any commercial 3D modeling program on the market.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>movie_creation</mat-icon>
+          <div>
+            <h4>3D Animation</h4>
+            <p>Blender animation software features include keyframing, rigging, character animation, and motion capture support. Create stunning 3D animation with professional-grade tools completely free.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>photo_camera</mat-icon>
+          <div>
+            <h4>3D Rendering</h4>
+            <p>Industry-standard rendering with Cycles (path tracer) and EEVEE (real-time). Blender 3D rendering software produces photorealistic results that compete with the most expensive commercial alternatives.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>precision_manufacturing</mat-icon>
+          <div>
+            <h4>3D Printing Support</h4>
+            <p>Built-in 3D printing software tools let you analyze, repair, and export models for 3D printers. Blender functions as a complete 3D printer program for preparing print-ready files.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Use Blender Section -->
+    <section class="seo-content-section">
+      <div class="seo-block">
+        <h2>
+          <mat-icon>check_circle</mat-icon>
+          Why Artists Choose Blender 3D Modeling Software
+        </h2>
+      </div>
+      <div class="seo-info-grid">
+        <div class="seo-info-item">
+          <mat-icon>check_circle</mat-icon>
+          <div>
+            <h4>Completely Free &amp; Open Source</h4>
+            <p>Blender 3D software download is 100% free with no hidden costs, subscriptions, or feature limitations. Unlike commercial 3D modeling software and expensive CAD design programs, Blender gives you every tool at no cost.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>check_circle</mat-icon>
+          <div>
+            <h4>Professional-Grade 3D Modeling</h4>
+            <p>As a 3D modeling program, Blender is used in professional productions including feature films, TV shows, and AAA video games. The same 3D editing software used by hobbyists powers industry studios.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>check_circle</mat-icon>
+          <div>
+            <h4>Massive Tutorial Community</h4>
+            <p>Thousands of free Blender tutorials are available online. From beginner Blender software tutorials to advanced Blender 3D software tutorials, the learning resources are endless.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>check_circle</mat-icon>
+          <div>
+            <h4>All-in-One 3D Creation Software</h4>
+            <p>Blender combines modeling, sculpting, animation, rendering, compositing, and video editing in one 3D creation software package. No need for multiple expensive 3D editing programs or separate CAD drawing software.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>check_circle</mat-icon>
+          <div>
+            <h4>Cross-Platform Availability</h4>
+            <p>Blender download is available for Windows, macOS, and Linux. This Blender computer software runs on virtually any modern system and supports GPU-accelerated rendering.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>check_circle</mat-icon>
+          <div>
+            <h4>Active Development &amp; Updates</h4>
+            <p>The Blender computer program receives regular updates with new features and performance improvements. Each release pushes Blender further as a leading 3D modeling software solution.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="seo-content-section">
+      <div class="seo-block">
+        <h2>
+          <mat-icon>category</mat-icon>
+          Common Use Cases for 3D Modeling with Blender
+        </h2>
+      </div>
+      <div class="seo-info-grid">
+        <div class="seo-info-item">
+          <mat-icon>rocket_launch</mat-icon>
+          <div>
+            <h4>Sci-Fi &amp; Spacecraft Design</h4>
+            <p>Artists use Blender 3D software, 3ds Max, and other 3D modeling programs to create detailed starships, space stations, and futuristic vehicles. 3D modeling enables incredibly detailed hard-surface sci-fi designs.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>smart_toy</mat-icon>
+          <div>
+            <h4>Mecha &amp; Robot Design</h4>
+            <p>Complex mechanical designs and giant robots come to life through 3D modeling programs. Blender's boolean and modifier tools make it an ideal 3D editing software for mecha art.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>videogame_asset</mat-icon>
+          <div>
+            <h4>Game Asset Creation</h4>
+            <p>From characters to environments, Blender 3D modeling software is widely used for game development. Export directly to Unity, Unreal Engine, and other game engines.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>movie</mat-icon>
+          <div>
+            <h4>3D Animation &amp; Film</h4>
+            <p>Blender animation software powers short films, music videos, and visual effects. The complete 3D animation pipeline from modeling to final composite lives inside Blender.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>architecture</mat-icon>
+          <div>
+            <h4>Architectural Visualization &amp; CAD</h4>
+            <p>Architects and designers use Blender as 3D design software for photorealistic building renders and technical modeling. Combined with add-ons, Blender functions as free CAD design software for architectural visualization and CAD drawing programs workflows.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>print</mat-icon>
+          <div>
+            <h4>3D Printing &amp; Fabrication</h4>
+            <p>Blender serves as powerful 3D printing software for designing printable models. Built-in mesh analysis tools make this 3D printer program perfect for preparing files for fabrication.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blender vs CAD Software Section -->
+    <section class="seo-content-section">
+      <div class="seo-block">
+        <h2>
+          <mat-icon>architecture</mat-icon>
+          Blender as Free CAD &amp; 3D Design Software
+        </h2>
+        <p>
+          While traditional CAD software like AutoCAD and other commercial CAD design programs can cost thousands of dollars per year in licensing fees, Blender offers a powerful free alternative for 3D design and technical modeling. As a free CAD program, Blender includes many of the features found in expensive CAD drawing software, making it an accessible entry point for designers, architects, and engineers looking for free CAD design software without compromising on capabilities.
+        </p>
+      </div>
+      <div class="seo-info-grid">
+        <div class="seo-info-item">
+          <mat-icon>savings</mat-icon>
+          <div>
+            <h4>Free CAD Alternative</h4>
+            <p>Unlike Autodesk AutoCAD software and other commercial CAD design programs that require expensive subscriptions, Blender is a completely free CAD system. This makes professional-grade 3D CAD software accessible to everyone from students to independent professionals seeking free CAD programs.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>straighten</mat-icon>
+          <div>
+            <h4>CAD Drawing &amp; Design Tools</h4>
+            <p>Blender's precision modeling tools function as capable CAD drawing software for architectural visualization, product design, and technical modeling. With add-ons, Blender extends into a full CAD design software solution rivaling dedicated CAD drawing programs and CAD computer programs.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>compare</mat-icon>
+          <div>
+            <h4>Blender vs SketchUp &amp; AutoCAD</h4>
+            <p>Artists choosing between Google SketchUp, SketchUp free, Autodesk AutoCAD software, and Blender find that Blender offers the most complete free 3D design software package. While SketchUp free versions have limitations and AutoCAD requires costly licenses, Blender provides unlimited 3D modeling capabilities at no cost.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>hub</mat-icon>
+          <div>
+            <h4>3D Design Software for Everyone</h4>
+            <p>Whether you need 3D design software for product visualization, 3D CAD software for engineering, or free CAD design software for architectural plans, Blender adapts to any 3D design workflow. The CAD computer program capabilities combined with artistic tools make it uniquely versatile among free CAD programs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="seo-content-section">
+      <div class="seo-block">
+        <h2>
+          <mat-icon>school</mat-icon>
+          Getting Started with Blender 3D Software
+        </h2>
+        <p>
+          Ready to start your 3D modeling journey? Blender 3D software download is completely free from blender.org. Whether you're interested in 3D modeling programs for the first time, switching from commercial 3D editing software, or migrating from CAD software like AutoCAD or Google SketchUp, Blender's learning curve is well-supported by an enormous community of creators and educators.
+        </p>
+      </div>
+      <div class="seo-info-grid">
+        <div class="seo-info-item">
+          <mat-icon>download</mat-icon>
+          <div>
+            <h4>Download Blender</h4>
+            <p>Get the latest Blender program download from the official website. The Blender software download is available for all major operating systems and is completely free, unlike AutoCAD software or other paid 3D design software.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>school</mat-icon>
+          <div>
+            <h4>Follow Blender Tutorials</h4>
+            <p>Start with beginner Blender tutorials on YouTube. A good Blender software tutorial will walk you through the interface, basic 3D modeling, and rendering fundamentals.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>groups</mat-icon>
+          <div>
+            <h4>Join the Community</h4>
+            <p>Connect with other Blender 3D artists on forums, Discord servers, and social media. The 3D graphics Blender community is one of the most welcoming in digital art.</p>
+          </div>
+        </div>
+
+        <div class="seo-info-item">
+          <mat-icon>palette</mat-icon>
+          <div>
+            <h4>Study Featured Artists</h4>
+            <p>Explore the artists in this directory for inspiration. See how professionals use Blender 3D modeling software and other 3D creation tools to create incredible 3D animation and rendered artwork.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
+
+<!-- Email CTA (full width, outside container) -->
+<app-cta-email-list darkThemeBg="primary"></app-cta-email-list>

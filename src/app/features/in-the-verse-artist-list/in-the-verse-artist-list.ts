@@ -17,6 +17,8 @@ import { MetaService } from '../../core/services/meta.service';
 import { StructuredDataService } from '../../core/services/structured-data.service';
 import { PaginationComponent } from '../blog/components/pagination/pagination.component';
 import { VideoDialogComponent } from './components/video-dialog/video-dialog.component';
+import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
+import { RelatedBlogPosts } from '../reusable-components/related-blog-posts/related-blog-posts';
 
 /**
  * In The Verse Artist List Component
@@ -37,6 +39,8 @@ import { VideoDialogComponent } from './components/video-dialog/video-dialog.com
     MatTooltipModule,
     FormsModule,
     PaginationComponent,
+    CtaEmailList,
+    RelatedBlogPosts,
   ],
   templateUrl: './in-the-verse-artist-list.html',
   styleUrl: './in-the-verse-artist-list.scss',
@@ -61,6 +65,21 @@ export class InTheVerseArtistList implements OnInit {
   searchQuery = signal('');
   allArtists: ArtistPreview[] = [];
   filteredArtists = signal<ArtistPreview[]>([]);
+
+  relatedBlogPosts = [
+    {
+      title: 'One Man, One PC, Cinema-Quality Starships: Howard Day',
+      slug: 'one-man-one-pc-cinema-quality-starships-howard-day',
+    },
+    {
+      title: 'Lighthuggers: When Fan Art Captures the Impossible',
+      slug: 'lighthuggers-when-fan-art-captures-the-impossible',
+    },
+    {
+      title: 'When Your Monster Becomes Your Friend: How Badlands Demystifies the Yautja',
+      slug: 'when-your-monster-becomes-your-friend-how-badlands-demystifies-the-yautja',
+    },
+  ];
 
   ngOnInit(): void {
     // Load all artists for search autocomplete
@@ -110,17 +129,56 @@ export class InTheVerseArtistList implements OnInit {
 
   private updateMetaTags(): void {
     const config = {
-      title: 'In The Verse - 3D Artists Directory | All The Things',
+      title: 'In The Verse - 3D Artists Directory | Blender 3D Software Artists & Tutorials',
       description:
-        'Discover talented 3D artists, Blender creators, and digital sculptors. Browse our curated directory of artists creating stunning sci-fi, mecha, and environment art.',
+        'Discover talented 3D modeling artists working with Blender 3D software, 3ds Max, and other leading 3D creation tools. Browse our curated directory of artists creating stunning sci-fi starships, mecha designs, and 3D animation. Free Blender tutorials, 3D modeling programs, and digital art inspiration.',
       keywords: [
+        '3D modeling',
+        '3D modeling software',
+        '3D modeling programs',
+        'Blender 3D software',
+        'Blender tutorial',
+        'Blender software tutorial',
+        'Blender 3D software tutorial',
+        'Blender download',
+        'Blender 3D download',
+        'Blender 3D modeling software',
+        'Blender 3D rendering software',
+        'Blender animation',
+        'Blender animation software',
+        'Blender computer software',
+        'Blender computer program',
+        '3D creation software',
+        '3D editing software',
+        '3D editing programs',
+        '3D printing software',
         '3D artists',
         'Blender artists',
         'digital art',
         'sci-fi art',
         'mecha design',
-        '3D modeling',
         'CGI artists',
+        'freeware CAD',
+        '3D graphics Blender',
+        '3D animation',
+        '3D design',
+        '3D design software',
+        'CAD software',
+        'CAD design software',
+        'CAD drawing software',
+        'CAD drawing programs',
+        'CAD design programs',
+        'CAD computer program',
+        'free CAD',
+        'free CAD programs',
+        'free CAD design software',
+        'free CAD system',
+        '3D CAD software',
+        'auto CAD',
+        'AutoCAD software',
+        'Autodesk AutoCAD software',
+        'SketchUp free',
+        'Google SketchUp',
       ],
       image: 'https://www.allthethings.dev/in-the-verse/og-3d-artist-spotlight.jpg',
       url: this.artistsService.getListingUrl(this.currentPage),
