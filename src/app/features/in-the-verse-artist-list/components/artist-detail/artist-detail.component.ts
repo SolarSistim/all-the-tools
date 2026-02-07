@@ -139,6 +139,14 @@ export class ArtistDetailComponent implements OnInit {
         return 'store';
       case 'patreon':
         return 'favorite';
+      case 'tiktok':
+        return 'music_note';
+      case 'threads':
+        return 'alternate_email';
+      case 'bluesky':
+        return 'cloud';
+      case 'reddit':
+        return 'forum';
       default:
         return 'link';
     }
@@ -166,6 +174,14 @@ export class ArtistDetailComponent implements OnInit {
         return 'Gumroad';
       case 'patreon':
         return 'Patreon';
+      case 'tiktok':
+        return 'TikTok';
+      case 'threads':
+        return 'Threads';
+      case 'bluesky':
+        return 'BlueSky';
+      case 'reddit':
+        return 'Reddit';
       default:
         return linkType;
     }

@@ -44,6 +44,10 @@ export interface ArtistLinks {
   blendermarket?: string;
   gumroad?: string;
   patreon?: string;
+  tiktok?: string;
+  threads?: string;
+  bluesky?: string;
+  reddit?: string;
 }
 
 /**
