@@ -129,7 +129,7 @@ export class InTheVerseArtistList implements OnInit {
 
   private updateMetaTags(): void {
     const config = {
-      title: 'In The Verse - 3D Artists Directory | Blender 3D Software Artists & Tutorials',
+      title: 'In The Verse - 3D Artist Spotlight | Blender 3D Software Artists & Tutorials',
       description:
         'Discover talented 3D modeling artists working with Blender 3D software, 3ds Max, and other leading 3D creation tools. Browse our curated directory of artists creating stunning sci-fi starships, mecha designs, and 3D animation. Free Blender tutorials, 3D modeling programs, and digital art inspiration.',
       keywords: [
