@@ -8,7 +8,7 @@ export const ARTISTS_DATA: Artist[] = [
     shortDescription: 'Technical Art Director creating stunning Star Wars and Star Trek spacecraft with procedural materials in Blender.',
     longDescription: `Howard Day is a Technical Art Director based in Lewiston, Idaho, with experience at Echtra Games and Zynga. Working primarily in Blender, Howard creates stunning starship designs for Star Wars and Star Trek universes, including iconic vessels like the XG-1 "Starwing" Assault Gunboat, GR-75 transports, and various commissioned works.
 
-Howard actively shares his work with the community, releasing free Blender models including the Krakatoa-Class, Hornet-Class, and Munro-Class ships. He collaborates with fellow artists like Alain Rivard, EC Henry, Eduardo Figini, and Greg Ellingson to bring these detailed spacecraft to life.`,
+Howard actively shares his work with his community, releasing free Blender models including the Krakatoa-Class, Hornet-Class, and Munro-Class ships. He collaborates with fellow artists like Alain Rivard, EC Henry, Eduardo Figini, and Greg Ellingson to bring these detailed spacecraft to life.`,
     keywords: ['Blender', 'Star Wars', 'Star Trek', 'Spacecraft', 'Sci-Fi', '3D'],
     metaDescription: 'Discover Howard Day, Technical Art Director creating Star Wars and Star Trek spacecraft in Blender with procedural materials and stunning detail.',
     metaKeywords: ['Howard Day', 'Technical Art Director', 'Blender starships', 'Star Wars ships', 'Star Trek ships', 'procedural materials', 'sci-fi art'],
