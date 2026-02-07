@@ -122,7 +122,7 @@ export class InTheVerseArtistList implements OnInit {
         '3D modeling',
         'CGI artists',
       ],
-      image: this.artistsService.getConfig().defaultOgImage,
+      image: 'https://www.allthethings.dev/in-the-verse/og-3d-artist-spotlight.jpg',
       url: this.artistsService.getListingUrl(this.currentPage),
       type: 'website',
     };
