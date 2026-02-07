@@ -231,6 +231,10 @@ export const routes: Routes = [
     loadChildren: () => import('./features/resources/resources.routes').then(m => m.RESOURCES_ROUTES),
   },
   {
+    path: '3d-artist-spotlight',
+    loadChildren: () => import('./features/in-the-verse-artist-list/artists.routes').then(m => m.ARTISTS_ROUTES),
+  },
+  {
     path: '404',
     loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
     title: '404 - Page Not Found | AllTheTools.dev'

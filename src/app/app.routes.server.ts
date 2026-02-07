@@ -1,6 +1,7 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { BLOG_ARTICLES_METADATA } from './features/blog/data/articles-metadata.data';
 import { RESOURCES_METADATA } from './features/resources/data/resources-metadata.data';
+import { ARTISTS_DATA } from './features/in-the-verse-artist-list/data/artists.data';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -17,6 +18,14 @@ export const serverRoutes: ServerRoute[] = [
     async getPrerenderParams() {
       // Return all resource slugs for prerendering
       return RESOURCES_METADATA.map(resource => ({ slug: resource.slug }));
+    }
+  },
+  {
+    path: '3d-artist-spotlight/:slug',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      // Return all artist slugs for prerendering
+      return ARTISTS_DATA.filter(artist => artist.display !== false).map(artist => ({ slug: artist.slug }));
     }
   },
   {

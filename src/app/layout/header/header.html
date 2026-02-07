@@ -48,6 +48,15 @@
           Blog
         </a>
 
+        <!-- Artist Spotlight Link -->
+        <a
+          routerLink="/3d-artist-spotlight"
+          routerLinkActive="active"
+          class="nav-link"
+        >
+          Artist Spotlight
+        </a>
+
         <!-- Resources Link -->
         <a
           routerLink="/resources"
@@ -362,6 +371,16 @@
         >
           <mat-icon>article</mat-icon>
           <span>Blog</span>
+        </a>
+
+        <a
+          routerLink="/3d-artist-spotlight"
+          routerLinkActive="active"
+          (click)="closeMobileMenu()"
+          class="mobile-nav-link"
+        >
+          <mat-icon>3d_rotation</mat-icon>
+          <span>Artist Spotlight</span>
         </a>
 
         <a

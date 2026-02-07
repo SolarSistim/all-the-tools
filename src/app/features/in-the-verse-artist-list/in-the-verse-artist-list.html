@@ -1,0 +1,166 @@
+<!-- Full-width Hero Image -->
+<section class="hero-banner"></section>
+
+<div class="artists-listing-container">
+  <div class="container">
+
+    <!-- Page Info Section -->
+    <section class="page-info-section">
+      <p class="page-description">
+        Discover talented 3D artists pushing the boundaries of digital art. From stunning sci-fi starships to intricate mecha designs, explore the work of creators shaping the visual future of gaming, film, and beyond.
+      </p>
+      <div class="page-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{ totalItems }}</span>
+          <span class="stat-label">Artists</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">Blender</span>
+          <span class="stat-label">Primary Tool</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">Sci-Fi</span>
+          <span class="stat-label">Focus</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+      <div class="search-container">
+        <mat-form-field class="search-field" appearance="fill">
+          <mat-label>Search artists...</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput($any($event.target).value)"
+            (keydown.enter)="onSearchSubmit()"
+            [matAutocomplete]="auto"
+            placeholder="Try 'Blender', 'Mecha', 'Sci-Fi'..."
+            aria-label="Search artists by name, description, or keywords"
+          />
+          <mat-icon matPrefix>search</mat-icon>
+          @if (searchQuery()) {
+            <button mat-icon-button matSuffix (click)="searchQuery.set(''); filteredArtists.set([]); onSearchSubmit()" aria-label="Clear search">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onArtistSelected($event.option.value)"
+          [displayWith]="displayArtist"
+          class="artists-autocomplete"
+        >
+          @for (artist of filteredArtists(); track artist.id) {
+            <mat-option [value]="artist" class="artist-option">
+              <div class="autocomplete-item">
+                <div class="autocomplete-content">
+                  <div class="autocomplete-title">{{ artist.name }}</div>
+                  <div class="autocomplete-meta">
+                    <span class="autocomplete-keywords">{{ artist.keywords.slice(0, 3).join(', ') }}</span>
+                  </div>
+                </div>
+              </div>
+            </mat-option>
+          }
+          @if (searchQuery() && filteredArtists().length === 0) {
+            <mat-option disabled>
+              <div class="no-results-option">
+                <mat-icon>search_off</mat-icon>
+                <span>No artists found</span>
+              </div>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </div>
+    </div>
+
+    <!-- Active Filters -->
+    <div class="filters" *ngIf="selectedKeyword || searchQuery()">
+      <div class="active-filters">
+        <span class="filter-label">Filtered by:</span>
+        <mat-chip *ngIf="selectedKeyword" class="filter-chip">
+          {{ selectedKeyword }}
+          <button mat-icon-button (click)="clearFilters()" aria-label="Clear keyword filter">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-chip>
+        <mat-chip *ngIf="searchQuery() && !selectedKeyword" class="filter-chip">
+          Search: "{{ searchQuery() }}"
+          <button mat-icon-button (click)="clearFilters()" aria-label="Clear search filter">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-chip>
+      </div>
+      <button mat-button (click)="clearFilters()" class="clear-filters-btn">
+        Clear all filters
+      </button>
+    </div>
+
+    <!-- Artists Grid -->
+    <div class="artists-grid" *ngIf="!loading && artists.length > 0">
+      <article *ngFor="let artist of artists" class="artist-card">
+        <a [routerLink]="['/3d-artist-spotlight', artist.slug]" class="artist-link">
+          <div
+            class="artist-image-wrapper"
+            [class.has-image]="artist.ogImage"
+            [style.background-image]="artist.ogImage ? 'url(' + artist.ogImage + ')' : null"
+          >
+            <h3 class="artist-card-name">{{ artist.name }}</h3>
+            @if (artist.hasVideo) {
+              <button class="video-badge" (click)="openVideoDialog(artist, $event)" [attr.aria-label]="'Play all ' + artist.name + ' videos'" [matTooltip]="'Play all ' + artist.name + ' videos'" matTooltipPosition="above">
+                <mat-icon>play_circle</mat-icon>
+              </button>
+            }
+          </div>
+
+          <div class="artist-content">
+            <h2 class="artist-name">{{ artist.name }}</h2>
+            <p class="artist-description">{{ artist.shortDescription }}</p>
+
+            <div class="artist-footer">
+              <div class="artist-keywords">
+                <button
+                  mat-chip-button
+                  *ngFor="let keyword of artist.keywords.slice(0, 3)"
+                  (click)="filterByKeyword(keyword); $event.preventDefault()"
+                  class="keyword-chip"
+                >
+                  {{ keyword }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && artists.length === 0">
+      <mat-icon>person_search</mat-icon>
+      <h2>No artists found</h2>
+      <p>Try adjusting your search or check back later for new artists.</p>
+      <button mat-raised-button color="primary" (click)="clearFilters()">
+        Clear Filters
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Pagination -->
+    <app-pagination
+      *ngIf="!loading && artists.length > 0"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+</div>

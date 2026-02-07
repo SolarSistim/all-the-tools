@@ -402,6 +402,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     featured: true,
     hasAudio: false,
+    hasVideo: true,
     display: true,
     relatedArticles: ['12', '14', '23'],
     readTime: 4,

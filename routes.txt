@@ -46,6 +46,7 @@
 /changelog
 /contact
 /disclaimer
+/3d-artist-spotlight
 /presskit
 /privacy
 /resources

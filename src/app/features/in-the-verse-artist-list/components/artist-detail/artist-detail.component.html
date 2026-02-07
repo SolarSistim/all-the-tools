@@ -1,0 +1,171 @@
+<div class="artist-page-container" *ngIf="artist">
+  <div class="container">
+    <!-- Main Content Area -->
+    <div class="artist-main">
+      <!-- Header Banner -->
+      <div
+        class="artist-banner"
+        [class.has-image]="artist.ogImage"
+        [style.background-image]="artist.ogImage ? 'url(' + artist.ogImage + ')' : null"
+      >
+        <h1 class="artist-banner-name">{{ artist.name }}</h1>
+        @if (artist.featured) {
+          <span class="featured-badge">Featured Artist</span>
+        }
+      </div>
+
+      <!-- Artist Header -->
+      <div class="artist-header">
+        <h1 class="artist-name">{{ artist.name }}</h1>
+        <p class="artist-short-description">{{ artist.shortDescription }}</p>
+      </div>
+
+      <!-- Featured Video -->
+      @if (allVideos.length > 0) {
+        <div class="featured-video-section">
+          <h2 class="section-title">
+            <mat-icon>play_circle</mat-icon>
+            Featured Video
+          </h2>
+          <button class="featured-video-card" (click)="openVideoDialog(0)">
+            <div class="featured-video-wrapper">
+              <img
+                [src]="getVideoThumbnail(allVideos[0].id)"
+                [alt]="'Featured video'"
+                loading="lazy"
+              />
+              <div class="featured-play-overlay">
+                <mat-icon>play_circle</mat-icon>
+              </div>
+            </div>
+          </button>
+        </div>
+      }
+
+      <!-- Artist Description -->
+      @if (artist.longDescription) {
+        <div class="artist-description">
+          <h2 class="section-title">
+            <mat-icon>person</mat-icon>
+            About {{ artist.name }}
+          </h2>
+          <div class="description-content">
+            @for (paragraph of artist.longDescription.split('\n\n'); track $index) {
+              <p>{{ paragraph }}</p>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Artist Links -->
+      @if (getLinksArray().length > 0) {
+        <div class="artist-links-section">
+          <h3 class="links-title">
+            <mat-icon>link</mat-icon>
+            Connect with {{ artist.name }}
+          </h3>
+          <div class="links-grid">
+            @for (link of getLinksArray(); track link.type) {
+              <a
+                [href]="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-card"
+              >
+                <mat-icon>{{ getLinkIcon(link.type) }}</mat-icon>
+                <span>{{ getLinkLabel(link.type) }}</span>
+                <mat-icon class="external-icon">open_in_new</mat-icon>
+              </a>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Artist Keywords -->
+      <div class="artist-keywords-section">
+        <h3 class="keywords-title">
+          <mat-icon>label</mat-icon>
+          Specializations
+        </h3>
+        <div class="keywords-container">
+          <mat-chip-set>
+            @for (keyword of artist.keywords; track keyword) {
+              <mat-chip [routerLink]="['/3d-artist-spotlight']" [queryParams]="{ keyword: keyword }">
+                {{ keyword }}
+              </mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      </div>
+
+      <!-- Video Gallery -->
+      @if (allVideos.length > 0) {
+        <div class="video-gallery-section">
+          <h2 class="section-title">
+            <mat-icon>play_circle</mat-icon>
+            Video Gallery
+            <span class="video-count">({{ allVideos.length }})</span>
+          </h2>
+          <div class="video-gallery-grid">
+            @for (video of allVideos; track video.id; let i = $index) {
+              <button class="video-thumbnail-card" (click)="openVideoDialog(i)">
+                <div class="thumbnail-wrapper">
+                  <img
+                    [src]="getVideoThumbnail(video.id)"
+                    [alt]="'Video thumbnail'"
+                    loading="lazy"
+                  />
+                  <div class="play-overlay">
+                    <mat-icon>play_circle</mat-icon>
+                  </div>
+                </div>
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Related Artists -->
+    <section class="related-artists" *ngIf="relatedArtists.length > 0">
+      <h2 class="related-title">
+        <mat-icon>group</mat-icon>
+        Similar Artists
+      </h2>
+      <div class="related-grid">
+        @for (related of relatedArtists; track related.id) {
+          <article class="related-card">
+            <a [routerLink]="['/3d-artist-spotlight', related.slug]" class="related-link">
+              <div
+                class="related-image-wrapper"
+                [class.has-image]="related.ogImage"
+                [style.background-image]="related.ogImage ? 'url(' + related.ogImage + ')' : null"
+              >
+                <h4 class="related-name-text">{{ related.name }}</h4>
+              </div>
+
+              <div class="related-content">
+                <h3 class="related-card-name">{{ related.name }}</h3>
+                <p class="related-description">{{ related.shortDescription }}</p>
+
+                <div class="related-keywords">
+                  @for (keyword of related.keywords.slice(0, 2); track keyword) {
+                    <span class="keyword-tag">{{ keyword }}</span>
+                  }
+                </div>
+              </div>
+            </a>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- Back to Artists -->
+    <div class="back-to-artists">
+      <a [routerLink]="['/3d-artist-spotlight']" mat-button>
+        <mat-icon>arrow_back</mat-icon>
+        Back to Artists
+      </a>
+    </div>
+  </div>
+</div>
