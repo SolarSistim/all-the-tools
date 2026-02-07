@@ -12,7 +12,7 @@ Howard actively shares his work with his community, releasing free Blender model
     keywords: ['Blender', 'Star Wars', 'Star Trek', 'Spacecraft', 'Sci-Fi', '3D'],
     metaDescription: 'Discover Howard Day, Technical Art Director creating Star Wars and Star Trek spacecraft in Blender with procedural materials and stunning detail.',
     metaKeywords: ['Howard Day', 'Technical Art Director', 'Blender starships', 'Star Wars ships', 'Star Trek ships', 'procedural materials', 'sci-fi art'],
-    ogImage: '/in-the-verse/oh-header-images/og-howard-day-01.jpg',
+    ogImage: '/in-the-verse/og-header-images/og-howard-day-01.jpg',
     youtubeVideoId: 'V0-5DC2J9fY',
     youtubeVideos: [
       { id: 'xMIbdpTihlk' },
@@ -60,7 +60,7 @@ With 13 years of Unreal Engine experience plus Houdini, Maya, and Python scripti
     keywords: ['Unreal Engine', 'VFX', 'Sci-Fi', '3D', 'CG Art', 'Real-Time'],
     metaDescription: 'Discover Dylan Browne, Unreal Engine Supervisor and Lead VFX Artist at Weta FX, pushing boundaries in real-time rendering and feature film visual effects.',
     metaKeywords: ['Dylan Browne', 'Unreal Engine', 'VFX artist', 'Weta FX', 'virtual production', 'real-time rendering', 'Houdini'],
-    ogImage: '/in-the-verse/oh-header-images/og-dylan-browne-01.jpg',
+    ogImage: '/in-the-verse/og-header-images/og-dylan-browne-01.jpg',
     youtubeVideoId: 'y5wBoQ9VQIQ',
     youtubeVideos: [
       { id: 'iKsl5xagXOY' },
@@ -86,7 +86,7 @@ With 13 years of Unreal Engine experience plus Houdini, Maya, and Python scripti
     keywords: ['CG Art', 'Sci-Fi', '3D', 'Spacecraft', 'VFX'],
     metaDescription: 'Discover John Seru, a CG Artist based in London creating digital art focused on sci-fi futures.',
     metaKeywords: ['John Seru', 'CG Artist', 'sci-fi art', '3D artist', 'London'],
-    ogImage: '/in-the-verse/oh-header-images/og-john-seru-01.jpg',
+    ogImage: '/in-the-verse/og-header-images/og-john-seru-01.jpg',
     youtubeVideoId: '9rhifRlY1VU',
     youtubeVideos: [
       { id: 'xRrdaD9PO2Y' },
@@ -112,7 +112,7 @@ With 13 years of Unreal Engine experience plus Houdini, Maya, and Python scripti
     keywords: ['3D Animation', 'Star Trek', 'Stargate', 'Sci-Fi', '3D', 'VFX'],
     metaDescription: 'Discover Robert Wilde, a 3D artist who worked on Star Trek Ships of the Line and recreated the Stargate wormhole effect for Stargate: Origins.',
     metaKeywords: ['Robert Wilde', '3D artist', 'Star Trek', 'Stargate', 'sci-fi art', '3D animation'],
-    ogImage: '/in-the-verse/oh-header-images/og-robert-wilde-01.jpg',
+    ogImage: '/in-the-verse/og-header-images/og-robert-wilde-01.jpg',
     youtubeVideoId: 'O6IiLERQby0',
     youtubeVideos: [
       { id: 'ltrNTAGIRaM' },
