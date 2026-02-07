@@ -19,6 +19,15 @@ export const content: ContentBlock[] = [
     },
   },
   {
+    type: 'component',
+    data: {
+      componentName: 'youtube-player',
+      videoId: 'iG5BPhzmKuo',
+      title: '▶ Watch or Listen to this Article',
+      description: 'Prefer to watch or listen? Click play to check out the video version of this article.',
+    },
+  },
+  {
     type: 'paragraph',
     data: {
       text: 'And yeah, I\'ll admit it upfront: I\'m already biased. I\'ve always had a soft spot for top-down space shooters. Give me inertia-heavy flight, crunchy weapons, and a reason to drift silently past an asteroid instead of charging in guns blazing, and I\'m hooked. Permanently.',

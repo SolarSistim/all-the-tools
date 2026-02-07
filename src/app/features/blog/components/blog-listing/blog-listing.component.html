@@ -211,6 +211,11 @@
               loading="lazy"
             />
             <span class="article-category">{{ article.category }}</span>
+            @if (article.hasVideo && article.youtubeVideoId) {
+              <button class="video-badge" (click)="openVideoDialog(article, $event)" [attr.aria-label]="'Play ' + article.title + ' video'" [matTooltip]="'Play video'" matTooltipPosition="above">
+                <mat-icon>play_circle</mat-icon>
+              </button>
+            }
           </div>
 
           <div class="article-content">
@@ -219,9 +224,6 @@
               <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
               @if (article.hasAudio) {
                 <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
-              }
-              @if (article.hasVideo) {
-                <mat-icon class="video-indicator" matTooltip="Watch this article on video">play_circle</mat-icon>
               }
             </div>
 
@@ -267,6 +269,11 @@
                 class="article-list-image"
                 loading="lazy"
               />
+              @if (article.hasVideo && article.youtubeVideoId) {
+                <button class="video-badge" (click)="openVideoDialog(article, $event)" [attr.aria-label]="'Play ' + article.title + ' video'" [matTooltip]="'Play video'" matTooltipPosition="above">
+                  <mat-icon>play_circle</mat-icon>
+                </button>
+              }
             </div>
 
             <div class="article-list-content">
@@ -277,9 +284,6 @@
                   <span class="article-reading-time" [matTooltip]="'Estimated reading time for this article is ' + article.readingTime + ' minute' + (article.readingTime > 1 ? 's' : '')">{{ article.readingTime | readingTime }}</span>
                   @if (article.hasAudio) {
                     <mat-icon class="audio-indicator" matTooltip="Listen to this article via audio">volume_up</mat-icon>
-                  }
-                  @if (article.hasVideo) {
-                    <mat-icon class="video-indicator" matTooltip="Watch this article on video">play_circle</mat-icon>
                   }
                 </div>
               </div>

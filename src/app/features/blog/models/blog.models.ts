@@ -42,6 +42,7 @@ export interface Article {
   relatedArticles?: string[]; // Article IDs
   hasAudio?: boolean; // Indicates if article has audio version
   hasVideo?: boolean; // Indicates if article has video version
+  youtubeVideoId?: string; // YouTube video ID for play button on listing
   readTime?: number; // Estimated read time in minutes
 }
 
@@ -63,6 +64,7 @@ export interface ArticlePreview {
   display?: boolean; // Controls visibility on blog listing (defaults to true)
   hasAudio?: boolean; // Indicates if article has audio version
   hasVideo?: boolean; // Indicates if article has video version
+  youtubeVideoId?: string; // YouTube video ID for play button on listing
 }
 
 /**

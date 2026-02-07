@@ -88,6 +88,11 @@
           @for (artist of filteredArtists(); track artist.id) {
             <mat-option [value]="artist" class="artist-option">
               <div class="autocomplete-item">
+                @if (artist.ogImage) {
+                  <div class="autocomplete-image">
+                    <img [src]="artist.ogImage" [alt]="artist.name" loading="lazy" />
+                  </div>
+                }
                 <div class="autocomplete-content">
                   <div class="autocomplete-title">{{ artist.name }}</div>
                   <div class="autocomplete-meta">
@@ -142,8 +147,9 @@
           >
             <h3 class="artist-card-name">{{ artist.name }}</h3>
             @if (artist.hasVideo) {
-              <button class="video-badge" (click)="openVideoDialog(artist, $event)" [attr.aria-label]="'Play all ' + artist.name + ' videos'" [matTooltip]="'Play all ' + artist.name + ' videos'" matTooltipPosition="above">
+              <button class="video-badge" (click)="openVideoDialog(artist, $event)" [attr.aria-label]="'Play all ' + artist.name + ' videos'" [matTooltip]="getVideoCount(artist) + ' video' + (getVideoCount(artist) > 1 ? 's' : '')" matTooltipPosition="above">
                 <mat-icon>play_circle</mat-icon>
+                <span class="video-count">{{ getVideoCount(artist) }}</span>
               </button>
             }
           </div>

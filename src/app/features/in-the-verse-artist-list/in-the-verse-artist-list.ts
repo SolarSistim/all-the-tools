@@ -180,7 +180,7 @@ export class InTheVerseArtistList implements OnInit {
         'SketchUp free',
         'Google SketchUp',
       ],
-      image: 'https://www.allthethings.dev/in-the-verse/og-3d-artist-spotlight.jpg',
+      image: 'https://www.allthethings.dev/in-the-verse/og-3d-artist-spotlight-01.jpg',
       url: this.artistsService.getListingUrl(this.currentPage),
       type: 'website',
     };
@@ -272,6 +272,13 @@ export class InTheVerseArtistList implements OnInit {
 
   displayArtist(artist: ArtistPreview | null): string {
     return artist ? artist.name : '';
+  }
+
+  getVideoCount(artist: ArtistPreview): number {
+    let count = 0;
+    if (artist.youtubeVideoId) count++;
+    if (artist.youtubeVideos?.length) count += artist.youtubeVideos.length;
+    return count;
   }
 
   openVideoDialog(artist: ArtistPreview, event: Event): void {

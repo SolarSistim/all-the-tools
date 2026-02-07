@@ -500,6 +500,40 @@
   box-shadow: 0 2px 8px var(--neon-cyan-glow);
 }
 
+.video-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: #FF0000;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background-color: #CC0000;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  mat-icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
 .article-content {
   padding: 1.5rem;
   display: flex;
@@ -638,6 +672,7 @@
 }
 
 .article-list-image-wrapper {
+  position: relative;
   flex-shrink: 0;
   width: 280px;
   overflow: hidden;

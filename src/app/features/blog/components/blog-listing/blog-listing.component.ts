@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog } from '@angular/material/dialog';
 import { ArticlePreview, PaginatedResponse } from '../../models/blog.models';
 import { BlogService } from '../../services/blog.service';
 import { MetaService } from '../../../../core/services/meta.service';
@@ -18,6 +19,7 @@ import { StructuredDataService } from '../../../../core/services/structured-data
 import { PaginationComponent } from '../pagination/pagination.component';
 import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
+import { VideoDialogComponent } from '../../../in-the-verse-artist-list/components/video-dialog/video-dialog.component';
 
 /**
  * Blog Listing Component
@@ -53,6 +55,7 @@ export class BlogListingComponent implements OnInit {
   private structuredDataService = inject(StructuredDataService);
   private destroyRef = inject(DestroyRef);
   private platformId = inject(PLATFORM_ID);
+  private dialog = inject(MatDialog);
 
   articles: ArticlePreview[] = [];
   currentPage = 1;
@@ -250,6 +253,24 @@ export class BlogListingComponent implements OnInit {
 
   displayArticle(article: ArticlePreview | null): string {
     return article ? article.title : '';
+  }
+
+  openVideoDialog(article: ArticlePreview, event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!article.youtubeVideoId) return;
+
+    this.dialog.open(VideoDialogComponent, {
+      data: {
+        videos: [{ id: article.youtubeVideoId }],
+        artistName: article.title,
+        startIndex: 0,
+      },
+      panelClass: 'video-dialog-panel',
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+    });
   }
 
   setViewMode(mode: 'tile' | 'list'): void {
