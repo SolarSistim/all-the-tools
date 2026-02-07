@@ -8,7 +8,7 @@ export const ARTISTS_ROUTES: Routes = [
       import('./in-the-verse-artist-list').then(
         (m) => m.InTheVerseArtistList
       ),
-    title: 'In The Verse - 3D Artists Directory | All The Things',
+    title: 'In The Verse - 3D Artists Spotlight | All The Things',
   },
   {
     path: ':slug',
