@@ -23,7 +23,7 @@ interface AsciiCharacter {
   binary: string;
   char: string;
   name: string;
-  category: 'control' | 'printable' | 'symbol' | 'number' | 'uppercase' | 'lowercase' | 'extended' | 'arrows';
+  category: 'control' | 'printable' | 'symbol' | 'number' | 'uppercase' | 'lowercase' | 'extended' | 'arrows' | 'checkmarks';
   description: string;
   htmlEntity?: string;
 }
@@ -126,13 +126,50 @@ export class AsciiCharacterReference implements OnInit {
     };
   });
 
+  // Checkmark characters collection
+  checkmarkCharacters = [
+    { char: '\u2713', name: 'Check Mark', unicode: 'U+2713' },
+    { char: '\u2714', name: 'Heavy Check Mark', unicode: 'U+2714' },
+    { char: '\u2705', name: 'Green Check Mark Emoji', unicode: 'U+2705' },
+    { char: '\u2610', name: 'Ballot Box (Empty)', unicode: 'U+2610' },
+    { char: '\u2611', name: 'Ballot Box with Check', unicode: 'U+2611' },
+    { char: '\u2612', name: 'Ballot Box with X', unicode: 'U+2612' },
+    { char: '\u2715', name: 'Multiplication X', unicode: 'U+2715' },
+    { char: '\u2716', name: 'Heavy Multiplication X', unicode: 'U+2716' },
+    { char: '\u2717', name: 'Ballot X', unicode: 'U+2717' },
+    { char: '\u2718', name: 'Heavy Ballot X', unicode: 'U+2718' },
+    { char: '\u274C', name: 'Cross Mark Emoji', unicode: 'U+274C' },
+    { char: '\u274E', name: 'Cross Mark in Box Emoji', unicode: 'U+274E' },
+    { char: '\u2720', name: 'Maltese Cross', unicode: 'U+2720' },
+    { char: '\u2BBD', name: 'Ballot Box with Light X', unicode: 'U+2BBD' },
+    { char: '\u2B55', name: 'Heavy Large Circle', unicode: 'U+2B55' },
+    { char: '\u2573', name: 'Box Drawings Light Diagonal Cross', unicode: 'U+2573' },
+    { char: '\u237B', name: 'Not Check Mark', unicode: 'U+237B' },
+    { char: '\u2319', name: 'Turned Not Sign', unicode: 'U+2319' },
+  ];
+
+  // Convert checkmark characters to AsciiCharacter format
+  private checkmarkCharactersAsAscii: AsciiCharacter[] = this.checkmarkCharacters.map((check) => {
+    const unicodeValue = parseInt(check.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: check.char,
+      name: check.name,
+      category: 'checkmarks' as const,
+      description: `${check.name} (${check.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
   // Computed filtered characters
   filteredCharacters = computed(() => {
     const query = this.searchQuery().toLowerCase();
     const category = this.selectedCategory();
 
-    // Always include arrow characters in the main grid alongside ASCII characters
-    let allCharacters = [...this.asciiCharacters, ...this.arrowCharactersAsAscii];
+    // Always include arrow and checkmark characters in the main grid alongside ASCII characters
+    let allCharacters = [...this.asciiCharacters, ...this.arrowCharactersAsAscii, ...this.checkmarkCharactersAsAscii];
 
     return allCharacters.filter(char => {
       const matchesSearch = !query ||
@@ -151,6 +188,7 @@ export class AsciiCharacterReference implements OnInit {
   // Category filter options
   categories = [
     { id: 'all', name: 'All Characters', icon: 'grid_view' },
+    { id: 'checkmarks', name: 'Checkmarks', icon: 'check_circle' },
     { id: 'arrows', name: 'Arrow Characters', icon: 'arrow_forward' },
     { id: 'printable', name: 'Printable Characters', icon: 'text_fields' },
     { id: 'symbol', name: 'Symbols', icon: 'code' },
