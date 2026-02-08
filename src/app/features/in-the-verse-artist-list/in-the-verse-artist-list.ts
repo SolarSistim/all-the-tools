@@ -19,6 +19,7 @@ import { PaginationComponent } from '../blog/components/pagination/pagination.co
 import { VideoDialogComponent } from './components/video-dialog/video-dialog.component';
 import { CtaEmailList } from '../reusable-components/cta-email-list/cta-email-list';
 import { RelatedBlogPosts } from '../reusable-components/related-blog-posts/related-blog-posts';
+import { AdsenseComponent } from '../blog/components/adsense/adsense.component';
 
 /**
  * In The Verse Artist List Component
@@ -41,6 +42,7 @@ import { RelatedBlogPosts } from '../reusable-components/related-blog-posts/rela
     PaginationComponent,
     CtaEmailList,
     RelatedBlogPosts,
+    AdsenseComponent,
   ],
   templateUrl: './in-the-verse-artist-list.html',
   styleUrl: './in-the-verse-artist-list.scss',

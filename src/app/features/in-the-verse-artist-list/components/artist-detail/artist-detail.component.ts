@@ -13,6 +13,7 @@ import { MetaService } from '../../../../core/services/meta.service';
 import { StructuredDataService } from '../../../../core/services/structured-data.service';
 import { VideoDialogComponent } from '../video-dialog/video-dialog.component';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
+import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 
 /**
  * Artist Detail Component
@@ -28,6 +29,7 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     MatButtonModule,
     MatChipsModule,
     CtaEmailList,
+    AdsenseComponent,
   ],
   templateUrl: './artist-detail.component.html',
   styleUrls: ['./artist-detail.component.scss'],
