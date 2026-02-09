@@ -89,13 +89,13 @@ export class SocialLaunchpadComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.metaService.updateTags({
       title: 'Social Media Launchpad - Multi-Platform Post Composer',
-      description: 'Craft optimized content for multiple social platforms simultaneously. Real-time character counts, hashtag recommendations, OG preview, and emoji picker for X (Twitter), Facebook, LinkedIn, Threads, and more.',
+      description: 'Compose optimized posts for X, Facebook, LinkedIn, and more with character counts and hashtags.',
       keywords: ['social media tool', 'multi-platform posting', 'character counter', 'hashtag tool', 'twitter character count', 'facebook post', 'linkedin post', 'social media composer'],
       image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer-tool.jpg',
       url: 'https://www.allthethings.dev/tools/social-media-launchpad',
       jsonLd: this.metaService.buildToolJsonLd({
         name: 'Social Media Launchpad - Multi-Platform Post Composer',
-        description: 'Craft optimized content for multiple social platforms simultaneously. Real-time character counts, hashtag recommendations, OG preview, and emoji picker for X (Twitter), Facebook, LinkedIn, Threads, and more.',
+        description: 'Compose optimized posts for X, Facebook, LinkedIn, and more with character counts and hashtags.',
         url: 'https://www.allthethings.dev/tools/social-media-launchpad',
         image: 'https://ik.imagekit.io/allthethingsdev/Social%20Media%20Launchpad/og-social-media-post-composer-tool.jpg'
       })

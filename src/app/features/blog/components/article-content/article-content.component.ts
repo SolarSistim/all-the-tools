@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { ContentBlock } from '../../models/blog.models';
+import { ContentBlock, Article } from '../../models/blog.models';
 import { ImageGalleryComponent } from '../image-gallery/image-gallery.component';
 import { BlockquoteComponent } from '../blockquote/blockquote.component';
 import { CodeBlockComponent } from '../code-block/code-block.component';
@@ -20,6 +20,10 @@ import { AlertSuccess } from '../../../reusable-components/alerts/alert-success/
 import { AlertWarning } from '../../../reusable-components/alerts/alert-warning/alert-warning';
 import { AlertDanger } from '../../../reusable-components/alerts/alert-danger/alert-danger';
 import { RelatedBlogPosts } from '../../../reusable-components/related-blog-posts/related-blog-posts';
+import { RelatedToolsComponent } from '../../../reusable-components/related-tools/related-tools';
+import { RelatedResourcesComponent } from '../../../reusable-components/related-resources/related-resources';
+import { ToolShowcaseComponent } from '../../../reusable-components/tool-showcase/tool-showcase';
+import { SeeAlsoComponent } from '../../../reusable-components/see-also/see-also';
 import { SnowGlobeShake } from '../../../art/snow-globe-shake/snow-globe-shake';
 import { SocialMediaLinksComponent } from '../../../../shared/components/social-media-links/social-media-links.component';
 
@@ -51,6 +55,10 @@ import { SocialMediaLinksComponent } from '../../../../shared/components/social-
     AlertWarning,
     AlertDanger,
     RelatedBlogPosts,
+    RelatedToolsComponent,
+    RelatedResourcesComponent,
+    ToolShowcaseComponent,
+    SeeAlsoComponent,
     SnowGlobeShake,
     SocialMediaLinksComponent,
   ],
@@ -59,6 +67,7 @@ import { SocialMediaLinksComponent } from '../../../../shared/components/social-
 })
 export class ArticleContentComponent {
   @Input({ required: true }) blocks!: ContentBlock[];
+  @Input() article?: Article; // Optional article context for cross-linking
 
   /**
    * Generate ID for headings (for anchor links)

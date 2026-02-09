@@ -209,6 +209,14 @@ export class ResourcesService {
   }
 
   /**
+   * Get all resources (for cross-linking and content matching)
+   */
+  getAllResources(): Observable<ResourcePreview[]> {
+    // Return all displayed resources
+    return of(this.previewsCache().filter((p) => p.display !== false));
+  }
+
+  /**
    * Convert Resource metadata to ResourcePreview
    */
   private convertMetadataToPreview(metadata: Resource): ResourcePreview {

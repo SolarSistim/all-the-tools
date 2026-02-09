@@ -103,7 +103,7 @@
 
     <!-- Article Content -->
     <article class="article-body" [ngClass]="'font-size-' + fontSize">
-      <app-article-content [blocks]="article.content"></app-article-content>
+      <app-article-content [blocks]="article.content" [article]="article"></app-article-content>
     </article>
 
     <!-- Table of Contents -->

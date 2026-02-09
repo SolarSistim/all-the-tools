@@ -47,7 +47,7 @@ export const RESOURCES_METADATA: ResourceMetadata[] = [
     publishedDate: '2025-12-01',
     tags: ['Senior Citizen', 'Computer Help', 'SEO', 'Dual Certified Teacher'],
     category: 'Senior Citizen',
-    metaDescription: 'Online Business Help for Senior Citizens by a Senior Citizen from Computer Help to SEO! Dual Certified Teacher J. Richard Kirkham B.Sc. is Finally Available for You!',
+    metaDescription: 'Online business and computer help for seniors by Dual Certified Teacher J. Richard Kirkham B.Sc.',
     metaKeywords: ['Senior Citizen', 'Computer Help', 'SEO', 'Dual Certified Teacher'],
     featured: true,
     display: true,

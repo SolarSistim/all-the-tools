@@ -1,0 +1,24 @@
+<div class="tool-showcase" *ngIf="tool">
+  <div class="showcase-header">
+    <mat-icon class="tool-icon">{{ tool.icon }}</mat-icon>
+    <div class="tool-header-info">
+      <h4 class="tool-name">{{ tool.name }}</h4>
+      <span class="tool-category">{{ tool.category | titlecase }}</span>
+    </div>
+  </div>
+
+  <p class="tool-description">
+    {{ customDescription || tool.description }}
+  </p>
+
+  <a
+    *ngIf="showCTA"
+    [routerLink]="['/tools', tool.route]"
+    mat-raised-button
+    color="primary"
+    class="showcase-cta"
+  >
+    <span>Try it now</span>
+    <mat-icon>arrow_forward</mat-icon>
+  </a>
+</div>

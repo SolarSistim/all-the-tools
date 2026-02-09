@@ -137,7 +137,7 @@ export class BlogListingComponent implements OnInit {
     const config = {
       title: 'Web Dev Guides & Tutorials — All The Things Blog',
       description:
-        'Explore blog posts on web development, coding tips, tool tutorials, and practical guides for developers and creators. Stay up to date with in-depth content and how-tos.',
+        'Web dev guides, coding tips, tool tutorials, and practical how-tos for developers and creators.',
       keywords: [
         'blog',
         'web development',

@@ -243,6 +243,20 @@ export class BlogService {
   }
 
   /**
+   * Get all articles (for cross-linking and content matching)
+   */
+  getAllArticles(): Observable<ArticlePreview[]> {
+    // Use metadata with estimated reading times
+    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
+      ...metadata,
+      readingTime: this.estimateReadingTime(metadata),
+    }));
+
+    // Return all displayed articles
+    return of(previews.filter((p) => p.display !== false));
+  }
+
+  /**
    * Calculate reading time for article content
    */
   calculateReadingTime(article: Article): number {

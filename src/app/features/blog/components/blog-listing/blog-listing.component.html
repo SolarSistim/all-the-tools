@@ -212,7 +212,7 @@
             />
             <span class="article-category">{{ article.category }}</span>
             @if (article.hasVideo && article.youtubeVideoId) {
-              <button class="video-badge" (click)="openVideoDialog(article, $event)" [attr.aria-label]="'Play ' + article.title + ' video'" [matTooltip]="'Play video'" matTooltipPosition="above">
+              <button class="video-badge" (click)="openVideoDialog(article, $event)" [attr.aria-label]="'Play ' + article.title + ' video'" [matTooltip]="'Watch this article'" matTooltipPosition="above">
                 <mat-icon>play_circle</mat-icon>
               </button>
             }
@@ -270,7 +270,7 @@
                 loading="lazy"
               />
               @if (article.hasVideo && article.youtubeVideoId) {
-                <button class="video-badge" (click)="openVideoDialog(article, $event)" [attr.aria-label]="'Play ' + article.title + ' video'" [matTooltip]="'Play video'" matTooltipPosition="above">
+                <button class="video-badge" (click)="openVideoDialog(article, $event)" [attr.aria-label]="'Play ' + article.title + ' video'" [matTooltip]="'Watch this article'" matTooltipPosition="above">
                   <mat-icon>play_circle</mat-icon>
                 </button>
               }

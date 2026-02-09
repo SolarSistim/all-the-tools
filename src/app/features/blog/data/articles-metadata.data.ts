@@ -92,7 +92,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     category: 'Food & Dining',
     metaDescription:
-      'The definitive guide to Mexican food trucks in Pensacola. Find authentic taco trucks, quesabirria, birria tacos, and Nicaraguan cuisine in Pensacola and the surrounding area. Includes reviews of Taco Trolley, Tacos El Amigo, Carne Asada Darling, and more.',
+      'Guide to Mexican food trucks in Pensacola. Taco trucks, quesabirria, birria tacos, and more.',
     metaKeywords: [
       'taco truck',
       'taco food truck',
@@ -156,7 +156,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     ],
     category: 'Amateur Sleuthing',
     metaDescription:
-      'A deep dive into Escambia County\'s $189 million Bay Center proposal. From Pensacon\'s struggles to Mobile\'s competitive threat, examining whether renovation, replacement, or inaction is the right choice for Pensacola.',
+      'Escambia County\'s $189M Bay Center proposal examined: renovate, replace, or lose ground to Mobile?',
     metaKeywords: [
       'Pensacola Bay Center',
       'Bay Center renovation',
@@ -207,7 +207,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   ],
   category: 'Guides',
   metaDescription:
-    'A no-fluff guide to birthday freebies and discounts from 100+ brands. Find the best food and drink rewards, retail perks, entertainment freebies, and city-specific lists — plus signup rules and pro tips.',
+    'Guide to birthday freebies from 100+ brands: food, drinks, retail perks, and city-specific lists.',
   metaKeywords: [
     'birthday freebies',
     'birthday rewards',
@@ -244,7 +244,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['Photo Editing', 'Image Tools', 'Design', 'Tools', 'Tutorial', 'Filters', 'Privacy'],
     category: 'Tutorials',
-    metaDescription: 'Complete tutorial on using the Photo Filter Studio to edit photos with professional filters and adjustments. Apply presets, fine-tune with sliders, and download your edits - all without uploading to the cloud.',
+    metaDescription: 'Edit photos with professional filters using Photo Filter Studio. Apply presets, fine-tune, download.',
     metaKeywords: [
       'Photo editor',
       'Photo filter studio tutorial',
@@ -277,7 +277,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['CSS', 'Web Development', 'Design', 'Tools', 'Tutorial', 'Gradients', 'Frontend'],
     category: 'Tutorials',
-    metaDescription: 'Complete tutorial on using the Gradient Generator tool to create stunning CSS gradients. Pick colors, adjust angles, see results instantly, and copy production-ready CSS code with vendor prefixes.',
+    metaDescription: 'Create CSS gradients with ease. Pick colors, adjust angles, preview live, and copy ready-to-use code.',
     metaKeywords: [
       'CSS gradient generator',
       'Gradient generator tutorial',
@@ -312,7 +312,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['Social Media', 'Tools', 'Productivity', 'Privacy', 'Tutorial', 'Web Tools'],
     category: 'Tutorials',
-    metaDescription: 'Learn how to use the Social Media Launchpad tool on All The Tools. Compose once, post everywhere with privacy-first design, character counters, hashtag recommendations, and quick copy actions.',
+    metaDescription: 'Use Social Media Launchpad to compose once and post everywhere with character counters and hashtags.',
     metaKeywords: [
       'Social media launchpad',
       'Social media posting tool',
@@ -347,7 +347,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['Weather', 'Winter', 'Science', 'Nature', 'Climate', 'Trees', 'Frost Cracking'],
     category: 'Natural Science',
-    metaDescription: 'Can trees really explode in winter? Learn about frost cracking, the phenomenon that causes trees to make gunshot-like sounds during extreme cold when frozen sap expands inside the trunk.',
+    metaDescription: 'Can trees explode in winter? Learn about frost cracking and the gunshot sounds during extreme cold.',
     metaKeywords: [
       'Exploding trees in winter',
       'Frost cracking',
@@ -383,7 +383,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['He-Man', 'Masters of the Universe', 'Movies', '80s Nostalgia', 'Action', 'Fantasy', 'Travis Knight'],
     category: 'TV & Film',
-    metaDescription: 'After decades in development, Masters of the Universe finally returns to the big screen. A nostalgic look at He-Man\'s journey from Saturday morning cartoons to the 2026 blockbuster starring Nicholas Galitzine.',
+    metaDescription: 'He-Man returns to the big screen in 2026. A nostalgic look from Saturday cartoons to the new film.',
     metaKeywords: [
       'He-Man',
       'Masters of the Universe',
@@ -444,7 +444,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['True Crime', 'History', 'Finance', 'Crime', 'Biography', "PabloEscabar"],
     category: 'Amateur Sleuthing',
-    metaDescription: 'Explore the 16 wealthiest criminals of the last 100 years, from Bernie Madoff\'s massive Ponzi scheme to Pablo Escobar\'s drug empire. Discover how these criminals amassed billions through fraud, corruption, and organized crime.',
+    metaDescription: 'The 16 wealthiest criminals of the last century, from Madoff\'s Ponzi scheme to Escobar\'s empire.',
     metaKeywords: ['Bernie Madoff', 'Pablo Escobar', 'Al Capone', 'Ponzi scheme', 'Wealthiest criminals', 'True crime', 'Financial fraud', 'Drug cartels', 'Organized crime', 'Criminal history'],
     featured: true,
     hasAudio: false,
@@ -465,7 +465,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     },
     tags: ['Tools', 'Tutorials', 'Programming', 'Web Development', 'Computer Science'],
     category: 'Tutorials',
-    metaDescription: 'Learn how to convert between binary, octal, decimal, and hexadecimal using our free base number converter tool. Perfect for developers, students, and anyone working with different number systems.',
+    metaDescription: 'Convert between binary, octal, decimal, and hex with our free base number converter tool.',
     metaKeywords: ['base number converter', 'binary to decimal', 'hex to decimal', 'octal converter', 'number system converter', 'binary calculator', 'hexadecimal converter'],
     featured: false,
     hasAudio: false,
@@ -509,7 +509,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['CGI', '3D Art', 'Star Trek', 'Star Wars', 'Digital Art', 'VFX', 'Fan Art'],
     category: '3D RENDERING',
     metaDescription:
-      'Howard Day creates cinema-quality Star Trek and Star Wars starship renders from his home PC using 3ds Max and V-Ray. His work is so professional, people think it\'s AI-generated.',
+      'Howard Day creates cinema-quality Star Trek and Star Wars starship renders from his home PC.',
     metaKeywords: [
       'Howard Day',
       'Howie Day',
@@ -545,7 +545,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Pensacola', 'Weather', 'Florida', 'Snow', 'Climate', 'Polar Vortex'],
     category: 'Amateur Sleuthing',
     metaDescription:
-      'Pensacola wakes up to snow for the second January in a row on January 18, 2026. A light dusting unlike last year\'s historic 7.6-inch dump, but still unprecedented for the Florida Panhandle.',
+      'Pensacola sees snow for the second January in a row. A rare event for the Florida Panhandle.',
     metaKeywords: [
       'Pensacola snow 2026',
       'Florida snow January 2026',
@@ -579,7 +579,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Pensacola', 'Weather', 'Florida', 'Snow', 'Climate', 'Polar Vortex'],
     category: 'Amateur Sleuthing',
     metaDescription:
-      'Pensacola shattered a 130-year snow record with 8.9 inches last January. Now the Florida panhandle might see snow again as the polar vortex disrupts normal weather patterns.',
+      'Pensacola broke a 130-year snow record last January. The polar vortex may bring more snow.',
     metaKeywords: [
       'Pensacola snow',
       'Florida snow',
@@ -613,7 +613,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Barcode Scanner', 'Tools', 'How-To', 'Tutorial', 'UPC', 'EAN', 'Productivity'],
     category: 'Tutorials',
     metaDescription:
-      'Complete guide to using the free barcode scanner tool. Learn how to scan UPC, EAN, Code 128, and QR codes with your device camera, manage scanned codes, and troubleshoot common issues.',
+      'Guide to the free barcode scanner. Scan UPC, EAN, Code 128, and QR codes with your camera.',
     metaKeywords: [
       'Barcode scanner tutorial',
       'How to scan barcodes',
@@ -752,7 +752,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Revelation Space', 'Alastair Reynolds', 'Science Fiction', 'Fan Art', 'Lighthuggers', 'Concept Art'],
     category: 'Books & Literature',
     metaDescription:
-      'Exploring the incredible fan art inspired by Alastair Reynolds\'s lighthuggers from the Revelation Space series. From Zandoarts to Victor Tomioka, these artists capture the haunting scale of near-lightspeed starships.',
+      'Fan art of Alastair Reynolds\'s lighthuggers from Revelation Space by Zandoarts, Tomioka, and more.',
     metaKeywords: [
       'Lighthuggers',
       'Revelation Space',
@@ -788,7 +788,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community', 'Reddit'],
     category: 'Amateur Sleuthing',
     metaDescription:
-      'After criticism went public, Pensacon\'s Julio Diaz hosted an impromptu Reddit AMA addressing venue issues, scheduling failures, and the uphill battle to save Pensacola\'s beloved convention. Here\'s what he said.',
+      'Pensacon\'s Julio Diaz addresses venue issues and scheduling failures in an impromptu Reddit AMA.',
     metaKeywords: [
       'Pensacon',
       'Pensacon 2026',
@@ -822,7 +822,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Pensacon', 'Pensacola', 'Conventions', 'Events', 'Local News', 'Community'],
     category: 'Amateur Sleuthing',
     metaDescription:
-      'A critical examination of Pensacon\'s operational problems after seven years of attendance. Venue overcrowding, scheduling disasters, and communication failures are hurting Pensacola\'s beloved convention.',
+      'Pensacon\'s problems examined: venue overcrowding, scheduling disasters, and communication failures.',
     metaKeywords: [
       'Pensacon',
       'Pensacon problems',
@@ -857,7 +857,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Interstellar', 'Christopher Nolan', 'Science Fiction', 'Movie Analysis', 'Film Critique'],
     category: 'TV & Film',
     metaDescription:
-      'A critical look at Interstellar\'s wormhole explanation scene. Why does Romilly need to explain basic physics to a trained NASA astronaut? An analysis of exposition and character consistency.',
+      'Why does Romilly explain basic physics to a NASA astronaut? Analyzing Interstellar\'s exposition.',
     metaKeywords: [
       'Interstellar',
       'Interstellar wormhole scene',
@@ -891,7 +891,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Timber Sales', 'Ohio', 'Forestry', 'Land Management', 'Timber Buyers', 'Southeast Ohio'],
     category: 'Amateur Sleuthing',
     metaDescription:
-      'Learn how to get maximum value from timber sales in southeast Ohio. Professional forestry consultation, competitive bidding, and complete oversight ensure landowners get top dollar.',
+      'Get maximum value from timber sales in southeast Ohio with professional forestry consultation.',
     metaKeywords: [
       'Timber sales Ohio',
       'Sell timber southeast Ohio',
@@ -992,7 +992,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Kenya', 'Technology', 'M-Pesa', 'Ushahidi', 'African Tech', 'Innovation'],
     category: 'Technology',
     metaDescription:
-      'From Ushahidi\'s crisis mapping to M-Pesa\'s mobile banking revolution, Kenya\'s tech ecosystem has quietly produced some of the most consequential digital tools of the last two decades.',
+      'From Ushahidi to M-Pesa, how Kenya\'s developers built digital tools that changed the world.',
     metaKeywords: [
       'Kenya tech scene',
       'Ushahidi',
@@ -1025,7 +1025,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Willy\'s Wonderland', 'Five Nights at Freddy\'s', 'Nicolas Cage', 'Horror', 'Movie Review'],
     category: 'TV & Film',
     metaDescription:
-      'Why Willy\'s Wonderland remains the killer animatronic movie we actually deserved - a deep dive into how Nicolas Cage fighting possessed Chuck E. Cheese knockoffs delivered more than the official FNAF adaptation.',
+      'Why Willy\'s Wonderland is a better killer animatronic movie than the official FNAF adaptation.',
     metaKeywords: [
       'Willy\'s Wonderland',
       'Five Nights at Freddy\'s',
@@ -1056,7 +1056,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['AI', 'Future of Work', 'Memory', 'Authenticity', 'Deepfakes'],
     category: 'Technology',
     metaDescription:
-      'The generation that experienced pre-AI media firsthand may become valuable authenticity verification specialists - because we have the actual neural pathways from living through it.',
+      'Pre-AI media veterans may become authenticity verification specialists with real neural pathways.',
     metaKeywords: [
       'AI detection',
       'Deepfakes',
@@ -1087,7 +1087,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     tags: ['Programming', 'Productivity', 'Remote Work', 'Focus', 'Noise Cancelling Headphones'],
     category: 'Technology',
     metaDescription:
-      'How noise cancelling headphones transformed my programming by eliminating unpredictable sounds and giving me back the ability to think deeply in a chaotic home environment.',
+      'How noise cancelling headphones restored my ability to code deeply in a chaotic home environment.',
     metaKeywords: [
       'Noise cancelling headphones',
       'Programming productivity',

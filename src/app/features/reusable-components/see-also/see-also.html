@@ -1,0 +1,30 @@
+<div class="see-also-block" *ngIf="displayItems.length > 0">
+  <div class="block-header">
+    <mat-icon class="header-icon">link</mat-icon>
+    <h3 class="header-title">{{ title }}</h3>
+  </div>
+  <ul class="see-also-list">
+    <li *ngFor="let item of displayItems" class="see-also-item">
+      <a
+        *ngIf="!item.isExternal"
+        [routerLink]="item.url"
+        class="see-also-link internal-link"
+      >
+        <mat-icon class="item-icon">{{ item.icon }}</mat-icon>
+        <span class="item-title">{{ item.title }}</span>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      </a>
+      <a
+        *ngIf="item.isExternal"
+        [href]="item.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="see-also-link external-link"
+      >
+        <mat-icon class="item-icon">{{ item.icon }}</mat-icon>
+        <span class="item-title">{{ item.title }}</span>
+        <mat-icon class="arrow-icon">open_in_new</mat-icon>
+      </a>
+    </li>
+  </ul>
+</div>

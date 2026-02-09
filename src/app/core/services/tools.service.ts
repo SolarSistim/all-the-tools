@@ -913,6 +913,19 @@ export class ToolsService {
   }
 
   /**
+   * Get multiple tools by their IDs (for cross-linking)
+   */
+  getToolsByIds(toolIds: string[]): Tool[] {
+    if (!toolIds || toolIds.length === 0) {
+      return [];
+    }
+
+    return toolIds
+      .map(id => this.tools.find(t => t.id === id))
+      .filter((t): t is Tool => t !== undefined && t.available !== false);
+  }
+
+  /**
    * Get a single tool by route
    */
   getToolByRoute(route: string): Tool | undefined {

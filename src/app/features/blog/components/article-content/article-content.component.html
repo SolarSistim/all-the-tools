@@ -209,5 +209,41 @@
       *ngIf="block.type === 'component' && block.data.componentName === 'related-blog-posts'"
       [posts]="block.data.posts"
     ></app-related-blog-posts>
+
+    <!-- Related Tools Block -->
+    <app-related-tools
+      *ngIf="block.type === 'related-tools'"
+      [toolIds]="block.data.toolIds"
+      [auto]="block.data.auto || false"
+      [limit]="block.data.limit || 3"
+      [title]="block.data.title || 'Related Tools'"
+      [currentArticleTags]="article?.tags"
+      [currentArticleCategory]="article?.category"
+    ></app-related-tools>
+
+    <!-- Related Resources Block -->
+    <app-related-resources
+      *ngIf="block.type === 'related-resources'"
+      [resourceIds]="block.data.resourceIds"
+      [auto]="block.data.auto || false"
+      [limit]="block.data.limit || 3"
+      [title]="block.data.title || 'Related Resources'"
+      [currentArticleTags]="article?.tags"
+    ></app-related-resources>
+
+    <!-- Tool Showcase Block -->
+    <app-tool-showcase
+      *ngIf="block.type === 'tool-showcase'"
+      [toolId]="block.data.toolId"
+      [customDescription]="block.data.customDescription"
+      [showCTA]="block.data.showCTA !== false"
+    ></app-tool-showcase>
+
+    <!-- See Also Block -->
+    <app-see-also
+      *ngIf="block.type === 'see-also'"
+      [title]="block.data.title || 'See Also'"
+      [items]="block.data.items"
+    ></app-see-also>
   </div>
 </div>

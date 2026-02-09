@@ -38,6 +38,18 @@ export interface Tool {
 
   /** Whether this tool has a tutorial available on the blog */
   hasTutorial?: boolean;
+
+  /** Specific tutorial article ID (more precise than hasTutorial flag) */
+  tutorialArticleId?: string;
+
+  /** Related article IDs (tutorials, guides, etc.) */
+  relatedArticles?: string[];
+
+  /** Related tool IDs (similar or complementary tools) */
+  relatedTools?: string[];
+
+  /** Related resource IDs (external resources) */
+  relatedResources?: string[];
 }
 
 /**

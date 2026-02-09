@@ -69,13 +69,13 @@ export class RomanNumeralConverter implements OnInit {
   private updateMetaTags(): void {
     this.metaService.updateTags({
       title: 'Roman Numeral Converter - Convert Numbers to Roman Numerals',
-      description: 'Free online Roman numeral converter. Convert numbers 1-3,999,999 to Roman numerals with vinculum support. Save conversions, download as text, and manage your conversion history locally.',
+      description: 'Free Roman numeral converter. Convert numbers 1-3,999,999 with vinculum support. Save and export.',
       keywords: ['roman numeral converter', 'number converter', 'roman numerals', 'ancient numerals', 'numeral conversion', 'vinculum'],
       image: 'https://www.allthethings.dev/meta-images/og-roman-numeral-converter.png',
       url: 'https://www.allthethings.dev/tools/roman-numeral-converter',
       jsonLd: this.metaService.buildToolJsonLd({
         name: 'Roman Numeral Converter - Convert Numbers to Roman Numerals',
-        description: 'Free online Roman numeral converter. Convert numbers 1-3,999,999 to Roman numerals with vinculum support. Save conversions, download as text, and manage your conversion history locally.',
+        description: 'Free Roman numeral converter. Convert numbers 1-3,999,999 with vinculum support. Save and export.',
         url: 'https://www.allthethings.dev/tools/roman-numeral-converter',
         image: 'https://www.allthethings.dev/meta-images/og-roman-numeral-converter.png'
       })

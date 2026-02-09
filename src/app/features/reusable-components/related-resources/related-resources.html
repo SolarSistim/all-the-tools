@@ -1,0 +1,21 @@
+<div class="related-resources-block" *ngIf="displayResources.length > 0">
+  <div class="block-header">
+    <mat-icon class="header-icon">library_books</mat-icon>
+    <h3 class="header-title">{{ title }}</h3>
+  </div>
+  <div class="resource-list">
+    <a
+      *ngFor="let resource of displayResources"
+      [href]="resource.externalUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="resource-item"
+    >
+      <div class="resource-content">
+        <span class="resource-title">{{ resource.title }}</span>
+        <span class="resource-description">{{ resource.subtitle }}</span>
+      </div>
+      <mat-icon class="external-icon">open_in_new</mat-icon>
+    </a>
+  </div>
+</div>

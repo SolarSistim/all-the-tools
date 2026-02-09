@@ -18,6 +18,8 @@ export interface Resource {
   featured?: boolean;
   display?: boolean;
   relatedResources?: string[];
+  relatedArticles?: string[]; // Article IDs for cross-linking
+  relatedTools?: string[]; // Tool IDs for cross-linking
   isPaid?: boolean;
   difficulty?: 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'N/A';
 }

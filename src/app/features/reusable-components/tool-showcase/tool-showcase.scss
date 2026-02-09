@@ -1,0 +1,147 @@
+@import '../../../../styles/utilities';
+
+.tool-showcase {
+  margin: $spacing-2xl 0;
+  padding: $spacing-xl;
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--surface) 100%);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 188, 212, 0.3);
+    border-color: var(--neon-cyan);
+  }
+}
+
+.showcase-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+.tool-icon {
+  flex-shrink: 0;
+  font-size: 3rem !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 12px var(--neon-cyan-glow));
+  transition: all 0.3s ease;
+
+  .tool-showcase:hover & {
+    transform: scale(1.1) rotate(5deg);
+    color: var(--neon-pink);
+  }
+}
+
+.tool-header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.tool-name {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.tool-category {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tool-description {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 $spacing-xl 0;
+}
+
+.showcase-cta {
+  display: inline-flex !important;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xl !important;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 188, 212, 0.4);
+
+    mat-icon {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: scale(1.02);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .tool-showcase {
+    padding: $spacing-lg;
+  }
+
+  .showcase-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+
+  .tool-icon {
+    font-size: 2.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  .tool-name {
+    font-size: 1.5rem;
+  }
+
+  .tool-description {
+    font-size: 1rem;
+  }
+
+  .showcase-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

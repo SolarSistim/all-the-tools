@@ -8,6 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { skip } from 'rxjs/operators';
 import { Article, ArticlePreview } from '../../models/blog.models';
 import { BlogService } from '../../services/blog.service';
+import { ContentEnhancementService } from '../../services/content-enhancement.service';
 import { MetaService } from '../../../../core/services/meta.service';
 import { StructuredDataService } from '../../../../core/services/structured-data.service';
 import { HeroImageComponent } from '../hero-image/hero-image.component';
@@ -46,6 +47,7 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private blogService = inject(BlogService);
+  private contentEnhancementService = inject(ContentEnhancementService);
   private metaService = inject(MetaService);
   private structuredDataService = inject(StructuredDataService);
   private destroyRef = inject(DestroyRef);
@@ -67,10 +69,11 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
     const article = this.route.snapshot.data['article'] as Article | null;
 
     if (article) {
-      this.article = article;
+      // Enhance article content with auto-generated cross-links
+      this.article = this.contentEnhancementService.enhanceArticleContent(article);
       // Use pre-calculated readTime from build script if available, otherwise calculate
-      this.readingTime = article.readTime || this.blogService.calculateReadingTime(article);
-      this.articleUrl = this.blogService.getArticleUrl(article.slug);
+      this.readingTime = this.article.readTime || this.blogService.calculateReadingTime(this.article);
+      this.articleUrl = this.blogService.getArticleUrl(this.article.slug);
       this.updateMetaTags();
       this.updateStructuredData();
       this.loadRelatedArticles();
@@ -93,10 +96,11 @@ export class BlogArticleComponent implements OnInit, OnDestroy {
         }
 
         if (newArticle.id !== this.article?.id) {
-          this.article = newArticle;
+          // Enhance article content with auto-generated cross-links
+          this.article = this.contentEnhancementService.enhanceArticleContent(newArticle);
           // Use pre-calculated readTime from build script if available, otherwise calculate
-          this.readingTime = newArticle.readTime || this.blogService.calculateReadingTime(newArticle);
-          this.articleUrl = this.blogService.getArticleUrl(newArticle.slug);
+          this.readingTime = this.article.readTime || this.blogService.calculateReadingTime(this.article);
+          this.articleUrl = this.blogService.getArticleUrl(this.article.slug);
           this.updateMetaTags();
           this.updateStructuredData();
           this.loadRelatedArticles();

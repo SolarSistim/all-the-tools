@@ -1,0 +1,20 @@
+<div class="related-tools-block" *ngIf="displayTools.length > 0">
+  <div class="block-header">
+    <mat-icon class="header-icon">build</mat-icon>
+    <h3 class="header-title">{{ title }}</h3>
+  </div>
+  <div class="tool-grid">
+    <a
+      *ngFor="let tool of displayTools"
+      [routerLink]="['/tools', tool.route]"
+      class="tool-card"
+    >
+      <mat-icon class="tool-icon">{{ tool.icon }}</mat-icon>
+      <div class="tool-info">
+        <span class="tool-name">{{ tool.name }}</span>
+        <span class="tool-description">{{ tool.description }}</span>
+      </div>
+      <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+    </a>
+  </div>
+</div>

@@ -40,6 +40,8 @@ export interface Article {
   featured?: boolean;
   display?: boolean; // Controls visibility on blog listing (defaults to true)
   relatedArticles?: string[]; // Article IDs
+  relatedTools?: string[]; // Tool IDs for cross-linking
+  relatedResources?: string[]; // Resource IDs for cross-linking
   hasAudio?: boolean; // Indicates if article has audio version
   hasVideo?: boolean; // Indicates if article has video version
   youtubeVideoId?: string; // YouTube video ID for play button on listing
@@ -97,7 +99,11 @@ export type ContentBlockType =
   | 'movieRatings'
   | 'businessRatings'
   | 'video'
-  | 'audio';
+  | 'audio'
+  | 'related-tools'
+  | 'related-resources'
+  | 'tool-showcase'
+  | 'see-also';
 
 /**
  * Base content block
@@ -326,6 +332,63 @@ export interface AudioBlock extends ContentBlock {
     embedUrl?: string;
     title?: string;
     description?: string;
+  };
+}
+
+/**
+ * Related Tools block
+ * Displays related tools inline within article content
+ */
+export interface RelatedToolsBlock extends ContentBlock {
+  type: 'related-tools';
+  data: {
+    toolIds?: string[]; // Explicit tool IDs (optional)
+    auto?: boolean; // Auto-generate based on article tags
+    limit?: number; // Max tools to show (default: 3)
+    title?: string; // Custom section title
+  };
+}
+
+/**
+ * Related Resources block
+ * Displays related resources inline within article content
+ */
+export interface RelatedResourcesBlock extends ContentBlock {
+  type: 'related-resources';
+  data: {
+    resourceIds?: string[]; // Explicit resource IDs (optional)
+    auto?: boolean; // Auto-generate based on tags
+    limit?: number; // Max resources to show (default: 3)
+    title?: string; // Custom section title
+  };
+}
+
+/**
+ * Tool Showcase block
+ * Features a specific tool with description and CTA
+ */
+export interface ToolShowcaseBlock extends ContentBlock {
+  type: 'tool-showcase';
+  data: {
+    toolId: string; // Tool to showcase
+    customDescription?: string; // Override default description
+    showCTA?: boolean; // Show "Try it now" button (default: true)
+  };
+}
+
+/**
+ * See Also block
+ * Mixed content type links (tools, articles, resources)
+ */
+export interface SeeAlsoBlock extends ContentBlock {
+  type: 'see-also';
+  data: {
+    title?: string; // Section title (default: "See Also")
+    items: Array<{
+      type: 'tool' | 'article' | 'resource';
+      id: string;
+      customText?: string; // Optional custom link text
+    }>;
   };
 }
 

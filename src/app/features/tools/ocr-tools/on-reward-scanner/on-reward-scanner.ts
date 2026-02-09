@@ -126,13 +126,13 @@ private cropSizeScale = [0.7, 0.85, 1, 1.15, 1.3];
   private updateMetaTags(): void {
     this.metaService.updateTags({
       title: 'On! Reward Code Scanner - Scan Nicotine Reward Codes',
-      description: 'Free online On! Nicotine reward code scanner. Scan product packaging with OCR to extract XXXXX-XXXX-XXXX codes. Store and manage codes locally with bulk export options.',
+      description: 'Scan On! Nicotine reward codes with OCR. Extract codes from packaging and manage them locally.',
       keywords: ['on nicotine scanner', 'reward code scanner', 'ocr scanner', 'nicotine rewards', 'code reader', 'on rewards'],
       image: 'https://www.allthethings.dev/meta-images/og-on-reward-scanner.png',
       url: 'https://www.allthethings.dev/tools/on-reward-scanner',
       jsonLd: this.metaService.buildToolJsonLd({
         name: 'On! Reward Code Scanner - Scan Nicotine Reward Codes',
-        description: 'Free online On! Nicotine reward code scanner. Scan product packaging with OCR to extract XXXXX-XXXX-XXXX codes. Store and manage codes locally with bulk export options.',
+        description: 'Scan On! Nicotine reward codes with OCR. Extract codes from packaging and manage them locally.',
         url: 'https://www.allthethings.dev/tools/on-reward-scanner',
         image: 'https://www.allthethings.dev/meta-images/og-on-reward-scanner.png'
       })
