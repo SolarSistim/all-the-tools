@@ -38,14 +38,24 @@ mat-sidenav-content {
   border-right: 1px solid var(--border-color);
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   border-radius: 0 !important;
+}
+
+::ng-deep .tools-sidenav .mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
 
   .sidenav-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 1rem;
+    height: 64px;
+    padding: 0 1rem;
     border-bottom: 1px solid var(--border-color);
     background: var(--bg-elevated);
+    flex-shrink: 0;
+    overflow: hidden;
 
     h2 {
       font-family: 'Orbitron', sans-serif;
@@ -75,6 +85,8 @@ mat-sidenav-content {
     padding: 0.5rem;
     border-bottom: 1px solid var(--border-color);
     gap: 4px;
+    flex-shrink: 0;
+    overflow: hidden;
 
     .sidenav-nav-link {
       display: flex;
@@ -110,21 +122,17 @@ mat-sidenav-content {
       }
 
       // Assign different colors to each nav link icon
-      &:nth-child(1) mat-icon { color: #6dd4ff !important; }
-      &:nth-child(2) mat-icon { color: #ff8cb0 !important; }
-      &:nth-child(3) mat-icon { color: #4ade80 !important; }
-      &:nth-child(4) mat-icon { color: #c77dff !important; }
-      &:nth-child(5) mat-icon { color: #ffd60a !important; }
-      &:nth-child(6) mat-icon { color: #ff9f1c !important; }
-      &:nth-child(7) mat-icon { color: #5b9bff !important; }
+      &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan - Home
+      &:nth-child(2) mat-icon { color: #F472B6 !important; }  // Neon Magenta - Blog
+      &:nth-child(3) mat-icon { color: #6EE7B7 !important; }  // Cool Green - Contact Us
     }
   }
 
   .sidenav-content {
     padding: 0.5rem;
     overflow-y: auto;
-    // max-height: calc(100vh - 80px);
-    height: auto;
+    flex: 1;
+    min-height: 0;
   }
 
   // Category Expansion Panels
@@ -185,6 +193,13 @@ mat-sidenav-content {
     width: 20px;
     height: 20px;
     color: var(--neon-cyan);
+  }
+
+  .allthethings-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #5B9DFF !important;  // Soft Azure
   }
 
   // Assign different colors to each category icon based on nth-child
@@ -342,6 +357,105 @@ mat-sidenav-content {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  // AllTheThings Links
+  .allthethings-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .allthethings-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+
+    &:hover {
+      background: var(--bg-elevated);
+      border-left-color: var(--neon-cyan);
+
+      mat-icon {
+        color: var(--neon-cyan);
+        filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
+      }
+
+      span {
+        color: var(--neon-cyan);
+      }
+    }
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    // Assign colors to each link
+    &:nth-child(1) mat-icon { color: #C084FC !important; }      // All Tools - Soft Violet
+    &:nth-child(2) mat-icon { color: #FB923C !important; }      // 3D Artist Spotlight - Burnt Orange
+    &:nth-child(3) mat-icon { color: #A3E635 !important; }      // Resources - Soft Lime
+    &:nth-child(4) mat-icon { color: #F87171 !important; }      // About - Cool Red
+
+    span {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: color 0.2s ease;
+    }
+  }
+
+  // AllTheThings Panel
+  .allthethings-panel {
+    background: var(--bg-elevated) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px !important;
+    margin-bottom: 0.5rem;
+    box-shadow: none !important;
+
+    .mat-expansion-panel-header {
+      background: transparent !important;
+      padding: 0.5rem 0.75rem 0.5rem 0.5rem !important;
+      min-height: 44px !important;
+      height: 44px !important;
+      max-height: 44px !important;
+
+      &:hover {
+        background: var(--bg-secondary) !important;
+      }
+
+      &.mat-expanded {
+        min-height: 44px !important;
+        height: 44px !important;
+        max-height: 44px !important;
+      }
+
+      .mat-expansion-indicator {
+        color: var(--text-secondary) !important;
+        margin-right: 0.5rem;
+
+        svg {
+          fill: var(--text-secondary) !important;
+
+          path {
+            fill: var(--text-secondary) !important;
+          }
+        }
+      }
+    }
+
+    .mat-expansion-panel-body {
+      padding: 0 !important;
+      background: var(--bg-secondary);
     }
   }
 }

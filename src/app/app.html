@@ -32,48 +32,12 @@
       </a>
 
       <a
-        routerLink="/tools"
-        (click)="closeToolsSidenavIfMobile()"
-        class="sidenav-nav-link"
-      >
-        <mat-icon>apps</mat-icon>
-        <span>All Tools</span>
-      </a>
-
-      <a
         routerLink="/blog"
         (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>article</mat-icon>
         <span>Blog</span>
-      </a>
-
-      <a
-        routerLink="/3d-artist-spotlight"
-        (click)="closeToolsSidenavIfMobile()"
-        class="sidenav-nav-link"
-      >
-        <mat-icon>3d_rotation</mat-icon>
-        <span>3D Artist Spotlight</span>
-      </a>
-
-      <a
-        routerLink="/resources"
-        (click)="closeToolsSidenavIfMobile()"
-        class="sidenav-nav-link"
-      >
-        <mat-icon>link</mat-icon>
-        <span>Resources</span>
-      </a>
-
-      <a
-        routerLink="/about"
-        (click)="closeToolsSidenavIfMobile()"
-        class="sidenav-nav-link"
-      >
-        <mat-icon>info</mat-icon>
-        <span>About</span>
       </a>
 
       <a
@@ -87,6 +51,55 @@
     </div>
 
     <div class="sidenav-content">
+      <!-- AllTheThings.dev Menu -->
+      <mat-expansion-panel class="category-panel allthethings-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="allthethings-icon">construction</mat-icon>
+            <span class="category-name">AllTheThings.dev</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- AllTheThings Links -->
+        <div class="allthethings-links">
+          <a
+            routerLink="/tools"
+            (click)="closeToolsSidenavIfMobile()"
+            class="allthethings-link"
+          >
+            <mat-icon>apps</mat-icon>
+            <span>All Tools</span>
+          </a>
+
+          <a
+            routerLink="/3d-artist-spotlight"
+            (click)="closeToolsSidenavIfMobile()"
+            class="allthethings-link"
+          >
+            <mat-icon>3d_rotation</mat-icon>
+            <span>3D Artist Spotlight</span>
+          </a>
+
+          <a
+            routerLink="/resources"
+            (click)="closeToolsSidenavIfMobile()"
+            class="allthethings-link"
+          >
+            <mat-icon>link</mat-icon>
+            <span>Resources</span>
+          </a>
+
+          <a
+            routerLink="/about"
+            (click)="closeToolsSidenavIfMobile()"
+            class="allthethings-link"
+          >
+            <mat-icon>info</mat-icon>
+            <span>About</span>
+          </a>
+        </div>
+      </mat-expansion-panel>
+
       <!-- Category Expansion Panels -->
       @for (category of categories; track category.id) {
         @if (getToolCount(category.id) > 0) {
