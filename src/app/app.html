@@ -4,6 +4,7 @@
   <mat-sidenav
     #toolsSidenav
     (closed)="closeToolsSidenav()"
+    [opened]="sidenavOpened()"
     mode="side"
     position="start"
     class="tools-sidenav"

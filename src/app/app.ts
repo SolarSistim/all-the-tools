@@ -39,6 +39,7 @@ export class App implements AfterViewInit, OnInit {
   @ViewChild('toolsSidenav') toolsSidenav!: MatSidenav;
 
   isMobile = signal(false);
+  sidenavOpened = signal(false);
 
   private sidenavService = inject(SidenavService);
   private toolsService = inject(ToolsService);
@@ -64,11 +65,13 @@ export class App implements AfterViewInit, OnInit {
       })
     );
 
-    // Monitor breakpoint for mobile detection
+    // Monitor breakpoint for mobile detection and sidenav state
     this.breakpointObserver
       .observe([Breakpoints.Handset])
       .subscribe((result) => {
         this.isMobile.set(result.matches);
+        // Expand sidenav on desktop, collapse on mobile/tablet
+        this.sidenavOpened.set(!result.matches);
       });
 
     // Set up router event handling for visit logging and scroll behavior

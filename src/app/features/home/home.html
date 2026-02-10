@@ -13,7 +13,7 @@
         <div class="hero-actions animate-fade-in">
           <a routerLink="/tools" class="btn">
             <mat-icon>apps</mat-icon>
-            Browse the Full Online Toolbox
+            Browse Full Toolbox
           </a>
           <a routerLink="/blog" class="btn-outline">
             <mat-icon>article</mat-icon>
@@ -31,6 +31,24 @@
         </div>
       </div>
     </div>
+
+    <!-- Popular Tools Tags in Hero -->
+    @if (popularTools.length > 0) {
+      <div class="hero-popular-tags-wrapper">
+        <div class="hero-popular-tags animate-fade-in">
+          @for (tool of popularTools.slice(0, 12); track tool.id) {
+            <a [routerLink]="['/tools', tool.route]" class="hero-tool-tag">
+              <mat-icon>{{ tool.icon }}</mat-icon>
+              <span>{{ tool.name }}</span>
+            </a>
+          }
+          <a routerLink="/tools" class="hero-tool-tag hero-all-tools-tag">
+            <mat-icon>apps</mat-icon>
+            <span>All Tools</span>
+          </a>
+        </div>
+      </div>
+    }
 
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">

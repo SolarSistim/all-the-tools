@@ -230,4 +230,28 @@ With 13 years of Unreal Engine experience plus Houdini, Maya, and Python scripti
     featured: false,
     display: true,
   },
+  {
+    id: '21',
+    slug: 'josh-van-zuylen',
+    name: 'Josh Van Zuylen',
+    shortDescription: 'Senior Principal Artist specializing in game, movie and VFX. I make things look pretty.',
+    longDescription: `Josh Van Zuylen is a Senior Principal Artist at Hundred Star with expertise in game, movie, and VFX production. Known for his ability to make visuals look stunning, Josh brings a professional and polished touch to sci-fi and fantasy projects.`,
+    keywords: ['VFX', 'Game Art', 'Movie', '3D', 'Sci-Fi'],
+    metaDescription: 'Discover Josh Van Zuylen, Senior Principal Artist specializing in game, movie and VFX.',
+    metaKeywords: ['Josh Van Zuylen', '2Polygons', 'Senior Principal Artist', 'VFX', 'game art', 'movie'],
+    ogImage: '/in-the-verse/og-header-images/og-josh-van-zuylen-01.jpg',
+    youtubeVideoId: 'nCBoHpk2ndA',
+    youtubeVideos: [
+      { id: 'dbJLRPBWcto' },
+      { id: 'MTebS_mGAEI' },
+      { id: 'vs4fcDwMVMw' },
+    ],
+    links: {
+      artstation: 'https://www.artstation.com/joshvanzuylen',
+      youtube: 'https://www.youtube.com/@2Polygons',
+    },
+    publishedDate: '2026-02-10',
+    featured: false,
+    display: true,
+  },
 ];
