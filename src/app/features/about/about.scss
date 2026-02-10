@@ -53,6 +53,15 @@
       filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
     }
   }
+
+  // Apply palette colors to policy button icons
+  // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+  &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+  &:nth-child(2) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+  &:nth-child(3) mat-icon { color: #6EE7B7 !important; }  // Cool Green
+  &:nth-child(4) mat-icon { color: #C084FC !important; }  // Soft Violet
+  &:nth-child(5) mat-icon { color: #FB923C !important; }  // Burnt Orange
+  &:nth-child(6) mat-icon { color: #A3E635 !important; }  // Soft Lime
 }
 
 .about-content {
@@ -118,4 +127,11 @@
     color: var(--text-secondary);
     margin: 0;
   }
+
+  // Apply palette colors to feature card icons
+  // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+  &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+  &:nth-child(2) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+  &:nth-child(3) mat-icon { color: #6EE7B7 !important; }  // Cool Green
+  &:nth-child(4) mat-icon { color: #C084FC !important; }  // Soft Violet
 }

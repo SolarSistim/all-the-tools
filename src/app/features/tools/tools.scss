@@ -174,6 +174,19 @@
       grid-template-columns: 1fr;
     }
 
+    li:nth-child(1) .popular-tool-link mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+    li:nth-child(2) .popular-tool-link mat-icon { color: #F472B6 !important; }  // Neon Magenta
+    li:nth-child(3) .popular-tool-link mat-icon { color: #6EE7B7 !important; }  // Cool Green
+    li:nth-child(4) .popular-tool-link mat-icon { color: #C084FC !important; }  // Soft Violet
+    li:nth-child(5) .popular-tool-link mat-icon { color: #FB923C !important; }  // Burnt Orange
+    li:nth-child(6) .popular-tool-link mat-icon { color: #A3E635 !important; }  // Soft Lime
+    li:nth-child(7) .popular-tool-link mat-icon { color: #F87171 !important; }  // Cool Red
+    li:nth-child(8) .popular-tool-link mat-icon { color: #5B9DFF !important; }  // Soft Azure
+    li:nth-child(9) .popular-tool-link mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+    li:nth-child(10) .popular-tool-link mat-icon { color: #FBBF24 !important; } // Muted Amber
+    li:nth-child(11) .popular-tool-link mat-icon { color: #6BCBFF !important; } // Neon Cyan
+    li:nth-child(12) .popular-tool-link mat-icon { color: #F472B6 !important; } // Neon Magenta
+
     li {
       .popular-tool-link {
         display: flex;
@@ -379,6 +392,20 @@
     transition: color 0.2s ease;
   }
 
+  // Apply palette colors to category chip icons
+  &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+  &:nth-child(2) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+  &:nth-child(3) mat-icon { color: #6EE7B7 !important; }  // Cool Green
+  &:nth-child(4) mat-icon { color: #C084FC !important; }  // Soft Violet
+  &:nth-child(5) mat-icon { color: #FB923C !important; }  // Burnt Orange
+  &:nth-child(6) mat-icon { color: #A3E635 !important; }  // Soft Lime
+  &:nth-child(7) mat-icon { color: #F87171 !important; }  // Cool Red
+  &:nth-child(8) mat-icon { color: #5B9DFF !important; }  // Soft Azure
+  &:nth-child(9) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+  &:nth-child(10) mat-icon { color: #FBBF24 !important; } // Muted Amber
+  &:nth-child(11) mat-icon { color: #6BCBFF !important; } // Neon Cyan
+  &:nth-child(12) mat-icon { color: #F472B6 !important; } // Neon Magenta
+
   &:hover:not(.selected) {
     background: var(--bg-secondary);
     border-color: var(--neon-cyan);
@@ -427,6 +454,133 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: $spacing-xl;
+
+  // Apply palette colors to tool card icons
+  // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+  app-tool-card:nth-child(1) ::ng-deep .tool-icon { color: #6BCBFF !important; }  // Neon Cyan
+  app-tool-card:nth-child(2) ::ng-deep .tool-icon { color: #F472B6 !important; }  // Neon Magenta
+  app-tool-card:nth-child(3) ::ng-deep .tool-icon { color: #6EE7B7 !important; }  // Cool Green
+  app-tool-card:nth-child(4) ::ng-deep .tool-icon { color: #C084FC !important; }  // Soft Violet
+  app-tool-card:nth-child(5) ::ng-deep .tool-icon { color: #FB923C !important; }  // Burnt Orange
+  app-tool-card:nth-child(6) ::ng-deep .tool-icon { color: #A3E635 !important; }  // Soft Lime
+  app-tool-card:nth-child(7) ::ng-deep .tool-icon { color: #F87171 !important; }  // Cool Red
+  app-tool-card:nth-child(8) ::ng-deep .tool-icon { color: #5B9DFF !important; }  // Soft Azure
+  app-tool-card:nth-child(9) ::ng-deep .tool-icon { color: #4FD1C5 !important; }  // Teal Mint
+  app-tool-card:nth-child(10) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(11) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(12) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(13) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(14) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(15) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(16) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(17) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(18) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(19) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(20) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(21) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(22) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(23) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(24) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(25) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(26) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(27) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(28) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(29) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(30) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(31) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(32) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(33) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(34) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(35) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(36) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(37) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(38) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(39) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(40) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(41) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(42) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(43) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(44) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(45) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(46) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(47) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(48) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(49) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(50) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(51) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(52) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(53) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(54) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(55) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(56) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(57) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(58) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(59) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(60) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(61) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(62) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(63) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(64) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(65) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(66) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(67) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(68) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(69) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(70) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(71) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(72) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(73) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(74) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(75) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(76) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(77) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(78) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(79) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(80) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(81) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(82) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(83) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(84) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(85) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(86) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(87) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(88) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(89) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(90) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(91) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(92) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(93) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(94) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(95) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(96) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(97) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(98) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(99) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(100) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(101) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(102) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(103) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(104) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(105) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(106) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(107) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(108) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(109) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(110) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(111) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(112) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(113) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(114) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
+  app-tool-card:nth-child(115) ::ng-deep .tool-icon { color: #FB923C !important; } // Burnt Orange
+  app-tool-card:nth-child(116) ::ng-deep .tool-icon { color: #A3E635 !important; } // Soft Lime
+  app-tool-card:nth-child(117) ::ng-deep .tool-icon { color: #F87171 !important; } // Cool Red
+  app-tool-card:nth-child(118) ::ng-deep .tool-icon { color: #5B9DFF !important; } // Soft Azure
+  app-tool-card:nth-child(119) ::ng-deep .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+  app-tool-card:nth-child(120) ::ng-deep .tool-icon { color: #FBBF24 !important; } // Muted Amber
+  app-tool-card:nth-child(121) ::ng-deep .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+  app-tool-card:nth-child(122) ::ng-deep .tool-icon { color: #F472B6 !important; } // Neon Magenta
+  app-tool-card:nth-child(123) ::ng-deep .tool-icon { color: #6EE7B7 !important; } // Cool Green
+  app-tool-card:nth-child(124) ::ng-deep .tool-icon { color: #C084FC !important; } // Soft Violet
 
   @media (max-width: 640px) {
     grid-template-columns: 1fr;

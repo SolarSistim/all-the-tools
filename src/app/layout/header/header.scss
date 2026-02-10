@@ -392,6 +392,99 @@
     }
   }
 
+  // Apply randomized palette colors to category menu item icons by column
+  // Each row gets different colors across columns - no monochromatic rows
+  // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+
+  // Column 1
+  .mega-menu-column:nth-child(1) {
+    .category-menu-item {
+      &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+      &:nth-child(2) mat-icon { color: #C084FC !important; }  // Soft Violet
+      &:nth-child(3) mat-icon { color: #F87171 !important; }  // Cool Red
+      &:nth-child(4) mat-icon { color: #FBBF24 !important; }  // Muted Amber
+    }
+  }
+
+  // Column 2
+  .mega-menu-column:nth-child(2) {
+    .category-menu-item {
+      &:nth-child(1) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+      &:nth-child(2) mat-icon { color: #FB923C !important; }  // Burnt Orange
+      &:nth-child(3) mat-icon { color: #5B9DFF !important; }  // Soft Azure
+      &:nth-child(4) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+    }
+  }
+
+  // Column 3
+  .mega-menu-column:nth-child(3) {
+    .category-menu-item {
+      &:nth-child(1) mat-icon { color: #6EE7B7 !important; }  // Cool Green
+      &:nth-child(2) mat-icon { color: #A3E635 !important; }  // Soft Lime
+      &:nth-child(3) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+      &:nth-child(4) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+    }
+  }
+
+  // Assign randomized colors from palette to tool menu items
+  // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+  .mega-menu-column:nth-child(1) {
+    .tool-menu-item {
+      &:nth-child(1) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+      &:nth-child(2) mat-icon { color: #6EE7B7 !important; }  // Cool Green
+      &:nth-child(3) mat-icon { color: #A3E635 !important; }  // Soft Lime
+      &:nth-child(4) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+      &:nth-child(5) mat-icon { color: #FB923C !important; }  // Burnt Orange
+      &:nth-child(6) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+      &:nth-child(7) mat-icon { color: #C084FC !important; }  // Soft Violet
+      &:nth-child(8) mat-icon { color: #F87171 !important; }  // Cool Red
+      &:nth-child(9) mat-icon { color: #FBBF24 !important; }  // Muted Amber
+      &:nth-child(10) mat-icon { color: #5B9DFF !important; } // Soft Azure
+
+      &:hover mat-icon {
+        filter: drop-shadow(0 0 6px currentColor) !important;
+      }
+    }
+  }
+
+  .mega-menu-column:nth-child(2) {
+    .tool-menu-item {
+      &:nth-child(1) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+      &:nth-child(2) mat-icon { color: #F87171 !important; }  // Cool Red
+      &:nth-child(3) mat-icon { color: #C084FC !important; }  // Soft Violet
+      &:nth-child(4) mat-icon { color: #FBBF24 !important; }  // Muted Amber
+      &:nth-child(5) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+      &:nth-child(6) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+      &:nth-child(7) mat-icon { color: #FB923C !important; }  // Burnt Orange
+      &:nth-child(8) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+      &:nth-child(9) mat-icon { color: #5B9DFF !important; }  // Soft Azure
+      &:nth-child(10) mat-icon { color: #A3E635 !important; } // Soft Lime
+
+      &:hover mat-icon {
+        filter: drop-shadow(0 0 6px currentColor) !important;
+      }
+    }
+  }
+
+  .mega-menu-column:nth-child(3) {
+    .tool-menu-item {
+      &:nth-child(1) mat-icon { color: #5B9DFF !important; }  // Soft Azure
+      &:nth-child(2) mat-icon { color: #FB923C !important; }  // Burnt Orange
+      &:nth-child(3) mat-icon { color: #F87171 !important; }  // Cool Red
+      &:nth-child(4) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+      &:nth-child(5) mat-icon { color: #A3E635 !important; }  // Soft Lime
+      &:nth-child(6) mat-icon { color: #C084FC !important; }  // Soft Violet
+      &:nth-child(7) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+      &:nth-child(8) mat-icon { color: #FBBF24 !important; }  // Muted Amber
+      &:nth-child(9) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+      &:nth-child(10) mat-icon { color: #6EE7B7 !important; } // Cool Green
+
+      &:hover mat-icon {
+        filter: drop-shadow(0 0 6px currentColor) !important;
+      }
+    }
+  }
+
   // Tutorial indicator dot
   .tutorial-indicator {
     display: inline-block;

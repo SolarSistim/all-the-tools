@@ -703,9 +703,7 @@ section {
 // FEATURED TOOLS SECTION
 // ============================================
 .featured-tools {
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
-    linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .tools-grid {
@@ -734,9 +732,7 @@ section {
 // CATEGORIES SECTION
 // ============================================
 .categories {
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
-    linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .categories-grid {
@@ -831,6 +827,21 @@ section {
     transition: all 0.3s ease;
   }
 }
+
+// Apply palette colors to category card icons
+// Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+.category-card:nth-child(1) .category-icon { color: #6BCBFF !important; }  // Neon Cyan
+.category-card:nth-child(2) .category-icon { color: #F472B6 !important; }  // Neon Magenta
+.category-card:nth-child(3) .category-icon { color: #6EE7B7 !important; }  // Cool Green
+.category-card:nth-child(4) .category-icon { color: #C084FC !important; }  // Soft Violet
+.category-card:nth-child(5) .category-icon { color: #FB923C !important; }  // Burnt Orange
+.category-card:nth-child(6) .category-icon { color: #A3E635 !important; }  // Soft Lime
+.category-card:nth-child(7) .category-icon { color: #F87171 !important; }  // Cool Red
+.category-card:nth-child(8) .category-icon { color: #5B9DFF !important; }  // Soft Azure
+.category-card:nth-child(9) .category-icon { color: #4FD1C5 !important; }  // Teal Mint
+.category-card:nth-child(10) .category-icon { color: #FBBF24 !important; } // Muted Amber
+.category-card:nth-child(11) .category-icon { color: #6BCBFF !important; } // Neon Cyan
+.category-card:nth-child(12) .category-icon { color: #F472B6 !important; } // Neon Magenta
 
 .category-name {
   font-family: 'Orbitron', sans-serif;
@@ -1024,9 +1035,7 @@ section {
 // BENEFITS SECTION
 // ============================================
 .benefits {
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
-    linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .benefits-grid {
@@ -1069,6 +1078,19 @@ section {
     color: var(--neon-cyan);
   }
 }
+
+// Apply palette colors to benefit card icons
+// Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+.benefit-card:nth-child(1) .benefit-icon { color: #6BCBFF !important; }  // Neon Cyan
+.benefit-card:nth-child(2) .benefit-icon { color: #F472B6 !important; }  // Neon Magenta
+.benefit-card:nth-child(3) .benefit-icon { color: #6EE7B7 !important; }  // Cool Green
+.benefit-card:nth-child(4) .benefit-icon { color: #C084FC !important; }  // Soft Violet
+.benefit-card:nth-child(5) .benefit-icon { color: #FB923C !important; }  // Burnt Orange
+.benefit-card:nth-child(6) .benefit-icon { color: #A3E635 !important; }  // Soft Lime
+.benefit-card:nth-child(7) .benefit-icon { color: #F87171 !important; }  // Cool Red
+.benefit-card:nth-child(8) .benefit-icon { color: #5B9DFF !important; }  // Soft Azure
+.benefit-card:nth-child(9) .benefit-icon { color: #4FD1C5 !important; }  // Teal Mint
+.benefit-card:nth-child(10) .benefit-icon { color: #FBBF24 !important; } // Muted Amber
 
 .benefit-title {
   font-family: 'Orbitron', sans-serif;

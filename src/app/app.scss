@@ -108,6 +108,15 @@ mat-sidenav-content {
           filter: drop-shadow(0 0 6px var(--neon-cyan-glow));
         }
       }
+
+      // Assign different colors to each nav link icon
+      &:nth-child(1) mat-icon { color: #6dd4ff !important; }
+      &:nth-child(2) mat-icon { color: #ff8cb0 !important; }
+      &:nth-child(3) mat-icon { color: #4ade80 !important; }
+      &:nth-child(4) mat-icon { color: #c77dff !important; }
+      &:nth-child(5) mat-icon { color: #ffd60a !important; }
+      &:nth-child(6) mat-icon { color: #ff9f1c !important; }
+      &:nth-child(7) mat-icon { color: #5b9bff !important; }
     }
   }
 
@@ -177,6 +186,21 @@ mat-sidenav-content {
     height: 20px;
     color: var(--neon-cyan);
   }
+
+  // Assign different colors to each category icon based on nth-child
+  // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+  .category-panel:nth-child(1) .category-icon { color: #6BCBFF !important; }  // Neon Cyan (Math & Calculators)
+  .category-panel:nth-child(2) .category-icon { color: #F472B6 !important; }  // Neon Magenta (Converters)
+  .category-panel:nth-child(3) .category-icon { color: #6EE7B7 !important; }  // Cool Green (Text Tools)
+  .category-panel:nth-child(4) .category-icon { color: #C084FC !important; }  // Soft Violet (Generators)
+  .category-panel:nth-child(5) .category-icon { color: #FB923C !important; }  // Burnt Orange (Color Tools)
+  .category-panel:nth-child(6) .category-icon { color: #A3E635 !important; }  // Soft Lime (Time & Date)
+  .category-panel:nth-child(7) .category-icon { color: #FB923C !important; }  // Burnt Orange (Image Tools)
+  .category-panel:nth-child(8) .category-icon { color: #F472B6 !important; }  // Neon Magenta (Hardware Tools)
+  .category-panel:nth-child(9) .category-icon { color: #4FD1C5 !important; }  // Teal Mint (OCR Tools)
+  .category-panel:nth-child(10) .category-icon { color: #FBBF24 !important; } // Muted Amber (Music & Audio)
+  .category-panel:nth-child(11) .category-icon { color: #F87171 !important; } // Cool Red (Social Media)
+  .category-panel:nth-child(12) .category-icon { color: #6EE7B7 !important; } // Cool Green (Other Tools)
 
   .category-name {
     flex: 1;
@@ -274,6 +298,29 @@ mat-sidenav-content {
       flex-shrink: 0;
     }
 
+    // Assign colors from palette to each tool icon
+    // Palette: Neon Cyan, Soft Azure, Teal Mint, Cool Green, Soft Lime, Muted Amber, Burnt Orange, Soft Violet, Neon Magenta, Cool Red
+    &:nth-child(1) .tool-icon { color: #6BCBFF !important; }  // Neon Cyan
+    &:nth-child(2) .tool-icon { color: #F472B6 !important; }  // Neon Magenta
+    &:nth-child(3) .tool-icon { color: #6EE7B7 !important; }  // Cool Green
+    &:nth-child(4) .tool-icon { color: #C084FC !important; }  // Soft Violet
+    &:nth-child(5) .tool-icon { color: #FB923C !important; }  // Burnt Orange
+    &:nth-child(6) .tool-icon { color: #A3E635 !important; }  // Soft Lime
+    &:nth-child(7) .tool-icon { color: #F87171 !important; }  // Cool Red
+    &:nth-child(8) .tool-icon { color: #5B9DFF !important; }  // Soft Azure
+    &:nth-child(9) .tool-icon { color: #4FD1C5 !important; }  // Teal Mint
+    &:nth-child(10) .tool-icon { color: #FBBF24 !important; } // Muted Amber
+    &:nth-child(11) .tool-icon { color: #6BCBFF !important; } // Neon Cyan
+    &:nth-child(12) .tool-icon { color: #F472B6 !important; } // Neon Magenta
+    &:nth-child(13) .tool-icon { color: #6EE7B7 !important; } // Cool Green
+    &:nth-child(14) .tool-icon { color: #C084FC !important; } // Soft Violet
+    &:nth-child(15) .tool-icon { color: #FB923C !important; } // Burnt Orange
+    &:nth-child(16) .tool-icon { color: #A3E635 !important; } // Soft Lime
+    &:nth-child(17) .tool-icon { color: #F87171 !important; } // Cool Red
+    &:nth-child(18) .tool-icon { color: #5B9DFF !important; } // Soft Azure
+    &:nth-child(19) .tool-icon { color: #4FD1C5 !important; } // Teal Mint
+    &:nth-child(20) .tool-icon { color: #FBBF24 !important; } // Muted Amber
+
     .tool-info {
       display: flex;
       flex-direction: column;
@@ -310,3 +357,4 @@ mat-sidenav-content {
     max-width: 320px;
   }
 }
+
