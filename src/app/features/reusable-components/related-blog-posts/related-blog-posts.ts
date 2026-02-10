@@ -10,7 +10,7 @@ export interface RelatedBlogPost {
 
 /**
  * Related Blog Posts Component
- * Displays related blog posts with attractive styling
+ * Displays related blog posts and tools with attractive styling
  */
 @Component({
   selector: 'app-related-blog-posts',
@@ -21,4 +21,16 @@ export interface RelatedBlogPost {
 })
 export class RelatedBlogPosts {
   @Input({ required: true }) posts: RelatedBlogPost[] = [];
+
+  /**
+   * Generate router link based on slug type
+   * If slug starts with /tools/, route to that path directly
+   * Otherwise, route to /blog/{slug}
+   */
+  getRouterLink(slug: string): string[] {
+    if (slug.startsWith('/tools/')) {
+      return [slug];
+    }
+    return ['/blog', slug];
+  }
 }

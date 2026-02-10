@@ -69,8 +69,9 @@
       }
     </div>
   </section>
+  
+  <app-related-blog-posts [posts]="relatedTools" style="padding-right: 28px; padding-left: 28px;"></app-related-blog-posts>
 
-  <app-related-blog-posts [posts]="relatedTools"></app-related-blog-posts>
 
   <!-- The Bottom Line Section -->
   <section class="bottom-line-section">
@@ -126,48 +127,64 @@
   <!-- Features Section -->
   <section class="features-section">
     <h2>Features</h2>
-    <div class="features-grid">
+    <div class="features-list">
       @if (currentMode() === 'timer') {
-        <div class="feature-card">
-          <mat-icon>tune</mat-icon>
-          <h3>Custom Time Input</h3>
-          <p>Set hours, minutes, and seconds with easy-to-use controls</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>tune</mat-icon>
+            <span class="feature-title">Custom Time Input</span>
+          </div>
+          <p class="feature-description">Set hours, minutes, and seconds with easy-to-use controls</p>
         </div>
-        <div class="feature-card">
-          <mat-icon>bookmark</mat-icon>
-          <h3>Save Presets</h3>
-          <p>Save unlimited custom presets for quick access to your favorite times</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>bookmark</mat-icon>
+            <span class="feature-title">Save Presets</span>
+          </div>
+          <p class="feature-description">Save unlimited custom presets for quick access to your favorite times</p>
         </div>
-        <div class="feature-card">
-          <mat-icon>notifications_active</mat-icon>
-          <h3>Audio Alerts</h3>
-          <p>Get notified with an audio alarm when your timer completes</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>notifications_active</mat-icon>
+            <span class="feature-title">Audio Alerts</span>
+          </div>
+          <p class="feature-description">Get notified with an audio alarm when your timer completes</p>
         </div>
-        <div class="feature-card">
-          <mat-icon>storage</mat-icon>
-          <h3>Local Storage</h3>
-          <p>Your presets are saved locally and persist between sessions</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>storage</mat-icon>
+            <span class="feature-title">Local Storage</span>
+          </div>
+          <p class="feature-description">Your presets are saved locally and persist between sessions</p>
         </div>
       } @else {
-        <div class="feature-card">
-          <mat-icon>flag</mat-icon>
-          <h3>Lap Recording</h3>
-          <p>Record split times and lap durations with a single click</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>flag</mat-icon>
+            <span class="feature-title">Lap Recording</span>
+          </div>
+          <p class="feature-description">Record split times and lap durations with a single click</p>
         </div>
-        <div class="feature-card">
-          <mat-icon>edit_note</mat-icon>
-          <h3>Add Notes</h3>
-          <p>Add custom notes to each lap for better tracking</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>edit_note</mat-icon>
+            <span class="feature-title">Add Notes</span>
+          </div>
+          <p class="feature-description">Add custom notes to each lap for better tracking</p>
         </div>
-        <div class="feature-card">
-          <mat-icon>precision_manufacturing</mat-icon>
-          <h3>High Precision</h3>
-          <p>Centisecond accuracy for precise timing measurements</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>precision_manufacturing</mat-icon>
+            <span class="feature-title">High Precision</span>
+          </div>
+          <p class="feature-description">Centisecond accuracy for precise timing measurements</p>
         </div>
-        <div class="feature-card">
-          <mat-icon>storage</mat-icon>
-          <h3>Save Laps</h3>
-          <p>Your lap data is automatically saved to local storage</p>
+        <div class="feature-item">
+          <div class="feature-header">
+            <mat-icon>storage</mat-icon>
+            <span class="feature-title">Save Laps</span>
+          </div>
+          <p class="feature-description">Your lap data is automatically saved to local storage</p>
         </div>
       }
     </div>
@@ -179,54 +196,54 @@
   <!-- Use Cases Section -->
   <section class="use-cases-section">
     <h2>Perfect For</h2>
-    <div class="use-cases-grid">
+    <div class="use-cases-list">
       @if (currentMode() === 'timer') {
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>restaurant</mat-icon>
           <span>Cooking & Baking</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>fitness_center</mat-icon>
           <span>Workout Intervals</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>school</mat-icon>
           <span>Study Sessions</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>work</mat-icon>
           <span>Pomodoro Technique</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>games</mat-icon>
           <span>Board Games</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>self_improvement</mat-icon>
           <span>Meditation</span>
         </div>
       } @else {
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>directions_run</mat-icon>
           <span>Running & Races</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>pool</mat-icon>
           <span>Swimming Laps</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>fitness_center</mat-icon>
           <span>Workout Timing</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>science</mat-icon>
           <span>Experiments</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>sports_motorsports</mat-icon>
           <span>Racing Events</span>
         </div>
-        <div class="use-case">
+        <div class="use-case-item">
           <mat-icon>speed</mat-icon>
           <span>Speed Tests</span>
         </div>
@@ -234,7 +251,7 @@
     </div>
   </section>
 
-  <app-related-blog-posts [posts]="relatedTools"></app-related-blog-posts>
+  <app-related-blog-posts [posts]="relatedTools" style="padding-right: 28px; padding-left: 28px;"></app-related-blog-posts>
 
   <!-- CTA Section -->
   <app-cta-email-list darkThemeBg="primary"></app-cta-email-list>

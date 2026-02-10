@@ -6,7 +6,7 @@
   <div class="related-links">
     <a
       *ngFor="let post of posts; let isLast = last"
-      [routerLink]="['/blog', post.slug]"
+      [routerLink]="getRouterLink(post.slug)"
       class="related-link"
     >
       {{ post.title }}<span *ngIf="!isLast" class="separator">,</span>
