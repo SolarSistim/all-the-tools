@@ -4,7 +4,7 @@
   <mat-sidenav
     #toolsSidenav
     (closed)="closeToolsSidenav()"
-    mode="over"
+    mode="side"
     position="start"
     class="tools-sidenav"
   >
@@ -23,7 +23,7 @@
     <div class="sidenav-nav">
       <a
         routerLink="/"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>home</mat-icon>
@@ -32,7 +32,7 @@
 
       <a
         routerLink="/tools"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>apps</mat-icon>
@@ -41,7 +41,7 @@
 
       <a
         routerLink="/blog"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>article</mat-icon>
@@ -50,7 +50,7 @@
 
       <a
         routerLink="/3d-artist-spotlight"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>3d_rotation</mat-icon>
@@ -59,7 +59,7 @@
 
       <a
         routerLink="/resources"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>link</mat-icon>
@@ -68,7 +68,7 @@
 
       <a
         routerLink="/about"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>info</mat-icon>
@@ -77,7 +77,7 @@
 
       <a
         routerLink="/contact"
-        (click)="closeToolsSidenav()"
+        (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
         <mat-icon>contact_mail</mat-icon>
@@ -103,7 +103,7 @@
               @for (tool of getToolsByCategory(category.id); track tool.id) {
                 <a
                   [routerLink]="getToolRouterLink(tool.route)"
-                  (click)="closeToolsSidenav()"
+                  (click)="closeToolsSidenavIfMobile()"
                   class="tool-item"
                 >
                   <mat-icon class="tool-icon">{{ tool.icon }}</mat-icon>

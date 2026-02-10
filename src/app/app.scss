@@ -26,7 +26,6 @@ mat-sidenav-content {
   flex-direction: column;
   min-height: 100vh;
   flex: 1;
-  padding-top: 64px; // Add padding for fixed header
   box-sizing: border-box;
 }
 
@@ -38,6 +37,7 @@ mat-sidenav-content {
   background: var(--bg-secondary) !important;
   border-right: 1px solid var(--border-color);
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  border-radius: 0 !important;
 
   .sidenav-header {
     display: flex;

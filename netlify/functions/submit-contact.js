@@ -97,8 +97,12 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Generate unique contact ID using timestamp
+    const contactId = Date.now().toString();
+
     // Extract form data
     const submissionData = {
+      contactId: contactId,
       firstName: data.firstName?.trim() || '',
       lastName: data.lastName?.trim() || '',
       phone: data.phone?.trim() || '',
@@ -200,7 +204,7 @@ This message was sent from the All The Tools contact form.
       const sheets = google.sheets({ version: 'v4', auth });
       const spreadsheetId = '1NDJC3E6n9rGkILd0IKI58vksBSW9eAJQ9gDTzBzoWbs';
       const sheetName = 'contact_form_submissions';
-      const range = `${sheetName}!A:P`; // 16 columns (A-P)
+      const range = `${sheetName}!A:Q`; // 17 columns (A-Q) - added contact_id
 
       // Extract server-side data
       const ip = event.headers['cf-connecting-ip'] ||
@@ -216,6 +220,7 @@ This message was sent from the All The Tools contact form.
 
       // Prepare the row data matching your column order
       const values = [[
+        submissionData.contactId,          // Contact ID (unique identifier)
         submissionData.humanReadableDate,  // Date/Time
         submissionData.firstName,          // First
         submissionData.lastName,           // Last

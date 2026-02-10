@@ -1,10 +1,11 @@
-import { Component, inject, ViewChild, AfterViewInit, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, ViewChild, AfterViewInit, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, RouterLink, RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { HeaderComponent } from './layout/header/header';
 import { FooterComponent } from './layout/footer/footer';
 import { BackToTopComponent } from './shared/components/back-to-top/back-to-top';
@@ -37,6 +38,8 @@ export class App implements AfterViewInit, OnInit {
 
   @ViewChild('toolsSidenav') toolsSidenav!: MatSidenav;
 
+  isMobile = signal(false);
+
   private sidenavService = inject(SidenavService);
   private toolsService = inject(ToolsService);
   private router = inject(Router);
@@ -45,6 +48,7 @@ export class App implements AfterViewInit, OnInit {
   private metaService = inject(MetaService);
   private adsenseService = inject(AdsenseService);
   private platformId = inject(PLATFORM_ID);
+  private breakpointObserver = inject(BreakpointObserver);
 
   ngOnInit(): void {
     this.adsenseService.init();
@@ -59,6 +63,13 @@ export class App implements AfterViewInit, OnInit {
         searchUrl: 'https://www.allthethings.dev/tools?search={search_term_string}'
       })
     );
+
+    // Monitor breakpoint for mobile detection
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isMobile.set(result.matches);
+      });
 
     // Set up router event handling for visit logging and scroll behavior
     this.router.events.subscribe((event) => {
@@ -159,6 +170,15 @@ export class App implements AfterViewInit, OnInit {
     }
     // Single segment route
     return ['/tools', toolRoute];
+  }
+
+  /**
+   * Close tools sidenav (mobile only on navigation)
+   */
+  closeToolsSidenavIfMobile(): void {
+    if (this.isMobile()) {
+      this.sidenavService.closeToolsSidenav();
+    }
   }
 
   /**
