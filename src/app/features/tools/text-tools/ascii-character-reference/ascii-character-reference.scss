@@ -283,6 +283,28 @@
       position: relative;
       top: 3px;
     }
+
+    // Colorful icons for each category chip
+    &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan
+    &:nth-child(2) mat-icon { color: #F472B6 !important; }  // Neon Magenta
+    &:nth-child(3) mat-icon { color: #6EE7B7 !important; }  // Cool Green
+    &:nth-child(4) mat-icon { color: #C084FC !important; }  // Soft Violet
+    &:nth-child(5) mat-icon { color: #FB923C !important; }  // Burnt Orange
+    &:nth-child(6) mat-icon { color: #A3E635 !important; }  // Soft Lime
+    &:nth-child(7) mat-icon { color: #F87171 !important; }  // Cool Red
+    &:nth-child(8) mat-icon { color: #5B9DFF !important; }  // Soft Azure
+    &:nth-child(9) mat-icon { color: #4FD1C5 !important; }  // Teal Mint
+    &:nth-child(10) mat-icon { color: #FBBF24 !important; } // Muted Amber
+    &:nth-child(11) mat-icon { color: #6BCBFF !important; } // Neon Cyan
+    &:nth-child(12) mat-icon { color: #F472B6 !important; } // Neon Magenta
+    &:nth-child(13) mat-icon { color: #6EE7B7 !important; } // Cool Green
+    &:nth-child(14) mat-icon { color: #C084FC !important; } // Soft Violet
+    &:nth-child(15) mat-icon { color: #FB923C !important; } // Burnt Orange
+    &:nth-child(16) mat-icon { color: #A3E635 !important; } // Soft Lime
+    &:nth-child(17) mat-icon { color: #F87171 !important; } // Cool Red
+    &:nth-child(18) mat-icon { color: #5B9DFF !important; } // Soft Azure
+    &:nth-child(19) mat-icon { color: #4FD1C5 !important; } // Teal Mint
+    &:nth-child(20) mat-icon { color: #FBBF24 !important; } // Muted Amber
   }
 }
 
@@ -499,6 +521,78 @@
       }
     }
   }
+
+  &.category-checkmarks {
+    background: rgba(34, 197, 94, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(34, 197, 94, 0.15);
+    }
+  }
+
+  &.category-chess {
+    background: rgba(217, 119, 6, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(217, 119, 6, 0.15);
+    }
+  }
+
+  &.category-cards {
+    background: rgba(244, 63, 94, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(244, 63, 94, 0.15);
+    }
+  }
+
+  &.category-mahjong {
+    background: rgba(34, 197, 94, 0.06);
+
+    &:hover:not(.disabled) {
+      background: rgba(34, 197, 94, 0.12);
+    }
+  }
+
+  &.category-dominos {
+    background: rgba(99, 102, 241, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(99, 102, 241, 0.15);
+    }
+  }
+
+  &.category-music {
+    background: rgba(168, 85, 247, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(168, 85, 247, 0.15);
+    }
+  }
+
+  &.category-gender {
+    background: rgba(236, 72, 153, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(236, 72, 153, 0.15);
+    }
+  }
+
+  &.category-box-drawing {
+    background: rgba(14, 165, 233, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(14, 165, 233, 0.15);
+    }
+  }
+
+  &.category-miscellaneous {
+    background: rgba(251, 146, 60, 0.08);
+
+    &:hover:not(.disabled) {
+      background: rgba(251, 146, 60, 0.15);
+    }
+  }
 }
 
 .char-display {
@@ -596,6 +690,21 @@
     font-family: 'Space Grotesk', sans-serif;
     color: var(--text-secondary);
     margin: 0 0 $spacing-md 0;
+  }
+
+  button {
+    background: linear-gradient(135deg, var(--neon-cyan, #6bcbff) 0%, #4fc3dc 100%) !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    padding: 10px 24px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(107, 203, 255, 0.3) !important;
+
+    &:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 16px rgba(107, 203, 255, 0.5) !important;
+    }
   }
 }
 

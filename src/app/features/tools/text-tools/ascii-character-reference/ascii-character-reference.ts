@@ -23,7 +23,7 @@ interface AsciiCharacter {
   binary: string;
   char: string;
   name: string;
-  category: 'control' | 'printable' | 'symbol' | 'number' | 'uppercase' | 'lowercase' | 'extended' | 'arrows' | 'checkmarks';
+  category: 'control' | 'printable' | 'symbol' | 'number' | 'uppercase' | 'lowercase' | 'extended' | 'arrows' | 'checkmarks' | 'chess' | 'cards' | 'mahjong' | 'dominos' | 'music' | 'gender' | 'miscellaneous' | 'box-drawing';
   description: string;
   htmlEntity?: string;
 }
@@ -108,7 +108,11 @@ export class AsciiCharacterReference implements OnInit {
     { char: '↴', name: 'Right Arrow with Corner Down', unicode: 'U+21B4' },
     { char: '↵', name: 'Down Arrow with Corner Left', unicode: 'U+21B5' },
     { char: '⤴', name: 'Arrow Pointing Right then Up', unicode: 'U+2934' },
-    { char: '⤵', name: 'Arrow Pointing Right then Down', unicode: 'U+2935' }
+    { char: '⤵', name: 'Arrow Pointing Right then Down', unicode: 'U+2935' },
+    { char: '▲', name: 'Black Up-Pointing Triangle', unicode: 'U+25B2' },
+    { char: '▼', name: 'Black Down-Pointing Triangle', unicode: 'U+25BC' },
+    { char: '►', name: 'Black Right-Pointing Triangle', unicode: 'U+25BA' },
+    { char: '◄', name: 'Black Left-Pointing Triangle', unicode: 'U+25C4' }
   ];
 
   // Convert arrow characters to AsciiCharacter format
@@ -163,13 +167,467 @@ export class AsciiCharacterReference implements OnInit {
     };
   });
 
+  // Chess characters collection
+  chessCharacters = [
+    { char: '♔', name: 'White King', unicode: 'U+2654', htmlDec: '&#9812' },
+    { char: '♕', name: 'White Queen', unicode: 'U+2655', htmlDec: '&#9813' },
+    { char: '♖', name: 'White Rook', unicode: 'U+2656', htmlDec: '&#9814' },
+    { char: '♗', name: 'White Bishop', unicode: 'U+2657', htmlDec: '&#9815' },
+    { char: '♘', name: 'White Knight', unicode: 'U+2658', htmlDec: '&#9816' },
+    { char: '♙', name: 'White Pawn', unicode: 'U+2659', htmlDec: '&#9817' },
+    { char: '♚', name: 'Black King', unicode: 'U+265A', htmlDec: '&#9818' },
+    { char: '♛', name: 'Black Queen', unicode: 'U+265B', htmlDec: '&#9819' },
+    { char: '♜', name: 'Black Rook', unicode: 'U+265C', htmlDec: '&#9820' },
+    { char: '♝', name: 'Black Bishop', unicode: 'U+265D', htmlDec: '&#9821' },
+    { char: '♞', name: 'Black Knight', unicode: 'U+265E', htmlDec: '&#9822' },
+    { char: '♟', name: 'Black Pawn', unicode: 'U+265F', htmlDec: '&#9823' }
+  ];
+
+  // Convert chess characters to AsciiCharacter format
+  private chessCharactersAsAscii: AsciiCharacter[] = this.chessCharacters.map((chess) => {
+    const unicodeValue = parseInt(chess.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: chess.char,
+      name: chess.name,
+      category: 'chess' as const,
+      description: `${chess.name} (${chess.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Playing cards collection - comprehensive playing card emojis
+  playingCardsSuits = [
+    { char: '🂠', name: 'Playing Card Back', unicode: 'U+1F0A0' },
+    // Suit symbols
+    { char: '♠', name: 'Black Spade Suit', unicode: 'U+2660' },
+    { char: '♥', name: 'Black Heart Suit', unicode: 'U+2665' },
+    { char: '♦', name: 'Black Diamond Suit', unicode: 'U+2666' },
+    { char: '♣', name: 'Black Club Suit', unicode: 'U+2663' },
+    // Spades (Ace - King)
+    { char: '🂡', name: 'Playing Card Ace Of Spades', unicode: 'U+1F0A1' },
+    { char: '🂢', name: 'Playing Card Two Of Spades', unicode: 'U+1F0A2' },
+    { char: '🂣', name: 'Playing Card Three Of Spades', unicode: 'U+1F0A3' },
+    { char: '🂤', name: 'Playing Card Four Of Spades', unicode: 'U+1F0A4' },
+    { char: '🂥', name: 'Playing Card Five Of Spades', unicode: 'U+1F0A5' },
+    { char: '🂦', name: 'Playing Card Six Of Spades', unicode: 'U+1F0A6' },
+    { char: '🂧', name: 'Playing Card Seven Of Spades', unicode: 'U+1F0A7' },
+    { char: '🂨', name: 'Playing Card Eight Of Spades', unicode: 'U+1F0A8' },
+    { char: '🂩', name: 'Playing Card Nine Of Spades', unicode: 'U+1F0A9' },
+    { char: '🂪', name: 'Playing Card Ten Of Spades', unicode: 'U+1F0AA' },
+    { char: '🂫', name: 'Playing Card Jack Of Spades', unicode: 'U+1F0AB' },
+    { char: '🂬', name: 'Playing Card Knight Of Spades', unicode: 'U+1F0AC' },
+    { char: '🂭', name: 'Playing Card Queen Of Spades', unicode: 'U+1F0AD' },
+    { char: '🂮', name: 'Playing Card King Of Spades', unicode: 'U+1F0AE' },
+    // Hearts (Ace - King)
+    { char: '🂱', name: 'Playing Card Ace Of Hearts', unicode: 'U+1F0B1' },
+    { char: '🂲', name: 'Playing Card Two Of Hearts', unicode: 'U+1F0B2' },
+    { char: '🂳', name: 'Playing Card Three Of Hearts', unicode: 'U+1F0B3' },
+    { char: '🂴', name: 'Playing Card Four Of Hearts', unicode: 'U+1F0B4' },
+    { char: '🂵', name: 'Playing Card Five Of Hearts', unicode: 'U+1F0B5' },
+    { char: '🂶', name: 'Playing Card Six Of Hearts', unicode: 'U+1F0B6' },
+    { char: '🂷', name: 'Playing Card Seven Of Hearts', unicode: 'U+1F0B7' },
+    { char: '🂸', name: 'Playing Card Eight Of Hearts', unicode: 'U+1F0B8' },
+    { char: '🂹', name: 'Playing Card Nine Of Hearts', unicode: 'U+1F0B9' },
+    { char: '🂺', name: 'Playing Card Ten Of Hearts', unicode: 'U+1F0BA' },
+    { char: '🂻', name: 'Playing Card Jack Of Hearts', unicode: 'U+1F0BB' },
+    { char: '🂼', name: 'Playing Card Knight Of Hearts', unicode: 'U+1F0BC' },
+    { char: '🂽', name: 'Playing Card Queen Of Hearts', unicode: 'U+1F0BD' },
+    { char: '🂾', name: 'Playing Card King Of Hearts', unicode: 'U+1F0BE' },
+    { char: '🂿', name: 'Playing Card Red Joker', unicode: 'U+1F0BF' },
+    // Diamonds (Ace - King)
+    { char: '🃁', name: 'Playing Card Ace Of Diamonds', unicode: 'U+1F0C1' },
+    { char: '🃂', name: 'Playing Card Two Of Diamonds', unicode: 'U+1F0C2' },
+    { char: '🃃', name: 'Playing Card Three Of Diamonds', unicode: 'U+1F0C3' },
+    { char: '🃄', name: 'Playing Card Four Of Diamonds', unicode: 'U+1F0C4' },
+    { char: '🃅', name: 'Playing Card Five Of Diamonds', unicode: 'U+1F0C5' },
+    { char: '🃆', name: 'Playing Card Six Of Diamonds', unicode: 'U+1F0C6' },
+    { char: '🃇', name: 'Playing Card Seven Of Diamonds', unicode: 'U+1F0C7' },
+    { char: '🃈', name: 'Playing Card Eight Of Diamonds', unicode: 'U+1F0C8' },
+    { char: '🃉', name: 'Playing Card Nine Of Diamonds', unicode: 'U+1F0C9' },
+    { char: '🃊', name: 'Playing Card Ten Of Diamonds', unicode: 'U+1F0CA' },
+    { char: '🃋', name: 'Playing Card Jack Of Diamonds', unicode: 'U+1F0CB' },
+    { char: '🃌', name: 'Playing Card Knight Of Diamonds', unicode: 'U+1F0CC' },
+    { char: '🃍', name: 'Playing Card Queen Of Diamonds', unicode: 'U+1F0CD' },
+    { char: '🃎', name: 'Playing Card King Of Diamonds', unicode: 'U+1F0CE' },
+    { char: '🃏', name: 'Playing Card Black Joker', unicode: 'U+1F0CF' },
+    // Clubs (Ace - King)
+    { char: '🃑', name: 'Playing Card Ace Of Clubs', unicode: 'U+1F0D1' },
+    { char: '🃒', name: 'Playing Card Two Of Clubs', unicode: 'U+1F0D2' },
+    { char: '🃓', name: 'Playing Card Three Of Clubs', unicode: 'U+1F0D3' },
+    { char: '🃔', name: 'Playing Card Four Of Clubs', unicode: 'U+1F0D4' },
+    { char: '🃕', name: 'Playing Card Five Of Clubs', unicode: 'U+1F0D5' },
+    { char: '🃖', name: 'Playing Card Six Of Clubs', unicode: 'U+1F0D6' },
+    { char: '🃗', name: 'Playing Card Seven Of Clubs', unicode: 'U+1F0D7' },
+    { char: '🃘', name: 'Playing Card Eight Of Clubs', unicode: 'U+1F0D8' },
+    { char: '🃙', name: 'Playing Card Nine Of Clubs', unicode: 'U+1F0D9' },
+    { char: '🃚', name: 'Playing Card Ten Of Clubs', unicode: 'U+1F0DA' },
+    { char: '🃛', name: 'Playing Card Jack Of Clubs', unicode: 'U+1F0DB' },
+    { char: '🃜', name: 'Playing Card Knight Of Clubs', unicode: 'U+1F0DC' },
+    { char: '🃝', name: 'Playing Card Queen Of Clubs', unicode: 'U+1F0DD' },
+    { char: '🃞', name: 'Playing Card King Of Clubs', unicode: 'U+1F0DE' },
+    { char: '🃟', name: 'Playing Card White Joker', unicode: 'U+1F0DF' },
+    // Tarot and Special Cards
+    { char: '🃠', name: 'Playing Card Fool', unicode: 'U+1F0E0' },
+    { char: '🃡', name: 'Playing Card Trump-1', unicode: 'U+1F0E1' },
+    { char: '🃢', name: 'Playing Card Trump-2', unicode: 'U+1F0E2' },
+    { char: '🃣', name: 'Playing Card Trump-3', unicode: 'U+1F0E3' },
+    { char: '🃤', name: 'Playing Card Trump-4', unicode: 'U+1F0E4' },
+    { char: '🃥', name: 'Playing Card Trump-5', unicode: 'U+1F0E5' },
+    { char: '🃦', name: 'Playing Card Trump-6', unicode: 'U+1F0E6' },
+    { char: '🃧', name: 'Playing Card Trump-7', unicode: 'U+1F0E7' },
+    { char: '🃨', name: 'Playing Card Trump-8', unicode: 'U+1F0E8' },
+    { char: '🃩', name: 'Playing Card Trump-9', unicode: 'U+1F0E9' },
+    { char: '🃪', name: 'Playing Card Trump-10', unicode: 'U+1F0EA' },
+    { char: '🃫', name: 'Playing Card Trump-11', unicode: 'U+1F0EB' },
+    { char: '🃬', name: 'Playing Card Trump-12', unicode: 'U+1F0EC' },
+    { char: '🃭', name: 'Playing Card Trump-13', unicode: 'U+1F0ED' },
+    { char: '🃮', name: 'Playing Card Trump-14', unicode: 'U+1F0EE' },
+    { char: '🃯', name: 'Playing Card Trump-15', unicode: 'U+1F0EF' },
+    { char: '🃰', name: 'Playing Card Trump-16', unicode: 'U+1F0F0' },
+    { char: '🃱', name: 'Playing Card Trump-17', unicode: 'U+1F0F1' },
+    { char: '🃲', name: 'Playing Card Trump-18', unicode: 'U+1F0F2' },
+    { char: '🃳', name: 'Playing Card Trump-19', unicode: 'U+1F0F3' },
+    { char: '🃴', name: 'Playing Card Trump-20', unicode: 'U+1F0F4' },
+    { char: '🃵', name: 'Playing Card Trump-21', unicode: 'U+1F0F5' }
+  ];
+
+  // Convert playing cards to AsciiCharacter format
+  private playingCardsSuitsAsAscii: AsciiCharacter[] = this.playingCardsSuits.map((card) => {
+    const unicodeValue = parseInt(card.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: card.char,
+      name: card.name,
+      category: 'cards' as const,
+      description: `${card.name} (${card.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Mahjong tiles collection
+  mahjongTiles = [
+    { char: '🀀', name: 'Mahjong Tile East Wind', unicode: 'U+1F000' },
+    { char: '🀁', name: 'Mahjong Tile South Wind', unicode: 'U+1F001' },
+    { char: '🀂', name: 'Mahjong Tile West Wind', unicode: 'U+1F002' },
+    { char: '🀃', name: 'Mahjong Tile North Wind', unicode: 'U+1F003' },
+    { char: '🀄', name: 'Mahjong Tile Red Dragon', unicode: 'U+1F004' },
+    { char: '🀅', name: 'Mahjong Tile Green Dragon', unicode: 'U+1F005' },
+    { char: '🀆', name: 'Mahjong Tile White Dragon', unicode: 'U+1F006' },
+    { char: '🀇', name: 'Mahjong Tile One Of Characters', unicode: 'U+1F007' },
+    { char: '🀈', name: 'Mahjong Tile Two Of Characters', unicode: 'U+1F008' },
+    { char: '🀉', name: 'Mahjong Tile Three Of Characters', unicode: 'U+1F009' },
+    { char: '🀊', name: 'Mahjong Tile Four Of Characters', unicode: 'U+1F00A' },
+    { char: '🀋', name: 'Mahjong Tile Five Of Characters', unicode: 'U+1F00B' },
+    { char: '🀌', name: 'Mahjong Tile Six Of Characters', unicode: 'U+1F00C' },
+    { char: '🀍', name: 'Mahjong Tile Seven Of Characters', unicode: 'U+1F00D' },
+    { char: '🀎', name: 'Mahjong Tile Eight Of Characters', unicode: 'U+1F00E' },
+    { char: '🀏', name: 'Mahjong Tile Nine Of Characters', unicode: 'U+1F00F' },
+    { char: '🀐', name: 'Mahjong Tile One Of Bamboos', unicode: 'U+1F010' },
+    { char: '🀑', name: 'Mahjong Tile Two Of Bamboos', unicode: 'U+1F011' },
+    { char: '🀒', name: 'Mahjong Tile Three Of Bamboos', unicode: 'U+1F012' },
+    { char: '🀓', name: 'Mahjong Tile Four Of Bamboos', unicode: 'U+1F013' },
+    { char: '🀔', name: 'Mahjong Tile Five Of Bamboos', unicode: 'U+1F014' },
+    { char: '🀕', name: 'Mahjong Tile Six Of Bamboos', unicode: 'U+1F015' },
+    { char: '🀖', name: 'Mahjong Tile Seven Of Bamboos', unicode: 'U+1F016' },
+    { char: '🀗', name: 'Mahjong Tile Eight Of Bamboos', unicode: 'U+1F017' },
+    { char: '🀘', name: 'Mahjong Tile Nine Of Bamboos', unicode: 'U+1F018' },
+    { char: '🀙', name: 'Mahjong Tile One Of Circles', unicode: 'U+1F019' },
+    { char: '🀚', name: 'Mahjong Tile Two Of Circles', unicode: 'U+1F01A' },
+    { char: '🀛', name: 'Mahjong Tile Three Of Circles', unicode: 'U+1F01B' },
+    { char: '🀜', name: 'Mahjong Tile Four Of Circles', unicode: 'U+1F01C' },
+    { char: '🀝', name: 'Mahjong Tile Five Of Circles', unicode: 'U+1F01D' },
+    { char: '🀞', name: 'Mahjong Tile Six Of Circles', unicode: 'U+1F01E' },
+    { char: '🀟', name: 'Mahjong Tile Seven Of Circles', unicode: 'U+1F01F' },
+    { char: '🀠', name: 'Mahjong Tile Eight Of Circles', unicode: 'U+1F020' },
+    { char: '🀡', name: 'Mahjong Tile Nine Of Circles', unicode: 'U+1F021' },
+    { char: '🀢', name: 'Mahjong Tile Plum', unicode: 'U+1F022' },
+    { char: '🀣', name: 'Mahjong Tile Orchid', unicode: 'U+1F023' },
+    { char: '🀤', name: 'Mahjong Tile Bamboo', unicode: 'U+1F024' },
+    { char: '🀥', name: 'Mahjong Tile Chrysanthemum', unicode: 'U+1F025' },
+    { char: '🀦', name: 'Mahjong Tile Spring', unicode: 'U+1F026' },
+    { char: '🀧', name: 'Mahjong Tile Summer', unicode: 'U+1F027' },
+    { char: '🀨', name: 'Mahjong Tile Autumn', unicode: 'U+1F028' },
+    { char: '🀩', name: 'Mahjong Tile Winter', unicode: 'U+1F029' },
+    { char: '🀪', name: 'Mahjong Tile Joker', unicode: 'U+1F02A' },
+    { char: '🀫', name: 'Mahjong Tile Back', unicode: 'U+1F02B' }
+  ];
+
+  // Convert mahjong tiles to AsciiCharacter format
+  private mahjongTilesAsAscii: AsciiCharacter[] = this.mahjongTiles.map((tile) => {
+    const unicodeValue = parseInt(tile.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: tile.char,
+      name: tile.name,
+      category: 'mahjong' as const,
+      description: `${tile.name} (${tile.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Domino tiles collection
+  dominoTiles = [
+    // Horizontal dominoes
+    { char: '🀰', name: 'Domino Tile Horizontal Back', unicode: 'U+1F030' },
+    { char: '🀱', name: 'Domino Tile Horizontal-00-00', unicode: 'U+1F031' },
+    { char: '🀲', name: 'Domino Tile Horizontal-00-01', unicode: 'U+1F032' },
+    { char: '🀳', name: 'Domino Tile Horizontal-00-02', unicode: 'U+1F033' },
+    { char: '🀴', name: 'Domino Tile Horizontal-00-03', unicode: 'U+1F034' },
+    { char: '🀵', name: 'Domino Tile Horizontal-00-04', unicode: 'U+1F035' },
+    { char: '🀶', name: 'Domino Tile Horizontal-00-05', unicode: 'U+1F036' },
+    { char: '🀷', name: 'Domino Tile Horizontal-00-06', unicode: 'U+1F037' },
+    { char: '🀸', name: 'Domino Tile Horizontal-01-00', unicode: 'U+1F038' },
+    { char: '🀹', name: 'Domino Tile Horizontal-01-01', unicode: 'U+1F039' },
+    { char: '🀺', name: 'Domino Tile Horizontal-01-02', unicode: 'U+1F03A' },
+    { char: '🀻', name: 'Domino Tile Horizontal-01-03', unicode: 'U+1F03B' },
+    { char: '🀼', name: 'Domino Tile Horizontal-01-04', unicode: 'U+1F03C' },
+    { char: '🀽', name: 'Domino Tile Horizontal-01-05', unicode: 'U+1F03D' },
+    { char: '🀾', name: 'Domino Tile Horizontal-01-06', unicode: 'U+1F03E' },
+    { char: '🀿', name: 'Domino Tile Horizontal-02-00', unicode: 'U+1F03F' },
+    { char: '🁀', name: 'Domino Tile Horizontal-02-01', unicode: 'U+1F040' },
+    { char: '🁁', name: 'Domino Tile Horizontal-02-02', unicode: 'U+1F041' },
+    { char: '🁂', name: 'Domino Tile Horizontal-02-03', unicode: 'U+1F042' },
+    { char: '🁃', name: 'Domino Tile Horizontal-02-04', unicode: 'U+1F043' },
+    { char: '🁄', name: 'Domino Tile Horizontal-02-05', unicode: 'U+1F044' },
+    { char: '🁅', name: 'Domino Tile Horizontal-02-06', unicode: 'U+1F045' },
+    { char: '🁆', name: 'Domino Tile Horizontal-03-00', unicode: 'U+1F046' },
+    { char: '🁇', name: 'Domino Tile Horizontal-03-01', unicode: 'U+1F047' },
+    { char: '🁈', name: 'Domino Tile Horizontal-03-02', unicode: 'U+1F048' },
+    { char: '🁉', name: 'Domino Tile Horizontal-03-03', unicode: 'U+1F049' },
+    { char: '🁊', name: 'Domino Tile Horizontal-03-04', unicode: 'U+1F04A' },
+    { char: '🁋', name: 'Domino Tile Horizontal-03-05', unicode: 'U+1F04B' },
+    { char: '🁌', name: 'Domino Tile Horizontal-03-06', unicode: 'U+1F04C' },
+    { char: '🁍', name: 'Domino Tile Horizontal-04-00', unicode: 'U+1F04D' },
+    { char: '🁎', name: 'Domino Tile Horizontal-04-01', unicode: 'U+1F04E' },
+    { char: '🁏', name: 'Domino Tile Horizontal-04-02', unicode: 'U+1F04F' },
+    { char: '🁐', name: 'Domino Tile Horizontal-04-03', unicode: 'U+1F050' },
+    { char: '🁑', name: 'Domino Tile Horizontal-04-04', unicode: 'U+1F051' },
+    { char: '🁒', name: 'Domino Tile Horizontal-04-05', unicode: 'U+1F052' },
+    { char: '🁓', name: 'Domino Tile Horizontal-04-06', unicode: 'U+1F053' },
+    { char: '🁔', name: 'Domino Tile Horizontal-05-00', unicode: 'U+1F054' },
+    { char: '🁕', name: 'Domino Tile Horizontal-05-01', unicode: 'U+1F055' },
+    { char: '🁖', name: 'Domino Tile Horizontal-05-02', unicode: 'U+1F056' },
+    { char: '🁗', name: 'Domino Tile Horizontal-05-03', unicode: 'U+1F057' },
+    { char: '🁘', name: 'Domino Tile Horizontal-05-04', unicode: 'U+1F058' },
+    { char: '🁙', name: 'Domino Tile Horizontal-05-05', unicode: 'U+1F059' },
+    { char: '🁚', name: 'Domino Tile Horizontal-05-06', unicode: 'U+1F05A' },
+    { char: '🁛', name: 'Domino Tile Horizontal-06-00', unicode: 'U+1F05B' },
+    { char: '🁜', name: 'Domino Tile Horizontal-06-01', unicode: 'U+1F05C' },
+    { char: '🁝', name: 'Domino Tile Horizontal-06-02', unicode: 'U+1F05D' },
+    { char: '🁞', name: 'Domino Tile Horizontal-06-03', unicode: 'U+1F05E' },
+    { char: '🁟', name: 'Domino Tile Horizontal-06-04', unicode: 'U+1F05F' },
+    { char: '🁠', name: 'Domino Tile Horizontal-06-05', unicode: 'U+1F060' },
+    { char: '🁡', name: 'Domino Tile Horizontal-06-06', unicode: 'U+1F061' },
+    // Vertical dominoes
+    { char: '🁢', name: 'Domino Tile Vertical Back', unicode: 'U+1F062' },
+    { char: '🁣', name: 'Domino Tile Vertical-00-00', unicode: 'U+1F063' },
+    { char: '🁤', name: 'Domino Tile Vertical-00-01', unicode: 'U+1F064' },
+    { char: '🁥', name: 'Domino Tile Vertical-00-02', unicode: 'U+1F065' },
+    { char: '🁦', name: 'Domino Tile Vertical-00-03', unicode: 'U+1F066' },
+    { char: '🁧', name: 'Domino Tile Vertical-00-04', unicode: 'U+1F067' },
+    { char: '🁨', name: 'Domino Tile Vertical-00-05', unicode: 'U+1F068' },
+    { char: '🁩', name: 'Domino Tile Vertical-00-06', unicode: 'U+1F069' },
+    { char: '🁪', name: 'Domino Tile Vertical-01-00', unicode: 'U+1F06A' },
+    { char: '🁫', name: 'Domino Tile Vertical-01-01', unicode: 'U+1F06B' },
+    { char: '🁬', name: 'Domino Tile Vertical-01-02', unicode: 'U+1F06C' },
+    { char: '🁭', name: 'Domino Tile Vertical-01-03', unicode: 'U+1F06D' },
+    { char: '🁮', name: 'Domino Tile Vertical-01-04', unicode: 'U+1F06E' },
+    { char: '🁯', name: 'Domino Tile Vertical-01-05', unicode: 'U+1F06F' },
+    { char: '🁰', name: 'Domino Tile Vertical-01-06', unicode: 'U+1F070' },
+    { char: '🁱', name: 'Domino Tile Vertical-02-00', unicode: 'U+1F071' },
+    { char: '🁲', name: 'Domino Tile Vertical-02-01', unicode: 'U+1F072' },
+    { char: '🁳', name: 'Domino Tile Vertical-02-02', unicode: 'U+1F073' },
+    { char: '🁴', name: 'Domino Tile Vertical-02-03', unicode: 'U+1F074' },
+    { char: '🁵', name: 'Domino Tile Vertical-02-04', unicode: 'U+1F075' },
+    { char: '🁶', name: 'Domino Tile Vertical-02-05', unicode: 'U+1F076' },
+    { char: '🁷', name: 'Domino Tile Vertical-02-06', unicode: 'U+1F077' },
+    { char: '🁸', name: 'Domino Tile Vertical-03-00', unicode: 'U+1F078' },
+    { char: '🁹', name: 'Domino Tile Vertical-03-01', unicode: 'U+1F079' },
+    { char: '🁺', name: 'Domino Tile Vertical-03-02', unicode: 'U+1F07A' },
+    { char: '🁻', name: 'Domino Tile Vertical-03-03', unicode: 'U+1F07B' },
+    { char: '🁼', name: 'Domino Tile Vertical-03-04', unicode: 'U+1F07C' },
+    { char: '🁽', name: 'Domino Tile Vertical-03-05', unicode: 'U+1F07D' },
+    { char: '🁾', name: 'Domino Tile Vertical-03-06', unicode: 'U+1F07E' },
+    { char: '🁿', name: 'Domino Tile Vertical-04-00', unicode: 'U+1F07F' },
+    { char: '🂀', name: 'Domino Tile Vertical-04-01', unicode: 'U+1F080' },
+    { char: '🂁', name: 'Domino Tile Vertical-04-02', unicode: 'U+1F081' },
+    { char: '🂂', name: 'Domino Tile Vertical-04-03', unicode: 'U+1F082' },
+    { char: '🂃', name: 'Domino Tile Vertical-04-04', unicode: 'U+1F083' },
+    { char: '🂄', name: 'Domino Tile Vertical-04-05', unicode: 'U+1F084' },
+    { char: '🂅', name: 'Domino Tile Vertical-04-06', unicode: 'U+1F085' },
+    { char: '🂆', name: 'Domino Tile Vertical-05-00', unicode: 'U+1F086' },
+    { char: '🂇', name: 'Domino Tile Vertical-05-01', unicode: 'U+1F087' },
+    { char: '🂈', name: 'Domino Tile Vertical-05-02', unicode: 'U+1F088' },
+    { char: '🂉', name: 'Domino Tile Vertical-05-03', unicode: 'U+1F089' },
+    { char: '🂊', name: 'Domino Tile Vertical-05-04', unicode: 'U+1F08A' },
+    { char: '🂋', name: 'Domino Tile Vertical-05-05', unicode: 'U+1F08B' },
+    { char: '🂌', name: 'Domino Tile Vertical-05-06', unicode: 'U+1F08C' },
+    { char: '🂍', name: 'Domino Tile Vertical-06-00', unicode: 'U+1F08D' },
+    { char: '🂎', name: 'Domino Tile Vertical-06-01', unicode: 'U+1F08E' },
+    { char: '🂏', name: 'Domino Tile Vertical-06-02', unicode: 'U+1F08F' },
+    { char: '🂐', name: 'Domino Tile Vertical-06-03', unicode: 'U+1F090' },
+    { char: '🂑', name: 'Domino Tile Vertical-06-04', unicode: 'U+1F091' },
+    { char: '🂒', name: 'Domino Tile Vertical-06-05', unicode: 'U+1F092' },
+    { char: '🂓', name: 'Domino Tile Vertical-06-06', unicode: 'U+1F093' }
+  ];
+
+  // Convert domino tiles to AsciiCharacter format
+  private dominoTilesAsAscii: AsciiCharacter[] = this.dominoTiles.map((tile) => {
+    const unicodeValue = parseInt(tile.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: tile.char,
+      name: tile.name,
+      category: 'dominos' as const,
+      description: `${tile.name} (${tile.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Music symbols collection
+  musicSymbols = [
+    { char: '♪', name: 'Musical Note', unicode: 'U+266A' },
+    { char: '♫', name: 'Beamed Eighth Notes', unicode: 'U+266B' }
+  ];
+
+  // Convert music symbols to AsciiCharacter format
+  private musicSymbolsAsAscii: AsciiCharacter[] = this.musicSymbols.map((sym) => {
+    const unicodeValue = parseInt(sym.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: sym.char,
+      name: sym.name,
+      category: 'music' as const,
+      description: `${sym.name} (${sym.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Gender symbols collection
+  genderSymbols = [
+    { char: '♂', name: 'Male Sign', unicode: 'U+2642' },
+    { char: '♀', name: 'Female Sign', unicode: 'U+2640' }
+  ];
+
+  // Convert gender symbols to AsciiCharacter format
+  private genderSymbolsAsAscii: AsciiCharacter[] = this.genderSymbols.map((sym) => {
+    const unicodeValue = parseInt(sym.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: sym.char,
+      name: sym.name,
+      category: 'gender' as const,
+      description: `${sym.name} (${sym.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Box drawing and lines collection
+  boxDrawingSymbols = [
+    { char: '┐', name: 'Box Drawings Light Down and Left', unicode: 'U+2510' },
+    { char: '└', name: 'Box Drawings Light Up and Right', unicode: 'U+2514' },
+    { char: '┴', name: 'Box Drawings Light Up and Horizontal', unicode: 'U+2534' },
+    { char: '┬', name: 'Box Drawings Light Down and Horizontal', unicode: 'U+252C' },
+    { char: '├', name: 'Box Drawings Light Vertical and Right', unicode: 'U+251C' },
+    { char: '─', name: 'Box Drawings Light Horizontal', unicode: 'U+2500' },
+    { char: '┼', name: 'Box Drawings Light Vertical and Horizontal', unicode: 'U+253C' },
+    { char: '═', name: 'Box Drawings Double Horizontal', unicode: 'U+2550' },
+    { char: '║', name: 'Box Drawings Double Vertical', unicode: 'U+2551' },
+    { char: '╔', name: 'Box Drawings Double Down and Right', unicode: 'U+2554' },
+    { char: '╗', name: 'Box Drawings Double Down and Left', unicode: 'U+2557' },
+    { char: '╚', name: 'Box Drawings Double Up and Right', unicode: 'U+255A' },
+    { char: '╝', name: 'Box Drawings Double Up and Left', unicode: 'U+255D' }
+  ];
+
+  // Convert box drawing symbols to AsciiCharacter format
+  private boxDrawingSymbolsAsAscii: AsciiCharacter[] = this.boxDrawingSymbols.map((sym) => {
+    const unicodeValue = parseInt(sym.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: sym.char,
+      name: sym.name,
+      category: 'box-drawing' as const,
+      description: `${sym.name} (${sym.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Miscellaneous symbols collection (Unicode, not ASCII 0-255 to avoid duplicates)
+  miscellaneousSymbols = [
+    { char: '☺', name: 'White Smiling Face', unicode: 'U+263A' },
+    { char: '☻', name: 'Black Smiling Face', unicode: 'U+263B' },
+    { char: '○', name: 'White Circle', unicode: 'U+25CB' },
+    { char: '◘', name: 'Inverse Bullet', unicode: 'U+25D8' },
+    { char: '◙', name: 'Inverse White Circle', unicode: 'U+25D9' },
+    { char: '☼', name: 'White Sun with Rays', unicode: 'U+263C' },
+    { char: '◎', name: 'Bullseye', unicode: 'U+25CE' },
+    { char: '▬', name: 'Black Rectangle', unicode: 'U+25AC' }
+  ];
+
+  // Convert miscellaneous symbols to AsciiCharacter format
+  private miscellaneousSymbolsAsAscii: AsciiCharacter[] = this.miscellaneousSymbols.map((sym) => {
+    const unicodeValue = parseInt(sym.unicode.replace('U+', ''), 16);
+    return {
+      decimal: unicodeValue,
+      hex: unicodeValue.toString(16).toUpperCase().padStart(4, '0'),
+      binary: unicodeValue.toString(2).padStart(16, '0'),
+      char: sym.char,
+      name: sym.name,
+      category: 'miscellaneous' as const,
+      description: `${sym.name} (${sym.unicode})`,
+      htmlEntity: `&#${unicodeValue};`
+    };
+  });
+
+  // Computed total characters count
+  totalCharactersCount = computed(() => {
+    return this.asciiCharacters.length +
+           this.arrowCharactersAsAscii.length +
+           this.checkmarkCharactersAsAscii.length +
+           this.chessCharactersAsAscii.length +
+           this.playingCardsSuitsAsAscii.length +
+           this.mahjongTilesAsAscii.length +
+           this.dominoTilesAsAscii.length +
+           this.musicSymbolsAsAscii.length +
+           this.genderSymbolsAsAscii.length +
+           this.boxDrawingSymbolsAsAscii.length +
+           this.miscellaneousSymbolsAsAscii.length;
+  });
+
   // Computed filtered characters
   filteredCharacters = computed(() => {
     const query = this.searchQuery().toLowerCase();
     const category = this.selectedCategory();
 
-    // Always include arrow and checkmark characters in the main grid alongside ASCII characters
-    let allCharacters = [...this.asciiCharacters, ...this.arrowCharactersAsAscii, ...this.checkmarkCharactersAsAscii];
+    // Combine all character collections
+    let allCharacters = [
+      ...this.asciiCharacters,
+      ...this.arrowCharactersAsAscii,
+      ...this.checkmarkCharactersAsAscii,
+      ...this.chessCharactersAsAscii,
+      ...this.playingCardsSuitsAsAscii,
+      ...this.mahjongTilesAsAscii,
+      ...this.dominoTilesAsAscii,
+      ...this.musicSymbolsAsAscii,
+      ...this.genderSymbolsAsAscii,
+      ...this.boxDrawingSymbolsAsAscii,
+      ...this.miscellaneousSymbolsAsAscii
+    ];
 
     return allCharacters.filter(char => {
       const matchesSearch = !query ||
@@ -190,6 +648,14 @@ export class AsciiCharacterReference implements OnInit {
     { id: 'all', name: 'All Characters', icon: 'grid_view' },
     { id: 'checkmarks', name: 'Checkmarks', icon: 'check_circle' },
     { id: 'arrows', name: 'Arrow Characters', icon: 'arrow_forward' },
+    { id: 'chess', name: 'Chess Symbols', icon: 'games' },
+    { id: 'cards', name: 'Playing Card Suits', icon: 'style' },
+    { id: 'mahjong', name: 'Mahjong Tiles', icon: 'games' },
+    { id: 'dominos', name: 'Domino Tiles', icon: 'casino' },
+    { id: 'music', name: 'Music Symbols', icon: 'music_note' },
+    { id: 'gender', name: 'Gender Symbols', icon: 'wc' },
+    { id: 'box-drawing', name: 'Bars', icon: 'reorder' },
+    { id: 'miscellaneous', name: 'Miscellaneous', icon: 'category' },
     { id: 'printable', name: 'Printable Characters', icon: 'text_fields' },
     { id: 'symbol', name: 'Symbols', icon: 'code' },
     { id: 'number', name: 'Numbers', icon: 'pin' },

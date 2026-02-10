@@ -1,4 +1,5 @@
 /
+/3d-artist-spotlight
 /404
 /about
 /accessibility
@@ -46,7 +47,6 @@
 /changelog
 /contact
 /disclaimer
-/3d-artist-spotlight
 /presskit
 /privacy
 /resources

@@ -63,9 +63,9 @@
         <mat-label>Search by character, name, or code</mat-label>
         <input matInput
                type="text"
-               [(ngModel)]="searchQuery"
-               placeholder="Enter character, name, decimal, hex, or binary code"
-               (ngModelChange)="searchQuery.set($event)">
+               [ngModel]="searchQuery()"
+               (ngModelChange)="searchQuery.set($event)"
+               placeholder="Enter character, name, decimal, hex, or binary code">
         <mat-icon matPrefix>search</mat-icon>
         @if (searchQuery()) {
           <button mat-icon-button matSuffix (click)="clearSearch()" aria-label="Clear search">
@@ -93,7 +93,7 @@
 
     <!-- Results Count -->
     <div class="results-count">
-      <p>Showing <strong>{{ filteredCharacters().length }}</strong> of <strong>256</strong> characters</p>
+      <p>Showing <strong>{{ filteredCharacters().length }}</strong> of <strong>{{ totalCharactersCount() }}</strong> characters</p>
     </div>
   </section>
 
