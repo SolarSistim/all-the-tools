@@ -24,7 +24,6 @@ import { ColorMapper } from './utils/color-mapping.util';
 import { ColorLegendComponent } from './components/color-legend.component';
 import { PropertyItemComponent } from './components/property-item.component';
 import { ElementDetailsBottomSheetComponent } from './components/element-details-bottom-sheet.component';
-import { AdsenseComponent } from '../../../blog/components/adsense/adsense.component';
 import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-email-list';
 
 @Component({
@@ -48,7 +47,6 @@ import { CtaEmailList } from '../../../reusable-components/cta-email-list/cta-em
     PageHeaderComponent,
     ColorLegendComponent,
     PropertyItemComponent,
-    AdsenseComponent,
     CtaEmailList
   ],
   templateUrl: './periodic-table-of-elements.html',
