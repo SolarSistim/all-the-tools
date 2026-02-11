@@ -1,4 +1,4 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ColorMetric, LegendItem } from '../models/element.interface';
 import { ColorMapper } from '../utils/color-mapping.util';
@@ -15,7 +15,9 @@ import { COLOR_METRIC_OPTIONS } from '../data/elements.data';
       @if (isCategorical()) {
         <div class="legend-categorical">
           @for (item of legendItems(); track item.label) {
-            <div class="legend-item">
+            <div class="legend-item"
+                 (mouseenter)="onItemHover(item)"
+                 (mouseleave)="onItemLeave()">
               <div
                 class="color-chip"
                 [style.background-color]="item.color">
@@ -68,6 +70,14 @@ import { COLOR_METRIC_OPTIONS } from '../data/elements.data';
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
 
     .color-chip {
@@ -130,6 +140,10 @@ export class ColorLegendComponent {
   maxValue = input<number | null>(null);
   hasUnknownValues = input<boolean>(false);
 
+  // Output events for hover interactions
+  legendItemHover = output<string | number>();
+  legendItemLeave = output<void>();
+
   private metricOption = computed(() => {
     return COLOR_METRIC_OPTIONS.find(opt => opt.value === this.metric());
   });
@@ -148,36 +162,36 @@ export class ColorLegendComponent {
     if (metric === 'category') {
       const colors = ColorMapper.getCategoricalColors('category');
       return [
-        { color: colors['alkali-metal'], label: 'Alkali Metal' },
-        { color: colors['alkaline-earth-metal'], label: 'Alkaline Earth' },
-        { color: colors['transition-metal'], label: 'Transition Metal' },
-        { color: colors['post-transition-metal'], label: 'Post-Transition' },
-        { color: colors['metalloid'], label: 'Metalloid' },
-        { color: colors['nonmetal'], label: 'Nonmetal' },
-        { color: colors['halogen'], label: 'Halogen' },
-        { color: colors['noble-gas'], label: 'Noble Gas' },
-        { color: colors['lanthanide'], label: 'Lanthanide' },
-        { color: colors['actinide'], label: 'Actinide' }
+        { color: colors['alkali-metal'], label: 'Alkali Metal', value: 'alkali-metal' },
+        { color: colors['alkaline-earth-metal'], label: 'Alkaline Earth', value: 'alkaline-earth-metal' },
+        { color: colors['transition-metal'], label: 'Transition Metal', value: 'transition-metal' },
+        { color: colors['post-transition-metal'], label: 'Post-Transition', value: 'post-transition-metal' },
+        { color: colors['metalloid'], label: 'Metalloid', value: 'metalloid' },
+        { color: colors['nonmetal'], label: 'Nonmetal', value: 'nonmetal' },
+        { color: colors['halogen'], label: 'Halogen', value: 'halogen' },
+        { color: colors['noble-gas'], label: 'Noble Gas', value: 'noble-gas' },
+        { color: colors['lanthanide'], label: 'Lanthanide', value: 'lanthanide' },
+        { color: colors['actinide'], label: 'Actinide', value: 'actinide' }
       ];
     }
 
     if (metric === 'state') {
       const colors = ColorMapper.getCategoricalColors('state');
       return [
-        { color: colors['solid'], label: 'Solid' },
-        { color: colors['liquid'], label: 'Liquid' },
-        { color: colors['gas'], label: 'Gas' },
-        { color: colors['unknown'], label: 'Unknown' }
+        { color: colors['solid'], label: 'Solid', value: 'solid' },
+        { color: colors['liquid'], label: 'Liquid', value: 'liquid' },
+        { color: colors['gas'], label: 'Gas', value: 'gas' },
+        { color: colors['unknown'], label: 'Unknown', value: 'unknown' }
       ];
     }
 
     if (metric === 'block') {
       const colors = ColorMapper.getCategoricalColors('block');
       return [
-        { color: colors['s'], label: 's-block' },
-        { color: colors['p'], label: 'p-block' },
-        { color: colors['d'], label: 'd-block' },
-        { color: colors['f'], label: 'f-block' }
+        { color: colors['s'], label: 's-block', value: 's' },
+        { color: colors['p'], label: 'p-block', value: 'p' },
+        { color: colors['d'], label: 'd-block', value: 'd' },
+        { color: colors['f'], label: 'f-block', value: 'f' }
       ];
     }
 
@@ -208,4 +222,14 @@ export class ColorLegendComponent {
   unknownColor = computed(() => {
     return ColorMapper.getUnknownColor();
   });
+
+  onItemHover(item: LegendItem): void {
+    if (item.value) {
+      this.legendItemHover.emit(item.value);
+    }
+  }
+
+  onItemLeave(): void {
+    this.legendItemLeave.emit();
+  }
 }

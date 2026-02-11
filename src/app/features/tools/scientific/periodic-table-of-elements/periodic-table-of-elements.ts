@@ -75,6 +75,7 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
   isMobile = signal<boolean>(false);
   detailsPanelOpen = signal<boolean>(false);
   isExpandMode = signal<boolean>(false);
+  hoveredLegendValue = signal<string | number | null>(null);
 
   // Computed signals
   filteredElements = computed(() => {
@@ -427,5 +428,33 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
     if (this.detailsPanelOpen()) {
       this.closeDetailsPanel();
     }
+  }
+
+  onLegendItemHover(value: string | number): void {
+    this.hoveredLegendValue.set(value);
+  }
+
+  onLegendItemLeave(): void {
+    this.hoveredLegendValue.set(null);
+  }
+
+  isElementDimmedByLegend(element: Element): boolean {
+    const hoveredValue = this.hoveredLegendValue();
+    if (!hoveredValue) return false;
+
+    const metric = this.selectedColorMetric();
+
+    // Check if element matches the hovered legend value based on current metric
+    if (metric === 'category') {
+      return element.category !== hoveredValue;
+    }
+    if (metric === 'state') {
+      return element.standardState !== hoveredValue;
+    }
+    if (metric === 'block') {
+      return element.block !== hoveredValue;
+    }
+
+    return false;
   }
 }

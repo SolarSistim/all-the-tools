@@ -63,5 +63,5 @@ export interface Element {
 export interface LegendItem {
   color: string;
   label: string;
-  value?: number;
+  value?: string | number;
 }
