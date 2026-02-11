@@ -457,4 +457,12 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
 
     return false;
   }
+
+  isElementDimmedBySelection(element: Element): boolean {
+    // Dim all elements except the selected one when details panel is open
+    const selected = this.selectedElement();
+    if (!this.detailsPanelOpen() || !selected) return false;
+
+    return element.atomicNumber !== selected.atomicNumber;
+  }
 }

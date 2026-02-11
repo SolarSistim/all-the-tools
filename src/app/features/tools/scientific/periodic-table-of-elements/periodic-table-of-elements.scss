@@ -276,6 +276,12 @@
     transition: opacity 0.3s ease, filter 0.3s ease;
   }
 
+  &.selection-dimmed {
+    opacity: 0.3;
+    filter: grayscale(40%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
   @media (max-width: $breakpoint-md) {
     padding: $spacing-xs;
   }
