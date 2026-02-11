@@ -333,16 +333,18 @@
 }
 
 <div class="periodic-table-container" id="periodic-table">
-  <!-- Expand Button -->
-  <button
-    mat-icon-button
-    (click)="toggleExpandMode()"
-    class="expand-table-btn"
-    matTooltip="Expand to viewport"
-    matTooltipPosition="left"
-    aria-label="Expand periodic table to fullscreen">
-    <mat-icon>fullscreen</mat-icon>
-  </button>
+  <!-- Expand Button - hidden when details panel is open -->
+  @if (!detailsPanelOpen()) {
+    <button
+      mat-icon-button
+      (click)="toggleExpandMode()"
+      class="expand-table-btn"
+      matTooltip="Expand to viewport"
+      matTooltipPosition="left"
+      aria-label="Expand periodic table to fullscreen">
+      <mat-icon>fullscreen</mat-icon>
+    </button>
+  }
 
   <!-- Controls Section -->
   <div class="controls-section">
