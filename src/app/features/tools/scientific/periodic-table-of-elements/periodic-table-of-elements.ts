@@ -160,7 +160,7 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
 
   private updateMetaTags(): void {
     this.metaService.updateTags({
-      title: 'Interactive Periodic Table of Elements | All The Tools',
+      title: 'Interactive Periodic Table of Elements | AllTheThings.dev',
       description: 'Free interactive periodic table with all 118 elements. Explore the periodic table elements with detailed properties, color-coded metrics, and instant element search. The complete table of elements for students and professionals.',
       keywords: [
         'periodic table',
