@@ -16,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
 import { MetaService } from '../../../../core/services/meta.service';
 import { CustomSnackbarService } from '../../../../core/services/custom-snackbar.service';
+import { SidenavService } from '../../../../core/services/sidenav.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { Element, ColorMetric, ElementCategory, StandardState } from './models/element.interface';
 import { ELEMENTS, COLOR_METRIC_OPTIONS } from './data/elements.data';
@@ -58,7 +59,9 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
   private snackbarService = inject(CustomSnackbarService);
   private breakpointObserver = inject(BreakpointObserver);
   private bottomSheet = inject(MatBottomSheet);
+  private sidenavService = inject(SidenavService);
   private destroy$ = new Subject<void>();
+  private sidenavWasOpen = false;
   private searchSubject$ = new Subject<string>();
 
   // Data
@@ -73,6 +76,7 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
   selectedStates = signal<StandardState[]>([]);
   isMobile = signal<boolean>(false);
   detailsPanelOpen = signal<boolean>(false);
+  isExpandMode = signal<boolean>(false);
 
   // Computed signals
   filteredElements = computed(() => {
@@ -247,6 +251,45 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
     }
   }
 
+  toggleExpandMode(): void {
+    this.isExpandMode.set(!this.isExpandMode());
+    if (this.isExpandMode()) {
+      // Store sidenav state and close it
+      this.sidenavWasOpen = this.sidenavService.isOpen();
+      if (this.sidenavWasOpen) {
+        this.sidenavService.closeToolsSidenav();
+      }
+      // Close details panel when entering expand mode
+      this.closeDetailsPanel();
+      // Add class to body to hide back-to-top button
+      document.body.classList.add('periodic-table-expand-mode');
+      // Focus the fullscreen overlay after it's rendered so ESC key works immediately
+      setTimeout(() => {
+        const fullscreenOverlay = document.querySelector('.fullscreen-overlay') as HTMLElement;
+        if (fullscreenOverlay) {
+          fullscreenOverlay.focus();
+        }
+      }, 0);
+    } else {
+      // Restore sidenav state
+      if (this.sidenavWasOpen) {
+        this.sidenavService.openToolsSidenav();
+      }
+      // Remove class from body
+      document.body.classList.remove('periodic-table-expand-mode');
+    }
+  }
+
+  exitExpandMode(): void {
+    this.isExpandMode.set(false);
+    // Restore sidenav state
+    if (this.sidenavWasOpen) {
+      this.sidenavService.openToolsSidenav();
+    }
+    // Remove class from body
+    document.body.classList.remove('periodic-table-expand-mode');
+  }
+
   resetFilters(): void {
     this.searchQuery.set('');
     this.selectedCategories.set([]);
@@ -369,6 +412,13 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
     if (event.key === 'Escape') {
       event.preventDefault();
       this.closeDetailsPanel();
+    }
+  }
+
+  onExpandModeKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.exitExpandMode();
     }
   }
 }

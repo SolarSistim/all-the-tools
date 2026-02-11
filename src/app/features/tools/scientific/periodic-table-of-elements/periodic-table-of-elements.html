@@ -51,7 +51,299 @@
   <!-- AdSense -->
   <app-adsense></app-adsense>
 
+<!-- Fullscreen Overlay (shown when in expand mode) -->
+@if (isExpandMode()) {
+  <div class="fullscreen-overlay" (keydown)="onExpandModeKeydown($event)" tabindex="0">
+    <!-- Close button (top right) - hidden when details panel is open -->
+    @if (!detailsPanelOpen()) {
+      <button
+        mat-icon-button
+        (click)="exitExpandMode()"
+        class="exit-expand-btn"
+        aria-label="Exit fullscreen mode">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+
+    <div class="fullscreen-content">
+      <div class="periodic-table-container fullscreen-table" id="periodic-table-fullscreen">
+        <!-- Include the same periodic table content here -->
+        <mat-drawer-container class="drawer-container" [hasBackdrop]="false">
+          <mat-drawer-content class="main-content">
+            <!-- Periodic Table Grid -->
+            <div class="periodic-grid">
+              <!-- Legend positioned between H and He -->
+              <app-color-legend
+                class="legend-in-grid"
+                [metric]="selectedColorMetric()"
+                [minValue]="colorScaleBounds().min"
+                [maxValue]="colorScaleBounds().max"
+                [hasUnknownValues]="colorScaleBounds().hasUnknown">
+              </app-color-legend>
+
+              <!-- Search and Color By controls between Be and B -->
+              <div class="controls-in-grid row-2">
+                <mat-form-field class="search-field-grid" appearance="fill">
+                  <mat-label>Search elements</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    placeholder="Symbol, name, or atomic number..."
+                    [ngModel]="searchQuery()"
+                    (ngModelChange)="onSearchInput($event)"
+                    aria-label="Search elements by symbol, name, or atomic number">
+                  <mat-icon matPrefix>search</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="metric-field-grid" appearance="fill">
+                  <mat-label>Color by</mat-label>
+                  <mat-select
+                    [ngModel]="selectedColorMetric()"
+                    (ngModelChange)="onColorMetricChange($event)"
+                    aria-label="Select color metric">
+                    @for (option of colorMetricOptions; track option.value) {
+                      <mat-option [value]="option.value">
+                        {{ option.label }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                  <mat-icon matPrefix>palette</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <!-- Filter controls between Mg and Al -->
+              <div class="controls-in-grid row-3">
+                <mat-form-field class="filter-field-grid" appearance="fill">
+                  <mat-label>Filter by category</mat-label>
+                  <mat-select
+                    multiple
+                    [ngModel]="selectedCategories()"
+                    (ngModelChange)="selectedCategories.set($event)"
+                    aria-label="Filter by chemical category">
+                    @for (category of categoryOptions; track category) {
+                      <mat-option [value]="category">
+                        {{ formatCategory(category) }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="filter-field-grid" appearance="fill">
+                  <mat-label>Filter by state</mat-label>
+                  <mat-select
+                    multiple
+                    [ngModel]="selectedStates()"
+                    (ngModelChange)="selectedStates.set($event)"
+                    aria-label="Filter by standard state">
+                    @for (state of stateOptions; track state) {
+                      <mat-option [value]="state">
+                        {{ formatState(state) }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              @for (element of elements; track trackByAtomicNumber($index, element)) {
+                <div
+                  class="element-tile"
+                  [class.filtered-out]="isElementFiltered(element)"
+                  [class.selected]="selectedElement()?.atomicNumber === element.atomicNumber"
+                  [style.grid-row]="getGridPosition(element).row"
+                  [style.grid-column]="getGridPosition(element).column"
+                  [style.background]="'linear-gradient(135deg, ' + getElementColor(element) + ' 0%, color-mix(in srgb, ' + getElementColor(element) + ' 60%, black) 100%)'"
+                  [style.color]="getTextColor(element)"
+                  [attr.data-category]="element.category"
+                  [attr.data-state]="element.standardState"
+                  [attr.data-period]="element.period"
+                  [attr.data-group]="element.group"
+                  (click)="selectElement(element)"
+                  (keydown)="onElementKeydown($event, element)"
+                  tabindex="0"
+                  role="button"
+                  [attr.aria-label]="element.name + ', atomic number ' + element.atomicNumber + ', ' + formatCategory(element.category) + ', ' + formatState(element.standardState) + '. Click to view detailed properties.'">
+                  <div class="element-number">{{ element.atomicNumber }}</div>
+                  <div class="element-symbol">{{ element.symbol }}</div>
+                  <div class="element-name">{{ element.name }}</div>
+                  <div class="element-mass">{{ element.atomicMass !== null ? element.atomicMass.toFixed(3) : '—' }}</div>
+                </div>
+              }
+            </div>
+          </mat-drawer-content>
+
+          <!-- Details Side Panel -->
+          <mat-drawer
+            #drawer
+            mode="over"
+            position="end"
+            [opened]="detailsPanelOpen()"
+            (keydown)="onDetailsKeydown($event)"
+            class="details-drawer">
+            @if (selectedElement(); as element) {
+              <div class="details-panel">
+                <div class="details-header">
+                  <div class="element-header">
+                    <div class="element-number-large">{{ element.atomicNumber }}</div>
+                    <div class="element-symbol-large">{{ element.symbol }}</div>
+                    <div class="element-name-large">{{ element.name }}</div>
+                  </div>
+                  <button
+                    mat-icon-button
+                    (click)="closeDetailsPanel()"
+                    class="close-button"
+                    aria-label="Close details panel">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+
+                <div class="details-content">
+                  <h3 class="section-title">Basic Properties</h3>
+                  <div class="properties-section">
+                    <app-property-item
+                      label="Atomic Number"
+                      [value]="element.atomicNumber"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Symbol"
+                      [value]="element.symbol"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Atomic Mass"
+                      [value]="element.atomicMass"
+                      unit="u"
+                      [highlighted]="selectedColorMetric() === 'atomicMass'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Category"
+                      [value]="formatCategory(element.category)"
+                      [highlighted]="selectedColorMetric() === 'category'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Standard State"
+                      [value]="formatState(element.standardState)"
+                      [highlighted]="selectedColorMetric() === 'state'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Block"
+                      [value]="element.block + '-block'"
+                      [highlighted]="selectedColorMetric() === 'block'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Group"
+                      [value]="element.group"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Period"
+                      [value]="element.period"
+                      [copyable]="false" />
+                  </div>
+
+                  <h3 class="section-title">Electronic Properties</h3>
+                  <div class="properties-section">
+                    <app-property-item
+                      label="Electron Configuration"
+                      [value]="element.electronConfiguration"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Electronegativity"
+                      [value]="element.electronegativity"
+                      unit="Pauling"
+                      [highlighted]="selectedColorMetric() === 'electronegativity'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Atomic Radius"
+                      [value]="element.atomicRadius"
+                      unit="pm"
+                      [highlighted]="selectedColorMetric() === 'atomicRadius'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Ionization Energy"
+                      [value]="element.ionizationEnergy"
+                      unit="kJ/mol"
+                      [highlighted]="selectedColorMetric() === 'ionizationEnergy'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Electron Affinity"
+                      [value]="element.electronAffinity"
+                      unit="kJ/mol"
+                      [highlighted]="selectedColorMetric() === 'electronAffinity'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Oxidation States"
+                      [value]="element.oxidationStates"
+                      [copyable]="false" />
+                  </div>
+
+                  <h3 class="section-title">Physical Properties</h3>
+                  <div class="properties-section">
+                    <app-property-item
+                      label="Density"
+                      [value]="element.density"
+                      unit="g/cm³"
+                      [highlighted]="selectedColorMetric() === 'density'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Melting Point"
+                      [value]="element.meltingPoint"
+                      unit="K"
+                      [highlighted]="selectedColorMetric() === 'meltingPoint'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Boiling Point"
+                      [value]="element.boilingPoint"
+                      unit="K"
+                      [highlighted]="selectedColorMetric() === 'boilingPoint'"
+                      [copyable]="false" />
+                  </div>
+
+                  <h3 class="section-title">Discovery</h3>
+                  <div class="properties-section">
+                    <app-property-item
+                      label="Year Discovered"
+                      [value]="element.yearDiscovered"
+                      [highlighted]="selectedColorMetric() === 'yearDiscovered'"
+                      [copyable]="false" />
+
+                    <app-property-item
+                      label="Discovered By"
+                      [value]="element.discoveredBy"
+                      [copyable]="false" />
+                  </div>
+                </div>
+              </div>
+            }
+          </mat-drawer>
+        </mat-drawer-container>
+      </div>
+    </div>
+  </div>
+}
+
 <div class="periodic-table-container" id="periodic-table">
+  <!-- Expand Button -->
+  <button
+    mat-icon-button
+    (click)="toggleExpandMode()"
+    class="expand-table-btn"
+    matTooltip="Expand to viewport"
+    matTooltipPosition="left"
+    aria-label="Expand periodic table to fullscreen">
+    <mat-icon>fullscreen</mat-icon>
+  </button>
+
   <!-- Controls Section -->
   <div class="controls-section">
     <div class="controls-row">
@@ -96,6 +388,17 @@
           Reset Filters
         </button>
       }
+
+      <!-- Expand Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="toggleExpandMode()"
+        class="expand-btn"
+        aria-label="Expand periodic table to fullscreen">
+        <mat-icon>fullscreen</mat-icon>
+        Expand
+      </button>
     </div>
 
     <!-- Filter Chips -->

@@ -34,4 +34,11 @@ export class SidenavService {
   openToolsSidenav(): void {
     this.toolsSidenav?.open();
   }
+
+  /**
+   * Check if tools sidenav is open
+   */
+  isOpen(): boolean {
+    return this.toolsSidenav?.opened ?? false;
+  }
 }
