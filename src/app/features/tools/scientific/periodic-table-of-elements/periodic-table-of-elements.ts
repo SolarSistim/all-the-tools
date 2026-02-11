@@ -292,12 +292,14 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
     this.searchQuery.set('');
     this.selectedCategories.set([]);
     this.selectedStates.set([]);
+    this.selectedColorMetric.set('category');
   }
 
   hasActiveFilters(): boolean {
     return this.searchQuery() !== '' ||
            this.selectedCategories().length > 0 ||
-           this.selectedStates().length > 0;
+           this.selectedStates().length > 0 ||
+           this.selectedColorMetric() !== 'category';
   }
 
   getElementColor(element: Element): string {
@@ -417,6 +419,13 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
     if (event.key === 'Escape') {
       event.preventDefault();
       this.exitExpandMode();
+    }
+  }
+
+  onTableBackgroundClick(): void {
+    // Close details panel when clicking on table background (not on elements)
+    if (this.detailsPanelOpen()) {
+      this.closeDetailsPanel();
     }
   }
 }

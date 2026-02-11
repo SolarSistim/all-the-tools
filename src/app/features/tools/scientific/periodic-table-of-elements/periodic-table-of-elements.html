@@ -64,9 +64,14 @@
 
     <div class="fullscreen-content">
       <div class="periodic-table-container fullscreen-table" id="periodic-table-fullscreen">
+        <!-- Reset Link - shown when filters are active -->
+        @if (hasActiveFilters()) {
+          <span class="reset-link" (click)="resetFilters()">Reset</span>
+        }
+
         <!-- Include the same periodic table content here -->
         <mat-drawer-container class="drawer-container" [hasBackdrop]="false">
-          <mat-drawer-content class="main-content">
+          <mat-drawer-content class="main-content" (click)="onTableBackgroundClick()">
             <!-- Periodic Table Grid -->
             <div class="periodic-grid">
               <!-- Legend positioned between H and He -->
@@ -153,7 +158,7 @@
                   [attr.data-state]="element.standardState"
                   [attr.data-period]="element.period"
                   [attr.data-group]="element.group"
-                  (click)="selectElement(element)"
+                  (click)="selectElement(element); $event.stopPropagation()"
                   (keydown)="onElementKeydown($event, element)"
                   tabindex="0"
                   role="button"
@@ -330,6 +335,11 @@
 }
 
 <div class="periodic-table-container" id="periodic-table">
+  <!-- Reset Link - shown when filters are active -->
+  @if (hasActiveFilters()) {
+    <span class="reset-link" (click)="resetFilters()">Reset</span>
+  }
+
   <!-- Expand Button - hidden when details panel is open -->
   @if (!detailsPanelOpen()) {
     <button
@@ -436,7 +446,7 @@
 
   <!-- Main Content with Side Panel -->
   <mat-drawer-container class="drawer-container" [hasBackdrop]="false">
-    <mat-drawer-content class="main-content">
+    <mat-drawer-content class="main-content" (click)="onTableBackgroundClick()">
       <!-- Periodic Table Grid -->
       <div class="periodic-grid">
         <!-- Legend positioned between H and He -->
@@ -524,7 +534,7 @@
             [attr.data-state]="element.standardState"
             [attr.data-period]="element.period"
             [attr.data-group]="element.group"
-            (click)="selectElement(element)"
+            (click)="selectElement(element); $event.stopPropagation()"
             (keydown)="onElementKeydown($event, element)"
             tabindex="0"
             role="button"

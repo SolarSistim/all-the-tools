@@ -952,6 +952,30 @@
   position: relative;
 }
 
+// Reset Link
+.reset-link {
+  position: absolute;
+  top: 5px;
+  left: 11px;
+  color: #4A90E2;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 100;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #357ABD;
+    text-decoration: none;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    top: $spacing-md;
+    left: $spacing-md;
+  }
+}
+
 // Fullscreen Overlay
 .fullscreen-overlay {
   position: fixed;
