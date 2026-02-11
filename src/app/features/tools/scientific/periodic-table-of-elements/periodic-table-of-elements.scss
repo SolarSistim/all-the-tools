@@ -338,7 +338,7 @@
   width: 400px;
   background: var(--bg-elevated);
   border-left: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0.95;
+  opacity: 0.97;
 
   @media (max-width: $breakpoint-xl) {
     width: 350px;
@@ -346,9 +346,11 @@
 }
 
 .details-panel {
-  padding: $spacing-3xl;
+  padding: 24px;
   height: 100%;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .details-header {
@@ -356,6 +358,7 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: $spacing-lg;
+  flex-shrink: 0;
 
   .close-button {
     color: var(--text-primary);
@@ -394,7 +397,11 @@
 }
 
 .details-content {
-  padding-top: $spacing-lg;
+  padding-right: 24px;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .section-title {
