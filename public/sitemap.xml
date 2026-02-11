@@ -517,6 +517,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.allthethings.dev/tools/scientific/periodic-table-of-elements</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.allthethings.dev/tools/social-media-launchpad</loc>
     <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>

@@ -84,6 +84,7 @@
 /tools/qr-code-generator
 /tools/roku-compatibility
 /tools/roman-numeral-converter
+/tools/scientific/periodic-table-of-elements
 /tools/social-media-launchpad
 /tools/spotify-playlist-export
 /tools/spotify/callback

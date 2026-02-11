@@ -394,6 +394,22 @@ export class ToolsService {
       available: true,
       hasTutorial: true
     },
+
+    // ========================================
+    // SCIENTIFIC TOOLS
+    // ========================================
+    {
+      id: 'periodic-table-of-elements',
+      name: 'Periodic Table of Elements',
+      description: 'Interactive periodic table with detailed element properties',
+      longDescription: 'Explore 118 chemical elements with our interactive periodic table. Color-coded by 12 different metrics including atomic mass, electronegativity, and standard state. Features comprehensive element data, advanced search and filtering, and detailed property panels. Perfect for chemistry students, educators, and enthusiasts.',
+      category: 'scientific',
+      icon: 'science',
+      route: 'scientific/periodic-table-of-elements',
+      featured: true,
+      tags: ['chemistry', 'periodic table', 'elements', 'science', 'education', 'atomic properties'],
+      available: true
+    },
   ];
 
   /**
@@ -476,6 +492,13 @@ export class ToolsService {
       description: 'Social media tools and utilities',
       icon: 'share',
       color: 'var(--neon-blue)'
+    },
+    {
+      id: 'scientific',
+      name: 'Scientific Tools',
+      description: 'Chemistry, physics, and scientific utilities',
+      icon: 'science',
+      color: 'var(--neon-cyan-bright)'
     },
     {
       id: 'other',

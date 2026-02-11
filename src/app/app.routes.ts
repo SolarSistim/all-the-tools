@@ -223,6 +223,11 @@ export const routes: Routes = [
     title: 'Morse Code Converter - All The Things'
   },
   {
+    path: 'tools/scientific/periodic-table-of-elements',
+    loadComponent: () => import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m => m.PeriodicTableOfElements),
+    title: 'Interactive Periodic Table of Elements - All The Tools'
+  },
+  {
     path: 'blog',
     loadChildren: () => import('./features/blog/blog.routes').then(m => m.BLOG_ROUTES),
   },

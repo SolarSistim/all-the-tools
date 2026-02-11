@@ -1,0 +1,3040 @@
+Context
+
+ Create a visually stunning, highly interactive Periodic Table of Elements feature for an Angular 20 project. The
+ component will display all 118 elements in a proper periodic table layout with advanced features including
+ metric-based coloring (12 different metrics), detailed element information, search/filtering, and full accessibility
+ support. The implementation must follow the project's established patterns (standalone components, Angular signals,
+ retro-futuristic aesthetic with glassmorphism) and integrate seamlessly with the existing "all-the-tools" codebase.
+
+ Why: This educational tool will provide chemistry students, educators, and enthusiasts with a modern, interactive way
+ to explore element properties and chemical patterns.
+
+ Location: C:\Users\cwmpe\Documents\Angular Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+
+ Current State: Blank standalone component with empty TS/HTML/SCSS files.
+
+ Project Patterns to Follow
+
+ - Angular 19.2.6 with standalone components
+ - State management: Angular signals (signal(), computed())
+ - Styling: SCSS with retro-futuristic aesthetic (neon colors, glassmorphism, gradient accents)
+ - UI Framework: Angular Material (MatCard, MatButton, MatSelect, MatIcon, MatSidenav, MatBottomSheet)
+ - Services: MetaService for SEO, CustomSnackbarService for notifications
+ - Responsive: Breakpoints at sm(640), md(768), lg(1024), xl(1280), 2xl(1536)
+
+ Core Features to Implement
+
+ 1. Full-Width Periodic Grid
+
+ - Display all 118 elements in correct periodic table layout (groups 1-18, periods 1-7)
+ - Separate lanthanides (row 9) and actinides (row 10) with proper positioning
+ - Each tile shows: atomic number, symbol, name, atomic mass
+ - CSS Grid with explicit positioning for precise element placement
+ - Responsive: full 18-column grid on desktop, stacked periods on mobile
+
+ 2. Metric Coloring System (12 Options)
+
+ - Categorical metrics: Chemical group, Standard state, Electronic block
+ - Continuous metrics: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting
+ point, Boiling point, Density, Year discovered
+ - Color scale: Viridis-inspired gradient for continuous, distinct palette for categorical
+ - Dynamic text color (black/white) based on background luminance (WCAG AA compliant)
+ - Handle missing values with neutral gray color
+
+ 3. Dynamic Legend
+
+ - Updates based on selected metric
+ - Continuous: Gradient bar with min/max labels and unit
+ - Categorical: Color chips with labels
+ - Includes "Unknown" for missing data
+
+ 4. Element Details Panel
+
+ - Desktop: Side drawer (MatSidenav) on right, table remains full-width
+ - Mobile: Bottom sheet (MatBottomSheet) modal
+ - Shows all properties: atomic number, symbol, name, mass, electron configuration, electronegativity, atomic radius,
+ ionization energy, electron affinity, density, melting/boiling points, oxidation states, standard state, year
+ discovered, discoveredBy
+ - Copy buttons for key properties
+ - Highlight selected metric value when metric coloring is active
+
+ 5. Search & Filters
+
+ - Search box: matches symbol, name, atomic number (debounced 300ms)
+ - Multi-select filters: category, standard state, classification
+ - Reset button to clear all filters
+ - Smooth animations for filter changes
+
+ 6. Keyboard Accessibility
+
+ - Tab navigation through element tiles
+ - Enter/Space opens details panel
+ - Escape closes details panel
+ - ARIA labels: "Hydrogen, atomic number 1, nonmetal, gas. Click to view detailed properties."
+ - Proper focus management and visual focus indicators
+
+ 7. Premium Visual Design
+
+ - Glassmorphism effects (@mixin glass-effect)
+ - Neon glow on hover (@mixin neon-glow)
+ - Smooth transitions (300ms cubic-bezier)
+ - Gradient accent bars
+ - Consistent spacing using project's spacing system
+
+ File Structure
+
+ src/app/features/tools/scientific/periodic-table-of-elements/
+ ├── periodic-table-of-elements.ts          # Main component (signals, state, methods)
+ ├── periodic-table-of-elements.html        # Template (grid, controls, details panel)
+ ├── periodic-table-of-elements.scss        # Styles (grid layout, responsive, glassmorphism)
+ ├── models/
+ │   └── element.interface.ts               # Element, ElementCategory, StandardState, ChemicalBlock interfaces
+ ├── data/
+ │   └── elements.data.ts                   # All 118 elements as TypeScript const
+ ├── utils/
+ │   └── color-mapping.util.ts              # ColorMapper class (gradient interpolation, contrast calculation)
+ └── components/
+     ├── color-legend.component.ts          # Dynamic legend (standalone component)
+     ├── element-details-bottom-sheet.component.ts  # Mobile details view
+     └── property-item.component.ts         # Reusable property display with copy button
+
+ Data Model
+
+ Element Interface:
+ interface Element {
+   atomicNumber: number;
+   symbol: string;
+   name: string;
+   atomicMass: number | null;
+   density: number | null;
+   meltingPoint: number | null;  // Kelvin
+   boilingPoint: number | null;  // Kelvin
+   electronegativity: number | null;  // Pauling scale
+   atomicRadius: number | null;  // Picometers
+   ionizationEnergy: number | null;  // kJ/mol
+   electronAffinity: number | null;  // kJ/mol
+   oxidationStates: number[];
+   electronConfiguration: string;
+   electronsPerShell: number[];
+   category: ElementCategory;
+   standardState: StandardState;
+   block: ChemicalBlock;
+   group: number | null;  // 1-18, null for lanthanides/actinides
+   period: number;  // 1-7
+   yearDiscovered: number | null;
+   discoveredBy: string | null;
+   cpkColor?: string;
+ }
+
+ Data Source: Store as TypeScript const in elements.data.ts (not JSON) for better type safety and tree-shaking.
+
+ Implementation Details
+
+ Grid Layout Strategy
+
+ - CSS Grid: grid-template-columns: repeat(18, 1fr)
+ - Explicit positioning: Use [data-period] and [data-group] attributes with CSS selectors
+ - Lanthanides: grid-row: 9; grid-column: 3-17 (atomic numbers 57-71)
+ - Actinides: grid-row: 10; grid-column: 3-17 (atomic numbers 89-103)
+ - Gaps: Use spacer indicators with asterisk (*) in period 6 and 7 at column 3
+
+ Color Mapping Algorithm
+
+ 1. Categorical: Direct lookup from predefined color palette
+ 2. Continuous:
+   - Calculate min/max across all elements for the metric
+   - Normalize value to 0-1 range: (value - min) / (max - min)
+   - Interpolate through 5-color gradient (viridis-inspired)
+ 3. Text contrast: Calculate relative luminance (WCAG formula), return white if luminance < 0.5, black otherwise
+ 4. Performance: Cache colors with key ${atomicNumber}-${metric}, clear cache on metric change
+
+ Responsive Strategy
+
+ - Desktop (>1024px): Full 18-column grid, side drawer for details
+ - Tablet (768-1024px): Full 18-column grid with smaller tiles, overlay for details
+ - Mobile (<768px): Stacked periods (horizontal scroll per period), bottom sheet for details
+ - Touch targets: Minimum 44x44px on mobile
+
+ State Management
+
+ - Use Angular signals for all reactive state:
+   - selectedElement = signal<Element | null>(null)
+   - searchQuery = signal<string>('')
+   - selectedColorMetric = signal<ColorMetric>('category')
+   - selectedCategories = signal<ElementCategory[]>([])
+   - isMobile = signal<boolean>(false)
+ - Use computed signals for derived state:
+   - filteredElements = computed(() => /* search + filter logic */)
+   - colorScaleBounds = computed(() => /* min/max for current metric */)
+   - legendItems = computed(() => /* legend data for current metric */)
+
+ Angular Material Modules
+
+ Import: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatFormFieldModule,
+  MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule, MatBottomSheetModule, MatDividerModule,
+ LayoutModule (BreakpointObserver)
+
+ Integration with Project
+
+ 1. Add "scientific" category to tools.service.ts categoryMeta array (if not exists)
+ 2. Register tool in tools array in tools.service.ts:
+ {
+   id: 'periodic-table-of-elements',
+   name: 'Periodic Table of Elements',
+   description: 'Interactive periodic table with detailed element properties',
+   category: 'scientific',
+   icon: 'science',
+   route: '/tools/scientific/periodic-table-of-elements',
+   featured: true
+ }
+ 3. Add route in app.routes.ts:
+ {
+   path: 'tools/scientific/periodic-table-of-elements',
+   loadComponent: () =>
+ import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m =>
+ m.PeriodicTableOfElements),
+   title: 'Periodic Table of Elements - All The Things'
+ }
+
+ SEO Strategy
+
+ In ngOnInit(), call:
+ this.metaService.updateTags({
+   title: 'Interactive Periodic Table of Elements | All The Tools',
+   description: 'Explore 118 chemical elements with our interactive periodic table. Color-coded by 12 different metrics
+  including atomic mass, electronegativity, and standard state.',
+   keywords: ['periodic table', 'chemical elements', 'chemistry tool', 'atomic properties'],
+   image: 'https://www.allthethings.dev/meta-images/og-periodic-table.png',
+   url: 'https://www.allthethings.dev/tools/scientific/periodic-table-of-elements'
+ });
+
+ Critical Implementation Steps
+
+ 1. Create Element Interface (models/element.interface.ts)
+   - Define Element, ElementCategory, StandardState, ChemicalBlock types
+   - Define ColorMetric type union and ColorMetricOption interface
+ 2. Create Elements Data (data/elements.data.ts)
+   - All 118 elements with complete properties
+   - Use authoritative sources (NIST, Wikipedia) for data accuracy
+   - Export as const ELEMENTS: ReadonlyArray<Element>
+   - Export helper maps: ELEMENT_BY_SYMBOL, ELEMENT_BY_NUMBER
+ 3. Create Color Mapping Utility (utils/color-mapping.util.ts)
+   - ColorMapper class with static methods
+   - Categorical color palettes (10 categories, 3 states, 4 blocks)
+   - Gradient interpolation for continuous metrics (5-color viridis gradient)
+   - Text contrast calculation (WCAG formula)
+   - RGB/Hex conversion utilities
+ 4. Build Main Component (periodic-table-of-elements.ts)
+   - Set up signals for state management
+   - Implement computed signals for filtering and color bounds
+   - Inject services: MetaService, CustomSnackbarService, BreakpointObserver, MatBottomSheet
+   - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+   - Keyboard event handlers
+   - Set up responsive breakpoint observer
+ 5. Create Template (periodic-table-of-elements.html)
+   - Controls section: search input, color-by select, filter chips, reset button
+   - Legend component: <app-color-legend>
+   - Mat-drawer-container with main grid in content, details panel in drawer
+   - Periodic grid: loop through filteredElements with trackBy
+   - Element tiles with proper data attributes and event handlers
+   - Details panel content (desktop side drawer)
+ 6. Style Component (periodic-table-of-elements.scss)
+   - Import project utilities: @use '@styles/utilities' as *;
+   - Periodic grid: CSS Grid with 18 columns, explicit positioning
+   - Element tiles: glassmorphism, hover effects with neon-glow, smooth transitions
+   - Responsive breakpoints: collapse to mobile layout <768px
+   - Details panel styling: match project aesthetic
+   - Animations for tile hover, filter changes
+ 7. Create Sub-Components
+   - ColorLegendComponent: dynamic legend that updates with metric
+   - ElementDetailsBottomSheet: mobile details view with MatBottomSheet
+   - PropertyItemComponent: reusable property row with copy button
+ 8. Register Tool
+   - Add to tools.service.ts (with scientific category if needed)
+   - Add route to app.routes.ts
+
+ Verification Checklist
+
+ After implementation, verify:
+
+ - All 118 elements render in correct grid positions
+ - Lanthanides appear in row 9, actinides in row 10
+ - Helium positioned at period 1, group 18 (top right)
+ - All 12 color metrics work correctly
+ - Legend updates dynamically with metric selection
+ - Missing values show as gray with "Unknown" in legend
+ - Text remains readable on all background colors (test with contrast checker)
+ - Search filters by symbol/name/atomic number
+ - Multi-select filters combine correctly
+ - Clicking element opens details panel (desktop: side, mobile: bottom sheet)
+ - Copy buttons work for element properties
+ - Keyboard navigation: Tab through tiles, Enter/Space opens, Escape closes
+ - ARIA labels present on all interactive elements
+ - Mobile layout: tiles remain readable, minimum 44x44px touch targets
+ - Desktop layout: full-width 18-column grid
+ - Hover effects: smooth lift, neon glow
+ - Performance: no lag when switching metrics or filtering
+ - Tool appears in tools list and navigation
+ - Route works and SEO meta tags are set
+
+ Potential Challenges & Solutions
+
+ Challenge: CSS Grid positioning for 118 elements is complex
+ Solution: Use TypeScript helper function with inline style binding [style.grid-column] and [style.grid-row]
+
+ Challenge: Color gradient calculations may be slow
+ Solution: Implement color caching with Map, clear cache on metric change
+
+ Challenge: Finding accurate data for all elements
+ Solution: Use multiple authoritative sources (NIST, Wikipedia, PubChem), mark uncertain values
+
+ Challenge: Mobile touch targets too small
+ Solution: Minimum 44x44px tiles on mobile, consider increasing gaps
+
+ Challenge: Text contrast on dynamic backgrounds
+ Solution: Implement WCAG relative luminance formula, test with contrast ratio calculator
+
+ ---
+ Implementation Time Estimate: 3-4 hours for full feature with all 118 elements and complete styling
+
+ Next Step: Exit plan mode for user approval, then provide optimized prompt for Claude Code implementation.
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+ Claude has written up a plan and is ready to execute. Would you like to proceed?
+
+ > 1. Yes, clear context and auto-accept edits (shift+tab)
+   2. Yes, auto-accept edits
+   3. Yes, manually approve edits
+   4. Type here to tell Claude what to change
+
+ ctrl-g to edit in Notepad · .claude\plans\toasty-fluttering-pike.md
+
+╭─── Claude Code v2.1.37 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                             │ Tips for getting started                                                                                                                                                        │
+│    Welcome back Cameron!    │ Run /init to create a CLAUDE.md file with instructions for Claude                                                                                                               │
+│                             │ Note: You have launched claude in your home directory. For the best experience, launch it in a project directory instead.                                                       │
+│                             │ ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────                                                       │
+│           ▐▛███▜▌           │ Recent activity                                                                                                                                                                 │
+│          ▝▜█████▛▘          │ No recent activity                                                                                                                                                              │
+│            ▘▘ ▝▝            │                                                                                                                                                                                 │
+│   Sonnet 4.5 · Claude API   │                                                                                                                                                                                 │
+│       C:\Users\cwmpe        │                                                                                                                                                                                 │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+> examine periodic-table-of-elements-prompt.txt at C:\Users\cwmpe\Downloads. Then, think about this task, fill in any gaps, and come up with a plan to create this component. Then, give me a prompt for
+  Claude Code to implement in my angular project, on my blank componnet found at C:\Users\cwmpe\Documents\Angular Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+
+● I'll help you examine the prompt file and create a comprehensive plan for building the periodic table component. Let me start by reading the file and exploring your Angular project structure.
+
+● Read 1 file (ctrl+o to expand)
+
+● Explore(Explore Angular project structure)
+  ⎿  Done (51 tool uses · 122.9k tokens · 2m 41s)
+
+● Excellent! I've read the prompt file and thoroughly explored your Angular project. Now let me design an implementation plan.
+
+● Plan(Design periodic table implementation)
+  ⎿  Done (11 tool uses · 31.4k tokens · 8m 22s)
+
+● Excellent! I now have a comprehensive understanding of both the requirements and the Angular project structure. Let me write the final implementation plan.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Perfect! I've written the comprehensive implementation plan. Now let me create an optimized prompt for Claude Code to execute the implementation.
+
+  Recommended Prompt for Claude Code
+
+  Here's the prompt you should give to Claude Code to implement this component:
+
+  ---
+  PROMPT FOR CLAUDE CODE:
+
+  Implement a visually stunning, interactive Periodic Table of Elements component in my Angular project at:
+  src/app/features/tools/scientific/periodic-table-of-elements/
+
+  CONTEXT:
+  - Angular 20.3.14 standalone component (already created but blank)
+  - Use Angular signals for state management
+  - Follow the project's retro-futuristic design (glassmorphism, neon effects)
+  - Use Angular Material components already in the project
+  - SCSS with utilities from styles/_utilities.scss
+
+  IMPLEMENTATION REQUIREMENTS:
+
+  1. DATA & MODELS:
+     - Create models/element.interface.ts with Element interface, enums for ElementCategory, StandardState, ChemicalBlock
+     - Create data/elements.data.ts with all 118 elements as TypeScript const array
+     - Include properties: atomicNumber, symbol, name, atomicMass, density, meltingPoint, boilingPoint, electronegativity, atomicRadius, ionizationEnergy, electronAffinity, oxidationStates,
+  electronConfiguration, category, standardState, block, group, period, yearDiscovered
+     - Use null for missing values (especially for synthetic elements)
+
+  2. PERIODIC TABLE GRID:
+     - CSS Grid with 18 columns (groups)
+     - Correct positioning: periods 1-7, groups 1-18
+     - Lanthanides in separate row 9 (columns 3-17)
+     - Actinides in separate row 10 (columns 3-17)
+     - Each tile shows: atomic number (top), symbol (large center), name (below), atomic mass (bottom)
+     - Full-width on desktop, stacked periods on mobile (<768px)
+
+  3. METRIC COLORING SYSTEM:
+     - Create utils/color-mapping.util.ts with ColorMapper class
+     - "Color by" dropdown with 12 options:
+       * Categorical: Chemical group, Standard state, Electronic block
+       * Continuous: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting point, Boiling point, Density, Year discovered
+     - For continuous: use viridis-inspired 5-color gradient, interpolate based on min/max normalization
+     - For categorical: distinct color palette per category
+     - Dynamic text color (black/white) based on background luminance using WCAG formula
+     - Show missing values in neutral gray
+
+  4. DYNAMIC LEGEND:
+     - Create components/color-legend.component.ts (standalone)
+     - Updates when metric changes
+     - Continuous: gradient bar with min/max labels and unit
+     - Categorical: colored chips with labels
+     - Include "Unknown" entry for missing data
+
+  5. ELEMENT DETAILS:
+     - Desktop: MatSidenav on right side (use MatDrawer)
+     - Mobile: MatBottomSheet modal
+     - Show all element properties with labels
+     - Copy buttons for key properties (use clipboard API)
+     - Highlight current metric value when metric coloring is active
+
+  6. SEARCH & FILTERS:
+     - Search input (debounced 300ms) matching symbol/name/atomic number
+     - Multi-select chips for category and standard state filters
+     - Reset button
+     - Use computed signal for filteredElements
+
+  7. VISUAL DESIGN:
+     - Use project's @mixin glass-effect for tiles
+     - Use @mixin neon-glow for hover effects
+     - Smooth transitions (300ms cubic-bezier)
+     - Gradient accent bars
+     - Premium hover states: translateY(-4px) scale(1.05)
+
+  8. ACCESSIBILITY:
+     - Tab navigation through tiles
+     - Enter/Space opens details
+     - Escape closes details
+     - ARIA labels: "[Name], atomic number [#], [category], [state]. Click to view detailed properties."
+     - Focus indicators with outline
+
+  9. PROJECT INTEGRATION:
+     - Add "scientific" category to tools.service.ts if not present
+     - Register tool in tools.service.ts tools array
+     - Add route in app.routes.ts for /tools/scientific/periodic-table-of-elements
+     - Use MetaService in ngOnInit() for SEO
+
+  10. COMPONENT STATE (use signals):
+      - selectedElement, searchQuery, selectedColorMetric, selectedCategories, selectedStates, isMobile, detailsPanelOpen
+      - Computed: filteredElements, colorScaleBounds, legendItems
+
+  TECHNICAL NOTES:
+  - Import modules: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule,
+  MatBottomSheetModule
+  - Use BreakpointObserver from @angular/cdk/layout for responsive
+  - Inject: MetaService, CustomSnackbarService, MatBottomSheet, BreakpointObserver
+  - Use trackBy function for element loops (trackByAtomicNumber)
+  - Cache colors for performance (Map with key: `${atomicNumber}-${metric}`)
+
+  VERIFICATION:
+  - All 118 elements in correct positions
+  - Helium at period 1, group 18 (top right)
+  - Lanthanides/actinides in separate rows
+  - All 12 color metrics functional
+  - Text readable on all backgrounds
+  - Keyboard navigation works
+  - Mobile responsive (<768px)
+  - Touch targets minimum 44x44px
+
+  Please implement the complete component with all files following the structure described. Use accurate element data from authoritative sources (NIST, Wikipedia).
+
+  ---
+  ⎿  Tool use rejected with user message: I want you to output a comprehensive prompt for me to use in VSCode with Claude Code.
+
+● Understood! Let me create a comprehensive, production-ready prompt you can use directly in VSCode with Claude Code:
+
+  ---
+  COMPREHENSIVE CLAUDE CODE PROMPT
+
+  Copy and paste this entire prompt into Claude Code in VSCode:
+
+  Implement a complete, production-ready Interactive Periodic Table of Elements feature in my Angular 20 project.
+
+  PROJECT CONTEXT:
+  - Location: C:\Users\cwmpe\Documents\Angular Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+  - Angular 20.3.14 with standalone components
+  - TypeScript strict mode enabled
+  - Angular Material 20.2.14 for UI
+  - SCSS with retro-futuristic design system (neon colors, glassmorphism)
+  - State management using Angular signals
+  - Existing services: MetaService (SEO), CustomSnackbarService (notifications), ToolsService (tool registry)
+
+  DESIGN REQUIREMENTS:
+
+  The periodic table must be:
+  1. Full-width across the viewport
+  2. Visually stunning (glassmorphism, neon glows, smooth animations)
+  3. Highly interactive (12 different color-by metrics)
+  4. Fully accessible (WCAG AA, keyboard navigation)
+  5. Responsive (desktop grid, mobile stacked periods)
+  6. Educational (detailed properties, copy-to-clipboard, search, filters)
+
+  FILE STRUCTURE TO CREATE:
+
+  periodic-table-of-elements/
+  ├── periodic-table-of-elements.ts          # Main component
+  ├── periodic-table-of-elements.html        # Template
+  ├── periodic-table-of-elements.scss        # Styles
+  ├── models/
+  │   └── element.interface.ts               # TypeScript interfaces
+  ├── data/
+  │   └── elements.data.ts                   # 118 elements dataset
+  ├── utils/
+  │   └── color-mapping.util.ts              # Color calculation utilities
+  └── components/
+      ├── color-legend.component.ts          # Dynamic legend
+      ├── element-details-bottom-sheet.component.ts
+      └── property-item.component.ts         # Reusable property display
+
+  DETAILED SPECIFICATIONS:
+
+  === 1. ELEMENT DATA MODEL (models/element.interface.ts) ===
+
+  ```typescript
+  export interface Element {
+    atomicNumber: number;
+    symbol: string;
+    name: string;
+    atomicMass: number | null;           // u (atomic mass units)
+    density: number | null;              // g/cm³
+    meltingPoint: number | null;         // Kelvin
+    boilingPoint: number | null;         // Kelvin
+    electronegativity: number | null;    // Pauling scale
+    atomicRadius: number | null;         // Picometers
+    ionizationEnergy: number | null;     // kJ/mol (first ionization)
+    electronAffinity: number | null;     // kJ/mol
+    oxidationStates: number[];           // e.g., [-1, 1, 3]
+    electronConfiguration: string;       // e.g., "[Ar] 3d10 4s2"
+    electronsPerShell: number[];         // e.g., [2, 8, 18, 32, 18, 7]
+    category: ElementCategory;
+    standardState: StandardState;        // at STP
+    block: ChemicalBlock;                // s, p, d, f
+    group: number | null;                // 1-18, null for lanthanides/actinides
+    period: number;                      // 1-7
+    yearDiscovered: number | null;
+    discoveredBy: string | null;
+  }
+
+  export enum ElementCategory {
+    ALKALI_METAL = 'Alkali Metal',
+    ALKALINE_EARTH_METAL = 'Alkaline Earth Metal',
+    TRANSITION_METAL = 'Transition Metal',
+    POST_TRANSITION_METAL = 'Post-transition Metal',
+    METALLOID = 'Metalloid',
+    NONMETAL = 'Nonmetal',
+    HALOGEN = 'Halogen',
+    NOBLE_GAS = 'Noble Gas',
+    LANTHANIDE = 'Lanthanide',
+    ACTINIDE = 'Actinide'
+  }
+
+  export enum StandardState {
+    SOLID = 'Solid',
+    LIQUID = 'Liquid',
+    GAS = 'Gas',
+    UNKNOWN = 'Unknown'
+  }
+
+  export enum ChemicalBlock {
+    S = 's',
+    P = 'p',
+    D = 'd',
+    F = 'f'
+  }
+
+  export type ColorMetric =
+    | 'category' | 'standardState' | 'block'
+    | 'atomicMass' | 'electronegativity' | 'atomicRadius'
+    | 'ionizationEnergy' | 'electronAffinity'
+    | 'meltingPoint' | 'boilingPoint' | 'density' | 'yearDiscovered';
+
+  export interface ColorMetricOption {
+    value: ColorMetric;
+    label: string;
+    type: 'continuous' | 'categorical';
+    unit?: string;
+    description?: string;
+  }
+
+  === 2. ELEMENTS DATA (data/elements.data.ts) ===
+
+  Create an array of all 118 elements with accurate data from Wikipedia/NIST:
+
+  import { Element, ElementCategory, StandardState, ChemicalBlock } from '../models/element.interface';
+
+  export const ELEMENTS: ReadonlyArray<Element> = [
+    {
+      atomicNumber: 1,
+      symbol: 'H',
+      name: 'Hydrogen',
+      atomicMass: 1.008,
+      density: 0.00008988,
+      meltingPoint: 14.01,
+      boilingPoint: 20.28,
+      electronegativity: 2.20,
+      atomicRadius: 120,
+      ionizationEnergy: 1312,
+      electronAffinity: 72.8,
+      oxidationStates: [-1, 1],
+      electronConfiguration: '1s¹',
+      electronsPerShell: [1],
+      category: ElementCategory.NONMETAL,
+      standardState: StandardState.GAS,
+      block: ChemicalBlock.S,
+      group: 1,
+      period: 1,
+      yearDiscovered: 1766,
+      discoveredBy: 'Henry Cavendish'
+    },
+    // Continue for all 118 elements...
+    // Use null for unknown/missing values
+  ] as const;
+
+  export const ELEMENT_BY_SYMBOL = new Map(ELEMENTS.map(el => [el.symbol, el]));
+  export const ELEMENT_BY_NUMBER = new Map(ELEMENTS.map(el => [el.atomicNumber, el]));
+
+  IMPORTANT: Include ALL 118 elements with accurate data. For synthetic elements with incomplete data, use null.
+
+  === 3. COLOR MAPPING UTILITY (utils/color-mapping.util.ts) ===
+
+  export class ColorMapper {
+    // Retro-futuristic categorical palettes
+    private static readonly CATEGORY_COLORS: Record<string, string> = {
+      'Alkali Metal': '#FF006E',
+      'Alkaline Earth Metal': '#FB5607',
+      'Transition Metal': '#8338EC',
+      'Post-transition Metal': '#3A86FF',
+      'Metalloid': '#06FFA5',
+      'Nonmetal': '#FFBE0B',
+      'Halogen': '#FF006E',
+      'Noble Gas': '#00F5FF',
+      'Lanthanide': '#FF69B4',
+      'Actinide': '#FFD700'
+    };
+
+    private static readonly STATE_COLORS: Record<string, string> = {
+      'Solid': '#8338EC',
+      'Liquid': '#3A86FF',
+      'Gas': '#06FFA5',
+      'Unknown': '#6C757D'
+    };
+
+    private static readonly BLOCK_COLORS: Record<string, string> = {
+      's': '#FF006E',
+      'p': '#FFBE0B',
+      'd': '#3A86FF',
+      'f': '#8338EC'
+    };
+
+    // Viridis-inspired gradient for scientific accuracy
+    private static readonly GRADIENT_COLORS = [
+      '#440154', '#3B528B', '#21908C', '#5DC863', '#FDE724'
+    ];
+
+    static getCategoricalColor(element: any, metric: string): string {
+      switch (metric) {
+        case 'category': return this.CATEGORY_COLORS[element.category] || '#6C757D';
+        case 'standardState': return this.STATE_COLORS[element.standardState] || '#6C757D';
+        case 'block': return this.BLOCK_COLORS[element.block] || '#6C757D';
+        default: return '#6C757D';
+      }
+    }
+
+    static getContinuousColor(value: number | null, min: number, max: number): string {
+      if (value === null) return '#2C2C2C'; // Dark gray for missing
+      const normalized = (value - min) / (max - min);
+      return this.interpolateGradient(Math.max(0, Math.min(1, normalized)));
+    }
+
+    private static interpolateGradient(t: number): string {
+      const segments = this.GRADIENT_COLORS.length - 1;
+      const scaledT = t * segments;
+      const index = Math.floor(scaledT);
+      const localT = scaledT - index;
+
+      if (index >= segments) return this.GRADIENT_COLORS[segments];
+
+      const color1 = this.hexToRgb(this.GRADIENT_COLORS[index]);
+      const color2 = this.hexToRgb(this.GRADIENT_COLORS[index + 1]);
+
+      const r = Math.round(color1.r + (color2.r - color1.r) * localT);
+      const g = Math.round(color1.g + (color2.g - color1.g) * localT);
+      const b = Math.round(color1.b + (color2.b - color1.b) * localT);
+
+      return this.rgbToHex(r, g, b);
+    }
+
+    static calculateTextContrast(bgColorHex: string): string {
+      const rgb = this.hexToRgb(bgColorHex);
+      const luminance = this.getRelativeLuminance(rgb.r, rgb.g, rgb.b);
+      return luminance > 0.5 ? '#000000' : '#FFFFFF';
+    }
+
+    private static getRelativeLuminance(r: number, g: number, b: number): number {
+      const [rs, gs, bs] = [r, g, b].map(c => {
+        const normalized = c / 255;
+        return normalized <= 0.03928
+          ? normalized / 12.92
+          : Math.pow((normalized + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    }
+
+    private static hexToRgb(hex: string): { r: number; g: number; b: number } {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 0, b: 0 };
+    }
+
+    private static rgbToHex(r: number, g: number, b: number): string {
+      return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+  }
+
+  === 4. MAIN COMPONENT (periodic-table-of-elements.ts) ===
+
+  Key implementation points:
+  - Use Angular signals for ALL state
+  - Inject: MetaService, CustomSnackbarService, MatBottomSheet, BreakpointObserver
+  - Computed signals: filteredElements, colorScaleBounds, legendItems
+  - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+  - Set up BreakpointObserver to detect mobile
+  - In ngOnInit(), call metaService.updateTags() with SEO data
+
+  State signals needed:
+  selectedElement = signal<Element | null>(null);
+  searchQuery = signal<string>('');
+  selectedColorMetric = signal<ColorMetric>('category');
+  selectedCategories = signal<ElementCategory[]>([]);
+  selectedStates = signal<StandardState[]>([]);
+  isMobile = signal<boolean>(false);
+  detailsPanelOpen = signal<boolean>(false);
+
+  Computed signals:
+  filteredElements = computed(() => {
+    // Search + filter logic
+  });
+
+  colorScaleBounds = computed(() => {
+    // Calculate min/max for continuous metrics
+  });
+
+  legendItems = computed(() => {
+    // Generate legend data based on current metric
+  });
+
+  Color methods:
+  getElementColor(element: Element): string {
+    const metric = this.selectedColorMetric();
+    const option = this.colorMetricOptions.find(m => m.value === metric)!;
+
+    if (option.type === 'categorical') {
+      return ColorMapper.getCategoricalColor(element, metric);
+    } else {
+      const bounds = this.colorScaleBounds();
+      const value = element[metric] as number | null;
+      return ColorMapper.getContinuousColor(value, bounds.min, bounds.max);
+    }
+  }
+
+  getTextColor(element: Element): string {
+    return ColorMapper.calculateTextContrast(this.getElementColor(element));
+  }
+
+  === 5. TEMPLATE (periodic-table-of-elements.html) ===
+
+  Structure:
+  1. Controls Section: Search input, color-by select, filter chips, reset button
+  2. Legend Component: <app-color-legend>
+  3. Drawer Container: MatDrawer for desktop details panel
+  4. Periodic Grid: Loop through filteredElements with proper positioning
+  5. Element Tiles: data attributes, click/keyboard handlers, dynamic colors
+
+  Grid layout strategy:
+  <div class="periodic-grid">
+    @for (element of filteredElements(); track element.atomicNumber) {
+      <div class="element-tile"
+           [attr.data-period]="element.period"
+           [attr.data-group]="element.group"
+           [attr.data-atomic-number]="element.atomicNumber"
+           [class.lanthanide]="element.category === 'Lanthanide'"
+           [class.actinide]="element.category === 'Actinide'"
+           [style.background-color]="getElementColor(element)"
+           [style.color]="getTextColor(element)"
+           role="button"
+           tabindex="0"
+           [attr.aria-label]="getAriaLabel(element)"
+           (click)="selectElement(element)"
+           (keydown)="onElementKeydown($event, element)">
+        <span class="element-atomic-number">{{ element.atomicNumber }}</span>
+        <span class="element-symbol">{{ element.symbol }}</span>
+        <span class="element-name">{{ element.name }}</span>
+        <span class="element-mass">{{ element.atomicMass | number:'1.0-3' }}</span>
+      </div>
+    }
+  </div>
+
+  === 6. STYLES (periodic-table-of-elements.scss) ===
+
+  Must include:
+  - CSS Grid with 18 columns: grid-template-columns: repeat(18, 1fr);
+  - Explicit positioning using data attributes
+  - Lanthanides: grid-row: 9;
+  - Actinides: grid-row: 10;
+  - Hover effects: transform: translateY(-4px) scale(1.05); + neon-glow
+  - Glassmorphism: backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.05);
+  - Responsive: Stack periods on mobile (<768px)
+  - Smooth transitions: transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  Example positioning:
+  .element-tile {
+    &[data-period="1"][data-group="1"] { grid-column: 1; grid-row: 1; }
+    &[data-period="1"][data-group="18"] { grid-column: 18; grid-row: 1; }
+
+    &.lanthanide {
+      grid-row: 9;
+      &[data-atomic-number="57"] { grid-column: 3; }
+      &[data-atomic-number="58"] { grid-column: 4; }
+      // ... continue
+    }
+
+    &.actinide {
+      grid-row: 10;
+      &[data-atomic-number="89"] { grid-column: 3; }
+      // ... continue
+    }
+  }
+
+  === 7. SUB-COMPONENTS ===
+
+  ColorLegendComponent: Standalone component that displays legend based on current metric
+  ElementDetailsBottomSheet: Mobile-only bottom sheet for element details
+  PropertyItemComponent: Reusable component for property display with copy button
+
+  === 8. PROJECT INTEGRATION ===
+
+  After creating the component:
+
+  1. tools.service.ts: Add "scientific" category if not present, then add tool:
+  {
+    id: 'periodic-table-of-elements',
+    name: 'Periodic Table of Elements',
+    description: 'Interactive periodic table with detailed element properties',
+    category: 'scientific',
+    icon: 'science',
+    route: '/tools/scientific/periodic-table-of-elements',
+    featured: true,
+    tags: ['chemistry', 'elements', 'science', 'education']
+  }
+
+  2. app.routes.ts: Add route:
+  {
+    path: 'tools/scientific/periodic-table-of-elements',
+    loadComponent: () => import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m => m.PeriodicTableOfElements),
+    title: 'Periodic Table of Elements - All The Things'
+  }
+
+  VISUAL DESIGN REQUIREMENTS:
+  - Follow project's retro-futuristic aesthetic
+  - Use glassmorphism effects (backdrop-filter: blur)
+  - Neon glow on hover
+  - Gradient accent bars at top of sections
+  - Smooth animations (300ms cubic-bezier)
+  - Premium feel with subtle elevation changes
+
+  ACCESSIBILITY REQUIREMENTS:
+  - Keyboard navigation (Tab, Enter, Space, Escape)
+  - ARIA labels: "[Name], atomic number [#], [category], [state]. Click to view detailed properties."
+  - Focus indicators with 3px outline
+  - WCAG AA contrast ratios (4.5:1 minimum)
+  - Screen reader friendly
+
+  RESPONSIVE REQUIREMENTS:
+  - Desktop (>1024px): Full 18-column grid, side drawer for details
+  - Tablet (768-1024px): Full grid with smaller tiles, overlay for details
+  - Mobile (<768px): Stacked periods with horizontal scroll, bottom sheet for details
+  - Touch targets: Minimum 44x44px on mobile
+
+  PERFORMANCE OPTIMIZATIONS:
+  - trackBy function for element loops
+  - Color caching with Map
+  - Debounced search (300ms)
+  - Memoized computed signals
+
+  VERIFICATION CHECKLIST:
+  - All 118 elements render
+  - Correct periodic table layout (Helium at top-right)
+  - Lanthanides/actinides in separate rows
+  - All 12 color metrics work
+  - Legend updates dynamically
+  - Search and filters functional
+  - Details panel opens (desktop: side, mobile: bottom)
+  - Copy buttons work
+  - Keyboard navigation functional
+  - Responsive layouts work
+  - Text readable on all backgrounds
+  - Tool appears in navigation
+
+  Please implement this complete feature with production-quality code, accurate element data, and polished styling that matches the project's aesthetic.
+
+  ---
+
+  Now you can copy this entire prompt and paste it into Claude Code in VSCode. It includes everything needed for a complete implementation!
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Ready to code?
+
+ Here is Claude's plan:
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+ Implementation Plan: Interactive Periodic Table of Elements
+
+ Context
+
+ Create a visually stunning, highly interactive Periodic Table of Elements feature for an Angular 20 project. The component will display all 118 elements in a proper periodic table layout with advanced
+ features including metric-based coloring (12 different metrics), detailed element information, search/filtering, and full accessibility support. The implementation must follow the project's established
+ patterns (standalone components, Angular signals, retro-futuristic aesthetic with glassmorphism) and integrate seamlessly with the existing "all-the-tools" codebase.
+
+ Why: This educational tool will provide chemistry students, educators, and enthusiasts with a modern, interactive way to explore element properties and chemical patterns.
+
+ Location: src/app/features/tools/scientific/periodic-table-of-elements/
+
+ Current State: Blank standalone component with empty TS/HTML/SCSS files.
+
+ Project Patterns to Follow
+
+ - Angular 20.3.14 with standalone components
+ - State management: Angular signals (signal(), computed())
+ - Styling: SCSS with retro-futuristic aesthetic (neon colors, glassmorphism, gradient accents)
+ - UI Framework: Angular Material 20.2.14 (MatCard, MatButton, MatSelect, MatIcon, MatSidenav, MatBottomSheet)
+ - Services: MetaService for SEO, CustomSnackbarService for notifications
+ - Responsive: Breakpoints at sm(640), md(768), lg(1024), xl(1280), 2xl(1536)
+
+ Core Features to Implement
+
+ 1. Full-Width Periodic Grid
+
+ - Display all 118 elements in correct periodic table layout (groups 1-18, periods 1-7)
+ - Separate lanthanides (row 9) and actinides (row 10) with proper positioning
+ - Each tile shows: atomic number, symbol, name, atomic mass
+ - CSS Grid with explicit positioning for precise element placement
+ - Responsive: full 18-column grid on desktop, stacked periods on mobile
+
+ 2. Metric Coloring System (12 Options)
+
+ - Categorical metrics: Chemical group, Standard state, Electronic block
+ - Continuous metrics: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting point, Boiling point, Density, Year discovered
+ - Color scale: Viridis-inspired gradient for continuous, distinct palette for categorical
+ - Dynamic text color (black/white) based on background luminance (WCAG AA compliant)
+ - Handle missing values with neutral gray color
+
+ 3. Dynamic Legend
+
+ - Updates based on selected metric
+ - Continuous: Gradient bar with min/max labels and unit
+ - Categorical: Color chips with labels
+ - Includes "Unknown" for missing data
+
+ 4. Element Details Panel
+
+ - Desktop: Side drawer (MatSidenav) on right, table remains full-width
+ - Mobile: Bottom sheet (MatBottomSheet) modal
+ - Shows all properties: atomic number, symbol, name, mass, electron configuration, electronegativity, atomic radius, ionization energy, electron affinity, density, melting/boiling points, oxidation states,
+ standard state, year discovered, discoveredBy
+ - Copy buttons for key properties
+ - Highlight selected metric value when metric coloring is active
+
+ 5. Search & Filters
+
+ - Search box: matches symbol, name, atomic number (debounced 300ms)
+ - Multi-select filters: category, standard state, classification
+ - Reset button to clear all filters
+ - Smooth animations for filter changes
+
+ 6. Keyboard Accessibility
+
+ - Tab navigation through element tiles
+ - Enter/Space opens details panel
+ - Escape closes details panel
+ - ARIA labels: "Hydrogen, atomic number 1, nonmetal, gas. Click to view detailed properties."
+ - Proper focus management and visual focus indicators
+
+ 7. Premium Visual Design
+
+ - Glassmorphism effects (@mixin glass-effect)
+ - Neon glow on hover (@mixin neon-glow)
+ - Smooth transitions (300ms cubic-bezier)
+ - Gradient accent bars
+ - Consistent spacing using project's spacing system
+
+ File Structure
+
+ src/app/features/tools/scientific/periodic-table-of-elements/
+ ├── periodic-table-of-elements.ts          # Main component (signals, state, methods)
+ ├── periodic-table-of-elements.html        # Template (grid, controls, details panel)
+ ├── periodic-table-of-elements.scss        # Styles (grid layout, responsive, glassmorphism)
+ ├── models/
+ │   └── element.interface.ts               # Element, ElementCategory, StandardState, ChemicalBlock interfaces
+ ├── data/
+ │   └── elements.data.ts                   # All 118 elements as TypeScript const
+ ├── utils/
+ │   └── color-mapping.util.ts              # ColorMapper class (gradient interpolation, contrast calculation)
+ └── components/
+     ├── color-legend.component.ts          # Dynamic legend (standalone component)
+     ├── element-details-bottom-sheet.component.ts  # Mobile details view
+     └── property-item.component.ts         # Reusable property display with copy button
+
+ Data Model
+
+ Element Interface:
+ interface Element {
+   atomicNumber: number;
+   symbol: string;
+   name: string;
+   atomicMass: number | null;
+   density: number | null;
+   meltingPoint: number | null;  // Kelvin
+   boilingPoint: number | null;  // Kelvin
+   electronegativity: number | null;  // Pauling scale
+   atomicRadius: number | null;  // Picometers
+   ionizationEnergy: number | null;  // kJ/mol
+   electronAffinity: number | null;  // kJ/mol
+   oxidationStates: number[];
+   electronConfiguration: string;
+   electronsPerShell: number[];
+   category: ElementCategory;
+   standardState: StandardState;
+   block: ChemicalBlock;
+   group: number | null;  // 1-18, null for lanthanides/actinides
+   period: number;  // 1-7
+   yearDiscovered: number | null;
+   discoveredBy: string | null;
+   cpkColor?: string;
+ }
+
+ Data Source: Store as TypeScript const in elements.data.ts (not JSON) for better type safety and tree-shaking.
+
+ Implementation Details
+
+ Grid Layout Strategy
+
+ - CSS Grid: grid-template-columns: repeat(18, 1fr)
+ - Explicit positioning: Use [data-period] and [data-group] attributes with CSS selectors
+ - Lanthanides: grid-row: 9; grid-column: 3-17 (atomic numbers 57-71)
+ - Actinides: grid-row: 10; grid-column: 3-17 (atomic numbers 89-103)
+ - Gaps: Use spacer indicators with asterisk (*) in period 6 and 7 at column 3
+
+ Color Mapping Algorithm
+
+ 1. Categorical: Direct lookup from predefined color palette
+ 2. Continuous:
+   - Calculate min/max across all elements for the metric
+   - Normalize value to 0-1 range: (value - min) / (max - min)
+   - Interpolate through 5-color gradient (viridis-inspired)
+ 3. Text contrast: Calculate relative luminance (WCAG formula), return white if luminance < 0.5, black otherwise
+ 4. Performance: Cache colors with key ${atomicNumber}-${metric}, clear cache on metric change
+
+ Responsive Strategy
+
+ - Desktop (>1024px): Full 18-column grid, side drawer for details
+ - Tablet (768-1024px): Full 18-column grid with smaller tiles, overlay for details
+ - Mobile (<768px): Stacked periods (horizontal scroll per period), bottom sheet for details
+ - Touch targets: Minimum 44x44px on mobile
+
+ State Management
+
+ - Use Angular signals for all reactive state:
+   - selectedElement = signal<Element | null>(null)
+   - searchQuery = signal<string>('')
+   - selectedColorMetric = signal<ColorMetric>('category')
+   - selectedCategories = signal<ElementCategory[]>([])
+   - isMobile = signal<boolean>(false)
+ - Use computed signals for derived state:
+   - filteredElements = computed(() => /* search + filter logic */)
+   - colorScaleBounds = computed(() => /* min/max for current metric */)
+   - legendItems = computed(() => /* legend data for current metric */)
+
+ Angular Material Modules
+
+ Import: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule,
+ MatBottomSheetModule, MatDividerModule, LayoutModule (BreakpointObserver)
+
+ Integration with Project
+
+ 1. Add "scientific" category to tools.service.ts categoryMeta array (if not exists)
+ 2. Register tool in tools array in tools.service.ts:
+ {
+   id: 'periodic-table-of-elements',
+   name: 'Periodic Table of Elements',
+   description: 'Interactive periodic table with detailed element properties',
+   category: 'scientific',
+   icon: 'science',
+   route: '/tools/scientific/periodic-table-of-elements',
+   featured: true
+ }
+ 3. Add route in app.routes.ts:
+ {
+   path: 'tools/scientific/periodic-table-of-elements',
+   loadComponent: () => import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m => m.PeriodicTableOfElements),
+   title: 'Periodic Table of Elements - All The Things'
+ }
+
+ SEO Strategy
+
+ In ngOnInit(), call:
+ this.metaService.updateTags({
+   title: 'Interactive Periodic Table of Elements | All The Tools',
+   description: 'Explore 118 chemical elements with our interactive periodic table. Color-coded by 12 different metrics including atomic mass, electronegativity, and standard state.',
+   keywords: ['periodic table', 'chemical elements', 'chemistry tool', 'atomic properties'],
+   image: 'https://www.allthethings.dev/meta-images/og-periodic-table.png',
+   url: 'https://www.allthethings.dev/tools/scientific/periodic-table-of-elements'
+ });
+
+ Critical Implementation Steps
+
+ 1. Create Element Interface (models/element.interface.ts)
+   - Define Element, ElementCategory, StandardState, ChemicalBlock types
+   - Define ColorMetric type union and ColorMetricOption interface
+ 2. Create Elements Data (data/elements.data.ts)
+   - All 118 elements with complete properties
+   - Use authoritative sources (NIST, Wikipedia) for data accuracy
+   - Export as const ELEMENTS: ReadonlyArray<Element>
+   - Export helper maps: ELEMENT_BY_SYMBOL, ELEMENT_BY_NUMBER
+ 3. Create Color Mapping Utility (utils/color-mapping.util.ts)
+   - ColorMapper class with static methods
+   - Categorical color palettes (10 categories, 3 states, 4 blocks)
+   - Gradient interpolation for continuous metrics (5-color viridis gradient)
+   - Text contrast calculation (WCAG formula)
+   - RGB/Hex conversion utilities
+ 4. Build Main Component (periodic-table-of-elements.ts)
+   - Set up signals for state management
+   - Implement computed signals for filtering and color bounds
+   - Inject services: MetaService, CustomSnackbarService, BreakpointObserver, MatBottomSheet
+   - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+   - Keyboard event handlers
+   - Set up responsive breakpoint observer
+ 5. Create Template (periodic-table-of-elements.html)
+   - Controls section: search input, color-by select, filter chips, reset button
+   - Legend component: <app-color-legend>
+   - Mat-drawer-container with main grid in content, details panel in drawer
+   - Periodic grid: loop through filteredElements with trackBy
+   - Element tiles with proper data attributes and event handlers
+   - Details panel content (desktop side drawer)
+ 6. Style Component (periodic-table-of-elements.scss)
+   - Import project utilities: @use '@styles/utilities' as *;
+   - Periodic grid: CSS Grid with 18 columns, explicit positioning
+   - Element tiles: glassmorphism, hover effects with neon-glow, smooth transitions
+   - Responsive breakpoints: collapse to mobile layout <768px
+   - Details panel styling: match project aesthetic
+   - Animations for tile hover, filter changes
+ 7. Create Sub-Components
+   - ColorLegendComponent: dynamic legend that updates with metric
+   - ElementDetailsBottomSheet: mobile details view with MatBottomSheet
+   - PropertyItemComponent: reusable property row with copy button
+ 8. Register Tool
+   - Add to tools.service.ts (with scientific category if needed)
+   - Add route to app.routes.ts
+
+ Verification Checklist
+
+ After implementation, verify:
+
+ - All 118 elements render in correct grid positions
+ - Lanthanides appear in row 9, actinides in row 10
+ - Helium positioned at period 1, group 18 (top right)
+ - All 12 color metrics work correctly
+ - Legend updates dynamically with metric selection
+ - Missing values show as gray with "Unknown" in legend
+ - Text remains readable on all background colors (test with contrast checker)
+ - Search filters by symbol/name/atomic number
+ - Multi-select filters combine correctly
+ - Clicking element opens details panel (desktop: side, mobile: bottom sheet)
+ - Copy buttons work for element properties
+ - Keyboard navigation: Tab through tiles, Enter/Space opens, Escape closes
+ - ARIA labels present on all interactive elements
+ - Mobile layout: tiles remain readable, minimum 44x44px touch targets
+ - Desktop layout: full-width 18-column grid
+ - Hover effects: smooth lift, neon glow
+ - Performance: no lag when switching metrics or filtering
+ - Tool appears in tools list and navigation
+ - Route works and SEO meta tags are set
+
+ Potential Challenges & Solutions
+
+ Challenge: CSS Grid positioning for 118 elements is complex
+ Solution: Use TypeScript helper function with inline style binding [style.grid-column] and [style.grid-row]
+
+ Challenge: Color gradient calculations may be slow
+ Solution: Implement color caching with Map, clear cache on metric change
+
+ Challenge: Finding accurate data for all elements
+ Solution: Use multiple authoritative sources (NIST, Wikipedia, PubChem), mark uncertain values
+
+ Challenge: Mobile touch targets too small
+ Solution: Minimum 44x44px tiles on mobile, consider increasing gaps
+
+ Challenge: Text contrast on dynamic backgrounds
+ Solution: Implement WCAG relative luminance formula, test with contrast ratio calculator
+
+ ---
+ Implementation Time Estimate: 3-4 hours for full feature with all 118 elements and complete styling
+
+ Next Step: Exit plan mode for user approval, then provide optimized prompt for Claude Code implementation.
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+ Claude has written up a plan and is ready to execute. Would you like to proceed?
+
+ > 1. Yes, clear context and auto-accept edits (shift+tab)
+   2. Yes, auto-accept edits
+   3. Yes, manually approve edits
+   4. Type here to tell Claude what to change
+
+ ctrl-g to edit in Notepad · .claude\plans\toasty-fluttering-pike.md
+
+╭─── Claude Code v2.1.37 ──────────────────────────────────────────────────────────────────────────────────────────────╮
+│                             │ Tips for getting started                                                               │
+│    Welcome back Cameron!    │ Run /init to create a CLAUDE.md file with instructions for Claude                      │
+│                             │ Note: You have launched claude in your home directory. For the best experience, launc… │
+│                             │ ────────────────────────────────────────────────────────────────────────────────────── │
+│           ▐▛███▜▌           │ Recent activity                                                                        │
+│          ▝▜█████▛▘          │ No recent activity                                                                     │
+│            ▘▘ ▝▝            │                                                                                        │
+│   Sonnet 4.5 · Claude API   │                                                                                        │
+│       C:\Users\cwmpe        │                                                                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+> examine periodic-table-of-elements-prompt.txt at C:\Users\cwmpe\Downloads. Then, think about this task, fill in
+  any gaps, and come up with a plan to create this component. Then, give me a prompt for Claude Code to implement
+  in my angular project, on my blank componnet found at C:\Users\cwmpe\Documents\Angular
+  Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+
+● I'll help you examine the prompt file and create a comprehensive plan for building the periodic table component. Let
+  me start by reading the file and exploring your Angular project structure.
+
+● Read 1 file (ctrl+o to expand)
+
+● Explore(Explore Angular project structure)
+  ⎿  Done (51 tool uses · 122.9k tokens · 2m 41s)
+
+● Excellent! I've read the prompt file and thoroughly explored your Angular project. Now let me design an implementation
+   plan.
+
+● Plan(Design periodic table implementation)
+  ⎿  Done (11 tool uses · 31.4k tokens · 8m 22s)
+
+● Excellent! I now have a comprehensive understanding of both the requirements and the Angular project structure. Let me
+   write the final implementation plan.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Perfect! I've written the comprehensive implementation plan. Now let me create an optimized prompt for Claude Code to
+  execute the implementation.
+
+  Recommended Prompt for Claude Code
+
+  Here's the prompt you should give to Claude Code to implement this component:
+
+  ---
+  PROMPT FOR CLAUDE CODE:
+
+  Implement a visually stunning, interactive Periodic Table of Elements component in my Angular project at:
+  src/app/features/tools/scientific/periodic-table-of-elements/
+
+  CONTEXT:
+  - Angular 20.3.14 standalone component (already created but blank)
+  - Use Angular signals for state management
+  - Follow the project's retro-futuristic design (glassmorphism, neon effects)
+  - Use Angular Material components already in the project
+  - SCSS with utilities from styles/_utilities.scss
+
+  IMPLEMENTATION REQUIREMENTS:
+
+  1. DATA & MODELS:
+     - Create models/element.interface.ts with Element interface, enums for ElementCategory, StandardState,
+  ChemicalBlock
+     - Create data/elements.data.ts with all 118 elements as TypeScript const array
+     - Include properties: atomicNumber, symbol, name, atomicMass, density, meltingPoint, boilingPoint,
+  electronegativity, atomicRadius, ionizationEnergy, electronAffinity, oxidationStates, electronConfiguration, category,
+   standardState, block, group, period, yearDiscovered
+     - Use null for missing values (especially for synthetic elements)
+
+  2. PERIODIC TABLE GRID:
+     - CSS Grid with 18 columns (groups)
+     - Correct positioning: periods 1-7, groups 1-18
+     - Lanthanides in separate row 9 (columns 3-17)
+     - Actinides in separate row 10 (columns 3-17)
+     - Each tile shows: atomic number (top), symbol (large center), name (below), atomic mass (bottom)
+     - Full-width on desktop, stacked periods on mobile (<768px)
+
+  3. METRIC COLORING SYSTEM:
+     - Create utils/color-mapping.util.ts with ColorMapper class
+     - "Color by" dropdown with 12 options:
+       * Categorical: Chemical group, Standard state, Electronic block
+       * Continuous: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting point,
+   Boiling point, Density, Year discovered
+     - For continuous: use viridis-inspired 5-color gradient, interpolate based on min/max normalization
+     - For categorical: distinct color palette per category
+     - Dynamic text color (black/white) based on background luminance using WCAG formula
+     - Show missing values in neutral gray
+
+  4. DYNAMIC LEGEND:
+     - Create components/color-legend.component.ts (standalone)
+     - Updates when metric changes
+     - Continuous: gradient bar with min/max labels and unit
+     - Categorical: colored chips with labels
+     - Include "Unknown" entry for missing data
+
+  5. ELEMENT DETAILS:
+     - Desktop: MatSidenav on right side (use MatDrawer)
+     - Mobile: MatBottomSheet modal
+     - Show all element properties with labels
+     - Copy buttons for key properties (use clipboard API)
+     - Highlight current metric value when metric coloring is active
+
+  6. SEARCH & FILTERS:
+     - Search input (debounced 300ms) matching symbol/name/atomic number
+     - Multi-select chips for category and standard state filters
+     - Reset button
+     - Use computed signal for filteredElements
+
+  7. VISUAL DESIGN:
+     - Use project's @mixin glass-effect for tiles
+     - Use @mixin neon-glow for hover effects
+     - Smooth transitions (300ms cubic-bezier)
+     - Gradient accent bars
+     - Premium hover states: translateY(-4px) scale(1.05)
+
+  8. ACCESSIBILITY:
+     - Tab navigation through tiles
+     - Enter/Space opens details
+     - Escape closes details
+     - ARIA labels: "[Name], atomic number [#], [category], [state]. Click to view detailed properties."
+     - Focus indicators with outline
+
+  9. PROJECT INTEGRATION:
+     - Add "scientific" category to tools.service.ts if not present
+     - Register tool in tools.service.ts tools array
+     - Add route in app.routes.ts for /tools/scientific/periodic-table-of-elements
+     - Use MetaService in ngOnInit() for SEO
+
+  10. COMPONENT STATE (use signals):
+      - selectedElement, searchQuery, selectedColorMetric, selectedCategories, selectedStates, isMobile,
+  detailsPanelOpen
+      - Computed: filteredElements, colorScaleBounds, legendItems
+
+  TECHNICAL NOTES:
+  - Import modules: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule,
+  MatFormFieldModule, MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule, MatBottomSheetModule
+  - Use BreakpointObserver from @angular/cdk/layout for responsive
+  - Inject: MetaService, CustomSnackbarService, MatBottomSheet, BreakpointObserver
+  - Use trackBy function for element loops (trackByAtomicNumber)
+  - Cache colors for performance (Map with key: `${atomicNumber}-${metric}`)
+
+  VERIFICATION:
+  - All 118 elements in correct positions
+  - Helium at period 1, group 18 (top right)
+  - Lanthanides/actinides in separate rows
+  - All 12 color metrics functional
+  - Text readable on all backgrounds
+  - Keyboard navigation works
+  - Mobile responsive (<768px)
+  - Touch targets minimum 44x44px
+
+  Please implement the complete component with all files following the structure described. Use accurate element data
+  from authoritative sources (NIST, Wikipedia).
+
+  ---
+  ⎿ Tool use rejected with user message: I want you to output a comprehensive prompt for me to use in VSCode with Claude
+     Code.
+
+● Understood! Let me create a comprehensive, production-ready prompt you can use directly in VSCode with Claude Code:
+
+  ---
+  COMPREHENSIVE CLAUDE CODE PROMPT
+
+  Copy and paste this entire prompt into Claude Code in VSCode:
+
+  Implement a complete, production-ready Interactive Periodic Table of Elements feature in my Angular 20 project.
+
+  PROJECT CONTEXT:
+  - Location: C:\Users\cwmpe\Documents\Angular
+  Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+  - Angular 20.3.14 with standalone components
+  - TypeScript strict mode enabled
+  - Angular Material 20.2.14 for UI
+  - SCSS with retro-futuristic design system (neon colors, glassmorphism)
+  - State management using Angular signals
+  - Existing services: MetaService (SEO), CustomSnackbarService (notifications), ToolsService (tool registry)
+
+  DESIGN REQUIREMENTS:
+
+  The periodic table must be:
+  1. Full-width across the viewport
+  2. Visually stunning (glassmorphism, neon glows, smooth animations)
+  3. Highly interactive (12 different color-by metrics)
+  4. Fully accessible (WCAG AA, keyboard navigation)
+  5. Responsive (desktop grid, mobile stacked periods)
+  6. Educational (detailed properties, copy-to-clipboard, search, filters)
+
+  FILE STRUCTURE TO CREATE:
+
+  periodic-table-of-elements/
+  ├── periodic-table-of-elements.ts          # Main component
+  ├── periodic-table-of-elements.html        # Template
+  ├── periodic-table-of-elements.scss        # Styles
+  ├── models/
+  │   └── element.interface.ts               # TypeScript interfaces
+  ├── data/
+  │   └── elements.data.ts                   # 118 elements dataset
+  ├── utils/
+  │   └── color-mapping.util.ts              # Color calculation utilities
+  └── components/
+      ├── color-legend.component.ts          # Dynamic legend
+      ├── element-details-bottom-sheet.component.ts
+      └── property-item.component.ts         # Reusable property display
+
+  DETAILED SPECIFICATIONS:
+
+  === 1. ELEMENT DATA MODEL (models/element.interface.ts) ===
+
+  ```typescript
+  export interface Element {
+    atomicNumber: number;
+    symbol: string;
+    name: string;
+    atomicMass: number | null;           // u (atomic mass units)
+    density: number | null;              // g/cm³
+    meltingPoint: number | null;         // Kelvin
+    boilingPoint: number | null;         // Kelvin
+    electronegativity: number | null;    // Pauling scale
+    atomicRadius: number | null;         // Picometers
+    ionizationEnergy: number | null;     // kJ/mol (first ionization)
+    electronAffinity: number | null;     // kJ/mol
+    oxidationStates: number[];           // e.g., [-1, 1, 3]
+    electronConfiguration: string;       // e.g., "[Ar] 3d10 4s2"
+    electronsPerShell: number[];         // e.g., [2, 8, 18, 32, 18, 7]
+    category: ElementCategory;
+    standardState: StandardState;        // at STP
+    block: ChemicalBlock;                // s, p, d, f
+    group: number | null;                // 1-18, null for lanthanides/actinides
+    period: number;                      // 1-7
+    yearDiscovered: number | null;
+    discoveredBy: string | null;
+  }
+
+  export enum ElementCategory {
+    ALKALI_METAL = 'Alkali Metal',
+    ALKALINE_EARTH_METAL = 'Alkaline Earth Metal',
+    TRANSITION_METAL = 'Transition Metal',
+    POST_TRANSITION_METAL = 'Post-transition Metal',
+    METALLOID = 'Metalloid',
+    NONMETAL = 'Nonmetal',
+    HALOGEN = 'Halogen',
+    NOBLE_GAS = 'Noble Gas',
+    LANTHANIDE = 'Lanthanide',
+    ACTINIDE = 'Actinide'
+  }
+
+  export enum StandardState {
+    SOLID = 'Solid',
+    LIQUID = 'Liquid',
+    GAS = 'Gas',
+    UNKNOWN = 'Unknown'
+  }
+
+  export enum ChemicalBlock {
+    S = 's',
+    P = 'p',
+    D = 'd',
+    F = 'f'
+  }
+
+  export type ColorMetric =
+    | 'category' | 'standardState' | 'block'
+    | 'atomicMass' | 'electronegativity' | 'atomicRadius'
+    | 'ionizationEnergy' | 'electronAffinity'
+    | 'meltingPoint' | 'boilingPoint' | 'density' | 'yearDiscovered';
+
+  export interface ColorMetricOption {
+    value: ColorMetric;
+    label: string;
+    type: 'continuous' | 'categorical';
+    unit?: string;
+    description?: string;
+  }
+
+  === 2. ELEMENTS DATA (data/elements.data.ts) ===
+
+  Create an array of all 118 elements with accurate data from Wikipedia/NIST:
+
+  import { Element, ElementCategory, StandardState, ChemicalBlock } from '../models/element.interface';
+
+  export const ELEMENTS: ReadonlyArray<Element> = [
+    {
+      atomicNumber: 1,
+      symbol: 'H',
+      name: 'Hydrogen',
+      atomicMass: 1.008,
+      density: 0.00008988,
+      meltingPoint: 14.01,
+      boilingPoint: 20.28,
+      electronegativity: 2.20,
+      atomicRadius: 120,
+      ionizationEnergy: 1312,
+      electronAffinity: 72.8,
+      oxidationStates: [-1, 1],
+      electronConfiguration: '1s¹',
+      electronsPerShell: [1],
+      category: ElementCategory.NONMETAL,
+      standardState: StandardState.GAS,
+      block: ChemicalBlock.S,
+      group: 1,
+      period: 1,
+      yearDiscovered: 1766,
+      discoveredBy: 'Henry Cavendish'
+    },
+    // Continue for all 118 elements...
+    // Use null for unknown/missing values
+  ] as const;
+
+  export const ELEMENT_BY_SYMBOL = new Map(ELEMENTS.map(el => [el.symbol, el]));
+  export const ELEMENT_BY_NUMBER = new Map(ELEMENTS.map(el => [el.atomicNumber, el]));
+
+  IMPORTANT: Include ALL 118 elements with accurate data. For synthetic elements with incomplete data, use null.
+
+  === 3. COLOR MAPPING UTILITY (utils/color-mapping.util.ts) ===
+
+  export class ColorMapper {
+    // Retro-futuristic categorical palettes
+    private static readonly CATEGORY_COLORS: Record<string, string> = {
+      'Alkali Metal': '#FF006E',
+      'Alkaline Earth Metal': '#FB5607',
+      'Transition Metal': '#8338EC',
+      'Post-transition Metal': '#3A86FF',
+      'Metalloid': '#06FFA5',
+      'Nonmetal': '#FFBE0B',
+      'Halogen': '#FF006E',
+      'Noble Gas': '#00F5FF',
+      'Lanthanide': '#FF69B4',
+      'Actinide': '#FFD700'
+    };
+
+    private static readonly STATE_COLORS: Record<string, string> = {
+      'Solid': '#8338EC',
+      'Liquid': '#3A86FF',
+      'Gas': '#06FFA5',
+      'Unknown': '#6C757D'
+    };
+
+    private static readonly BLOCK_COLORS: Record<string, string> = {
+      's': '#FF006E',
+      'p': '#FFBE0B',
+      'd': '#3A86FF',
+      'f': '#8338EC'
+    };
+
+    // Viridis-inspired gradient for scientific accuracy
+    private static readonly GRADIENT_COLORS = [
+      '#440154', '#3B528B', '#21908C', '#5DC863', '#FDE724'
+    ];
+
+    static getCategoricalColor(element: any, metric: string): string {
+      switch (metric) {
+        case 'category': return this.CATEGORY_COLORS[element.category] || '#6C757D';
+        case 'standardState': return this.STATE_COLORS[element.standardState] || '#6C757D';
+        case 'block': return this.BLOCK_COLORS[element.block] || '#6C757D';
+        default: return '#6C757D';
+      }
+    }
+
+    static getContinuousColor(value: number | null, min: number, max: number): string {
+      if (value === null) return '#2C2C2C'; // Dark gray for missing
+      const normalized = (value - min) / (max - min);
+      return this.interpolateGradient(Math.max(0, Math.min(1, normalized)));
+    }
+
+    private static interpolateGradient(t: number): string {
+      const segments = this.GRADIENT_COLORS.length - 1;
+      const scaledT = t * segments;
+      const index = Math.floor(scaledT);
+      const localT = scaledT - index;
+
+      if (index >= segments) return this.GRADIENT_COLORS[segments];
+
+      const color1 = this.hexToRgb(this.GRADIENT_COLORS[index]);
+      const color2 = this.hexToRgb(this.GRADIENT_COLORS[index + 1]);
+
+      const r = Math.round(color1.r + (color2.r - color1.r) * localT);
+      const g = Math.round(color1.g + (color2.g - color1.g) * localT);
+      const b = Math.round(color1.b + (color2.b - color1.b) * localT);
+
+      return this.rgbToHex(r, g, b);
+    }
+
+    static calculateTextContrast(bgColorHex: string): string {
+      const rgb = this.hexToRgb(bgColorHex);
+      const luminance = this.getRelativeLuminance(rgb.r, rgb.g, rgb.b);
+      return luminance > 0.5 ? '#000000' : '#FFFFFF';
+    }
+
+    private static getRelativeLuminance(r: number, g: number, b: number): number {
+      const [rs, gs, bs] = [r, g, b].map(c => {
+        const normalized = c / 255;
+        return normalized <= 0.03928
+          ? normalized / 12.92
+          : Math.pow((normalized + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    }
+
+    private static hexToRgb(hex: string): { r: number; g: number; b: number } {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 0, b: 0 };
+    }
+
+    private static rgbToHex(r: number, g: number, b: number): string {
+      return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+  }
+
+  === 4. MAIN COMPONENT (periodic-table-of-elements.ts) ===
+
+  Key implementation points:
+  - Use Angular signals for ALL state
+  - Inject: MetaService, CustomSnackbarService, MatBottomSheet, BreakpointObserver
+  - Computed signals: filteredElements, colorScaleBounds, legendItems
+  - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+  - Set up BreakpointObserver to detect mobile
+  - In ngOnInit(), call metaService.updateTags() with SEO data
+
+  State signals needed:
+  selectedElement = signal<Element | null>(null);
+  searchQuery = signal<string>('');
+  selectedColorMetric = signal<ColorMetric>('category');
+  selectedCategories = signal<ElementCategory[]>([]);
+  selectedStates = signal<StandardState[]>([]);
+  isMobile = signal<boolean>(false);
+  detailsPanelOpen = signal<boolean>(false);
+
+  Computed signals:
+  filteredElements = computed(() => {
+    // Search + filter logic
+  });
+
+  colorScaleBounds = computed(() => {
+    // Calculate min/max for continuous metrics
+  });
+
+  legendItems = computed(() => {
+    // Generate legend data based on current metric
+  });
+
+  Color methods:
+  getElementColor(element: Element): string {
+    const metric = this.selectedColorMetric();
+    const option = this.colorMetricOptions.find(m => m.value === metric)!;
+
+    if (option.type === 'categorical') {
+      return ColorMapper.getCategoricalColor(element, metric);
+    } else {
+      const bounds = this.colorScaleBounds();
+      const value = element[metric] as number | null;
+      return ColorMapper.getContinuousColor(value, bounds.min, bounds.max);
+    }
+  }
+
+  getTextColor(element: Element): string {
+    return ColorMapper.calculateTextContrast(this.getElementColor(element));
+  }
+
+  === 5. TEMPLATE (periodic-table-of-elements.html) ===
+
+  Structure:
+  1. Controls Section: Search input, color-by select, filter chips, reset button
+  2. Legend Component: <app-color-legend>
+  3. Drawer Container: MatDrawer for desktop details panel
+  4. Periodic Grid: Loop through filteredElements with proper positioning
+  5. Element Tiles: data attributes, click/keyboard handlers, dynamic colors
+
+  Grid layout strategy:
+  <div class="periodic-grid">
+    @for (element of filteredElements(); track element.atomicNumber) {
+      <div class="element-tile"
+           [attr.data-period]="element.period"
+           [attr.data-group]="element.group"
+           [attr.data-atomic-number]="element.atomicNumber"
+           [class.lanthanide]="element.category === 'Lanthanide'"
+           [class.actinide]="element.category === 'Actinide'"
+           [style.background-color]="getElementColor(element)"
+           [style.color]="getTextColor(element)"
+           role="button"
+           tabindex="0"
+           [attr.aria-label]="getAriaLabel(element)"
+           (click)="selectElement(element)"
+           (keydown)="onElementKeydown($event, element)">
+        <span class="element-atomic-number">{{ element.atomicNumber }}</span>
+        <span class="element-symbol">{{ element.symbol }}</span>
+        <span class="element-name">{{ element.name }}</span>
+        <span class="element-mass">{{ element.atomicMass | number:'1.0-3' }}</span>
+      </div>
+    }
+  </div>
+
+  === 6. STYLES (periodic-table-of-elements.scss) ===
+
+  Must include:
+  - CSS Grid with 18 columns: grid-template-columns: repeat(18, 1fr);
+  - Explicit positioning using data attributes
+  - Lanthanides: grid-row: 9;
+  - Actinides: grid-row: 10;
+  - Hover effects: transform: translateY(-4px) scale(1.05); + neon-glow
+  - Glassmorphism: backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.05);
+  - Responsive: Stack periods on mobile (<768px)
+  - Smooth transitions: transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  Example positioning:
+  .element-tile {
+    &[data-period="1"][data-group="1"] { grid-column: 1; grid-row: 1; }
+    &[data-period="1"][data-group="18"] { grid-column: 18; grid-row: 1; }
+
+    &.lanthanide {
+      grid-row: 9;
+      &[data-atomic-number="57"] { grid-column: 3; }
+      &[data-atomic-number="58"] { grid-column: 4; }
+      // ... continue
+    }
+
+    &.actinide {
+      grid-row: 10;
+      &[data-atomic-number="89"] { grid-column: 3; }
+      // ... continue
+    }
+  }
+
+  === 7. SUB-COMPONENTS ===
+
+  ColorLegendComponent: Standalone component that displays legend based on current metric
+  ElementDetailsBottomSheet: Mobile-only bottom sheet for element details
+  PropertyItemComponent: Reusable component for property display with copy button
+
+  === 8. PROJECT INTEGRATION ===
+
+  After creating the component:
+
+  1. tools.service.ts: Add "scientific" category if not present, then add tool:
+  {
+    id: 'periodic-table-of-elements',
+    name: 'Periodic Table of Elements',
+    description: 'Interactive periodic table with detailed element properties',
+    category: 'scientific',
+    icon: 'science',
+    route: '/tools/scientific/periodic-table-of-elements',
+    featured: true,
+    tags: ['chemistry', 'elements', 'science', 'education']
+  }
+
+  2. app.routes.ts: Add route:
+  {
+    path: 'tools/scientific/periodic-table-of-elements',
+    loadComponent: () =>
+  import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m =>
+  m.PeriodicTableOfElements),
+    title: 'Periodic Table of Elements - All The Things'
+  }
+
+  VISUAL DESIGN REQUIREMENTS:
+  - Follow project's retro-futuristic aesthetic
+  - Use glassmorphism effects (backdrop-filter: blur)
+  - Neon glow on hover
+  - Gradient accent bars at top of sections
+  - Smooth animations (300ms cubic-bezier)
+  - Premium feel with subtle elevation changes
+
+  ACCESSIBILITY REQUIREMENTS:
+  - Keyboard navigation (Tab, Enter, Space, Escape)
+  - ARIA labels: "[Name], atomic number [#], [category], [state]. Click to view detailed properties."
+  - Focus indicators with 3px outline
+  - WCAG AA contrast ratios (4.5:1 minimum)
+  - Screen reader friendly
+
+  RESPONSIVE REQUIREMENTS:
+  - Desktop (>1024px): Full 18-column grid, side drawer for details
+  - Tablet (768-1024px): Full grid with smaller tiles, overlay for details
+  - Mobile (<768px): Stacked periods with horizontal scroll, bottom sheet for details
+  - Touch targets: Minimum 44x44px on mobile
+
+  PERFORMANCE OPTIMIZATIONS:
+  - trackBy function for element loops
+  - Color caching with Map
+  - Debounced search (300ms)
+  - Memoized computed signals
+
+  VERIFICATION CHECKLIST:
+  - All 118 elements render
+  - Correct periodic table layout (Helium at top-right)
+  - Lanthanides/actinides in separate rows
+  - All 12 color metrics work
+  - Legend updates dynamically
+  - Search and filters functional
+  - Details panel opens (desktop: side, mobile: bottom)
+  - Copy buttons work
+  - Keyboard navigation functional
+  - Responsive layouts work
+  - Text readable on all backgrounds
+  - Tool appears in navigation
+
+  Please implement this complete feature with production-quality code, accurate element data, and polished styling that
+  matches the project's aesthetic.
+
+  ---
+
+  Now you can copy this entire prompt and paste it into Claude Code in VSCode. It includes everything needed for a
+  complete implementation!
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Ready to code?
+
+ Here is Claude's plan:
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+ Implementation Plan: Interactive Periodic Table of Elements
+
+ Context
+
+ Create a visually stunning, highly interactive Periodic Table of Elements feature for an Angular 20 project. The
+ component will display all 118 elements in a proper periodic table layout with advanced features including
+ metric-based coloring (12 different metrics), detailed element information, search/filtering, and full accessibility
+ support. The implementation must follow the project's established patterns (standalone components, Angular signals,
+ retro-futuristic aesthetic with glassmorphism) and integrate seamlessly with the existing "all-the-tools" codebase.
+
+ Why: This educational tool will provide chemistry students, educators, and enthusiasts with a modern, interactive way
+ to explore element properties and chemical patterns.
+
+ Location: src/app/features/tools/scientific/periodic-table-of-elements/
+
+ Current State: Blank standalone component with empty TS/HTML/SCSS files.
+
+ Project Patterns to Follow
+
+ - Angular 20.3.14 with standalone components
+ - State management: Angular signals (signal(), computed())
+ - Styling: SCSS with retro-futuristic aesthetic (neon colors, glassmorphism, gradient accents)
+ - UI Framework: Angular Material 20.2.14 (MatCard, MatButton, MatSelect, MatIcon, MatSidenav, MatBottomSheet)
+ - Services: MetaService for SEO, CustomSnackbarService for notifications
+ - Responsive: Breakpoints at sm(640), md(768), lg(1024), xl(1280), 2xl(1536)
+
+ Core Features to Implement
+
+ 1. Full-Width Periodic Grid
+
+ - Display all 118 elements in correct periodic table layout (groups 1-18, periods 1-7)
+ - Separate lanthanides (row 9) and actinides (row 10) with proper positioning
+ - Each tile shows: atomic number, symbol, name, atomic mass
+ - CSS Grid with explicit positioning for precise element placement
+ - Responsive: full 18-column grid on desktop, stacked periods on mobile
+
+ 2. Metric Coloring System (12 Options)
+
+ - Categorical metrics: Chemical group, Standard state, Electronic block
+ - Continuous metrics: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting
+ point, Boiling point, Density, Year discovered
+ - Color scale: Viridis-inspired gradient for continuous, distinct palette for categorical
+ - Dynamic text color (black/white) based on background luminance (WCAG AA compliant)
+ - Handle missing values with neutral gray color
+
+ 3. Dynamic Legend
+
+ - Updates based on selected metric
+ - Continuous: Gradient bar with min/max labels and unit
+ - Categorical: Color chips with labels
+ - Includes "Unknown" for missing data
+
+ 4. Element Details Panel
+
+ - Desktop: Side drawer (MatSidenav) on right, table remains full-width
+ - Mobile: Bottom sheet (MatBottomSheet) modal
+ - Shows all properties: atomic number, symbol, name, mass, electron configuration, electronegativity, atomic radius,
+ ionization energy, electron affinity, density, melting/boiling points, oxidation states, standard state, year
+ discovered, discoveredBy
+ - Copy buttons for key properties
+ - Highlight selected metric value when metric coloring is active
+
+ 5. Search & Filters
+
+ - Search box: matches symbol, name, atomic number (debounced 300ms)
+ - Multi-select filters: category, standard state, classification
+ - Reset button to clear all filters
+ - Smooth animations for filter changes
+
+ 6. Keyboard Accessibility
+
+ - Tab navigation through element tiles
+ - Enter/Space opens details panel
+ - Escape closes details panel
+ - ARIA labels: "Hydrogen, atomic number 1, nonmetal, gas. Click to view detailed properties."
+ - Proper focus management and visual focus indicators
+
+ 7. Premium Visual Design
+
+ - Glassmorphism effects (@mixin glass-effect)
+ - Neon glow on hover (@mixin neon-glow)
+ - Smooth transitions (300ms cubic-bezier)
+ - Gradient accent bars
+ - Consistent spacing using project's spacing system
+
+ File Structure
+
+ src/app/features/tools/scientific/periodic-table-of-elements/
+ ├── periodic-table-of-elements.ts          # Main component (signals, state, methods)
+ ├── periodic-table-of-elements.html        # Template (grid, controls, details panel)
+ ├── periodic-table-of-elements.scss        # Styles (grid layout, responsive, glassmorphism)
+ ├── models/
+ │   └── element.interface.ts               # Element, ElementCategory, StandardState, ChemicalBlock interfaces
+ ├── data/
+ │   └── elements.data.ts                   # All 118 elements as TypeScript const
+ ├── utils/
+ │   └── color-mapping.util.ts              # ColorMapper class (gradient interpolation, contrast calculation)
+ └── components/
+     ├── color-legend.component.ts          # Dynamic legend (standalone component)
+     ├── element-details-bottom-sheet.component.ts  # Mobile details view
+     └── property-item.component.ts         # Reusable property display with copy button
+
+ Data Model
+
+ Element Interface:
+ interface Element {
+   atomicNumber: number;
+   symbol: string;
+   name: string;
+   atomicMass: number | null;
+   density: number | null;
+   meltingPoint: number | null;  // Kelvin
+   boilingPoint: number | null;  // Kelvin
+   electronegativity: number | null;  // Pauling scale
+   atomicRadius: number | null;  // Picometers
+   ionizationEnergy: number | null;  // kJ/mol
+   electronAffinity: number | null;  // kJ/mol
+   oxidationStates: number[];
+   electronConfiguration: string;
+   electronsPerShell: number[];
+   category: ElementCategory;
+   standardState: StandardState;
+   block: ChemicalBlock;
+   group: number | null;  // 1-18, null for lanthanides/actinides
+   period: number;  // 1-7
+   yearDiscovered: number | null;
+   discoveredBy: string | null;
+   cpkColor?: string;
+ }
+
+ Data Source: Store as TypeScript const in elements.data.ts (not JSON) for better type safety and tree-shaking.
+
+ Implementation Details
+
+ Grid Layout Strategy
+
+ - CSS Grid: grid-template-columns: repeat(18, 1fr)
+ - Explicit positioning: Use [data-period] and [data-group] attributes with CSS selectors
+ - Lanthanides: grid-row: 9; grid-column: 3-17 (atomic numbers 57-71)
+ - Actinides: grid-row: 10; grid-column: 3-17 (atomic numbers 89-103)
+ - Gaps: Use spacer indicators with asterisk (*) in period 6 and 7 at column 3
+
+ Color Mapping Algorithm
+
+ 1. Categorical: Direct lookup from predefined color palette
+ 2. Continuous:
+   - Calculate min/max across all elements for the metric
+   - Normalize value to 0-1 range: (value - min) / (max - min)
+   - Interpolate through 5-color gradient (viridis-inspired)
+ 3. Text contrast: Calculate relative luminance (WCAG formula), return white if luminance < 0.5, black otherwise
+ 4. Performance: Cache colors with key ${atomicNumber}-${metric}, clear cache on metric change
+
+ Responsive Strategy
+
+ - Desktop (>1024px): Full 18-column grid, side drawer for details
+ - Tablet (768-1024px): Full 18-column grid with smaller tiles, overlay for details
+ - Mobile (<768px): Stacked periods (horizontal scroll per period), bottom sheet for details
+ - Touch targets: Minimum 44x44px on mobile
+
+ State Management
+
+ - Use Angular signals for all reactive state:
+   - selectedElement = signal<Element | null>(null)
+   - searchQuery = signal<string>('')
+   - selectedColorMetric = signal<ColorMetric>('category')
+   - selectedCategories = signal<ElementCategory[]>([])
+   - isMobile = signal<boolean>(false)
+ - Use computed signals for derived state:
+   - filteredElements = computed(() => /* search + filter logic */)
+   - colorScaleBounds = computed(() => /* min/max for current metric */)
+   - legendItems = computed(() => /* legend data for current metric */)
+
+ Angular Material Modules
+
+ Import: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatFormFieldModule,
+  MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule, MatBottomSheetModule, MatDividerModule,
+ LayoutModule (BreakpointObserver)
+
+ Integration with Project
+
+ 1. Add "scientific" category to tools.service.ts categoryMeta array (if not exists)
+ 2. Register tool in tools array in tools.service.ts:
+ {
+   id: 'periodic-table-of-elements',
+   name: 'Periodic Table of Elements',
+   description: 'Interactive periodic table with detailed element properties',
+   category: 'scientific',
+   icon: 'science',
+   route: '/tools/scientific/periodic-table-of-elements',
+   featured: true
+ }
+ 3. Add route in app.routes.ts:
+ {
+   path: 'tools/scientific/periodic-table-of-elements',
+   loadComponent: () =>
+ import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m =>
+ m.PeriodicTableOfElements),
+   title: 'Periodic Table of Elements - All The Things'
+ }
+
+ SEO Strategy
+
+ In ngOnInit(), call:
+ this.metaService.updateTags({
+   title: 'Interactive Periodic Table of Elements | All The Tools',
+   description: 'Explore 118 chemical elements with our interactive periodic table. Color-coded by 12 different metrics
+  including atomic mass, electronegativity, and standard state.',
+   keywords: ['periodic table', 'chemical elements', 'chemistry tool', 'atomic properties'],
+   image: 'https://www.allthethings.dev/meta-images/og-periodic-table.png',
+   url: 'https://www.allthethings.dev/tools/scientific/periodic-table-of-elements'
+ });
+
+ Critical Implementation Steps
+
+ 1. Create Element Interface (models/element.interface.ts)
+   - Define Element, ElementCategory, StandardState, ChemicalBlock types
+   - Define ColorMetric type union and ColorMetricOption interface
+ 2. Create Elements Data (data/elements.data.ts)
+   - All 118 elements with complete properties
+   - Use authoritative sources (NIST, Wikipedia) for data accuracy
+   - Export as const ELEMENTS: ReadonlyArray<Element>
+   - Export helper maps: ELEMENT_BY_SYMBOL, ELEMENT_BY_NUMBER
+ 3. Create Color Mapping Utility (utils/color-mapping.util.ts)
+   - ColorMapper class with static methods
+   - Categorical color palettes (10 categories, 3 states, 4 blocks)
+   - Gradient interpolation for continuous metrics (5-color viridis gradient)
+   - Text contrast calculation (WCAG formula)
+   - RGB/Hex conversion utilities
+ 4. Build Main Component (periodic-table-of-elements.ts)
+   - Set up signals for state management
+   - Implement computed signals for filtering and color bounds
+   - Inject services: MetaService, CustomSnackbarService, BreakpointObserver, MatBottomSheet
+   - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+   - Keyboard event handlers
+   - Set up responsive breakpoint observer
+ 5. Create Template (periodic-table-of-elements.html)
+   - Controls section: search input, color-by select, filter chips, reset button
+   - Legend component: <app-color-legend>
+   - Mat-drawer-container with main grid in content, details panel in drawer
+   - Periodic grid: loop through filteredElements with trackBy
+   - Element tiles with proper data attributes and event handlers
+   - Details panel content (desktop side drawer)
+ 6. Style Component (periodic-table-of-elements.scss)
+   - Import project utilities: @use '@styles/utilities' as *;
+   - Periodic grid: CSS Grid with 18 columns, explicit positioning
+   - Element tiles: glassmorphism, hover effects with neon-glow, smooth transitions
+   - Responsive breakpoints: collapse to mobile layout <768px
+   - Details panel styling: match project aesthetic
+   - Animations for tile hover, filter changes
+ 7. Create Sub-Components
+   - ColorLegendComponent: dynamic legend that updates with metric
+   - ElementDetailsBottomSheet: mobile details view with MatBottomSheet
+   - PropertyItemComponent: reusable property row with copy button
+ 8. Register Tool
+   - Add to tools.service.ts (with scientific category if needed)
+   - Add route to app.routes.ts
+
+ Verification Checklist
+
+ After implementation, verify:
+
+ - All 118 elements render in correct grid positions
+ - Lanthanides appear in row 9, actinides in row 10
+ - Helium positioned at period 1, group 18 (top right)
+ - All 12 color metrics work correctly
+ - Legend updates dynamically with metric selection
+ - Missing values show as gray with "Unknown" in legend
+ - Text remains readable on all background colors (test with contrast checker)
+ - Search filters by symbol/name/atomic number
+ - Multi-select filters combine correctly
+ - Clicking element opens details panel (desktop: side, mobile: bottom sheet)
+ - Copy buttons work for element properties
+ - Keyboard navigation: Tab through tiles, Enter/Space opens, Escape closes
+ - ARIA labels present on all interactive elements
+ - Mobile layout: tiles remain readable, minimum 44x44px touch targets
+ - Desktop layout: full-width 18-column grid
+ - Hover effects: smooth lift, neon glow
+ - Performance: no lag when switching metrics or filtering
+ - Tool appears in tools list and navigation
+ - Route works and SEO meta tags are set
+
+ Potential Challenges & Solutions
+
+ Challenge: CSS Grid positioning for 118 elements is complex
+ Solution: Use TypeScript helper function with inline style binding [style.grid-column] and [style.grid-row]
+
+ Challenge: Color gradient calculations may be slow
+ Solution: Implement color caching with Map, clear cache on metric change
+
+ Challenge: Finding accurate data for all elements
+ Solution: Use multiple authoritative sources (NIST, Wikipedia, PubChem), mark uncertain values
+
+ Challenge: Mobile touch targets too small
+ Solution: Minimum 44x44px tiles on mobile, consider increasing gaps
+
+ Challenge: Text contrast on dynamic backgrounds
+ Solution: Implement WCAG relative luminance formula, test with contrast ratio calculator
+
+ ---
+ Implementation Time Estimate: 3-4 hours for full feature with all 118 elements and complete styling
+
+ Next Step: Exit plan mode for user approval, then provide optimized prompt for Claude Code implementation.
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+ Claude has written up a plan and is ready to execute. Would you like to proceed?
+
+ > 1. Yes, clear context and auto-accept edits (shift+tab)
+   2. Yes, auto-accept edits
+   3. Yes, manually approve edits
+   4. Type here to tell Claude what to change
+
+ ctrl-g to edit in Notepad · .claude\plans\toasty-fluttering-pike.md
+
+╭─── Claude Code v2.1.37 ──────────────────────────────────────────────────────────────────────────────────────────╮
+│                             │ Tips for getting started                                                           │
+│    Welcome back Cameron!    │ Run /init to create a CLAUDE.md file with instructions for Claude                  │
+│                             │ Note: You have launched claude in your home directory. For the best experience, l… │
+│                             │ ────────────────────────────────────────────────────────────────────────────────── │
+│           ▐▛███▜▌           │ Recent activity                                                                    │
+│          ▝▜█████▛▘          │ No recent activity                                                                 │
+│            ▘▘ ▝▝            │                                                                                    │
+│   Sonnet 4.5 · Claude API   │                                                                                    │
+│       C:\Users\cwmpe        │                                                                                    │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+> examine periodic-table-of-elements-prompt.txt at C:\Users\cwmpe\Downloads. Then, think about this task, fill
+  in any gaps, and come up with a plan to create this component. Then, give me a prompt for Claude Code to
+  implement in my angular project, on my blank componnet found at C:\Users\cwmpe\Documents\Angular
+  Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+
+● I'll help you examine the prompt file and create a comprehensive plan for building the periodic table component.
+  Let me start by reading the file and exploring your Angular project structure.
+
+● Read 1 file (ctrl+o to expand)
+
+● Explore(Explore Angular project structure)
+  ⎿  Done (51 tool uses · 122.9k tokens · 2m 41s)
+
+● Excellent! I've read the prompt file and thoroughly explored your Angular project. Now let me design an
+  implementation plan.
+
+● Plan(Design periodic table implementation)
+  ⎿  Done (11 tool uses · 31.4k tokens · 8m 22s)
+
+● Excellent! I now have a comprehensive understanding of both the requirements and the Angular project structure.
+  Let me write the final implementation plan.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Perfect! I've written the comprehensive implementation plan. Now let me create an optimized prompt for Claude Code
+   to execute the implementation.
+
+  Recommended Prompt for Claude Code
+
+  Here's the prompt you should give to Claude Code to implement this component:
+
+  ---
+  PROMPT FOR CLAUDE CODE:
+
+  Implement a visually stunning, interactive Periodic Table of Elements component in my Angular project at:
+  src/app/features/tools/scientific/periodic-table-of-elements/
+
+  CONTEXT:
+  - Angular 20.3.14 standalone component (already created but blank)
+  - Use Angular signals for state management
+  - Follow the project's retro-futuristic design (glassmorphism, neon effects)
+  - Use Angular Material components already in the project
+  - SCSS with utilities from styles/_utilities.scss
+
+  IMPLEMENTATION REQUIREMENTS:
+
+  1. DATA & MODELS:
+     - Create models/element.interface.ts with Element interface, enums for ElementCategory, StandardState,
+  ChemicalBlock
+     - Create data/elements.data.ts with all 118 elements as TypeScript const array
+     - Include properties: atomicNumber, symbol, name, atomicMass, density, meltingPoint, boilingPoint,
+  electronegativity, atomicRadius, ionizationEnergy, electronAffinity, oxidationStates, electronConfiguration,
+  category, standardState, block, group, period, yearDiscovered
+     - Use null for missing values (especially for synthetic elements)
+
+  2. PERIODIC TABLE GRID:
+     - CSS Grid with 18 columns (groups)
+     - Correct positioning: periods 1-7, groups 1-18
+     - Lanthanides in separate row 9 (columns 3-17)
+     - Actinides in separate row 10 (columns 3-17)
+     - Each tile shows: atomic number (top), symbol (large center), name (below), atomic mass (bottom)
+     - Full-width on desktop, stacked periods on mobile (<768px)
+
+  3. METRIC COLORING SYSTEM:
+     - Create utils/color-mapping.util.ts with ColorMapper class
+     - "Color by" dropdown with 12 options:
+       * Categorical: Chemical group, Standard state, Electronic block
+       * Continuous: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting
+  point, Boiling point, Density, Year discovered
+     - For continuous: use viridis-inspired 5-color gradient, interpolate based on min/max normalization
+     - For categorical: distinct color palette per category
+     - Dynamic text color (black/white) based on background luminance using WCAG formula
+     - Show missing values in neutral gray
+
+  4. DYNAMIC LEGEND:
+     - Create components/color-legend.component.ts (standalone)
+     - Updates when metric changes
+     - Continuous: gradient bar with min/max labels and unit
+     - Categorical: colored chips with labels
+     - Include "Unknown" entry for missing data
+
+  5. ELEMENT DETAILS:
+     - Desktop: MatSidenav on right side (use MatDrawer)
+     - Mobile: MatBottomSheet modal
+     - Show all element properties with labels
+     - Copy buttons for key properties (use clipboard API)
+     - Highlight current metric value when metric coloring is active
+
+  6. SEARCH & FILTERS:
+     - Search input (debounced 300ms) matching symbol/name/atomic number
+     - Multi-select chips for category and standard state filters
+     - Reset button
+     - Use computed signal for filteredElements
+
+  7. VISUAL DESIGN:
+     - Use project's @mixin glass-effect for tiles
+     - Use @mixin neon-glow for hover effects
+     - Smooth transitions (300ms cubic-bezier)
+     - Gradient accent bars
+     - Premium hover states: translateY(-4px) scale(1.05)
+
+  8. ACCESSIBILITY:
+     - Tab navigation through tiles
+     - Enter/Space opens details
+     - Escape closes details
+     - ARIA labels: "[Name], atomic number [#], [category], [state]. Click to view detailed properties."
+     - Focus indicators with outline
+
+  9. PROJECT INTEGRATION:
+     - Add "scientific" category to tools.service.ts if not present
+     - Register tool in tools.service.ts tools array
+     - Add route in app.routes.ts for /tools/scientific/periodic-table-of-elements
+     - Use MetaService in ngOnInit() for SEO
+
+  10. COMPONENT STATE (use signals):
+      - selectedElement, searchQuery, selectedColorMetric, selectedCategories, selectedStates, isMobile,
+  detailsPanelOpen
+      - Computed: filteredElements, colorScaleBounds, legendItems
+
+  TECHNICAL NOTES:
+  - Import modules: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule,
+  MatFormFieldModule, MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule, MatBottomSheetModule
+  - Use BreakpointObserver from @angular/cdk/layout for responsive
+  - Inject: MetaService, CustomSnackbarService, MatBottomSheet, BreakpointObserver
+  - Use trackBy function for element loops (trackByAtomicNumber)
+  - Cache colors for performance (Map with key: `${atomicNumber}-${metric}`)
+
+  VERIFICATION:
+  - All 118 elements in correct positions
+  - Helium at period 1, group 18 (top right)
+  - Lanthanides/actinides in separate rows
+  - All 12 color metrics functional
+  - Text readable on all backgrounds
+  - Keyboard navigation works
+  - Mobile responsive (<768px)
+  - Touch targets minimum 44x44px
+
+  Please implement the complete component with all files following the structure described. Use accurate element
+  data from authoritative sources (NIST, Wikipedia).
+
+  ---
+  ⎿ Tool use rejected with user message: I want you to output a comprehensive prompt for me to use in VSCode with
+    Claude Code.
+
+● Understood! Let me create a comprehensive, production-ready prompt you can use directly in VSCode with Claude
+  Code:
+
+  ---
+  COMPREHENSIVE CLAUDE CODE PROMPT
+
+  Copy and paste this entire prompt into Claude Code in VSCode:
+
+  Implement a complete, production-ready Interactive Periodic Table of Elements feature in my Angular 20 project.
+
+  PROJECT CONTEXT:
+  - Location: C:\Users\cwmpe\Documents\Angular
+  Projects\all-the-tools\src\app\features\tools\scientific\periodic-table-of-elements
+  - Angular 20.3.14 with standalone components
+  - TypeScript strict mode enabled
+  - Angular Material 20.2.14 for UI
+  - SCSS with retro-futuristic design system (neon colors, glassmorphism)
+  - State management using Angular signals
+  - Existing services: MetaService (SEO), CustomSnackbarService (notifications), ToolsService (tool registry)
+
+  DESIGN REQUIREMENTS:
+
+  The periodic table must be:
+  1. Full-width across the viewport
+  2. Visually stunning (glassmorphism, neon glows, smooth animations)
+  3. Highly interactive (12 different color-by metrics)
+  4. Fully accessible (WCAG AA, keyboard navigation)
+  5. Responsive (desktop grid, mobile stacked periods)
+  6. Educational (detailed properties, copy-to-clipboard, search, filters)
+
+  FILE STRUCTURE TO CREATE:
+
+  periodic-table-of-elements/
+  ├── periodic-table-of-elements.ts          # Main component
+  ├── periodic-table-of-elements.html        # Template
+  ├── periodic-table-of-elements.scss        # Styles
+  ├── models/
+  │   └── element.interface.ts               # TypeScript interfaces
+  ├── data/
+  │   └── elements.data.ts                   # 118 elements dataset
+  ├── utils/
+  │   └── color-mapping.util.ts              # Color calculation utilities
+  └── components/
+      ├── color-legend.component.ts          # Dynamic legend
+      ├── element-details-bottom-sheet.component.ts
+      └── property-item.component.ts         # Reusable property display
+
+  DETAILED SPECIFICATIONS:
+
+  === 1. ELEMENT DATA MODEL (models/element.interface.ts) ===
+
+  ```typescript
+  export interface Element {
+    atomicNumber: number;
+    symbol: string;
+    name: string;
+    atomicMass: number | null;           // u (atomic mass units)
+    density: number | null;              // g/cm³
+    meltingPoint: number | null;         // Kelvin
+    boilingPoint: number | null;         // Kelvin
+    electronegativity: number | null;    // Pauling scale
+    atomicRadius: number | null;         // Picometers
+    ionizationEnergy: number | null;     // kJ/mol (first ionization)
+    electronAffinity: number | null;     // kJ/mol
+    oxidationStates: number[];           // e.g., [-1, 1, 3]
+    electronConfiguration: string;       // e.g., "[Ar] 3d10 4s2"
+    electronsPerShell: number[];         // e.g., [2, 8, 18, 32, 18, 7]
+    category: ElementCategory;
+    standardState: StandardState;        // at STP
+    block: ChemicalBlock;                // s, p, d, f
+    group: number | null;                // 1-18, null for lanthanides/actinides
+    period: number;                      // 1-7
+    yearDiscovered: number | null;
+    discoveredBy: string | null;
+  }
+
+  export enum ElementCategory {
+    ALKALI_METAL = 'Alkali Metal',
+    ALKALINE_EARTH_METAL = 'Alkaline Earth Metal',
+    TRANSITION_METAL = 'Transition Metal',
+    POST_TRANSITION_METAL = 'Post-transition Metal',
+    METALLOID = 'Metalloid',
+    NONMETAL = 'Nonmetal',
+    HALOGEN = 'Halogen',
+    NOBLE_GAS = 'Noble Gas',
+    LANTHANIDE = 'Lanthanide',
+    ACTINIDE = 'Actinide'
+  }
+
+  export enum StandardState {
+    SOLID = 'Solid',
+    LIQUID = 'Liquid',
+    GAS = 'Gas',
+    UNKNOWN = 'Unknown'
+  }
+
+  export enum ChemicalBlock {
+    S = 's',
+    P = 'p',
+    D = 'd',
+    F = 'f'
+  }
+
+  export type ColorMetric =
+    | 'category' | 'standardState' | 'block'
+    | 'atomicMass' | 'electronegativity' | 'atomicRadius'
+    | 'ionizationEnergy' | 'electronAffinity'
+    | 'meltingPoint' | 'boilingPoint' | 'density' | 'yearDiscovered';
+
+  export interface ColorMetricOption {
+    value: ColorMetric;
+    label: string;
+    type: 'continuous' | 'categorical';
+    unit?: string;
+    description?: string;
+  }
+
+  === 2. ELEMENTS DATA (data/elements.data.ts) ===
+
+  Create an array of all 118 elements with accurate data from Wikipedia/NIST:
+
+  import { Element, ElementCategory, StandardState, ChemicalBlock } from '../models/element.interface';
+
+  export const ELEMENTS: ReadonlyArray<Element> = [
+    {
+      atomicNumber: 1,
+      symbol: 'H',
+      name: 'Hydrogen',
+      atomicMass: 1.008,
+      density: 0.00008988,
+      meltingPoint: 14.01,
+      boilingPoint: 20.28,
+      electronegativity: 2.20,
+      atomicRadius: 120,
+      ionizationEnergy: 1312,
+      electronAffinity: 72.8,
+      oxidationStates: [-1, 1],
+      electronConfiguration: '1s¹',
+      electronsPerShell: [1],
+      category: ElementCategory.NONMETAL,
+      standardState: StandardState.GAS,
+      block: ChemicalBlock.S,
+      group: 1,
+      period: 1,
+      yearDiscovered: 1766,
+      discoveredBy: 'Henry Cavendish'
+    },
+    // Continue for all 118 elements...
+    // Use null for unknown/missing values
+  ] as const;
+
+  export const ELEMENT_BY_SYMBOL = new Map(ELEMENTS.map(el => [el.symbol, el]));
+  export const ELEMENT_BY_NUMBER = new Map(ELEMENTS.map(el => [el.atomicNumber, el]));
+
+  IMPORTANT: Include ALL 118 elements with accurate data. For synthetic elements with incomplete data, use null.
+
+  === 3. COLOR MAPPING UTILITY (utils/color-mapping.util.ts) ===
+
+  export class ColorMapper {
+    // Retro-futuristic categorical palettes
+    private static readonly CATEGORY_COLORS: Record<string, string> = {
+      'Alkali Metal': '#FF006E',
+      'Alkaline Earth Metal': '#FB5607',
+      'Transition Metal': '#8338EC',
+      'Post-transition Metal': '#3A86FF',
+      'Metalloid': '#06FFA5',
+      'Nonmetal': '#FFBE0B',
+      'Halogen': '#FF006E',
+      'Noble Gas': '#00F5FF',
+      'Lanthanide': '#FF69B4',
+      'Actinide': '#FFD700'
+    };
+
+    private static readonly STATE_COLORS: Record<string, string> = {
+      'Solid': '#8338EC',
+      'Liquid': '#3A86FF',
+      'Gas': '#06FFA5',
+      'Unknown': '#6C757D'
+    };
+
+    private static readonly BLOCK_COLORS: Record<string, string> = {
+      's': '#FF006E',
+      'p': '#FFBE0B',
+      'd': '#3A86FF',
+      'f': '#8338EC'
+    };
+
+    // Viridis-inspired gradient for scientific accuracy
+    private static readonly GRADIENT_COLORS = [
+      '#440154', '#3B528B', '#21908C', '#5DC863', '#FDE724'
+    ];
+
+    static getCategoricalColor(element: any, metric: string): string {
+      switch (metric) {
+        case 'category': return this.CATEGORY_COLORS[element.category] || '#6C757D';
+        case 'standardState': return this.STATE_COLORS[element.standardState] || '#6C757D';
+        case 'block': return this.BLOCK_COLORS[element.block] || '#6C757D';
+        default: return '#6C757D';
+      }
+    }
+
+    static getContinuousColor(value: number | null, min: number, max: number): string {
+      if (value === null) return '#2C2C2C'; // Dark gray for missing
+      const normalized = (value - min) / (max - min);
+      return this.interpolateGradient(Math.max(0, Math.min(1, normalized)));
+    }
+
+    private static interpolateGradient(t: number): string {
+      const segments = this.GRADIENT_COLORS.length - 1;
+      const scaledT = t * segments;
+      const index = Math.floor(scaledT);
+      const localT = scaledT - index;
+
+      if (index >= segments) return this.GRADIENT_COLORS[segments];
+
+      const color1 = this.hexToRgb(this.GRADIENT_COLORS[index]);
+      const color2 = this.hexToRgb(this.GRADIENT_COLORS[index + 1]);
+
+      const r = Math.round(color1.r + (color2.r - color1.r) * localT);
+      const g = Math.round(color1.g + (color2.g - color1.g) * localT);
+      const b = Math.round(color1.b + (color2.b - color1.b) * localT);
+
+      return this.rgbToHex(r, g, b);
+    }
+
+    static calculateTextContrast(bgColorHex: string): string {
+      const rgb = this.hexToRgb(bgColorHex);
+      const luminance = this.getRelativeLuminance(rgb.r, rgb.g, rgb.b);
+      return luminance > 0.5 ? '#000000' : '#FFFFFF';
+    }
+
+    private static getRelativeLuminance(r: number, g: number, b: number): number {
+      const [rs, gs, bs] = [r, g, b].map(c => {
+        const normalized = c / 255;
+        return normalized <= 0.03928
+          ? normalized / 12.92
+          : Math.pow((normalized + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    }
+
+    private static hexToRgb(hex: string): { r: number; g: number; b: number } {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 0, b: 0 };
+    }
+
+    private static rgbToHex(r: number, g: number, b: number): string {
+      return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+  }
+
+  === 4. MAIN COMPONENT (periodic-table-of-elements.ts) ===
+
+  Key implementation points:
+  - Use Angular signals for ALL state
+  - Inject: MetaService, CustomSnackbarService, MatBottomSheet, BreakpointObserver
+  - Computed signals: filteredElements, colorScaleBounds, legendItems
+  - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+  - Set up BreakpointObserver to detect mobile
+  - In ngOnInit(), call metaService.updateTags() with SEO data
+
+  State signals needed:
+  selectedElement = signal<Element | null>(null);
+  searchQuery = signal<string>('');
+  selectedColorMetric = signal<ColorMetric>('category');
+  selectedCategories = signal<ElementCategory[]>([]);
+  selectedStates = signal<StandardState[]>([]);
+  isMobile = signal<boolean>(false);
+  detailsPanelOpen = signal<boolean>(false);
+
+  Computed signals:
+  filteredElements = computed(() => {
+    // Search + filter logic
+  });
+
+  colorScaleBounds = computed(() => {
+    // Calculate min/max for continuous metrics
+  });
+
+  legendItems = computed(() => {
+    // Generate legend data based on current metric
+  });
+
+  Color methods:
+  getElementColor(element: Element): string {
+    const metric = this.selectedColorMetric();
+    const option = this.colorMetricOptions.find(m => m.value === metric)!;
+
+    if (option.type === 'categorical') {
+      return ColorMapper.getCategoricalColor(element, metric);
+    } else {
+      const bounds = this.colorScaleBounds();
+      const value = element[metric] as number | null;
+      return ColorMapper.getContinuousColor(value, bounds.min, bounds.max);
+    }
+  }
+
+  getTextColor(element: Element): string {
+    return ColorMapper.calculateTextContrast(this.getElementColor(element));
+  }
+
+  === 5. TEMPLATE (periodic-table-of-elements.html) ===
+
+  Structure:
+  1. Controls Section: Search input, color-by select, filter chips, reset button
+  2. Legend Component: <app-color-legend>
+  3. Drawer Container: MatDrawer for desktop details panel
+  4. Periodic Grid: Loop through filteredElements with proper positioning
+  5. Element Tiles: data attributes, click/keyboard handlers, dynamic colors
+
+  Grid layout strategy:
+  <div class="periodic-grid">
+    @for (element of filteredElements(); track element.atomicNumber) {
+      <div class="element-tile"
+           [attr.data-period]="element.period"
+           [attr.data-group]="element.group"
+           [attr.data-atomic-number]="element.atomicNumber"
+           [class.lanthanide]="element.category === 'Lanthanide'"
+           [class.actinide]="element.category === 'Actinide'"
+           [style.background-color]="getElementColor(element)"
+           [style.color]="getTextColor(element)"
+           role="button"
+           tabindex="0"
+           [attr.aria-label]="getAriaLabel(element)"
+           (click)="selectElement(element)"
+           (keydown)="onElementKeydown($event, element)">
+        <span class="element-atomic-number">{{ element.atomicNumber }}</span>
+        <span class="element-symbol">{{ element.symbol }}</span>
+        <span class="element-name">{{ element.name }}</span>
+        <span class="element-mass">{{ element.atomicMass | number:'1.0-3' }}</span>
+      </div>
+    }
+  </div>
+
+  === 6. STYLES (periodic-table-of-elements.scss) ===
+
+  Must include:
+  - CSS Grid with 18 columns: grid-template-columns: repeat(18, 1fr);
+  - Explicit positioning using data attributes
+  - Lanthanides: grid-row: 9;
+  - Actinides: grid-row: 10;
+  - Hover effects: transform: translateY(-4px) scale(1.05); + neon-glow
+  - Glassmorphism: backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.05);
+  - Responsive: Stack periods on mobile (<768px)
+  - Smooth transitions: transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  Example positioning:
+  .element-tile {
+    &[data-period="1"][data-group="1"] { grid-column: 1; grid-row: 1; }
+    &[data-period="1"][data-group="18"] { grid-column: 18; grid-row: 1; }
+
+    &.lanthanide {
+      grid-row: 9;
+      &[data-atomic-number="57"] { grid-column: 3; }
+      &[data-atomic-number="58"] { grid-column: 4; }
+      // ... continue
+    }
+
+    &.actinide {
+      grid-row: 10;
+      &[data-atomic-number="89"] { grid-column: 3; }
+      // ... continue
+    }
+  }
+
+  === 7. SUB-COMPONENTS ===
+
+  ColorLegendComponent: Standalone component that displays legend based on current metric
+  ElementDetailsBottomSheet: Mobile-only bottom sheet for element details
+  PropertyItemComponent: Reusable component for property display with copy button
+
+  === 8. PROJECT INTEGRATION ===
+
+  After creating the component:
+
+  1. tools.service.ts: Add "scientific" category if not present, then add tool:
+  {
+    id: 'periodic-table-of-elements',
+    name: 'Periodic Table of Elements',
+    description: 'Interactive periodic table with detailed element properties',
+    category: 'scientific',
+    icon: 'science',
+    route: '/tools/scientific/periodic-table-of-elements',
+    featured: true,
+    tags: ['chemistry', 'elements', 'science', 'education']
+  }
+
+  2. app.routes.ts: Add route:
+  {
+    path: 'tools/scientific/periodic-table-of-elements',
+    loadComponent: () =>
+  import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m =>
+  m.PeriodicTableOfElements),
+    title: 'Periodic Table of Elements - All The Things'
+  }
+
+  VISUAL DESIGN REQUIREMENTS:
+  - Follow project's retro-futuristic aesthetic
+  - Use glassmorphism effects (backdrop-filter: blur)
+  - Neon glow on hover
+  - Gradient accent bars at top of sections
+  - Smooth animations (300ms cubic-bezier)
+  - Premium feel with subtle elevation changes
+
+  ACCESSIBILITY REQUIREMENTS:
+  - Keyboard navigation (Tab, Enter, Space, Escape)
+  - ARIA labels: "[Name], atomic number [#], [category], [state]. Click to view detailed properties."
+  - Focus indicators with 3px outline
+  - WCAG AA contrast ratios (4.5:1 minimum)
+  - Screen reader friendly
+
+  RESPONSIVE REQUIREMENTS:
+  - Desktop (>1024px): Full 18-column grid, side drawer for details
+  - Tablet (768-1024px): Full grid with smaller tiles, overlay for details
+  - Mobile (<768px): Stacked periods with horizontal scroll, bottom sheet for details
+  - Touch targets: Minimum 44x44px on mobile
+
+  PERFORMANCE OPTIMIZATIONS:
+  - trackBy function for element loops
+  - Color caching with Map
+  - Debounced search (300ms)
+  - Memoized computed signals
+
+  VERIFICATION CHECKLIST:
+  - All 118 elements render
+  - Correct periodic table layout (Helium at top-right)
+  - Lanthanides/actinides in separate rows
+  - All 12 color metrics work
+  - Legend updates dynamically
+  - Search and filters functional
+  - Details panel opens (desktop: side, mobile: bottom)
+  - Copy buttons work
+  - Keyboard navigation functional
+  - Responsive layouts work
+  - Text readable on all backgrounds
+  - Tool appears in navigation
+
+  Please implement this complete feature with production-quality code, accurate element data, and polished styling
+  that matches the project's aesthetic.
+
+  ---
+
+  Now you can copy this entire prompt and paste it into Claude Code in VSCode. It includes everything needed for a
+  complete implementation!
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Ready to code?
+
+ Here is Claude's plan:
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+ Implementation Plan: Interactive Periodic Table of Elements
+
+ Context
+
+ Create a visually stunning, highly interactive Periodic Table of Elements feature for an Angular 20 project. The
+ component will display all 118 elements in a proper periodic table layout with advanced features including
+ metric-based coloring (12 different metrics), detailed element information, search/filtering, and full
+ accessibility support. The implementation must follow the project's established patterns (standalone components,
+ Angular signals, retro-futuristic aesthetic with glassmorphism) and integrate seamlessly with the existing
+ "all-the-tools" codebase.
+
+ Why: This educational tool will provide chemistry students, educators, and enthusiasts with a modern, interactive
+ way to explore element properties and chemical patterns.
+
+ Location: src/app/features/tools/scientific/periodic-table-of-elements/
+
+ Current State: Blank standalone component with empty TS/HTML/SCSS files.
+
+ Project Patterns to Follow
+
+ - Angular 20.3.14 with standalone components
+ - State management: Angular signals (signal(), computed())
+ - Styling: SCSS with retro-futuristic aesthetic (neon colors, glassmorphism, gradient accents)
+ - UI Framework: Angular Material 20.2.14 (MatCard, MatButton, MatSelect, MatIcon, MatSidenav, MatBottomSheet)
+ - Services: MetaService for SEO, CustomSnackbarService for notifications
+ - Responsive: Breakpoints at sm(640), md(768), lg(1024), xl(1280), 2xl(1536)
+
+ Core Features to Implement
+
+ 1. Full-Width Periodic Grid
+
+ - Display all 118 elements in correct periodic table layout (groups 1-18, periods 1-7)
+ - Separate lanthanides (row 9) and actinides (row 10) with proper positioning
+ - Each tile shows: atomic number, symbol, name, atomic mass
+ - CSS Grid with explicit positioning for precise element placement
+ - Responsive: full 18-column grid on desktop, stacked periods on mobile
+
+ 2. Metric Coloring System (12 Options)
+
+ - Categorical metrics: Chemical group, Standard state, Electronic block
+ - Continuous metrics: Atomic mass, Electronegativity, Atomic radius, Ionization energy, Electron affinity, Melting
+  point, Boiling point, Density, Year discovered
+ - Color scale: Viridis-inspired gradient for continuous, distinct palette for categorical
+ - Dynamic text color (black/white) based on background luminance (WCAG AA compliant)
+ - Handle missing values with neutral gray color
+
+ 3. Dynamic Legend
+
+ - Updates based on selected metric
+ - Continuous: Gradient bar with min/max labels and unit
+ - Categorical: Color chips with labels
+ - Includes "Unknown" for missing data
+
+ 4. Element Details Panel
+
+ - Desktop: Side drawer (MatSidenav) on right, table remains full-width
+ - Mobile: Bottom sheet (MatBottomSheet) modal
+ - Shows all properties: atomic number, symbol, name, mass, electron configuration, electronegativity, atomic
+ radius, ionization energy, electron affinity, density, melting/boiling points, oxidation states, standard state,
+ year discovered, discoveredBy
+ - Copy buttons for key properties
+ - Highlight selected metric value when metric coloring is active
+
+ 5. Search & Filters
+
+ - Search box: matches symbol, name, atomic number (debounced 300ms)
+ - Multi-select filters: category, standard state, classification
+ - Reset button to clear all filters
+ - Smooth animations for filter changes
+
+ 6. Keyboard Accessibility
+
+ - Tab navigation through element tiles
+ - Enter/Space opens details panel
+ - Escape closes details panel
+ - ARIA labels: "Hydrogen, atomic number 1, nonmetal, gas. Click to view detailed properties."
+ - Proper focus management and visual focus indicators
+
+ 7. Premium Visual Design
+
+ - Glassmorphism effects (@mixin glass-effect)
+ - Neon glow on hover (@mixin neon-glow)
+ - Smooth transitions (300ms cubic-bezier)
+ - Gradient accent bars
+ - Consistent spacing using project's spacing system
+
+ File Structure
+
+ src/app/features/tools/scientific/periodic-table-of-elements/
+ ├── periodic-table-of-elements.ts          # Main component (signals, state, methods)
+ ├── periodic-table-of-elements.html        # Template (grid, controls, details panel)
+ ├── periodic-table-of-elements.scss        # Styles (grid layout, responsive, glassmorphism)
+ ├── models/
+ │   └── element.interface.ts               # Element, ElementCategory, StandardState, ChemicalBlock interfaces
+ ├── data/
+ │   └── elements.data.ts                   # All 118 elements as TypeScript const
+ ├── utils/
+ │   └── color-mapping.util.ts              # ColorMapper class (gradient interpolation, contrast calculation)
+ └── components/
+     ├── color-legend.component.ts          # Dynamic legend (standalone component)
+     ├── element-details-bottom-sheet.component.ts  # Mobile details view
+     └── property-item.component.ts         # Reusable property display with copy button
+
+ Data Model
+
+ Element Interface:
+ interface Element {
+   atomicNumber: number;
+   symbol: string;
+   name: string;
+   atomicMass: number | null;
+   density: number | null;
+   meltingPoint: number | null;  // Kelvin
+   boilingPoint: number | null;  // Kelvin
+   electronegativity: number | null;  // Pauling scale
+   atomicRadius: number | null;  // Picometers
+   ionizationEnergy: number | null;  // kJ/mol
+   electronAffinity: number | null;  // kJ/mol
+   oxidationStates: number[];
+   electronConfiguration: string;
+   electronsPerShell: number[];
+   category: ElementCategory;
+   standardState: StandardState;
+   block: ChemicalBlock;
+   group: number | null;  // 1-18, null for lanthanides/actinides
+   period: number;  // 1-7
+   yearDiscovered: number | null;
+   discoveredBy: string | null;
+   cpkColor?: string;
+ }
+
+ Data Source: Store as TypeScript const in elements.data.ts (not JSON) for better type safety and tree-shaking.
+
+ Implementation Details
+
+ Grid Layout Strategy
+
+ - CSS Grid: grid-template-columns: repeat(18, 1fr)
+ - Explicit positioning: Use [data-period] and [data-group] attributes with CSS selectors
+ - Lanthanides: grid-row: 9; grid-column: 3-17 (atomic numbers 57-71)
+ - Actinides: grid-row: 10; grid-column: 3-17 (atomic numbers 89-103)
+ - Gaps: Use spacer indicators with asterisk (*) in period 6 and 7 at column 3
+
+ Color Mapping Algorithm
+
+ 1. Categorical: Direct lookup from predefined color palette
+ 2. Continuous:
+   - Calculate min/max across all elements for the metric
+   - Normalize value to 0-1 range: (value - min) / (max - min)
+   - Interpolate through 5-color gradient (viridis-inspired)
+ 3. Text contrast: Calculate relative luminance (WCAG formula), return white if luminance < 0.5, black otherwise
+ 4. Performance: Cache colors with key ${atomicNumber}-${metric}, clear cache on metric change
+
+ Responsive Strategy
+
+ - Desktop (>1024px): Full 18-column grid, side drawer for details
+ - Tablet (768-1024px): Full 18-column grid with smaller tiles, overlay for details
+ - Mobile (<768px): Stacked periods (horizontal scroll per period), bottom sheet for details
+ - Touch targets: Minimum 44x44px on mobile
+
+ State Management
+
+ - Use Angular signals for all reactive state:
+   - selectedElement = signal<Element | null>(null)
+   - searchQuery = signal<string>('')
+   - selectedColorMetric = signal<ColorMetric>('category')
+   - selectedCategories = signal<ElementCategory[]>([])
+   - isMobile = signal<boolean>(false)
+ - Use computed signals for derived state:
+   - filteredElements = computed(() => /* search + filter logic */)
+   - colorScaleBounds = computed(() => /* min/max for current metric */)
+   - legendItems = computed(() => /* legend data for current metric */)
+
+ Angular Material Modules
+
+ Import: CommonModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule,
+ MatFormFieldModule, MatInputModule, MatChipsModule, MatTooltipModule, MatSidenavModule, MatBottomSheetModule,
+ MatDividerModule, LayoutModule (BreakpointObserver)
+
+ Integration with Project
+
+ 1. Add "scientific" category to tools.service.ts categoryMeta array (if not exists)
+ 2. Register tool in tools array in tools.service.ts:
+ {
+   id: 'periodic-table-of-elements',
+   name: 'Periodic Table of Elements',
+   description: 'Interactive periodic table with detailed element properties',
+   category: 'scientific',
+   icon: 'science',
+   route: '/tools/scientific/periodic-table-of-elements',
+   featured: true
+ }
+ 3. Add route in app.routes.ts:
+ {
+   path: 'tools/scientific/periodic-table-of-elements',
+   loadComponent: () =>
+ import('./features/tools/scientific/periodic-table-of-elements/periodic-table-of-elements').then(m =>
+ m.PeriodicTableOfElements),
+   title: 'Periodic Table of Elements - All The Things'
+ }
+
+ SEO Strategy
+
+ In ngOnInit(), call:
+ this.metaService.updateTags({
+   title: 'Interactive Periodic Table of Elements | All The Tools',
+   description: 'Explore 118 chemical elements with our interactive periodic table. Color-coded by 12 different
+ metrics including atomic mass, electronegativity, and standard state.',
+   keywords: ['periodic table', 'chemical elements', 'chemistry tool', 'atomic properties'],
+   image: 'https://www.allthethings.dev/meta-images/og-periodic-table.png',
+   url: 'https://www.allthethings.dev/tools/scientific/periodic-table-of-elements'
+ });
+
+ Critical Implementation Steps
+
+ 1. Create Element Interface (models/element.interface.ts)
+   - Define Element, ElementCategory, StandardState, ChemicalBlock types
+   - Define ColorMetric type union and ColorMetricOption interface
+ 2. Create Elements Data (data/elements.data.ts)
+   - All 118 elements with complete properties
+   - Use authoritative sources (NIST, Wikipedia) for data accuracy
+   - Export as const ELEMENTS: ReadonlyArray<Element>
+   - Export helper maps: ELEMENT_BY_SYMBOL, ELEMENT_BY_NUMBER
+ 3. Create Color Mapping Utility (utils/color-mapping.util.ts)
+   - ColorMapper class with static methods
+   - Categorical color palettes (10 categories, 3 states, 4 blocks)
+   - Gradient interpolation for continuous metrics (5-color viridis gradient)
+   - Text contrast calculation (WCAG formula)
+   - RGB/Hex conversion utilities
+ 4. Build Main Component (periodic-table-of-elements.ts)
+   - Set up signals for state management
+   - Implement computed signals for filtering and color bounds
+   - Inject services: MetaService, CustomSnackbarService, BreakpointObserver, MatBottomSheet
+   - Methods: selectElement(), closeDetailsPanel(), getElementColor(), getTextColor(), copyToClipboard()
+   - Keyboard event handlers
+   - Set up responsive breakpoint observer
+ 5. Create Template (periodic-table-of-elements.html)
+   - Controls section: search input, color-by select, filter chips, reset button
+   - Legend component: <app-color-legend>
+   - Mat-drawer-container with main grid in content, details panel in drawer
+   - Periodic grid: loop through filteredElements with trackBy
+   - Element tiles with proper data attributes and event handlers
+   - Details panel content (desktop side drawer)
+ 6. Style Component (periodic-table-of-elements.scss)
+   - Import project utilities: @use '@styles/utilities' as *;
+   - Periodic grid: CSS Grid with 18 columns, explicit positioning
+   - Element tiles: glassmorphism, hover effects with neon-glow, smooth transitions
+   - Responsive breakpoints: collapse to mobile layout <768px
+   - Details panel styling: match project aesthetic
+   - Animations for tile hover, filter changes
+ 7. Create Sub-Components
+   - ColorLegendComponent: dynamic legend that updates with metric
+   - ElementDetailsBottomSheet: mobile details view with MatBottomSheet
+   - PropertyItemComponent: reusable property row with copy button
+ 8. Register Tool
+   - Add to tools.service.ts (with scientific category if needed)
+   - Add route to app.routes.ts
+
+ Verification Checklist
+
+ After implementation, verify:
+
+ - All 118 elements render in correct grid positions
+ - Lanthanides appear in row 9, actinides in row 10
+ - Helium positioned at period 1, group 18 (top right)
+ - All 12 color metrics work correctly
+ - Legend updates dynamically with metric selection
+ - Missing values show as gray with "Unknown" in legend
+ - Text remains readable on all background colors (test with contrast checker)
+ - Search filters by symbol/name/atomic number
+ - Multi-select filters combine correctly
+ - Clicking element opens details panel (desktop: side, mobile: bottom sheet)
+ - Copy buttons work for element properties
+ - Keyboard navigation: Tab through tiles, Enter/Space opens, Escape closes
+ - ARIA labels present on all interactive elements
+ - Mobile layout: tiles remain readable, minimum 44x44px touch targets
+ - Desktop layout: full-width 18-column grid
+ - Hover effects: smooth lift, neon glow
+ - Performance: no lag when switching metrics or filtering
+ - Tool appears in tools list and navigation
+ - Route works and SEO meta tags are set
+
+ Potential Challenges & Solutions
+
+ Challenge: CSS Grid positioning for 118 elements is complex
+ Solution: Use TypeScript helper function with inline style binding [style.grid-column] and [style.grid-row]
+
+ Challenge: Color gradient calculations may be slow
+ Solution: Implement color caching with Map, clear cache on metric change
+
+ Challenge: Finding accurate data for all elements
+ Solution: Use multiple authoritative sources (NIST, Wikipedia, PubChem), mark uncertain values
+
+ Challenge: Mobile touch targets too small
+ Solution: Minimum 44x44px tiles on mobile, consider increasing gaps
+
+ Challenge: Text contrast on dynamic backgrounds
+ Solution: Implement WCAG relative luminance formula, test with contrast ratio calculator
