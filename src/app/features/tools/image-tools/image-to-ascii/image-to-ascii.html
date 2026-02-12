@@ -1,0 +1,327 @@
+<div class="image-to-ascii-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="icon-wrapper">
+        <mat-icon class="hero-icon">terminal</mat-icon>
+      </div>
+      <h1 class="hero-title">Image to ASCII Converter</h1>
+      <p class="hero-subtitle">
+        Transform your images into retro ASCII art with customizable character sets and styles.
+        Perfect for terminal graphics, creative projects, and nostalgic digital art.
+      </p>
+      <button mat-raised-button color="primary" (click)="scrollToConverter()" class="cta-button">
+        <mat-icon>upload</mat-icon>
+        Convert Your Image
+      </button>
+    </div>
+
+    <div class="hero-visual">
+      <div class="example-card slide-in">
+        <div class="example-header">
+          <mat-icon>image</mat-icon>
+          <span>Upload Image</span>
+        </div>
+        <div class="example-content">JPG, PNG, GIF</div>
+      </div>
+      <div class="example-card slide-in" style="animation-delay: 0.1s;">
+        <div class="example-header">
+          <mat-icon>text_format</mat-icon>
+          <span>Choose Style</span>
+        </div>
+        <div class="example-content">@%#*+=-:. </div>
+      </div>
+      <div class="example-card slide-in" style="animation-delay: 0.2s;">
+        <div class="example-header">
+          <mat-icon>download</mat-icon>
+          <span>Export Art</span>
+        </div>
+        <div class="example-content">Copy or Download</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Blog Posts -->
+  <app-related-blog-posts [posts]="relatedBlogPosts"></app-related-blog-posts>
+
+  <!-- Bottom Line Section -->
+  <section class="bottom-line-section">
+    <h2>Convert Images to ASCII Art</h2>
+    <p>
+      Our free online image to ASCII converter transforms any image into stunning text art.
+      Choose from multiple character sets including standard, detailed, block, and minimal styles.
+      Adjust the width, toggle light/dark mode, and customize every aspect of your ASCII art.
+      All processing happens locally in your browser—your images are never uploaded or stored anywhere.
+      Perfect for creating retro terminal graphics, decorative text art, or unique profile signatures.
+    </p>
+  </section>
+
+  <!-- AdSense Component -->
+  <app-adsense></app-adsense>
+
+  <!-- Hidden File Input -->
+  <input
+    #fileInput
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    style="display: none;"
+  />
+
+  <!-- Upload Section (No Image) -->
+  @if (!hasImage) {
+    <section class="upload-section">
+      <mat-card class="upload-card">
+        <div
+          class="drop-zone"
+          [class.dragging]="isDragging()"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave()"
+          (drop)="onDrop($event)"
+          (click)="openFilePicker()"
+        >
+          <mat-icon class="upload-icon">cloud_upload</mat-icon>
+          <h3>Drag & Drop Your Image</h3>
+          <p>or click to browse</p>
+          <div class="supported-formats">
+            <mat-icon>info</mat-icon>
+            <span>Supports JPG, PNG, GIF, WebP, AVIF (max 10MB)</span>
+          </div>
+        </div>
+
+        @if (errorMessage()) {
+          <div class="error-message">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        @if (isLoading()) {
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        }
+      </mat-card>
+    </section>
+  }
+
+  <!-- Options and Output Grid (Has Image) -->
+  @if (hasImage) {
+    <div class="converter-grid">
+      <!-- Options Panel -->
+      <section class="options-section">
+      <mat-card class="options-card">
+        <div class="card-header">
+          <h2>
+            <mat-icon>tune</mat-icon>
+            Conversion Options
+          </h2>
+        </div>
+
+        <div class="options-grid">
+          <!-- Width Slider -->
+          <div class="option-item">
+            <label>
+              <mat-icon>width_normal</mat-icon>
+              Width: {{ asciiWidth() }} characters
+            </label>
+            <mat-slider
+              min="20"
+              max="200"
+              step="5"
+              discrete
+            >
+              <input matSliderThumb [value]="asciiWidth()" (valueChange)="asciiWidth.set($event); onWidthChange()" />
+            </mat-slider>
+          </div>
+
+          <!-- Character Set -->
+          <div class="option-item">
+            <label>
+              <mat-icon>text_format</mat-icon>
+              Character Set
+            </label>
+            <mat-form-field appearance="fill">
+              <mat-label>Select Character Set</mat-label>
+              <mat-select
+                [value]="selectedCharSet()"
+                (selectionChange)="selectedCharSet.set($event.value); onCharSetChange()"
+              >
+                @for (charSet of characterSets; track charSet.id) {
+                  <mat-option [value]="charSet.id">
+                    {{ charSet.name }}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Inverted Toggle -->
+          <div class="option-item">
+            <label>
+              <mat-icon>invert_colors</mat-icon>
+              Inverted Colors
+            </label>
+            <mat-slide-toggle
+              [ngModel]="inverted()"
+              (ngModelChange)="inverted.set($event); onInvertedChange()"
+              name="inverted"
+              matTooltip="Swap light and dark areas"
+            >
+              {{ inverted() ? 'On' : 'Off' }}
+            </mat-slide-toggle>
+          </div>
+
+          <!-- Font Size Slider -->
+          <div class="option-item">
+            <label>
+              <mat-icon>format_size</mat-icon>
+              Preview Font Size: {{ fontSize() }}px
+            </label>
+            <mat-slider
+              min="6"
+              max="20"
+              step="1"
+              discrete
+            >
+              <input matSliderThumb [value]="fontSize()" (valueChange)="fontSize.set($event); onFontSizeChange()" />
+            </mat-slider>
+          </div>
+
+          <!-- Preserve Aspect Ratio Toggle -->
+          <div class="option-item">
+            <label>
+              <mat-icon>aspect_ratio</mat-icon>
+              Preserve Aspect Ratio
+            </label>
+            <mat-slide-toggle
+              [ngModel]="preserveAspectRatio()"
+              (ngModelChange)="preserveAspectRatio.set($event); updateConversion()"
+              name="preserveAspectRatio"
+            >
+              {{ preserveAspectRatio() ? 'On' : 'Off' }}
+            </mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button mat-raised-button color="primary" (click)="changeImage()">
+            <mat-icon>image</mat-icon>
+            Change Image
+          </button>
+          <button mat-raised-button color="primary" (click)="resetAll()">
+            <mat-icon>refresh</mat-icon>
+            Reset
+          </button>
+        </div>
+
+        @if (isProcessing()) {
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        }
+
+        @if (errorMessage()) {
+          <div class="error-message">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+      </mat-card>
+    </section>
+
+    <!-- Output Panel -->
+    <section class="output-section">
+      <mat-card class="output-card">
+        <div class="card-header">
+          <h2>
+            <mat-icon>art_track</mat-icon>
+            ASCII Output
+          </h2>
+          <div class="header-actions">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="copyToClipboard()"
+              matTooltip="Copy to clipboard"
+            >
+              <mat-icon>content_copy</mat-icon>
+              Copy
+            </button>
+            <button
+              mat-raised-button
+              (click)="downloadAscii()"
+              matTooltip="Download as text file"
+            >
+              <mat-icon>download</mat-icon>
+              Download
+            </button>
+          </div>
+        </div>
+
+        <mat-tab-group [selectedIndex]="viewMode() === 'preview' ? 0 : 1" (selectedIndexChange)="viewMode.set($event === 0 ? 'preview' : 'text')">
+          <mat-tab label="Preview" >
+            <div class="output-preview" [style.font-size.px]="fontSize()">
+              <pre>{{ asciiOutput() }}</pre>
+            </div>
+          </mat-tab>
+          <mat-tab label="Copy Text">
+            <div class="output-text">
+              <textarea
+              style="height: 100%;"
+                readonly
+                [value]="asciiOutput()"
+                (click)="$any($event.target).select()"
+              ></textarea>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </section>
+    </div>
+  }
+
+  <!-- How It Works Section -->
+  <section class="info-section">
+    <h2>How It Works</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <mat-icon class="info-icon">upload_file</mat-icon>
+        <div>
+          <h4>1. Upload Your Image</h4>
+          <p>Drag and drop any image or click to browse. Supports JPG, PNG, GIF, WebP, and AVIF formats up to 10MB.</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <mat-icon class="info-icon">tune</mat-icon>
+        <div>
+          <h4>2. Customize Settings</h4>
+          <p>Choose your character set, adjust width, toggle inverted colors, and fine-tune the preview font size.</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <mat-icon class="info-icon">download</mat-icon>
+        <div>
+          <h4>3. Export Your Art</h4>
+          <p>Copy to clipboard or download as a text file. Your ASCII art is ready to use anywhere!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AdSense Component -->
+  <app-adsense></app-adsense>
+
+  <!-- Character Sets Info -->
+  <section class="character-sets-section">
+    <h2>Character Sets Explained</h2>
+    <div class="character-sets-grid">
+      @for (charSet of characterSets; track charSet.id) {
+        <mat-card class="character-set-card">
+          <h3>{{ charSet.name }}</h3>
+          <p>{{ charSet.description }}</p>
+          <div class="char-preview">{{ charSet.chars }}</div>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- CTA Email List -->
+  <app-cta-email-list darkThemeBg="primary"></app-cta-email-list>
+</div>

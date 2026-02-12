@@ -303,6 +303,19 @@ export class ToolsService {
       available: true,
       hasTutorial: true
     },
+    {
+      id: 'image-to-ascii',
+      name: 'Image to ASCII',
+      description: 'Convert images to ASCII art with customizable character sets and styles',
+      longDescription: 'Transform any image into ASCII art using advanced character mapping. Choose from multiple character sets (standard, detailed, block, minimal), adjust output width, toggle light/dark mode, and export as text. Perfect for retro art, terminal graphics, and creative projects. All processing happens locally in your browser.',
+      category: 'image',
+      icon: 'terminal',
+      route: 'image-to-ascii',
+      featured: true,
+      tags: ['image', 'ascii', 'art', 'conversion', 'text', 'generator', 'retro'],
+      available: true,
+      hasTutorial: false
+    },
 
     // ========================================
     // HARDWARE TOOLS

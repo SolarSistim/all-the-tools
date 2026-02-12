@@ -178,6 +178,11 @@ export const routes: Routes = [
     title: 'Photo Filter Studio - All The Things'
   },
   {
+    path: 'tools/image-to-ascii',
+    loadComponent: () => import('./features/tools/image-tools/image-to-ascii/image-to-ascii').then(m => m.ImageToAscii),
+    title: 'Image to ASCII Converter - All The Things'
+  },
+  {
     path: 'tools/currency-converter',
     loadComponent: () => import('./features/tools/converters/currency-converter/currency-converter').then(m => m.CurrencyConverter),
     title: 'Currency Converter - All The Things'

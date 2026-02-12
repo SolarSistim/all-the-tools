@@ -221,6 +221,14 @@ export class PeriodicTableOfElements implements OnInit, OnDestroy {
   }
 
   selectElement(element: Element): void {
+    const currentSelected = this.selectedElement();
+
+    // If clicking the same element and details panel is open, toggle it closed
+    if (currentSelected && currentSelected.atomicNumber === element.atomicNumber && this.detailsPanelOpen()) {
+      this.closeDetailsPanel();
+      return;
+    }
+
     this.selectedElement.set(element);
 
     if (this.isMobile()) {

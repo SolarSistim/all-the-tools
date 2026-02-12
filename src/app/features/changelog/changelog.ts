@@ -49,6 +49,22 @@ export class Changelog implements OnInit {
   changelog: ChangelogEntry[] = [
     {
       version: '1.2.0',
+      date: 'February 12, 2026',
+      changes: [
+        {
+          type: 'added',
+          description: 'Periodic Table of Elements',
+          route: '/tools/scientific/periodic-table-of-elements'
+        },
+        {
+          type: 'added',
+          description: 'Image to ASCII Converter',
+          route: '/tools/image-to-ascii'
+        }
+      ]
+    },
+    {
+      version: '1.2.0',
       date: 'February 5, 2026',
       changes: [
         {
