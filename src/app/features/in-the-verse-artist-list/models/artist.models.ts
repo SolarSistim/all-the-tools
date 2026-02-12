@@ -48,6 +48,7 @@ export interface ArtistLinks {
   threads?: string;
   bluesky?: string;
   reddit?: string;
+  store?: string;
 }
 
 /**
