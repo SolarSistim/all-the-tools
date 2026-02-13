@@ -110,11 +110,11 @@ exports.handler = async (event, context) => {
     let values;
 
     if (sheetName === 'page_views') {
-      // page_views: Timestamp, Referrer, Root Domain, UrlPath, ...
+      // page_views: Timestamp, Root Domain, Referrer, UrlPath, ...
       values = [[
         visitorInfo.humanReadableDate,
-        visitorInfo.referrer,
         visitorInfo.domain,
+        visitorInfo.referrer,
         visitorInfo.urlPath,
         visitorInfo.ip,
         visitorInfo.country,
