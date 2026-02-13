@@ -50,6 +50,12 @@ exports.handler = async (event, context) => {
                    data.domain ||
                    'Unknown';
 
+    // Extract referrer with fallback to HTTP Referer header
+    const referrer = data.referrer ||
+                     event.headers['referer'] ||
+                     event.headers['referrer'] ||
+                     'Direct';
+
     // Extract visitor information
     const visitorInfo = {
       timestamp: new Date().toISOString(),
@@ -64,7 +70,7 @@ exports.handler = async (event, context) => {
         hour12: true
       }),
       domain: domain,
-      referrer: data.referrer || 'Direct',
+      referrer: referrer,
       urlPath: data.urlPath || '/',
       sessionId: data.sessionId || '',
       deviceType: data.deviceType || 'Unknown',
