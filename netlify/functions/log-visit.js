@@ -44,6 +44,12 @@ exports.handler = async (event, context) => {
       }
     }
 
+    // Extract domain from headers
+    const domain = event.headers['host'] ||
+                   event.headers['x-forwarded-host'] ||
+                   data.domain ||
+                   'Unknown';
+
     // Extract visitor information
     const visitorInfo = {
       timestamp: new Date().toISOString(),
@@ -57,6 +63,7 @@ exports.handler = async (event, context) => {
         second: '2-digit',
         hour12: true
       }),
+      domain: domain,
       referrer: data.referrer || 'Direct',
       urlPath: data.urlPath || '/',
       sessionId: data.sessionId || '',
@@ -91,11 +98,12 @@ exports.handler = async (event, context) => {
 
     // Use the sheet name from request data, default to visitor_logs
     const sheetName = data.sheetName || 'visitor_logs';
-    const range = `${sheetName}!A:M`; // Adjust column range as needed
+    const range = `${sheetName}!A:N`; // Adjusted to include Domain column
 
     // Prepare the row data
     const values = [[
       visitorInfo.humanReadableDate,
+      visitorInfo.domain,
       visitorInfo.referrer,
       visitorInfo.urlPath,
       visitorInfo.ip,
