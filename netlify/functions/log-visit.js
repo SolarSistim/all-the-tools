@@ -98,25 +98,48 @@ exports.handler = async (event, context) => {
 
     // Use the sheet name from request data, default to visitor_logs
     const sheetName = data.sheetName || 'visitor_logs';
-    const range = `${sheetName}!A:N`; // Adjusted to include Domain column
+    const range = `${sheetName}!A:N`; // Adjusted to include Root Domain column
 
-    // Prepare the row data
-    const values = [[
-      visitorInfo.humanReadableDate,
-      visitorInfo.domain,
-      visitorInfo.referrer,
-      visitorInfo.urlPath,
-      visitorInfo.ip,
-      visitorInfo.country,
-      visitorInfo.city,
-      visitorInfo.region,
-      `${visitorInfo.latitude}, ${visitorInfo.longitude}`,
-      visitorInfo.sessionId,
-      visitorInfo.deviceType,
-      visitorInfo.userAgent,
-      visitorInfo.screenResolution,
-      visitorInfo.language,
-    ]];
+    // Prepare the row data based on sheet type
+    let values;
+
+    if (sheetName === 'page_views') {
+      // page_views: Timestamp, Referrer, Root Domain, UrlPath, ...
+      values = [[
+        visitorInfo.humanReadableDate,
+        visitorInfo.referrer,
+        visitorInfo.domain,
+        visitorInfo.urlPath,
+        visitorInfo.ip,
+        visitorInfo.country,
+        visitorInfo.city,
+        visitorInfo.region,
+        `${visitorInfo.latitude}, ${visitorInfo.longitude}`,
+        visitorInfo.sessionId,
+        visitorInfo.deviceType,
+        visitorInfo.userAgent,
+        visitorInfo.screenResolution,
+        visitorInfo.language,
+      ]];
+    } else {
+      // visitor_logs: Date, Root Domain, Referrer, UrlPath, ...
+      values = [[
+        visitorInfo.humanReadableDate,
+        visitorInfo.domain,
+        visitorInfo.referrer,
+        visitorInfo.urlPath,
+        visitorInfo.ip,
+        visitorInfo.country,
+        visitorInfo.city,
+        visitorInfo.region,
+        `${visitorInfo.latitude}, ${visitorInfo.longitude}`,
+        visitorInfo.sessionId,
+        visitorInfo.deviceType,
+        visitorInfo.userAgent,
+        visitorInfo.screenResolution,
+        visitorInfo.language,
+      ]];
+    }
 
     // Append the data to the sheet
     await sheets.spreadsheets.values.append({
