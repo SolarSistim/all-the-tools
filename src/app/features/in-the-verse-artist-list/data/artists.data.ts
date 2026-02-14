@@ -281,4 +281,34 @@ With 13 years of Unreal Engine experience plus Houdini, Maya, and Python scripti
     featured: false,
     display: true,
   },
+  {
+    id: '23',
+    slug: 'halcyon',
+    name: 'HALCYON',
+    shortDescription: 'Sci-fi series following elite crews forging beyond the frontiers of known space, encountering alien civilizations and cosmic enigmas.',
+    longDescription: `Set in a far-flung future, Halcyon follows elite crews forging beyond the frontiers of known space. Their journeys lead them to encounter alien civilizations, decode cosmic enigmas, and push the boundaries of scientific exploration. Despite an era fueled by unwavering optimism and interstellar cooperation, a subtle undercurrent lurks in the deep recesses of the universe—reminding all that not every mystery will be benign.
+
+Compelled by an insatiable desire to understand the cosmos, each episode weaves exhilarating quests with intricate scientific and philosophical dilemmas. Halcyon serves as a convergence point for myriad species drawn together by their thirst for knowledge, embodying both the hope of progress and the lurking promise of the unknown in an ever-expanding cosmos.`,
+    keywords: ['Sci-Fi', 'Space Exploration', 'Animation', 'Series', 'Space Opera'],
+    metaDescription: 'Discover Halcyon, a sci-fi series following elite crews exploring the frontiers of known space, encountering alien civilizations and cosmic mysteries.',
+    metaKeywords: ['Halcyon', 'sci-fi series', 'space exploration', 'alien civilizations', 'space opera', 'YouTube series'],
+    ogImage: '/in-the-verse/og-header-images/og-halcyon-01.jpg',
+    youtubeVideoId: 'haQZXcT3RJk',
+    youtubeVideos: [
+      { id: 'TcN2xwSqJf8' },
+      { id: '43vtiLGQzBQ' },
+      { id: 'eHj8lYXv16I' },
+      { id: 'zYPQ55KkiDA' },
+      { id: 'Gvol-xacoq8' },
+      { id: 'LJa2Q4k-HHU' },
+      { id: 'bI7UP6ZA1qU' },
+    ],
+    links: {
+      website: 'https://halcyonseries.com',
+      youtube: 'https://www.youtube.com/@HalcyonSeries',
+    },
+    publishedDate: '2026-02-14',
+    featured: false,
+    display: true,
+  },
 ];
