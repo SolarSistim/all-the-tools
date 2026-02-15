@@ -10,6 +10,10 @@ export async function loadArticleContent(
   try {
     // Explicit import mapping for each article
     switch (slug) {
+      case 'fixing-tailscale-stuck-on-starting-windows-10-docker-hyper-v':
+        const tailscaleModule = await import('./fixing-tailscale-stuck-on-starting-windows-10-docker-hyper-v.content');
+        return tailscaleModule.content;
+
       case 'roku-tv-black-screen-defect-class-action-lawsuit':
         const rokuBlackScreenModule = await import('./roku-tv-black-screen-defect-class-action-lawsuit.content');
         return rokuBlackScreenModule.content;
