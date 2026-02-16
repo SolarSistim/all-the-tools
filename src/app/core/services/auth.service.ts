@@ -57,6 +57,9 @@ export class AuthService {
         setCookie: true
       });
 
+      // Handle OAuth callback (if returning from external provider like Google)
+      await this.handleOAuthCallback();
+
       // Restore session if user is already logged in
       const currentUser = this.goTrue.currentUser();
       if (currentUser) {
@@ -77,7 +80,8 @@ export class AuthService {
   }
 
   /**
-   * Load GoTrue script dynamically
+   * Load GoTrue script (now loaded from index.html)
+   * This method just waits for the script to be available
    */
   private loadGoTrueScript(): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -86,30 +90,27 @@ export class AuthService {
         return;
       }
 
-      // Check if script already exists
-      const existingScript = document.querySelector('script[src*="gotrue"]');
-      if (existingScript) {
+      // Check if GoTrue is already available
+      if (window.GoTrue) {
         this.scriptLoaded = true;
         resolve();
         return;
       }
 
-      // Create and inject script
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = 'https://unpkg.com/gotrue-js@0.9.29/dist/gotrue.js';
-      script.async = true;
-
-      script.onload = () => {
-        this.scriptLoaded = true;
-        resolve();
-      };
-
-      script.onerror = () => {
-        reject(new Error('Failed to load GoTrue script'));
-      };
-
-      document.head.appendChild(script);
+      // Wait for GoTrue to load (max 5 seconds)
+      let attempts = 0;
+      const maxAttempts = 50; // 50 attempts * 100ms = 5 seconds
+      const checkInterval = setInterval(() => {
+        attempts++;
+        if (window.GoTrue) {
+          clearInterval(checkInterval);
+          this.scriptLoaded = true;
+          resolve();
+        } else if (attempts >= maxAttempts) {
+          clearInterval(checkInterval);
+          reject(new Error('Failed to load GoTrue script'));
+        }
+      }, 100);
     });
   }
 
@@ -146,6 +147,32 @@ export class AuthService {
     } catch (error: any) {
       console.error('Signup error:', error);
       throw new Error(error.json?.error_description || error.message || 'Signup failed');
+    }
+  }
+
+  /**
+   * Handle OAuth callback from external providers (Google, etc.)
+   */
+  private async handleOAuthCallback(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Check if we have an OAuth callback in the URL hash
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      try {
+        // GoTrue will automatically parse the hash and create the user session
+        const user = this.goTrue.currentUser();
+        if (user) {
+          this.userSubject.next(user);
+          // Clean up the URL hash
+          window.history.replaceState({}, document.title, window.location.pathname);
+          console.log('OAuth login successful');
+        }
+      } catch (error) {
+        console.error('OAuth callback error:', error);
+      }
     }
   }
 
