@@ -78,10 +78,8 @@ export class AuthService {
 
       this.netlifyIdentity.on('login', (user: NetlifyUser) => {
         this.userSubject.next(user);
-        // Close the modal after a brief delay to allow the widget to finish processing
-        setTimeout(() => {
-          this.netlifyIdentity.close();
-        }, 100);
+        // Don't auto-close - let the modal close naturally to avoid race conditions
+        // The widget will close automatically after a moment, or user can close manually
       });
 
       this.netlifyIdentity.on('logout', () => {
