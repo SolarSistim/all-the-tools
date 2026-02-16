@@ -104,6 +104,12 @@ export class AuthService {
       this.netlifyIdentity.on('init', (user: NetlifyUser | null) => {
         if (user) {
           this.userSubject.next(user);
+          // Close the widget immediately on init to prevent UI errors
+          setTimeout(() => {
+            if (this.netlifyIdentity) {
+              this.netlifyIdentity.close();
+            }
+          }, 100);
         }
       });
 
