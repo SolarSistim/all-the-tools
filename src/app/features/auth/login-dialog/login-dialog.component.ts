@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService } from '../../../core/services/auth.service';
+import { AlertSuccess } from '../../reusable-components/alerts/alert-success/alert-success';
+import { AlertDanger } from '../../reusable-components/alerts/alert-danger/alert-danger';
 
 @Component({
   selector: 'app-login-dialog',
@@ -22,7 +24,9 @@ import { AuthService } from '../../../core/services/auth.service';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    AlertSuccess,
+    AlertDanger
   ],
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.scss']

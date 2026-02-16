@@ -46,10 +46,11 @@
             </mat-form-field>
 
             @if (errorMessage) {
-              <div class="alert-message error-message">
-                <mat-icon>error_outline</mat-icon>
-                <span>{{ errorMessage }}</span>
-              </div>
+              <app-alert-danger
+                title="Login Failed"
+                [content]="errorMessage"
+                icon="error_outline">
+              </app-alert-danger>
             }
 
             <button mat-raised-button class="submit-button" type="submit" [disabled]="loading || loginForm.invalid">
@@ -112,10 +113,11 @@
           }
 
           @if (successMessage) {
-            <div class="alert-message success-message">
-              <mat-icon>check_circle</mat-icon>
-              <span>{{ successMessage }}</span>
-            </div>
+            <app-alert-success
+              title="Account Created"
+              [content]="successMessage"
+              icon="check_circle">
+            </app-alert-success>
           }
         </div>
       </mat-tab>
