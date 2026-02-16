@@ -61,7 +61,7 @@ export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
     hasVideo: false,
     display: true,
     relatedArticles: [],
-    readTime: 8,
+    readTime: 5,
   },
   {
     id: '112',

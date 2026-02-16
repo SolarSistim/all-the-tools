@@ -11,10 +11,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialog } from '@angular/material/dialog';
 import { ToolsService } from '../../core/services/tools.service';
 import { SidenavService } from '../../core/services/sidenav.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ToolCategoryMeta, Tool } from '../../core/models/tool.interface';
+import { LoginDialogComponent } from '../../features/auth/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -53,6 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
   private document = inject(DOCUMENT);
   private authService = inject(AuthService);
+  private dialog = inject(MatDialog);
 
   // Mobile menu state
   mobileMenuOpen = signal(false);
@@ -315,7 +318,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Open login modal
    */
   login(): void {
-    this.authService.login();
+    this.dialog.open(LoginDialogComponent, {
+      width: '500px',
+      maxWidth: '95vw',
+      panelClass: 'login-dialog-container'
+    });
   }
 
   /**

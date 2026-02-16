@@ -686,23 +686,3 @@ body.light-theme {
   }
 }
 
-// ============================================
-// Netlify Identity Widget Fixes
-// ============================================
-
-// Hide the widget's user info displays that cause errors
-// when full_name is not set
-.netlify-identity-user-info,
-.netlify-identity-user,
-.netlify-identity-widget .netlify-identity-header {
-  display: none !important;
-}
-
-// When widget is closed, hide it completely to prevent background errors
-.netlify-identity-widget[aria-hidden="true"],
-.netlify-identity-widget.closed {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
