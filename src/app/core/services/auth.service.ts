@@ -243,17 +243,18 @@ export class AuthService {
     try {
       console.log('[AuthService] Attempting login via Netlify Identity API...');
 
-      // Use fetch to call Netlify Identity API directly
+      // Netlify Identity (GoTrue) requires form-encoded data for token endpoint
+      const params = new URLSearchParams();
+      params.append('grant_type', 'password');
+      params.append('username', email);
+      params.append('password', password);
+
       const response = await fetch(`${environment.netlifyIdentitySiteUrl}/.netlify/identity/token`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
-          email,
-          password,
-          grant_type: 'password'
-        })
+        body: params.toString()
       });
 
       console.log('[AuthService] API response status:', response.status);
@@ -261,24 +262,33 @@ export class AuthService {
       if (!response.ok) {
         const error = await response.json();
         console.error('[AuthService] API error:', error);
-        throw new Error(error.error_description || error.msg || 'Login failed');
+        throw new Error(error.error_description || error.msg || 'Invalid email or password');
       }
 
       const data = await response.json();
       console.log('[AuthService] Login response received');
 
-      // Store the token and user data
+      // Extract user data from token response
       const user = {
-        email,
-        token: data.access_token,
-        refresh_token: data.refresh_token,
+        email: data.email || email,
+        token: {
+          access_token: data.access_token,
+          token_type: data.token_type,
+          expires_in: data.expires_in,
+          refresh_token: data.refresh_token
+        },
+        id: data.user?.id,
+        app_metadata: data.user?.app_metadata,
+        user_metadata: data.user?.user_metadata,
         ...data.user
       };
 
-      this.userSubject.next(user as NetlifyUser);
+      // Enrich user with JWT data
+      const enrichedUser = this.enrichUserFromToken(user);
+      this.userSubject.next(enrichedUser as NetlifyUser);
       console.log('[AuthService] Login successful');
 
-      return user as NetlifyUser;
+      return enrichedUser as NetlifyUser;
     } catch (error: any) {
       console.error('[AuthService] Login error:', error);
       throw new Error(error.message || 'Login failed');
