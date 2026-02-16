@@ -38,7 +38,7 @@
     .header-content {
       display: flex;
       gap: 1rem;
-      align-items: center;
+      align-items: flex-start;
 
       .brand-icon {
         display: flex;
@@ -48,8 +48,6 @@
         height: 48px;
         border-radius: 12px;
         background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
-        box-shadow: 0 4px 12px var(--neon-cyan-glow);
-        animation: iconGlow 3s ease-in-out infinite;
 
         mat-icon {
           font-size: 28px;
@@ -118,6 +116,10 @@
       opacity: 0.6;
       transition: all 0.3s ease;
 
+      .mdc-tab__text-label {
+        color: var(--text-primary);
+      }
+
       &:hover {
         opacity: 1;
         background: rgba(var(--neon-cyan), 0.05);
@@ -136,6 +138,7 @@
         font-size: 20px;
         width: 20px;
         height: 20px;
+        color: var(--text-primary);
       }
     }
 
@@ -173,34 +176,6 @@
       background: var(--bg-elevated) !important;
       border: 2px solid var(--border-color) !important;
       border-radius: 12px !important;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        transition: left 0.5s ease;
-      }
-
-      &:hover:not([disabled]) {
-        border-color: var(--neon-cyan);
-        box-shadow: 0 4px 16px var(--neon-cyan-glow);
-        transform: translateY(-2px);
-
-        &::before {
-          left: 100%;
-        }
-      }
-
-      &:active:not([disabled]) {
-        transform: translateY(0);
-      }
 
       .google-icon {
         width: 24px;
@@ -274,31 +249,26 @@
               background-color: transparent;
             }
 
-            .mdc-text-field--outlined {
-              .mdc-notched-outline {
-                .mdc-notched-outline__leading,
-                .mdc-notched-outline__notch,
-                .mdc-notched-outline__trailing {
-                  border-color: var(--border-color);
-                  transition: all 0.3s ease;
-                }
+            // Fill appearance styling
+            .mdc-text-field--filled {
+              background-color: var(--bg-elevated);
+              border-radius: 12px 12px 0 0;
+
+              &:hover {
+                background-color: var(--bg-elevated);
               }
 
-              &:hover .mdc-notched-outline {
-                .mdc-notched-outline__leading,
-                .mdc-notched-outline__notch,
-                .mdc-notched-outline__trailing {
-                  border-color: var(--neon-cyan);
-                }
+              &.mdc-text-field--focused {
+                background-color: var(--bg-elevated);
               }
 
-              &.mdc-text-field--focused .mdc-notched-outline {
-                .mdc-notched-outline__leading,
-                .mdc-notched-outline__notch,
-                .mdc-notched-outline__trailing {
-                  border-color: var(--neon-cyan) !important;
-                  border-width: 2px;
-                  box-shadow: 0 0 12px var(--neon-cyan-glow);
+              .mdc-line-ripple {
+                &::before {
+                  border-bottom-color: var(--border-color);
+                }
+
+                &::after {
+                  border-bottom-color: var(--neon-cyan);
                 }
               }
             }
@@ -311,16 +281,23 @@
             .mat-mdc-input-element {
               color: var(--text-primary);
               font-size: 0.9375rem;
+              padding-top: 20px;
 
               &::placeholder {
                 color: var(--text-tertiary);
-                opacity: 0.5;
+                opacity: 0.6;
               }
             }
 
-            label {
-              color: var(--text-secondary);
+            .mat-mdc-floating-label {
+              color: var(--text-secondary) !important;
               font-weight: 500;
+            }
+
+            .mdc-text-field--filled .mat-mdc-floating-label {
+              &.mdc-floating-label--float-above {
+                transform: translateY(-50%) scale(0.75);
+              }
             }
           }
         }
@@ -441,10 +418,6 @@
 
     .dialog-header {
       .header-content {
-        .brand-icon {
-          box-shadow: 0 4px 12px rgba(0, 128, 165, 0.2);
-        }
-
         .header-text h2 {
           background: linear-gradient(135deg, #0080a5 0%, #ff6b99 100%);
           -webkit-background-clip: text;
@@ -455,12 +428,6 @@
     }
 
     .tab-content {
-      .google-button {
-        &:hover:not([disabled]) {
-          box-shadow: 0 4px 16px rgba(0, 128, 165, 0.15);
-        }
-      }
-
       .auth-form {
         .submit-button {
           box-shadow: 0 4px 16px rgba(0, 128, 165, 0.2);
@@ -530,14 +497,6 @@
   }
 }
 
-@keyframes iconGlow {
-  0%, 100% {
-    box-shadow: 0 4px 12px var(--neon-cyan-glow);
-  }
-  50% {
-    box-shadow: 0 4px 20px var(--neon-cyan-glow), 0 0 30px var(--neon-cyan-glow);
-  }
-}
 
 @keyframes pulseGlow {
   0%, 100% {

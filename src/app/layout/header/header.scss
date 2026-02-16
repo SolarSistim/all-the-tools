@@ -228,46 +228,10 @@
   color: #ffffff !important;
   border-radius: 12px !important;
   padding: 8px 20px !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px var(--neon-cyan-glow);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-cyan) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
 
   mat-icon {
     color: #ffffff !important;
     margin-right: 6px;
-    z-index: 1;
-    position: relative;
-  }
-
-  span {
-    z-index: 1;
-    position: relative;
-  }
-
-  &:hover {
-    box-shadow: 0 6px 20px var(--neon-cyan-glow) !important;
-    transform: translateY(-2px);
-
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 }
 
