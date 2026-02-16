@@ -50,7 +50,7 @@ export class AuthService {
     }
 
     // Catch unhandled errors from the Netlify Identity widget
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', (event): boolean => {
       // Check if error is from Netlify Identity widget trying to access full_name
       if (event.message?.includes("Cannot read properties of undefined (reading 'full_name')") ||
           event.filename?.includes('netlify-identity-widget')) {
@@ -58,6 +58,7 @@ export class AuthService {
         event.preventDefault(); // Prevent the error from breaking the page
         return false;
       }
+      return true; // Allow other errors to propagate normally
     });
 
     // Also catch unhandled promise rejections
