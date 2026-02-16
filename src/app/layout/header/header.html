@@ -418,43 +418,7 @@
     <div class="mobile-menu-overlay" (click)="closeMobileMenu()"></div>
     <div class="mobile-menu" [@slideIn]>
       <nav class="mobile-nav">
-        <!-- Login Button (when not authenticated) -->
-        @if (!(isAuthenticated$ | async)) {
-          <button
-            (click)="login(); closeMobileMenu()"
-            class="mobile-nav-link login-mobile-btn"
-          >
-            <mat-icon>login</mat-icon>
-            <span>Login</span>
-          </button>
-        }
-
-        <!-- Account Links (when authenticated) -->
-        @if (isAuthenticated$ | async) {
-          <a
-            routerLink="/account"
-            routerLinkActive="active"
-            (click)="closeMobileMenu()"
-            class="mobile-nav-link"
-          >
-            <mat-icon>person</mat-icon>
-            <span>My Account</span>
-          </a>
-        }
-
-        <!-- Admin Link (when admin) -->
-        @if (isAdmin$ | async) {
-          <a
-            routerLink="/admin"
-            routerLinkActive="active"
-            (click)="closeMobileMenu()"
-            class="mobile-nav-link"
-          >
-            <mat-icon>admin_panel_settings</mat-icon>
-            <span>Admin Dashboard</span>
-          </a>
-        }
-
+        <!-- Home -->
         <a
           routerLink="/"
           routerLinkActive="active"
@@ -466,6 +430,55 @@
           <span>Home</span>
         </a>
 
+        <!-- Login/Logout Button (under Home) -->
+        @if (!(isAuthenticated$ | async)) {
+          <button
+            (click)="login(); closeMobileMenu()"
+            class="mobile-nav-link login-mobile-btn auth-action-link"
+          >
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+        } @else {
+          <button
+            (click)="logout(); closeMobileMenu()"
+            class="mobile-nav-link logout-mobile-btn auth-action-link"
+          >
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        }
+
+        <!-- My Account (when authenticated, under Home) -->
+        @if (isAuthenticated$ | async) {
+          <a
+            routerLink="/account"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-nav-link auth-action-link"
+          >
+            <mat-icon>person</mat-icon>
+            <span>My Account</span>
+          </a>
+        }
+
+        <!-- Admin Dashboard (when admin, under Home) -->
+        @if (isAdmin$ | async) {
+          <a
+            routerLink="/admin"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-nav-link auth-action-link admin-link"
+          >
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span>Admin Dashboard</span>
+          </a>
+        }
+
+        <!-- Divider -->
+        <div class="mobile-nav-divider"></div>
+
+        <!-- All Tools -->
         <a
           routerLink="/tools"
           routerLinkActive="active"
@@ -476,16 +489,7 @@
           <span>All Tools</span>
         </a>
 
-        <a
-          routerLink="/blog"
-          routerLinkActive="active"
-          (click)="closeMobileMenu()"
-          class="mobile-nav-link"
-        >
-          <mat-icon>article</mat-icon>
-          <span>Blog</span>
-        </a>
-
+        <!-- 3D Artist Spotlight -->
         <a
           routerLink="/3d-artist-spotlight"
           routerLinkActive="active"
@@ -496,6 +500,7 @@
           <span>3D Artist Spotlight</span>
         </a>
 
+        <!-- Resources -->
         <a
           routerLink="/resources"
           routerLinkActive="active"
@@ -525,9 +530,32 @@
           }
         </div>
 
-        <!-- About & Legal Links -->
+        <!-- all the things.dev Section -->
         <div class="mobile-categories">
-          <p class="mobile-section-title">About & Legal</p>
+          <p class="mobile-section-title">
+            <mat-icon>language</mat-icon>
+            all the things.dev
+          </p>
+
+          <a
+            routerLink="/blog"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-category-link"
+          >
+            <mat-icon>article</mat-icon>
+            <span>Blog</span>
+          </a>
+
+          <a
+            routerLink="/contact"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-category-link"
+          >
+            <mat-icon>contact_mail</mat-icon>
+            <span>Contact Us</span>
+          </a>
 
           <a
             routerLink="/about"
@@ -536,7 +564,7 @@
             class="mobile-category-link"
           >
             <mat-icon>info</mat-icon>
-            <span>About All The Tools</span>
+            <span>About</span>
           </a>
 
           <a
@@ -580,28 +608,15 @@
           </a>
 
           <a
-            routerLink="/contact"
+            routerLink="/disclaimer"
             routerLinkActive="active"
             (click)="closeMobileMenu()"
             class="mobile-category-link"
           >
-            <mat-icon>contact_mail</mat-icon>
-            <span>Contact Us</span>
+            <mat-icon>gavel</mat-icon>
+            <span>Disclaimer</span>
           </a>
         </div>
-
-        <!-- Logout (when authenticated) -->
-        @if (isAuthenticated$ | async) {
-          <div class="mobile-categories">
-            <button
-              (click)="logout(); closeMobileMenu()"
-              class="mobile-category-link logout-mobile-btn"
-            >
-              <mat-icon>logout</mat-icon>
-              <span>Logout</span>
-            </button>
-          </div>
-        }
       </nav>
     </div>
   }

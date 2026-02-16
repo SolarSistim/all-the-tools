@@ -707,6 +707,19 @@
   flex-direction: column;
   padding: $spacing-lg $spacing-md;
 
+  // Divider
+  .mobile-nav-divider {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--border-color) 20%,
+      var(--border-color) 80%,
+      transparent 100%
+    );
+    margin: $spacing-lg 0;
+  }
+
   .mobile-nav-link {
     display: flex;
     align-items: center;
@@ -717,20 +730,44 @@
     font-weight: 500;
     color: var(--text-primary);
     text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 
     mat-icon {
       color: var(--text-secondary);
-      transition: color 0.2s ease;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    span {
+      z-index: 1;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan-glow), transparent);
+      transition: left 0.4s ease;
+      opacity: 0.1;
     }
 
     &:hover {
       background: var(--bg-elevated);
-      color: var(--neon-cyan);
+      color: var(--neon-cyan-bright);
+      transform: translateX(4px);
 
       mat-icon {
-        color: var(--neon-cyan);
+        color: var(--neon-cyan-bright);
+      }
+
+      &::before {
+        left: 100%;
       }
     }
 
@@ -738,10 +775,85 @@
       background: var(--bg-elevated);
       color: var(--neon-cyan);
       border-left: 3px solid var(--neon-cyan);
+      box-shadow: inset 0 0 20px var(--neon-cyan-glow);
 
       mat-icon {
         color: var(--neon-cyan);
         filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+      }
+    }
+
+    // Auth Action Links (Login, Logout, My Account, Admin)
+    &.auth-action-link {
+      margin-left: $spacing-lg;
+      font-size: 0.9375rem;
+      padding: $spacing-sm $spacing-md;
+      border-left: 2px solid var(--border-color);
+
+      &:hover {
+        border-left-color: var(--neon-cyan);
+      }
+    }
+
+    // Login Button Special Styling
+    &.login-mobile-btn {
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      color: #ffffff !important;
+      font-weight: 600;
+      box-shadow: 0 4px 12px var(--neon-cyan-glow);
+      border: none;
+
+      mat-icon {
+        color: #ffffff !important;
+      }
+
+      &:hover {
+        box-shadow: 0 6px 20px var(--neon-cyan-glow);
+        transform: translateX(4px) translateY(-2px);
+      }
+
+      &::before {
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      }
+    }
+
+    // Logout Button Special Styling
+    &.logout-mobile-btn {
+      background: rgba(244, 67, 54, 0.12);
+      color: #f44336 !important;
+      border: 1px solid rgba(244, 67, 54, 0.3);
+
+      mat-icon {
+        color: #f44336 !important;
+      }
+
+      &:hover {
+        background: rgba(244, 67, 54, 0.2);
+        box-shadow: 0 4px 12px rgba(244, 67, 54, 0.2);
+      }
+    }
+
+    // Admin Link Special Styling
+    &.admin-link {
+      border-left-color: var(--amber);
+
+      &:hover {
+        color: var(--amber-bright);
+
+        mat-icon {
+          color: var(--amber-bright);
+        }
+      }
+
+      &.active {
+        border-left-color: var(--amber);
+        color: var(--amber);
+        box-shadow: inset 0 0 20px var(--amber-glow);
+
+        mat-icon {
+          color: var(--amber);
+          filter: drop-shadow(0 0 8px var(--amber-glow));
+        }
       }
     }
   }
@@ -757,14 +869,24 @@
   border-bottom: 1px solid var(--border-color);
 
   .mobile-section-title {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-primary) !important;
-    margin: 0 0 $spacing-sm;
+    margin: 0 0 $spacing-md;
     padding: 0 $spacing-md;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: var(--neon-cyan);
+    }
   }
 
   .mobile-category-link {
