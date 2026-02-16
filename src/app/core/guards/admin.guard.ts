@@ -31,14 +31,8 @@ export const adminGuard: CanActivateFn = (route, state) => {
     map(isAdmin => {
       if (!isAdmin) {
         // User is not admin, redirect to home
+        // User can click the Login button in the header if needed
         router.navigate(['/']);
-
-        // If user is not even authenticated, show login modal
-        const isAuthenticated = authService.getCurrentUser() !== null;
-        if (!isAuthenticated) {
-          authService.login();
-        }
-
         return false;
       }
       // User is admin, allow navigation

@@ -280,8 +280,21 @@ export class ProfileTabComponent {
     });
   }
 
-  changePassword() {
-    this.authService.openPasswordReset();
+  async changePassword() {
+    const user = this.authService.getCurrentUser();
+    if (!user?.email) {
+      console.error('No user email found');
+      return;
+    }
+
+    try {
+      await this.authService.requestPasswordReset(user.email);
+      // Show success message to user
+      alert('Password reset email sent! Please check your inbox.');
+    } catch (error: any) {
+      console.error('Password reset failed:', error);
+      alert(error.message || 'Failed to send password reset email');
+    }
   }
 
   deleteAccount() {

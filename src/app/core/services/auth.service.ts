@@ -62,7 +62,8 @@ export class AuthService {
       if (currentUser) {
         // Verify token is still valid
         try {
-          await currentUser.jwt();
+          // GoTrue user has jwt method
+          await (currentUser as any).jwt();
           this.userSubject.next(currentUser);
         } catch (error) {
           // Token expired, clear session
@@ -177,7 +178,8 @@ export class AuthService {
     try {
       const user = this.getCurrentUser();
       if (user) {
-        await user.logout();
+        // GoTrue user has logout method
+        await (user as any).logout();
       }
       this.goTrue.clearStore();
       this.userSubject.next(null);
@@ -208,7 +210,8 @@ export class AuthService {
     }
 
     try {
-      const token = await user.jwt();
+      // GoTrue user has jwt method
+      const token = await (user as any).jwt();
       return token;
     } catch (error) {
       console.error('Failed to get token:', error);

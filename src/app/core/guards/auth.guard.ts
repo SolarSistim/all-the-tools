@@ -30,9 +30,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     take(1),
     map(isAuthenticated => {
       if (!isAuthenticated) {
-        // User not authenticated, redirect to home and open login modal
+        // User not authenticated, redirect to home
+        // User can click the Login button in the header
         router.navigate(['/']);
-        authService.login();
         return false;
       }
       // User authenticated, allow navigation
