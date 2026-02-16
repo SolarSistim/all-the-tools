@@ -686,4 +686,16 @@ body.light-theme {
   }
 }
 
+// ============================================
+// Netlify Identity Widget Fixes
+// ============================================
+
+// Hide the widget's user info display that causes errors
+// when full_name is not set
+.netlify-identity-widget {
+  .netlify-identity-user-info,
+  .netlify-identity-user {
+    display: none !important;
+  }
+}
 

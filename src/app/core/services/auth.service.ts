@@ -37,6 +37,36 @@ export class AuthService {
 
   constructor() {
     this.initNetlifyIdentity();
+    this.setupGlobalErrorHandler();
+  }
+
+  /**
+   * Setup global error handler to catch Netlify Identity widget errors
+   * Prevents the widget's internal errors from breaking the page
+   */
+  private setupGlobalErrorHandler(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Catch unhandled errors from the Netlify Identity widget
+    window.addEventListener('error', (event) => {
+      // Check if error is from Netlify Identity widget trying to access full_name
+      if (event.message?.includes("Cannot read properties of undefined (reading 'full_name')") ||
+          event.filename?.includes('netlify-identity-widget')) {
+        console.warn('Suppressed Netlify Identity widget error:', event.message);
+        event.preventDefault(); // Prevent the error from breaking the page
+        return false;
+      }
+    });
+
+    // Also catch unhandled promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+      if (event.reason?.message?.includes('full_name')) {
+        console.warn('Suppressed Netlify Identity promise rejection:', event.reason);
+        event.preventDefault();
+      }
+    });
   }
 
   /**
