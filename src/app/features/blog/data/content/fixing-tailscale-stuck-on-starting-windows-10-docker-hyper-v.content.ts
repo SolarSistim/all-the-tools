@@ -14,7 +14,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'If you\'ve installed Tailscale on Windows 10 and it just sits there saying:',
+      text: 'If you\'ve installed Tailscale on Windows 10/11 and when it starts it just says:',
       className: 'lead',
     },
   },
@@ -27,7 +27,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: '…you\'re not alone.',
+      text: '…you\'re at the right place.',
     },
   },
   {
@@ -64,7 +64,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Tailscale is a VPN service that creates a secure private network between your devices using WireGuard. Unlike traditional VPNs, Tailscale provides zero-config networking that just works—when it starts properly.',
+      text: 'Tailscale is a VPN service that creates a secure private network between your devices using WireGuard. Unlike traditional VPNs, Tailscale provides zero-config networking that just works - that is, when it starts properly.',
     },
   },
   {
@@ -143,7 +143,7 @@ export const content: ContentBlock[] = [
   {
     type: 'paragraph',
     data: {
-      text: 'Without that adapter, Tailscale has nothing to bind to — so it just sits there.',
+      text: 'Without that adapter, Tailscale has nothing to bind to - so it just sits there.',
     },
   },
   {
@@ -182,7 +182,7 @@ export const content: ContentBlock[] = [
     type: 'heading',
     data: {
       level: 2,
-      text: 'The Fix (Worked 100%)',
+      text: 'The Fix',
     },
   },
   {
@@ -250,7 +250,7 @@ netcfg -d`,
   {
     type: 'paragraph',
     data: {
-      text: 'You may see an "Access is denied" during <code>netsh int ip reset</code>. That\'s fine.',
+      text: 'You may see an "Access is denied" during <code>netsh int ip reset</code>, that\'s fine.',
     },
   },
   {
@@ -288,7 +288,7 @@ netcfg -d`,
   {
     type: 'paragraph',
     data: {
-      text: 'You will see adapters being removed in the output. That\'s normal.',
+      text: 'You will see adapters being removed in the output, hat\'s normal.',
     },
   },
   {
@@ -390,7 +390,7 @@ netcfg -d`,
   {
     type: 'paragraph',
     data: {
-      text: '<strong>Control Panel → Network and Internet → Network Connections</strong>',
+      text: '<strong>Control Panel → Network and Sharing Center → Change Adapter Settings</strong>',
     },
   },
   {
@@ -402,7 +402,7 @@ netcfg -d`,
   {
     type: 'paragraph',
     data: {
-      text: '<strong>Tailscale Tunnel</strong>',
+      text: '<strong>Tailscale/Tailscale Tunnel</strong>',
     },
   },
   {
