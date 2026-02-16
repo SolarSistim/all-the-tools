@@ -1,0 +1,375 @@
+You are Claude Code acting as a senior full-stack engineer. You will implement a user authentication system and an ad-free account benefit system for an Angular site hosted on Netlify.
+
+0) Context
+
+Site: https://www.allthethings.dev
+
+Tech stack:
+
+Angular (mostly statically generated)
+
+Hosted on Netlify
+
+Currently ad supported
+
+Current environment config:
+
+export const environment = {
+  production: true|false,
+  adsEnabled: true,
+  ogFetchLimitPerMin: 10,
+  ogFetchUserLimitPerMin: 5,
+  ogFetchUserLockoutMinutes: 10
+};
+
+
+environment.adsEnabled globally controls whether ads are enabled for the site.
+
+1) New Requirements
+Core Goals
+
+Implement user authentication.
+
+Make ad-free browsing an automatic account benefit.
+
+Add role support (user + admin).
+
+Add a fully functional My Account page with multiple tabs.
+
+Ad-Free Rules
+
+If environment.adsEnabled === false → ads are disabled globally.
+
+If environment.adsEnabled === true:
+
+Logged-out users see ads.
+
+Logged-in users do NOT see ads.
+
+As long as the account exists and the user is logged in, ads remain disabled.
+
+Do NOT rely solely on client-side flags.
+
+2) Authentication Requirements
+
+Use Netlify’s authentication stack.
+
+You must evaluate and choose the correct solution:
+
+Netlify Identity (GoTrue-based user auth)
+
+OAuth provider tokens (used primarily for accessing third-party APIs)
+
+For user authentication, strongly prefer Netlify Identity unless you have a compelling technical reason not to.
+
+Support:
+
+Email/password login
+
+Google OAuth login
+
+Persistent sessions
+
+Logout
+
+3) Architecture Requirements
+A) Angular Auth Layer
+
+Create:
+
+AuthService
+
+user$
+
+isAuthenticated$
+
+isAdmin$
+
+hasAdFree$
+
+login()
+
+signup()
+
+logout()
+
+loginWithGoogle()
+
+refreshSession()
+
+Create route guards:
+
+AuthGuard
+
+AdminGuard
+
+Ensure session survives refresh and navigation.
+
+B) Roles
+
+Minimum roles:
+
+user
+
+admin
+
+Admin must:
+
+Access an admin dashboard
+
+Promote/demote users
+
+View account list
+
+Roles must be validated server-side.
+
+C) Ad Gating System
+
+Centralize ads behind:
+
+<app-ads> component OR
+
+*appShowAds structural directive
+
+Ads render only when:
+
+environment.adsEnabled === true && isAuthenticated === false
+
+
+Ensure:
+
+No layout shift where possible.
+
+Static prerender compatibility.
+
+No trivial client-side bypass.
+
+D) My Account Page (NEW REQUIREMENT)
+
+Create a /my-account route protected by AuthGuard.
+
+This page must contain at least two tabs:
+
+Tab 1: News / Communication
+
+Purpose:
+
+Communicate directly with logged-in users.
+
+Must support:
+
+Displaying platform announcements
+
+Feature updates
+
+Important system messages
+
+Architecture:
+
+News items stored server-side (Netlify Function or static JSON endpoint).
+
+Optionally allow marking messages as “read” per user.
+
+Display unread indicator in header account menu if feasible.
+
+This system must be extensible for future:
+
+Tier-specific messaging
+
+In-app notifications
+
+Tab 2: Profile & Account Management
+
+Must include:
+
+Profile Information
+
+Email (read-only or editable depending on Identity capabilities)
+
+Display name
+
+Account creation date
+
+Role display (user/admin)
+
+Password Management
+
+Change password flow
+
+Reset password support
+
+Account Management
+
+Delete account (with confirmation step)
+
+Logout from all sessions (if supported)
+
+View account status (Ad-Free Active badge)
+
+Security
+
+All sensitive actions must be validated server-side.
+
+Account deletion must call a Netlify Function.
+
+Confirm deletion via explicit user confirmation.
+
+UX Requirements for My Account
+
+Use Angular Material or existing site UI patterns.
+
+Tabs should not cause full page reload.
+
+Add “My Account” to header when logged in.
+
+Show small “Ad-Free Active” badge somewhere visible.
+
+4) Netlify Functions
+
+Implement secure Netlify Functions for:
+
+Fetch current user profile
+
+Admin role changes
+
+Account deletion
+
+Fetching News/Communication items
+
+(Optional) Mark message as read
+
+All functions must:
+
+Validate JWT
+
+Reject unauthorized requests
+
+Never expose secrets
+
+5) Netlify Configuration Tasks
+
+You must:
+
+Enable Identity
+
+Configure Google OAuth provider
+
+Configure external providers correctly
+
+Add/update netlify.toml
+
+Functions directory
+
+SPA redirect rules
+
+Document required environment variables.
+
+6) Deliverables
+
+You must produce:
+
+1) Architecture Decision Record (Markdown)
+
+Include:
+
+Why Netlify Identity
+
+How roles are stored
+
+How ad-free logic works
+
+How My Account data flows
+
+How admin authorization is enforced
+
+2) Implementation
+
+Angular services
+
+Guards
+
+Login/signup UI
+
+Account dropdown menu
+
+My Account page with tab structure
+
+Admin dashboard
+
+Ad gating directive/component
+
+Netlify Functions
+
+3) Setup Guide
+
+Netlify Identity setup
+
+Google OAuth setup
+
+Required environment variables
+
+Local development instructions
+
+4) Testing Plan
+
+Manual verification checklist:
+
+Logged-out user sees ads
+
+Logged-in user does not see ads
+
+Admin access restricted properly
+
+My Account loads only when authenticated
+
+Password change works
+
+Account deletion works
+
+News tab loads correctly
+
+JWT validation blocks unauthorized API calls
+
+7) Constraints
+
+Keep architecture maintainable.
+
+Avoid unnecessary complexity.
+
+Avoid large intrusive refactors.
+
+Ensure ad-free benefit cannot be spoofed.
+
+Minimize vendor lock-in beyond Netlify Identity + Functions.
+
+8) Execution Plan
+
+Before coding:
+
+Inspect repository structure.
+
+Identify where ads are rendered.
+
+Identify routing structure.
+
+Identify static generation strategy.
+
+Propose implementation plan.
+
+Then implement.
+
+Now proceed:
+
+Analyze repository
+
+Propose architecture
+
+Implement authentication
+
+Implement ad-free account benefit
+
+Implement My Account page with required tabs
+
+Write setup documentation
+
+Provide final summary of changes

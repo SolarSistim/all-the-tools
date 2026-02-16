@@ -89,6 +89,32 @@
         >
           <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
         </button>
+
+        <!-- Login Button (when not authenticated) -->
+        @if (!(isAuthenticated$ | async)) {
+          <button
+            mat-button
+            (click)="login()"
+            class="login-btn"
+            aria-label="Login"
+          >
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+        }
+
+        <!-- Account Menu (when authenticated) -->
+        @if (isAuthenticated$ | async) {
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="accountMenu"
+            class="account-btn"
+            aria-label="Account menu"
+            [matTooltip]="getUserDisplayName()"
+          >
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        }
       </div>
 
       <!-- Mobile Menu Button -->
@@ -337,11 +363,98 @@
     </div>
   </mat-menu>
 
+  <!-- Account Dropdown Menu (Desktop) -->
+  <mat-menu #accountMenu="matMenu" class="account-menu">
+    <div class="account-menu-content">
+      <div class="menu-section">
+        <!-- User Info Header -->
+        @if (user$ | async; as user) {
+          <div class="account-header" mat-menu-item disabled>
+            <mat-icon>account_circle</mat-icon>
+            <div class="account-info">
+              <span class="account-email">{{ user.email }}</span>
+              <span class="account-badge ad-free-badge">Ad-Free Active</span>
+            </div>
+          </div>
+        }
+
+        <!-- My Account Link -->
+        <a
+          mat-menu-item
+          routerLink="/account"
+          class="account-menu-item"
+        >
+          <mat-icon>person</mat-icon>
+          <span>My Account</span>
+        </a>
+
+        <!-- Admin Dashboard Link (only for admins) -->
+        @if (isAdmin$ | async) {
+          <a
+            mat-menu-item
+            routerLink="/admin"
+            class="account-menu-item"
+          >
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span>Admin Dashboard</span>
+          </a>
+        }
+
+        <!-- Logout Button -->
+        <button
+          mat-menu-item
+          (click)="logout()"
+          class="account-menu-item logout-btn"
+        >
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </mat-menu>
+
   <!-- Mobile Sidebar Menu -->
   @if (mobileMenuOpen()) {
     <div class="mobile-menu-overlay" (click)="closeMobileMenu()"></div>
     <div class="mobile-menu" [@slideIn]>
       <nav class="mobile-nav">
+        <!-- Login Button (when not authenticated) -->
+        @if (!(isAuthenticated$ | async)) {
+          <button
+            (click)="login(); closeMobileMenu()"
+            class="mobile-nav-link login-mobile-btn"
+          >
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+        }
+
+        <!-- Account Links (when authenticated) -->
+        @if (isAuthenticated$ | async) {
+          <a
+            routerLink="/account"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-nav-link"
+          >
+            <mat-icon>person</mat-icon>
+            <span>My Account</span>
+          </a>
+        }
+
+        <!-- Admin Link (when admin) -->
+        @if (isAdmin$ | async) {
+          <a
+            routerLink="/admin"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+            class="mobile-nav-link"
+          >
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span>Admin Dashboard</span>
+          </a>
+        }
+
         <a
           routerLink="/"
           routerLinkActive="active"
@@ -476,6 +589,19 @@
             <span>Contact Us</span>
           </a>
         </div>
+
+        <!-- Logout (when authenticated) -->
+        @if (isAuthenticated$ | async) {
+          <div class="mobile-categories">
+            <button
+              (click)="logout(); closeMobileMenu()"
+              class="mobile-category-link logout-mobile-btn"
+            >
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </div>
+        }
       </nav>
     </div>
   }

@@ -22,6 +22,10 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# Netlify Identity configuration
+[identity]
+  external_providers = ["google"]
+
 # Security headers for everything (no cache directive here)
 [[headers]]
   for = "/*"

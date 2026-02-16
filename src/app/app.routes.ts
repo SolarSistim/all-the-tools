@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home';
+import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -46,6 +48,18 @@ export const routes: Routes = [
     path: 'contact',
     loadComponent: () => import('./features/contact-form/contact-form').then(m => m.ContactForm),
     title: 'Contact Us - All The Things'
+  },
+  {
+    path: 'account',
+    loadComponent: () => import('./features/account/account.component').then(m => m.AccountComponent),
+    title: 'My Account - All The Tools',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin',
+    loadComponent: () => import('./features/admin/admin.component').then(m => m.AdminComponent),
+    title: 'Admin Dashboard - All The Tools',
+    canActivate: [adminGuard]
   },
   {
     path: 'tools/percentage-calculator',

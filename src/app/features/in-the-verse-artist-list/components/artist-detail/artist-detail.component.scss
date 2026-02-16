@@ -735,27 +735,30 @@
   height: 140px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-cyan) 100%);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.2) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
-    z-index: 0;
+  &.has-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+      z-index: 0;
+    }
   }
 }
 
@@ -799,7 +802,7 @@
 }
 
 .verse-description {
-  margin: 0;
+  margin: 0 0 1rem 0;
   font-size: 0.875rem;
   color: var(--text-secondary);
   line-height: 1.4;
@@ -808,6 +811,13 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex: 1;
+}
+
+.verse-keywords {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .back-to-artists {

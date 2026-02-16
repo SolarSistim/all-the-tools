@@ -3,5 +3,6 @@ export const environment = {
   adsEnabled: true,
   ogFetchLimitPerMin: 10,
   ogFetchUserLimitPerMin: 5,
-  ogFetchUserLockoutMinutes: 10
+  ogFetchUserLockoutMinutes: 10,
+  netlifyIdentitySiteUrl: 'https://allthetools.dev'
 };

@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ToolsService } from '../../core/services/tools.service';
 import { SidenavService } from '../../core/services/sidenav.service';
+import { AuthService } from '../../core/services/auth.service';
 import { ToolCategoryMeta, Tool } from '../../core/models/tool.interface';
 
 @Component({
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private sidenavService = inject(SidenavService);
   private platformId = inject(PLATFORM_ID);
   private document = inject(DOCUMENT);
+  private authService = inject(AuthService);
 
   // Mobile menu state
   mobileMenuOpen = signal(false);
@@ -63,6 +65,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Track if we have a pending scroll update
   private scrollTicking = false;
+
+  // Auth observables for template
+  isAuthenticated$ = this.authService.isAuthenticated$;
+  isAdmin$ = this.authService.isAdmin$;
+  user$ = this.authService.user$;
 
   // Bind scrolled class to host element
   @HostBinding('class.scrolled') get scrolledClass() {
@@ -302,5 +309,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
     // Single segment route
     return ['/tools', toolRoute];
+  }
+
+  /**
+   * Open login modal
+   */
+  login(): void {
+    this.authService.login();
+  }
+
+  /**
+   * Logout current user
+   */
+  logout(): void {
+    this.authService.logout();
+  }
+
+  /**
+   * Get user display name
+   */
+  getUserDisplayName(): string {
+    return this.authService.getUserDisplayName();
   }
 }
