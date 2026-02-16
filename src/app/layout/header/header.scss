@@ -238,6 +238,7 @@
 // Account Button
 .account-btn {
   position: relative;
+  top: -5px;
   transition: all 0.3s ease;
   border: 2px solid transparent;
 
@@ -246,7 +247,6 @@
     width: 32px !important;
     height: 32px !important;
     color: var(--text-secondary);
-    transition: all 0.3s ease;
   }
 
   &::before {
@@ -263,19 +263,6 @@
     transition: opacity 0.3s ease;
   }
 
-  &:hover {
-    background: var(--bg-elevated) !important;
-
-    mat-icon {
-      color: var(--neon-cyan-bright);
-      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
-      animation: accountPulse 1.5s ease-in-out infinite;
-    }
-
-    &::before {
-      opacity: 1;
-    }
-  }
 }
 
 @keyframes accountPulse {
