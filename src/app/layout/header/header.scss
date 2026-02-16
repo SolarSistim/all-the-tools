@@ -249,29 +249,6 @@
     color: var(--text-secondary);
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 50%;
-    padding: 2px;
-    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-}
-
-@keyframes accountPulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
-  }
-  50% {
-    filter: drop-shadow(0 0 16px var(--neon-cyan-glow));
-  }
 }
 
 // Account Menu Dropdown
