@@ -41,6 +41,49 @@ export class AuthService {
   }
 
   /**
+   * Decode JWT token to extract user information
+   */
+  private decodeJWT(token: string): any {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error('[AuthService] Failed to decode JWT:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Enrich user object with data from JWT token
+   */
+  private enrichUserFromToken(user: any): NetlifyUser {
+    if (!user || !user.token || !user.token.access_token) {
+      return user;
+    }
+
+    const decoded = this.decodeJWT(user.token.access_token);
+    console.log('[AuthService] Decoded JWT:', decoded);
+
+    if (decoded) {
+      // Merge JWT data into user object
+      return {
+        ...user,
+        email: decoded.email || user.email,
+        app_metadata: decoded.app_metadata || user.app_metadata,
+        user_metadata: decoded.user_metadata || user.user_metadata,
+        sub: decoded.sub || user.sub,
+        id: decoded.sub || user.id
+      };
+    }
+
+    return user;
+  }
+
+  /**
    * Initialize Netlify Identity Widget
    */
   private async initNetlifyIdentity(): Promise<void> {
@@ -80,12 +123,16 @@ export class AuthService {
       console.log('[AuthService] Current user:', currentUser ? 'Found' : 'None');
 
       if (currentUser) {
-        console.log('[AuthService] User details:', JSON.stringify(currentUser, null, 2));
-        console.log('[AuthService] User email:', currentUser.email);
-        console.log('[AuthService] User app_metadata:', currentUser.app_metadata);
-        console.log('[AuthService] User user_metadata:', currentUser.user_metadata);
-        this.userSubject.next(currentUser);
-        console.log('[AuthService] User session restored successfully');
+        console.log('[AuthService] Raw user object:', JSON.stringify(currentUser, null, 2));
+
+        // Enrich user object with JWT data
+        const enrichedUser = this.enrichUserFromToken(currentUser);
+        console.log('[AuthService] Enriched user email:', enrichedUser.email);
+        console.log('[AuthService] Enriched user app_metadata:', enrichedUser.app_metadata);
+        console.log('[AuthService] Enriched user user_metadata:', enrichedUser.user_metadata);
+
+        this.userSubject.next(enrichedUser);
+        console.log('[AuthService] User session restored successfully with enriched data');
       }
 
       console.log('[AuthService] Initialization complete');
@@ -105,11 +152,15 @@ export class AuthService {
     // Listen for login events
     this.netlifyIdentity.on('login', (user: NetlifyUser) => {
       console.log('[AuthService] Login event received');
-      console.log('[AuthService] User object:', JSON.stringify(user, null, 2));
-      console.log('[AuthService] User email:', user.email);
-      console.log('[AuthService] User app_metadata:', user.app_metadata);
-      console.log('[AuthService] User user_metadata:', user.user_metadata);
-      this.userSubject.next(user);
+      console.log('[AuthService] Raw user object:', JSON.stringify(user, null, 2));
+
+      // Enrich user object with JWT data (in case it's incomplete)
+      const enrichedUser = this.enrichUserFromToken(user);
+      console.log('[AuthService] Enriched user email:', enrichedUser.email);
+      console.log('[AuthService] Enriched user app_metadata:', enrichedUser.app_metadata);
+      console.log('[AuthService] Enriched user user_metadata:', enrichedUser.user_metadata);
+
+      this.userSubject.next(enrichedUser);
       this.netlifyIdentity.close(); // Close the widget if it's open
     });
 
