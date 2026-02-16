@@ -133,7 +133,7 @@ After deploying the authentication system, you need to manually assign the admin
 
 **Option B: Via API**
 ```bash
-curl -H "Authorization: Bearer YOUR_ADMIN_TOKEN" \
+curl -H "Authorization: Bearer YOUR_ADMIN_TOKEN" \ 
   https://api.netlify.com/api/v1/sites/YOUR_SITE_ID/identity/users
 ```
 
