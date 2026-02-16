@@ -109,8 +109,9 @@ export class AuthService {
 
       this.netlifyIdentity.on('login', (user: NetlifyUser) => {
         this.userSubject.next(user);
-        // Don't auto-close - let the modal close naturally to avoid race conditions
-        // The widget will close automatically after a moment, or user can close manually
+        // Reload the page to reset widget state and prevent MobX errors
+        // This ensures a clean state after login and prevents the widget crash
+        window.location.reload();
       });
 
       this.netlifyIdentity.on('logout', () => {
