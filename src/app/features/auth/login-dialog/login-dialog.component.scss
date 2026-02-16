@@ -37,7 +37,7 @@
     .header-content {
       display: flex;
       gap: 1rem;
-      align-items: flex-start;
+      align-items: center;
 
       .brand-icon {
         display: flex;
@@ -68,6 +68,10 @@
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+        }
+
+        ::ng-deep .mat-mdc-dialog-title {
+          padding-left: 0px !important;
         }
 
         .subtitle {
