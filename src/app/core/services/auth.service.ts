@@ -37,7 +37,61 @@ export class AuthService {
 
   constructor() {
     console.log('[AuthService] Constructor called');
+
+    // Restore user session from localStorage if available
+    if (isPlatformBrowser(this.platformId)) {
+      this.restoreUserSession();
+    }
+
     this.initNetlifyIdentity();
+  }
+
+  /**
+   * Save user session to localStorage
+   */
+  private saveUserSession(user: NetlifyUser): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    try {
+      localStorage.setItem('netlify_user', JSON.stringify(user));
+      console.log('[AuthService] User session saved to localStorage');
+    } catch (error) {
+      console.error('[AuthService] Failed to save user session:', error);
+    }
+  }
+
+  /**
+   * Restore user session from localStorage
+   */
+  private restoreUserSession(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    try {
+      const storedUser = localStorage.getItem('netlify_user');
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+        console.log('[AuthService] Restoring user session from localStorage');
+        this.userSubject.next(user);
+      }
+    } catch (error) {
+      console.error('[AuthService] Failed to restore user session:', error);
+      // Clear invalid data
+      localStorage.removeItem('netlify_user');
+    }
+  }
+
+  /**
+   * Clear user session from localStorage
+   */
+  private clearUserSession(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    try {
+      localStorage.removeItem('netlify_user');
+      console.log('[AuthService] User session cleared from localStorage');
+    } catch (error) {
+      console.error('[AuthService] Failed to clear user session:', error);
+    }
   }
 
   /**
@@ -117,12 +171,13 @@ export class AuthService {
         this.setupEventListeners();
       }
 
-      // Check for existing user session
+      // Check for existing user session (if not already restored from localStorage)
       console.log('[AuthService] Checking for existing user session...');
       const currentUser = this.netlifyIdentity.currentUser();
-      console.log('[AuthService] Current user:', currentUser ? 'Found' : 'None');
+      console.log('[AuthService] Current user from widget:', currentUser ? 'Found' : 'None');
 
-      if (currentUser) {
+      // Only set from widget if we don't already have a user from localStorage
+      if (currentUser && !this.userSubject.value) {
         console.log('[AuthService] Raw user object:', JSON.stringify(currentUser, null, 2));
 
         // Enrich user object with JWT data
@@ -132,7 +187,10 @@ export class AuthService {
         console.log('[AuthService] Enriched user user_metadata:', enrichedUser.user_metadata);
 
         this.userSubject.next(enrichedUser);
+        this.saveUserSession(enrichedUser);
         console.log('[AuthService] User session restored successfully with enriched data');
+      } else if (this.userSubject.value) {
+        console.log('[AuthService] User session already restored from localStorage');
       }
 
       console.log('[AuthService] Initialization complete');
@@ -161,6 +219,10 @@ export class AuthService {
       console.log('[AuthService] Enriched user user_metadata:', enrichedUser.user_metadata);
 
       this.userSubject.next(enrichedUser);
+
+      // Save session to localStorage
+      this.saveUserSession(enrichedUser);
+
       this.netlifyIdentity.close(); // Close the widget if it's open
     });
 
@@ -168,6 +230,7 @@ export class AuthService {
     this.netlifyIdentity.on('logout', () => {
       console.log('[AuthService] Logout event received');
       this.userSubject.next(null);
+      this.clearUserSession();
     });
 
     // Listen for error events
@@ -286,6 +349,10 @@ export class AuthService {
       // Enrich user with JWT data
       const enrichedUser = this.enrichUserFromToken(user);
       this.userSubject.next(enrichedUser as NetlifyUser);
+
+      // Save session to localStorage
+      this.saveUserSession(enrichedUser as NetlifyUser);
+
       console.log('[AuthService] Login successful');
 
       return enrichedUser as NetlifyUser;
@@ -389,12 +456,14 @@ export class AuthService {
         await this.netlifyIdentity.logout();
       }
       this.userSubject.next(null);
+      this.clearUserSession();
       console.log('[AuthService] User logged out, reloading page');
       window.location.reload();
     } catch (error) {
       console.error('[AuthService] Logout error:', error);
       // Clear user anyway
       this.userSubject.next(null);
+      this.clearUserSession();
       window.location.reload();
     }
   }
