@@ -59,6 +59,7 @@ export class AuthService {
 
       // Initialize the widget with site URL
       this.netlifyIdentity.init({
+        APIUrl: `${environment.netlifyIdentitySiteUrl}/.netlify/identity`,
         locale: 'en'
       });
 
@@ -77,7 +78,10 @@ export class AuthService {
 
       this.netlifyIdentity.on('login', (user: NetlifyUser) => {
         this.userSubject.next(user);
-        this.netlifyIdentity.close();
+        // Close the modal after a brief delay to allow the widget to finish processing
+        setTimeout(() => {
+          this.netlifyIdentity.close();
+        }, 100);
       });
 
       this.netlifyIdentity.on('logout', () => {
