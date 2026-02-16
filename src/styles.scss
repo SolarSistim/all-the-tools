@@ -367,8 +367,8 @@ app-root {
   background: var(--bg-elevated) !important;
   color: var(--text-primary) !important;
   border-radius: 16px !important;
-  border: 1px solid var(--neon-cyan) !important;
-  box-shadow: 0 0 30px var(--neon-cyan-glow) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
 }
 
 // Material tabs
@@ -531,77 +531,66 @@ body.light-theme {
 //   color: black;
 // }
 
-// Material form field background
-.mat-mdc-form-field-flex, .mat-mdc-text-field-wrapper {
-  background-color: rgb(241, 241, 241) !important;
-  color: black !important;
-}
+// Material form field - theme-aware styling
+body.light-theme {
+  .mat-mdc-form-field-flex, .mat-mdc-text-field-wrapper {
+    background-color: rgb(241, 241, 241) !important;
+  }
 
-// Input text color (dark)
-.mat-mdc-form-field .mat-mdc-input-element {
-  color: rgba(0, 0, 0, 0.87) !important;
-}
+  .mat-mdc-form-field .mat-mdc-input-element {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
 
-// Placeholder text color (dark gray)
-.mat-mdc-form-field .mat-mdc-input-element::placeholder {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
+  .mat-mdc-form-field .mat-mdc-input-element::placeholder {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
 
-// Label color (dark gray)
-.mat-mdc-form-field .mat-mdc-floating-label {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
+  .mat-mdc-form-field .mat-mdc-floating-label {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
 
-// Focused label color (darker)
-.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
-  color: rgba(0, 0, 0, 0.87) !important;
-}
+  .mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
 
-// Icon color inside form fields (dark)
-.mat-mdc-form-field .mat-icon {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
+  .mat-mdc-form-field .mat-icon {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
 
-// Prefix/Suffix text color (dark)
-.mat-mdc-form-field .mat-mdc-form-field-icon-prefix,
-.mat-mdc-form-field .mat-mdc-form-field-icon-suffix {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
+  .mat-mdc-form-field .mat-mdc-form-field-icon-prefix,
+  .mat-mdc-form-field .mat-mdc-form-field-icon-suffix {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
 
-// Hint text color (dark gray)
-.mat-mdc-form-field .mat-mdc-form-field-hint {
-  color: rgba(0, 0, 0, 0.6) !important;
-}
+  .mat-mdc-form-field .mat-mdc-form-field-hint {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
 
-// Bottom line color (dark)
-.mat-mdc-form-field .mat-mdc-form-field-underline {
-  background-color: rgba(0, 0, 0, 0.42) !important;
-}
+  .mat-mdc-form-field .mat-mdc-form-field-underline {
+    background-color: rgba(0, 0, 0, 0.42) !important;
+  }
 
-// Focused bottom line color (darker)
-.mat-mdc-form-field.mat-focused .mat-mdc-form-field-underline {
-  background-color: rgba(0, 0, 0, 0.87) !important;
+  .mat-mdc-form-field.mat-focused .mat-mdc-form-field-underline {
+    background-color: rgba(0, 0, 0, 0.87) !important;
+  }
 }
 
 // ============================================
 // MATERIAL SELECT DROPDOWN OVERRIDES
 // ============================================
 
-// Select trigger (the closed dropdown display)
+// Select trigger - theme-aware
 .mat-mdc-select {
-  // Selected value text
   .mat-mdc-select-value {
-    color: rgba(0, 0, 0, 0.87) !important;
+    color: var(--text-primary) !important;
   }
 
-  // Selected value text container - ensure proper spacing
   .mat-mdc-select-value-text {
     .currency-option {
       display: flex !important;
       align-items: center !important;
       gap: 0.5rem !important;
 
-      // Add explicit margin to each child for better spacing
       .currency-flag {
         margin-right: 0.5rem !important;
       }
@@ -616,48 +605,43 @@ body.light-theme {
     }
   }
 
-  // Select arrow
   .mat-mdc-select-arrow {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: var(--text-secondary) !important;
   }
 
-  // Placeholder text
   .mat-mdc-select-placeholder {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: var(--text-tertiary) !important;
   }
 }
 
 // Select panel (dropdown container)
 .mat-mdc-select-panel {
-  background: #F1F1F1 !important;
+  background: var(--bg-elevated) !important;
   border-radius: 8px !important;
+  border: 1px solid var(--border-color) !important;
 }
 
 // Select options
 .mat-mdc-option {
-  background: #F1F1F1 !important;
+  background: var(--bg-elevated) !important;
 
-  // Primary text color (dark for visibility)
   .mdc-list-item__primary-text {
-    color: #2c2c2c !important;
+    color: var(--text-primary) !important;
   }
 
-  // Hover state
   &:hover {
-    background: #e0e0e0 !important;
+    background: var(--bg-secondary) !important;
   }
 
-  // Active state (keyboard navigation)
   &.mat-mdc-option-active {
-    background: #e0e0e0 !important;
+    background: var(--bg-secondary) !important;
   }
 
-  // Selected state
   &.mdc-list-item--selected {
-    background: #d0d0d0 !important;
+    background: var(--bg-primary) !important;
 
     .mdc-list-item__primary-text {
-      color: #1a1a1a !important;
+      color: var(--neon-cyan-bright) !important;
       font-weight: 600;
     }
   }
@@ -671,18 +655,18 @@ body.light-theme {
 
   .currency-flag {
     font-size: 1.25rem;
-    color: #2c2c2c !important;
+    color: var(--text-primary) !important;
   }
 
   .currency-code {
     font-weight: 600;
     min-width: 40px;
-    color: #2c2c2c !important;
+    color: var(--text-primary) !important;
   }
 
   .currency-name {
     font-size: 0.875rem;
-    color: #5c5c5c !important;
+    color: var(--text-secondary) !important;
   }
 }
 

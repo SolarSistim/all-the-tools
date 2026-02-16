@@ -1,569 +1,327 @@
-// Login Dialog - Refined Cyber-Luxe Design
+// Premium Auth Theme Variables
+:root {
+  --neon-cyan: 0, 255, 242;
+  --neon-pink: 255, 0, 127;
+  --bg-card: rgba(18, 18, 24, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --input-bg: rgba(0, 0, 0, 0.25);
+}
+
 .login-dialog {
   position: relative;
-  width: 100%;
-  max-width: 480px;
   overflow: hidden;
 
-  // Animated background effect
-  .dialog-bg-effect {
+  // Background Accent Glow
+  .accent-glow {
     position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      circle at center,
-      var(--neon-cyan-glow) 0%,
-      transparent 50%
-    );
-    opacity: 0.03;
-    animation: pulseGlow 8s ease-in-out infinite;
-    pointer-events: none;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(var(--neon-cyan), 0.15) 0%, transparent 70%);
     z-index: 0;
+    pointer-events: none;
   }
 
-  // Header Section
-  .dialog-header {
-    position: relative;
+  ::ng-deep h2[mat-dialog-title] {
+    padding: 0.5rem 0 1.5rem !important;
+    margin: 0 !important;
+    border-bottom: none !important;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    z-index: 1;
+    align-items: center;
 
-    .header-content {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-
-      .brand-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
-
-        mat-icon {
-          font-size: 28px;
-          width: 28px;
-          height: 28px;
-          color: #ffffff;
-        }
-      }
-
-      .header-text {
-        h2 {
-          margin: 0;
-          font-family: 'Orbitron', sans-serif;
-          font-size: 1.75rem;
-          font-weight: 600;
-          letter-spacing: -0.02em;
-          color: var(--text-primary);
-          background: linear-gradient(135deg, var(--neon-cyan-bright) 0%, var(--neon-pink-bright) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        ::ng-deep .mat-mdc-dialog-title {
-          padding-left: 0px !important;
-        }
-
-        .subtitle {
-          margin: 0.25rem 0 0 0;
-          font-size: 0.875rem;
-          color: var(--text-secondary);
-          font-weight: 400;
-        }
-      }
+    .title-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
     }
 
     .close-button {
-      flex-shrink: 0;
-      margin-top: -4px;
-      margin-right: -8px;
-      transition: all 0.3s ease;
-
-      &:hover {
-        transform: rotate(90deg);
-        background: rgba(var(--neon-pink), 0.1);
-      }
+      background: transparent;
 
       mat-icon {
-        color: var(--text-secondary);
+        font-size: 20px;
+        color: var(--text-primary);
       }
     }
   }
 
-  // Tab Group Styling
   ::ng-deep .auth-tabs {
-    position: relative;
-    z-index: 1;
+    .mat-mdc-tab-header {
+      border-bottom-style: none !important;
+      border-bottom-width: 0 !important;
+      border-bottom-color: transparent !important;
+    }
+
+    .mat-mdc-tab-label-container {
+      border-bottom: none !important;
+    }
 
     .mat-mdc-tab-labels {
-      margin-bottom: 2rem;
-      border-bottom: 2px solid var(--border-color);
+      border-bottom: 1px solid var(--glass-border) !important;
+      margin-bottom: 1.5rem;
     }
 
     .mat-mdc-tab {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      min-width: 140px;
-      opacity: 0.6;
+      height: 48px;
+      opacity: 0.5;
       transition: all 0.3s ease;
 
       .mdc-tab__text-label {
-        color: var(--text-primary);
-      }
-
-      &:hover {
-        opacity: 1;
-        background: rgba(var(--neon-cyan), 0.05);
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.8rem;
+        color: var(--text-primary) !important;
       }
 
       &.mdc-tab--active {
         opacity: 1;
-
-        .mdc-tab__text-label {
-          color: var(--neon-cyan-bright);
-        }
-      }
-
-      .tab-icon {
-        margin-right: 0.5rem;
-        font-size: 20px;
-        width: 20px;
-        height: 20px;
-        color: var(--text-primary);
-      }
-    }
-
-    .mat-mdc-tab-body-wrapper {
-      .mat-mdc-tab-body-content {
-        overflow: visible;
+        .mdc-tab__text-label { color: var(--text-primary) !important; }
       }
     }
 
     .mat-ink-bar {
-      height: 3px !important;
-      background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
-      box-shadow: 0 2px 8px var(--neon-cyan-glow);
+      height: 2px !important;
+      background: var(--text-primary) !important;
+    }
+
+    .mdc-tab-indicator__content--underline {
+      border-color: var(--text-primary) !important;
+      border-top-width: 2px !important;
     }
   }
 
-  // Tab Content
   .tab-content {
-    padding: 0.5rem 0 1rem;
+    padding: 1rem 0;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    .full-width {
-      width: 100%;
-    }
-
-    // Google Button - Prominent CTA
     .google-button {
-      height: 56px;
-      font-size: 1rem;
-      font-weight: 600;
+      width: 100%;
+      height: 54px;
+      border-radius: 16px !important;
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid var(--glass-border) !important;
+      font-weight: 500;
+      letter-spacing: 0.02em;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      background: var(--bg-elevated) !important;
-      border: 2px solid var(--border-color) !important;
-      border-radius: 12px !important;
+      transition: all 0.2s ease;
 
       .google-icon {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
+        transform: translateY(4px);
+        margin-right: 8px;
       }
 
-      span {
-        color: var(--text-primary);
+      &:hover:not([disabled]) {
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        transform: translateY(-1px);
       }
+
+      span { color: #fff; }
     }
 
-    // Divider
     .divider {
-      position: relative;
-      text-align: center;
       margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
 
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        width: calc(50% - 80px);
+      &::before, &::after {
+        content: "";
+        flex: 1;
         height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent 0%,
-          var(--border-color) 50%,
-          transparent 100%
-        );
+        background: linear-gradient(to right, transparent, var(--glass-border), transparent);
       }
-
-      &::before {
-        left: 0;
-      }
-
-      &::after {
-        right: 0;
-      }
-
-      span {
-        padding: 0 1.5rem;
-        color: var(--text-tertiary);
-        font-size: 0.8125rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        background: var(--bg-elevated);
-      }
+      span { padding: 0 15px; }
     }
 
-    // Auth Form
     .auth-form {
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1rem;
 
-      .form-field-wrapper {
-        mat-form-field {
-          width: 100%;
+      mat-form-field {
+        ::ng-deep {
+          .mdc-text-field--filled {
+            background-color: var(--input-bg) !important;
+            border-radius: 14px !important;
+            border: 1px solid var(--glass-border);
+            padding: 0 12px;
 
-          ::ng-deep {
-            .mat-mdc-form-field-focus-overlay {
-              background-color: transparent;
+            &::before, &::after { display: none !important; }
+          }
+
+          .mat-mdc-form-field-focus-overlay { display: none; }
+
+          .mdc-text-field--focused {
+            border-color: rgba(var(--neon-cyan), 0.5) !important;
+            box-shadow: 0 0 0 4px rgba(var(--neon-cyan), 0.05);
+          }
+
+          .mdc-line-ripple {
+            &::before {
+              border-bottom-color: var(--border-color) !important;
             }
-
-            // Fill appearance styling
-            .mdc-text-field--filled {
-              background-color: var(--bg-elevated);
-              border-radius: 12px 12px 0 0;
-
-              &:hover {
-                background-color: var(--bg-elevated);
-              }
-
-              &.mdc-text-field--focused {
-                background-color: var(--bg-elevated);
-              }
-
-              .mdc-line-ripple {
-                &::before {
-                  border-bottom-color: var(--border-color);
-                }
-
-                &::after {
-                  border-bottom-color: var(--neon-cyan);
-                }
-              }
-            }
-
-            .mat-mdc-form-field-icon-prefix {
-              color: var(--text-secondary);
-              margin-right: 0.75rem;
-            }
-
-            .mat-mdc-input-element {
-              color: var(--text-primary);
-              font-size: 0.9375rem;
-              padding-top: 20px;
-
-              &::placeholder {
-                color: var(--text-tertiary);
-                opacity: 0.6;
-              }
-            }
-
-            .mat-mdc-floating-label {
-              color: var(--text-secondary) !important;
-              font-weight: 500;
-            }
-
-            .mdc-text-field--filled .mat-mdc-floating-label {
-              &.mdc-floating-label--float-above {
-                transform: translateY(-50%) scale(0.75);
-              }
+            &::after {
+              border-bottom-color: var(--text-primary) !important;
             }
           }
+
+          .mat-mdc-floating-label { color: var(--text-secondary) !important; }
+          .mat-mdc-input-element {
+            color: var(--text-primary) !important;
+
+            &::placeholder {
+              color: var(--text-tertiary) !important;
+            }
+          }
+          .mat-mdc-form-field-icon-prefix { color: var(--text-primary) !important; }
         }
       }
 
-      // Alert Messages
       .alert-message {
+        padding: 12px 16px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        padding: 1rem 1.25rem;
-        border-radius: 12px;
-        font-size: 0.875rem;
+        gap: 10px;
+        font-size: 0.85rem;
+        animation: slideUp 0.3s ease-out;
         font-weight: 500;
-        animation: slideInRight 0.4s ease-out;
+        letter-spacing: 0.01em;
 
         mat-icon {
-          font-size: 22px;
-          width: 22px;
-          height: 22px;
-          flex-shrink: 0;
-        }
-
-        span {
-          flex: 1;
-          line-height: 1.5;
-        }
-      }
-
-      .error-message {
-        background: rgba(244, 67, 54, 0.12);
-        color: #f44336;
-        border: 1px solid rgba(244, 67, 54, 0.3);
-        box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15);
-      }
-
-      .success-message {
-        background: rgba(76, 175, 80, 0.12);
-        color: #4caf50;
-        border: 1px solid rgba(76, 175, 80, 0.3);
-        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
-      }
-
-      // Submit Button
-      .submit-button {
-        height: 56px;
-        font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        border-radius: 12px !important;
-        background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
-        box-shadow: 0 4px 16px var(--neon-cyan-glow);
-        transition: all 0.3s ease;
-        animation: slideInUp 0.4s ease-out 0.25s both;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-cyan) 100%);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        &:hover:not([disabled]) {
-          box-shadow: 0 6px 24px var(--neon-cyan-glow);
-          transform: translateY(-2px);
-
-          &::before {
-            opacity: 1;
-          }
-        }
-
-        &:active:not([disabled]) {
-          transform: translateY(0);
-        }
-
-        &[disabled] {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-
-        span, mat-icon {
-          position: relative;
-          z-index: 1;
-          color: #ffffff;
-        }
-
-        mat-icon {
-          margin-left: 0.5rem;
           font-size: 20px;
           width: 20px;
           height: 20px;
         }
 
-        .button-spinner {
-          ::ng-deep circle {
-            stroke: #ffffff;
-          }
-        }
-      }
-    }
-  }
-}
-
-// Light Theme Adjustments
-:host-context(body.light-theme) {
-  .login-dialog {
-    .dialog-bg-effect {
-      opacity: 0.02;
-    }
-
-    .dialog-header {
-      .header-content {
-        .header-text h2 {
-          background: linear-gradient(135deg, #0080a5 0%, #ff6b99 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-      }
-    }
-
-    .tab-content {
-      .auth-form {
-        .submit-button {
-          box-shadow: 0 4px 16px rgba(0, 128, 165, 0.2);
-
-          &:hover:not([disabled]) {
-            box-shadow: 0 6px 24px rgba(0, 128, 165, 0.3);
-          }
-        }
-      }
-    }
-  }
-}
-
-// Animations
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.03;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.05;
-    transform: scale(1.1);
-  }
-}
-
-// Material Dialog Overrides
-::ng-deep {
-  .login-dialog-container {
-    .mat-mdc-dialog-container {
-      padding: 2.5rem !important;
-      background: var(--bg-elevated) !important;
-      border: 1px solid var(--border-color) !important;
-      border-radius: 20px !important;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
-
-      @media (max-width: 600px) {
-        padding: 1.75rem !important;
-        border-radius: 16px !important;
-      }
-
-      .mat-mdc-dialog-surface {
-        background: transparent;
-        border-radius: 20px;
-      }
-    }
-  }
-}
-
-// Responsive Design
-@media (max-width: 600px) {
-  .login-dialog {
-    max-width: 100%;
-
-    .dialog-header {
-      .header-content {
-        .brand-icon {
-          width: 40px;
-          height: 40px;
+        &.error-message {
+          background: rgba(255, 64, 129, 0.1);
+          color: #ff4081;
+          border: 1px solid rgba(255, 64, 129, 0.2);
 
           mat-icon {
-            font-size: 24px;
-            width: 24px;
-            height: 24px;
+            color: #ff4081;
           }
         }
+        &.success-message {
+          background: rgba(109, 212, 255, 0.1);
+          color: var(--neon-cyan);
+          border: 1px solid rgba(109, 212, 255, 0.2);
 
-        .header-text {
-          h2 {
-            font-size: 1.5rem;
-          }
-
-          .subtitle {
-            font-size: 0.8125rem;
+          mat-icon {
+            color: var(--neon-cyan);
           }
         }
       }
+
+      .submit-button {
+        height: 56px;
+        margin-top: 1rem;
+        border-radius: 16px !important;
+        background: linear-gradient(135deg, rgb(var(--neon-cyan)), #0072ff) !important;
+        color: #fff !important;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 10px 20px -10px rgba(var(--neon-cyan), 0.5);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:hover:not([disabled]) {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 30px -10px rgba(var(--neon-cyan), 0.6);
+          filter: brightness(1.1);
+        }
+
+        &:active { transform: translateY(0); }
+
+        span { margin-right: 8px; }
+        mat-icon { transform: translateY(7px); }
+        mat-spinner ::ng-deep circle { stroke: #fff; }
+      }
     }
 
-    .tab-content {
-      .google-button,
-      .auth-form .submit-button {
-        height: 52px;
-        font-size: 0.9375rem;
+    // Success message when shown alone (after signup)
+    .alert-message.success-message:only-child {
+      padding: 2rem;
+      font-size: 1rem;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+      }
+
+      span {
+        line-height: 1.6;
       }
     }
   }
+}
+
+// Dialog Container Override
+::ng-deep .login-dialog-container .mat-mdc-dialog-container {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(25px) saturate(160%);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 28px !important;
+  padding: 2.5rem !important;
+
+  .mat-mdc-dialog-surface {
+    background: transparent !important;
+  }
+}
+
+// Light Theme Overrides
+:host-context(body.light-theme) {
+  // Dialog Container
+  ::ng-deep .login-dialog-container .mat-mdc-dialog-container {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  // Alert Messages - Light Theme
+  .alert-message {
+    &.error-message {
+      background: rgba(255, 64, 129, 0.15) !important;
+      color: #c41a64 !important;
+      border: 1px solid rgba(255, 64, 129, 0.3) !important;
+
+      mat-icon {
+        color: #c41a64 !important;
+      }
+    }
+    &.success-message {
+      background: rgba(0, 128, 165, 0.15) !important;
+      color: #006684 !important;
+      border: 1px solid rgba(0, 128, 165, 0.3) !important;
+
+      mat-icon {
+        color: #006684 !important;
+      }
+    }
+  }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -37,6 +37,7 @@ export class LoginDialogComponent {
   loading = false;
   errorMessage = '';
   successMessage = '';
+  signupCompleted = false;
 
   constructor() {
     this.loginForm = this.fb.group({
@@ -105,6 +106,7 @@ export class LoginDialogComponent {
       await this.authService.signupWithEmail(email, password);
       console.log('[LoginDialog] Signup successful');
       this.successMessage = 'Account created! Please check your email to confirm your account.';
+      this.signupCompleted = true;
       this.signupForm.reset();
     } catch (error: any) {
       console.error('[LoginDialog] Signup error:', error);

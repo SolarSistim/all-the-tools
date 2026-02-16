@@ -4,5 +4,6 @@ export const environment = {
   ogFetchLimitPerMin: 10,
   ogFetchUserLimitPerMin: 5,
   ogFetchUserLockoutMinutes: 10,
-  netlifyIdentitySiteUrl: 'http://localhost:4200'
+  // Use deployed site URL for Identity API (localhost doesn't have Netlify Identity backend)
+  netlifyIdentitySiteUrl: 'https://www.allthethings.dev'
 };
