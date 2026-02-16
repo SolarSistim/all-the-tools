@@ -20,15 +20,15 @@
   <!-- Simple Analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
-  <!-- GoTrue JS for Netlify Identity - load synchronously before Angular -->
+  <!-- Netlify Identity Widget - Official supported way -->
   <script>
-    console.log('[INDEX.HTML] Loading GoTrue script...');
+    console.log('[INDEX.HTML] Loading Netlify Identity Widget...');
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/gotrue-js@0.9.29/dist/gotrue.min.js" crossorigin="anonymous"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    console.log('[INDEX.HTML] GoTrue script loaded, window.GoTrue available:', !!window.GoTrue);
-    if (!window.GoTrue) {
-      console.error('[INDEX.HTML] WARNING: window.GoTrue is not defined after loading script!');
+    console.log('[INDEX.HTML] Netlify Identity Widget loaded, window.netlifyIdentity available:', !!window.netlifyIdentity);
+    if (!window.netlifyIdentity) {
+      console.error('[INDEX.HTML] WARNING: window.netlifyIdentity is not defined after loading script!');
     }
   </script>
 

@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NetlifyUser } from '../models/user.interface';
 
-// Import GoTrue JS client
+// Import Netlify Identity Widget
 declare global {
   interface Window {
-    GoTrue?: any;
+    netlifyIdentity?: any;
   }
 }
 
@@ -17,7 +17,7 @@ declare global {
 })
 export class AuthService {
   private platformId = inject(PLATFORM_ID);
-  private goTrue: any;
+  private netlifyIdentity: any;
   private scriptLoaded = false;
 
   // User state management with BehaviorSubject
@@ -37,14 +37,14 @@ export class AuthService {
 
   constructor() {
     console.log('[AuthService] Constructor called');
-    this.initGoTrue();
+    this.initNetlifyIdentity();
   }
 
   /**
-   * Initialize GoTrue client
+   * Initialize Netlify Identity Widget
    */
-  private async initGoTrue(): Promise<void> {
-    console.log('[AuthService] initGoTrue started');
+  private async initNetlifyIdentity(): Promise<void> {
+    console.log('[AuthService] initNetlifyIdentity started');
 
     if (!isPlatformBrowser(this.platformId)) {
       console.log('[AuthService] Not in browser, skipping initialization');
@@ -54,58 +54,76 @@ export class AuthService {
     console.log('[AuthService] Platform is browser, proceeding with initialization');
 
     try {
-      console.log('[AuthService] Loading GoTrue script...');
-      await this.loadGoTrueScript();
-      console.log('[AuthService] GoTrue script loaded successfully');
+      console.log('[AuthService] Loading Netlify Identity Widget...');
+      await this.loadNetlifyIdentityScript();
+      console.log('[AuthService] Netlify Identity Widget loaded successfully');
 
-      // Initialize GoTrue client
-      console.log('[AuthService] Initializing GoTrue client with URL:', `${environment.netlifyIdentitySiteUrl}/.netlify/identity`);
-      console.log('[AuthService] window.GoTrue available:', !!window.GoTrue);
+      // Get reference to netlifyIdentity
+      console.log('[AuthService] window.netlifyIdentity available:', !!window.netlifyIdentity);
+      this.netlifyIdentity = window.netlifyIdentity;
 
-      this.goTrue = new window.GoTrue({
-        APIUrl: `${environment.netlifyIdentitySiteUrl}/.netlify/identity`,
-        audience: '',
-        setCookie: true
-      });
+      console.log('[AuthService] Netlify Identity instance assigned:', !!this.netlifyIdentity);
 
-      console.log('[AuthService] GoTrue client initialized:', !!this.goTrue);
+      // Initialize the widget (but don't show it)
+      if (this.netlifyIdentity) {
+        console.log('[AuthService] Initializing Netlify Identity Widget...');
+        this.netlifyIdentity.init();
+        console.log('[AuthService] Netlify Identity Widget initialized');
 
-      // Handle OAuth callback (if returning from external provider like Google)
-      console.log('[AuthService] Checking for OAuth callback...');
-      await this.handleOAuthCallback();
+        // Set up event listeners
+        this.setupEventListeners();
+      }
 
-      // Restore session if user is already logged in
+      // Check for existing user session
       console.log('[AuthService] Checking for existing user session...');
-      const currentUser = this.goTrue.currentUser();
+      const currentUser = this.netlifyIdentity.currentUser();
       console.log('[AuthService] Current user:', currentUser ? 'Found' : 'None');
 
       if (currentUser) {
-        // Verify token is still valid
-        try {
-          // GoTrue user has jwt method
-          await (currentUser as any).jwt();
-          this.userSubject.next(currentUser);
-          console.log('[AuthService] User session restored successfully');
-        } catch (error) {
-          // Token expired, clear session
-          console.warn('[AuthService] Session expired, clearing user');
-          this.goTrue.clearStore();
-        }
+        this.userSubject.next(currentUser);
+        console.log('[AuthService] User session restored successfully');
       }
 
       console.log('[AuthService] Initialization complete');
     } catch (error) {
-      console.error('[AuthService] Failed to initialize GoTrue:', error);
+      console.error('[AuthService] Failed to initialize Netlify Identity:', error);
     }
   }
 
   /**
-   * Load GoTrue script (now loaded from index.html)
+   * Set up event listeners for Netlify Identity
+   */
+  private setupEventListeners(): void {
+    if (!this.netlifyIdentity) return;
+
+    console.log('[AuthService] Setting up event listeners');
+
+    // Listen for login events
+    this.netlifyIdentity.on('login', (user: NetlifyUser) => {
+      console.log('[AuthService] Login event received:', user);
+      this.userSubject.next(user);
+      this.netlifyIdentity.close(); // Close the widget if it's open
+    });
+
+    // Listen for logout events
+    this.netlifyIdentity.on('logout', () => {
+      console.log('[AuthService] Logout event received');
+      this.userSubject.next(null);
+    });
+
+    // Listen for error events
+    this.netlifyIdentity.on('error', (err: any) => {
+      console.error('[AuthService] Netlify Identity error:', err);
+    });
+  }
+
+  /**
+   * Load Netlify Identity script (loaded from index.html)
    * This method just waits for the script to be available
    */
-  private loadGoTrueScript(): Promise<void> {
+  private loadNetlifyIdentityScript(): Promise<void> {
     return new Promise((resolve, reject) => {
-      console.log('[AuthService] loadGoTrueScript called');
+      console.log('[AuthService] loadNetlifyIdentityScript called');
       console.log('[AuthService] scriptLoaded:', this.scriptLoaded);
       console.log('[AuthService] isPlatformBrowser:', isPlatformBrowser(this.platformId));
 
@@ -115,63 +133,96 @@ export class AuthService {
         return;
       }
 
-      // Check if GoTrue is already available
-      console.log('[AuthService] Checking if window.GoTrue exists:', !!window.GoTrue);
-      if (window.GoTrue) {
-        console.log('[AuthService] window.GoTrue found immediately');
+      // Check if netlifyIdentity is already available
+      console.log('[AuthService] Checking if window.netlifyIdentity exists:', !!window.netlifyIdentity);
+      if (window.netlifyIdentity) {
+        console.log('[AuthService] window.netlifyIdentity found immediately');
         this.scriptLoaded = true;
         resolve();
         return;
       }
 
-      // Wait for GoTrue to load (max 5 seconds)
-      console.log('[AuthService] window.GoTrue not found, starting polling...');
+      // Wait for netlifyIdentity to load (max 5 seconds)
+      console.log('[AuthService] window.netlifyIdentity not found, starting polling...');
       let attempts = 0;
       const maxAttempts = 50; // 50 attempts * 100ms = 5 seconds
       const checkInterval = setInterval(() => {
         attempts++;
-        console.log(`[AuthService] Polling attempt ${attempts}/${maxAttempts}, window.GoTrue:`, !!window.GoTrue);
+        console.log(`[AuthService] Polling attempt ${attempts}/${maxAttempts}, window.netlifyIdentity:`, !!window.netlifyIdentity);
 
-        if (window.GoTrue) {
+        if (window.netlifyIdentity) {
           clearInterval(checkInterval);
           this.scriptLoaded = true;
-          console.log('[AuthService] window.GoTrue found after polling!');
+          console.log('[AuthService] window.netlifyIdentity found after polling!');
           resolve();
         } else if (attempts >= maxAttempts) {
           clearInterval(checkInterval);
-          console.error('[AuthService] Timeout waiting for GoTrue script');
-          reject(new Error('Failed to load GoTrue script'));
+          console.error('[AuthService] Timeout waiting for Netlify Identity script');
+          reject(new Error('Failed to load Netlify Identity script'));
         }
       }, 100);
     });
   }
 
   /**
-   * Login with email and password
+   * Login with email and password using Netlify Identity API directly
    */
   public async loginWithEmail(email: string, password: string): Promise<NetlifyUser> {
     console.log('[AuthService] loginWithEmail called');
     console.log('[AuthService] Email:', email);
-    console.log('[AuthService] this.goTrue exists:', !!this.goTrue);
+    console.log('[AuthService] this.netlifyIdentity exists:', !!this.netlifyIdentity);
     console.log('[AuthService] isPlatformBrowser:', isPlatformBrowser(this.platformId));
 
-    if (!this.goTrue || !isPlatformBrowser(this.platformId)) {
+    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
       console.error('[AuthService] Authentication service not available', {
-        goTrue: !!this.goTrue,
+        netlifyIdentity: !!this.netlifyIdentity,
         isPlatformBrowser: isPlatformBrowser(this.platformId)
       });
       throw new Error('Authentication service not available');
     }
 
     try {
-      console.log('[AuthService] Attempting login with GoTrue...');
-      const user = await this.goTrue.login(email, password, true);
-      console.log('[AuthService] Login successful:', user);
-      this.userSubject.next(user);
-      return user;
+      console.log('[AuthService] Attempting login via Netlify Identity API...');
+
+      // Use fetch to call Netlify Identity API directly
+      const response = await fetch(`${environment.netlifyIdentitySiteUrl}/.netlify/identity/token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          grant_type: 'password'
+        })
+      });
+
+      console.log('[AuthService] API response status:', response.status);
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('[AuthService] API error:', error);
+        throw new Error(error.error_description || error.msg || 'Login failed');
+      }
+
+      const data = await response.json();
+      console.log('[AuthService] Login response received');
+
+      // Store the token and user data
+      const user = {
+        email,
+        token: data.access_token,
+        refresh_token: data.refresh_token,
+        ...data.user
+      };
+
+      this.userSubject.next(user as NetlifyUser);
+      console.log('[AuthService] Login successful');
+
+      return user as NetlifyUser;
     } catch (error: any) {
       console.error('[AuthService] Login error:', error);
-      throw new Error(error.json?.error_description || error.message || 'Login failed');
+      throw new Error(error.message || 'Login failed');
     }
   }
 
@@ -179,73 +230,63 @@ export class AuthService {
    * Sign up with email and password
    */
   public async signupWithEmail(email: string, password: string): Promise<NetlifyUser> {
-    if (!this.goTrue || !isPlatformBrowser(this.platformId)) {
+    console.log('[AuthService] signupWithEmail called');
+
+    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
+      console.error('[AuthService] Authentication service not available for signup');
       throw new Error('Authentication service not available');
     }
 
     try {
-      const user = await this.goTrue.signup(email, password);
+      console.log('[AuthService] Attempting signup via Netlify Identity API...');
+
+      const response = await fetch(`${environment.netlifyIdentitySiteUrl}/.netlify/identity/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+
+      console.log('[AuthService] Signup response status:', response.status);
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('[AuthService] Signup API error:', error);
+        throw new Error(error.error_description || error.msg || 'Signup failed');
+      }
+
+      const user = await response.json();
+      console.log('[AuthService] Signup successful, confirmation email sent');
+
       // Note: User needs to confirm email before they can log in
       return user;
     } catch (error: any) {
-      console.error('Signup error:', error);
-      throw new Error(error.json?.error_description || error.message || 'Signup failed');
+      console.error('[AuthService] Signup error:', error);
+      throw new Error(error.message || 'Signup failed');
     }
   }
 
-  /**
-   * Handle OAuth callback from external providers (Google, etc.)
-   */
-  private async handleOAuthCallback(): Promise<void> {
-    console.log('[AuthService] handleOAuthCallback called');
-
-    if (!isPlatformBrowser(this.platformId)) {
-      console.log('[AuthService] Not in browser, skipping OAuth callback');
-      return;
-    }
-
-    // Check if we have an OAuth callback in the URL hash
-    const hash = window.location.hash;
-    console.log('[AuthService] Current URL hash:', hash);
-    console.log('[AuthService] Has access_token in hash:', hash && hash.includes('access_token'));
-
-    if (hash && hash.includes('access_token')) {
-      console.log('[AuthService] OAuth callback detected in URL hash');
-      try {
-        // GoTrue will automatically parse the hash and create the user session
-        const user = this.goTrue.currentUser();
-        console.log('[AuthService] User from OAuth callback:', user ? 'Found' : 'None');
-
-        if (user) {
-          this.userSubject.next(user);
-          // Clean up the URL hash
-          window.history.replaceState({}, document.title, window.location.pathname);
-          console.log('[AuthService] OAuth login successful, hash cleaned');
-        } else {
-          console.warn('[AuthService] OAuth callback present but no user found');
-        }
-      } catch (error) {
-        console.error('[AuthService] OAuth callback error:', error);
-      }
-    }
-  }
 
   /**
    * Login with Google OAuth
    */
   public async loginWithGoogle(): Promise<void> {
     console.log('[AuthService] loginWithGoogle called');
-    console.log('[AuthService] this.goTrue exists:', !!this.goTrue);
+    console.log('[AuthService] this.netlifyIdentity exists:', !!this.netlifyIdentity);
     console.log('[AuthService] isPlatformBrowser:', isPlatformBrowser(this.platformId));
     console.log('[AuthService] environment.netlifyIdentitySiteUrl:', environment.netlifyIdentitySiteUrl);
 
-    if (!this.goTrue || !isPlatformBrowser(this.platformId)) {
+    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
       console.error('[AuthService] Authentication service not available for Google login', {
-        goTrue: !!this.goTrue,
-        goTrueType: typeof this.goTrue,
+        netlifyIdentity: !!this.netlifyIdentity,
+        netlifyIdentityType: typeof this.netlifyIdentity,
         isPlatformBrowser: isPlatformBrowser(this.platformId),
         scriptLoaded: this.scriptLoaded,
-        windowGoTrue: !!window.GoTrue
+        windowNetlifyIdentity: !!window.netlifyIdentity
       });
       throw new Error('Authentication service not available');
     }
@@ -265,23 +306,25 @@ export class AuthService {
    * Logout current user
    */
   public async logout(): Promise<void> {
-    if (!this.goTrue || !isPlatformBrowser(this.platformId)) {
+    console.log('[AuthService] logout called');
+
+    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
+      console.log('[AuthService] Not in browser or netlifyIdentity not available');
       return;
     }
 
     try {
-      const user = this.getCurrentUser();
+      const user = this.netlifyIdentity.currentUser();
       if (user) {
-        // GoTrue user has logout method
-        await (user as any).logout();
+        console.log('[AuthService] Logging out user via Netlify Identity');
+        await this.netlifyIdentity.logout();
       }
-      this.goTrue.clearStore();
       this.userSubject.next(null);
+      console.log('[AuthService] User logged out, reloading page');
       window.location.reload();
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error('[AuthService] Logout error:', error);
       // Clear user anyway
-      this.goTrue.clearStore();
       this.userSubject.next(null);
       window.location.reload();
     }
@@ -298,17 +341,21 @@ export class AuthService {
    * Get JWT token for API calls
    */
   public async getToken(): Promise<string | null> {
-    const user = this.getCurrentUser();
+    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
+      return null;
+    }
+
+    const user = this.netlifyIdentity.currentUser();
     if (!user) {
       return null;
     }
 
     try {
-      // GoTrue user has jwt method
-      const token = await (user as any).jwt();
+      // Get JWT token from user object
+      const token = user.token?.access_token || user.token;
       return token;
     } catch (error) {
-      console.error('Failed to get token:', error);
+      console.error('[AuthService] Failed to get token:', error);
       return null;
     }
   }
@@ -349,19 +396,36 @@ export class AuthService {
   }
 
   /**
-   * Open password reset modal
-   * For now, this will be handled through email
+   * Request password reset
    */
   public async requestPasswordReset(email: string): Promise<void> {
-    if (!this.goTrue || !isPlatformBrowser(this.platformId)) {
+    console.log('[AuthService] requestPasswordReset called');
+
+    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
       throw new Error('Authentication service not available');
     }
 
     try {
-      await this.goTrue.requestPasswordRecovery(email);
+      console.log('[AuthService] Requesting password reset for:', email);
+
+      const response = await fetch(`${environment.netlifyIdentitySiteUrl}/.netlify/identity/recover`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('[AuthService] Password reset error:', error);
+        throw new Error(error.error_description || error.msg || 'Password reset failed');
+      }
+
+      console.log('[AuthService] Password reset email sent');
     } catch (error: any) {
-      console.error('Password reset error:', error);
-      throw new Error(error.json?.error_description || error.message || 'Password reset failed');
+      console.error('[AuthService] Password reset error:', error);
+      throw new Error(error.message || 'Password reset failed');
     }
   }
 }
