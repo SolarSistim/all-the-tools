@@ -4,5 +4,5 @@ export const environment = {
   ogFetchLimitPerMin: 10,
   ogFetchUserLimitPerMin: 5,
   ogFetchUserLockoutMinutes: 10,
-  netlifyIdentitySiteUrl: 'https://allthetools.dev'
+  netlifyIdentitySiteUrl: 'https://allthethings.dev'
 };
