@@ -80,6 +80,10 @@ export class AuthService {
       console.log('[AuthService] Current user:', currentUser ? 'Found' : 'None');
 
       if (currentUser) {
+        console.log('[AuthService] User details:', JSON.stringify(currentUser, null, 2));
+        console.log('[AuthService] User email:', currentUser.email);
+        console.log('[AuthService] User app_metadata:', currentUser.app_metadata);
+        console.log('[AuthService] User user_metadata:', currentUser.user_metadata);
         this.userSubject.next(currentUser);
         console.log('[AuthService] User session restored successfully');
       }
@@ -100,7 +104,11 @@ export class AuthService {
 
     // Listen for login events
     this.netlifyIdentity.on('login', (user: NetlifyUser) => {
-      console.log('[AuthService] Login event received:', user);
+      console.log('[AuthService] Login event received');
+      console.log('[AuthService] User object:', JSON.stringify(user, null, 2));
+      console.log('[AuthService] User email:', user.email);
+      console.log('[AuthService] User app_metadata:', user.app_metadata);
+      console.log('[AuthService] User user_metadata:', user.user_metadata);
       this.userSubject.next(user);
       this.netlifyIdentity.close(); // Close the widget if it's open
     });
@@ -334,7 +342,9 @@ export class AuthService {
    * Get current user synchronously
    */
   public getCurrentUser(): NetlifyUser | null {
-    return this.userSubject.value;
+    const user = this.userSubject.value;
+    console.log('[AuthService] getCurrentUser called, user:', user);
+    return user;
   }
 
   /**
@@ -364,17 +374,39 @@ export class AuthService {
    * Check if user has a specific role
    */
   private hasRole(user: NetlifyUser | null, role: string): boolean {
-    if (!user || !user.app_metadata || !user.app_metadata.roles) {
+    console.log('[AuthService] hasRole called with role:', role);
+    console.log('[AuthService] User object:', user);
+    console.log('[AuthService] User app_metadata:', user?.app_metadata);
+    console.log('[AuthService] User app_metadata.roles:', user?.app_metadata?.roles);
+
+    if (!user) {
+      console.log('[AuthService] No user, returning false');
       return false;
     }
-    return user.app_metadata.roles.includes(role);
+
+    if (!user.app_metadata) {
+      console.log('[AuthService] No app_metadata, returning false');
+      return false;
+    }
+
+    if (!user.app_metadata.roles) {
+      console.log('[AuthService] No roles in app_metadata, returning false');
+      return false;
+    }
+
+    const hasRole = user.app_metadata.roles.includes(role);
+    console.log('[AuthService] Checking if roles include', role, ':', hasRole);
+    return hasRole;
   }
 
   /**
    * Check if current user has a specific role (synchronous)
    */
   public hasRoleSync(role: string): boolean {
-    return this.hasRole(this.getCurrentUser(), role);
+    console.log('[AuthService] hasRoleSync called with role:', role);
+    const result = this.hasRole(this.getCurrentUser(), role);
+    console.log('[AuthService] hasRoleSync returning:', result);
+    return result;
   }
 
   /**
