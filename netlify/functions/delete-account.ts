@@ -3,54 +3,56 @@ import { requireAuth, handleCORS, errorResponse, successResponse } from './utils
 
 /**
  * Delete Account Function
- * Allows users to delete their own Netlify Identity account
- * DESTRUCTIVE ACTION - permanently deletes user data
+ * Uses Type Casting to access Identity context in v1 Functions
  */
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
-  // Handle CORS preflight
+  // 1. Handle CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return handleCORS();
   }
 
   try {
-    // Require authentication
-    const user = requireAuth(context);
+    // 2. Authenticate the user
+    // Casting context to 'any' here solves the "Argument of type..." error
+    const user = requireAuth(context as any);
 
-    // Use GoTrue's self-delete endpoint: DELETE /.netlify/identity/user
-    // This allows any authenticated user to delete their own account using
-    // their own JWT — no admin privileges or special tokens required.
-    const authHeader = event.headers['authorization'] || event.headers['Authorization'] || '';
-    const siteUrl = (process.env.URL || '').replace(/\/$/, '');
+    // 3. Extract Identity details via Type Casting
+    // In v1, these live inside clientContext
+    const clientContext = (context as any).clientContext;
+    const userId = clientContext?.user?.sub;
+    const adminToken = clientContext?.identity?.token;
 
-    if (!siteUrl) {
-      throw new Error('Server configuration error: Missing site URL');
+    if (!userId || !adminToken) {
+      console.error('Identity context missing:', { hasUserId: !!userId, hasToken: !!adminToken });
+      throw new Error('Server configuration error: Identity context not found');
     }
 
-    const deleteUrl = `${siteUrl}/.netlify/identity/user`;
+    // 4. Construct the Admin API URL
+    const siteUrl = (process.env.URL || '').replace(/\/$/, '');
+    const deleteUrl = `${siteUrl}/.netlify/identity/admin/users/${userId}`;
 
+    // 5. Execute the deletion using the Admin Token
     const response = await fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
-        'Authorization': authHeader,
+        'Authorization': `Bearer ${adminToken}`,
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Failed to delete user:', response.status, errorText);
       throw new Error(`Failed to delete account: ${response.status} ${errorText}`);
     }
 
     return successResponse({
       message: 'Account deleted successfully',
     });
+
   } catch (error: any) {
-    console.error('Error deleting account:', error);
-
-    if (error.message === 'Unauthorized: Authentication required') {
-      return errorResponse(error, 401);
-    }
-
-    return errorResponse(error);
+    console.error('Error deleting account:', error.message);
+    
+    const statusCode = error.message.includes('Authentication') ? 401 : 500;
+    return errorResponse(error, statusCode);
   }
 };
