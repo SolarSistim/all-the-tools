@@ -494,6 +494,30 @@ body.light-theme {
 }
 
 // ============================================
+// GLASS DIALOG CONTAINER
+// Shared panel class for auth and confirmation dialogs.
+// Using body.light-theme for theme-switching so this works
+// regardless of which component triggered the dialog.
+// ============================================
+
+body.light-theme {
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+.login-dialog-container .mat-mdc-dialog-container {
+  background: var(--bg-card, rgba(18, 18, 24, 0.95)) !important;
+  backdrop-filter: blur(25px) saturate(160%);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
+  border-radius: 28px !important;
+  padding: 2.5rem !important;
+
+  .mat-mdc-dialog-surface {
+    background: transparent !important;
+  }
+}
+
+// ============================================
 // PRINT STYLES
 // ============================================
 @media print {

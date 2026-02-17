@@ -111,27 +111,6 @@
   }
 }
 
-// Dialog Container Override
-::ng-deep .login-dialog-container .mat-mdc-dialog-container {
-  background: var(--bg-card) !important;
-  backdrop-filter: blur(25px) saturate(160%);
-  border: 1px solid var(--glass-border) !important;
-  border-radius: 28px !important;
-  padding: 2.5rem !important;
-
-  .mat-mdc-dialog-surface {
-    background: transparent !important;
-  }
-}
-
-// Light Theme Overrides
-:host-context(body.light-theme) {
-  ::ng-deep .login-dialog-container .mat-mdc-dialog-container {
-    background: rgba(255, 255, 255, 0.95) !important;
-    border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  }
-}
-
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

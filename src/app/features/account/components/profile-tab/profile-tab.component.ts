@@ -6,54 +6,193 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../../../core/services/auth.service';
 import { AccountService } from '../../services/account.service';
 
 /**
- * Confirmation Dialog Component
+ * Confirmation Dialog Component — styled to match the Sign In dialog.
  */
 @Component({
   selector: 'app-confirm-delete-dialog',
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatDialogModule, MatIconModule],
   template: `
-    <h2 mat-dialog-title>
-      <mat-icon color="warn">warning</mat-icon>
-      Confirm Account Deletion
-    </h2>
-    <mat-dialog-content>
-      <p><strong>Are you absolutely sure you want to delete your account?</strong></p>
-      <p>This action cannot be undone. All your data will be permanently deleted.</p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="false">Cancel</button>
-      <button mat-raised-button color="warn" [mat-dialog-close]="true">
-        Delete My Account
-      </button>
-    </mat-dialog-actions>
+    <div class="confirm-dialog">
+      <div class="accent-glow"></div>
+
+      <h2 mat-dialog-title>
+        <span class="title-text">Delete Account</span>
+        <button mat-icon-button (click)="dialogRef.close(false)" class="close-button">
+          <mat-icon>close</mat-icon>
+        </button>
+      </h2>
+
+      <mat-dialog-content>
+        <div class="dialog-body">
+          <div class="warning-icon-wrap">
+            <mat-icon class="warning-icon">warning_amber</mat-icon>
+          </div>
+          <p class="warning-title">Are you absolutely sure?</p>
+          <p class="warning-text">
+            All your data will be permanently deleted and cannot be recovered.
+          </p>
+        </div>
+      </mat-dialog-content>
+
+      <mat-dialog-actions>
+        <button mat-flat-button class="cancel-btn" (click)="dialogRef.close(false)">
+          Cancel
+        </button>
+        <button mat-flat-button class="delete-btn" (click)="dialogRef.close(true)">
+          <mat-icon>delete_forever</mat-icon>
+          Delete My Account
+        </button>
+      </mat-dialog-actions>
+    </div>
   `,
   styles: [`
-    h2 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .confirm-dialog {
+      position: relative;
+      overflow: hidden;
 
-    mat-dialog-content {
-      min-width: 300px;
-
-      p {
-        margin: 0.5rem 0;
+      .accent-glow {
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(211, 47, 47, 0.2) 0%, transparent 70%);
+        z-index: 0;
+        pointer-events: none;
       }
 
-      strong {
-        color: #f44336;
+      ::ng-deep h2[mat-dialog-title] {
+        padding: 0.5rem 0 1.5rem !important;
+        margin: 0 !important;
+        border-bottom: none !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .title-text {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 1.8rem;
+          font-weight: 700;
+          letter-spacing: -0.03em;
+          color: var(--text-primary);
+          flex: 1;
+          margin-left: 20px;
+        }
+
+        .close-button {
+          background: transparent;
+          mat-icon {
+            font-size: 20px;
+            color: var(--text-primary);
+          }
+        }
+      }
+
+      .dialog-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.75rem;
+        padding: 0.5rem 0 1.5rem;
+
+        .warning-icon-wrap {
+          width: 68px;
+          height: 68px;
+          border-radius: 50%;
+          background: rgba(211, 47, 47, 0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 0.25rem;
+
+          .warning-icon {
+            font-size: 38px;
+            width: 38px;
+            height: 38px;
+            color: #ef5350;
+          }
+        }
+
+        .warning-title {
+          margin: 0;
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-primary);
+        }
+
+        .warning-text {
+          margin: 0;
+          font-size: 0.9rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          max-width: 300px;
+        }
+      }
+
+      ::ng-deep mat-dialog-actions {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+      }
+
+      .cancel-btn {
+        height: 48px;
+        border-radius: 12px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
+        color: var(--text-primary) !important;
+        font-weight: 500;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1) !important;
+        }
+      }
+
+      .delete-btn {
+        height: 48px;
+        border-radius: 12px !important;
+        background: #d32f2f !important;
+        color: #fff !important;
+        font-weight: 600;
+        transition: background 0.2s ease;
+
+        mat-icon {
+          color: #fff !important;
+          margin-right: 4px;
+        }
+
+        &:hover {
+          background: #b71c1c !important;
+        }
+      }
+    }
+
+    :host-context(body.light-theme) {
+      .cancel-btn {
+        background: rgba(0, 0, 0, 0.04) !important;
+        border-color: rgba(0, 0, 0, 0.12) !important;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.08) !important;
+        }
       }
     }
   `]
 })
-export class ConfirmDeleteDialogComponent {}
+export class ConfirmDeleteDialogComponent {
+  dialogRef = inject(MatDialogRef<ConfirmDeleteDialogComponent>);
+}
 
 /**
  * Profile Tab Component
@@ -346,7 +485,9 @@ export class ProfileTabComponent {
 
   deleteAccount() {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
-      width: '400px'
+      width: '440px',
+      maxWidth: '95vw',
+      panelClass: 'login-dialog-container'
     });
 
     dialogRef.afterClosed().subscribe(confirmed => {
