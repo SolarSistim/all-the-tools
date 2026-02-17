@@ -42,6 +42,11 @@ export class LoginDialogComponent {
   errorMessage = '';
   successMessage = '';
   signupCompleted = false;
+  selectedTabIndex = 0;
+
+  get dialogTitle(): string {
+    return this.selectedTabIndex === 0 ? 'Welcome Back' : 'Create Account';
+  }
 
   constructor() {
     this.loginForm = this.fb.group({
