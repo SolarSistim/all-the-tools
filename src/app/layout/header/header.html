@@ -90,30 +90,33 @@
           <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
         </button>
 
-        <!-- Login Button (when not authenticated) -->
-        @if (!(isAuthenticated$ | async)) {
-          <button
-            mat-button
-            (click)="login()"
-            class="login-btn"
-            aria-label="Login"
-          >
-            <mat-icon>login</mat-icon>
-            <span>Login</span>
-          </button>
-        }
+        <!-- Auth buttons — hidden until auth state is determined to avoid flash -->
+        @if (authReady$ | async) {
+          <!-- Login Button (when not authenticated) -->
+          @if (!(isAuthenticated$ | async)) {
+            <button
+              mat-button
+              (click)="login()"
+              class="login-btn"
+              aria-label="Login"
+            >
+              <mat-icon>login</mat-icon>
+              <span>Login</span>
+            </button>
+          }
 
-        <!-- Account Menu (when authenticated) -->
-        @if (isAuthenticated$ | async) {
-          <button
-            mat-icon-button
-            [matMenuTriggerFor]="accountMenu"
-            class="account-btn"
-            aria-label="Account menu"
-            [matTooltip]="getUserDisplayName()"
-          >
-            <mat-icon>account_circle</mat-icon>
-          </button>
+          <!-- Account Menu (when authenticated) -->
+          @if (isAuthenticated$ | async) {
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="accountMenu"
+              class="account-btn"
+              aria-label="Account menu"
+              [matTooltip]="getUserDisplayName()"
+            >
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          }
         }
       </div>
 
@@ -430,49 +433,52 @@
           <span>Home</span>
         </a>
 
-        <!-- Login/Logout Button (under Home) -->
-        @if (!(isAuthenticated$ | async)) {
-          <button
-            (click)="login(); closeMobileMenu()"
-            class="mobile-nav-link login-mobile-btn auth-action-link"
-          >
-            <mat-icon>login</mat-icon>
-            <span>Login</span>
-          </button>
-        } @else {
-          <button
-            (click)="logout(); closeMobileMenu()"
-            class="mobile-nav-link logout-mobile-btn auth-action-link"
-          >
-            <mat-icon>logout</mat-icon>
-            <span>Logout</span>
-          </button>
-        }
+        <!-- Auth links — hidden until auth state is determined to avoid flash -->
+        @if (authReady$ | async) {
+          <!-- Login/Logout Button (under Home) -->
+          @if (!(isAuthenticated$ | async)) {
+            <button
+              (click)="login(); closeMobileMenu()"
+              class="mobile-nav-link login-mobile-btn auth-action-link"
+            >
+              <mat-icon>login</mat-icon>
+              <span>Login</span>
+            </button>
+          } @else {
+            <button
+              (click)="logout(); closeMobileMenu()"
+              class="mobile-nav-link logout-mobile-btn auth-action-link"
+            >
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          }
 
-        <!-- My Account (when authenticated, under Home) -->
-        @if (isAuthenticated$ | async) {
-          <a
-            routerLink="/account"
-            routerLinkActive="active"
-            (click)="closeMobileMenu()"
-            class="mobile-nav-link auth-action-link"
-          >
-            <mat-icon>person</mat-icon>
-            <span>My Account</span>
-          </a>
-        }
+          <!-- My Account (when authenticated, under Home) -->
+          @if (isAuthenticated$ | async) {
+            <a
+              routerLink="/account"
+              routerLinkActive="active"
+              (click)="closeMobileMenu()"
+              class="mobile-nav-link auth-action-link"
+            >
+              <mat-icon>person</mat-icon>
+              <span>My Account</span>
+            </a>
+          }
 
-        <!-- Admin Dashboard (when admin, under Home) -->
-        @if (isAdmin$ | async) {
-          <a
-            routerLink="/admin"
-            routerLinkActive="active"
-            (click)="closeMobileMenu()"
-            class="mobile-nav-link auth-action-link admin-link"
-          >
-            <mat-icon>admin_panel_settings</mat-icon>
-            <span>Admin Dashboard</span>
-          </a>
+          <!-- Admin Dashboard (when admin, under Home) -->
+          @if (isAdmin$ | async) {
+            <a
+              routerLink="/admin"
+              routerLinkActive="active"
+              (click)="closeMobileMenu()"
+              class="mobile-nav-link auth-action-link admin-link"
+            >
+              <mat-icon>admin_panel_settings</mat-icon>
+              <span>Admin Dashboard</span>
+            </a>
+          }
         }
 
         <!-- Divider -->

@@ -73,6 +73,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated$ = this.authService.isAuthenticated$;
   isAdmin$ = this.authService.isAdmin$;
   user$ = this.authService.user$;
+  authReady$ = this.authService.authReady$;
 
   // Bind scrolled class to host element
   @HostBinding('class.scrolled') get scrolledClass() {

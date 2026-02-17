@@ -24,6 +24,10 @@ export class AuthService {
   private userSubject = new BehaviorSubject<NetlifyUser | null>(null);
   public user$: Observable<NetlifyUser | null> = this.userSubject.asObservable();
 
+  // Emits true once auth state has been determined (avoids login-button flash on load)
+  private authReadySubject = new BehaviorSubject<boolean>(false);
+  public authReady$: Observable<boolean> = this.authReadySubject.asObservable();
+
   // Derived observable streams
   public isAuthenticated$: Observable<boolean> = this.user$.pipe(
     map(user => !!user)
@@ -38,10 +42,12 @@ export class AuthService {
   constructor() {
     console.log('[AuthService] Constructor called');
 
-    // Restore user session from localStorage if available
+    // Restore user session from localStorage if available (synchronous).
+    // We mark authReady immediately so the header doesn't flash the Login button.
     if (isPlatformBrowser(this.platformId)) {
       this.restoreUserSession();
     }
+    this.authReadySubject.next(true);
 
     this.initNetlifyIdentity();
   }
