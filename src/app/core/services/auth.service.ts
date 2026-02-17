@@ -163,12 +163,15 @@ export class AuthService {
 
       // Initialize the widget (but don't show it)
       if (this.netlifyIdentity) {
-        console.log('[AuthService] Initializing Netlify Identity Widget...');
-        this.netlifyIdentity.init();
-        console.log('[AuthService] Netlify Identity Widget initialized');
-
-        // Set up event listeners
+        // Set up event listeners BEFORE init(), so we catch any events
+        // fired during initialization (e.g. 'open' triggered by a confirmation token in the URL)
         this.setupEventListeners();
+
+        console.log('[AuthService] Initializing Netlify Identity Widget...');
+        this.netlifyIdentity.init({
+          APIUrl: `${environment.netlifyIdentitySiteUrl}/.netlify/identity`
+        });
+        console.log('[AuthService] Netlify Identity Widget initialized');
       }
 
       // Check for existing user session (if not already restored from localStorage)
@@ -207,23 +210,31 @@ export class AuthService {
 
     console.log('[AuthService] Setting up event listeners');
 
-    // Listen for login events
+    // Prevent the widget from showing its own overlay UI.
+    // We handle all auth UI ourselves, so close it immediately if it tries to open.
+    this.netlifyIdentity.on('open', () => {
+      console.log('[AuthService] Widget tried to open - closing immediately (we handle UI)');
+      this.netlifyIdentity.close();
+    });
+
+    // Listen for login events (fires after email confirmation or widget login)
     this.netlifyIdentity.on('login', (user: NetlifyUser) => {
       console.log('[AuthService] Login event received');
-      console.log('[AuthService] Raw user object:', JSON.stringify(user, null, 2));
 
       // Enrich user object with JWT data (in case it's incomplete)
       const enrichedUser = this.enrichUserFromToken(user);
       console.log('[AuthService] Enriched user email:', enrichedUser.email);
-      console.log('[AuthService] Enriched user app_metadata:', enrichedUser.app_metadata);
-      console.log('[AuthService] Enriched user user_metadata:', enrichedUser.user_metadata);
 
       this.userSubject.next(enrichedUser);
 
       // Save session to localStorage
       this.saveUserSession(enrichedUser);
 
-      this.netlifyIdentity.close(); // Close the widget if it's open
+      // Close widget and clean up the URL hash left by the confirmation link
+      this.netlifyIdentity.close();
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
     });
 
     // Listen for logout events
@@ -236,6 +247,8 @@ export class AuthService {
     // Listen for error events
     this.netlifyIdentity.on('error', (err: any) => {
       console.error('[AuthService] Netlify Identity error:', err);
+      // Close widget on error to prevent stuck overlay
+      this.netlifyIdentity.close();
     });
   }
 
