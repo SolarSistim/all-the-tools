@@ -16,23 +16,17 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     // Require authentication
     const user = requireAuth(context);
 
-    // Get admin token from environment
-    const adminToken = process.env.NETLIFY_ADMIN_TOKEN;
-
-    if (!adminToken) {
-      throw new Error('Server configuration error: Missing NETLIFY_ADMIN_TOKEN');
-    }
-
     // The JWT clientContext user has the user UUID in `sub` (standard JWT claim).
     const userId = user.sub || user.id;
 
-    // Use the GoTrue admin API at the site's own URL.
-    // Netlify automatically provides process.env.URL as the canonical site URL.
-    // The personal access token authenticates admin operations against this endpoint.
+    // Forward the caller's own JWT to the GoTrue admin API.
+    // NETLIFY_ADMIN_TOKEN is an opaque PAT and is not a JWT — GoTrue rejects it.
+    // A user with the 'admin' role in their JWT can call GoTrue admin endpoints.
+    const authHeader = event.headers['authorization'] || event.headers['Authorization'] || '';
     const siteUrl = (process.env.URL || '').replace(/\/$/, '');
 
-    if (!siteUrl || !adminToken) {
-      throw new Error('Server configuration error: Missing credentials');
+    if (!siteUrl) {
+      throw new Error('Server configuration error: Missing site URL');
     }
 
     const deleteUrl = `${siteUrl}/.netlify/identity/admin/users/${userId}`;
@@ -40,7 +34,7 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     const response = await fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${adminToken}`,
+        'Authorization': authHeader,
       },
     });
 
