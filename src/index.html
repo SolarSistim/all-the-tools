@@ -20,17 +20,19 @@
   <!-- Simple Analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
-  <!-- Netlify Identity Widget - Official supported way -->
+  <!-- Extract recovery token BEFORE the widget loads so it can't consume it first -->
   <script>
-    console.log('[INDEX.HTML] Loading Netlify Identity Widget...');
+    (function () {
+      var match = window.location.hash.match(/recovery_token=([^&]+)/);
+      if (match) {
+        window.__netlifyRecoveryToken = decodeURIComponent(match[1]);
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    })();
   </script>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    console.log('[INDEX.HTML] Netlify Identity Widget loaded, window.netlifyIdentity available:', !!window.netlifyIdentity);
-    if (!window.netlifyIdentity) {
-      console.error('[INDEX.HTML] WARNING: window.netlifyIdentity is not defined after loading script!');
-    }
-  </script>
 
   <meta name="msvalidate.01" content="3DFDFDF33310F206064A50103481656C" />
   <meta name="yandex-verification" content="18b109fb1879ecf5" />

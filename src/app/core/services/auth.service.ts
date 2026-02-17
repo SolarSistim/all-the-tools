@@ -57,11 +57,10 @@ export class AuthService {
    * doesn't try to handle it with its own UI.
    */
   private extractRecoveryToken(): void {
-    const hash = window.location.hash;
-    const match = hash.match(/recovery_token=([^&]+)/);
-    if (match) {
-      this.pendingRecoveryToken = decodeURIComponent(match[1]);
-      history.replaceState(null, '', window.location.pathname + window.location.search);
+    const token = (window as any).__netlifyRecoveryToken;
+    if (token) {
+      this.pendingRecoveryToken = token;
+      delete (window as any).__netlifyRecoveryToken;
     }
   }
 
