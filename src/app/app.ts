@@ -1,27 +1,32 @@
 import { Component, inject, ViewChild, AfterViewInit, OnInit, PLATFORM_ID, signal } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd, RouterLink, RouterOutlet } from '@angular/router';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { Router, NavigationEnd, RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { HeaderComponent } from './layout/header/header';
 import { FooterComponent } from './layout/footer/footer';
 import { BackToTopComponent } from './shared/components/back-to-top/back-to-top';
 import { SidenavService } from './core/services/sidenav.service';
 import { ToolsService } from './core/services/tools.service';
+import { AuthService } from './core/services/auth.service';
 import { VisitLoggerService } from './core/services/visit-logger.service';
 import { GoogleAnalyticsService } from './core/services/google-analytics.service';
 import { MetaService } from './core/services/meta.service';
 import { AdsenseService } from './core/services/adsense.service';
 import { ToolCategoryMeta, Tool } from './core/models/tool.interface';
+import { LoginDialogComponent } from './features/auth/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-root',
   imports: [
+    CommonModule,
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
@@ -43,7 +48,12 @@ export class App implements AfterViewInit, OnInit {
 
   private sidenavService = inject(SidenavService);
   private toolsService = inject(ToolsService);
+  private authService = inject(AuthService);
+  private dialog = inject(MatDialog);
   private router = inject(Router);
+
+  authReady$ = this.authService.authReady$;
+  isAuthenticated$ = this.authService.isAuthenticated$;
   private visitLogger = inject(VisitLoggerService);
   private googleAnalytics = inject(GoogleAnalyticsService);
   private metaService = inject(MetaService);
@@ -189,5 +199,16 @@ export class App implements AfterViewInit, OnInit {
    */
   closeToolsSidenav(): void {
     this.sidenavService.closeToolsSidenav();
+  }
+
+  /**
+   * Open login dialog
+   */
+  login(): void {
+    this.dialog.open(LoginDialogComponent, {
+      width: '500px',
+      maxWidth: '95vw',
+      panelClass: 'login-dialog-container'
+    });
   }
 }

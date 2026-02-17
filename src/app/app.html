@@ -24,6 +24,8 @@
     <div class="sidenav-nav">
       <a
         routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
         (click)="closeToolsSidenavIfMobile()"
         class="sidenav-nav-link"
       >
@@ -31,23 +33,27 @@
         <span>Home</span>
       </a>
 
-      <a
-        routerLink="/blog"
-        (click)="closeToolsSidenavIfMobile()"
-        class="sidenav-nav-link"
-      >
-        <mat-icon>article</mat-icon>
-        <span>Blog</span>
-      </a>
-
-      <a
-        routerLink="/contact"
-        (click)="closeToolsSidenavIfMobile()"
-        class="sidenav-nav-link"
-      >
-        <mat-icon>contact_mail</mat-icon>
-        <span>Contact Us</span>
-      </a>
+      @if (authReady$ | async) {
+        @if (isAuthenticated$ | async) {
+          <a
+            routerLink="/account"
+            routerLinkActive="active"
+            (click)="closeToolsSidenavIfMobile()"
+            class="sidenav-nav-link"
+          >
+            <mat-icon>account_circle</mat-icon>
+            <span>My Account</span>
+          </a>
+        } @else {
+          <button
+            (click)="login(); closeToolsSidenavIfMobile()"
+            class="sidenav-nav-link"
+          >
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+        }
+      }
     </div>
 
     <div class="sidenav-content">
@@ -96,6 +102,24 @@
           >
             <mat-icon>info</mat-icon>
             <span>About</span>
+          </a>
+
+          <a
+            routerLink="/blog"
+            (click)="closeToolsSidenavIfMobile()"
+            class="allthethings-link"
+          >
+            <mat-icon>article</mat-icon>
+            <span>Blog</span>
+          </a>
+
+          <a
+            routerLink="/contact"
+            (click)="closeToolsSidenavIfMobile()"
+            class="allthethings-link"
+          >
+            <mat-icon>contact_mail</mat-icon>
+            <span>Contact Us</span>
           </a>
         </div>
       </mat-expansion-panel>

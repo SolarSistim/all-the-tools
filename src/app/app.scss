@@ -102,7 +102,16 @@ mat-sidenav-content {
       font-size: 0.95rem;
       border-radius: 6px;
       transition: all 0.2s ease;
+      background: transparent;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      appearance: none;
+      border: none;
       border-left: 3px solid transparent;
+      outline: none;
 
       mat-icon {
         font-size: 20px;
@@ -125,8 +134,7 @@ mat-sidenav-content {
 
       // Assign different colors to each nav link icon
       &:nth-child(1) mat-icon { color: #6BCBFF !important; }  // Neon Cyan - Home
-      &:nth-child(2) mat-icon { color: #F472B6 !important; }  // Neon Magenta - Blog
-      &:nth-child(3) mat-icon { color: #6EE7B7 !important; }  // Cool Green - Contact Us
+      &:nth-child(2) mat-icon { color: #C084FC !important; }  // Soft Violet - Login / My Account
     }
   }
 
@@ -407,6 +415,8 @@ mat-sidenav-content {
     &:nth-child(2) mat-icon { color: #FB923C !important; }      // 3D Artist Spotlight - Burnt Orange
     &:nth-child(3) mat-icon { color: #A3E635 !important; }      // Resources - Soft Lime
     &:nth-child(4) mat-icon { color: #F87171 !important; }      // About - Cool Red
+    &:nth-child(5) mat-icon { color: #F472B6 !important; }      // Blog - Neon Magenta
+    &:nth-child(6) mat-icon { color: #6EE7B7 !important; }      // Contact Us - Cool Green
 
     span {
       font-weight: 600;

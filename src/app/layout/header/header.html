@@ -129,6 +129,21 @@
         >
           <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
         </button>
+
+        <!-- Account Button (Mobile) -->
+        @if (authReady$ | async) {
+          @if (isAuthenticated$ | async) {
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="accountMenu"
+              class="account-btn"
+              aria-label="Account menu"
+              [matTooltip]="getUserDisplayName()"
+            >
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          }
+        }
       </div>
     </div>
   </mat-toolbar>
