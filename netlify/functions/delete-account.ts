@@ -16,12 +16,9 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     // Require authentication
     const user = requireAuth(context);
 
-    // The JWT clientContext user has the user UUID in `sub` (standard JWT claim).
-    const userId = user.sub || user.id;
-
-    // Forward the caller's own JWT to the GoTrue admin API.
-    // NETLIFY_ADMIN_TOKEN is an opaque PAT and is not a JWT — GoTrue rejects it.
-    // A user with the 'admin' role in their JWT can call GoTrue admin endpoints.
+    // Use GoTrue's self-delete endpoint: DELETE /.netlify/identity/user
+    // This allows any authenticated user to delete their own account using
+    // their own JWT — no admin privileges or special tokens required.
     const authHeader = event.headers['authorization'] || event.headers['Authorization'] || '';
     const siteUrl = (process.env.URL || '').replace(/\/$/, '');
 
@@ -29,7 +26,7 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       throw new Error('Server configuration error: Missing site URL');
     }
 
-    const deleteUrl = `${siteUrl}/.netlify/identity/admin/users/${userId}`;
+    const deleteUrl = `${siteUrl}/.netlify/identity/user`;
 
     const response = await fetch(deleteUrl, {
       method: 'DELETE',
