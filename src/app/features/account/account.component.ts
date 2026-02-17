@@ -155,6 +155,10 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
       }
     }
 
+    :host-context(body:not(.light-theme)) ::ng-deep .mdc-tab-indicator__content--underline {
+      border-color: #6dd4ff !important;
+    }
+
     @media (max-width: 768px) {
       .account-container {
         margin: 1rem auto;
