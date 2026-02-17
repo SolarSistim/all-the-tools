@@ -270,7 +270,7 @@ export class ConfirmDeleteDialogComponent {
               <div class="field-value">
                 <mat-chip-set>
                   @for (role of getUserRoles(); track role) {
-                    <mat-chip [highlighted]="role === 'admin'">
+                    <mat-chip [class.admin-chip]="role === 'admin'">
                       {{ role }}
                     </mat-chip>
                   }
@@ -388,12 +388,20 @@ export class ConfirmDeleteDialogComponent {
       }
     }
 
+    ::ng-deep .admin-chip {
+      border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    }
+
     .ad-free-badge {
       .status-icon {
         color: #4caf50 !important;
         position: relative;
         top: 5px;
         margin-right: 0.25rem;
+      }
+
+      ::ng-deep .mdc-evolution-chip__action {
+        padding-left: 0 !important;
       }
     }
 
