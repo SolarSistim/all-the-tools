@@ -57,7 +57,7 @@ import { NewsItem } from '../../models/news-item.interface';
                   @if (!item.imageUrl) {
                     <mat-icon class="header-icon">{{ getTypeIcon(item.type) }}</mat-icon>
                   }
-                  <span class="type-badge type-badge-{{ item.type }}">{{ item.type }}</span>
+                  <span class="type-badge type-badge-{{ item.type }}">{{ item.typeLabel || item.type }}</span>
                 </div>
               </div>
 

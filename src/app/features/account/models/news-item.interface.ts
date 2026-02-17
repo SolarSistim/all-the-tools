@@ -15,6 +15,7 @@ export interface NewsItem {
   imageUrl?: string; // Optional header image URL
   link?: string; // Optional CTA link
   linkLabel?: string; // Optional label for the link button (defaults to "Read more")
+  typeLabel?: string; // Optional display label for the badge (overrides type)
 }
 
 /**
