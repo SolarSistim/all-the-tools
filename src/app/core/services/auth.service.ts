@@ -72,10 +72,14 @@ export class AuthService {
     const base = `${environment.netlifyIdentitySiteUrl}/.netlify/identity`;
 
     // 1. Exchange recovery token for an access token
-    const recoverRes = await fetch(`${base}/recover`, {
+    const params = new URLSearchParams();
+    params.append('grant_type', 'recovery');
+    params.append('token', recoveryToken);
+
+    const recoverRes = await fetch(`${base}/token`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ recovery_token: recoveryToken })
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
     });
 
     if (!recoverRes.ok) {
