@@ -8,6 +8,9 @@
 
 # Node
 /node_modules
+netlify/functions/node_modules
+.netlify/plugins
+.netlify/functions-serve/
 npm-debug.log
 yarn-error.log
 
