@@ -153,9 +153,11 @@ import { NewsItem } from '../../models/news-item.interface';
 
     /* ── Masonry layout ── */
     .news-masonry {
-      column-width: 260px; /* min column width — browser creates as many as fit */
-      column-count: 4;     /* hard cap at 4 columns */
+      column-count: 3;
       column-gap: 1.25rem;
+
+      @media (max-width: 768px) { column-count: 2; }
+      @media (max-width: 480px) { column-count: 1; }
     }
 
     .news-card {
