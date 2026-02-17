@@ -1,5 +1,7 @@
 import { Component, Input, AfterViewInit, inject, PLATFORM_ID, isDevMode } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { AdsenseService } from '../../../../core/services/adsense.service';
 
@@ -12,7 +14,7 @@ import { AdsenseService } from '../../../../core/services/adsense.service';
 @Component({
   selector: 'app-adsense',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, MatIconModule],
   templateUrl: './adsense.component.html',
   styleUrls: ['./adsense.component.scss'],
 })

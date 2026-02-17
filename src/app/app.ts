@@ -19,6 +19,7 @@ import { MetaService } from './core/services/meta.service';
 import { AdsenseService } from './core/services/adsense.service';
 import { ToolCategoryMeta, Tool } from './core/models/tool.interface';
 import { LoginDialogComponent } from './features/auth/login-dialog/login-dialog.component';
+import { CustomSnackbarService } from './core/services/custom-snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -60,9 +61,11 @@ export class App implements AfterViewInit, OnInit {
   private adsenseService = inject(AdsenseService);
   private platformId = inject(PLATFORM_ID);
   private breakpointObserver = inject(BreakpointObserver);
+  private snackbar = inject(CustomSnackbarService);
 
   ngOnInit(): void {
     this.adsenseService.init();
+    this.showPendingAuthToast();
 
     // Initialize Google Analytics (only in production, not localhost)
     this.googleAnalytics.initialize();
@@ -109,6 +112,28 @@ export class App implements AfterViewInit, OnInit {
 
     // Defer Ahrefs analytics loading for better initial page performance
     this.loadAhrefsAnalytics();
+  }
+
+  /**
+   * Show any queued auth notification that was set before a page reload/redirect.
+   */
+  private showPendingAuthToast(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    try {
+      const toast = sessionStorage.getItem('auth_toast');
+      if (!toast) return;
+      sessionStorage.removeItem('auth_toast');
+
+      setTimeout(() => {
+        if (toast === 'login') {
+          this.snackbar.success('You\'re signed in. Welcome!');
+        } else if (toast === 'logout') {
+          this.snackbar.info('You\'ve been signed out.');
+        } else if (toast === 'error') {
+          this.snackbar.error('Authentication failed. Please try again.');
+        }
+      }, 400);
+    } catch {}
   }
 
   /**

@@ -197,7 +197,7 @@ import { NewsItem } from '../../models/news-item.interface';
 
     .type-badge {
       margin-left: auto;
-      font-size: 0.68rem;
+      font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -219,7 +219,7 @@ import { NewsItem } from '../../models/news-item.interface';
       padding: 1rem 1.25rem 1.25rem;
 
       .card-date {
-        font-size: 0.78rem;
+        font-size: 0.975rem;
         color: var(--text-secondary);
         opacity: 0.65;
         margin-bottom: 0.4rem;
@@ -227,7 +227,7 @@ import { NewsItem } from '../../models/news-item.interface';
 
       .card-title {
         margin: 0 0 0.5rem;
-        font-size: 1rem;
+        font-size: 1.25rem;
         font-weight: 600;
         line-height: 1.4;
         color: var(--text-primary);
@@ -236,7 +236,7 @@ import { NewsItem } from '../../models/news-item.interface';
       .card-message {
         flex: 1;
         margin: 0;
-        font-size: 0.875rem;
+        font-size: 1.09rem;
         line-height: 1.65;
         color: var(--text-secondary);
       }

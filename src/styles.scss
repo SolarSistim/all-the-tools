@@ -290,6 +290,44 @@ app-root {
   }
 }
 
+// Light form fields on dark theme only
+body:not(.light-theme) {
+  .mat-mdc-text-field-wrapper,
+  .mat-mdc-form-field-flex {
+    background: rgba(255, 255, 255, 0.92) !important;
+  }
+
+  .mat-mdc-form-field {
+    // Search/prefix icon
+    .mat-mdc-form-field-icon-prefix mat-icon,
+    .mat-mdc-form-field-icon-suffix mat-icon {
+      color: #1e1e1e !important;
+    }
+
+    // Floating label
+    .mdc-floating-label,
+    .mat-mdc-floating-label {
+      color: #2a2a2a !important;
+    }
+
+    // Bottom border — inactive state
+    .mdc-line-ripple::before {
+      border-bottom-color: rgba(0, 0, 0, 0.4) !important;
+    }
+
+    // Bottom border — focused/active state
+    .mdc-line-ripple::after {
+      border-bottom-color: #1e1e1e !important;
+    }
+
+    // Input text
+    .mat-mdc-input-element {
+      color: #1e1e1e !important;
+      caret-color: #1e1e1e !important;
+    }
+  }
+}
+
 // Force all form fields to use fill appearance
 .mat-mdc-form-field-appearance-outline {
   .mat-mdc-text-field-wrapper {

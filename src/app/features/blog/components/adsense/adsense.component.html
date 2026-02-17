@@ -1,5 +1,5 @@
-<!-- Only render ads if user is NOT authenticated (ad-free for logged-in users) -->
 @if (shouldShowAds$ | async) {
+  <!-- Ads shown to non-authenticated users -->
   <div class="adsense-container">
     @if (isDevelopment) {
       <!-- Development mode placeholder -->
@@ -21,5 +21,14 @@
         data-loading="eager">
       </ins>
     }
+    <div class="ditch-ads-bar">
+      <a routerLink="/why-sign-up" class="ditch-ads-link">Ditch the ads</a>
+    </div>
+  </div>
+} @else {
+  <!-- Authenticated users get an ad-free experience -->
+  <div class="no-ads-message">
+    <mat-icon>thumb_up</mat-icon>
+    <span>No ads for you!</span>
   </div>
 }

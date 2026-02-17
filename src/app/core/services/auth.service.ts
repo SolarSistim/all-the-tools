@@ -180,6 +180,8 @@ export class AuthService {
       this.saveUserSession(enrichedUser);
 
       this.netlifyIdentity.close();
+      // Queue a welcome toast to be shown after the page navigates
+      try { sessionStorage.setItem('auth_toast', 'login'); } catch {}
       // Navigate to account after OAuth login, replacing the callback URL in history
       window.location.replace('/account/news');
     });
@@ -187,10 +189,13 @@ export class AuthService {
     this.netlifyIdentity.on('logout', () => {
       this.userSubject.next(null);
       this.clearUserSession();
+      // Queue a goodbye toast to be shown after the page reloads
+      try { sessionStorage.setItem('auth_toast', 'logout'); } catch {}
     });
 
     this.netlifyIdentity.on('error', () => {
       this.netlifyIdentity.close();
+      try { sessionStorage.setItem('auth_toast', 'error'); } catch {}
     });
   }
 

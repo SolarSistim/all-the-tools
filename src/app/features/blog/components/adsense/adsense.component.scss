@@ -64,6 +64,45 @@
   max-height: none;
 }
 
+.ditch-ads-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem 0.5rem 0;
+
+  .ditch-ads-link {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+      color: var(--neon-cyan);
+    }
+  }
+}
+
+.no-ads-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+
+  mat-icon {
+    color: var(--neon-cyan);
+    opacity: 1;
+  }
+
+  span {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
+
 .adsense-container ins.adsbygoogle {
   display: block;
   width: 100%;

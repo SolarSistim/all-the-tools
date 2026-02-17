@@ -264,6 +264,11 @@ export const routes: Routes = [
     loadChildren: () => import('./features/in-the-verse-artist-list/artists.routes').then(m => m.ARTISTS_ROUTES),
   },
   {
+    path: 'why-sign-up',
+    loadComponent: () => import('./features/why-sign-up/why-sign-up.component').then(m => m.WhySignUpComponent),
+    title: 'Why Sign Up? | AllTheThings.dev'
+  },
+  {
     path: '404',
     loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
     title: '404 - Page Not Found | AllTheTools.dev'
