@@ -37,7 +37,7 @@ export class AdsenseService {
       return;
     }
 
-    if (this.document.querySelector('script[data-adsense="true"]')) {
+    if (this.document.querySelector('script[data-ads-loaded="true"]')) {
       this.loaded = true;
       return;
     }
@@ -46,7 +46,7 @@ export class AdsenseService {
     script.async = true;
     script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7077792325295668';
     script.setAttribute('crossorigin', 'anonymous');
-    script.setAttribute('data-adsense', 'true');
+    script.setAttribute('data-ads-loaded', 'true');
     this.document.head.appendChild(script);
     this.loaded = true;
   }
