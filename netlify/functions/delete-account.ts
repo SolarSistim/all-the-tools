@@ -28,8 +28,12 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     // `id` is not populated from the JWT — use sub, fall back to id.
     const userId = user.sub || user.id;
 
+    // Debug: log the values being used so we can diagnose 404s
+    console.log('DEBUG delete-account — siteId:', siteId, '| userId:', userId, '| user keys:', Object.keys(user));
+
     // Delete user via Netlify Identity Admin API
     const deleteUrl = `https://api.netlify.com/api/v1/sites/${siteId}/identity/users/${userId}`;
+    console.log('DEBUG delete-account — DELETE', deleteUrl);
 
     const response = await fetch(deleteUrl, {
       method: 'DELETE',
