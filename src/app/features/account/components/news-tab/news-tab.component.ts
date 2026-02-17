@@ -1,11 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
-import { AccountService } from '../../services/account.service';
 import { NewsItem } from '../../models/news-item.interface';
 
 /**
@@ -43,7 +42,7 @@ import { NewsItem } from '../../models/news-item.interface';
         <div class="error-state">
           <mat-icon>error_outline</mat-icon>
           <p>Failed to load news items</p>
-          <button mat-raised-button (click)="loadNews()">
+          <button mat-raised-button color="primary" class="cta-button" (click)="loadNews()">
             <mat-icon>refresh</mat-icon>
             Retry
           </button>
@@ -148,8 +147,23 @@ import { NewsItem } from '../../models/news-item.interface';
         font-size: 0.9rem;
       }
 
-      button {
+      .cta-button {
         margin-top: 1rem;
+        padding: 12px 32px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        mat-icon {
+          margin-right: 8px;
+        }
       }
     }
 
@@ -256,8 +270,6 @@ import { NewsItem } from '../../models/news-item.interface';
   `]
 })
 export class NewsTabComponent implements OnInit {
-  private accountService = inject(AccountService);
-
   newsItems = signal<NewsItem[]>([]);
   loading = signal(true);
   error = signal(false);
@@ -271,35 +283,67 @@ export class NewsTabComponent implements OnInit {
     this.loading.set(true);
     this.error.set(false);
 
-    this.accountService.getNews().subscribe({
-      next: (response) => {
-        this.newsItems.set(response.news);
-        this.unreadCount.set(response.unreadCount);
-        this.loading.set(false);
+    const mockNews: NewsItem[] = [
+      {
+        id: '1',
+        title: 'Welcome to All The Tools!',
+        message: 'Thanks for signing up. Your account is ready — explore our growing library of tools for text, images, calculations, and more.',
+        type: 'success',
+        priority: 10,
+        createdAt: '2026-02-17T09:00:00.000Z',
+        isRead: false
       },
-      error: (err) => {
-        console.error('Failed to load news:', err);
-        this.error.set(true);
-        this.loading.set(false);
+      {
+        id: '2',
+        title: 'New Tool: On-Reward Scanner',
+        message: 'We\'ve just launched the On-Reward Scanner under OCR Tools. Upload a receipt image and extract reward points automatically.',
+        type: 'info',
+        priority: 9,
+        createdAt: '2026-02-14T14:30:00.000Z',
+        isRead: false
+      },
+      {
+        id: '3',
+        title: 'Scheduled Maintenance — Feb 20',
+        message: 'We\'ll be performing server maintenance on February 20th from 2:00–4:00 AM UTC. Some tools may be temporarily unavailable during this window.',
+        type: 'warning',
+        priority: 8,
+        createdAt: '2026-02-10T08:00:00.000Z',
+        isRead: true
+      },
+      {
+        id: '4',
+        title: 'Profile & Account Page Launched',
+        message: 'You can now manage your account preferences, view news & updates, and log out from a single place. Visit /account anytime.',
+        type: 'info',
+        priority: 7,
+        createdAt: '2026-01-28T11:00:00.000Z',
+        isRead: true
+      },
+      {
+        id: '5',
+        title: 'Bug Fix: ASCII Character Reference',
+        message: 'Fixed an issue where copying certain control characters from the ASCII grid would paste incorrect values in some browsers. All copy functions now work correctly.',
+        type: 'success',
+        priority: 6,
+        createdAt: '2026-01-15T16:45:00.000Z',
+        isRead: true
       }
-    });
+    ];
+
+    setTimeout(() => {
+      this.newsItems.set(mockNews);
+      this.unreadCount.set(mockNews.filter(n => !n.isRead).length);
+      this.loading.set(false);
+    }, 300);
   }
 
   markAsRead(newsItemId: string) {
-    this.accountService.markNewsAsRead(newsItemId).subscribe({
-      next: () => {
-        // Update local state
-        const items = this.newsItems();
-        const updatedItems = items.map(item =>
-          item.id === newsItemId ? { ...item, isRead: true } : item
-        );
-        this.newsItems.set(updatedItems);
-        this.unreadCount.set(this.unreadCount() - 1);
-      },
-      error: (err) => {
-        console.error('Failed to mark as read:', err);
-      }
-    });
+    const updatedItems = this.newsItems().map(item =>
+      item.id === newsItemId ? { ...item, isRead: true } : item
+    );
+    this.newsItems.set(updatedItems);
+    this.unreadCount.set(updatedItems.filter(n => !n.isRead).length);
   }
 
   formatDate(dateString: string): string {
