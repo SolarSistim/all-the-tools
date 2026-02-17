@@ -290,30 +290,15 @@
         .account-info {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          min-width: 0;
 
           .account-email {
             font-weight: 600;
             color: var(--text-primary);
             font-size: 0.9375rem;
-          }
-
-          .account-badge {
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 4px 10px;
-            border-radius: 12px;
-            width: fit-content;
-          }
-
-          .ad-free-badge {
-            background: rgba(76, 175, 80, 0.15);
-            color: #4caf50;
-            border: 1px solid rgba(76, 175, 80, 0.3);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       }
