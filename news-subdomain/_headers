@@ -1,0 +1,4 @@
+/*
+  Access-Control-Allow-Origin: https://www.allthethings.dev
+  Access-Control-Allow-Methods: GET
+  Content-Type: application/json

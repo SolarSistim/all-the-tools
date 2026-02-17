@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
-import { NewsItem, NewsResponse } from '../models/news-item.interface';
+import { NewsResponse } from '../models/news-item.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,12 @@ export class AccountService {
   private authService = inject(AuthService);
 
   /**
-   * Get news items for the current user
-   * Filtered by user role (admin sees admin-only news)
+   * Get news items from the remote JSON feed.
+   * Hosted on news.allthethings.dev — update the file there to publish new items
+   * without rebuilding the app.
    */
   getNews(): Observable<NewsResponse> {
-    return from(this.authService.getToken()).pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        });
-
-        return this.http.get<NewsResponse>('/.netlify/functions/get-news', { headers });
-      })
-    );
+    return this.http.get<NewsResponse>(environment.newsUrl);
   }
 
   /**

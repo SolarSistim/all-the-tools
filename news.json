@@ -1,0 +1,44 @@
+{
+  "news": [
+    {
+      "id": "1",
+      "title": "Welcome to All The Tools!",
+      "message": "Thanks for signing up. Your account is ready — explore our growing library of tools for text, images, calculations, and more.",
+      "type": "success",
+      "priority": 10,
+      "createdAt": "2026-02-17T09:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "New Tool: On-Reward Scanner",
+      "message": "We've just launched the On-Reward Scanner under OCR Tools. Upload a receipt image and extract reward points automatically.",
+      "type": "info",
+      "priority": 9,
+      "createdAt": "2026-02-14T14:30:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Scheduled Maintenance — Feb 20",
+      "message": "We'll be performing server maintenance on February 20th from 2:00–4:00 AM UTC. Some tools may be temporarily unavailable during this window.",
+      "type": "warning",
+      "priority": 8,
+      "createdAt": "2026-02-10T08:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Profile & Account Page Launched",
+      "message": "You can now manage your account preferences, view news & updates, and log out from a single place. Visit /account anytime.",
+      "type": "info",
+      "priority": 7,
+      "createdAt": "2026-01-28T11:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Bug Fix: ASCII Character Reference",
+      "message": "Fixed an issue where copying certain control characters from the ASCII grid would paste incorrect values in some browsers. All copy functions now work correctly.",
+      "type": "success",
+      "priority": 6,
+      "createdAt": "2026-01-15T16:45:00.000Z"
+    }
+  ]
+}

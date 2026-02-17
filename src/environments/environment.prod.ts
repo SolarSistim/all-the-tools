@@ -4,5 +4,6 @@ export const environment = {
   ogFetchLimitPerMin: 10,
   ogFetchUserLimitPerMin: 5,
   ogFetchUserLockoutMinutes: 10,
-  netlifyIdentitySiteUrl: 'https://www.allthethings.dev'
+  netlifyIdentitySiteUrl: 'https://www.allthethings.dev',
+  newsUrl: 'https://news.allthethings.dev/news.json'
 };
