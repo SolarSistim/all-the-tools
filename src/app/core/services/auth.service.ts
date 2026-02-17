@@ -180,9 +180,8 @@ export class AuthService {
       this.saveUserSession(enrichedUser);
 
       this.netlifyIdentity.close();
-      if (window.location.hash) {
-        history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
+      // Navigate to account after OAuth login, replacing the callback URL in history
+      window.location.replace('/account/news');
     });
 
     this.netlifyIdentity.on('logout', () => {
