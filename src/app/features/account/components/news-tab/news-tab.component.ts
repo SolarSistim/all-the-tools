@@ -19,13 +19,6 @@ import { NewsItem } from '../../models/news-item.interface';
   ],
   template: `
     <div class="news-tab">
-      <div class="tab-header">
-        <h2>News & Updates</h2>
-        @if (unreadCount() > 0) {
-          <span class="unread-chip">{{ unreadCount() }} unread</span>
-        }
-      </div>
-
       @if (loading()) {
         <div class="loading-state">
           <mat-spinner diameter="40"></mat-spinner>
@@ -111,27 +104,6 @@ import { NewsItem } from '../../models/news-item.interface';
       padding: 1rem 0;
     }
 
-    .tab-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-
-      h2 {
-        margin: 0;
-        font-size: 1.5rem;
-      }
-
-      .unread-chip {
-        background: #f44336;
-        color: white;
-        padding: 2px 10px;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-    }
-
     .loading-state,
     .error-state,
     .empty-state {
@@ -181,12 +153,9 @@ import { NewsItem } from '../../models/news-item.interface';
 
     /* ── Masonry layout ── */
     .news-masonry {
-      column-count: 4;
+      column-width: 260px; /* min column width — browser creates as many as fit */
+      column-count: 4;     /* hard cap at 4 columns */
       column-gap: 1.25rem;
-
-      @media (max-width: 1400px) { column-count: 3; }
-      @media (max-width: 960px)  { column-count: 2; }
-      @media (max-width: 600px)  { column-count: 1; }
     }
 
     .news-card {
