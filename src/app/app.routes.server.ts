@@ -179,6 +179,14 @@ export const serverRoutes: ServerRoute[] = [
     }
   },
   {
+    path: 'account',
+    renderMode: RenderMode.Client
+  },
+  {
+    path: 'account/:tab',
+    renderMode: RenderMode.Client
+  },
+  {
     path: '**',
     renderMode: RenderMode.Prerender
   }
