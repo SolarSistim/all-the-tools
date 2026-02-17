@@ -66,13 +66,19 @@ import { UserListComponent } from './components/user-list/user-list.component';
       }
 
       .admin-subtitle {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-secondary);
         font-size: 1.1rem;
         margin: 0;
       }
     }
 
     .admin-card {
+      background-color: var(--bg-elevated) !important;
+
+      ::ng-deep .mat-mdc-card-surface {
+        background-color: var(--bg-elevated) !important;
+      }
+
       mat-card-content {
         padding: 1.5rem;
       }

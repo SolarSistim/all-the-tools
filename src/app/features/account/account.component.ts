@@ -76,6 +76,7 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
         gap: 0.5rem;
         font-size: 2rem;
         margin: 0 0 0.5rem 0;
+        color: var(--text-primary);
 
         mat-icon {
           font-size: 2.5rem;
@@ -85,13 +86,19 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
       }
 
       .account-subtitle {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-secondary);
         font-size: 1.1rem;
         margin: 0;
       }
     }
 
     .account-card {
+      background-color: var(--bg-elevated) !important;
+
+      ::ng-deep .mat-mdc-card-surface {
+        background-color: var(--bg-elevated) !important;
+      }
+
       mat-card-content {
         padding: 0;
       }

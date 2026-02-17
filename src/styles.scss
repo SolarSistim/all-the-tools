@@ -263,11 +263,17 @@ app-root {
 }
 
 // Material card overrides
+// MDC cards render the actual background on .mat-mdc-card-surface, not the host element
 .mat-mdc-card {
-  background: var(--bg-elevated) !important;
+  --mdc-elevated-card-container-color: var(--bg-elevated);
+  --mdc-outlined-card-container-color: var(--bg-elevated);
   color: var(--text-primary) !important;
   border-radius: 16px !important;
   border: 1px solid var(--border-color) !important;
+
+  .mat-mdc-card-surface {
+    background-color: var(--bg-elevated) !important;
+  }
 }
 
 // Material form field overrides
