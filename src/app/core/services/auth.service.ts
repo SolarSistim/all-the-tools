@@ -39,15 +39,83 @@ export class AuthService {
 
   public hasAdFree$: Observable<boolean> = this.isAuthenticated$;
 
+  // Non-null when the page loaded with a #recovery_token= hash (password reset link).
+  // AppComponent reads this to open the "Set New Password" dialog.
+  public pendingRecoveryToken: string | null = null;
+
   constructor() {
-    // Restore user session from localStorage if available (synchronous).
-    // We mark authReady immediately so the header doesn't flash the Login button.
     if (isPlatformBrowser(this.platformId)) {
       this.restoreUserSession();
+      this.extractRecoveryToken();
     }
     this.authReadySubject.next(true);
-
     this.initNetlifyIdentity();
+  }
+
+  /**
+   * Extract and remove a recovery_token from the URL hash so the widget
+   * doesn't try to handle it with its own UI.
+   */
+  private extractRecoveryToken(): void {
+    const hash = window.location.hash;
+    const match = hash.match(/recovery_token=([^&]+)/);
+    if (match) {
+      this.pendingRecoveryToken = decodeURIComponent(match[1]);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
+
+  /**
+   * Exchange a recovery token for a session and update the user's password.
+   */
+  public async setNewPassword(recoveryToken: string, newPassword: string): Promise<void> {
+    const base = `${environment.netlifyIdentitySiteUrl}/.netlify/identity`;
+
+    // 1. Exchange recovery token for an access token
+    const recoverRes = await fetch(`${base}/recover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ recovery_token: recoveryToken })
+    });
+
+    if (!recoverRes.ok) {
+      const err = await recoverRes.json();
+      throw new Error(err.error_description || err.msg || 'Invalid or expired recovery link');
+    }
+
+    const session = await recoverRes.json();
+    const accessToken = session.access_token;
+
+    // 2. Set the new password using the session token
+    const updateRes = await fetch(`${base}/user`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({ password: newPassword })
+    });
+
+    if (!updateRes.ok) {
+      const err = await updateRes.json();
+      throw new Error(err.error_description || err.msg || 'Failed to update password');
+    }
+
+    // 3. Log the user in with the new session
+    const user = {
+      email: session.email || '',
+      token: {
+        access_token: session.access_token,
+        token_type: session.token_type,
+        expires_in: session.expires_in,
+        refresh_token: session.refresh_token
+      },
+      ...session.user
+    };
+
+    const enrichedUser = this.enrichUserFromToken(user);
+    this.userSubject.next(enrichedUser as NetlifyUser);
+    this.saveUserSession(enrichedUser as NetlifyUser);
   }
 
   /**

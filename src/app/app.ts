@@ -147,8 +147,21 @@ export class App implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    // Register the sidenav with the service so it can be controlled
     this.sidenavService.registerSidenav(this.toolsSidenav);
+
+    // If the page loaded from a password-reset email link, open the Set New Password dialog
+    const recoveryToken = this.authService.pendingRecoveryToken;
+    if (recoveryToken) {
+      this.authService.pendingRecoveryToken = null;
+      setTimeout(() => {
+        this.dialog.open(LoginDialogComponent, {
+          width: '500px',
+          maxWidth: '95vw',
+          panelClass: 'login-dialog-container',
+          data: { recoveryToken }
+        });
+      }, 0);
+    }
   }
 
   /**

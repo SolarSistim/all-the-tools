@@ -9,6 +9,55 @@
   </h2>
 
   <mat-dialog-content>
+
+    <!-- Set New Password (opened from recovery email link) -->
+    @if (isRecoveryMode) {
+      <div class="tab-content">
+        @if (successMessage) {
+          <app-alert-success
+            title="Password Updated"
+            [content]="successMessage"
+            icon="check_circle">
+          </app-alert-success>
+        } @else {
+          <form [formGroup]="recoveryForm" (ngSubmit)="onSetNewPassword()" class="auth-form">
+            <p class="reset-hint">Choose a new password for your account.</p>
+
+            <mat-form-field appearance="fill">
+              <mat-label>New Password</mat-label>
+              <input matInput type="password" formControlName="password" autocomplete="new-password">
+              <mat-icon matPrefix>lock</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput type="password" formControlName="confirmPassword" autocomplete="new-password">
+              <mat-icon matPrefix>lock_outline</mat-icon>
+            </mat-form-field>
+
+            @if (errorMessage) {
+              <app-alert-danger
+                title="Error"
+                [content]="errorMessage"
+                icon="error_outline">
+              </app-alert-danger>
+            }
+
+            <button mat-raised-button class="submit-button" type="submit" [disabled]="loading || recoveryForm.invalid">
+              @if (loading) {
+                <mat-spinner diameter="24"></mat-spinner>
+              } @else {
+                <span>Set New Password</span>
+                <mat-icon>lock_reset</mat-icon>
+              }
+            </button>
+          </form>
+        }
+      </div>
+    }
+
+    <!-- Normal login / signup tabs -->
+    @if (!isRecoveryMode) {
     <mat-tab-group
       animationDuration="400ms"
       class="auth-tabs"
@@ -177,5 +226,7 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+    } <!-- end @if (!isRecoveryMode) -->
+
   </mat-dialog-content>
 </div>

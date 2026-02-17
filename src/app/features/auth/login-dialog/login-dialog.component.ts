@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,10 +35,12 @@ export class LoginDialogComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private dialogRef = inject(MatDialogRef<LoginDialogComponent>);
+  dialogData = inject<{ recoveryToken?: string } | null>(MAT_DIALOG_DATA, { optional: true });
 
   loginForm: FormGroup;
   signupForm: FormGroup;
   resetForm: FormGroup;
+  recoveryForm: FormGroup;
 
   loading = false;
   errorMessage = '';
@@ -51,7 +53,12 @@ export class LoginDialogComponent {
   resetErrorMessage = '';
   resetSuccessMessage = '';
 
+  get isRecoveryMode(): boolean {
+    return !!this.dialogData?.recoveryToken;
+  }
+
   get dialogTitle(): string {
+    if (this.isRecoveryMode) return 'Set New Password';
     if (this.showForgotPassword) return 'Reset Password';
     return this.selectedTabIndex === 0 ? 'Welcome Back' : 'Create Account';
   }
@@ -71,6 +78,11 @@ export class LoginDialogComponent {
     this.resetForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
+
+    this.recoveryForm = this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validators: this.passwordMatchValidator });
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -168,6 +180,24 @@ export class LoginDialogComponent {
       this.resetErrorMessage = error.message || 'Failed to send reset email. Please try again.';
     } finally {
       this.resetLoading = false;
+    }
+  }
+
+  async onSetNewPassword() {
+    if (this.recoveryForm.invalid || !this.dialogData?.recoveryToken) return;
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    try {
+      const { password } = this.recoveryForm.value;
+      await this.authService.setNewPassword(this.dialogData.recoveryToken, password);
+      this.successMessage = 'Password updated! You are now logged in.';
+      setTimeout(() => this.dialogRef.close(), 2000);
+    } catch (error: any) {
+      this.errorMessage = error.message || 'Failed to update password. Please try again.';
+    } finally {
+      this.loading = false;
     }
   }
 
