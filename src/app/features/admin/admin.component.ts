@@ -56,12 +56,12 @@ import { UserListComponent } from './components/user-list/user-list.component';
         gap: 0.5rem;
         font-size: 2rem;
         margin: 0 0 0.5rem 0;
+        color: var(--text-primary);
 
         mat-icon {
           font-size: 2.5rem;
           width: 2.5rem;
           height: 2.5rem;
-          color: #ff9800;
         }
       }
 
