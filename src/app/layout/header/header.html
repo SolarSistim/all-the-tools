@@ -101,7 +101,11 @@
               aria-label="Account menu"
               [matTooltip]="getUserDisplayName()"
             >
-              <mat-icon>account_circle</mat-icon>
+              @if (avatarUrl$ | async; as avatarUrl) {
+                <img [src]="avatarUrl" [alt]="getUserDisplayName()" class="user-avatar" referrerpolicy="no-referrer">
+              } @else {
+                <mat-icon>account_circle</mat-icon>
+              }
             </button>
           } @else {
             <!-- Login Button (when not authenticated) -->
@@ -140,7 +144,11 @@
               aria-label="Account menu"
               [matTooltip]="getUserDisplayName()"
             >
-              <mat-icon>account_circle</mat-icon>
+              @if (avatarUrl$ | async; as avatarUrl) {
+                <img [src]="avatarUrl" [alt]="getUserDisplayName()" class="user-avatar" referrerpolicy="no-referrer">
+              } @else {
+                <mat-icon>account_circle</mat-icon>
+              }
             </button>
           }
         }

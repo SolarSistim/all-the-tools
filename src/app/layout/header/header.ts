@@ -1,5 +1,6 @@
 import { Component, signal, inject, OnInit, OnDestroy, HostBinding, PLATFORM_ID, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { map } from 'rxjs/operators';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -74,6 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAdmin$ = this.authService.isAdmin$;
   user$ = this.authService.user$;
   authReady$ = this.authService.authReady$;
+  avatarUrl$ = this.authService.user$.pipe(map(user => user?.user_metadata?.avatar_url ?? null));
 
   // Bind scrolled class to host element
   @HostBinding('class.scrolled') get scrolledClass() {
@@ -340,4 +342,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getUserDisplayName(): string {
     return this.authService.getUserDisplayName();
   }
+
 }
