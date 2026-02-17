@@ -411,6 +411,15 @@ export class AuthService {
   }
 
   /**
+   * Returns true if the current user authenticated via an external OAuth provider (e.g. Google).
+   * These users manage their password with the provider, not on this site.
+   */
+  public isOAuthUser(): boolean {
+    const provider = this.getCurrentUser()?.app_metadata?.provider;
+    return !!provider && provider !== 'email';
+  }
+
+  /**
    * Request password reset
    */
   public async requestPasswordReset(email: string): Promise<void> {

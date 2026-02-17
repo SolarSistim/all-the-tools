@@ -127,24 +127,26 @@ export class ConfirmDeleteDialogComponent {}
           </mat-card-content>
         </mat-card>
 
-        <!-- Password Management Section -->
-        <mat-card class="profile-section">
-          <mat-card-header>
-            <mat-card-title>
-              <mat-icon>lock</mat-icon>
-              Password & Security
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p class="section-description">
-              Manage your password and security settings
-            </p>
-            <button mat-raised-button color="primary" (click)="changePassword()">
-              <mat-icon>vpn_key</mat-icon>
-              Change Password
-            </button>
-          </mat-card-content>
-        </mat-card>
+        <!-- Password Management Section (hidden for OAuth users) -->
+        @if (!isOAuthUser()) {
+          <mat-card class="profile-section">
+            <mat-card-header>
+              <mat-card-title>
+                <mat-icon>lock</mat-icon>
+                Password & Security
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p class="section-description">
+                Manage your password and security settings
+              </p>
+              <button mat-raised-button color="primary" (click)="changePassword()">
+                <mat-icon>vpn_key</mat-icon>
+                Change Password
+              </button>
+            </mat-card-content>
+          </mat-card>
+        }
 
         <!-- Account Management Section -->
         <mat-card class="profile-section danger-section">
@@ -269,6 +271,10 @@ export class ProfileTabComponent {
 
   getUserRoles(): string[] {
     return this.authService.getUserRoles();
+  }
+
+  isOAuthUser(): boolean {
+    return this.authService.isOAuthUser();
   }
 
   formatDate(dateString: string): string {
