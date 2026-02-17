@@ -2,18 +2,21 @@
 :root {
   --neon-cyan: 0, 255, 242;
   --neon-pink: 255, 0, 127;
-  --bg-card: rgba(18, 18, 24, 0.95);
+  --bg-card: rgba(18, 18, 24, 0.50);
   --glass-border: rgba(255, 255, 255, 0.08);
   --input-bg: rgba(0, 0, 0, 0.25);
 }
 
 ::ng-deep mat-dialog-container {
   padding: 16px !important;
+  background-color: transparent !important;
 }
 
 .login-dialog {
   position: relative;
   overflow: hidden;
+  background-color: transparent !important;
+  // background: radial-gradient(circle, rgba(var(--neon-cyan), 0.15) 0%, transparent 80%);
 
   // Background Accent Glow
   .accent-glow {
@@ -22,7 +25,6 @@
     right: -100px;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(var(--neon-cyan), 0.15) 0%, transparent 70%);
     z-index: 0;
     pointer-events: none;
   }

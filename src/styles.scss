@@ -500,6 +500,12 @@ body.light-theme {
 // regardless of which component triggered the dialog.
 // ============================================
 
+// Dark mode defaults (overridden by body.light-theme below)
+:root {
+  --bg-card: rgba(14, 16, 26, 0.50);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
 body.light-theme {
   --bg-card: rgba(255, 255, 255, 0.72);
   --glass-border: rgba(0, 0, 0, 0.1);
@@ -512,13 +518,15 @@ body.light-theme {
 }
 
 .login-dialog-container .mat-mdc-dialog-container {
-  // Reduced alpha so backdrop-filter shows blurred content through the panel
-  background: var(--bg-card, rgba(14, 16, 26, 0.72)) !important;
+  background: var(--bg-card) !important;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
+  border: 1px solid var(--glass-border) !important;
   border-radius: 28px !important;
   padding: 2.5rem !important;
+  // Tell Angular Material's MDC surface to be transparent so the
+  // container's frosted-glass background and backdrop-filter show through
+  --mdc-dialog-container-color: transparent;
 
   .mat-mdc-dialog-surface {
     background: transparent !important;
