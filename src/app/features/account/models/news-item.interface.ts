@@ -12,6 +12,9 @@ export interface NewsItem {
   createdAt: string; // ISO date string
   expiresAt?: string; // Optional expiry date
   isRead?: boolean; // Populated on client-side
+  imageUrl?: string; // Optional header image URL
+  link?: string; // Optional CTA link
+  linkLabel?: string; // Optional label for the link button (defaults to "Read more")
 }
 
 /**

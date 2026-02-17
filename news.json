@@ -3,23 +3,28 @@
     {
       "id": "1",
       "title": "Welcome to All The Tools!",
-      "message": "Thanks for signing up. Your account is ready — explore our growing library of tools for text, images, calculations, and more.",
+      "message": "Thanks for signing up. Your account is ready — explore our growing library of tools for text, images, calculations, dates, and more. Everything is free to use and we're adding new tools regularly.",
       "type": "success",
       "priority": 10,
-      "createdAt": "2026-02-17T09:00:00.000Z"
+      "createdAt": "2026-02-17T09:00:00.000Z",
+      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+      "link": "/tools",
+      "linkLabel": "Browse Tools"
     },
     {
       "id": "2",
       "title": "New Tool: On-Reward Scanner",
-      "message": "We've just launched the On-Reward Scanner under OCR Tools. Upload a receipt image and extract reward points automatically.",
+      "message": "We've just launched the On-Reward Scanner under OCR Tools. Upload a receipt image and the tool will automatically extract and tally your reward points — no manual counting needed.",
       "type": "info",
       "priority": 9,
-      "createdAt": "2026-02-14T14:30:00.000Z"
+      "createdAt": "2026-02-14T14:30:00.000Z",
+      "link": "/tools/ocr-tools/on-reward-scanner",
+      "linkLabel": "Try it now"
     },
     {
       "id": "3",
       "title": "Scheduled Maintenance — Feb 20",
-      "message": "We'll be performing server maintenance on February 20th from 2:00–4:00 AM UTC. Some tools may be temporarily unavailable during this window.",
+      "message": "We'll be performing server maintenance on February 20th from 2:00–4:00 AM UTC. Some tools may be temporarily unavailable during this window. No data will be lost.",
       "type": "warning",
       "priority": 8,
       "createdAt": "2026-02-10T08:00:00.000Z"
@@ -27,18 +32,33 @@
     {
       "id": "4",
       "title": "Profile & Account Page Launched",
-      "message": "You can now manage your account preferences, view news & updates, and log out from a single place. Visit /account anytime.",
+      "message": "You can now manage your account preferences, view news and updates, and log out from a single place. We'll be adding more account features here over time.",
       "type": "info",
       "priority": 7,
-      "createdAt": "2026-01-28T11:00:00.000Z"
+      "createdAt": "2026-01-28T11:00:00.000Z",
+      "link": "/account",
+      "linkLabel": "Go to Account"
     },
     {
       "id": "5",
       "title": "Bug Fix: ASCII Character Reference",
-      "message": "Fixed an issue where copying certain control characters from the ASCII grid would paste incorrect values in some browsers. All copy functions now work correctly.",
+      "message": "Fixed an issue where copying certain control characters from the ASCII grid would paste incorrect values in some browsers. All copy functions now work correctly across Chrome, Firefox, and Safari.",
       "type": "success",
       "priority": 6,
-      "createdAt": "2026-01-15T16:45:00.000Z"
+      "createdAt": "2026-01-15T16:45:00.000Z",
+      "link": "/tools/text-tools/ascii-character-reference",
+      "linkLabel": "Open ASCII Reference"
+    },
+    {
+      "id": "6",
+      "title": "3D Artist Spotlight — New Entries",
+      "message": "We've added several new artists to the 3D Artist Spotlight section. Check out the latest featured creators and their work from across the community.",
+      "type": "info",
+      "priority": 5,
+      "createdAt": "2026-01-08T10:00:00.000Z",
+      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+      "link": "/3d-artist-spotlight",
+      "linkLabel": "View Artists"
     }
   ]
 }

@@ -2,16 +2,11 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AccountService } from '../../services/account.service';
 import { NewsItem } from '../../models/news-item.interface';
 
-/**
- * News Tab Component
- * Displays news and announcements for logged-in users
- */
 @Component({
   selector: 'app-news-tab',
   standalone: true,
@@ -19,18 +14,15 @@ import { NewsItem } from '../../models/news-item.interface';
     CommonModule,
     MatIconModule,
     MatButtonModule,
-    MatChipsModule,
     MatProgressSpinnerModule,
-    MatBadgeModule
+    MatTooltipModule
   ],
   template: `
     <div class="news-tab">
       <div class="tab-header">
         <h2>News & Updates</h2>
         @if (unreadCount() > 0) {
-          <mat-chip class="unread-chip">
-            {{ unreadCount() }} unread
-          </mat-chip>
+          <span class="unread-chip">{{ unreadCount() }} unread</span>
         }
       </div>
 
@@ -55,44 +47,59 @@ import { NewsItem } from '../../models/news-item.interface';
           <p class="empty-subtitle">Check back later for announcements and updates</p>
         </div>
       } @else {
-        <div class="news-list">
+        <div class="news-masonry">
           @for (item of newsItems(); track item.id) {
-            <div class="news-item" [class.unread]="!item.isRead" [class]="'news-type-' + item.type">
-              <div class="news-icon">
-                @switch (item.type) {
-                  @case ('info') {
-                    <mat-icon>info</mat-icon>
-                  }
-                  @case ('warning') {
-                    <mat-icon>warning</mat-icon>
-                  }
-                  @case ('success') {
-                    <mat-icon>check_circle</mat-icon>
-                  }
-                  @case ('error') {
-                    <mat-icon>error</mat-icon>
-                  }
+            <div class="news-card" [class.unread]="!item.isRead">
+
+              <!-- Card Header: image or gradient -->
+              <div
+                class="card-header"
+                [class.has-image]="item.imageUrl"
+                [style.background-image]="item.imageUrl ? 'url(' + item.imageUrl + ')' : null"
+              >
+                @if (item.imageUrl) {
+                  <div class="image-overlay"></div>
                 }
+                <div class="header-content">
+                  @if (!item.imageUrl) {
+                    <mat-icon class="header-icon">{{ getTypeIcon(item.type) }}</mat-icon>
+                  }
+                  <span class="type-badge type-badge-{{ item.type }}">{{ item.type }}</span>
+                </div>
               </div>
 
-              <div class="news-content">
-                <h3>{{ item.title }}</h3>
-                <p class="news-message">{{ item.message }}</p>
-                <div class="news-meta">
-                  <span class="news-date">{{ formatDate(item.createdAt) }}</span>
+              <!-- Card Body -->
+              <div class="card-body">
+                <div class="card-meta">
+                  <span class="card-date">{{ formatDate(item.createdAt) }}</span>
                   @if (!item.isRead) {
                     <button
-                      mat-button
-                      color="primary"
-                      (click)="markAsRead(item.id)"
+                      mat-icon-button
                       class="mark-read-btn"
+                      matTooltip="Mark as read"
+                      (click)="markAsRead(item.id)"
                     >
                       <mat-icon>done</mat-icon>
-                      Mark as read
                     </button>
                   }
                 </div>
+                <h3 class="card-title">{{ item.title }}</h3>
+                <p class="card-message">{{ item.message }}</p>
+                @if (item.link) {
+                  <a
+                    [href]="item.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    mat-button
+                    color="primary"
+                    class="card-link-btn"
+                  >
+                    {{ item.linkLabel || 'Read more' }}
+                    <mat-icon>open_in_new</mat-icon>
+                  </a>
+                }
               </div>
+
             </div>
           }
         </div>
@@ -116,8 +123,12 @@ import { NewsItem } from '../../models/news-item.interface';
       }
 
       .unread-chip {
-        background-color: #f44336;
+        background: #f44336;
         color: white;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
       }
     }
 
@@ -168,104 +179,154 @@ import { NewsItem } from '../../models/news-item.interface';
       }
     }
 
-    .news-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    /* ── Masonry layout ── */
+    .news-masonry {
+      column-count: 4;
+      column-gap: 1.25rem;
+
+      @media (max-width: 1400px) { column-count: 3; }
+      @media (max-width: 960px)  { column-count: 2; }
+      @media (max-width: 600px)  { column-count: 1; }
     }
 
-    .news-item {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      border-left: 4px solid #2196f3;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      transition: all 0.2s ease;
-
-      &.unread {
-        background-color: rgba(33, 150, 243, 0.1);
-        border-left-width: 6px;
-      }
-
-      &.news-type-info {
-        border-left-color: #2196f3;
-      }
-
-      &.news-type-warning {
-        border-left-color: #ff9800;
-      }
-
-      &.news-type-success {
-        border-left-color: #4caf50;
-      }
-
-      &.news-type-error {
-        border-left-color: #f44336;
-      }
+    .news-card {
+      break-inside: avoid;
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 1.25rem;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      vertical-align: top;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.08);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px var(--shadow-color);
+        border-color: var(--neon-cyan);
+      }
+
+      &.unread {
+        border-color: rgba(109, 212, 255, 0.4);
       }
     }
 
-    .news-icon {
-      flex-shrink: 0;
+    /* ── Card Header ── */
+    .card-header {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+      background: linear-gradient(210deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
 
-      mat-icon {
-        font-size: 2rem;
-        width: 2rem;
-        height: 2rem;
-      }
-    }
-
-    .news-content {
-      flex: 1;
-
-      h3 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.1rem;
-        font-weight: 500;
+      &.has-image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
 
-      .news-message {
-        margin: 0 0 0.75rem 0;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.8);
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);
       }
 
-      .news-meta {
+      .header-content {
+        position: relative;
+        z-index: 1;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
-        font-size: 0.875rem;
+        width: 100%;
 
-        .news-date {
-          color: rgba(255, 255, 255, 0.6);
-        }
-
-        .mark-read-btn {
-          padding: 0 0.5rem;
-          min-width: auto;
+        .header-icon {
+          font-size: 2rem;
+          width: 2rem;
+          height: 2rem;
+          color: rgba(255, 255, 255, 0.9);
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
       }
     }
 
-    @media (max-width: 768px) {
-      .news-item {
-        flex-direction: column;
+    .type-badge {
+      margin-left: auto;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: white;
 
-        .news-icon mat-icon {
-          font-size: 1.5rem;
-          width: 1.5rem;
-          height: 1.5rem;
+      &.type-badge-success { background: rgba(76, 175, 80, 0.85); }
+      &.type-badge-info    { background: rgba(33, 150, 243, 0.85); }
+      &.type-badge-warning { background: rgba(255, 152, 0, 0.85); }
+      &.type-badge-error   { background: rgba(244, 67, 54, 0.85); }
+    }
+
+    /* ── Card Body ── */
+    .card-body {
+      padding: 1rem 1.25rem 1.25rem;
+
+      .card-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.4rem;
+
+        .card-date {
+          font-size: 0.78rem;
+          color: var(--text-secondary);
+          opacity: 0.65;
+        }
+
+        .mark-read-btn {
+          width: 28px;
+          height: 28px;
+          line-height: 28px;
+
+          ::ng-deep mat-icon {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            color: var(--neon-cyan);
+          }
         }
       }
 
-      .news-content .news-meta {
-        flex-direction: column;
-        align-items: flex-start;
+      .card-title {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--text-primary);
+      }
+
+      .card-message {
+        margin: 0 0 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: var(--text-secondary);
+      }
+
+      .card-link-btn {
+        padding: 0;
+        min-width: auto;
+        font-size: 0.875rem;
+
+        ::ng-deep mat-icon {
+          font-size: 15px;
+          width: 15px;
+          height: 15px;
+          margin-left: 3px;
+          vertical-align: middle;
+        }
       }
     }
   `]
@@ -308,20 +369,25 @@ export class NewsTabComponent implements OnInit {
     this.unreadCount.set(updatedItems.filter(n => !n.isRead).length);
   }
 
+  getTypeIcon(type: string): string {
+    const icons: Record<string, string> = {
+      success: 'check_circle',
+      info: 'info',
+      warning: 'warning',
+      error: 'error'
+    };
+    return icons[type] ?? 'notifications';
+  }
+
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     const now = new Date();
     const diffMs = now.getTime() - date.getTime();
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-    if (diffDays === 0) {
-      return 'Today';
-    } else if (diffDays === 1) {
-      return 'Yesterday';
-    } else if (diffDays < 7) {
-      return `${diffDays} days ago`;
-    } else {
-      return date.toLocaleDateString();
-    }
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7)  return `${diffDays} days ago`;
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 }
