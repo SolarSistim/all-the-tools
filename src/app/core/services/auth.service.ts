@@ -283,24 +283,27 @@ export class AuthService {
   }
 
   /**
-   * Get JWT token for API calls
+   * Get a fresh JWT token for API calls.
+   * Uses the widget's .jwt() method which auto-refreshes when expired,
+   * rather than reading the cached access_token which may be stale.
    */
   public async getToken(): Promise<string | null> {
-    if (!this.netlifyIdentity || !isPlatformBrowser(this.platformId)) {
-      return null;
+    if (!isPlatformBrowser(this.platformId)) return null;
+
+    // Prefer the widget's .jwt() which silently refreshes an expired token
+    if (this.netlifyIdentity) {
+      const widgetUser = this.netlifyIdentity.currentUser();
+      if (widgetUser?.jwt) {
+        try {
+          return await widgetUser.jwt();
+        } catch {
+          // jwt() can throw if refresh fails — fall through to stored token
+        }
+      }
     }
 
-    const user = this.netlifyIdentity.currentUser();
-    if (!user) {
-      return null;
-    }
-
-    try {
-      const token = user.token?.access_token || user.token;
-      return token;
-    } catch {
-      return null;
-    }
+    // Fall back to the stored access token (valid for fresh sessions)
+    return this.userSubject.value?.token?.access_token ?? null;
   }
 
   /**
