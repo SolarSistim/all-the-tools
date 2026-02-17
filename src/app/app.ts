@@ -207,7 +207,8 @@ export class App implements AfterViewInit, OnInit {
     this.dialog.open(LoginDialogComponent, {
       width: '500px',
       maxWidth: '95vw',
-      panelClass: 'login-dialog-container'
+      panelClass: 'login-dialog-container',
+      backdropClass: 'glass-dialog-backdrop'
     });
   }
 }

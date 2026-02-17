@@ -501,13 +501,21 @@ body.light-theme {
 // ============================================
 
 body.light-theme {
-  --bg-card: rgba(255, 255, 255, 0.95);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+// Frosted-glass backdrop: blurs the page content sitting behind the dialog
+.glass-dialog-backdrop {
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(6px);
 }
 
 .login-dialog-container .mat-mdc-dialog-container {
-  background: var(--bg-card, rgba(18, 18, 24, 0.95)) !important;
-  backdrop-filter: blur(25px) saturate(160%);
+  // Reduced alpha so backdrop-filter shows blurred content through the panel
+  background: var(--bg-card, rgba(14, 16, 26, 0.72)) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08)) !important;
   border-radius: 28px !important;
   padding: 2.5rem !important;

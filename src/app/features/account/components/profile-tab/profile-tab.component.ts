@@ -487,7 +487,8 @@ export class ProfileTabComponent {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       width: '440px',
       maxWidth: '95vw',
-      panelClass: 'login-dialog-container'
+      panelClass: 'login-dialog-container',
+      backdropClass: 'glass-dialog-backdrop'
     });
 
     dialogRef.afterClosed().subscribe(confirmed => {
