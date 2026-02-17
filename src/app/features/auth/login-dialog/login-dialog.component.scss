@@ -211,11 +211,26 @@
         height: 56px;
         margin-top: 1rem;
         border-radius: 16px !important;
-        background: linear-gradient(135deg, rgb(var(--neon-cyan)), #0072ff) !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid var(--glass-border) !important;
         color: #fff !important;
         font-weight: 700;
         font-size: 1rem;
-        box-shadow: 0 10px 20px -10px rgba(var(--neon-cyan), 0.5);
+        transition: all 0.2s ease;
+
+        &:hover:not([disabled]) {
+          background: rgba(255, 255, 255, 0.07) !important;
+          border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        &[disabled] {
+          background: rgba(255, 255, 255, 0.03) !important;
+          border: 1px solid var(--glass-border) !important;
+          color: var(--text-tertiary) !important;
+          box-shadow: none !important;
+          opacity: 1;
+          cursor: not-allowed;
+        }
 
         span { margin-right: 8px; }
         mat-icon { transform: translateY(7px); }
@@ -245,6 +260,22 @@
   ::ng-deep .login-dialog-container .mat-mdc-dialog-container {
     background: rgba(255, 255, 255, 0.95) !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .submit-button {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: var(--text-primary) !important;
+
+    &:hover:not([disabled]) {
+      background: rgba(0, 0, 0, 0.08) !important;
+      border-color: rgba(0, 0, 0, 0.25) !important;
+    }
+
+    &[disabled] {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--text-tertiary) !important;
+    }
   }
 
 }
