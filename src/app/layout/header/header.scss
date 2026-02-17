@@ -245,12 +245,27 @@
     transition: all 0.3s ease;
   }
 
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 1.5px solid var(--border-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
   &:hover {
     background: var(--bg-elevated) !important;
 
     mat-icon {
       color: var(--neon-cyan);
       filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+
+    .user-avatar {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 8px var(--neon-cyan-glow);
     }
   }
 }

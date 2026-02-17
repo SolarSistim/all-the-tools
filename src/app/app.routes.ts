@@ -51,7 +51,7 @@ export const routes: Routes = [
   },
   {
     path: 'account',
-    redirectTo: 'account/news',
+    redirectTo: '/account/news',
     pathMatch: 'full'
   },
   {

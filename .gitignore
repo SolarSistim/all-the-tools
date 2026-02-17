@@ -7,10 +7,7 @@
 /bazel-out
 
 # Node
-/node_modules
-netlify/functions/node_modules
-.netlify/plugins
-.netlify/functions-serve/
+node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -44,6 +41,13 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Local environment variables — never commit
+.env
+.env.local
+
 # Claude Code local settings
 .claude/settings.local.json
 nul
+
+# Local Netlify folder
+.netlify
