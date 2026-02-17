@@ -92,21 +92,8 @@
 
         <!-- Auth buttons — hidden until auth state is determined to avoid flash -->
         @if (authReady$ | async) {
-          <!-- Login Button (when not authenticated) -->
-          @if (!(isAuthenticated$ | async)) {
-            <button
-              mat-button
-              (click)="login()"
-              class="login-btn"
-              aria-label="Login"
-            >
-              <mat-icon>login</mat-icon>
-              <span>Login</span>
-            </button>
-          }
-
-          <!-- Account Menu (when authenticated) -->
           @if (isAuthenticated$ | async) {
+            <!-- Account Menu (when authenticated) -->
             <button
               mat-icon-button
               [matMenuTriggerFor]="accountMenu"
@@ -115,6 +102,17 @@
               [matTooltip]="getUserDisplayName()"
             >
               <mat-icon>account_circle</mat-icon>
+            </button>
+          } @else {
+            <!-- Login Button (when not authenticated) -->
+            <button
+              mat-button
+              (click)="login()"
+              class="login-btn"
+              aria-label="Login"
+            >
+              <mat-icon>login</mat-icon>
+              <span>Login</span>
             </button>
           }
         }
