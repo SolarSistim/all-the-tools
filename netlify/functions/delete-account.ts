@@ -16,37 +16,38 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     // Require authentication
     const user = requireAuth(context);
 
-    // Get Netlify site ID and admin token from environment
-    const siteId = process.env.NETLIFY_SITE_ID;
+    // Get admin token from environment
     const adminToken = process.env.NETLIFY_ADMIN_TOKEN;
 
-    if (!siteId || !adminToken) {
-      throw new Error('Server configuration error: Missing Netlify credentials');
+    if (!adminToken) {
+      throw new Error('Server configuration error: Missing NETLIFY_ADMIN_TOKEN');
     }
 
     // The JWT clientContext user has the user UUID in `sub` (standard JWT claim).
-    // `id` is not populated from the JWT — use sub, fall back to id.
     const userId = user.sub || user.id;
 
-    // Debug: log the values being used so we can diagnose 404s
-    console.log('DEBUG delete-account — siteId:', siteId, '| userId:', userId, '| user keys:', Object.keys(user));
+    // Use the GoTrue admin API at the site's own URL.
+    // Netlify automatically provides process.env.URL as the canonical site URL.
+    // The personal access token authenticates admin operations against this endpoint.
+    const siteUrl = (process.env.URL || '').replace(/\/$/, '');
 
-    // Delete user via Netlify Identity Admin API
-    const deleteUrl = `https://api.netlify.com/api/v1/sites/${siteId}/identity/users/${userId}`;
-    console.log('DEBUG delete-account — DELETE', deleteUrl);
+    if (!siteUrl || !adminToken) {
+      throw new Error('Server configuration error: Missing credentials');
+    }
+
+    const deleteUrl = `${siteUrl}/.netlify/identity/admin/users/${userId}`;
 
     const response = await fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${adminToken}`,
-        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Failed to delete user:', response.status, errorText);
-      throw new Error(`Failed to delete account: ${response.statusText}`);
+      throw new Error(`Failed to delete account: ${response.status} ${errorText}`);
     }
 
     return successResponse({
