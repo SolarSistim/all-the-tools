@@ -237,18 +237,22 @@
 
 // Account Button
 .account-btn {
-  position: relative;
-  top: -5px;
+  color: var(--text-secondary) !important;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
 
   mat-icon {
-    font-size: 32px !important;
-    width: 32px !important;
-    height: 32px !important;
     color: var(--text-secondary);
+    transition: all 0.3s ease;
   }
 
+  &:hover {
+    background: var(--bg-elevated) !important;
+
+    mat-icon {
+      color: var(--neon-cyan);
+      filter: drop-shadow(0 0 8px var(--neon-cyan-glow));
+    }
+  }
 }
 
 // Account Menu Dropdown
@@ -1101,7 +1105,8 @@
   }
 
   // Shrink action buttons more
-  .theme-toggle {
+  .theme-toggle,
+  .account-btn {
     mat-icon {
       font-size: 18px;
       width: 18px;
