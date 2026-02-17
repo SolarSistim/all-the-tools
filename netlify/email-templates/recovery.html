@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reset your password</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0f0f14;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #e0e0e0;
+    }
+    .wrapper {
+      max-width: 560px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background-color: #1a1a24;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #6dd4ff;
+      margin-bottom: 32px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 12px;
+    }
+    p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #a0a0b0;
+      margin: 0 0 24px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #00fff2, #0072ff);
+      color: #000000 !important;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-bottom: 28px;
+    }
+    .fallback {
+      font-size: 0.8rem;
+      color: #606070;
+      word-break: break-all;
+    }
+    .fallback a {
+      color: #6dd4ff;
+    }
+    .footer {
+      margin-top: 32px;
+      font-size: 0.78rem;
+      color: #505060;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="logo">ALL THE THINGS</div>
+      <h1>Reset your password</h1>
+      <p>
+        We received a request to reset the password for your All The Things account.
+        Click the button below to choose a new password. This link expires in 24 hours.
+      </p>
+      <a href="{{ .ConfirmationURL }}" class="btn">Reset My Password</a>
+      <p class="fallback">
+        If the button doesn't work, copy and paste this link into your browser:<br>
+        <a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a>
+      </p>
+    </div>
+    <div class="footer">
+      If you didn't request a password reset, you can safely ignore this email.<br>
+      Your password won't change until you click the link above.
+    </div>
+  </div>
+</body>
+</html>
