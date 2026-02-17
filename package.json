@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "netlify:dev": "netlify dev",
+    "netlify:dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider netlify dev",
     "start:network": "ng serve --host 0.0.0.0",
     "build": "npm run calculate:readtimes && npm run generate:seo && ng build && npm run generate:sitemap && npm run generate:rss",
     "watch": "ng build --watch --configuration development",
@@ -68,6 +68,7 @@
     "@types/jasmine": "~5.1.0",
     "@types/matter-js": "^0.20.2",
     "@types/node": "^20.17.19",
+    "cross-env": "^10.1.0",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

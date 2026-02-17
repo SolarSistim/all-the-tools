@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Netlify Functions for all-the-tools",
   "dependencies": {
-    "googleapis": "^128.0.0",
-    "nodemailer": "^6.9.0"
+    "googleapis": "^144.0.0",
+    "nodemailer": "^7.0.0"
   }
 }
