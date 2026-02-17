@@ -20,17 +20,6 @@
   <!-- Simple Analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
-  <!-- Extract recovery token BEFORE the widget loads so it can't consume it first -->
-  <script>
-    (function () {
-      var match = window.location.hash.match(/recovery_token=([^&]+)/);
-      if (match) {
-        window.__netlifyRecoveryToken = decodeURIComponent(match[1]);
-        history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
-    })();
-  </script>
-
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 

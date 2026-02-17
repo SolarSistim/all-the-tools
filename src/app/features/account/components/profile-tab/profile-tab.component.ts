@@ -127,27 +127,6 @@ export class ConfirmDeleteDialogComponent {}
           </mat-card-content>
         </mat-card>
 
-        <!-- Password Management Section (hidden for OAuth users) -->
-        @if (!isOAuthUser()) {
-          <mat-card class="profile-section">
-            <mat-card-header>
-              <mat-card-title>
-                <mat-icon>lock</mat-icon>
-                Password & Security
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p class="section-description">
-                Manage your password and security settings
-              </p>
-              <button mat-raised-button color="primary" (click)="changePassword()">
-                <mat-icon>vpn_key</mat-icon>
-                Change Password
-              </button>
-            </mat-card-content>
-          </mat-card>
-        }
-
         <!-- Account Management Section -->
         <mat-card class="profile-section danger-section">
           <mat-card-header>
@@ -284,23 +263,6 @@ export class ProfileTabComponent {
       month: 'long',
       day: 'numeric'
     });
-  }
-
-  async changePassword() {
-    const user = this.authService.getCurrentUser();
-    if (!user?.email) {
-      console.error('No user email found');
-      return;
-    }
-
-    try {
-      await this.authService.requestPasswordReset(user.email);
-      // Show success message to user
-      alert('Password reset email sent! Please check your inbox.');
-    } catch (error: any) {
-      console.error('Password reset failed:', error);
-      alert(error.message || 'Failed to send password reset email');
-    }
   }
 
   deleteAccount() {
