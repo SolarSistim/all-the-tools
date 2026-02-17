@@ -266,6 +266,16 @@ export class ConfirmDeleteDialogComponent {
             </div>
 
             <div class="profile-field">
+              <label>Current session</label>
+              <div class="field-value">
+                <button mat-button class="logout-link" (click)="logout()">
+                  <mat-icon>logout</mat-icon>
+                  Log Out
+                </button>
+              </div>
+            </div>
+
+            <div class="profile-field">
               <label>Role</label>
               <div class="field-value">
                 <mat-chip-set>
@@ -371,6 +381,33 @@ export class ConfirmDeleteDialogComponent {
 
       .field-value {
         color: white;
+      }
+    }
+
+    .logout-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0 0.5rem 0 0;
+      color: var(--text-primary, rgba(255, 255, 255, 0.85));
+      font-size: 0.9rem;
+      min-width: unset;
+      height: unset;
+      line-height: unset;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+
+      &:hover {
+        color: #f44336;
+        background: transparent;
+
+        mat-icon {
+          color: #f44336;
+        }
       }
     }
 
@@ -489,6 +526,10 @@ export class ProfileTabComponent {
       month: 'long',
       day: 'numeric'
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   deleteAccount() {

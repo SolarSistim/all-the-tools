@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../core/services/auth.service';
 import { NewsTabComponent } from './components/news-tab/news-tab.component';
 import { ProfileTabComponent } from './components/profile-tab/profile-tab.component';
@@ -20,6 +21,7 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
     MatTabsModule,
     MatIconModule,
     MatCardModule,
+    MatButtonModule,
     NewsTabComponent,
     ProfileTabComponent
   ],
@@ -31,7 +33,11 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
           My Account
         </h1>
         @if (user$ | async; as user) {
-          <p class="account-subtitle">{{ user.email }}</p>
+          <p class="account-subtitle">
+            <span class="user-email">{{ user.email }}</span>
+            <span class="subtitle-separator">|</span>
+            <button mat-button class="logout-btn" (click)="logout()">Log Out</button>
+          </p>
         }
       </div>
 
@@ -86,9 +92,32 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
       }
 
       .account-subtitle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
         color: var(--text-secondary);
         font-size: 1.1rem;
         margin: 0;
+
+        .subtitle-separator {
+          opacity: 0.4;
+        }
+
+        .logout-btn {
+          color: var(--text-secondary);
+          font-size: 1.1rem;
+          min-width: unset;
+          height: unset;
+          line-height: unset;
+          padding: 0;
+          letter-spacing: inherit;
+
+          &:hover {
+            color: #f44336;
+            background: transparent;
+          }
+        }
       }
     }
 
@@ -163,4 +192,8 @@ export class AccountComponent {
 
   user$ = this.authService.user$;
   selectedTabIndex = signal(0);
+
+  logout() {
+    this.authService.logout();
+  }
 }
