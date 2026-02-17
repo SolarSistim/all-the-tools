@@ -207,6 +207,55 @@
         animation: slideUp 0.3s ease-out;
       }
 
+      .reset-hint {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin: 0 0 0.5rem;
+        line-height: 1.5;
+      }
+
+      .forgot-password-link {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        text-align: right;
+        align-self: flex-end;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: var(--text-primary);
+          text-decoration: underline;
+        }
+      }
+
+      .back-link {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: none;
+        border: none;
+        padding: 0;
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+        }
+
+        &:hover {
+          color: var(--text-primary);
+          text-decoration: underline;
+        }
+      }
+
       .submit-button {
         height: 56px;
         margin-top: 1rem;
