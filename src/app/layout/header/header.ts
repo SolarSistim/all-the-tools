@@ -343,4 +343,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return this.authService.getUserDisplayName();
   }
 
+  /**
+   * Returns a font-size that scales down so the email fits within the
+   * ~192px available in the account menu header (280px panel minus padding
+   * and icon). Assumes ~0.52px average char width per 1px of font size.
+   */
+  getEmailFontSize(email: string): string {
+    const availableWidth = 192;
+    const charWidthFactor = 0.52;
+    const maxSize = 15;
+    const minSize = 9;
+    const fitted = availableWidth / (email.length * charWidthFactor);
+    const size = Math.min(maxSize, Math.max(minSize, fitted));
+    return `${Math.floor(size * 10) / 10}px`;
+  }
+
 }

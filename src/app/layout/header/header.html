@@ -396,7 +396,7 @@
           <div class="account-header" mat-menu-item disabled>
             <mat-icon>account_circle</mat-icon>
             <div class="account-info">
-              <span class="account-email">{{ user.email }}</span>
+              <span class="account-email" [style.font-size]="getEmailFontSize(user.email)">{{ user.email }}</span>
             </div>
           </div>
         }

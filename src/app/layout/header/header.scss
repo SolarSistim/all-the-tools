@@ -253,6 +253,8 @@
     display: block;
     border: 1.5px solid var(--border-color);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    top: -3px;
   }
 
   &:hover {
@@ -305,15 +307,17 @@
         .account-info {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          align-self: center;
           min-width: 0;
 
           .account-email {
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 0.9375rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1;
           }
         }
       }
