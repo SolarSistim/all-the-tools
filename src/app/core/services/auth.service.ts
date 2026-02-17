@@ -237,7 +237,7 @@ export class AuthService {
       throw new Error('Authentication service not available');
     }
 
-    const redirectTo = window.location.origin;
+    const redirectTo = `${window.location.origin}/account/news`;
     const url = `${environment.netlifyIdentitySiteUrl}/.netlify/identity/authorize?provider=google&redirect_to=${encodeURIComponent(redirectTo)}`;
     window.location.href = url;
   }
@@ -250,7 +250,7 @@ export class AuthService {
       throw new Error('Authentication service not available');
     }
 
-    const redirectTo = window.location.origin;
+    const redirectTo = `${window.location.origin}/account/news`;
     const url = `${environment.netlifyIdentitySiteUrl}/.netlify/identity/authorize?provider=github&redirect_to=${encodeURIComponent(redirectTo)}`;
     window.location.href = url;
   }

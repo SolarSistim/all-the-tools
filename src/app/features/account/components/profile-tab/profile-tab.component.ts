@@ -358,7 +358,7 @@ export class ConfirmDeleteDialogComponent {
       mat-card-content {
         .section-description {
           margin: 0 0 1rem 0;
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--text-secondary);
         }
       }
     }
@@ -376,11 +376,11 @@ export class ConfirmDeleteDialogComponent {
 
       label {
         font-weight: 500;
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-secondary);
       }
 
       .field-value {
-        color: white;
+        color: var(--text-primary);
       }
     }
 
@@ -389,7 +389,7 @@ export class ConfirmDeleteDialogComponent {
       align-items: center;
       gap: 0.25rem;
       padding: 0 0.5rem 0 0;
-      color: var(--text-primary, rgba(255, 255, 255, 0.85));
+      color: var(--text-primary);
       font-size: 0.9rem;
       min-width: unset;
       height: unset;
@@ -457,7 +457,7 @@ export class ConfirmDeleteDialogComponent {
     }
 
     .danger-confirm {
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--text-secondary);
       font-size: 0.9rem;
       line-height: 1.5;
     }

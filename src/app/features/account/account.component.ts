@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -43,7 +44,7 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
 
       <mat-card class="account-card">
         <mat-card-content>
-          <mat-tab-group [(selectedIndex)]="selectedTabIndex" animationDuration="300ms">
+          <mat-tab-group [selectedIndex]="selectedTabIndex()" (selectedIndexChange)="onTabChange($event)" animationDuration="300ms">
             <mat-tab>
               <ng-template mat-tab-label>
                 <mat-icon>notifications</mat-icon>
@@ -187,11 +188,26 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
     }
   `]
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
   private authService = inject(AuthService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   user$ = this.authService.user$;
   selectedTabIndex = signal(0);
+
+  private readonly TAB_ROUTES = ['news', 'profile'];
+
+  ngOnInit() {
+    const tab = this.route.snapshot.paramMap.get('tab');
+    const index = this.TAB_ROUTES.indexOf(tab ?? '');
+    this.selectedTabIndex.set(index >= 0 ? index : 0);
+  }
+
+  onTabChange(index: number) {
+    this.selectedTabIndex.set(index);
+    this.router.navigate(['/account', this.TAB_ROUTES[index]], { replaceUrl: true });
+  }
 
   logout() {
     this.authService.logout();

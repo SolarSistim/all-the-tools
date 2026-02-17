@@ -51,6 +51,11 @@ export const routes: Routes = [
   },
   {
     path: 'account',
+    redirectTo: 'account/news',
+    pathMatch: 'full'
+  },
+  {
+    path: 'account/:tab',
     loadComponent: () => import('./features/account/account.component').then(m => m.AccountComponent),
     title: 'My Account - All The Tools',
     canActivate: [authGuard]
