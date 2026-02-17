@@ -1,4 +1,13 @@
 # Netlify Configuration for Angular Project with Static Prerendering
+
+# Local dev server: run `netlify dev` or `npm run netlify:dev`
+[dev]
+  command = "ng serve"
+  targetPort = 4200
+  port = 8888
+  framework = "#custom"
+  autoLaunch = false
+
 [build]
   command = "npm ci && npm run prerender"
   publish = "dist/all-the-tools/browser"

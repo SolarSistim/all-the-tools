@@ -41,6 +41,13 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Local environment variables — never commit
+.env
+.env.local
+
 # Claude Code local settings
 .claude/settings.local.json
 nul
+
+# Local Netlify folder
+.netlify

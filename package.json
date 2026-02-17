@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "netlify:dev": "netlify dev",
     "start:network": "ng serve --host 0.0.0.0",
     "build": "npm run calculate:readtimes && npm run generate:seo && ng build && npm run generate:sitemap && npm run generate:rss",
     "watch": "ng build --watch --configuration development",

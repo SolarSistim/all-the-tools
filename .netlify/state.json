@@ -1,4 +1,22 @@
 {
-  "siteId": "all-the-tools",
-  "framework": "static"
+	"framework": "static",
+	"siteId": "5888a9b4-42ce-4e14-beeb-1a5a61eb3835",
+	"geolocation": {
+		"data": {
+			"city": "Milton",
+			"country": {
+				"code": "US",
+				"name": "United States"
+			},
+			"subdivision": {
+				"code": "FL",
+				"name": "Florida"
+			},
+			"timezone": "America/Chicago",
+			"latitude": 30.671,
+			"longitude": -87.1737,
+			"postalCode": "32571"
+		},
+		"timestamp": 1771355551138
+	}
 }
