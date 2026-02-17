@@ -6,6 +6,7 @@ import { Context } from '@netlify/functions';
  */
 export interface NetlifyUser {
   id: string;
+  sub: string; // JWT standard claim — the actual user UUID from Netlify Identity
   email: string;
   user_metadata?: {
     full_name?: string;

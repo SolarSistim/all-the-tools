@@ -24,8 +24,12 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       throw new Error('Server configuration error: Missing Netlify credentials');
     }
 
+    // The JWT clientContext user has the user UUID in `sub` (standard JWT claim).
+    // `id` is not populated from the JWT — use sub, fall back to id.
+    const userId = user.sub || user.id;
+
     // Delete user via Netlify Identity Admin API
-    const deleteUrl = `https://api.netlify.com/api/v1/sites/${siteId}/identity/users/${user.id}`;
+    const deleteUrl = `https://api.netlify.com/api/v1/sites/${siteId}/identity/users/${userId}`;
 
     const response = await fetch(deleteUrl, {
       method: 'DELETE',
