@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { AccountService } from '../../services/account.service';
 import { NewsItem } from '../../models/news-item.interface';
 
@@ -14,8 +13,7 @@ import { NewsItem } from '../../models/news-item.interface';
     CommonModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule
+    MatProgressSpinnerModule
   ],
   template: `
     <div class="news-tab">
@@ -28,7 +26,7 @@ import { NewsItem } from '../../models/news-item.interface';
         <div class="error-state">
           <mat-icon>error_outline</mat-icon>
           <p>Failed to load news items</p>
-          <button mat-raised-button color="primary" class="cta-button" (click)="loadNews()">
+          <button mat-raised-button color="primary" class="retry-btn" (click)="loadNews()">
             <mat-icon>refresh</mat-icon>
             Retry
           </button>
@@ -40,9 +38,9 @@ import { NewsItem } from '../../models/news-item.interface';
           <p class="empty-subtitle">Check back later for announcements and updates</p>
         </div>
       } @else {
-        <div class="news-masonry">
+        <div class="news-grid">
           @for (item of newsItems(); track item.id) {
-            <div class="news-card" [class.unread]="!item.isRead">
+            <div class="news-card">
 
               <!-- Card Header: image or gradient -->
               <div
@@ -63,33 +61,22 @@ import { NewsItem } from '../../models/news-item.interface';
 
               <!-- Card Body -->
               <div class="card-body">
-                <div class="card-meta">
-                  <span class="card-date">{{ formatDate(item.createdAt) }}</span>
-                  @if (!item.isRead) {
-                    <button
-                      mat-icon-button
-                      class="mark-read-btn"
-                      matTooltip="Mark as read"
-                      (click)="markAsRead(item.id)"
-                    >
-                      <mat-icon>done</mat-icon>
-                    </button>
-                  }
-                </div>
+                <span class="card-date">{{ formatDate(item.createdAt) }}</span>
                 <h3 class="card-title">{{ item.title }}</h3>
                 <p class="card-message">{{ item.message }}</p>
                 @if (item.link) {
-                  <a
-                    [href]="item.link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    mat-button
-                    color="primary"
-                    class="card-link-btn"
-                  >
-                    {{ item.linkLabel || 'Read more' }}
-                    <mat-icon>open_in_new</mat-icon>
-                  </a>
+                  <div class="card-footer">
+                    <a
+                      [href]="item.link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      mat-raised-button
+                      class="card-link-btn"
+                    >
+                      {{ item.linkLabel || 'Read more' }}
+                      <mat-icon>open_in_new</mat-icon>
+                    </a>
+                  </div>
                 }
               </div>
 
@@ -104,6 +91,7 @@ import { NewsItem } from '../../models/news-item.interface';
       padding: 1rem 0;
     }
 
+    /* ── States ── */
     .loading-state,
     .error-state,
     .empty-state {
@@ -127,60 +115,41 @@ import { NewsItem } from '../../models/news-item.interface';
         opacity: 0.7;
       }
 
-      .empty-subtitle {
-        font-size: 0.9rem;
-      }
+      .empty-subtitle { font-size: 0.9rem; }
+    }
 
-      .cta-button {
-        margin-top: 1rem;
-        padding: 12px 32px;
-        font-size: 1rem;
-        font-weight: 600;
-        text-transform: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
+    .retry-btn {
+      margin-top: 1rem;
+      font-weight: 600;
+      text-transform: none;
+    }
 
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
-        }
+    /* ── Equal-height grid ── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
 
-        mat-icon {
-          margin-right: 8px;
-        }
+      @media (max-width: 640px) {
+        grid-template-columns: 1fr;
       }
     }
 
-    /* ── Masonry layout ── */
-    .news-masonry {
-      column-count: 3;
-      column-gap: 1.25rem;
-
-      @media (max-width: 768px) { column-count: 2; }
-      @media (max-width: 480px) { column-count: 1; }
-    }
-
+    /* ── Card ── */
     .news-card {
-      break-inside: avoid;
-      display: inline-block;
-      width: 100%;
-      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
       background: var(--bg-elevated);
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border-color);
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       box-shadow: 0 2px 8px var(--shadow-color);
-      vertical-align: top;
 
       &:hover {
         transform: translateY(-4px);
         box-shadow: 0 8px 20px var(--shadow-color);
         border-color: var(--neon-cyan);
-      }
-
-      &.unread {
-        border-color: rgba(109, 212, 255, 0.4);
       }
     }
 
@@ -188,7 +157,8 @@ import { NewsItem } from '../../models/news-item.interface';
     .card-header {
       position: relative;
       width: 100%;
-      height: 160px;
+      height: 170px;
+      flex-shrink: 0;
       overflow: hidden;
       background: linear-gradient(210deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
       display: flex;
@@ -243,32 +213,16 @@ import { NewsItem } from '../../models/news-item.interface';
 
     /* ── Card Body ── */
     .card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       padding: 1rem 1.25rem 1.25rem;
 
-      .card-meta {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .card-date {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        opacity: 0.65;
         margin-bottom: 0.4rem;
-
-        .card-date {
-          font-size: 0.78rem;
-          color: var(--text-secondary);
-          opacity: 0.65;
-        }
-
-        .mark-read-btn {
-          width: 28px;
-          height: 28px;
-          line-height: 28px;
-
-          ::ng-deep mat-icon {
-            font-size: 16px;
-            width: 16px;
-            height: 16px;
-            color: var(--neon-cyan);
-          }
-        }
       }
 
       .card-title {
@@ -280,24 +234,45 @@ import { NewsItem } from '../../models/news-item.interface';
       }
 
       .card-message {
-        margin: 0 0 0.75rem;
+        flex: 1;
+        margin: 0;
         font-size: 0.875rem;
         line-height: 1.65;
         color: var(--text-secondary);
       }
 
-      .card-link-btn {
-        padding: 0;
-        min-width: auto;
-        font-size: 0.875rem;
+      .card-footer {
+        margin-top: 1.25rem;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
 
-        ::ng-deep mat-icon {
-          font-size: 15px;
-          width: 15px;
-          height: 15px;
-          margin-left: 3px;
-          vertical-align: middle;
-        }
+    /* ── Link button — matches tip-calculator CTA ── */
+    .card-link-btn {
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: none;
+      height: 40px;
+      padding: 0 1.25rem !important;
+      background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%) !important;
+      color: white !important;
+      border: none !important;
+      box-shadow: 0 4px 15px var(--neon-cyan-glow) !important;
+      transition: all 0.3s ease !important;
+      text-decoration: none;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px var(--neon-cyan-glow), 0 0 30px var(--neon-pink-glow) !important;
+      }
+
+      ::ng-deep mat-icon {
+        font-size: 15px;
+        width: 15px;
+        height: 15px;
+        margin-left: 4px;
+        vertical-align: middle;
       }
     }
   `]
@@ -308,7 +283,6 @@ export class NewsTabComponent implements OnInit {
   newsItems = signal<NewsItem[]>([]);
   loading = signal(true);
   error = signal(false);
-  unreadCount = signal(0);
 
   ngOnInit() {
     this.loadNews();
@@ -321,7 +295,6 @@ export class NewsTabComponent implements OnInit {
     this.accountService.getNews().subscribe({
       next: (response) => {
         this.newsItems.set(response.news);
-        this.unreadCount.set(response.news.length);
         this.loading.set(false);
       },
       error: (err) => {
@@ -332,20 +305,12 @@ export class NewsTabComponent implements OnInit {
     });
   }
 
-  markAsRead(newsItemId: string) {
-    const updatedItems = this.newsItems().map(item =>
-      item.id === newsItemId ? { ...item, isRead: true } : item
-    );
-    this.newsItems.set(updatedItems);
-    this.unreadCount.set(updatedItems.filter(n => !n.isRead).length);
-  }
-
   getTypeIcon(type: string): string {
     const icons: Record<string, string> = {
       success: 'check_circle',
-      info: 'info',
+      info:    'info',
       warning: 'warning',
-      error: 'error'
+      error:   'error'
     };
     return icons[type] ?? 'notifications';
   }
@@ -353,8 +318,7 @@ export class NewsTabComponent implements OnInit {
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) return 'Today';
     if (diffDays === 1) return 'Yesterday';
