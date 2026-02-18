@@ -1,5 +1,7 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, shareReplay } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import {
   Resource,
   ResourcePreview,
@@ -7,261 +9,240 @@ import {
   ResourcesConfig,
   ResourceFilters,
 } from '../models/resource.models';
-import { RESOURCES_METADATA } from '../data/resources-metadata.data';
+import { environment } from '../../../../environments/environment';
 
 /**
  * ResourcesService
- * Manages resources, pagination, and resource retrieval
- * For static prerendered sites - uses client-side pagination
+ * Fetches resources from json.allthethings.dev/resources/.
+ * resources.json is fetched once and cached for listing/search.
+ * Individual {slug}.json files are fetched on demand for detail pages.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class ResourcesService {
+  private http = inject(HttpClient);
+
   private readonly config: ResourcesConfig = {
     pageSize: 21,
     baseUrl: 'https://www.allthethings.dev/resources',
     defaultOgImage: 'https://www.allthethings.dev/meta-images/og-resources.png',
   };
 
-  // Cache for resource metadata and previews
-  private metadataCache = signal<Resource[]>(RESOURCES_METADATA);
-  private previewsCache = signal<ResourcePreview[]>([]);
+  private readonly apiUrl = environment.resourcesUrl;
 
-  constructor() {
-    this.initializePreviewCache();
+  // In-memory cache for the index
+  private indexCache: ResourcePreview[] | null = null;
+  // Shared in-flight observable — prevents duplicate HTTP requests when
+  // the listing fires two calls simultaneously (search autocomplete + page load)
+  private indexFetch$: Observable<ResourcePreview[]> | null = null;
+
+  private fetchIndex(): Observable<ResourcePreview[]> {
+    if (this.indexCache) {
+      return of(this.indexCache);
+    }
+    if (!this.indexFetch$) {
+      this.indexFetch$ = this.http
+        .get<{ resources: ResourcePreview[] }>(`${this.apiUrl}/resources.json`)
+        .pipe(
+          map((response) => {
+            const previews = response.resources.filter((r) => r.display !== false);
+            this.indexCache = previews;
+            return previews;
+          }),
+          shareReplay(1)
+        );
+    }
+    return this.indexFetch$;
   }
 
   /**
-   * Initialize resource preview cache
-   */
-  private initializePreviewCache(): void {
-    const previews = this.metadataCache().map((metadata) =>
-      this.convertMetadataToPreview(metadata)
-    );
-    this.previewsCache.set(previews);
-  }
-
-  /**
-   * Get paginated resource previews
+   * Get paginated resource previews.
+   * Fetches resources.json once, then paginates client-side from cache.
    */
   getResourcePreviews(
     page: number = 1,
     pageSize: number = this.config.pageSize,
     filters?: ResourceFilters
   ): Observable<PaginatedResponse<ResourcePreview>> {
-    let previews = this.previewsCache();
+    return this.fetchIndex().pipe(
+      map((previews) => {
+        let filtered = previews;
 
-    // Filter out non-displayed resources (display defaults to true if not specified)
-    previews = previews.filter((p) => p.display !== false);
+        if (filters?.category) {
+          filtered = filtered.filter((p) => p.category === filters.category);
+        }
+        if (filters?.tag) {
+          filtered = filtered.filter((p) => p.tags.includes(filters.tag!));
+        }
+        if (filters?.featured !== undefined) {
+          filtered = filtered.filter((p) => p.featured === filters.featured);
+        }
+        if (filters?.isPaid !== undefined) {
+          filtered = filtered.filter((p) => p.isPaid === filters.isPaid);
+        }
+        if (filters?.difficulty) {
+          filtered = filtered.filter((p) => p.difficulty === filters.difficulty);
+        }
+        if (filters?.search) {
+          const searchLower = filters.search.toLowerCase();
+          filtered = filtered.filter(
+            (p) =>
+              p.title.toLowerCase().includes(searchLower) ||
+              p.description.toLowerCase().includes(searchLower) ||
+              p.subtitle.toLowerCase().includes(searchLower) ||
+              p.tags.some((tag) => tag.toLowerCase().includes(searchLower))
+          );
+        }
 
-    // Apply filters
-    if (filters?.category) {
-      previews = previews.filter((p) => p.category === filters.category);
-    }
-    if (filters?.tag) {
-      previews = previews.filter((p) => p.tags.includes(filters.tag!));
-    }
-    if (filters?.featured !== undefined) {
-      previews = previews.filter((p) => p.featured === filters.featured);
-    }
-    if (filters?.isPaid !== undefined) {
-      previews = previews.filter((p) => p.isPaid === filters.isPaid);
-    }
-    if (filters?.difficulty) {
-      previews = previews.filter((p) => p.difficulty === filters.difficulty);
-    }
-    if (filters?.search) {
-      const searchLower = filters.search.toLowerCase();
-      previews = previews.filter(
-        (p) =>
-          p.title.toLowerCase().includes(searchLower) ||
-          p.description.toLowerCase().includes(searchLower) ||
-          p.subtitle.toLowerCase().includes(searchLower) ||
-          p.tags.some((tag) => tag.toLowerCase().includes(searchLower))
-      );
-    }
+        // Sort newest first (resources.json is pre-sorted, but respect filters)
+        filtered = [...filtered].sort((a, b) => {
+          const dateA = new Date(a.publishedDate).getTime();
+          const dateB = new Date(b.publishedDate).getTime();
+          return dateB - dateA;
+        });
 
-    // Sort by date (newest first)
-    previews = [...previews].sort((a, b) => {
-      const dateA = new Date(a.publishedDate).getTime();
-      const dateB = new Date(b.publishedDate).getTime();
-      return dateB - dateA;
-    });
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / pageSize);
+        const startIndex = (page - 1) * pageSize;
+        const items = filtered.slice(startIndex, startIndex + pageSize);
 
-    // Calculate pagination
-    const totalItems = previews.length;
-    const totalPages = Math.ceil(totalItems / pageSize);
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const items = previews.slice(startIndex, endIndex);
-
-    return of({
-      items,
-      currentPage: page,
-      pageSize,
-      totalItems,
-      totalPages,
-    });
+        return { items, currentPage: page, pageSize, totalItems, totalPages };
+      })
+    );
   }
 
   /**
-   * Get resource by slug
+   * Get full resource data by slug.
+   * Fetches the individual {slug}.json from the API.
    */
   getResourceBySlug(slug: string): Observable<Resource | null> {
-    const resource = this.metadataCache().find((r) => r.slug === slug);
-    return of(resource || null);
+    return this.http
+      .get<Resource>(`${this.apiUrl}/${slug}.json`)
+      .pipe(catchError(() => of(null)));
   }
 
   /**
-   * Get resource by ID
+   * Get resource by ID (id === slug in the new JSON schema).
    */
   getResourceById(id: string): Observable<Resource | null> {
-    const resource = this.metadataCache().find((r) => r.id === id);
-    return of(resource || null);
+    return this.getResourceBySlug(id);
   }
 
   /**
-   * Get related resources
+   * Get related resources for a given resource.
+   * relatedResources in individual JSONs are slugs.
    */
   getRelatedResources(
     resource: Resource,
     limit: number = 3
   ): Observable<ResourcePreview[]> {
-    let related: ResourcePreview[] = [];
-    const displayedPreviews = this.previewsCache().filter((p) => p.display !== false);
+    return this.fetchIndex().pipe(
+      map((previews) => {
+        let related: ResourcePreview[] = [];
 
-    // First, try to get explicitly related resources
-    if (resource.relatedResources && resource.relatedResources.length > 0) {
-      const relatedById = displayedPreviews.filter((p) =>
-        resource.relatedResources!.includes(p.id)
-      );
-      related = [...relatedById];
-    }
+        // Match by slug (relatedResources are slugs in new schema)
+        if (resource.relatedResources && resource.relatedResources.length > 0) {
+          related = resource.relatedResources
+            .map((slug) => previews.find((p) => p.slug === slug))
+            .filter(Boolean) as ResourcePreview[];
+        }
 
-    // If not enough, find resources with matching tags
-    if (related.length < limit) {
-      const byTags = displayedPreviews
-        .filter((p) => p.id !== resource.id)
-        .filter((p) => p.tags.some((tag) => resource.tags.includes(tag)))
-        .slice(0, limit - related.length);
-      related = [...related, ...byTags];
-    }
+        // Fall back to matching tags
+        if (related.length < limit) {
+          const byTags = previews
+            .filter((p) => p.slug !== resource.slug)
+            .filter((p) => !related.find((r) => r.slug === p.slug))
+            .filter((p) => p.tags.some((tag) => resource.tags.includes(tag)))
+            .slice(0, limit - related.length);
+          related = [...related, ...byTags];
+        }
 
-    // If still not enough, get from same category
-    if (related.length < limit) {
-      const byCategory = displayedPreviews
-        .filter((p) => p.id !== resource.id)
-        .filter((p) => p.category === resource.category)
-        .filter((p) => !related.find((r) => r.id === p.id))
-        .slice(0, limit - related.length);
-      related = [...related, ...byCategory];
-    }
+        // Fall back to same category
+        if (related.length < limit) {
+          const byCategory = previews
+            .filter((p) => p.slug !== resource.slug)
+            .filter((p) => p.category === resource.category)
+            .filter((p) => !related.find((r) => r.slug === p.slug))
+            .slice(0, limit - related.length);
+          related = [...related, ...byCategory];
+        }
 
-    return of(related.slice(0, limit));
+        return related.slice(0, limit);
+      })
+    );
   }
 
   /**
-   * Get all categories
+   * Get all unique categories from the index.
    */
   getCategories(): Observable<string[]> {
-    const categories = [
-      ...new Set(this.metadataCache().map((r) => r.category)),
-    ];
-    return of(categories.sort());
+    return this.fetchIndex().pipe(
+      map((previews) => {
+        const categories = [...new Set(previews.map((r) => r.category))];
+        return categories.sort();
+      })
+    );
   }
 
   /**
-   * Get all tags
+   * Get all unique tags from the index.
    */
   getTags(): Observable<string[]> {
-    const tags = new Set<string>();
-    this.metadataCache().forEach((resource) => {
-      resource.tags.forEach((tag) => tags.add(tag));
-    });
-    return of([...tags].sort());
+    return this.fetchIndex().pipe(
+      map((previews) => {
+        const tags = new Set<string>();
+        previews.forEach((r) => r.tags.forEach((tag) => tags.add(tag)));
+        return [...tags].sort();
+      })
+    );
   }
 
   /**
-   * Get featured resources
+   * Get featured resources from the index.
    */
   getFeaturedResources(limit: number = 3): Observable<ResourcePreview[]> {
-    const featured = this.previewsCache()
-      .filter((p) => p.display !== false)
-      .filter((p) => p.featured)
-      .slice(0, limit);
-    return of(featured);
+    return this.fetchIndex().pipe(
+      map((previews) => previews.filter((p) => p.featured).slice(0, limit))
+    );
   }
 
   /**
-   * Get recent resources
+   * Get most recent resources from the index.
    */
   getRecentResources(limit: number = 5): Observable<ResourcePreview[]> {
-    const recent = [...this.previewsCache()]
-      .filter((p) => p.display !== false)
-      .sort((a, b) => {
-        const dateA = new Date(a.publishedDate).getTime();
-        const dateB = new Date(b.publishedDate).getTime();
-        return dateB - dateA;
-      })
-      .slice(0, limit);
-    return of(recent);
+    return this.fetchIndex().pipe(
+      map((previews) =>
+        [...previews]
+          .sort((a, b) => {
+            const dateA = new Date(a.publishedDate).getTime();
+            const dateB = new Date(b.publishedDate).getTime();
+            return dateB - dateA;
+          })
+          .slice(0, limit)
+      )
+    );
   }
 
   /**
-   * Get all resources (for cross-linking and content matching)
+   * Get all displayed resources from the index.
    */
   getAllResources(): Observable<ResourcePreview[]> {
-    // Return all displayed resources
-    return of(this.previewsCache().filter((p) => p.display !== false));
+    return this.fetchIndex();
   }
 
-  /**
-   * Convert Resource metadata to ResourcePreview
-   */
-  private convertMetadataToPreview(metadata: Resource): ResourcePreview {
-    return {
-      id: metadata.id,
-      slug: metadata.slug,
-      title: metadata.title,
-      subtitle: metadata.subtitle,
-      description: metadata.description,
-      externalUrl: metadata.externalUrl,
-      publishedDate: metadata.publishedDate,
-      thumbnail: metadata.thumbnail,
-      tags: metadata.tags,
-      category: metadata.category,
-      featured: metadata.featured,
-      display: metadata.display,
-      isPaid: metadata.isPaid,
-      difficulty: metadata.difficulty,
-    };
-  }
-
-  /**
-   * Get resources configuration
-   */
   getConfig(): ResourcesConfig {
     return { ...this.config };
   }
 
-  /**
-   * Get external resource URL (the actual external link)
-   */
   getResourceUrl(resource: Resource): string {
     return resource.externalUrl;
   }
 
-  /**
-   * Get resource page URL (internal permalink)
-   */
   getResourcePageUrl(slug: string): string {
     return `${this.config.baseUrl}/${slug}`;
   }
 
-  /**
-   * Build paginated listing URL
-   */
   getListingUrl(page: number = 1): string {
     return page === 1
       ? this.config.baseUrl

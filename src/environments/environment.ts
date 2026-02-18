@@ -6,5 +6,6 @@ export const environment = {
   ogFetchUserLockoutMinutes: 10,
   // Use deployed site URL for Identity API (localhost doesn't have Netlify Identity backend)
   netlifyIdentitySiteUrl: 'https://www.allthethings.dev',
-  newsUrl: 'https://json.allthethings.dev/news/news.json'
+  newsUrl: 'https://json.allthethings.dev/news/news.json',
+  resourcesUrl: 'https://json.allthethings.dev/resources'
 };
