@@ -371,13 +371,14 @@ export class AuthService {
    * Called after assign-default-role succeeds so the UI reflects the new role
    * without requiring the user to log out and back in.
    */
-  public updateUserRoles(roles: string[]): void {
+  public updateUserRoles(roles: string[], createdAt?: string): void {
     const currentUser = this.userSubject.value;
     if (!currentUser) return;
 
     const updatedUser: NetlifyUser = {
       ...currentUser,
-      app_metadata: { ...currentUser.app_metadata, roles }
+      app_metadata: { ...currentUser.app_metadata, roles },
+      ...(createdAt ? { created_at: createdAt } : {})
     };
     this.userSubject.next(updatedUser);
     this.saveUserSession(updatedUser);

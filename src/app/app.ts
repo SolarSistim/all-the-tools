@@ -160,7 +160,7 @@ export class App implements AfterViewInit, OnInit {
       if (response.ok) {
         const data = await response.json();
         if (data.assigned && Array.isArray(data.roles)) {
-          this.authService.updateUserRoles(data.roles);
+          this.authService.updateUserRoles(data.roles, data.createdAt);
         }
       } else {
         console.warn('[assignRoleIfNeeded] assign-default-role returned', response.status);

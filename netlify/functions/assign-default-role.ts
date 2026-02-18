@@ -60,6 +60,9 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       throw new Error(`Failed to assign role: ${response.statusText}`);
     }
 
+    const updatedUser = await response.json();
+    const createdAt: string | undefined = updatedUser.created_at;
+
     console.log(`[assign-default-role] Assigned 'user' role to: ${user.email}`);
 
     // Send signup notification email (non-blocking — never fail the role assignment)
@@ -118,7 +121,7 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       console.error('[assign-default-role] Email notification failed:', emailErr);
     }
 
-    return successResponse({ roles: ['user'], assigned: true });
+    return successResponse({ roles: ['user'], assigned: true, createdAt });
 
   } catch (error: any) {
     console.error('[assign-default-role] Error:', error);
