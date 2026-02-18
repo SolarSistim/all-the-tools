@@ -48,7 +48,7 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
             <mat-tab>
               <ng-template mat-tab-label>
                 <mat-icon>notifications</mat-icon>
-                <span>News & Updates</span>
+                <span style="font-weight: bold">News & Updates</span>
               </ng-template>
               <app-news-tab />
             </mat-tab>
@@ -56,7 +56,7 @@ import { ProfileTabComponent } from './components/profile-tab/profile-tab.compon
             <mat-tab>
               <ng-template mat-tab-label>
                 <mat-icon>person</mat-icon>
-                <span>Profile & Account</span>
+                <span style="font-weight: bold">Profile & Account</span>
               </ng-template>
               <app-profile-tab />
             </mat-tab>

@@ -962,3 +962,38 @@
     font-size: 1.13rem;
   }
 }
+
+// Dark theme overrides for autocomplete dropdown
+body:not(.light-theme) {
+  ::ng-deep .blog-autocomplete {
+    .mat-mdc-option {
+      color: var(--text-primary);
+
+      .mdc-list-item__primary-text {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .autocomplete-title {
+    color: var(--text-primary) !important;
+  }
+
+  .autocomplete-meta,
+  .autocomplete-date {
+    color: var(--text-secondary) !important;
+  }
+
+  .autocomplete-category {
+    color: var(--neon-cyan) !important;
+  }
+
+  .no-results-option {
+    color: var(--text-secondary) !important;
+
+    mat-icon,
+    span {
+      color: var(--text-secondary) !important;
+    }
+  }
+}
