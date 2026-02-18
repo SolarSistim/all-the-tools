@@ -20,7 +20,18 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
 
   try {
     // Require a valid JWT — the user can only assign a role to themselves
-    const user = requireAuth(context);
+    const user = requireAuth(context as any);
+
+    // Extract Identity context (auto-injected by Netlify for authenticated requests)
+    const clientContext = (context as any).clientContext;
+    const userId = clientContext?.user?.sub;
+    const identityToken = clientContext?.identity?.token;
+
+    if (!userId || !identityToken) {
+      console.error('[assign-default-role] Identity context missing:', { hasUserId: !!userId, hasToken: !!identityToken });
+      throw new Error('Server configuration error: Identity context not found');
+    }
+
     const existingRoles = user.app_metadata?.roles || [];
 
     // Already has at least one role — nothing to do
@@ -28,20 +39,14 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       return successResponse({ roles: existingRoles, assigned: false });
     }
 
-    const siteId = process.env.NETLIFY_SITE_ID;
-    const adminToken = process.env.NETLIFY_ADMIN_TOKEN;
-
-    if (!siteId || !adminToken) {
-      throw new Error('Server configuration error: Missing Netlify credentials');
-    }
-
-    // Assign 'user' role via Netlify Identity Admin API
-    const updateUrl = `https://api.netlify.com/api/v1/sites/${siteId}/identity/users/${user.sub}`;
+    // Assign 'user' role via GoTrue admin endpoint (same pattern as delete-account.ts)
+    const siteUrl = (process.env.URL || '').replace(/\/$/, '');
+    const updateUrl = `${siteUrl}/.netlify/identity/admin/users/${userId}`;
 
     const response = await fetch(updateUrl, {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${adminToken}`,
+        'Authorization': `Bearer ${identityToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -51,7 +56,7 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('[assign-default-role] Admin API error:', response.status, errorText);
+      console.error('[assign-default-role] Identity API error:', response.status, errorText);
       throw new Error(`Failed to assign role: ${response.statusText}`);
     }
 
