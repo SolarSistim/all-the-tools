@@ -195,7 +195,14 @@ export class AuthService {
 
     this.netlifyIdentity.on('error', () => {
       this.netlifyIdentity.close();
-      try { sessionStorage.setItem('auth_toast', 'error'); } catch {}
+      // Only queue the error toast if the user is NOT already logged in.
+      // The widget fires spurious 'error' events during the OAuth open→close
+      // cycle even when login succeeds; we must not show "Authentication failed"
+      // in those cases.
+      const alreadyLoggedIn = !!this.netlifyIdentity?.currentUser();
+      if (!alreadyLoggedIn) {
+        try { sessionStorage.setItem('auth_toast', 'error'); } catch {}
+      }
     });
   }
 
