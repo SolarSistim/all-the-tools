@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { VisitLoggerService } from '../../../../core/services/visit-logger.service';
 
 /**
  * YouTube Player Component
@@ -20,6 +21,8 @@ export class YoutubePlayerComponent implements OnInit {
 
   @ViewChild('youtubeIframe') youtubeIframe?: ElementRef<HTMLIFrameElement>;
 
+  private visitLogger = inject(VisitLoggerService);
+  private location = inject(Location);
   private sanitizer = inject(DomSanitizer);
 
   isExpanded = false;
@@ -71,15 +74,22 @@ export class YoutubePlayerComponent implements OnInit {
 
   expandPlayer(): void {
     this.isExpanded = true;
+    // Log expand-play event (video auto-plays when expanded)
+    this.visitLogger.logVideoEvent('expand-play', this.location.path(), this.videoId);
   }
 
   collapsePlayer(): void {
     this.isExpanded = false;
+    // Log closed-player event (closing player stops video)
+    this.visitLogger.logVideoEvent('closed-player', this.location.path(), this.videoId);
   }
 
   openInYouTube(): void {
     // Pause the video before opening in YouTube
     this.pauseVideo();
+
+    // Log opened-in-youtube event
+    this.visitLogger.logVideoEvent('opened-in-youtube', this.location.path(), this.videoId);
     window.open(this.youtubeUrl, '_blank', 'noopener,noreferrer');
   }
 

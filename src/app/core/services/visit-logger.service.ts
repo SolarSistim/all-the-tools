@@ -132,4 +132,108 @@ export class VisitLoggerService {
     return 'Desktop';
   }
 
+  /**
+   * Log an audio player event (play/pause)
+   */
+  logAudioEvent(action: 'play' | 'pause', urlPath: string): void {
+    // Only run in browser
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Use requestIdleCallback to ensure this doesn't impact performance
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => this.sendAudioEventLog(action, urlPath), { timeout: 2000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(() => this.sendAudioEventLog(action, urlPath), 100);
+    }
+  }
+
+  /**
+   * Log a video player event (expand-play/closed-player/opened-in-youtube)
+   */
+  logVideoEvent(action: 'expand-play' | 'closed-player' | 'opened-in-youtube', urlPath: string, videoId: string): void {
+    // Only run in browser
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // Use requestIdleCallback to ensure this doesn't impact performance
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => this.sendVideoEventLog(action, urlPath, videoId), { timeout: 2000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(() => this.sendVideoEventLog(action, urlPath, videoId), 100);
+    }
+  }
+
+  /**
+   * Send audio event data to the Netlify function
+   */
+  private async sendAudioEventLog(action: 'play' | 'pause', urlPath: string): Promise<void> {
+    try {
+      const audioEventData = {
+        action: action,
+        urlPath: urlPath,
+        mediaType: 'audio',
+        sessionId: this.sessionId,
+        deviceType: this.getDeviceType(),
+        userAgent: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+      };
+
+      // Send to Netlify function (fire and forget)
+      fetch('/.netlify/functions/log-audio-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(audioEventData),
+        // Use keepalive to ensure the request completes even if user navigates away
+        keepalive: true,
+      }).catch(err => {
+        // Silently fail - we don't want to impact user experience
+        console.debug('Audio event logging failed:', err);
+      });
+    } catch (error) {
+      // Silently fail
+      console.debug('Error preparing audio event log:', error);
+    }
+  }
+
+  /**
+   * Send video event data to the Netlify function
+   */
+  private async sendVideoEventLog(action: 'expand-play' | 'closed-player' | 'opened-in-youtube', urlPath: string, videoId: string): Promise<void> {
+    try {
+      const videoEventData = {
+        action: action,
+        urlPath: urlPath,
+        videoId: videoId,
+        mediaType: 'video',
+        sessionId: this.sessionId,
+        deviceType: this.getDeviceType(),
+        userAgent: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+      };
+
+      // Send to Netlify function (fire and forget) - reuses log-audio-event for media_plays sheet
+      fetch('/.netlify/functions/log-audio-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(videoEventData),
+        // Use keepalive to ensure the request completes even if user navigates away
+        keepalive: true,
+      }).catch(err => {
+        // Silently fail - we don't want to impact user experience
+        console.debug('Video event logging failed:', err);
+      });
+    } catch (error) {
+      // Silently fail
+      console.debug('Error preparing video event log:', error);
+    }
+  }
 }
