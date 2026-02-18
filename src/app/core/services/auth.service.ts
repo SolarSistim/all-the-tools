@@ -182,6 +182,15 @@ export class AuthService {
       this.netlifyIdentity.close();
       // Queue a welcome toast to be shown after the page navigates
       try { sessionStorage.setItem('auth_toast', 'login'); } catch {}
+
+      // If the user has no roles, flag for role assignment after navigation.
+      // Identity event functions (identity-signup/identity-login) don't fire
+      // reliably for Google OAuth, so we handle it client-side instead.
+      const roles = enrichedUser?.app_metadata?.roles ?? [];
+      if (roles.length === 0) {
+        try { sessionStorage.setItem('needs_role_assignment', '1'); } catch {}
+      }
+
       // Navigate to account after OAuth login, replacing the callback URL in history
       window.location.replace('/account/news');
     });
@@ -355,5 +364,22 @@ export class AuthService {
   public isOAuthUser(): boolean {
     const provider = this.getCurrentUser()?.app_metadata?.provider;
     return !!provider && provider !== 'email';
+  }
+
+  /**
+   * Update the current user's roles in local state and localStorage.
+   * Called after assign-default-role succeeds so the UI reflects the new role
+   * without requiring the user to log out and back in.
+   */
+  public updateUserRoles(roles: string[]): void {
+    const currentUser = this.userSubject.value;
+    if (!currentUser) return;
+
+    const updatedUser: NetlifyUser = {
+      ...currentUser,
+      app_metadata: { ...currentUser.app_metadata, roles }
+    };
+    this.userSubject.next(updatedUser);
+    this.saveUserSession(updatedUser);
   }
 }

@@ -66,6 +66,7 @@ export class App implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.adsenseService.init();
     this.showPendingAuthToast();
+    this.assignRoleIfNeeded();
 
     // Initialize Google Analytics (only in production, not localhost)
     this.googleAnalytics.initialize();
@@ -134,6 +135,39 @@ export class App implements AfterViewInit, OnInit {
         }
       }, 400);
     } catch {}
+  }
+
+  /**
+   * If the user just signed up (no roles on their JWT), call the assign-default-role
+   * function to set roles via the Netlify Admin API, then update local state so the
+   * UI reflects the correct role without requiring a logout/login cycle.
+   */
+  private async assignRoleIfNeeded(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) return;
+    try {
+      const flag = sessionStorage.getItem('needs_role_assignment');
+      if (!flag) return;
+      sessionStorage.removeItem('needs_role_assignment');
+
+      const token = await this.authService.getToken();
+      if (!token) return;
+
+      const response = await fetch('/.netlify/functions/assign-default-role', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.assigned && Array.isArray(data.roles)) {
+          this.authService.updateUserRoles(data.roles);
+        }
+      } else {
+        console.warn('[assignRoleIfNeeded] assign-default-role returned', response.status);
+      }
+    } catch (err) {
+      console.error('[assignRoleIfNeeded] Failed:', err);
+    }
   }
 
   /**
