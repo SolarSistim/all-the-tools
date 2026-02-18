@@ -389,9 +389,7 @@ Through his channel, Rasmus celebrates, fosters, and empowers creativity by shar
     slug: 'alvision100',
     name: 'Alvision100',
     shortDescription: 'Digital artist and VFX compositor creating optimistic visions of the Star Trek future.',
-    longDescription: `Alvision100 is a digital artist based in the United States who has been creating fan art and VFX compositing work since joining YouTube in April 2010. A self-described starship fan, Alvision focuses on Star Trek content, bringing an optimistic perspective to the franchise's vision of the future.
-
-With 158 videos and over 2.8 million views, the channel has built a community of more than 11,700 subscribers drawn to its Star Trek-centered creations.`,
+    longDescription: `Alvision100 is a digital artist based in the United States who has been creating fan art and VFX compositing work since joining YouTube in April 2010. A self-described starship fan, Alvision focuses on Star Trek content, bringing an optimistic perspective to the franchise's vision of the future.`,
     keywords: ['Star Trek', 'VFX Compositing', 'Fan Art', 'Spacecraft', 'Sci-Fi', '3D'],
     metaDescription: 'Discover Alvision100, a digital artist and VFX compositor creating optimistic visions of the Star Trek future with fan art and starship content.',
     metaKeywords: ['Alvision100', 'Star Trek', 'VFX compositing', 'fan art', 'starship', 'digital artist', 'sci-fi art'],

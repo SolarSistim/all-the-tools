@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, DestroyRef, signal, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -20,6 +20,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
 import { ReadingTimePipe } from '../../pipes/reading-time.pipe';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header';
 import { VideoDialogComponent } from '../../../in-the-verse-artist-list/components/video-dialog/video-dialog.component';
+import { VisitLoggerService } from '../../../../core/services/visit-logger.service';
 
 /**
  * Blog Listing Component
@@ -56,6 +57,8 @@ export class BlogListingComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private platformId = inject(PLATFORM_ID);
   private dialog = inject(MatDialog);
+  private visitLogger = inject(VisitLoggerService);
+  private location = inject(Location);
 
   articles: ArticlePreview[] = [];
   currentPage = 1;
@@ -260,6 +263,8 @@ export class BlogListingComponent implements OnInit {
     event.stopPropagation();
 
     if (!article.youtubeVideoId) return;
+
+    this.visitLogger.logVideoEvent('expand-play', this.location.path(), article.youtubeVideoId);
 
     this.dialog.open(VideoDialogComponent, {
       data: {
