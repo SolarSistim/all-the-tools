@@ -9,6 +9,51 @@ export type ArticleMetadata = Omit<Article, 'content'>;
 
 export const BLOG_ARTICLES_METADATA: ArticleMetadata[] = [
   {
+    id: '114',
+    slug: 'multi-factor-authentication-a-horror-story',
+    title: 'Multi-Factor Authentication: A Horror Story',
+    description:
+      'A no-nonsense look at why skipping multi-factor authentication is one of the most costly digital mistakes you can make - especially during a divorce, breakup, or toxic friendship fallout. Real stories, real consequences, and the tools to protect yourself.',
+    author: AUTHORS.joel_hansen,
+    publishedDate: '02-19-2026',
+    heroImage: {
+      src: 'https://ik.imagekit.io/allthethingsdev/Multifactor%20Authentication%20a%20Horror%20Story/og-multifactor-auth-a-horror-story.jpg?updatedAt=1771539122418',
+      alt: 'Multi-Factor Authentication: A Horror Story - protecting your digital identity',
+    },
+    tags: [
+      'Security',
+      'Multi-Factor Authentication',
+      'MFA',
+      '2FA',
+      'Cybersecurity',
+      'Digital Privacy',
+      'Online Safety',
+      'Divorce',
+      'Identity Protection',
+    ],
+    category: 'Security',
+    metaDescription:
+      'Real stories of account compromise during divorces and breakups - and why multi-factor authentication is the simple, free tool that could have prevented all of it. A guide to MFA tools and staying proactive.',
+    metaKeywords: [
+      'multi-factor authentication',
+      'MFA',
+      'two-factor authentication',
+      '2FA',
+      'Google Authenticator',
+      'Authy',
+      'cybersecurity',
+      'account security',
+      'divorce cyber hacking',
+      'digital privacy',
+      'online safety',
+      'YubiKey',
+      'Microsoft Authenticator',
+      'identity protection',
+    ],
+    featured: true,
+    readTime: 6,
+  },
+  {
     id: '113',
     slug: 'fixing-tailscale-stuck-on-starting-windows-10-docker-hyper-v',
     title: 'Fixing "Tailscale Stuck on Starting…" on Windows 10 (Docker Desktop / Hyper-V Systems)',
