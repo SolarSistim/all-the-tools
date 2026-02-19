@@ -1,0 +1,14 @@
+{
+  "id": "how-to-generate-placeholder-images-with-placehold-co",
+  "slug": "how-to-generate-placeholder-images-with-placehold-co",
+  "title": "Quickly Generate Custom Image Placeholders with Placehold.co",
+  "subtitle": "A Simple and Fast API for Creating Dummy Images for Web Layouts and Mockups",
+  "description": "Placehold.co is an essential tool for web developers and designers who need temporary image assets during the development process. Generate custom-sized placeholders with specific text, colors, and file formats via a simple URL API.",
+  "category": "Digital Tools",
+  "publishedDate": "2026-01-20",
+  "tags": ["Web Development", "Prototyping", "Design Tools", "Frontend"],
+  "featured": true,
+  "isPaid": false,
+  "difficulty": "easy",
+  "display": true
+}

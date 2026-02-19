@@ -1,0 +1,14 @@
+{
+  "id": "squoosh-image-optimizer",
+  "slug": "squoosh-image-optimizer",
+  "title": "Squoosh Image Optimizer",
+  "subtitle": "Fast, visual image compression in the browser",
+  "description": "Squoosh is a free web app from Google that lets you compress and compare images side by side. A quick way to shrink PNG, JPG, and WebP files before publishing, with live previews and quality controls.",
+  "category": "Image Optimization",
+  "publishedDate": "2026-01-15",
+  "tags": ["Images", "Compression", "Optimization", "Web Performance", "Tool"],
+  "featured": false,
+  "isPaid": false,
+  "difficulty": "beginner",
+  "display": true
+}

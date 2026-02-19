@@ -33,7 +33,7 @@ export interface ResourcePreview {
   title: string;
   subtitle: string;
   description: string;
-  externalUrl: string;
+  externalUrl?: string;
   publishedDate: Date | string;
   thumbnail?: ThumbnailData;
   tags: string[];

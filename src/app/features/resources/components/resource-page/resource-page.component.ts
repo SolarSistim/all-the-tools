@@ -41,6 +41,7 @@ export class ResourcePageComponent implements OnInit {
     const resource = this.route.snapshot.data['resource'] as Resource;
 
     if (resource) {
+      console.log('[Resource Page] resource data:', resource);
       this.resource = resource;
       this.resourcePageUrl = this.resourcesService.getResourcePageUrl(resource.slug);
       this.updateMetaTags();

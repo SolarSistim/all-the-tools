@@ -1,0 +1,14 @@
+{
+  "id": "masterselects-browser-video-editor",
+  "slug": "masterselects-browser-video-editor",
+  "title": "MASterSelects - Professional In-Browser Video Editor",
+  "subtitle": "GPU-Accelerated Video Editing Powered by WebGPU with No Uploads or Subscriptions",
+  "description": "MASterSelects is a powerful video editor that runs entirely in your browser with no uploads, no server processing, and no subscription required. Built with WebGPU for hardware-accelerated rendering, it leverages your local GPU to deliver professional-grade video editing at 60fps.",
+  "category": "Digital Tools",
+  "publishedDate": "2026-02-02",
+  "tags": ["Video Editing", "WebGPU", "Browser Tools", "GPU Acceleration", "Video Production", "Web Development"],
+  "featured": true,
+  "isPaid": false,
+  "difficulty": "intermediate",
+  "display": true
+}

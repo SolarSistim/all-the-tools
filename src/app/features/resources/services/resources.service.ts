@@ -40,7 +40,11 @@ export class ResourcesService {
   private indexSlugs: string[] | null = null;
   private indexFetch$: Observable<string[]> | null = null;
 
-  // Per-resource cache and in-flight dedup
+  // Preview cache (listing only — no externalUrl, metaDescription, etc.)
+  private previewCache = new Map<string, ResourcePreview>();
+  private previewFetches = new Map<string, Observable<ResourcePreview | null>>();
+
+  // Full resource cache (detail page)
   private resourceCache = new Map<string, Resource>();
   private resourceFetches = new Map<string, Observable<Resource | null>>();
 
@@ -63,7 +67,26 @@ export class ResourcesService {
     return this.indexFetch$;
   }
 
-  // ── Individual resource ──────────────────────────────────────────────────
+  // ── Preview (listing) ────────────────────────────────────────────────────
+
+  private fetchPreview(slug: string): Observable<ResourcePreview | null> {
+    if (this.previewCache.has(slug)) {
+      return of(this.previewCache.get(slug)!);
+    }
+    if (!this.previewFetches.has(slug)) {
+      this.previewFetches.set(
+        slug,
+        this.http.get<ResourcePreview>(`${this.apiUrl}/previews/${slug}.json`).pipe(
+          tap((r) => this.previewCache.set(slug, r)),
+          catchError(() => of(null)),
+          shareReplay(1)
+        )
+      );
+    }
+    return this.previewFetches.get(slug)!;
+  }
+
+  // ── Full resource (detail page) ──────────────────────────────────────────
 
   private fetchResource(slug: string): Observable<Resource | null> {
     if (this.resourceCache.has(slug)) {
@@ -122,9 +145,9 @@ export class ResourcesService {
           });
         }
 
-        return forkJoin(slugsToFetch.map((s) => this.fetchResource(s))).pipe(
+        return forkJoin(slugsToFetch.map((s) => this.fetchPreview(s))).pipe(
           map((resources) => {
-            let items = resources.filter(Boolean) as Resource[];
+            let items = resources.filter(Boolean) as ResourcePreview[];
 
             if (filters?.category) {
               items = items.filter((r) => r.category === filters.category);
@@ -159,7 +182,7 @@ export class ResourcesService {
               : items; // already sliced via slugsToFetch
 
             return {
-              items: pageItems as unknown as ResourcePreview[],
+              items: pageItems,
               currentPage: page,
               pageSize,
               totalItems,
@@ -201,12 +224,12 @@ export class ResourcesService {
           );
         }
 
-        // Fill remaining slots from cached resources with matching tags/category
+        // Fill remaining slots from cached previews with matching tags/category
         if (relatedSlugs.length < limit) {
           const extra = slugs
             .filter((s) => s !== resource.slug && !relatedSlugs.includes(s))
-            .filter((s) => this.resourceCache.has(s))
-            .map((s) => this.resourceCache.get(s)!)
+            .filter((s) => this.previewCache.has(s))
+            .map((s) => this.previewCache.get(s)!)
             .filter(
               (r) =>
                 r.tags.some((t) => resource.tags.includes(t)) ||
@@ -220,33 +243,33 @@ export class ResourcesService {
         if (relatedSlugs.length === 0) return of([]);
 
         return forkJoin(
-          relatedSlugs.slice(0, limit).map((s) => this.fetchResource(s))
+          relatedSlugs.slice(0, limit).map((s) => this.fetchPreview(s))
         ).pipe(
-          map((resources) => resources.filter(Boolean) as unknown as ResourcePreview[])
+          map((resources) => resources.filter(Boolean) as ResourcePreview[])
         );
       })
     );
   }
 
   getCategories(): Observable<string[]> {
-    const cached = [...this.resourceCache.values()];
+    const cached = [...this.previewCache.values()];
     return of([...new Set(cached.map((r) => r.category))].sort());
   }
 
   getTags(): Observable<string[]> {
     const tags = new Set<string>();
-    this.resourceCache.forEach((r) => r.tags.forEach((t) => tags.add(t)));
+    this.previewCache.forEach((r) => r.tags.forEach((t) => tags.add(t)));
     return of([...tags].sort());
   }
 
   getFeaturedResources(limit: number = 3): Observable<ResourcePreview[]> {
     return this.fetchIndex().pipe(
       switchMap((slugs) =>
-        forkJoin(slugs.slice(0, limit * 3).map((s) => this.fetchResource(s))).pipe(
+        forkJoin(slugs.slice(0, limit * 3).map((s) => this.fetchPreview(s))).pipe(
           map((resources) =>
-            (resources.filter(Boolean) as Resource[])
+            (resources.filter(Boolean) as ResourcePreview[])
               .filter((r) => r.featured)
-              .slice(0, limit) as unknown as ResourcePreview[]
+              .slice(0, limit)
           )
         )
       )
@@ -256,8 +279,8 @@ export class ResourcesService {
   getRecentResources(limit: number = 5): Observable<ResourcePreview[]> {
     return this.fetchIndex().pipe(
       switchMap((slugs) =>
-        forkJoin(slugs.slice(0, limit).map((s) => this.fetchResource(s))).pipe(
-          map((resources) => resources.filter(Boolean) as unknown as ResourcePreview[])
+        forkJoin(slugs.slice(0, limit).map((s) => this.fetchPreview(s))).pipe(
+          map((resources) => resources.filter(Boolean) as ResourcePreview[])
         )
       )
     );
@@ -267,8 +290,8 @@ export class ResourcesService {
     return this.fetchIndex().pipe(
       switchMap((slugs) => {
         if (!slugs.length) return of([]);
-        return forkJoin(slugs.map((s) => this.fetchResource(s))).pipe(
-          map((resources) => resources.filter(Boolean) as unknown as ResourcePreview[])
+        return forkJoin(slugs.map((s) => this.fetchPreview(s))).pipe(
+          map((resources) => resources.filter(Boolean) as ResourcePreview[])
         );
       })
     );

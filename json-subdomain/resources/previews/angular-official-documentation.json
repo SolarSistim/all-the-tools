@@ -1,0 +1,14 @@
+{
+  "id": "angular-official-documentation",
+  "slug": "angular-official-documentation",
+  "title": "Angular Official Documentation",
+  "subtitle": "Comprehensive guide to the Angular framework",
+  "description": "The official Angular documentation provides in-depth guides, API references, and tutorials for building modern web applications with Angular.",
+  "category": "Framework Documentation",
+  "publishedDate": "2025-12-01",
+  "tags": ["Angular", "Documentation", "Web Development", "TypeScript"],
+  "featured": true,
+  "isPaid": false,
+  "difficulty": "intermediate",
+  "display": true
+}
