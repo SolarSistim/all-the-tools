@@ -182,19 +182,6 @@
       </button>
     </div>
 
-    <hr class="pagination-divider top-divider-upper" *ngIf="!loading && articles.length > 0">
-
-    <!-- Pagination (Top) -->
-    <app-pagination
-      *ngIf="!loading && articles.length > 0"
-      [currentPage]="currentPage"
-      [totalPages]="totalPages"
-      (pageChange)="onPageChange($event)"
-      class="top-pagination"
-    ></app-pagination>
-
-    <hr class="pagination-divider top-divider-lower" *ngIf="!loading && articles.length > 0">
-
     <!-- Articles Section -->
     <section class="articles-section" *ngIf="!loading && articles.length > 0">
       <h2 class="section-title">Latest Posts</h2>
@@ -313,8 +300,6 @@
       </div>
     </div>
 
-    <hr class="pagination-divider bottom-divider-upper" *ngIf="!loading && articles.length > 0">
-
     <!-- Pagination -->
     <app-pagination
       *ngIf="!loading && articles.length > 0"
@@ -323,7 +308,5 @@
       (pageChange)="onPageChange($event)"
       class="bottom-pagination"
     ></app-pagination>
-
-    <hr class="pagination-divider bottom-divider-lower" *ngIf="!loading && articles.length > 0">
   </div>
 </div>

@@ -52,7 +52,7 @@ export class ResourcesListingComponent implements OnInit {
   currentPage = 1;
   totalPages = 1;
   totalItems = 0;
-  pageSize = 21;
+  pageSize = 9;
   loading = true;
   selectedCategory: string | null = null;
   selectedTag: string | null = null;
@@ -104,6 +104,7 @@ export class ResourcesListingComponent implements OnInit {
       .getResourcePreviews(this.currentPage, this.pageSize, filters)
       .subscribe({
         next: (response: PaginatedResponse<ResourcePreview>) => {
+          console.log('[Resources] Page load response:', response);
           this.resources = response.items;
           this.totalPages = response.totalPages;
           this.totalItems = response.totalItems;

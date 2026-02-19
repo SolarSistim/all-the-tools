@@ -275,16 +275,20 @@
   color: var(--neon-cyan);
 }
 
-// Resources Grid (4-column layout)
+// Resources Grid (3-column layout)
 .resources-grid {
   display: grid;
   gap: 2rem;
   margin-bottom: 3rem;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
 
   // Responsive breakpoints
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; // Single column on mobile
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
   }
 }
 

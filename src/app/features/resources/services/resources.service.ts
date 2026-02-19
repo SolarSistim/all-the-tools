@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, shareReplay } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable, of, forkJoin, shareReplay } from 'rxjs';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import {
   Resource,
   ResourcePreview,
@@ -13,9 +13,14 @@ import { environment } from '../../../../environments/environment';
 
 /**
  * ResourcesService
- * Fetches resources from json.allthethings.dev/resources/.
- * resources.json is fetched once and cached for listing/search.
- * Individual {slug}.json files are fetched on demand for detail pages.
+ *
+ * resources.json  — lightweight index (IDs only, ordered newest-first)
+ * {slug}.json     — full resource data, fetched on demand per page or detail view
+ *
+ * Flow:
+ *  1. Fetch resources.json once → ordered list of slugs (cached)
+ *  2. For each listing page: slice the relevant slugs, fetch only those JSONs in parallel
+ *  3. Detail page / click: fetch (or return cached) individual {slug}.json
  */
 @Injectable({
   providedIn: 'root',
@@ -24,31 +29,33 @@ export class ResourcesService {
   private http = inject(HttpClient);
 
   private readonly config: ResourcesConfig = {
-    pageSize: 21,
+    pageSize: 9,
     baseUrl: 'https://www.allthethings.dev/resources',
     defaultOgImage: 'https://www.allthethings.dev/meta-images/og-resources.png',
   };
 
   private readonly apiUrl = environment.resourcesUrl;
 
-  // In-memory cache for the index
-  private indexCache: ResourcePreview[] | null = null;
-  // Shared in-flight observable — prevents duplicate HTTP requests when
-  // the listing fires two calls simultaneously (search autocomplete + page load)
-  private indexFetch$: Observable<ResourcePreview[]> | null = null;
+  // Ordered slug list from resources.json
+  private indexSlugs: string[] | null = null;
+  private indexFetch$: Observable<string[]> | null = null;
 
-  private fetchIndex(): Observable<ResourcePreview[]> {
-    if (this.indexCache) {
-      return of(this.indexCache);
-    }
+  // Per-resource cache and in-flight dedup
+  private resourceCache = new Map<string, Resource>();
+  private resourceFetches = new Map<string, Observable<Resource | null>>();
+
+  // ── Index ────────────────────────────────────────────────────────────────
+
+  private fetchIndex(): Observable<string[]> {
+    if (this.indexSlugs) return of(this.indexSlugs);
     if (!this.indexFetch$) {
       this.indexFetch$ = this.http
-        .get<{ resources: ResourcePreview[] }>(`${this.apiUrl}/resources.json`)
+        .get<{ resources: { id: string }[] }>(`${this.apiUrl}/resources.json`)
         .pipe(
           map((response) => {
-            const previews = response.resources.filter((r) => r.display !== false);
-            this.indexCache = previews;
-            return previews;
+            const slugs = response.resources.map((r) => r.id);
+            this.indexSlugs = slugs;
+            return slugs;
           }),
           shareReplay(1)
         );
@@ -56,9 +63,33 @@ export class ResourcesService {
     return this.indexFetch$;
   }
 
+  // ── Individual resource ──────────────────────────────────────────────────
+
+  private fetchResource(slug: string): Observable<Resource | null> {
+    if (this.resourceCache.has(slug)) {
+      return of(this.resourceCache.get(slug)!);
+    }
+    if (!this.resourceFetches.has(slug)) {
+      this.resourceFetches.set(
+        slug,
+        this.http.get<Resource>(`${this.apiUrl}/${slug}.json`).pipe(
+          tap((r) => this.resourceCache.set(slug, r)),
+          catchError(() => of(null)),
+          shareReplay(1)
+        )
+      );
+    }
+    return this.resourceFetches.get(slug)!;
+  }
+
+  // ── Public API ───────────────────────────────────────────────────────────
+
   /**
    * Get paginated resource previews.
-   * Fetches resources.json once, then paginates client-side from cache.
+   *
+   * Without filters: only fetches the current page's individual JSONs.
+   * With filters:    fetches all JSONs (needed to evaluate filter conditions),
+   *                  then filters and paginates in memory.
    */
   getResourcePreviews(
     page: number = 1,
@@ -66,169 +97,181 @@ export class ResourcesService {
     filters?: ResourceFilters
   ): Observable<PaginatedResponse<ResourcePreview>> {
     return this.fetchIndex().pipe(
-      map((previews) => {
-        let filtered = previews;
+      switchMap((slugs) => {
+        const hasFilters = !!(
+          filters?.category ||
+          filters?.tag ||
+          filters?.search ||
+          filters?.featured !== undefined ||
+          filters?.isPaid !== undefined ||
+          filters?.difficulty
+        );
 
-        if (filters?.category) {
-          filtered = filtered.filter((p) => p.category === filters.category);
-        }
-        if (filters?.tag) {
-          filtered = filtered.filter((p) => p.tags.includes(filters.tag!));
-        }
-        if (filters?.featured !== undefined) {
-          filtered = filtered.filter((p) => p.featured === filters.featured);
-        }
-        if (filters?.isPaid !== undefined) {
-          filtered = filtered.filter((p) => p.isPaid === filters.isPaid);
-        }
-        if (filters?.difficulty) {
-          filtered = filtered.filter((p) => p.difficulty === filters.difficulty);
-        }
-        if (filters?.search) {
-          const searchLower = filters.search.toLowerCase();
-          filtered = filtered.filter(
-            (p) =>
-              p.title.toLowerCase().includes(searchLower) ||
-              p.description.toLowerCase().includes(searchLower) ||
-              p.subtitle.toLowerCase().includes(searchLower) ||
-              p.tags.some((tag) => tag.toLowerCase().includes(searchLower))
-          );
+        // Determine which slugs to fetch
+        const slugsToFetch = hasFilters
+          ? slugs                                              // all (to filter)
+          : slugs.slice((page - 1) * pageSize, page * pageSize); // current page only
+
+        if (slugsToFetch.length === 0) {
+          return of({
+            items: [] as ResourcePreview[],
+            currentPage: page,
+            pageSize,
+            totalItems: slugs.length,
+            totalPages: Math.ceil(slugs.length / pageSize),
+          });
         }
 
-        // Sort newest first (resources.json is pre-sorted, but respect filters)
-        filtered = [...filtered].sort((a, b) => {
-          const dateA = new Date(a.publishedDate).getTime();
-          const dateB = new Date(b.publishedDate).getTime();
-          return dateB - dateA;
-        });
+        return forkJoin(slugsToFetch.map((s) => this.fetchResource(s))).pipe(
+          map((resources) => {
+            let items = resources.filter(Boolean) as Resource[];
 
-        const totalItems = filtered.length;
-        const totalPages = Math.ceil(totalItems / pageSize);
-        const startIndex = (page - 1) * pageSize;
-        const items = filtered.slice(startIndex, startIndex + pageSize);
+            if (filters?.category) {
+              items = items.filter((r) => r.category === filters.category);
+            }
+            if (filters?.tag) {
+              items = items.filter((r) => r.tags.includes(filters.tag!));
+            }
+            if (filters?.featured !== undefined) {
+              items = items.filter((r) => r.featured === filters.featured);
+            }
+            if (filters?.isPaid !== undefined) {
+              items = items.filter((r) => r.isPaid === filters.isPaid);
+            }
+            if (filters?.difficulty) {
+              items = items.filter((r) => r.difficulty === filters.difficulty);
+            }
+            if (filters?.search) {
+              const q = filters.search.toLowerCase();
+              items = items.filter(
+                (r) =>
+                  r.title.toLowerCase().includes(q) ||
+                  r.description.toLowerCase().includes(q) ||
+                  r.subtitle.toLowerCase().includes(q) ||
+                  r.tags.some((t) => t.toLowerCase().includes(q))
+              );
+            }
 
-        return { items, currentPage: page, pageSize, totalItems, totalPages };
+            const totalItems = hasFilters ? items.length : slugs.length;
+            const totalPages = Math.ceil(totalItems / pageSize);
+            const pageItems = hasFilters
+              ? items.slice((page - 1) * pageSize, page * pageSize)
+              : items; // already sliced via slugsToFetch
+
+            return {
+              items: pageItems as unknown as ResourcePreview[],
+              currentPage: page,
+              pageSize,
+              totalItems,
+              totalPages,
+            };
+          })
+        );
       })
     );
   }
 
   /**
-   * Get full resource data by slug.
-   * Fetches the individual {slug}.json from the API.
+   * Fetch a single resource by slug.
+   * Returns cached data immediately if already loaded.
    */
   getResourceBySlug(slug: string): Observable<Resource | null> {
-    return this.http
-      .get<Resource>(`${this.apiUrl}/${slug}.json`)
-      .pipe(catchError(() => of(null)));
+    return this.fetchResource(slug);
   }
 
-  /**
-   * Get resource by ID (id === slug in the new JSON schema).
-   */
   getResourceById(id: string): Observable<Resource | null> {
     return this.getResourceBySlug(id);
   }
 
   /**
-   * Get related resources for a given resource.
-   * relatedResources in individual JSONs are slugs.
+   * Get related resources. Uses relatedResources slugs from the individual JSON,
+   * falling back to tag/category matches from already-cached resources.
    */
   getRelatedResources(
     resource: Resource,
     limit: number = 3
   ): Observable<ResourcePreview[]> {
     return this.fetchIndex().pipe(
-      map((previews) => {
-        let related: ResourcePreview[] = [];
+      switchMap((slugs) => {
+        let relatedSlugs: string[] = [];
 
-        // Match by slug (relatedResources are slugs in new schema)
-        if (resource.relatedResources && resource.relatedResources.length > 0) {
-          related = resource.relatedResources
-            .map((slug) => previews.find((p) => p.slug === slug))
-            .filter(Boolean) as ResourcePreview[];
+        if (resource.relatedResources?.length) {
+          relatedSlugs = resource.relatedResources.filter((s) =>
+            slugs.includes(s)
+          );
         }
 
-        // Fall back to matching tags
-        if (related.length < limit) {
-          const byTags = previews
-            .filter((p) => p.slug !== resource.slug)
-            .filter((p) => !related.find((r) => r.slug === p.slug))
-            .filter((p) => p.tags.some((tag) => resource.tags.includes(tag)))
-            .slice(0, limit - related.length);
-          related = [...related, ...byTags];
+        // Fill remaining slots from cached resources with matching tags/category
+        if (relatedSlugs.length < limit) {
+          const extra = slugs
+            .filter((s) => s !== resource.slug && !relatedSlugs.includes(s))
+            .filter((s) => this.resourceCache.has(s))
+            .map((s) => this.resourceCache.get(s)!)
+            .filter(
+              (r) =>
+                r.tags.some((t) => resource.tags.includes(t)) ||
+                r.category === resource.category
+            )
+            .map((r) => r.slug)
+            .slice(0, limit - relatedSlugs.length);
+          relatedSlugs = [...relatedSlugs, ...extra];
         }
 
-        // Fall back to same category
-        if (related.length < limit) {
-          const byCategory = previews
-            .filter((p) => p.slug !== resource.slug)
-            .filter((p) => p.category === resource.category)
-            .filter((p) => !related.find((r) => r.slug === p.slug))
-            .slice(0, limit - related.length);
-          related = [...related, ...byCategory];
-        }
+        if (relatedSlugs.length === 0) return of([]);
 
-        return related.slice(0, limit);
+        return forkJoin(
+          relatedSlugs.slice(0, limit).map((s) => this.fetchResource(s))
+        ).pipe(
+          map((resources) => resources.filter(Boolean) as unknown as ResourcePreview[])
+        );
       })
     );
   }
 
-  /**
-   * Get all unique categories from the index.
-   */
   getCategories(): Observable<string[]> {
-    return this.fetchIndex().pipe(
-      map((previews) => {
-        const categories = [...new Set(previews.map((r) => r.category))];
-        return categories.sort();
-      })
-    );
+    const cached = [...this.resourceCache.values()];
+    return of([...new Set(cached.map((r) => r.category))].sort());
   }
 
-  /**
-   * Get all unique tags from the index.
-   */
   getTags(): Observable<string[]> {
-    return this.fetchIndex().pipe(
-      map((previews) => {
-        const tags = new Set<string>();
-        previews.forEach((r) => r.tags.forEach((tag) => tags.add(tag)));
-        return [...tags].sort();
-      })
-    );
+    const tags = new Set<string>();
+    this.resourceCache.forEach((r) => r.tags.forEach((t) => tags.add(t)));
+    return of([...tags].sort());
   }
 
-  /**
-   * Get featured resources from the index.
-   */
   getFeaturedResources(limit: number = 3): Observable<ResourcePreview[]> {
     return this.fetchIndex().pipe(
-      map((previews) => previews.filter((p) => p.featured).slice(0, limit))
-    );
-  }
-
-  /**
-   * Get most recent resources from the index.
-   */
-  getRecentResources(limit: number = 5): Observable<ResourcePreview[]> {
-    return this.fetchIndex().pipe(
-      map((previews) =>
-        [...previews]
-          .sort((a, b) => {
-            const dateA = new Date(a.publishedDate).getTime();
-            const dateB = new Date(b.publishedDate).getTime();
-            return dateB - dateA;
-          })
-          .slice(0, limit)
+      switchMap((slugs) =>
+        forkJoin(slugs.slice(0, limit * 3).map((s) => this.fetchResource(s))).pipe(
+          map((resources) =>
+            (resources.filter(Boolean) as Resource[])
+              .filter((r) => r.featured)
+              .slice(0, limit) as unknown as ResourcePreview[]
+          )
+        )
       )
     );
   }
 
-  /**
-   * Get all displayed resources from the index.
-   */
+  getRecentResources(limit: number = 5): Observable<ResourcePreview[]> {
+    return this.fetchIndex().pipe(
+      switchMap((slugs) =>
+        forkJoin(slugs.slice(0, limit).map((s) => this.fetchResource(s))).pipe(
+          map((resources) => resources.filter(Boolean) as unknown as ResourcePreview[])
+        )
+      )
+    );
+  }
+
   getAllResources(): Observable<ResourcePreview[]> {
-    return this.fetchIndex();
+    return this.fetchIndex().pipe(
+      switchMap((slugs) => {
+        if (!slugs.length) return of([]);
+        return forkJoin(slugs.map((s) => this.fetchResource(s))).pipe(
+          map((resources) => resources.filter(Boolean) as unknown as ResourcePreview[])
+        );
+      })
+    );
   }
 
   getConfig(): ResourcesConfig {
