@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
+import { environment } from '../environments/environment';
 
 export const routes: Routes = [
   {
@@ -273,6 +274,14 @@ export const routes: Routes = [
     loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
     title: '404 - Page Not Found | AllTheTools.dev'
   },
+
+  // ── Dev-only: Compose Tool ────────────────────────────────────────────────
+  // Only registered in development; never included in the production bundle.
+  ...(!environment.production ? [{
+    path: 'compose',
+    loadChildren: () => import('./features/compose/compose.routes').then(m => m.COMPOSE_ROUTES),
+  }] : []),
+
   {
     path: '**',
     loadComponent: () => import('./features/not-found/not-found.component').then(m => m.NotFoundComponent),
