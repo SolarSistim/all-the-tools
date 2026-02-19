@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, of, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, forkJoin, shareReplay } from 'rxjs';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import {
   Article,
   ArticlePreview,
@@ -8,34 +9,112 @@ import {
   BlogConfig,
   ContentBlock,
 } from '../models/blog.models';
-import { BLOG_ARTICLES_METADATA, ArticleMetadata } from '../data/articles-metadata.data';
-import { loadArticleContent } from '../data/content/article-content-loader';
+import { environment } from '../../../../environments/environment';
 
 /**
  * BlogService
- * Manages blog articles, pagination, and article retrieval
- * For static prerendered sites - uses client-side pagination
+ *
+ * blog.json           — lightweight index (slugs only, ordered newest-first)
+ * previews/{slug}.json — lightweight preview for listing cards
+ * articles/{slug}.json — full article data including content blocks
+ *
+ * Flow:
+ *  1. Fetch blog.json once → ordered list of slugs (cached)
+ *  2. Listing page (no filters): slice relevant slugs, forkJoin only those previews
+ *  3. Listing page (with filters): fetch all previews, filter, paginate
+ *  4. Detail page: fetch (or return cached) articles/{slug}.json
  */
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
+  private http = inject(HttpClient);
+
   private readonly config: BlogConfig = {
     pageSize: 9,
     baseUrl: 'https://www.allthethings.dev/blog',
     defaultOgImage: 'https://www.allthethings.dev/meta-images/og-blog.png',
   };
 
-  // Cache for article metadata and previews
-  private metadataCache = signal<ArticleMetadata[]>(BLOG_ARTICLES_METADATA);
-  private fullArticlesCache = new Map<string, Article>(); // Cache loaded articles
+  private readonly apiUrl = environment.blogUrl;
 
-  constructor() {
-    // No initialization needed - metadata is already loaded from constant
+  // Ordered slug list from blog.json
+  private indexSlugs: string[] | null = null;
+  private indexFetch$: Observable<string[]> | null = null;
+
+  // Preview cache (listing only — no content, metaDescription, etc.)
+  private previewCache = new Map<string, ArticlePreview>();
+  private previewFetches = new Map<string, Observable<ArticlePreview | null>>();
+
+  // Full article cache (detail page)
+  private articleCache = new Map<string, Article>();
+  private articleFetches = new Map<string, Observable<Article | null>>();
+
+  // ── Index ────────────────────────────────────────────────────────────────
+
+  private fetchIndex(): Observable<string[]> {
+    if (this.indexSlugs) return of(this.indexSlugs);
+    if (!this.indexFetch$) {
+      this.indexFetch$ = this.http
+        .get<{ articles: { id: string }[] }>(`${this.apiUrl}/blog.json`)
+        .pipe(
+          map((response) => {
+            const slugs = response.articles.map((a) => a.id);
+            this.indexSlugs = slugs;
+            return slugs;
+          }),
+          shareReplay(1)
+        );
+    }
+    return this.indexFetch$;
   }
 
+  // ── Preview (listing) ────────────────────────────────────────────────────
+
+  private fetchPreview(slug: string): Observable<ArticlePreview | null> {
+    if (this.previewCache.has(slug)) {
+      return of(this.previewCache.get(slug)!);
+    }
+    if (!this.previewFetches.has(slug)) {
+      this.previewFetches.set(
+        slug,
+        this.http.get<ArticlePreview>(`${this.apiUrl}/previews/${slug}.json`).pipe(
+          tap((a) => this.previewCache.set(slug, a)),
+          catchError(() => of(null)),
+          shareReplay(1)
+        )
+      );
+    }
+    return this.previewFetches.get(slug)!;
+  }
+
+  // ── Full article (detail page) ───────────────────────────────────────────
+
+  private fetchArticle(slug: string): Observable<Article | null> {
+    if (this.articleCache.has(slug)) {
+      return of(this.articleCache.get(slug)!);
+    }
+    if (!this.articleFetches.has(slug)) {
+      this.articleFetches.set(
+        slug,
+        this.http.get<Article>(`${this.apiUrl}/articles/${slug}.json`).pipe(
+          tap((a) => this.articleCache.set(slug, a)),
+          catchError(() => of(null)),
+          shareReplay(1)
+        )
+      );
+    }
+    return this.articleFetches.get(slug)!;
+  }
+
+  // ── Public API ───────────────────────────────────────────────────────────
+
   /**
-   * Get paginated article previews
+   * Get paginated article previews.
+   *
+   * Without filters: only fetches the current page's individual previews.
+   * With filters:    fetches all previews (needed to evaluate filter conditions),
+   *                  then filters and paginates in memory.
    */
   getArticlePreviews(
     page: number = 1,
@@ -46,229 +125,201 @@ export class BlogService {
       featured?: boolean;
     }
   ): Observable<PaginatedResponse<ArticlePreview>> {
-    // Use metadata with estimated reading times
-    let previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
-      ...metadata,
-      readingTime: this.estimateReadingTime(metadata),
-    }));
+    return this.fetchIndex().pipe(
+      switchMap((slugs) => {
+        const hasFilters = !!(
+          filters?.category ||
+          filters?.tag ||
+          filters?.featured !== undefined
+        );
 
-    // Filter out non-displayed articles (display defaults to true if not specified)
-    previews = previews.filter((p) => p.display !== false);
+        const slugsToFetch = hasFilters
+          ? slugs
+          : slugs.slice((page - 1) * pageSize, page * pageSize);
 
-    // Apply filters
-    if (filters?.category) {
-      previews = previews.filter((p) => p.category === filters.category);
-    }
-    if (filters?.tag) {
-      previews = previews.filter((p) => p.tags.includes(filters.tag!));
-    }
-    if (filters?.featured !== undefined) {
-      previews = previews.filter((p) => p.featured === filters.featured);
-    }
-
-    // Sort by date (newest first)
-    previews = [...previews].sort((a, b) => {
-      const dateA = new Date(a.publishedDate).getTime();
-      const dateB = new Date(b.publishedDate).getTime();
-      return dateB - dateA;
-    });
-
-    // Calculate pagination
-    const totalItems = previews.length;
-    const totalPages = Math.ceil(totalItems / pageSize);
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const items = previews.slice(startIndex, endIndex);
-
-    return of({
-      items,
-      currentPage: page,
-      pageSize,
-      totalItems,
-      totalPages,
-    });
-  }
-
-  /**
-   * Get article by slug (loads content dynamically)
-   */
-  getArticleBySlug(slug: string): Observable<Article | null> {
-    // Check if article is already fully loaded in cache
-    if (this.fullArticlesCache.has(slug)) {
-      return of(this.fullArticlesCache.get(slug)!);
-    }
-
-    // Find metadata
-    const metadata = this.metadataCache().find((m) => m.slug === slug);
-    if (!metadata) {
-      return of(null);
-    }
-
-    // Load content and merge with metadata
-    return from(loadArticleContent(slug)).pipe(
-      map((content) => {
-        if (!content) {
-          return null;
+        if (slugsToFetch.length === 0) {
+          return of({
+            items: [] as ArticlePreview[],
+            currentPage: page,
+            pageSize,
+            totalItems: slugs.length,
+            totalPages: Math.ceil(slugs.length / pageSize),
+          });
         }
 
-        const article: Article = {
-          ...metadata,
-          content,
-        };
+        return forkJoin(slugsToFetch.map((s) => this.fetchPreview(s))).pipe(
+          map((previews) => {
+            let items = previews.filter(Boolean) as ArticlePreview[];
 
-        // Cache the full article
-        this.fullArticlesCache.set(slug, article);
-        return article;
+            // Filter out non-displayed articles
+            items = items.filter((p) => p.display !== false);
+
+            if (filters?.category) {
+              items = items.filter((p) => p.category === filters.category);
+            }
+            if (filters?.tag) {
+              items = items.filter((p) => p.tags.includes(filters.tag!));
+            }
+            if (filters?.featured !== undefined) {
+              items = items.filter((p) => p.featured === filters.featured);
+            }
+
+            const totalItems = hasFilters ? items.length : slugs.length;
+            const totalPages = Math.ceil(totalItems / pageSize);
+            const pageItems = hasFilters
+              ? items.slice((page - 1) * pageSize, page * pageSize)
+              : items;
+
+            return {
+              items: pageItems,
+              currentPage: page,
+              pageSize,
+              totalItems,
+              totalPages,
+            };
+          })
+        );
       })
     );
   }
 
   /**
-   * Get article by ID (loads content dynamically)
+   * Fetch a single article by slug (full data including content).
    */
-  getArticleById(id: string): Observable<Article | null> {
-    const metadata = this.metadataCache().find((m) => m.id === id);
-    if (!metadata) {
-      return of(null);
-    }
-
-    // Use getArticleBySlug to leverage caching and content loading
-    return this.getArticleBySlug(metadata.slug);
+  getArticleBySlug(slug: string): Observable<Article | null> {
+    return this.fetchArticle(slug);
   }
 
   /**
-   * Get related articles
+   * Fetch a single article by ID.
+   * In the JSON architecture id = slug, so this delegates to getArticleBySlug.
+   */
+  getArticleById(id: string): Observable<Article | null> {
+    return this.getArticleBySlug(id);
+  }
+
+  /**
+   * Get related articles for a given article.
+   * Uses relatedArticles slugs from the full JSON, falling back to
+   * tag/category matches from already-cached previews.
    */
   getRelatedArticles(
     article: Article,
     limit: number = 3
   ): Observable<ArticlePreview[]> {
-    let related: ArticlePreview[] = [];
+    return this.fetchIndex().pipe(
+      switchMap((slugs) => {
+        let relatedSlugs: string[] = [];
 
-    // Use metadata with estimated reading times
-    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
-      ...metadata,
-      readingTime: this.estimateReadingTime(metadata),
-    }));
+        if (article.relatedArticles?.length) {
+          relatedSlugs = article.relatedArticles.filter((s) =>
+            slugs.includes(s)
+          );
+        }
 
-    const displayedPreviews = previews.filter((p) => p.display !== false);
+        // Fill remaining slots from cached previews with matching tags/category
+        if (relatedSlugs.length < limit) {
+          const extra = slugs
+            .filter((s) => s !== article.slug && !relatedSlugs.includes(s))
+            .filter((s) => this.previewCache.has(s))
+            .map((s) => this.previewCache.get(s)!)
+            .filter(
+              (p) =>
+                p.tags.some((t) => article.tags.includes(t)) ||
+                p.category === article.category
+            )
+            .map((p) => p.slug)
+            .slice(0, limit - relatedSlugs.length);
+          relatedSlugs = [...relatedSlugs, ...extra];
+        }
 
-    // First, try to get explicitly related articles
-    if (article.relatedArticles && article.relatedArticles.length > 0) {
-      const relatedById = displayedPreviews.filter((p) =>
-        article.relatedArticles!.includes(p.id)
-      );
-      related = [...relatedById];
-    }
+        if (relatedSlugs.length === 0) return of([]);
 
-    // If not enough, find articles with matching tags
-    if (related.length < limit) {
-      const byTags = displayedPreviews
-        .filter((p) => p.id !== article.id)
-        .filter((p) => p.tags.some((tag) => article.tags.includes(tag)))
-        .slice(0, limit - related.length);
-      related = [...related, ...byTags];
-    }
-
-    // If still not enough, get from same category
-    if (related.length < limit) {
-      const byCategory = displayedPreviews
-        .filter((p) => p.id !== article.id)
-        .filter((p) => p.category === article.category)
-        .filter((p) => !related.find((r) => r.id === p.id))
-        .slice(0, limit - related.length);
-      related = [...related, ...byCategory];
-    }
-
-    return of(related.slice(0, limit));
+        return forkJoin(
+          relatedSlugs.slice(0, limit).map((s) => this.fetchPreview(s))
+        ).pipe(
+          map((previews) => previews.filter(Boolean) as ArticlePreview[])
+        );
+      })
+    );
   }
 
   /**
-   * Get all categories
+   * Get all categories (from cached previews).
    */
   getCategories(): Observable<string[]> {
-    const categories = [
-      ...new Set(this.metadataCache().map((m) => m.category)),
-    ];
-    return of(categories.sort());
+    const cached = [...this.previewCache.values()];
+    return of([...new Set(cached.map((p) => p.category))].sort());
   }
 
   /**
-   * Get all tags
+   * Get all tags (from cached previews).
    */
   getTags(): Observable<string[]> {
     const tags = new Set<string>();
-    this.metadataCache().forEach((metadata) => {
-      metadata.tags.forEach((tag) => tags.add(tag));
-    });
+    this.previewCache.forEach((p) => p.tags.forEach((t) => tags.add(t)));
     return of([...tags].sort());
   }
 
   /**
-   * Get featured articles
+   * Get featured articles.
    */
   getFeaturedArticles(limit: number = 3): Observable<ArticlePreview[]> {
-    // Use metadata with estimated reading times
-    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
-      ...metadata,
-      readingTime: this.estimateReadingTime(metadata),
-    }));
-
-    const featured = previews
-      .filter((p) => p.display !== false)
-      .filter((p) => p.featured)
-      .slice(0, limit);
-    return of(featured);
+    return this.fetchIndex().pipe(
+      switchMap((slugs) =>
+        forkJoin(slugs.slice(0, limit * 3).map((s) => this.fetchPreview(s))).pipe(
+          map((previews) =>
+            (previews.filter(Boolean) as ArticlePreview[])
+              .filter((p) => p.featured)
+              .slice(0, limit)
+          )
+        )
+      )
+    );
   }
 
   /**
-   * Get recent articles
+   * Get recent articles (first N from index, already ordered newest-first).
    */
   getRecentArticles(limit: number = 5): Observable<ArticlePreview[]> {
-    // Use metadata with estimated reading times
-    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
-      ...metadata,
-      readingTime: this.estimateReadingTime(metadata),
-    }));
-
-    const recent = [...previews]
-      .filter((p) => p.display !== false)
-      .sort((a, b) => {
-        const dateA = new Date(a.publishedDate).getTime();
-        const dateB = new Date(b.publishedDate).getTime();
-        return dateB - dateA;
-      })
-      .slice(0, limit);
-    return of(recent);
+    return this.fetchIndex().pipe(
+      switchMap((slugs) =>
+        forkJoin(slugs.slice(0, limit).map((s) => this.fetchPreview(s))).pipe(
+          map((previews) => previews.filter(Boolean) as ArticlePreview[])
+        )
+      )
+    );
   }
 
   /**
-   * Get all articles (for cross-linking and content matching)
+   * Get all articles (for cross-linking and content matching).
    */
   getAllArticles(): Observable<ArticlePreview[]> {
-    // Use metadata with estimated reading times
-    const previews: ArticlePreview[] = this.metadataCache().map(metadata => ({
-      ...metadata,
-      readingTime: this.estimateReadingTime(metadata),
-    }));
-
-    // Return all displayed articles
-    return of(previews.filter((p) => p.display !== false));
+    return this.fetchIndex().pipe(
+      switchMap((slugs) => {
+        if (!slugs.length) return of([]);
+        return forkJoin(slugs.map((s) => this.fetchPreview(s))).pipe(
+          map((previews) =>
+            (previews.filter(Boolean) as ArticlePreview[]).filter(
+              (p) => p.display !== false
+            )
+          )
+        );
+      })
+    );
   }
 
   /**
-   * Calculate reading time for article content
+   * Calculate reading time for a fully loaded article.
    */
   calculateReadingTime(article: Article): number {
     const wordsPerMinute = 200;
     let totalWords = 0;
 
-    // Count words in title and description
     totalWords += article.title.split(/\s+/).length;
     totalWords += article.description.split(/\s+/).length;
 
-    // Count words in content blocks
-    article.content.forEach((block) => {
+    article.content.forEach((block: ContentBlock) => {
       switch (block.type) {
         case 'paragraph':
           totalWords += block.data.text.split(/\s+/).length;
@@ -295,46 +346,21 @@ export class BlogService {
   }
 
   /**
-   * Estimate reading time from metadata (without content)
-   * Uses the readTime from metadata if available, otherwise estimates
-   */
-  private estimateReadingTime(metadata: ArticleMetadata): number {
-    // If readTime is already calculated and stored in metadata, use it
-    if (metadata.readTime && metadata.readTime > 0) {
-      return metadata.readTime;
-    }
-
-    // Otherwise, fall back to estimation
-    const wordsPerMinute = 200;
-    let totalWords = 0;
-
-    totalWords += metadata.title.split(/\s+/).length;
-    totalWords += metadata.description.split(/\s+/).length;
-
-    // Estimate content words based on article category
-    // This is a rough estimate since we don't have actual content
-    const estimatedContentWords = 800; // Average article length
-    totalWords += estimatedContentWords;
-
-    return Math.ceil(totalWords / wordsPerMinute);
-  }
-
-  /**
-   * Get blog configuration
+   * Get blog configuration.
    */
   getConfig(): BlogConfig {
     return { ...this.config };
   }
 
   /**
-   * Build article URL
+   * Build article URL.
    */
   getArticleUrl(slug: string): string {
     return `${this.config.baseUrl}/${slug}`;
   }
 
   /**
-   * Build paginated listing URL
+   * Build paginated listing URL.
    */
   getListingUrl(page: number = 1): string {
     return page === 1
