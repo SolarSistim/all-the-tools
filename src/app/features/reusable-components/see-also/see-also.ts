@@ -119,7 +119,7 @@ export class SeeAlsoComponent implements OnInit {
             this.displayItems.push({
               type: 'resource',
               title: item?.customText || resource.title,
-              url: resource.externalUrl,
+              url: resource.externalUrl ?? '',
               icon: 'library_books',
               isExternal: true
             });
