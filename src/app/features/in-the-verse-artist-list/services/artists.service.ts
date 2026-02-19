@@ -1,5 +1,7 @@
-import { Injectable, signal } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, forkJoin, shareReplay } from 'rxjs';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import {
   Artist,
   ArtistPreview,
@@ -7,132 +9,197 @@ import {
   ArtistsConfig,
   ArtistFilters,
 } from '../models/artist.models';
-import { ARTISTS_DATA } from '../data/artists.data';
+import { environment } from '../../../../environments/environment';
 
 /**
  * ArtistsService
- * Manages artist data, pagination, and retrieval
- * For static prerendered sites - uses client-side pagination
+ *
+ * artists.json  — lightweight index (IDs only, ordered newest-first)
+ * previews/{slug}.json — listing card data, fetched per page
+ * artists/{slug}.json  — full artist data, fetched on detail page only
  */
 @Injectable({
   providedIn: 'root',
 })
 export class ArtistsService {
+  private http = inject(HttpClient);
+
   private readonly config: ArtistsConfig = {
     pageSize: 12,
     baseUrl: 'https://www.allthethings.dev/3d-artist-spotlight',
     defaultOgImage: 'https://www.allthethings.dev/meta-images/og-3d-artists.png',
   };
 
-  // Cache for artist data and previews
-  private dataCache = signal<Artist[]>(ARTISTS_DATA);
-  private previewsCache = signal<ArtistPreview[]>([]);
+  private readonly apiUrl = environment.artistsUrl;
 
-  constructor() {
-    this.initializePreviewCache();
+  // Ordered slug list from artists.json
+  private indexSlugs: string[] | null = null;
+  private indexFetch$: Observable<string[]> | null = null;
+
+  // Preview cache (listing only)
+  private previewCache = new Map<string, ArtistPreview>();
+  private previewFetches = new Map<string, Observable<ArtistPreview | null>>();
+
+  // Full artist cache (detail page)
+  private artistCache = new Map<string, Artist>();
+  private artistFetches = new Map<string, Observable<Artist | null>>();
+
+  // ── Index ────────────────────────────────────────────────────────────────
+
+  private fetchIndex(): Observable<string[]> {
+    if (this.indexSlugs) return of(this.indexSlugs);
+    if (!this.indexFetch$) {
+      this.indexFetch$ = this.http
+        .get<{ artists: { id: string }[] }>(`${this.apiUrl}/artists.json`)
+        .pipe(
+          map((response) => {
+            const slugs = response.artists.map((a) => a.id);
+            this.indexSlugs = slugs;
+            return slugs;
+          }),
+          shareReplay(1)
+        );
+    }
+    return this.indexFetch$;
   }
 
-  /**
-   * Initialize artist preview cache
-   */
-  private initializePreviewCache(): void {
-    const previews = this.dataCache().map((artist) =>
-      this.convertToPreview(artist)
-    );
-    this.previewsCache.set(previews);
+  // ── Preview (listing) ────────────────────────────────────────────────────
+
+  private fetchPreview(slug: string): Observable<ArtistPreview | null> {
+    if (this.previewCache.has(slug)) {
+      return of(this.previewCache.get(slug)!);
+    }
+    if (!this.previewFetches.has(slug)) {
+      this.previewFetches.set(
+        slug,
+        this.http.get<ArtistPreview>(`${this.apiUrl}/previews/${slug}.json`).pipe(
+          map((p) => ({ ...p, hasVideo: !!p.youtubeVideoId })),
+          tap((p) => this.previewCache.set(slug, p)),
+          catchError(() => of(null)),
+          shareReplay(1)
+        )
+      );
+    }
+    return this.previewFetches.get(slug)!;
   }
 
-  /**
-   * Get paginated artist previews
-   */
+  // ── Full artist (detail page) ────────────────────────────────────────────
+
+  private fetchArtist(slug: string): Observable<Artist | null> {
+    if (this.artistCache.has(slug)) {
+      return of(this.artistCache.get(slug)!);
+    }
+    if (!this.artistFetches.has(slug)) {
+      this.artistFetches.set(
+        slug,
+        this.http.get<Artist>(`${this.apiUrl}/artists/${slug}.json`).pipe(
+          tap((a) => this.artistCache.set(slug, a)),
+          catchError(() => of(null)),
+          shareReplay(1)
+        )
+      );
+    }
+    return this.artistFetches.get(slug)!;
+  }
+
+  // ── Public API ───────────────────────────────────────────────────────────
+
   getArtistPreviews(
     page: number = 1,
     pageSize: number = this.config.pageSize,
     filters?: ArtistFilters
   ): Observable<PaginatedArtistResponse<ArtistPreview>> {
-    let previews = this.previewsCache();
+    return this.fetchIndex().pipe(
+      switchMap((slugs) => {
+        const hasFilters = !!(
+          filters?.keyword ||
+          filters?.search ||
+          filters?.featured !== undefined ||
+          filters?.hasVideo !== undefined
+        );
 
-    // Filter out non-displayed artists (display defaults to true if not specified)
-    previews = previews.filter((p) => p.display !== false);
+        const slugsToFetch = hasFilters
+          ? slugs
+          : slugs.slice((page - 1) * pageSize, page * pageSize);
 
-    // Apply filters
-    if (filters?.keyword) {
-      previews = previews.filter((p) =>
-        p.keywords.some((k) => k.toLowerCase() === filters.keyword!.toLowerCase())
-      );
-    }
-    if (filters?.featured !== undefined) {
-      previews = previews.filter((p) => p.featured === filters.featured);
-    }
-    if (filters?.hasVideo !== undefined) {
-      previews = previews.filter((p) => p.hasVideo === filters.hasVideo);
-    }
-    if (filters?.search) {
-      const searchLower = filters.search.toLowerCase().trim();
-      previews = previews.filter(
-        (p) =>
-          p.name.toLowerCase().includes(searchLower) ||
-          p.shortDescription.toLowerCase().includes(searchLower) ||
-          p.keywords.some((keyword) => keyword.toLowerCase().includes(searchLower))
-      );
-    }
+        if (slugsToFetch.length === 0) {
+          return of({
+            items: [] as ArtistPreview[],
+            currentPage: page,
+            pageSize,
+            totalItems: slugs.length,
+            totalPages: Math.ceil(slugs.length / pageSize),
+          });
+        }
 
-    // Sort by date (newest first)
-    previews = [...previews].sort((a, b) => {
-      const dateA = new Date(a.publishedDate).getTime();
-      const dateB = new Date(b.publishedDate).getTime();
-      return dateB - dateA;
-    });
+        return forkJoin(slugsToFetch.map((s) => this.fetchPreview(s))).pipe(
+          map((previews) => {
+            let items = (previews.filter(Boolean) as ArtistPreview[]).filter(
+              (p) => p.display !== false
+            );
 
-    // Calculate pagination
-    const totalItems = previews.length;
-    const totalPages = Math.ceil(totalItems / pageSize);
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const items = previews.slice(startIndex, endIndex);
+            if (filters?.keyword) {
+              items = items.filter((p) =>
+                p.keywords.some(
+                  (k) => k.toLowerCase() === filters.keyword!.toLowerCase()
+                )
+              );
+            }
+            if (filters?.featured !== undefined) {
+              items = items.filter((p) => p.featured === filters.featured);
+            }
+            if (filters?.hasVideo !== undefined) {
+              items = items.filter((p) => p.hasVideo === filters.hasVideo);
+            }
+            if (filters?.search) {
+              const q = filters.search.toLowerCase().trim();
+              items = items.filter(
+                (p) =>
+                  p.name.toLowerCase().includes(q) ||
+                  p.shortDescription.toLowerCase().includes(q) ||
+                  p.keywords.some((k) => k.toLowerCase().includes(q))
+              );
+            }
 
-    return of({
-      items,
-      currentPage: page,
-      pageSize,
-      totalItems,
-      totalPages,
-    });
+            const totalItems = hasFilters ? items.length : slugs.length;
+            const totalPages = Math.ceil(totalItems / pageSize);
+            const pageItems = hasFilters
+              ? items.slice((page - 1) * pageSize, page * pageSize)
+              : items;
+
+            return {
+              items: pageItems,
+              currentPage: page,
+              pageSize,
+              totalItems,
+              totalPages,
+            };
+          })
+        );
+      })
+    );
   }
 
-  /**
-   * Get artist by slug
-   */
   getArtistBySlug(slug: string): Observable<Artist | null> {
-    const artist = this.dataCache().find((a) => a.slug === slug);
-    return of(artist || null);
+    return this.fetchArtist(slug);
   }
 
-  /**
-   * Get artist by ID
-   */
   getArtistById(id: string): Observable<Artist | null> {
-    const artist = this.dataCache().find((a) => a.id === id);
-    return of(artist || null);
+    return this.getArtistBySlug(id);
   }
 
-  /**
-   * Get related artists based on keywords
-   */
   getRelatedArtists(
     artist: Artist,
     limit: number = 3
   ): Observable<ArtistPreview[]> {
-    const displayedPreviews = this.previewsCache().filter((p) => p.display !== false);
-
-    // Find artists with matching keywords
-    const related = displayedPreviews
+    const cached = [...this.previewCache.values()].filter(
+      (p) => p.display !== false
+    );
+    const related = cached
       .filter((p) => p.id !== artist.id)
       .map((p) => {
-        const matchingKeywords = p.keywords.filter((k) =>
-          artist.keywords.includes(k)
-        ).length;
-        return { preview: p, score: matchingKeywords };
+        const score = p.keywords.filter((k) => artist.keywords.includes(k)).length;
+        return { preview: p, score };
       })
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score)
@@ -142,103 +209,71 @@ export class ArtistsService {
     return of(related);
   }
 
-  /**
-   * Get all unique keywords
-   */
   getKeywords(): Observable<string[]> {
     const keywords = new Set<string>();
-    this.dataCache().forEach((artist) => {
-      artist.keywords.forEach((keyword) => keywords.add(keyword));
-    });
+    this.previewCache.forEach((p) => p.keywords.forEach((k) => keywords.add(k)));
     return of([...keywords].sort());
   }
 
-  /**
-   * Get featured artists
-   */
   getFeaturedArtists(limit: number = 3): Observable<ArtistPreview[]> {
-    const featured = this.previewsCache()
-      .filter((p) => p.display !== false)
-      .filter((p) => p.featured)
-      .slice(0, limit);
-    return of(featured);
-  }
-
-  /**
-   * Get recent artists
-   */
-  getRecentArtists(limit: number = 5): Observable<ArtistPreview[]> {
-    const recent = [...this.previewsCache()]
-      .filter((p) => p.display !== false)
-      .sort((a, b) => {
-        const dateA = new Date(a.publishedDate).getTime();
-        const dateB = new Date(b.publishedDate).getTime();
-        return dateB - dateA;
-      })
-      .slice(0, limit);
-    return of(recent);
-  }
-
-  /**
-   * Search artists by query (for autocomplete)
-   */
-  searchArtists(query: string, limit: number = 10): Observable<ArtistPreview[]> {
-    if (!query || query.trim() === '') {
-      return of([]);
-    }
-
-    const searchLower = query.toLowerCase().trim();
-    const results = this.previewsCache()
-      .filter((p) => p.display !== false)
-      .filter(
-        (p) =>
-          p.name.toLowerCase().includes(searchLower) ||
-          p.shortDescription.toLowerCase().includes(searchLower) ||
-          p.keywords.some((k) => k.toLowerCase().includes(searchLower))
+    return this.fetchIndex().pipe(
+      switchMap((slugs) =>
+        forkJoin(slugs.slice(0, limit * 3).map((s) => this.fetchPreview(s))).pipe(
+          map((previews) =>
+            (previews.filter(Boolean) as ArtistPreview[])
+              .filter((p) => p.display !== false && p.featured)
+              .slice(0, limit)
+          )
+        )
       )
-      .slice(0, limit);
-
-    return of(results);
+    );
   }
 
-  /**
-   * Convert Artist to ArtistPreview
-   */
-  private convertToPreview(artist: Artist): ArtistPreview {
-    return {
-      id: artist.id,
-      slug: artist.slug,
-      name: artist.name,
-      shortDescription: artist.shortDescription,
-      keywords: artist.keywords,
-      image: artist.image,
-      ogImage: artist.ogImage,
-      publishedDate: artist.publishedDate,
-      featured: artist.featured,
-      display: artist.display,
-      hasVideo: !!artist.youtubeVideoId,
-      youtubeVideoId: artist.youtubeVideoId,
-      youtubeVideos: artist.youtubeVideos,
-    };
+  getRecentArtists(limit: number = 5): Observable<ArtistPreview[]> {
+    return this.fetchIndex().pipe(
+      switchMap((slugs) =>
+        forkJoin(slugs.slice(0, limit).map((s) => this.fetchPreview(s))).pipe(
+          map((previews) =>
+            (previews.filter(Boolean) as ArtistPreview[]).filter(
+              (p) => p.display !== false
+            )
+          )
+        )
+      )
+    );
   }
 
-  /**
-   * Get artists configuration
-   */
+  searchArtists(query: string, limit: number = 10): Observable<ArtistPreview[]> {
+    if (!query || query.trim() === '') return of([]);
+
+    return this.fetchIndex().pipe(
+      switchMap((slugs) =>
+        forkJoin(slugs.map((s) => this.fetchPreview(s))).pipe(
+          map((previews) => {
+            const q = query.toLowerCase().trim();
+            return (previews.filter(Boolean) as ArtistPreview[])
+              .filter((p) => p.display !== false)
+              .filter(
+                (p) =>
+                  p.name.toLowerCase().includes(q) ||
+                  p.shortDescription.toLowerCase().includes(q) ||
+                  p.keywords.some((k) => k.toLowerCase().includes(q))
+              )
+              .slice(0, limit);
+          })
+        )
+      )
+    );
+  }
+
   getConfig(): ArtistsConfig {
     return { ...this.config };
   }
 
-  /**
-   * Get artist page URL (internal permalink)
-   */
   getArtistPageUrl(slug: string): string {
     return `${this.config.baseUrl}/${slug}`;
   }
 
-  /**
-   * Build paginated listing URL
-   */
   getListingUrl(page: number = 1): string {
     return page === 1
       ? this.config.baseUrl

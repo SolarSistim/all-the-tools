@@ -6,5 +6,6 @@ export const environment = {
   ogFetchUserLockoutMinutes: 10,
   netlifyIdentitySiteUrl: 'https://www.allthethings.dev',
   newsUrl: 'https://json.allthethings.dev/news/news.json',
-  resourcesUrl: 'https://json.allthethings.dev/resources'
+  resourcesUrl: 'https://json.allthethings.dev/resources',
+  artistsUrl: 'https://json.allthethings.dev/3d-artist-spotlight'
 };
