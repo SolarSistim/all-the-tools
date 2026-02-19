@@ -95,7 +95,7 @@ export class ResourcesService {
     if (!this.resourceFetches.has(slug)) {
       this.resourceFetches.set(
         slug,
-        this.http.get<Resource>(`${this.apiUrl}/${slug}.json`).pipe(
+        this.http.get<Resource>(`${this.apiUrl}/resources/${slug}.json`).pipe(
           tap((r) => this.resourceCache.set(slug, r)),
           catchError(() => of(null)),
           shareReplay(1)
