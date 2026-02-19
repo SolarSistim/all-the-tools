@@ -54,6 +54,7 @@
 /resources/angular-official-documentation
 /resources/ezgif-gif-creator-editor
 /resources/how-to-convert-video-to-webp-with-ezgif
+/resources/how-to-generate-placeholder-images-with-placehold-co
 /resources/masterselects-browser-video-editor
 /resources/mdn-web-docs
 /resources/money-market-funds-kenya-safety
