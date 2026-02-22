@@ -92,6 +92,10 @@ function calculateReadTime(wordCount) {
  * Get all content files
  */
 function getContentFiles() {
+  if (!fs.existsSync(CONTENT_DIR)) {
+    console.log('No content directory found — skipping read time calculation.');
+    return [];
+  }
   const files = fs.readdirSync(CONTENT_DIR);
   return files.filter(file => file.endsWith('.content.ts') && file !== 'article-content-loader.ts');
 }
@@ -272,6 +276,16 @@ function main() {
     readTimes[slug] = readTime;
 
     console.log(`✓ ${slug}: ${wordCount} words → ${readTime} min`);
+  }
+
+  if (Object.keys(readTimes).length === 0) {
+    console.log('No articles to update.');
+    return;
+  }
+
+  if (!fs.existsSync(METADATA_FILE)) {
+    console.log('No metadata file found — skipping metadata update.');
+    return;
   }
 
   console.log(`\nUpdating ${Object.keys(readTimes).length} articles in metadata file...`);
