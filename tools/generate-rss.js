@@ -162,22 +162,31 @@ function readSingleQuotedField(text, field) {
   return value;
 }
 
-function loadBlogMetadata() {
-  const filePath = path.join(process.cwd(), 'src', 'app', 'features', 'blog', 'data', 'articles-metadata.data.ts');
-  const source = readFileSafe(filePath);
-  const arrayText = extractArrayText(source, 'BLOG_ARTICLES_METADATA');
-  const entries = splitObjects(arrayText);
+async function loadBlogMetadata() {
   const map = new Map();
-  entries.forEach(entry => {
-    const slug = readSingleQuotedField(entry, 'slug');
-    if (!slug) return;
-    map.set(slug, {
-      title: readSingleQuotedField(entry, 'title'),
-      description: readSingleQuotedField(entry, 'description'),
-      metaDescription: readSingleQuotedField(entry, 'metaDescription'),
-      publishedDate: readSingleQuotedField(entry, 'publishedDate')
-    });
-  });
+  try {
+    const indexRes = await fetch('https://json.allthethings.dev/blog/blog.json');
+    if (!indexRes.ok) return map;
+    const indexData = await indexRes.json();
+    const slugs = (indexData.articles || []).map(a => a.id).filter(Boolean);
+    await Promise.all(slugs.map(async slug => {
+      try {
+        const previewRes = await fetch(`https://json.allthethings.dev/blog/previews/${slug}.json`);
+        if (!previewRes.ok) return;
+        const preview = await previewRes.json();
+        map.set(slug, {
+          title: preview.title || '',
+          description: preview.description || '',
+          metaDescription: preview.metaDescription || preview.description || '',
+          publishedDate: preview.publishedDate || ''
+        });
+      } catch {
+        // skip individual preview failures
+      }
+    }));
+  } catch {
+    // return empty map if fetch fails
+  }
   return map;
 }
 
@@ -304,11 +313,11 @@ function buildRss(items) {
   ].join('\n');
 }
 
-function main() {
+async function main() {
   const sitemapPath = findSitemapPath();
   const distBrowserDir = path.dirname(sitemapPath);
   const urlEntries = parseSitemap(sitemapPath);
-  const blogMeta = loadBlogMetadata();
+  const blogMeta = await loadBlogMetadata();
   const toolsMeta = loadToolsMetadata();
   const items = buildItems(urlEntries, blogMeta, toolsMeta);
   const rssXml = buildRss(items);
