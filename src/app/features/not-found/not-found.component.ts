@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { BLOG_ARTICLES_METADATA, ArticleMetadata } from '../blog/data/articles-metadata.data';
+import { BlogService } from '../blog/services/blog.service';
+import { ArticlePreview } from '../blog/models/blog.models';
 import { MetaService } from '../../core/services/meta.service';
 
 /**
@@ -21,7 +22,8 @@ import { MetaService } from '../../core/services/meta.service';
 export class NotFoundComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private metaService = inject(MetaService);
-  latestPosts: ArticleMetadata[] = [];
+  private blogService = inject(BlogService);
+  latestPosts: ArticlePreview[] = [];
 
   constructor() {
     // Set 404 status code for SSR
@@ -48,14 +50,8 @@ export class NotFoundComponent implements OnInit {
   }
 
   private loadLatestPosts(): void {
-    // Get the 3 most recent blog posts
-    this.latestPosts = BLOG_ARTICLES_METADATA
-      .filter(article => article.display !== false)
-      .sort((a, b) => {
-        const dateA = new Date(a.publishedDate);
-        const dateB = new Date(b.publishedDate);
-        return dateB.getTime() - dateA.getTime();
-      })
-      .slice(0, 3);
+    this.blogService.getRecentArticles(3).subscribe(posts => {
+      this.latestPosts = posts;
+    });
   }
 }

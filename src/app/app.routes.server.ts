@@ -1,5 +1,4 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
-import { BLOG_ARTICLES_METADATA } from './features/blog/data/articles-metadata.data';
 import { RESOURCES_METADATA } from './features/resources/data/resources-metadata.data';
 import { ARTISTS_DATA } from './features/in-the-verse-artist-list/data/artists.data';
 
@@ -8,8 +7,9 @@ export const serverRoutes: ServerRoute[] = [
     path: 'blog/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      // Return all article slugs for prerendering
-      return BLOG_ARTICLES_METADATA.map(article => ({ slug: article.slug }));
+      const response = await fetch('https://json.allthethings.dev/blog/blog.json');
+      const data = await response.json() as { articles: { id: string }[] };
+      return data.articles.map(article => ({ slug: article.id }));
     }
   },
   {

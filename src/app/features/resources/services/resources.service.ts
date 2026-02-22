@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, forkJoin, shareReplay } from 'rxjs';
+import { Observable, of, forkJoin, shareReplay, timer } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import {
   Resource,
@@ -53,16 +53,15 @@ export class ResourcesService {
   private fetchIndex(): Observable<string[]> {
     if (this.indexSlugs) return of(this.indexSlugs);
     if (!this.indexFetch$) {
-      this.indexFetch$ = this.http
-        .get<{ resources: { id: string }[] }>(`${this.apiUrl}/resources.json`)
-        .pipe(
-          map((response) => {
-            const slugs = response.resources.map((r) => r.id);
-            this.indexSlugs = slugs;
-            return slugs;
-          }),
-          shareReplay(1)
-        );
+      this.indexFetch$ = timer(250).pipe(
+        switchMap(() => this.http.get<{ resources: { id: string }[] }>(`${this.apiUrl}/resources.json`)),
+        map((response) => {
+          const slugs = response.resources.map((r) => r.id);
+          this.indexSlugs = slugs;
+          return slugs;
+        }),
+        shareReplay(1)
+      );
     }
     return this.indexFetch$;
   }

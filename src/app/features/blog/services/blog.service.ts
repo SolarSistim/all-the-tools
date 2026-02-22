@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, forkJoin, shareReplay } from 'rxjs';
+import { Observable, of, forkJoin, shareReplay, timer } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import {
   Article,
@@ -55,16 +55,15 @@ export class BlogService {
   private fetchIndex(): Observable<string[]> {
     if (this.indexSlugs) return of(this.indexSlugs);
     if (!this.indexFetch$) {
-      this.indexFetch$ = this.http
-        .get<{ articles: { id: string }[] }>(`${this.apiUrl}/blog.json`)
-        .pipe(
-          map((response) => {
-            const slugs = response.articles.map((a) => a.id);
-            this.indexSlugs = slugs;
-            return slugs;
-          }),
-          shareReplay(1)
-        );
+      this.indexFetch$ = timer(250).pipe(
+        switchMap(() => this.http.get<{ articles: { id: string }[] }>(`${this.apiUrl}/blog.json`)),
+        map((response) => {
+          const slugs = response.articles.map((a) => a.id);
+          this.indexSlugs = slugs;
+          return slugs;
+        }),
+        shareReplay(1)
+      );
     }
     return this.indexFetch$;
   }

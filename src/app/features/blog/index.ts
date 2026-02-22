@@ -28,8 +28,5 @@ export { PaginationComponent } from './components/pagination/pagination.componen
 // Pipes
 export { ReadingTimePipe } from './pipes/reading-time.pipe';
 
-// Data (for testing/demo purposes)
-export { BLOG_ARTICLES_METADATA } from './data/articles-metadata.data';
-export type { ArticleMetadata } from './data/articles-metadata.data';
+// Data
 export { AUTHORS } from './data/authors.data';
-export { loadArticleContent } from './data/content/article-content-loader';

@@ -151,7 +151,7 @@
     padding: 0;
     height: auto;
     min-height: 80px;
-    color: #000000;
+    color: var(--text-primary);
 
     &:hover {
       background-color: var(--bg-secondary);
@@ -162,7 +162,7 @@
     }
 
     .mdc-list-item__primary-text {
-      color: #000000;
+      color: var(--text-primary);
     }
   }
 }
@@ -197,7 +197,7 @@
 .autocomplete-title {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #000000 !important;
+  color: var(--text-primary);
   margin-bottom: 0.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -211,11 +211,11 @@
   display: flex;
   gap: 0.75rem;
   font-size: 0.75rem;
-  color: #333333 !important;
+  color: var(--text-secondary);
 }
 
 .autocomplete-keywords {
-  color: #0066cc !important;
+  color: var(--neon-cyan);
   font-weight: 500;
 }
 
@@ -224,18 +224,18 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  color: #333333 !important;
+  color: var(--text-secondary);
   justify-content: center;
 
   mat-icon {
     font-size: 1.5rem;
     width: 1.5rem;
     height: 1.5rem;
-    color: #333333 !important;
+    color: var(--text-secondary);
   }
 
   span {
-    color: #333333 !important;
+    color: var(--text-secondary);
   }
 }
 
