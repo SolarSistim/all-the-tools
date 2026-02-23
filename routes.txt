@@ -2,6 +2,7 @@
 /3d-artist-spotlight
 /3d-artist-spotlight/alan-e
 /3d-artist-spotlight/alvision100
+/3d-artist-spotlight/diogo-vincenzi
 /3d-artist-spotlight/dylan-browne
 /3d-artist-spotlight/halcyon
 /3d-artist-spotlight/howard-day
