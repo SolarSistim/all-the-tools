@@ -1,0 +1,11 @@
+{
+  "/json-proxy": {
+    "target": "https://json.allthethings.dev",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/json-proxy": ""
+    },
+    "logLevel": "warn"
+  }
+}
