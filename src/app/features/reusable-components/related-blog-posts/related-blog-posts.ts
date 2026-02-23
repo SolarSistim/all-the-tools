@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 export interface RelatedBlogPost {
   title: string;
   slug: string;
+  heroImage?: string;
 }
 
 /**

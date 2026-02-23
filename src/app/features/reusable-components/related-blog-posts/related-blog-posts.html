@@ -1,4 +1,13 @@
 <div class="related-blog-posts">
+  <a
+    *ngIf="posts.length === 1 && posts[0]?.heroImage"
+    [routerLink]="getRouterLink(posts[0].slug)"
+    class="single-post-image-link"
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <img [src]="posts[0].heroImage" [alt]="posts[0].title" class="single-post-image" loading="lazy" />
+  </a>
   <div class="related-header">
     <mat-icon class="related-icon">article</mat-icon>
     <span class="related-label">Related:</span>
