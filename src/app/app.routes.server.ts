@@ -1,6 +1,4 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
-import { RESOURCES_METADATA } from './features/resources/data/resources-metadata.data';
-import { ARTISTS_DATA } from './features/in-the-verse-artist-list/data/artists.data';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -16,16 +14,18 @@ export const serverRoutes: ServerRoute[] = [
     path: 'resources/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      // Return all resource slugs for prerendering
-      return RESOURCES_METADATA.map(resource => ({ slug: resource.slug }));
+      const response = await fetch('https://json.allthethings.dev/resources/resources.json');
+      const data = await response.json() as { resources: { id: string }[] };
+      return data.resources.map(resource => ({ slug: resource.id }));
     }
   },
   {
     path: '3d-artist-spotlight/:slug',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      // Return all artist slugs for prerendering
-      return ARTISTS_DATA.filter(artist => artist.display !== false).map(artist => ({ slug: artist.slug }));
+      const response = await fetch('https://json.allthethings.dev/3d-artist-spotlight/artists.json');
+      const data = await response.json() as { artists: { id: string }[] };
+      return data.artists.map(artist => ({ slug: artist.id }));
     }
   },
   {
